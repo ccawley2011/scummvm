@@ -30,6 +30,7 @@
 #include "backends/keymapper/action.h"
 #include "backends/keymapper/keymapper.h"
 #include "backends/keymapper/virtual-mouse.h"
+#include "backends/touchmapper/touchmapper.h"
 #include "backends/vkeybd/virtual-keyboard.h"
 
 #include "engines/engine.h"
@@ -58,6 +59,11 @@ DefaultEventManager::DefaultEventManager(Common::EventSource *boss) :
 
 	_keymapper = new Common::Keymapper(this);
 	_dispatcher.registerMapper(_keymapper);
+
+#ifdef ENABLE_TOUCHMAPPER
+	_touchmapper = new Common::Touchmapper(this);
+	_dispatcher.registerMapper(_touchmapper);
+#endif
 }
 
 DefaultEventManager::~DefaultEventManager() {

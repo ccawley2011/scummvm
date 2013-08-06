@@ -111,6 +111,11 @@ MODULE_OBJS += \
 	plugins/elf/version.o
 endif
 
+ifdef ENABLE_TOUCHMAPPER
+MODULE_OBJS += \
+	touchmapper/touchmapper.o
+endif
+
 ifdef ENABLE_VKEYBD
 MODULE_OBJS += \
 	vkeybd/image-map.o \

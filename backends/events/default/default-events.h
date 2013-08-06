@@ -31,6 +31,9 @@ class Keymapper;
 class VirtualKeyboard;
 #endif
 class VirtualMouse;
+#ifdef ENABLE_TOUCHMAPPER
+class Touchmapper;
+#endif
 }
 
 
@@ -42,6 +45,10 @@ class DefaultEventManager : public Common::EventManager, Common::EventObserver {
 	Common::VirtualMouse *_virtualMouse;
 
 	Common::Keymapper *_keymapper;
+
+#ifdef ENABLE_TOUCHMAPPER
+	Common::Touchmapper *_touchmapper;
+#endif
 
 	Common::ArtificialEventSource _artificialEventSource;
 
