@@ -24,6 +24,7 @@
 #define COMMON_EVENTS_H
 
 #include "common/keyboard.h"
+#include "common/finger.h"
 #include "common/queue.h"
 #include "common/rect.h"
 #include "common/noncopyable.h"
@@ -90,7 +91,23 @@ enum EventType {
 
 	EVENT_JOYAXIS_MOTION = 24,
 	EVENT_JOYBUTTON_DOWN = 25,
-	EVENT_JOYBUTTON_UP = 26
+	EVENT_JOYBUTTON_UP = 26,
+
+#ifdef ENABLE_TOUCHMAPPER
+	EVENT_FINGERMOVE = 27,
+	// Triggered if a finger touches and leaves the screen at the same location
+	EVENT_SINGLETAP = 28,
+	// Triggered when finger touches screen
+	EVENT_TAPDOWN = 29,
+	// Triggered when finger leaves screen
+	EVENT_TAPUP = 30,
+	EVENT_DOUBLETAP = 31,
+	EVENT_SIMULATE_LBUTTONDOWN = 32,
+	EVENT_SIMULATE_MBUTTONDOWN = 33,
+	EVENT_SIMULATE_MBUTTONUP = 34,
+	EVENT_SIMULATE_RBUTTONDOWN = 35,
+	EVENT_SIMULATE_RBUTTONUP = 36
+#endif
 };
 
 const int16 JOYAXIS_MIN = -32768;
@@ -165,6 +182,14 @@ struct Event {
 	 * screen area as defined by the most recent call to initSize().
 	 */
 	Point mouse;
+
+
+	/**
+	 * Fingers
+	 */
+#ifdef ENABLE_TOUCHMAPPER
+	FingerState finger[5];
+#endif
 
 #ifdef ENABLE_KEYMAPPER
 	// IMPORTANT NOTE: This is part of the WIP Keymapper. If you plan to use
@@ -422,6 +447,7 @@ private:
 };
 
 class Keymapper;
+class Touchmapper;
 
 /**
  * The EventManager provides user input events to the client code.
