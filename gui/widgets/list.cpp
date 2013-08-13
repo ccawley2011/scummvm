@@ -62,6 +62,7 @@ ListWidget::ListWidget(Dialog *boss, const String &name, const char *tooltip, ui
 
 	_quickSelect = true;
 	_editColor = ThemeEngine::kFontColorNormal;
+	_scrollOffset = 0;
 }
 
 ListWidget::ListWidget(Dialog *boss, int x, int y, int w, int h, const char *tooltip, uint32 cmd)
@@ -93,6 +94,7 @@ ListWidget::ListWidget(Dialog *boss, int x, int y, int w, int h, const char *too
 
 	_quickSelect = true;
 	_editColor = ThemeEngine::kFontColorNormal;
+	_scrollOffset = 0;
 }
 
 bool ListWidget::containsWidget(Widget *w) const {
@@ -259,9 +261,39 @@ void ListWidget::handleMouseUp(int x, int y, int button, int clickCount) {
 }
 
 void ListWidget::handleMouseWheel(int x, int y, int direction) {
-	_scrollBar->handleMouseWheel(x, y, direction);
+	_scrollBar->handleScroll(direction * kLineHeight * -1, kLineHeight);
 }
 
+#ifdef ENABLE_TOUCHMAPPER
+void ListWidget::handleFingerMoved(int x, int y, int deltax, int deltay, int button) {
+	_scrollBar->handleScroll(deltay, kLineHeight);
+}
+
+void ListWidget::handleFingerSingleTap(int x, int y, int button, int clickCount) {
+	if ((_selectedItem == findItem(x, y)) && _selectedItem >= 0) {
+		sendCommand(kListItemDoubleClickedCmd, _selectedItem);
+	}
+}
+
+void ListWidget::handleFingerDown(int x, int y, int button, int clickCount) {
+	if (!isEnabled())
+		return;
+
+	int newSelectedItem = findItem(x, y);
+
+	if (_selectedItem != newSelectedItem && newSelectedItem != -1) {
+		if (_editMode)
+			abortEditMode();
+		_selectedItem = newSelectedItem;
+		sendCommand(kListSelectionChangedCmd, _selectedItem);
+	}
+
+	// TODO: Determine where inside the string the user clicked and place the
+	// caret accordingly.
+	// See _editScrollOffset and EditTextWidget::handleMouseDown.
+	markAsDirty();
+}
+#endif
 
 int ListWidget::findItem(int x, int y) const {
 	if (y < _topPadding) return -1;
@@ -487,6 +519,33 @@ void ListWidget::handleCommand(CommandSender *sender, uint32 cmd, uint32 data) {
 			((GUI::Dialog *)_boss)->setFocusWidget(this);
 		}
 		break;
+	case kSetScrollOffset:
+		if (_currentPos == 0 && (int)data > 0 && _scrollOffset >= 0)
+			data = 0;
+
+		if ((_currentPos == ((int)_list.size() - _entriesPerPage)) && (int)data < 0)
+			data = 0;
+
+		_scrollOffset = _scrollOffset + (int)data;
+
+		if (_scrollOffset > 0) {
+			while (_scrollOffset >= kLineHeight) {
+				_scrollOffset -= kLineHeight;
+				_currentPos--;
+			}
+		} else if (_scrollOffset < 0) {
+			while (_scrollOffset <= kLineHeight*-1) {
+				_scrollOffset += kLineHeight;
+				_currentPos++;
+			}
+		}
+
+		checkBounds();
+		markAsDirty();
+
+		// Scrollbar actions cause list focus (which triggers a redraw)
+		// NOTE: ListWidget's boss is always GUI::Dialog
+		((GUI::Dialog *)_boss)->setFocusWidget(this);
 	}
 }
 
@@ -497,6 +556,8 @@ void ListWidget::drawWidget() {
 	// Draw a thin frame around the list.
 	g_gui.theme()->drawWidgetBackground(Common::Rect(_x, _y, _x + _w, _y + _h), 0,
 	                                    ThemeEngine::kWidgetBackgroundBorder);
+	const Common::Rect &r = Common::Rect(_x + _leftPadding, _y, _x + _leftPadding + getEditRect().width(), _y + _h);
+	setTextDrawableArea(r);
 
 	// Draw the list items
 	for (i = 0, pos = _currentPos; i < _entriesPerPage && pos < len; i++, pos++) {
@@ -515,7 +576,7 @@ void ListWidget::drawWidget() {
 		if (_numberingMode != kListNumberingOff) {
 			buffer = Common::String::format("%2d. ", (pos + _numberingMode));
 			g_gui.theme()->drawText(Common::Rect(_x + _hlLeftPadding, y, _x + r.left + _leftPadding, y + fontHeight - 2),
-			                        buffer, _state, Graphics::kTextAlignLeft, inverted, _leftPadding, true);
+			        buffer, _state, Graphics::kTextAlignLeft, inverted, _leftPadding, true, ThemeEngine::kFontStyleBold, ThemeEngine::kFontColorNormal, true, _textDrawableArea);
 			pad = 0;
 		}
 
@@ -533,11 +594,11 @@ void ListWidget::drawWidget() {
 			color = _editColor;
 			adjustOffset();
 			g_gui.theme()->drawText(Common::Rect(_x + r.left, y, _x + r.right, y + fontHeight - 2), buffer, _state,
-			                        Graphics::kTextAlignLeft, inverted, pad, true, ThemeEngine::kFontStyleBold, color);
+			                        Graphics::kTextAlignLeft, inverted, pad, true, ThemeEngine::kFontStyleBold, color, true, _textDrawableArea);
 		} else {
 			buffer = _list[pos];
 			g_gui.theme()->drawText(Common::Rect(_x + r.left, y, _x + r.right, y + fontHeight - 2), buffer, _state,
-			                        Graphics::kTextAlignLeft, inverted, pad, true, ThemeEngine::kFontStyleBold, color);
+			                        Graphics::kTextAlignLeft, inverted, pad, true, ThemeEngine::kFontStyleBold, color, true, _textDrawableArea);
 		}
 	}
 }

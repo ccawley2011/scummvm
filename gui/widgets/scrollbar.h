@@ -28,7 +28,8 @@
 namespace GUI {
 
 enum {
-	kSetPositionCmd		= 'SETP'
+	kSetPositionCmd		= 'SETP',
+	kSetScrollOffset	= 'SETS'
 };
 
 
@@ -61,13 +62,14 @@ public:
 	int		_entriesPerPage;
 	int		_currentPos;
 	int		_singleStep;
+	int		_scrollOffset;
 
 public:
 	ScrollBarWidget(GuiObject *boss, int x, int y, int w, int h);
 
+	void handleScroll(int pixels, int stepSize);
 	void handleMouseDown(int x, int y, int button, int clickCount);
 	void handleMouseUp(int x, int y, int button, int clickCount);
-	void handleMouseWheel(int x, int y, int direction);
 	void handleMouseMoved(int x, int y, int button);
 	void handleMouseEntered(int button)	{ setFlags(WIDGET_HILITED); }
 	void handleMouseLeft(int button)	{ clearFlags(WIDGET_HILITED); _part = kNoPart; markAsDirty(); }

@@ -49,7 +49,33 @@ ScrollBarWidget::ScrollBarWidget(GuiObject *boss, int x, int y, int w, int h)
 	_currentPos = 0;
 	_singleStep = 1;
 
+	_scrollOffset = 0;
 	_repeatTimer = 0;
+}
+
+void ScrollBarWidget::handleScroll(int pixels, int stepSize) {
+	int old_pos = _currentPos;
+
+	if (_numEntries < _entriesPerPage)
+		return;
+
+	int i = _scrollOffset + pixels;
+
+	if (i > 0) {
+		while (i >= stepSize) {
+			i = i - stepSize;
+			_currentPos -= _singleStep;
+		}
+	} else {
+		while (i <= stepSize*-1) {
+			i = i + stepSize;
+			_currentPos += _singleStep;
+		}
+	}
+
+	_scrollOffset = i;
+	checkBounds(old_pos);
+	sendCommand(kSetScrollOffset, pixels);
 }
 
 void ScrollBarWidget::handleMouseDown(int x, int y, int button, int clickCount) {
@@ -85,22 +111,6 @@ void ScrollBarWidget::handleMouseDown(int x, int y, int button, int clickCount) 
 void ScrollBarWidget::handleMouseUp(int x, int y, int button, int clickCount) {
 	_draggingPart = kNoPart;
 	_repeatTimer = 0;
-}
-
-void ScrollBarWidget::handleMouseWheel(int x, int y, int direction) {
-	int old_pos = _currentPos;
-
-	if (_numEntries < _entriesPerPage)
-		return;
-
-	if (direction < 0) {
-		_currentPos -= _singleStep;
-	} else {
-		_currentPos += _singleStep;
-	}
-
-	// Make sure that _currentPos is still inside the bounds
-	checkBounds(old_pos);
 }
 
 void ScrollBarWidget::handleMouseMoved(int x, int y, int button) {
