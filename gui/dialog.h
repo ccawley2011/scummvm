@@ -105,6 +105,12 @@ protected:
 	virtual void handleCommand(CommandSender *sender, uint32 cmd, uint32 data);
 	virtual void handleOtherEvent(Common::Event evt);
 
+#ifdef ENABLE_TOUCHMAPPER
+	virtual void handleFingerDown(int x, int y, int button, int clickCount);
+	virtual void handleFingerSingleTap(int x, int y, int button, int clickCount);
+	virtual void handleFingerMoved(int x, int y, int deltax, int deltay, int button);
+#endif
+
 	Widget *findWidget(int x, int y); // Find the widget at pos x,y if any
 	Widget *findWidget(const char *name);
 	void removeWidget(Widget *widget);
