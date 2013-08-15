@@ -551,9 +551,13 @@ bool LauncherDialog::doGameDetection(const Common::String &path) {
 	Common::FSNode dir(path);
 	Common::FSList files;
 	if (!dir.getChildren(files, Common::FSNode::kListAll)) {
-		MessageDialog alert(_("ScummVM couldn't open the specified directory!"));
-		alert.runModal();
-		return true;
+		// If a file is selected, try looking for the game in the directory it resides
+		dir = dir.getParent();
+		if (!dir.getChildren(files, Common::FSNode::kListAll)) {
+			MessageDialog alert(_("ScummVM couldn't open the specified directory!"));
+			alert.runModal();
+			return true;
+		}
 	}
 
 	// ...so let's determine a list of candidates, games that
