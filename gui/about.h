@@ -51,6 +51,11 @@ public:
 	void drawDialog(DrawLayer layerToDraw) override;
 	void handleTickle() override;
 	void handleMouseUp(int x, int y, int button, int clickCount) override;
+#ifdef ENABLE_TOUCHMAPPER
+	void handleFingerSingleTap(int x, int y, int button, int clickCount) override {
+		handleMouseUp(x, y, button, clickCount);
+	};
+#endif
 	void handleKeyDown(Common::KeyState state) override;
 	void handleKeyUp(Common::KeyState state) override;
 
