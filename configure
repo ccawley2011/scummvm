@@ -202,6 +202,7 @@ _gold=yes
 # Default vkeybd/eventrec options
 _vkeybd=no
 _eventrec=no
+_touchmapper=no
 # GUI translation options
 _translation=yes
 # Default platform settings
@@ -1198,6 +1199,8 @@ for ac_option in $@; do
 	--disable-vkeybd)            _vkeybd=no              ;;
 	--enable-eventrecorder)      _eventrec=yes           ;;
 	--disable-eventrecorder)     _eventrec=no            ;;
+	--enable-touchmapper)        _touchmapper=yes        ;;
+	--disable-touchmapper)       _touchmapper=no         ;;
 	--enable-text-console)       _text_console=yes       ;;
 	--disable-text-console)      _text_console=no        ;;
 	--with-fluidsynth-prefix=*)
@@ -5751,6 +5754,7 @@ echo "$_discord"
 #
 define_in_config_if_yes $_vkeybd 'ENABLE_VKEYBD'
 define_in_config_if_yes $_eventrec 'ENABLE_EVENTRECORDER'
+define_in_config_if_yes $_touchmapper 'ENABLE_TOUCHMAPPER'
 
 # Check whether to build translation support
 #
@@ -6069,6 +6073,10 @@ fi
 
 if test "$_eventrec" = yes ; then
 	echo_n ", event recorder"
+fi
+
+if test "$_touchmapper" = yes ; then
+	echo_n ", touchmapper"
 fi
 
 if test "$_cloud" = yes ; then
