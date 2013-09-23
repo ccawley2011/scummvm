@@ -239,6 +239,10 @@ public:
 	void handleMouseEntered(int button)	{ if (_duringPress) { setFlags(WIDGET_PRESSED); } else { setFlags(WIDGET_HILITED); } markAsDirty(); }
 	void handleMouseLeft(int button)	{ clearFlags(WIDGET_HILITED | WIDGET_PRESSED); markAsDirty(); }
 
+#ifdef ENABLE_TOUCHMAPPER
+	void handleFingerMoved(int x, int y, int deltax, int deltay, int button);
+#endif
+
 	void setHighLighted(bool enable);
 	void setPressedState();
 	void setUnpressedState();
