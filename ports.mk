@@ -95,11 +95,11 @@ endif
 
 bundle_name = ScummVM.app
 
+bundle: all
 ifdef USE_DOCKTILEPLUGIN
-bundle: scummvm-static scummvm.docktileplugin
-else
-bundle: scummvm-static
+bundle: scummvm.docktileplugin
 endif
+bundle:
 	mkdir -p $(bundle_name)/Contents/MacOS
 	mkdir -p $(bundle_name)/Contents/Resources
 	echo "APPL????" > $(bundle_name)/Contents/PkgInfo
@@ -129,7 +129,7 @@ endif
 	cp $(bundle_name)/Contents/Resources/COPYING.OFL $(bundle_name)/Contents/Resources/COPYING-OFL
 	cp $(bundle_name)/Contents/Resources/COPYING.BSD $(bundle_name)/Contents/Resources/COPYING-BSD
 	chmod 644 $(bundle_name)/Contents/Resources/*
-	cp scummvm-static $(bundle_name)/Contents/MacOS/scummvm
+	cp scummvm $(bundle_name)/Contents/MacOS/scummvm
 	chmod 755 $(bundle_name)/Contents/MacOS/scummvm
 	$(STRIP) $(bundle_name)/Contents/MacOS/scummvm
 ifdef USE_DOCKTILEPLUGIN
@@ -291,117 +291,18 @@ endif
 	cp $(srcdir)/dists/ios7/Images.xcassets/LaunchImage.launchimage/ScummVM-splash-2208x1242.png $(bundle_name)/LaunchImage-800-Landscape-736h@3x.png
 	cp $(srcdir)/dists/ios7/Images.xcassets/LaunchImage.launchimage/ScummVM-splash-750x1334.png $(bundle_name)/LaunchImage-800-667h@2x.png
 
-# Location of static libs for the iPhone
-ifneq ($(BACKEND), iphone)
-ifneq ($(BACKEND), ios7)
-# Static libaries, used for the scummvm-static and iphone targets
-OSX_STATIC_LIBS := `$(SDLCONFIG) --prefix=$(STATICLIBPATH) --static-libs`
-ifdef USE_SDL_NET
-ifdef USE_SDL2
-OSX_STATIC_LIBS += $(STATICLIBPATH)/lib/libSDL2_net.a
-else
-OSX_STATIC_LIBS += $(STATICLIBPATH)/lib/libSDL_net.a
-endif
-endif
-# With sdl2-config we don't always get the OpenGL framework
-OSX_STATIC_LIBS += -framework OpenGL
-endif
-endif
-
-ifdef USE_LIBCURL
-OSX_STATIC_LIBS += -lcurl
-endif
-
-ifdef USE_FREETYPE2
-OSX_STATIC_LIBS += $(STATICLIBPATH)/lib/libfreetype.a $(STATICLIBPATH)/lib/libbz2.a
-endif
-
-ifdef USE_VORBIS
-OSX_STATIC_LIBS += \
-		$(STATICLIBPATH)/lib/libvorbisfile.a \
-		$(STATICLIBPATH)/lib/libvorbis.a
-endif
-
-ifdef USE_TREMOR
-OSX_STATIC_LIBS += $(STATICLIBPATH)/lib/libvorbisidec.a
-endif
-
-ifdef USE_FLAC
-OSX_STATIC_LIBS += $(STATICLIBPATH)/lib/libFLAC.a
-endif
-
-ifdef USE_OGG
-OSX_STATIC_LIBS += $(STATICLIBPATH)/lib/libogg.a
-endif
-
-ifdef USE_FLUIDSYNTH
-OSX_STATIC_LIBS += \
-                -liconv -framework CoreMIDI -framework CoreAudio\
-                $(STATICLIBPATH)/lib/libfluidsynth.a \
-                $(STATICLIBPATH)/lib/libglib-2.0.a \
-                $(STATICLIBPATH)/lib/libintl.a
-
-ifneq ($(BACKEND), iphone)
-ifneq ($(BACKEND), ios7)
-OSX_STATIC_LIBS += -lreadline -framework AudioUnit
-endif
-endif
-endif
-
-ifdef USE_MAD
-OSX_STATIC_LIBS += $(STATICLIBPATH)/lib/libmad.a
-endif
-
-ifdef USE_PNG
-OSX_STATIC_LIBS += $(STATICLIBPATH)/lib/libpng.a
-endif
-
-ifdef USE_THEORADEC
-OSX_STATIC_LIBS += $(STATICLIBPATH)/lib/libtheoradec.a
-endif
-
-ifdef USE_FAAD
-OSX_STATIC_LIBS += $(STATICLIBPATH)/lib/libfaad.a
-endif
-
-ifdef USE_MPEG2
-OSX_STATIC_LIBS += $(STATICLIBPATH)/lib/libmpeg2.a
-endif
-
-ifdef USE_A52
-OSX_STATIC_LIBS += $(STATICLIBPATH)/lib/liba52.a
-endif
-
-ifdef USE_JPEG
-OSX_STATIC_LIBS += $(STATICLIBPATH)/lib/libjpeg.a
-endif
-
-ifdef USE_ZLIB
-OSX_ZLIB ?= $(STATICLIBPATH)/lib/libz.a
-endif
-
 ifdef USE_SPARKLE
 ifdef MACOSX
 ifneq ($(SPARKLEPATH),)
-OSX_STATIC_LIBS += -F$(SPARKLEPATH)
+LDFLAGS += -F$(SPARKLEPATH)
 endif
-OSX_STATIC_LIBS += -framework Sparkle -Wl,-rpath,@loader_path/../Frameworks
+LDFLAGS += -framework Sparkle -Wl,-rpath,@loader_path/../Frameworks
 endif
 endif
-
-# Special target to create a static linked binary for Mac OS X.
-# We use -force_cpusubtype_ALL to ensure the binary runs on every
-# PowerPC machine.
-scummvm-static: $(OBJS)
-	$(CXX) $(LDFLAGS) -force_cpusubtype_ALL -o scummvm-static $(OBJS) \
-		-framework CoreMIDI \
-		$(OSX_STATIC_LIBS) \
-		$(OSX_ZLIB)
 
 # Special target to create a static linked binary for the iPhone (legacy, and iOS 7+)
 iphone: $(OBJS)
 	$(CXX) $(LDFLAGS) -o scummvm $(OBJS) \
-		$(OSX_STATIC_LIBS) \
 		-framework UIKit -framework CoreGraphics -framework OpenGLES \
 		-framework CoreFoundation -framework QuartzCore -framework Foundation \
 		-framework AudioToolbox -framework CoreAudio -framework SystemConfiguration -lobjc -lz
