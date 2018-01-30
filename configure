@@ -1015,7 +1015,6 @@ Game engines:
     The values of <engine name> for these options are as follows:
 $engines_help
 Optional Features:
-  --enable-static          build a static binary instead of using shared objects
   --enable-c++11           build as C++11 if the compiler allows that
   --disable-debug          disable building with debugging symbols
   --enable-Werror          treat warnings as errors
@@ -1025,6 +1024,8 @@ Optional Features:
   --enable-optimizations   enable optimizations
   --enable-profiling       enable profiling
   --enable-plugins         enable the support for dynamic plugins
+  --enable-static-libs     use static linking information from system library
+                           configuration scripts
   --default-dynamic        make plugins dynamic by default
   --disable-mt32emu        don't enable the integrated MT-32 emulator
   --disable-nuked-opl      don't build Nuked OPL driver
@@ -1179,10 +1180,11 @@ EOF
 
 for ac_option in $@; do
 	case "$ac_option" in
-	--enable-static)              _static_build=yes      ;;
-	--disable-16bit)              _16bit=no              ;;
-	--enable-highres)             _highres=yes           ;;
-	--disable-highres)            _highres=no            ;;
+	--enable-static-libs)         _static_libs=yes ;;
+	--disable-static-libs)        _static_libs=no ;;
+	--disable-16bit)              _16bit=no       ;;
+	--enable-highres)             _highres=yes    ;;
+	--disable-highres)            _highres=no     ;;
 	--disable-savegame-timestamp) _savegame_timestamp=no ;;
 	--disable-scalers)            _build_scalers=no      ;;
 	--disable-hq-scalers)         _build_hq_scalers=no   ;;
@@ -1430,6 +1432,7 @@ for ac_option in $@; do
 		_pandoc=yes
 		;;
 	--with-staticlib-prefix=*)
+		_static_libs=yes
 		_staticlibpath=`echo $ac_option | cut -d '=' -f 2`
 		;;
 	--with-xcodetools-path=*)
@@ -3697,7 +3700,7 @@ append_var MODULES "backends/platform/$_backend"
 if test "$_sdl" = auto ; then
 	find_sdlconfig
 	append_var SDL_CFLAGS "`$_sdlconfig --prefix="$_sdlpath" --cflags`"
-	if test "$_static_build" = yes ; then
+	if test "$_static_libs" = yes ; then
 		append_var SDL_LIBS "`$_sdlconfig --prefix="$_sdlpath" --static-libs`"
 	else
 		append_var SDL_LIBS "`$_sdlconfig --prefix="$_sdlpath" --libs`"
@@ -4652,7 +4655,7 @@ if test "$_libcurl" != "no"; then
 	if test -z "$_libcurlconfig"; then
 		_libcurl=no
 	else
-		if test -n "$_staticlibpath"; then
+		if test "$_static_libs" = yes; then
 			LIBCURL_LIBS=`$_libcurlconfig --static-libs`
 		else
 			LIBCURL_LIBS=`$_libcurlconfig --libs`
@@ -4952,6 +4955,10 @@ if test "$_freetype2" != "no"; then
 	if test $_freetype_found != true; then
 		_freetype2=no
 	else
+		if test "$_static_libs" = yes; then
+			FREETYPE2_LIBS="$FREETYPE2_STATIC_LIBS"
+		fi
+
 		if test "$_freetype2" = "auto"; then
 			_freetype2=no
 
@@ -5476,6 +5483,23 @@ case $_backend in
 		;;
 esac
 
+# The Apple linker intentionally refuses to know about -Bstatic or -static, so
+# instead it is necessary to give full paths to the static libraries to generate
+# a static build in this environment
+case $_host_os in darwin*)
+	if test "$_static_libs" = yes; then
+		newlibs=
+		for lib in $LIBS; do
+			newlib=`echo $lib | sed "s@-l\(.*\)@$_staticlibpath/lib/lib\\1.a@"`
+			if test -f "$newlib"; then
+				newlibs="$newlibs $newlib"
+			else
+				newlibs="$newlibs $lib"
+			fi
+		done
+		LIBS=$newlibs
+	fi
+esac
 
 #
 # Engine selection
