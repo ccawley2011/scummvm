@@ -61,3 +61,12 @@ void BaseBackend::fillScreen(uint32 col) {
 		memset(screen->getPixels(), col, screen->h * screen->pitch);
 	unlockScreen();
 }
+
+bool BaseBackend::hasCPUFeature(CPUFeature f) {
+#ifdef __MMX__
+	if (f == kCPUFeatureMMX)
+		return true;
+#endif
+
+	return false;
+}

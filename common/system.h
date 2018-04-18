@@ -1349,6 +1349,20 @@ public:
 	 */
 	virtual bool openUrl(const Common::String &url) {return false; }
 
+
+	enum CPUFeature {
+		kCPUFeatureMMX
+	};
+
+	/**
+	 * Returns the availability of optional CPU features.
+	 *
+	 * @param f the feature to be checked for
+	 *
+	 * @return true if the requested feature is available, false otherwise.
+	 */
+	virtual bool hasCPUFeature(CPUFeature f) { return false; }
+
 	/**
 	 * Returns the locale of the system.
 	 *

@@ -35,11 +35,7 @@ void hq2x_16(const byte *, byte *, uint32, uint32, uint32, uint32);
 
 }
 
-void HQ2x(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch, int width, int height) {
-	hq2x_16(srcPtr, dstPtr, width, height, srcPitch, dstPitch);
-}
-
-#else
+#endif
 
 #define PIXEL00_0	*(q) = w5;
 #define PIXEL00_10	*(q) = interpolate16_3_1<ColorMask >(w5, w1);
@@ -1959,10 +1955,13 @@ static void HQ2x_implementation(const uint8 *srcPtr, uint32 srcPitch, uint8 *dst
 
 void HQ2x(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch, int width, int height) {
 	extern int gBitFormat;
+#ifdef USE_NASM
+	if(g_system->hasCPUFeature(OSystem::kCPUFeatureMMX))
+		hq2x_16(srcPtr, dstPtr, width, height, srcPitch, dstPitch);
+	else
+#endif
 	if (gBitFormat == 565)
 		HQ2x_implementation<Graphics::ColorMasks<565> >(srcPtr, srcPitch, dstPtr, dstPitch, width, height);
 	else
 		HQ2x_implementation<Graphics::ColorMasks<555> >(srcPtr, srcPitch, dstPtr, dstPitch, width, height);
 }
-
-#endif // Assembly version

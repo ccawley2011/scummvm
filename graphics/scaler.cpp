@@ -103,18 +103,20 @@ void InitLUT(Graphics::PixelFormat format) {
 	}
 
 #ifdef USE_NASM
-	hqx_lowbits  = (1 << format.rShift) | (1 << format.gShift) | (1 << format.bShift),
-	hqx_low2bits = (3 << format.rShift) | (3 << format.gShift) | (3 << format.bShift),
-	hqx_low3bits = (7 << format.rShift) | (7 << format.gShift) | (7 << format.bShift),
+	if(g_system->hasCPUFeature(OSystem::kCPUFeatureMMX)) {
+		hqx_lowbits  = (1 << format.rShift) | (1 << format.gShift) | (1 << format.bShift),
+		hqx_low2bits = (3 << format.rShift) | (3 << format.gShift) | (3 << format.bShift),
+		hqx_low3bits = (7 << format.rShift) | (7 << format.gShift) | (7 << format.bShift),
 
-	hqx_highbits = format.RGBToColor(255, 255, 255) ^ hqx_lowbits;
+		hqx_highbits = format.RGBToColor(255, 255, 255) ^ hqx_lowbits;
 
-	// FIXME: The following code only does the right thing
-	// if the color order is RGB or BGR, i.e., green is in the middle.
-	hqx_greenMask   = format.RGBToColor(  0, 255,   0);
-	hqx_redBlueMask = format.RGBToColor(255,   0, 255);
+		// FIXME: The following code only does the right thing
+		// if the color order is RGB or BGR, i.e., green is in the middle.
+		hqx_greenMask   = format.RGBToColor(  0, 255,   0);
+		hqx_redBlueMask = format.RGBToColor(255,   0, 255);
 
-	hqx_green_redBlue_Mask = (hqx_greenMask << 16) | hqx_redBlueMask;
+		hqx_green_redBlue_Mask = (hqx_greenMask << 16) | hqx_redBlueMask;
+	}
 #endif
 }
 #endif

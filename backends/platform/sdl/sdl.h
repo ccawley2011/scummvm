@@ -73,6 +73,8 @@ public:
 	virtual bool hasTextInClipboard();
 	virtual Common::String getTextFromClipboard();
 
+	virtual bool hasCPUFeature(CPUFeature f);
+
 	virtual void setWindowCaption(const char *caption);
 	virtual void addSysArchivesToSearchSet(Common::SearchSet &s, int priority = 0);
 	virtual uint32 getMillis(bool skipRecord = false);

@@ -35,6 +35,8 @@ public:
 	virtual void displayMessageOnOSD(const char *msg);
 	virtual void displayActivityIconOnOSD(const Graphics::Surface *icon) {}
 	virtual void fillScreen(uint32 col);
+
+	virtual bool hasCPUFeature(CPUFeature f);
 };
 
 class EventsBaseBackend : public BaseBackend, Common::EventSource {

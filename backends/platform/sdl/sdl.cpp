@@ -513,6 +513,15 @@ Common::String OSystem_SDL::getTextFromClipboard() {
 #endif
 }
 
+bool OSystem_SDL::hasCPUFeature(CPUFeature f) {
+	if (f == kCPUFeatureMMX) {
+		if (SDL_HasMMX())
+			return true;
+	}
+
+	return ModularBackend::hasCPUFeature(f);
+}
+
 uint32 OSystem_SDL::getMillis(bool skipRecord) {
 	uint32 millis = SDL_GetTicks();
 

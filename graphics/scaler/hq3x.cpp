@@ -36,11 +36,7 @@ void hq3x_16(const byte *, byte *, uint32, uint32, uint32, uint32);
 
 }
 
-void HQ3x(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch, int width, int height) {
-	hq3x_16(srcPtr, dstPtr, width, height, srcPitch, dstPitch);
-}
-
-#else
+#endif
 
 #define PIXEL00_1M  *(q) = interpolate16_3_1<ColorMask >(w5, w1);
 #define PIXEL00_1U  *(q) = interpolate16_3_1<ColorMask >(w5, w2);
@@ -2936,10 +2932,13 @@ static void HQ3x_implementation(const uint8 *srcPtr, uint32 srcPitch, uint8 *dst
 
 void HQ3x(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch, int width, int height) {
 	extern int gBitFormat;
+#ifdef USE_NASM
+	if(g_system->hasCPUFeature(OSystem::kCPUFeatureMMX))
+		hq3x_16(srcPtr, dstPtr, width, height, srcPitch, dstPitch);
+	else
+#endif
 	if (gBitFormat == 565)
 		HQ3x_implementation<Graphics::ColorMasks<565> >(srcPtr, srcPitch, dstPtr, dstPitch, width, height);
 	else
 		HQ3x_implementation<Graphics::ColorMasks<555> >(srcPtr, srcPitch, dstPtr, dstPitch, width, height);
 }
-
-#endif // Assembly version
