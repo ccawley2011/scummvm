@@ -24,6 +24,7 @@
  */
 
 #include "common/events.h"
+#include "common/joystick.h"
 #include "common/system.h"
 
 #include "gui/gui-manager.h"
@@ -175,6 +176,35 @@ void InputDeviceManager::waitInput(const InputBits filter) {
 	}
 }
 
+uint InputDeviceManager::convertJoystickToKey(uint joybutton) {
+	switch (joybutton) {
+	case Common::JOYCODE_A:
+		return Common::KEYCODE_RETURN;
+	case Common::JOYCODE_B:
+		// nothing
+		break;
+	case Common::JOYCODE_X:
+		return Common::KEYCODE_i;
+	case Common::JOYCODE_Y:
+		return Common::KEYCODE_t;
+	case Common::JOYCODE_LB:
+		return Common::KEYCODE_TILDE; // Open inventory panel
+	case Common::JOYCODE_RB:
+		return Common::KEYCODE_KP_MULTIPLY;// Open biochip panel
+	case Common::JOYCODE_START:
+		return Common::KEYCODE_p;
+	case Common::JOYCODE_UP:
+		return Common::KEYCODE_UP;
+	case Common::JOYCODE_DOWN:
+		return Common::KEYCODE_DOWN;
+	case Common::JOYCODE_LEFT:
+		return Common::KEYCODE_LEFT;
+	case Common::JOYCODE_RIGHT:
+		return Common::KEYCODE_RIGHT;
+	}
+	return 0;
+}
+
 bool InputDeviceManager::notifyEvent(const Common::Event &event) {
 	if (GUI::GuiManager::instance().isActive()) {
 		// For some reason, the engine hooks in the event system using an EventObserver.
@@ -214,6 +244,76 @@ bool InputDeviceManager::notifyEvent(const Common::Event &event) {
 		// Set the key to up if we have it
 		if (_keyMap.contains(event.kbd.keycode))
 			_keyMap[event.kbd.keycode] = false;
+		break;
+	case Common::EVENT_JOYAXIS_MOTION:
+		break;
+	case Common::EVENT_JOYBUTTON_DOWN:
+		warning("Joystick button down: %d", event.joystick.button);
+		if (_keyMap.contains(convertJoystickToKey(event.joystick.button)))
+			_keyMap[convertJoystickToKey(event.joystick.button)] = true;
+		break;
+	case Common::EVENT_JOYBUTTON_UP:
+		warning("Joystick button up: %d", event.joystick.button);
+		if (_keyMap.contains(convertJoystickToKey(event.joystick.button)))
+			_keyMap[convertJoystickToKey(event.joystick.button)] = false;
+		break;
+	case Common::EVENT_JOYHAT_MOTION:
+		switch (event.joystick.hatPosition) {
+		case Common::JOYHAT_CENTERED:
+			_keyMap[Common::KEYCODE_UP] = false;
+			_keyMap[Common::KEYCODE_DOWN] = false;
+			_keyMap[Common::KEYCODE_LEFT] = false;
+			_keyMap[Common::KEYCODE_RIGHT] = false;
+			break;
+		case Common::JOYHAT_LEFTUP:
+			_keyMap[Common::KEYCODE_UP] = true;
+			_keyMap[Common::KEYCODE_DOWN] = false;
+			_keyMap[Common::KEYCODE_LEFT] = true;
+			_keyMap[Common::KEYCODE_RIGHT] = false;
+			break;
+		case Common::JOYHAT_LEFT:
+			_keyMap[Common::KEYCODE_UP] = false;
+			_keyMap[Common::KEYCODE_DOWN] = false;
+			_keyMap[Common::KEYCODE_LEFT] = true;
+			_keyMap[Common::KEYCODE_RIGHT] = false;
+			break;
+		case Common::JOYHAT_LEFTDOWN:
+			_keyMap[Common::KEYCODE_UP] = false;
+			_keyMap[Common::KEYCODE_DOWN] = true;
+			_keyMap[Common::KEYCODE_LEFT] = true;
+			_keyMap[Common::KEYCODE_RIGHT] = false;
+			break;
+		case Common::JOYHAT_RIGHTUP:
+			_keyMap[Common::KEYCODE_UP] = true;
+			_keyMap[Common::KEYCODE_DOWN] = false;
+			_keyMap[Common::KEYCODE_LEFT] = false;
+			_keyMap[Common::KEYCODE_RIGHT] = true;
+			break;
+		case Common::JOYHAT_RIGHT:
+			_keyMap[Common::KEYCODE_UP] = false;
+			_keyMap[Common::KEYCODE_DOWN] = false;
+			_keyMap[Common::KEYCODE_LEFT] = false;
+			_keyMap[Common::KEYCODE_RIGHT] = true;
+			break;
+		case Common::JOYHAT_RIGHTDOWN:
+			_keyMap[Common::KEYCODE_UP] = false;
+			_keyMap[Common::KEYCODE_DOWN] = true;
+			_keyMap[Common::KEYCODE_LEFT] = false;
+			_keyMap[Common::KEYCODE_RIGHT] = true;
+			break;
+		case Common::JOYHAT_UP:
+			_keyMap[Common::KEYCODE_UP] = true;
+			_keyMap[Common::KEYCODE_DOWN] = false;
+			_keyMap[Common::KEYCODE_LEFT] = false;
+			_keyMap[Common::KEYCODE_RIGHT] = false;
+			break;
+		case Common::JOYHAT_DOWN:
+			_keyMap[Common::KEYCODE_UP] = false;
+			_keyMap[Common::KEYCODE_DOWN] = true;
+			_keyMap[Common::KEYCODE_LEFT] = false;
+			_keyMap[Common::KEYCODE_RIGHT] = false;
+			break;
+		}
 		break;
 	default:
 		break;

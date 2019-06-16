@@ -30,6 +30,9 @@
 #include "common/config-manager.h"
 #include "common/textconsole.h"
 #include "common/fs.h"
+#include "common/joystick.h"
+#include "engines/engine.h"
+#include "gui/gui-manager.h"
 
 // FIXME move joystick defines out and replace with confile file options
 // we should really allow users to map any key to a joystick button
@@ -658,6 +661,8 @@ bool SdlEventSource::dispatchSDLEvent(SDL_Event &ev, Common::Event &event) {
 			return handleJoyButtonUp(ev, event);
 		case SDL_JOYAXISMOTION:
 			return handleJoyAxisMotion(ev, event);
+		case SDL_JOYHATMOTION:
+			return handleJoyHatMotion(ev, event);
 		}
 	}
 
@@ -884,7 +889,24 @@ void SdlEventSource::closeJoystick() {
 	}
 }
 
+bool SdlEventSource::shouldGenerateMouseEvents() {
+	// Engine doesn't support joystick -> emulate mouse events
+	if (g_engine && !g_engine->hasFeature(Engine::kSupportsJoystick)) {
+		return true;
+	}
+	if (g_gui.isActive()) {
+		return true;
+	}
+	return false;
+}
+
 bool SdlEventSource::handleJoyButtonDown(SDL_Event &ev, Common::Event &event) {
+	if (!shouldGenerateMouseEvents()) {
+		event.type = Common::EVENT_JOYBUTTON_DOWN;
+		event.joystick.button = ev.jbutton.button + 1;
+		return true;
+	}
+
 	if (ev.jbutton.button == JOY_BUT_LMOUSE) {
 		event.type = Common::EVENT_LBUTTONDOWN;
 		return processMouseEvent(event, _km.x / MULTIPLIER, _km.y / MULTIPLIER);
@@ -921,6 +943,12 @@ bool SdlEventSource::handleJoyButtonDown(SDL_Event &ev, Common::Event &event) {
 }
 
 bool SdlEventSource::handleJoyButtonUp(SDL_Event &ev, Common::Event &event) {
+	if (!shouldGenerateMouseEvents()) {
+		event.type = Common::EVENT_JOYBUTTON_UP;
+		event.joystick.button = ev.jbutton.button + 1;
+		return true;
+	}
+
 	if (ev.jbutton.button == JOY_BUT_LMOUSE) {
 		event.type = Common::EVENT_LBUTTONUP;
 		return processMouseEvent(event, _km.x / MULTIPLIER, _km.y / MULTIPLIER);
@@ -957,12 +985,39 @@ bool SdlEventSource::handleJoyButtonUp(SDL_Event &ev, Common::Event &event) {
 }
 
 bool SdlEventSource::handleJoyAxisMotion(SDL_Event &ev, Common::Event &event) {
+	if (!shouldGenerateMouseEvents()) {
+		event.type = Common::EVENT_JOYAXIS_MOTION;
+		event.joystick.axis = ev.jaxis.axis;
+		event.joystick.position = ev.jaxis.value;
+		return true;
+	}
+
 	if (ev.jaxis.axis == JOY_XAXIS) {
 		_km.joy_x = ev.jaxis.value;
 		return handleAxisToMouseMotion(_km.joy_x, _km.joy_y);
 	} else if (ev.jaxis.axis == JOY_YAXIS) {
 		_km.joy_y = ev.jaxis.value;
 		return handleAxisToMouseMotion(_km.joy_x, _km.joy_y);
+	}
+
+	return false;
+}
+
+bool SdlEventSource::handleJoyHatMotion(SDL_Event &ev, Common::Event &event) {
+	if (!shouldGenerateMouseEvents()) {
+		event.type = Common::EVENT_JOYHAT_MOTION;
+		switch (ev.jhat.value) {
+		case SDL_HAT_LEFTUP: event.joystick.hatPosition = Common::JOYHAT_LEFTUP; break;
+		case SDL_HAT_UP: event.joystick.hatPosition = Common::JOYHAT_UP; break;
+		case SDL_HAT_RIGHTUP: event.joystick.hatPosition = Common::JOYHAT_RIGHTUP; break;
+		case SDL_HAT_LEFT: event.joystick.hatPosition = Common::JOYHAT_LEFT; break;
+		case SDL_HAT_CENTERED: event.joystick.hatPosition = Common::JOYHAT_CENTERED; break;
+		case SDL_HAT_RIGHT: event.joystick.hatPosition = Common::JOYHAT_RIGHT; break;
+		case SDL_HAT_LEFTDOWN: event.joystick.hatPosition = Common::JOYHAT_LEFTDOWN; break;
+		case SDL_HAT_DOWN: event.joystick.hatPosition = Common::JOYHAT_DOWN; break;
+		case SDL_HAT_RIGHTDOWN: event.joystick.hatPosition = Common::JOYHAT_RIGHTDOWN; break;
+		}
+		return true;
 	}
 
 	return false;
@@ -1053,6 +1108,12 @@ bool SdlEventSource::handleControllerButton(const SDL_Event &ev, Common::Event &
 			{ EVENT_KEYDOWN, KeyState(KEYCODE_KP6, 0), EVENT_KEYDOWN, KeyState(KEYCODE_KP3, 0) }
 	};
 
+	if (!shouldGenerateMouseEvents()) {
+		event.type = buttonUp ? Common::EVENT_JOYBUTTON_UP : Common::EVENT_JOYBUTTON_DOWN;
+		event.joystick.button = ev.cbutton.button;
+		return true;
+	}
+
 	if (ev.cbutton.button > SDL_CONTROLLER_BUTTON_DPAD_RIGHT) {
 		warning("Unknown SDL controller button: '%d'", ev.cbutton.button);
 		return false;
@@ -1097,6 +1158,13 @@ bool SdlEventSource::handleControllerButton(const SDL_Event &ev, Common::Event &
 }
 
 bool SdlEventSource::handleControllerAxisMotion(const SDL_Event &ev, Common::Event &event) {
+	if (!shouldGenerateMouseEvents()) {
+		event.type = Common::EVENT_JOYAXIS_MOTION;
+		event.joystick.axis = ev.caxis.axis;
+		event.joystick.position = ev.caxis.value;
+		return true;
+	}
+
 	if (ev.caxis.axis == SDL_CONTROLLER_AXIS_LEFTX) {
 		_km.joy_x = ev.caxis.value;
 		return handleAxisToMouseMotion(_km.joy_x, _km.joy_y);

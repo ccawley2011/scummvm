@@ -87,6 +87,28 @@ enum EventType {
 	,
 	EVENT_VIRTUAL_KEYBOARD = 20
 #endif
+	,
+	EVENT_JOYAXIS_MOTION = 23,
+	EVENT_JOYBUTTON_DOWN = 24,
+	EVENT_JOYBUTTON_UP = 25,
+	EVENT_JOYHAT_MOTION = 26
+};
+
+const int16 JOYAXIS_MIN = -32768;
+const int16 JOYAXIS_MAX = 32767;
+
+/**
+ * Data structure for joystick events
+ */
+struct JoystickState {
+	/** The axis for EVENT_JOYAXIS_MOTION events */
+	byte axis;
+	/** The new axis position for EVENT_JOYAXIS_MOTION events */
+	int16 position;
+	/** The button index for EVENT_JOYBUTTON_DOWN/UP events */
+	byte button;
+	/** The hat position for EVENT_JOYHAT events */
+	byte hatPosition;
 };
 
 typedef uint32 CustomEventType;
@@ -120,6 +142,12 @@ struct Event {
 	 * screen area as defined by the most recent call to initSize().
 	 */
 	Point mouse;
+
+	/**
+	 * Joystick data; only valid for joystick events (EVENT_JOYAXIS_MOTION,
+	 * EVENT_JOYBUTTON_DOWN and EVENT_JOYBUTTON_UP).
+	 */
+	JoystickState joystick;
 
 #ifdef ENABLE_KEYMAPPER
 	// IMPORTANT NOTE: This is part of the WIP Keymapper. If you plan to use

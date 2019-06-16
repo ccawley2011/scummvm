@@ -140,6 +140,7 @@ protected:
 	virtual bool handleJoyButtonDown(SDL_Event &ev, Common::Event &event);
 	virtual bool handleJoyButtonUp(SDL_Event &ev, Common::Event &event);
 	virtual bool handleJoyAxisMotion(SDL_Event &ev, Common::Event &event);
+	virtual bool handleJoyHatMotion(SDL_Event &ev, Common::Event &event);
 	virtual void updateKbdMouse();
 	virtual bool handleKbdMouse(Common::Event &event);
 
@@ -149,6 +150,8 @@ protected:
 	virtual bool handleControllerButton(const SDL_Event &ev, Common::Event &event, bool buttonUp);
 	virtual bool handleControllerAxisMotion(const SDL_Event &ev, Common::Event &event);
 #endif
+
+	bool shouldGenerateMouseEvents();
 
 	//@}
 
