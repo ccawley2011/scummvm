@@ -26,22 +26,18 @@
 #include "backends/mutex/mutex.h"
 #include "gui/EventRecorder.h"
 
-#include "audio/mixer.h"
 #include "graphics/pixelformat.h"
 
 ModularBackend::ModularBackend()
 	:
 	_mutexManager(0),
-	_graphicsManager(0),
-	_mixer(0) {
+	_graphicsManager(0) {
 
 }
 
 ModularBackend::~ModularBackend() {
 	delete _graphicsManager;
 	_graphicsManager = 0;
-	delete _mixer;
-	_mixer = 0;
 	delete _mutexManager;
 	_mutexManager = 0;
 }
@@ -265,11 +261,6 @@ void ModularBackend::unlockMutex(MutexRef mutex) {
 void ModularBackend::deleteMutex(MutexRef mutex) {
 	assert(_mutexManager);
 	_mutexManager->deleteMutex(mutex);
-}
-
-Audio::Mixer *ModularBackend::getMixer() {
-	assert(_mixer);
-	return (Audio::Mixer *)_mixer;
 }
 
 void ModularBackend::displayMessageOnOSD(const char *msg) {

@@ -64,6 +64,8 @@ public:
 	virtual Common::EventSource *getDefaultEventSource() { return this; }
 	virtual bool pollEvent(Common::Event &event);
 
+	virtual Audio::Mixer *getMixer();
+
 	virtual uint32 getMillis(bool skipRecord = false);
 	virtual void delayMillis(uint msecs);
 	virtual void getTimeAndDate(TimeDate &t) const {}
@@ -71,9 +73,12 @@ public:
 	virtual void quit();
 
 	virtual void logMessage(LogMessageType::Type type, const char *message);
+
+private:
+	Audio::Mixer *_mixer;
 };
 
-OSystem_NULL::OSystem_NULL() {
+OSystem_NULL::OSystem_NULL() : _mixer(0) {
 	#if defined(__amigaos4__)
 		_fsFactory = new AmigaOSFilesystemFactory();
 	#elif defined(POSIX)
@@ -88,6 +93,8 @@ OSystem_NULL::OSystem_NULL() {
 }
 
 OSystem_NULL::~OSystem_NULL() {
+	delete _mixer;
+	_mixer = 0;
 }
 
 void OSystem_NULL::initBackend() {
@@ -105,6 +112,11 @@ void OSystem_NULL::initBackend() {
 	// be functional. Of course, can't do that in a NULL backend :).
 
 	ModularBackend::initBackend();
+}
+
+Audio::Mixer *OSystem_NULL::getMixer() {
+	assert(_mixer);
+	return (Audio::Mixer *)_mixer;
 }
 
 bool OSystem_NULL::pollEvent(Common::Event &event) {

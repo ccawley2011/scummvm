@@ -236,7 +236,8 @@ struct TizenAppFrame : Frame {
 TizenSystem::TizenSystem(TizenAppForm *appForm) :
 	_appForm(appForm),
 	_audioThread(0),
-	_epoch(0) {
+	_epoch(0),
+	_mixer(0) {
 }
 
 result TizenSystem::Construct(void) {
@@ -401,6 +402,11 @@ void TizenSystem::destroyBackend() {
 
 	delete _mutexManager;
 	_mutexManager = NULL;
+}
+
+Audio::Mixer *TizenSystem::getMixer() {
+	assert(_mixer);
+	return (Audio::Mixer *)_mixer;
 }
 
 bool TizenSystem::pollEvent(Common::Event &event) {

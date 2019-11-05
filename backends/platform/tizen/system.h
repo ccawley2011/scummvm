@@ -81,6 +81,7 @@ private:
 	result initModules();
 
 	void updateScreen();
+	Audio::Mixer *getMixer();
 	bool pollEvent(Common::Event &event);
 	uint32 getMillis(bool skipRecord = false);
 	void delayMillis(uint msecs);
@@ -98,6 +99,8 @@ private:
 	AudioThread *_audioThread;
 	long long _epoch;
 	Common::String _resourcePath;
+	Audio::Mixer *_mixer;
+
 };
 
 #endif
