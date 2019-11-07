@@ -141,7 +141,7 @@ void OSystem_Wii::initBackend() {
 	initSfx();
 	initEvents();
 
-	EventsBaseBackend::initBackend();
+	BaseBackend::initBackend();
 }
 
 void OSystem_Wii::quit() {
@@ -380,7 +380,7 @@ Common::String OSystem_Wii::getSystemLanguage() const {
 	} else {
 		// This will only happen when new languages are added to the API.
 		warning("WII: Unknown system language: %d", langID);
-		return EventsBaseBackend::getSystemLanguage();
+		return BaseBackend::getSystemLanguage();
 	}
 }
 #endif // !GAMECUBE

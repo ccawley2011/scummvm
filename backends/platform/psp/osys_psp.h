@@ -41,7 +41,7 @@
 #include "backends/platform/psp/audio.h"
 #include "backends/platform/psp/thread.h"
 
-class OSystem_PSP : public EventsBaseBackend, public PaletteManager {
+class OSystem_PSP : public BaseBackend, Common::EventSource, public PaletteManager {
 private:
 
 	Audio::MixerImpl *_mixer;
@@ -146,6 +146,9 @@ public:
 	void logMessage(LogMessageType::Type type, const char *message);
 
 	virtual Common::String getDefaultConfigFileName();
+
+protected:
+	virtual Common::EventSource *getDefaultEventSource() { return this; }
 };
 
 #endif /* OSYS_PSP_H */

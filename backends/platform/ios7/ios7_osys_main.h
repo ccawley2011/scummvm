@@ -53,7 +53,7 @@ struct AQCallbackStruct {
 	AudioStreamBasicDescription dataFormat;
 };
 
-class OSystem_iOS7 : public EventsBaseBackend, public PaletteManager {
+class OSystem_iOS7 : public BaseBackend, Common::EventSource, public PaletteManager {
 protected:
 	static const OSystem::GraphicsMode s_supportedGraphicsModes[];
 	static AQCallbackStruct s_AudioQueue;
@@ -115,6 +115,8 @@ protected:
 #ifdef IPHONE_SANDBOXED
 	Common::String _chrootBasePath;
 #endif
+
+	virtual Common::EventSource *getDefaultEventSource() { return this; }
 
 public:
 

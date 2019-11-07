@@ -63,7 +63,7 @@ void OSystem_Dreamcast::initBackend()
 
   _audiocdManager = new DCCDManager();
 
-  EventsBaseBackend::initBackend();
+  BaseBackend::initBackend();
 }
 
 

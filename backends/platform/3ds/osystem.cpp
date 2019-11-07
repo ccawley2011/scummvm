@@ -139,7 +139,7 @@ void OSystem_3DS::initBackend() {
 
 	init3DSGraphics();
 	initAudio();
-	EventsBaseBackend::initBackend();
+	BaseBackend::initBackend();
 	initEvents();
 }
 

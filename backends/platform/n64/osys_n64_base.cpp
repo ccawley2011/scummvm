@@ -192,7 +192,7 @@ void OSystem_N64::initBackend() {
 
 	setupMixer();
 
-	EventsBaseBackend::initBackend();
+	BaseBackend::initBackend();
 }
 
 bool OSystem_N64::hasFeature(Feature f) {

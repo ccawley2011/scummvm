@@ -45,7 +45,7 @@ namespace Audio {
 class MixerImpl;
 };
 
-class OSystem_PS2 : public EventsBaseBackend, public PaletteManager {
+class OSystem_PS2 : public BaseBackend, Common::EventSource, public PaletteManager {
 public:
 	OSystem_PS2(const char *elfPath);
 	virtual ~OSystem_PS2(void);
@@ -159,6 +159,9 @@ private:
 	int _bootDevice;
 	char *_bootPath;
 	char *_configFile;
+
+protected:
+	virtual Common::EventSource *getDefaultEventSource() { return this; }
 };
 
 #endif // SYSTEMPS2_H

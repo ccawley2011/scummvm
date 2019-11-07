@@ -69,7 +69,7 @@ public:
 	void stop();
 };
 
-class OSystem_Dreamcast : private DCHardware, public EventsBaseBackend, public PaletteManager, public FilesystemFactory
+class OSystem_Dreamcast : private DCHardware, public BaseBackend, Common::EventSource, public PaletteManager, public FilesystemFactory
 #ifdef DYNAMIC_MODULES
   , public FilePluginProvider
 #endif
@@ -181,6 +181,10 @@ public:
   AbstractFSNode *makeRootFileNode() const;
   AbstractFSNode *makeCurrentDirectoryFileNode() const;
   AbstractFSNode *makeFileNodePath(const Common::String &path) const;
+
+ protected:
+
+   virtual Common::EventSource *getDefaultEventSource() { return this; }
 
  private:
 

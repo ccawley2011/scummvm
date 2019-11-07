@@ -138,7 +138,7 @@ void OSystem_DS::initBackend() {
 		_audiocdManager = new DSAudioCDManager();
 	*/
 
-	EventsBaseBackend::initBackend();
+	BaseBackend::initBackend();
 }
 
 bool OSystem_DS::hasFeature(Feature f) {

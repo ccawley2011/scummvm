@@ -53,7 +53,7 @@ extern void wii_memstats(void);
 }
 #endif
 
-class OSystem_Wii : public EventsBaseBackend, public PaletteManager {
+class OSystem_Wii : public BaseBackend, Common::EventSource, public PaletteManager {
 private:
 	s64 _startup_time;
 
@@ -130,6 +130,8 @@ private:
 
 protected:
 	Audio::MixerImpl *_mixer;
+
+	virtual Common::EventSource *getDefaultEventSource() { return this; }
 
 public:
 	enum {

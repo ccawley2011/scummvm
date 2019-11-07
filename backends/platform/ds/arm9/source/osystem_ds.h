@@ -38,7 +38,7 @@
 #include "graphics/colormasks.h"
 #include "graphics/palette.h"
 
-class OSystem_DS : public EventsBaseBackend, public PaletteManager {
+class OSystem_DS : public BaseBackend, Common::EventSource, public PaletteManager {
 protected:
 
 	int eventNum;
@@ -71,6 +71,8 @@ protected:
 	bool _disableCursorPalette;
 
 	int _gammaValue;
+
+	virtual Common::EventSource *getDefaultEventSource() { return this; }
 
 public:
 	typedef void (*SoundProc)(byte *buf, int len);

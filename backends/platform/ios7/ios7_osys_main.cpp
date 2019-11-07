@@ -164,7 +164,7 @@ void OSystem_iOS7::initBackend() {
 
 	setTimerCallback(&OSystem_iOS7::timerHandler, 10);
 
-	EventsBaseBackend::initBackend();
+	BaseBackend::initBackend();
 }
 
 bool OSystem_iOS7::hasFeature(Feature f) {

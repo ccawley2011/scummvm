@@ -37,11 +37,5 @@ public:
 	virtual void fillScreen(uint32 col);
 };
 
-class EventsBaseBackend : public BaseBackend, Common::EventSource {
-protected:
-	virtual Common::EventSource *getDefaultEventSource() { return this; }
-public:
-};
-
 
 #endif
