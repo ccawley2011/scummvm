@@ -46,7 +46,31 @@ class MutexManager;
  * And, it should also initialize all the managers variables
  * declared in this class, or override their related functions.
  */
-class ModularBackend : public BaseBackend {
+class ModularMutexBackend : public BaseBackend {
+public:
+	ModularMutexBackend();
+	virtual ~ModularMutexBackend();
+
+	/** @name Mutex handling */
+	//@{
+
+	virtual MutexRef createMutex() override;
+	virtual void lockMutex(MutexRef mutex) override;
+	virtual void unlockMutex(MutexRef mutex) override;
+	virtual void deleteMutex(MutexRef mutex) override;
+
+	//@}
+
+protected:
+	/** @name Managers variables */
+	//@{
+
+	MutexManager *_mutexManager;
+
+	//@}
+};
+
+class ModularBackend : public ModularMutexBackend {
 public:
 	ModularBackend();
 	virtual ~ModularBackend();
@@ -114,21 +138,6 @@ public:
 	virtual void setMouseCursor(const void *buf, uint w, uint h, int hotspotX, int hotspotY, uint32 keycolor, bool dontScale = false, const Graphics::PixelFormat *format = NULL) override;
 	virtual void setCursorPalette(const byte *colors, uint start, uint num) override;
 
-	//@}
-
-	/** @name Mutex handling */
-	//@{
-
-	virtual MutexRef createMutex() override;
-	virtual void lockMutex(MutexRef mutex) override;
-	virtual void unlockMutex(MutexRef mutex) override;
-	virtual void deleteMutex(MutexRef mutex) override;
-
-	//@}
-
-	/** @name Miscellaneous */
-	//@{
-
 	virtual void displayMessageOnOSD(const char *msg) override;
 	virtual void displayActivityIconOnOSD(const Graphics::Surface *icon) override;
 
@@ -138,7 +147,6 @@ protected:
 	/** @name Managers variables */
 	//@{
 
-	MutexManager *_mutexManager;
 	GraphicsManager *_graphicsManager;
 
 	//@}

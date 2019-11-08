@@ -30,7 +30,6 @@
 
 ModularBackend::ModularBackend()
 	:
-	_mutexManager(0),
 	_graphicsManager(0) {
 
 }
@@ -38,8 +37,6 @@ ModularBackend::ModularBackend()
 ModularBackend::~ModularBackend() {
 	delete _graphicsManager;
 	_graphicsManager = 0;
-	delete _mutexManager;
-	_mutexManager = 0;
 }
 
 bool ModularBackend::hasFeature(Feature f) {
@@ -243,30 +240,44 @@ void ModularBackend::setCursorPalette(const byte *colors, uint start, uint num) 
 	_graphicsManager->setCursorPalette(colors, start, num);
 }
 
-OSystem::MutexRef ModularBackend::createMutex() {
-	assert(_mutexManager);
-	return _mutexManager->createMutex();
-}
-
-void ModularBackend::lockMutex(MutexRef mutex) {
-	assert(_mutexManager);
-	_mutexManager->lockMutex(mutex);
-}
-
-void ModularBackend::unlockMutex(MutexRef mutex) {
-	assert(_mutexManager);
-	_mutexManager->unlockMutex(mutex);
-}
-
-void ModularBackend::deleteMutex(MutexRef mutex) {
-	assert(_mutexManager);
-	_mutexManager->deleteMutex(mutex);
-}
-
 void ModularBackend::displayMessageOnOSD(const char *msg) {
 	_graphicsManager->displayMessageOnOSD(msg);
 }
 
 void ModularBackend::displayActivityIconOnOSD(const Graphics::Surface *icon) {
 	_graphicsManager->displayActivityIconOnOSD(icon);
+}
+
+
+
+
+ModularMutexBackend::ModularMutexBackend()
+	:
+	_mutexManager(0) {
+
+}
+
+ModularMutexBackend::~ModularMutexBackend() {
+	delete _mutexManager;
+	_mutexManager = 0;
+}
+
+OSystem::MutexRef ModularMutexBackend::createMutex() {
+	assert(_mutexManager);
+	return _mutexManager->createMutex();
+}
+
+void ModularMutexBackend::lockMutex(MutexRef mutex) {
+	assert(_mutexManager);
+	_mutexManager->lockMutex(mutex);
+}
+
+void ModularMutexBackend::unlockMutex(MutexRef mutex) {
+	assert(_mutexManager);
+	_mutexManager->unlockMutex(mutex);
+}
+
+void ModularMutexBackend::deleteMutex(MutexRef mutex) {
+	assert(_mutexManager);
+	_mutexManager->deleteMutex(mutex);
 }
