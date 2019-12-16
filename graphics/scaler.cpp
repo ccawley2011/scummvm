@@ -121,7 +121,19 @@ void InitLUT(Graphics::PixelFormat format) {
 
 
 /** Lookup table for the DotMatrix scaler. */
-uint16 g_dotmatrix[16] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+uint32 g_dotmatrix[16] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+
+template<typename Pixel>
+void InitDotMatrix(Graphics::PixelFormat format) {
+	Pixel *dotmatrix = (Pixel *)g_dotmatrix;
+
+	// Build dotmatrix lookup table for the DotMatrix scaler.
+	dotmatrix[0] = dotmatrix[10] = format.ARGBToColor(0,  0, 63,  0);
+	dotmatrix[1] = dotmatrix[11] = format.ARGBToColor(0,  0,  0, 63);
+	dotmatrix[2] = dotmatrix[ 8] = format.ARGBToColor(0, 63,  0,  0);
+	dotmatrix[4] = dotmatrix[ 6] =
+		dotmatrix[12] = dotmatrix[14] = format.ARGBToColor(0, 63, 63, 63);
+}
 
 /** Init the scaler subsystem. */
 void InitScalers(uint32 BitFormat) {
@@ -144,12 +156,7 @@ void InitScalers(uint32 BitFormat) {
 	InitLUT(format);
 #endif
 
-	// Build dotmatrix lookup table for the DotMatrix scaler.
-	g_dotmatrix[0] = g_dotmatrix[10] = format.RGBToColor( 0, 63,  0);
-	g_dotmatrix[1] = g_dotmatrix[11] = format.RGBToColor( 0,  0, 63);
-	g_dotmatrix[2] = g_dotmatrix[ 8] = format.RGBToColor(63,  0,  0);
-	g_dotmatrix[4] = g_dotmatrix[ 6] =
-		g_dotmatrix[12] = g_dotmatrix[14] = format.RGBToColor(63, 63, 63);
+	InitDotMatrix<uint16>(format);
 }
 
 void DestroyScalers() {
@@ -164,11 +171,13 @@ void DestroyScalers() {
  * Trivial 'scaler' - in fact it doesn't do any scaling but just copies the
  * source to the destination.
  */
-void Normal1x(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch,
+template<typename Pixel>
+void Normal1xTemplate(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch,
 							int width, int height) {
 	// Spot the case when it can all be done in 1 hit
-	if ((srcPitch == sizeof(uint16) * (uint)width) && (dstPitch == sizeof(uint16) * (uint)width)) {
-		memcpy(dstPtr, srcPtr, sizeof(uint16) * width * height);
+	int BytesPerPixel = sizeof(Pixel);
+	if ((srcPitch == BytesPerPixel * (uint)width) && (dstPitch == BytesPerPixel * (uint)width)) {
+		memcpy(dstPtr, srcPtr, BytesPerPixel * width * height);
 		return;
 	}
 	while (height--) {
@@ -178,8 +187,37 @@ void Normal1x(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPit
 	}
 }
 
+void Normal1x(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch,
+							int width, int height) {
+	Normal1xTemplate<uint16>(srcPtr, srcPitch, dstPtr, dstPitch, width, height);
+}
+
 #ifdef USE_SCALERS
 
+/**
+ * Trivial nearest-neighbor 2x scaler.
+ */
+template<typename Pixel>
+void Normal2xTemplate(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch,
+							int width, int height) {
+	uint8 *r;
+	int b = sizeof(Pixel);
+
+	assert(IS_ALIGNED(dstPtr, 2));
+	while (height--) {
+		r = dstPtr;
+		for (int i = 0; i < width; ++i, r += b * 2) {
+			Pixel color = *(((const Pixel *)srcPtr) + i);
+
+			*(Pixel *)(r) = color;
+			*(Pixel *)(r + b) = color;
+			*(Pixel *)(r + dstPitch) = color;
+			*(Pixel *)(r + b + dstPitch) = color;
+		}
+		srcPtr += srcPitch;
+		dstPtr += dstPitch << 1;
+	}
+}
 
 #ifdef USE_ARM_SCALER_ASM
 extern "C" void Normal2xARM(const uint8  *srcPtr,
@@ -189,20 +227,16 @@ extern "C" void Normal2xARM(const uint8  *srcPtr,
                                   int     width,
                                   int     height);
 
-void Normal2x(const uint8  *srcPtr,
-                    uint32  srcPitch,
-                    uint8  *dstPtr,
-                    uint32  dstPitch,
-                    int     width,
-                    int     height) {
+template<>
+void Normal2xTemplate<uint16>(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch,
+							int width, int height) {
 	Normal2xARM(srcPtr, srcPitch, dstPtr, dstPitch, width, height);
 }
 
 #else
-/**
- * Trivial nearest-neighbor 2x scaler.
- */
-void Normal2x(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch,
+
+template<>
+void Normal2xTemplate<uint16>(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch,
 							int width, int height) {
 	uint8 *r;
 
@@ -221,36 +255,49 @@ void Normal2x(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPit
 		dstPtr += dstPitch << 1;
 	}
 }
+
 #endif
+
+void Normal2x(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch,
+							int width, int height) {
+	Normal2xTemplate<uint16>(srcPtr, srcPitch, dstPtr, dstPitch, width, height);
+}
 
 /**
  * Trivial nearest-neighbor 3x scaler.
  */
-void Normal3x(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch,
+template<typename Pixel>
+void Normal3xTemplate(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch,
 							int width, int height) {
 	uint8 *r;
 	const uint32 dstPitch2 = dstPitch * 2;
 	const uint32 dstPitch3 = dstPitch * 3;
+	int b = sizeof(Pixel);
 
 	assert(IS_ALIGNED(dstPtr, 2));
 	while (height--) {
 		r = dstPtr;
-		for (int i = 0; i < width; ++i, r += 6) {
-			uint16 color = *(((const uint16 *)srcPtr) + i);
+		for (int i = 0; i < width; ++i, r += b * 3) {
+			Pixel color = *(((const Pixel *)srcPtr) + i);
 
-			*(uint16 *)(r + 0) = color;
-			*(uint16 *)(r + 2) = color;
-			*(uint16 *)(r + 4) = color;
-			*(uint16 *)(r + 0 + dstPitch) = color;
-			*(uint16 *)(r + 2 + dstPitch) = color;
-			*(uint16 *)(r + 4 + dstPitch) = color;
-			*(uint16 *)(r + 0 + dstPitch2) = color;
-			*(uint16 *)(r + 2 + dstPitch2) = color;
-			*(uint16 *)(r + 4 + dstPitch2) = color;
+			*(Pixel *)(r + b * 0) = color;
+			*(Pixel *)(r + b * 1) = color;
+			*(Pixel *)(r + b * 2) = color;
+			*(Pixel *)(r + b * 0 + dstPitch) = color;
+			*(Pixel *)(r + b * 1 + dstPitch) = color;
+			*(Pixel *)(r + b * 2 + dstPitch) = color;
+			*(Pixel *)(r + b * 0 + dstPitch2) = color;
+			*(Pixel *)(r + b * 1 + dstPitch2) = color;
+			*(Pixel *)(r + b * 2 + dstPitch2) = color;
 		}
 		srcPtr += srcPitch;
 		dstPtr += dstPitch3;
 	}
+}
+
+void Normal3x(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch,
+							int width, int height) {
+	Normal3xTemplate<uint16>(srcPtr, srcPitch, dstPtr, dstPitch, width, height);
 }
 
 /**
@@ -274,24 +321,31 @@ void AdvMame3x(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPi
 template<typename ColorMask>
 void TV2xTemplate(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch,
 					int width, int height) {
-	const uint32 nextlineSrc = srcPitch / sizeof(uint16);
-	const uint16 *p = (const uint16 *)srcPtr;
+	typedef typename ColorMask::PixelType Pixel;
 
-	const uint32 nextlineDst = dstPitch / sizeof(uint16);
-	uint16 *q = (uint16 *)dstPtr;
+	const uint32 nextlineSrc = srcPitch / ColorMask::kBytesPerPixel;
+	const Pixel *p = (const Pixel *)srcPtr;
+
+	const uint32 nextlineDst = dstPitch / ColorMask::kBytesPerPixel;
+	Pixel *q = (Pixel *)dstPtr;
 
 	while (height--) {
 		for (int i = 0, j = 0; i < width; ++i, j += 2) {
-			uint16 p1 = *(p + i);
-			uint32 pi;
+			Pixel p1 = *(p + i);
+			Pixel pi;
 
 			pi = (((p1 & ColorMask::kRedBlueMask) * 7) >> 3) & ColorMask::kRedBlueMask;
 			pi |= (((p1 & ColorMask::kGreenMask) * 7) >> 3) & ColorMask::kGreenMask;
+			pi |= p1 & ColorMask::kAlphaMask;
+
+			uint8 r, g, b;
+			Graphics::colorToRGB<ColorMask>(p1,r,g,b);
+			pi = Graphics::RGBToColor<ColorMask>((r*7) / 8, (g*7) / 8, (b*7) / 8);
 
 			*(q + j) = p1;
 			*(q + j + 1) = p1;
-			*(q + j + nextlineDst) = (uint16)pi;
-			*(q + j + nextlineDst + 1) = (uint16)pi;
+			*(q + j + nextlineDst) = pi;
+			*(q + j + nextlineDst + 1) = pi;
 		}
 		p += nextlineSrc;
 		q += nextlineDst << 1;
@@ -305,7 +359,8 @@ void TV2x(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch, 
 		TV2xTemplate<Graphics::ColorMasks<555> >(srcPtr, srcPitch, dstPtr, dstPitch, width, height);
 }
 
-static inline uint16 DOT_16(const uint16 *dotmatrix, uint16 c, int j, int i) {
+template <typename Pixel>
+static inline Pixel DOT(const Pixel *dotmatrix, Pixel c, int j, int i) {
 	return c - ((c >> 2) & dotmatrix[((j & 3) << 2) + (i & 3)]);
 }
 
@@ -316,28 +371,34 @@ static inline uint16 DOT_16(const uint16 *dotmatrix, uint16 c, int j, int i) {
 // a way that also works together with aspect-ratio correction is left as an
 // exercise for the reader.)
 
-void DotMatrix(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch,
+template<typename Pixel>
+void DotMatrixTemplate(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch,
 					int width, int height) {
 
-	const uint16 *dotmatrix = g_dotmatrix;
+	const Pixel *dotmatrix = (Pixel *)g_dotmatrix;
 
-	const uint32 nextlineSrc = srcPitch / sizeof(uint16);
-	const uint16 *p = (const uint16 *)srcPtr;
+	const uint32 nextlineSrc = srcPitch / sizeof(Pixel);
+	const Pixel *p = (const Pixel *)srcPtr;
 
 	const uint32 nextlineDst = dstPitch / sizeof(uint16);
-	uint16 *q = (uint16 *)dstPtr;
+	Pixel *q = (Pixel *)dstPtr;
 
 	for (int j = 0, jj = 0; j < height; ++j, jj += 2) {
 		for (int i = 0, ii = 0; i < width; ++i, ii += 2) {
-			uint16 c = *(p + i);
-			*(q + ii) = DOT_16(dotmatrix, c, jj, ii);
-			*(q + ii + 1) = DOT_16(dotmatrix, c, jj, ii + 1);
-			*(q + ii + nextlineDst) = DOT_16(dotmatrix, c, jj + 1, ii);
-			*(q + ii + nextlineDst + 1) = DOT_16(dotmatrix, c, jj + 1, ii + 1);
+			Pixel c = *(p + i);
+			*(q + ii) = DOT<Pixel>(dotmatrix, c, jj, ii);
+			*(q + ii + 1) = DOT<Pixel>(dotmatrix, c, jj, ii + 1);
+			*(q + ii + nextlineDst) = DOT<Pixel>(dotmatrix, c, jj + 1, ii);
+			*(q + ii + nextlineDst + 1) = DOT<Pixel>(dotmatrix, c, jj + 1, ii + 1);
 		}
 		p += nextlineSrc;
 		q += nextlineDst << 1;
 	}
+}
+
+void DotMatrix(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch,
+							int width, int height) {
+	DotMatrixTemplate<uint16>(srcPtr, srcPitch, dstPtr, dstPitch, width, height);
 }
 
 #endif // #ifdef USE_SCALERS

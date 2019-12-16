@@ -22,46 +22,49 @@
 #include "graphics/scaler/downscaler.h"
 #include "graphics/scaler/intern.h"
 
-#ifdef USE_ARM_SCALER_ASM
-extern "C" {
-	void DownscaleAllByHalfARM(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch, int width, int height, int mask, int round);
-}
-
-void DownscaleAllByHalf(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch, int width, int height) {
-	// Rounding constants and masks used for different pixel formats
-	static const int roundingconstants[] = { 0x00200802, 0x00201002 };
-	static const int redbluegreenMasks[] = { 0x03E07C1F, 0x07E0F81F };
-
-	extern int gBitFormat;
-
-	const int maskUsed = (gBitFormat == 565);
-	DownscaleAllByHalfARM(srcPtr, srcPitch, dstPtr, dstPitch, width, height, redbluegreenMasks[maskUsed], roundingconstants[maskUsed]);
-}
-
-#else
+#define interpolate_1_1_1_1(a,b,c,d)	(ColorMask::kBytesPerPixel == 2 ? interpolate16_1_1_1_1<ColorMask>(a,b,c,d) : interpolate32_1_1_1_1<ColorMask>(a,b,c,d))
 
 template<typename ColorMask>
 void DownscaleAllByHalfTemplate(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch, int width, int height) {
+	typedef typename ColorMask::PixelType Pixel;
+
 	uint8 *work;
-	uint16 srcPitch16 = (uint16)(srcPitch / sizeof(uint16));
+	uint16 srcPitch16 = (uint16)(srcPitch / ColorMask::kBytesPerPixel);
 
 	while ((height -= 2) >= 0) {
 		work = dstPtr;
 
 		for (int i=0; i<width; i+=2) {
 			// Another lame filter attempt :)
-			uint16 color1 = *(((const uint16 *)srcPtr) + i);
-			uint16 color2 = *(((const uint16 *)srcPtr) + (i + 1));
-			uint16 color3 = *(((const uint16 *)srcPtr) + (i + srcPitch16));
-			uint16 color4 = *(((const uint16 *)srcPtr) + (i + srcPitch16 + 1));
-			*(((uint16 *)work) + 0) = interpolate16_1_1_1_1<ColorMask>(color1, color2, color3, color4);
+			Pixel color1 = *(((const Pixel *)srcPtr) + i);
+			Pixel color2 = *(((const Pixel *)srcPtr) + (i + 1));
+			Pixel color3 = *(((const Pixel *)srcPtr) + (i + srcPitch16));
+			Pixel color4 = *(((const Pixel *)srcPtr) + (i + srcPitch16 + 1));
+			*(((Pixel *)work) + 0) = interpolate_1_1_1_1(color1, color2, color3, color4);
 
-			work += sizeof(uint16);
+			work += ColorMask::kBytesPerPixel;
 		}
 		srcPtr += 2 * srcPitch;
 		dstPtr += dstPitch;
 	}
 }
+
+#ifdef USE_ARM_SCALER_ASM
+extern "C" {
+	void DownscaleAllByHalfARM(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch, int width, int height, int mask, int round);
+}
+
+template<>
+void DownscaleAllByHalfTemplate<Graphics::ColorMasks<565> >(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch, int width, int height) {
+	DownscaleAllByHalfARM(srcPtr, srcPitch, dstPtr, dstPitch, width, height, 0x07E0F81F, 0x00201002);
+}
+
+template<>
+void DownscaleAllByHalfTemplate<Graphics::ColorMasks<555> >(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch, int width, int height) {
+	DownscaleAllByHalfARM(srcPtr, srcPitch, dstPtr, dstPitch, width, height, 0x03E07C1F, 0x00200802);
+}
+
+#endif
 
 void DownscaleAllByHalf(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch, int width, int height) {
 	extern int gBitFormat;
@@ -70,5 +73,3 @@ void DownscaleAllByHalf(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uin
 	else
 		DownscaleAllByHalfTemplate<Graphics::ColorMasks<555> >(srcPtr, srcPitch, dstPtr, dstPitch, width, height);
 }
-
-#endif

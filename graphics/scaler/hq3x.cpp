@@ -42,58 +42,65 @@ void HQ3x(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch, 
 
 #else
 
-#define PIXEL00_1M  *(q) = interpolate16_3_1<ColorMask >(w5, w1);
-#define PIXEL00_1U  *(q) = interpolate16_3_1<ColorMask >(w5, w2);
-#define PIXEL00_1L  *(q) = interpolate16_3_1<ColorMask >(w5, w4);
-#define PIXEL00_2   *(q) = interpolate16_2_1_1<ColorMask >(w5, w4, w2);
-#define PIXEL00_4   *(q) = interpolate16_2_7_7<ColorMask >(w5, w4, w2);
-#define PIXEL00_5   *(q) = interpolate16_1_1<ColorMask >(w4, w2);
+#define interpolate_1_1(a,b)		(ColorMask::kBytesPerPixel == 2 ? interpolate16_1_1<ColorMask>(a,b) : interpolate32_1_1<ColorMask>(a,b))
+#define interpolate_3_1(a,b)		(ColorMask::kBytesPerPixel == 2 ? interpolate16_3_1<ColorMask>(a,b) : interpolate32_3_1<ColorMask>(a,b))
+#define interpolate_7_1(a,b)		(ColorMask::kBytesPerPixel == 2 ? interpolate16_7_1<ColorMask>(a,b) : interpolate32_7_1<ColorMask>(a,b))
+#define interpolate_2_1_1(a,b,c)	(ColorMask::kBytesPerPixel == 2 ? interpolate16_2_1_1<ColorMask>(a,b,c) : interpolate32_2_1_1<ColorMask>(a,b,c))
+#define interpolate_2_7_7(a,b,c)	(ColorMask::kBytesPerPixel == 2 ? interpolate16_2_7_7<ColorMask>(a,b,c) : interpolate32_2_7_7<ColorMask>(a,b,c))
+#define interpolate_1_1_1_1(a,b,c,d)	(ColorMask::kBytesPerPixel == 2 ? interpolate16_1_1_1_1<ColorMask>(a,b,c,d) : interpolate32_1_1_1_1<ColorMask>(a,b,c,d))
+
+#define PIXEL00_1M  *(q) = interpolate_3_1(w5, w1);
+#define PIXEL00_1U  *(q) = interpolate_3_1(w5, w2);
+#define PIXEL00_1L  *(q) = interpolate_3_1(w5, w4);
+#define PIXEL00_2   *(q) = interpolate_2_1_1(w5, w4, w2);
+#define PIXEL00_4   *(q) = interpolate_2_7_7(w5, w4, w2);
+#define PIXEL00_5   *(q) = interpolate_1_1(w4, w2);
 #define PIXEL00_C   *(q) = w5;
 
-#define PIXEL01_1   *(q+1) = interpolate16_3_1<ColorMask >(w5, w2);
-#define PIXEL01_3   *(q+1) = interpolate16_7_1<ColorMask >(w5, w2);
-#define PIXEL01_6   *(q+1) = interpolate16_3_1<ColorMask >(w2, w5);
+#define PIXEL01_1   *(q+1) = interpolate_3_1(w5, w2);
+#define PIXEL01_3   *(q+1) = interpolate_7_1(w5, w2);
+#define PIXEL01_6   *(q+1) = interpolate_3_1(w2, w5);
 #define PIXEL01_C   *(q+1) = w5;
 
-#define PIXEL02_1M  *(q+2) = interpolate16_3_1<ColorMask >(w5, w3);
-#define PIXEL02_1U  *(q+2) = interpolate16_3_1<ColorMask >(w5, w2);
-#define PIXEL02_1R  *(q+2) = interpolate16_3_1<ColorMask >(w5, w6);
-#define PIXEL02_2   *(q+2) = interpolate16_2_1_1<ColorMask >(w5, w2, w6);
-#define PIXEL02_4   *(q+2) = interpolate16_2_7_7<ColorMask >(w5, w2, w6);
-#define PIXEL02_5   *(q+2) = interpolate16_1_1<ColorMask >(w2, w6);
+#define PIXEL02_1M  *(q+2) = interpolate_3_1(w5, w3);
+#define PIXEL02_1U  *(q+2) = interpolate_3_1(w5, w2);
+#define PIXEL02_1R  *(q+2) = interpolate_3_1(w5, w6);
+#define PIXEL02_2   *(q+2) = interpolate_2_1_1(w5, w2, w6);
+#define PIXEL02_4   *(q+2) = interpolate_2_7_7(w5, w2, w6);
+#define PIXEL02_5   *(q+2) = interpolate_1_1(w2, w6);
 #define PIXEL02_C   *(q+2) = w5;
 
-#define PIXEL10_1   *(q+nextlineDst) = interpolate16_3_1<ColorMask >(w5, w4);
-#define PIXEL10_3   *(q+nextlineDst) = interpolate16_7_1<ColorMask >(w5, w4);
-#define PIXEL10_6   *(q+nextlineDst) = interpolate16_3_1<ColorMask >(w4, w5);
+#define PIXEL10_1   *(q+nextlineDst) = interpolate_3_1(w5, w4);
+#define PIXEL10_3   *(q+nextlineDst) = interpolate_7_1(w5, w4);
+#define PIXEL10_6   *(q+nextlineDst) = interpolate_3_1(w4, w5);
 #define PIXEL10_C   *(q+nextlineDst) = w5;
 
 #define PIXEL11     *(q+1+nextlineDst) = w5;
 
-#define PIXEL12_1   *(q+2+nextlineDst) = interpolate16_3_1<ColorMask >(w5, w6);
-#define PIXEL12_3   *(q+2+nextlineDst) = interpolate16_7_1<ColorMask >(w5, w6);
-#define PIXEL12_6   *(q+2+nextlineDst) = interpolate16_3_1<ColorMask >(w6, w5);
+#define PIXEL12_1   *(q+2+nextlineDst) = interpolate_3_1(w5, w6);
+#define PIXEL12_3   *(q+2+nextlineDst) = interpolate_7_1(w5, w6);
+#define PIXEL12_6   *(q+2+nextlineDst) = interpolate_3_1(w6, w5);
 #define PIXEL12_C   *(q+2+nextlineDst) = w5;
 
-#define PIXEL20_1M  *(q+nextlineDst2) = interpolate16_3_1<ColorMask >(w5, w7);
-#define PIXEL20_1D  *(q+nextlineDst2) = interpolate16_3_1<ColorMask >(w5, w8);
-#define PIXEL20_1L  *(q+nextlineDst2) = interpolate16_3_1<ColorMask >(w5, w4);
-#define PIXEL20_2   *(q+nextlineDst2) = interpolate16_2_1_1<ColorMask >(w5, w8, w4);
-#define PIXEL20_4   *(q+nextlineDst2) = interpolate16_2_7_7<ColorMask >(w5, w8, w4);
-#define PIXEL20_5   *(q+nextlineDst2) = interpolate16_1_1<ColorMask >(w8, w4);
+#define PIXEL20_1M  *(q+nextlineDst2) = interpolate_3_1(w5, w7);
+#define PIXEL20_1D  *(q+nextlineDst2) = interpolate_3_1(w5, w8);
+#define PIXEL20_1L  *(q+nextlineDst2) = interpolate_3_1(w5, w4);
+#define PIXEL20_2   *(q+nextlineDst2) = interpolate_2_1_1(w5, w8, w4);
+#define PIXEL20_4   *(q+nextlineDst2) = interpolate_2_7_7(w5, w8, w4);
+#define PIXEL20_5   *(q+nextlineDst2) = interpolate_1_1(w8, w4);
 #define PIXEL20_C   *(q+nextlineDst2) = w5;
 
-#define PIXEL21_1   *(q+1+nextlineDst2) = interpolate16_3_1<ColorMask >(w5, w8);
-#define PIXEL21_3   *(q+1+nextlineDst2) = interpolate16_7_1<ColorMask >(w5, w8);
-#define PIXEL21_6   *(q+1+nextlineDst2) = interpolate16_3_1<ColorMask >(w8, w5);
+#define PIXEL21_1   *(q+1+nextlineDst2) = interpolate_3_1(w5, w8);
+#define PIXEL21_3   *(q+1+nextlineDst2) = interpolate_7_1(w5, w8);
+#define PIXEL21_6   *(q+1+nextlineDst2) = interpolate_3_1(w8, w5);
 #define PIXEL21_C   *(q+1+nextlineDst2) = w5;
 
-#define PIXEL22_1M  *(q+2+nextlineDst2) = interpolate16_3_1<ColorMask >(w5, w9);
-#define PIXEL22_1D  *(q+2+nextlineDst2) = interpolate16_3_1<ColorMask >(w5, w8);
-#define PIXEL22_1R  *(q+2+nextlineDst2) = interpolate16_3_1<ColorMask >(w5, w6);
-#define PIXEL22_2   *(q+2+nextlineDst2) = interpolate16_2_1_1<ColorMask >(w5, w6, w8);
-#define PIXEL22_4   *(q+2+nextlineDst2) = interpolate16_2_7_7<ColorMask >(w5, w6, w8);
-#define PIXEL22_5   *(q+2+nextlineDst2) = interpolate16_1_1<ColorMask >(w6, w8);
+#define PIXEL22_1M  *(q+2+nextlineDst2) = interpolate_3_1(w5, w9);
+#define PIXEL22_1D  *(q+2+nextlineDst2) = interpolate_3_1(w5, w8);
+#define PIXEL22_1R  *(q+2+nextlineDst2) = interpolate_3_1(w5, w6);
+#define PIXEL22_2   *(q+2+nextlineDst2) = interpolate_2_1_1(w5, w6, w8);
+#define PIXEL22_4   *(q+2+nextlineDst2) = interpolate_2_7_7(w5, w6, w8);
+#define PIXEL22_5   *(q+2+nextlineDst2) = interpolate_1_1(w6, w8);
 #define PIXEL22_C   *(q+2+nextlineDst2) = w5;
 
 extern "C" uint32   *RGBtoYUV;
@@ -106,14 +113,16 @@ extern "C" uint32   *RGBtoYUV;
  */
 template<typename ColorMask>
 static void HQ3x_implementation(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch, int width, int height) {
+	typedef typename ColorMask::PixelType Pixel;
+
 	int  w1, w2, w3, w4, w5, w6, w7, w8, w9;
 
-	const uint32 nextlineSrc = srcPitch / sizeof(uint16);
-	const uint16 *p = (const uint16 *)srcPtr;
+	const uint32 nextlineSrc = srcPitch / ColorMask::kBytesPerPixel;
+	const Pixel *p = (const Pixel *)srcPtr;
 
-	const uint32 nextlineDst = dstPitch / sizeof(uint16);
+	const uint32 nextlineDst = dstPitch / ColorMask::kBytesPerPixel;
 	const uint32 nextlineDst2 = 2 * nextlineDst;
-	uint16 *q = (uint16 *)dstPtr;
+	Pixel *q = (Pixel *)dstPtr;
 
 	//	 +----+----+----+
 	//	 |    |    |    |

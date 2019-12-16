@@ -38,20 +38,22 @@ static inline int GetResult(uint32 A, uint32 B, uint32 C, uint32 D) {
 	return (y>>1) - (x>>1);
 }
 
-#define interpolate_1_1		interpolate16_1_1<ColorMask>
-#define interpolate_3_1		interpolate16_3_1<ColorMask>
-#define interpolate_6_1_1	interpolate16_6_1_1<ColorMask>
-#define interpolate_1_1_1_1	interpolate16_1_1_1_1<ColorMask>
+#define interpolate_1_1(a,b)		(ColorMask::kBytesPerPixel == 2 ? interpolate16_1_1<ColorMask>(a,b) : interpolate32_1_1<ColorMask>(a,b))
+#define interpolate_3_1(a,b)		(ColorMask::kBytesPerPixel == 2 ? interpolate16_3_1<ColorMask>(a,b) : interpolate32_3_1<ColorMask>(a,b))
+#define interpolate_6_1_1(a,b,c)	(ColorMask::kBytesPerPixel == 2 ? interpolate16_6_1_1<ColorMask>(a,b,c) : interpolate32_6_1_1<ColorMask>(a,b,c))
+#define interpolate_1_1_1_1(a,b,c,d)	(ColorMask::kBytesPerPixel == 2 ? interpolate16_1_1_1_1<ColorMask>(a,b,c,d) : interpolate32_1_1_1_1<ColorMask>(a,b,c,d))
 
 template<typename ColorMask>
 void Super2xSaITemplate(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch, int width, int height) {
-	const uint16 *bP;
-	uint16 *dP;
-	const uint32 nextlineSrc = srcPitch >> 1;
+	typedef typename ColorMask::PixelType Pixel;
+
+	const Pixel *bP;
+	Pixel *dP;
+	const uint32 nextlineSrc = srcPitch / ColorMask::kBytesPerPixel;
 
 	while (height--) {
-		bP = (const uint16 *)srcPtr;
-		dP = (uint16 *)dstPtr;
+		bP = (const Pixel *)srcPtr;
+		dP = (Pixel *)dstPtr;
 
 		for (int i = 0; i < width; ++i) {
 			unsigned color4, color5, color6;
@@ -136,10 +138,10 @@ void Super2xSaITemplate(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uin
 			else
 				product1a = color5;
 
-			*(dP + 0) = (uint16) product1a;
-			*(dP + 1) = (uint16) product1b;
-			*(dP + dstPitch/2 + 0) = (uint16) product2a;
-			*(dP + dstPitch/2 + 1) = (uint16) product2b;
+			*(dP + 0) = (Pixel) product1a;
+			*(dP + 1) = (Pixel) product1b;
+			*(dP + dstPitch / ColorMask::kBytesPerPixel + 0) = (Pixel) product2a;
+			*(dP + dstPitch / ColorMask::kBytesPerPixel + 1) = (Pixel) product2b;
 
 			bP += 1;
 			dP += 2;
@@ -160,13 +162,15 @@ void Super2xSaI(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstP
 
 template<typename ColorMask>
 void SuperEagleTemplate(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch, int width, int height) {
-	const uint16 *bP;
-	uint16 *dP;
-	const uint32 nextlineSrc = srcPitch >> 1;
+	typedef typename ColorMask::PixelType Pixel;
+
+	const Pixel *bP;
+	Pixel *dP;
+	const uint32 nextlineSrc = srcPitch / ColorMask::kBytesPerPixel;
 
 	while (height--) {
-		bP = (const uint16 *)srcPtr;
-		dP = (uint16 *)dstPtr;
+		bP = (const Pixel *)srcPtr;
+		dP = (Pixel *)dstPtr;
 		for (int i = 0; i < width; ++i) {
 			unsigned color4, color5, color6;
 			unsigned color1, color2, color3;
@@ -247,10 +251,10 @@ void SuperEagleTemplate(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uin
 				}
 			}
 
-			*(dP + 0) = (uint16) product1a;
-			*(dP + 1) = (uint16) product1b;
-			*(dP + dstPitch/2 + 0) = (uint16) product2a;
-			*(dP + dstPitch/2 + 1) = (uint16) product2b;
+			*(dP + 0) = (Pixel) product1a;
+			*(dP + 1) = (Pixel) product1b;
+			*(dP + dstPitch / ColorMask::kBytesPerPixel + 0) = (Pixel) product2a;
+			*(dP + dstPitch / ColorMask::kBytesPerPixel + 1) = (Pixel) product2b;
 
 			bP += 1;
 			dP += 2;
@@ -272,13 +276,15 @@ void SuperEagle(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstP
 
 template<typename ColorMask>
 void _2xSaITemplate(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 dstPitch, int width, int height) {
-	const uint16 *bP;
-	uint16 *dP;
-	const uint32 nextlineSrc = srcPitch >> 1;
+	typedef typename ColorMask::PixelType Pixel;
+
+	const Pixel *bP;
+	Pixel *dP;
+	const uint32 nextlineSrc = srcPitch / ColorMask::kBytesPerPixel;
 
 	while (height--) {
-		bP = (const uint16 *)srcPtr;
-		dP = (uint16 *)dstPtr;
+		bP = (const Pixel *)srcPtr;
+		dP = (Pixel *)dstPtr;
 
 		for (int i = 0; i < width; ++i) {
 
@@ -388,10 +394,10 @@ void _2xSaITemplate(const uint8 *srcPtr, uint32 srcPitch, uint8 *dstPtr, uint32 
 				}
 			}
 
-			*(dP + 0) = (uint16) colorA;
-			*(dP + 1) = (uint16) product;
-			*(dP + dstPitch/2 + 0) = (uint16) product1;
-			*(dP + dstPitch/2 + 1) = (uint16) product2;
+			*(dP + 0) = (Pixel) colorA;
+			*(dP + 1) = (Pixel) product;
+			*(dP + dstPitch / ColorMask::kBytesPerPixel + 0) = (Pixel) product1;
+			*(dP + dstPitch / ColorMask::kBytesPerPixel + 1) = (Pixel) product2;
 
 			bP += 1;
 			dP += 2;
