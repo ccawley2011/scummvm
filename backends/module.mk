@@ -219,6 +219,7 @@ endif
 
 ifeq ($(BACKEND),android)
 MODULE_OBJS += \
+	mixer/android/android-mixer.o \
 	mutex/pthread/pthread-mutex.o
 endif
 

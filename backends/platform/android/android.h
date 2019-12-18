@@ -28,7 +28,6 @@
 #include "backends/platform/android/portdefs.h"
 #include "common/fs.h"
 #include "common/archive.h"
-#include "audio/mixer_intern.h"
 #include "backends/modular-backend.h"
 #include "backends/plugins/posix/posix-provider.h"
 #include "backends/fs/posix/posix-fs-factory.h"
@@ -69,13 +68,8 @@ private:
 	pthread_t _timer_thread;
 	static void *timerThreadFunc(void *arg);
 
-	bool _audio_thread_exit;
-	pthread_t _audio_thread;
-	static void *audioThreadFunc(void *arg);
-
 	bool _virtkeybd_on;
 
-	Audio::MixerImpl *_mixer;
 	timeval _startTime;
 
 	Common::String getSystemProperty(const char *name) const;
@@ -128,7 +122,6 @@ public:
 	virtual void setWindowCaption(const char *caption);
 	virtual void showVirtualKeyboard(bool enable);
 
-	virtual Audio::Mixer *getMixer();
 	virtual void getTimeAndDate(TimeDate &t) const;
 	virtual void logMessage(LogMessageType::Type type, const char *message);
 	virtual void addSysArchivesToSearchSet(Common::SearchSet &s,

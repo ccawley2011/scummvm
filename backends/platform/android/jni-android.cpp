@@ -49,6 +49,8 @@
 #include "common/encoding.h"
 #include "engines/engine.h"
 
+#include "backends/mixer/mixer.h"
+
 #include "backends/platform/android/android.h"
 #include "backends/platform/android/asset-archive.h"
 #include "backends/platform/android/jni-android.h"
@@ -723,8 +725,12 @@ void JNI::setPause(JNIEnv *env, jobject self, jboolean value) {
 
 	if (!pause) {
 		// wake up all threads
-		for (uint i = 0; i < 3; ++i)
+		for (uint i = 0; i < 2; ++i)
 			sem_post(&pause_sem);
+
+		_system->getMixerManager()->resumeAudio();
+	} else {
+		_system->getMixerManager()->suspendAudio();
 	}
 }
 

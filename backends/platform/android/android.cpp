@@ -56,6 +56,7 @@
 #include "common/config-manager.h"
 
 #include "backends/audiocd/default/default-audiocd.h"
+#include "backends/mixer/android/android-mixer.h"
 #include "backends/mutex/pthread/pthread-mutex.h"
 #include "backends/saves/default/default-saves.h"
 #include "backends/timer/default/default-timer.h"
@@ -91,7 +92,6 @@ OSystem_Android::OSystem_Android(int audio_sample_rate, int audio_buffer_size) :
 	_audio_sample_rate(audio_sample_rate),
 	_audio_buffer_size(audio_buffer_size),
 	_screen_changeid(0),
-	_mixer(0),
 	_queuedEventTime(0),
 	_event_queue_lock(0),
 	_touch_pt_down(),
@@ -121,20 +121,7 @@ OSystem_Android::OSystem_Android(int audio_sample_rate, int audio_buffer_size) :
 
 OSystem_Android::~OSystem_Android() {
 	ENTER();
-	// _audiocdManager should be deleted before _mixer!
-	// It is normally deleted in proper order in the OSystem destructor.
-	// However, currently _mixer is deleted here (OSystem_Android)
-	// and in the ModularBackend destructor,
-	// hence unless _audiocdManager is deleted here first,
-	// it will cause a crash for the Android app (arm64 v8a) upon exit
-	// -- when the audio cd manager was actually used eg. audio cd test of the testbed
-	// FIXME: A more proper fix would probably be to:
-	//        - delete _mixer in the base class (OSystem) after _audiocdManager (this is already the current behavior)
-	//	      - remove its deletion from OSystem_Android and ModularBackend (this is what needs to be fixed).
-	delete _audiocdManager;
-	_audiocdManager = 0;
-	delete _mixer;
-	_mixer = 0;
+
 	delete _fsFactory;
 	_fsFactory = 0;
 	delete _timerManager;
@@ -170,131 +157,6 @@ void *OSystem_Android::timerThreadFunc(void *arg) {
 		timer->handler();
 		nanosleep(&tv, 0);
 	}
-
-	JNI::detachThread();
-
-	return 0;
-}
-
-void *OSystem_Android::audioThreadFunc(void *arg) {
-	JNI::attachThread();
-
-	OSystem_Android *system = (OSystem_Android *)arg;
-	Audio::MixerImpl *mixer = system->_mixer;
-
-	uint buf_size = system->_audio_buffer_size;
-
-	JNIEnv *env = JNI::getEnv();
-
-	jbyteArray bufa = env->NewByteArray(buf_size);
-
-	bool paused = true;
-
-	int offset, left, written, i;
-
-	struct timespec tv_delay;
-	tv_delay.tv_sec = 0;
-	tv_delay.tv_nsec = 20 * 1000 * 1000;
-
-	uint msecs_full = buf_size * 1000 / (mixer->getOutputRate() * 2 * 2);
-
-	struct timespec tv_full;
-	tv_full.tv_sec = 0;
-	tv_full.tv_nsec = msecs_full * 1000 * 1000;
-
-	uint silence_count = 33;
-
-	while (!system->_audio_thread_exit) {
-		if (JNI::pause) {
-			JNI::setAudioStop();
-
-			paused = true;
-			silence_count = 33;
-
-			LOGD("audio thread going to sleep");
-			sem_wait(&JNI::pause_sem);
-			LOGD("audio thread woke up");
-		}
-
-		byte *buf = (byte *)env->GetPrimitiveArrayCritical(bufa, 0);
-		assert(buf);
-
-		int samples = mixer->mixCallback(buf, buf_size);
-
-		bool silence = samples < 1;
-
-		// looks stupid, and it is, but currently there's no way to detect
-		// silence-only buffers from the mixer
-		if (!silence) {
-			silence = true;
-
-			for (i = 0; i < samples; i += 2)
-				// SID streams constant crap
-				if (READ_UINT16(buf + i) > 32) {
-					silence = false;
-					break;
-				}
-		}
-
-		env->ReleasePrimitiveArrayCritical(bufa, buf, 0);
-
-		if (silence) {
-			if (!paused)
-				silence_count++;
-
-			// only pause after a while to prevent toggle mania
-			if (silence_count > 32) {
-				if (!paused) {
-					LOGD("AudioTrack pause");
-
-					JNI::setAudioPause();
-					paused = true;
-				}
-
-				nanosleep(&tv_full, 0);
-
-				continue;
-			}
-		}
-
-		if (paused) {
-			LOGD("AudioTrack play");
-
-			JNI::setAudioPlay();
-			paused = false;
-
-			silence_count = 0;
-		}
-
-		offset = 0;
-		left = buf_size;
-		written = 0;
-
-		while (left > 0) {
-			written = JNI::writeAudio(env, bufa, offset, left);
-
-			if (written < 0) {
-				LOGE("AudioTrack error: %d", written);
-				break;
-			}
-
-			// buffer full
-			if (written < left)
-				nanosleep(&tv_delay, 0);
-
-			offset += written;
-			left -= written;
-		}
-
-		if (written < 0)
-			break;
-
-		// prepare the next buffer, and run into the blocking AudioTrack.write
-	}
-
-	JNI::setAudioStop();
-
-	env->DeleteLocalRef(bufa);
 
 	JNI::detachThread();
 
@@ -351,14 +213,11 @@ void OSystem_Android::initBackend() {
 
 	gettimeofday(&_startTime, 0);
 
-	_mixer = new Audio::MixerImpl(_audio_sample_rate);
-	_mixer->setReady(true);
-
 	_timer_thread_exit = false;
 	pthread_create(&_timer_thread, 0, timerThreadFunc, this);
 
-	_audio_thread_exit = false;
-	pthread_create(&_audio_thread, 0, audioThreadFunc, this);
+	_mixerManager = new AndroidMixerManager(_audio_sample_rate, _audio_buffer_size);
+	_mixerManager->init();
 
 	_graphicsManager = new AndroidGraphicsManager();
 
@@ -455,9 +314,6 @@ void OSystem_Android::quit() {
 
 	JNI::setReadyForEvents(false);
 
-	_audio_thread_exit = true;
-	pthread_join(_audio_thread, 0);
-
 	_timer_thread_exit = true;
 	pthread_join(_timer_thread, 0);
 }
@@ -472,11 +328,6 @@ void OSystem_Android::showVirtualKeyboard(bool enable) {
 	ENTER("%d", enable);
 
 	JNI::showVirtualKeyboard(enable);
-}
-
-Audio::Mixer *OSystem_Android::getMixer() {
-	assert(_mixer);
-	return _mixer;
 }
 
 void OSystem_Android::getTimeAndDate(TimeDate &td) const {
