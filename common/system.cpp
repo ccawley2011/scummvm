@@ -25,6 +25,7 @@
 #include "common/system.h"
 #include "common/events.h"
 #include "common/fs.h"
+#include "common/log.h"
 #include "common/savefile.h"
 #include "common/str.h"
 #include "common/taskbar.h"
@@ -56,6 +57,7 @@ OSystem::OSystem() {
 #if defined(USE_SYSDIALOGS)
 	_dialogManager = nullptr;
 #endif
+	_logger = nullptr;
 	_fsFactory = nullptr;
 	_backendInitialized = false;
 }
@@ -90,6 +92,9 @@ OSystem::~OSystem() {
 	_dialogManager = nullptr;
 #endif
 
+	delete _logger;
+	_logger = nullptr;
+
 	delete _savefileManager;
 	_savefileManager = nullptr;
 
@@ -123,6 +128,7 @@ void OSystem::initBackend() {
 
 void OSystem::destroy() {
 	_backendInitialized = false;
+	_logger->close();
 	Common::String::releaseMemoryPoolMutex();
 	delete this;
 }

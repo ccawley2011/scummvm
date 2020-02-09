@@ -137,7 +137,6 @@ protected:
 
 	// Logging
 	virtual Common::WriteStream *createLogFile();
-	Common::Log *_logger;
 
 #ifdef USE_OPENGL
 	int _desktopWidth, _desktopHeight;

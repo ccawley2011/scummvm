@@ -40,6 +40,7 @@ struct Surface;
 
 namespace Common {
 class EventManager;
+class Log;
 struct Rect;
 class SaveFileManager;
 class SearchSet;
@@ -205,6 +206,13 @@ protected:
 	 */
 	Common::DialogManager *_dialogManager;
 #endif
+
+	/**
+	 * No default value is provided for _loggger by OSystem.
+	 *
+	 * @note _logger is deleted by the OSystem destructor.
+	 */
+	Common::Log *_logger;
 
 	/**
 	 * No default value is provided for _fsFactory by OSystem.
