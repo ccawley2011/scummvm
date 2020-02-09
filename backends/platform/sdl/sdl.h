@@ -98,16 +98,6 @@ protected:
 #endif
 
 	/**
-	 * The path of the currently open log file, if any.
-	 *
-	 * @note This is currently a string and not an FSNode for simplicity;
-	 * e.g. we don't need to include fs.h here, and currently the
-	 * only use of this value is to use it to open the log file in an
-	 * editor; for that, we need it only as a string anyway.
-	 */
-	Common::String _logFilePath;
-
-	/**
 	 * Mixer manager that configures and setups SDL for
 	 * the wrapped Audio::Mixer, the true mixer.
 	 */
@@ -134,9 +124,6 @@ protected:
 	 * Create the audio CD manager
 	 */
 	virtual AudioCDManager *createAudioCDManager();
-
-	// Logging
-	virtual Common::WriteStream *createLogFile();
 
 #ifdef USE_OPENGL
 	int _desktopWidth, _desktopHeight;

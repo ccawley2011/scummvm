@@ -24,6 +24,7 @@
 #define BACKENDS_LOG_LOG_H
 
 #include "common/scummsys.h"
+#include "common/str.h"
 
 class OSystem;
 
@@ -70,6 +71,24 @@ public:
 	void open(WriteStream *stream);
 
 	/**
+	 * Opens a new log file.
+	 *
+	 * The previous log, which was handled by this logger, will be closed
+	 * before the new stream is associated.
+	 *
+	 * Calling open with fileName being empty is valid and will result in the
+	 * same behavior as calling close, but it may have additional overhead.
+	 * @see close
+	 *
+	 * This function will output information about the ScummVM version and
+	 * the features built into ScummVM automatically. It will also add a short
+	 * notice to indicate that the log was opened successfully.
+	 *
+	 * @param fileName Name of the file to output the log contents to.
+	 */
+	void open(Common::String fileName);
+
+	/**
 	 * Closes the current log file.
 	 *
 	 * This function will output a line saying that the log was closed
@@ -96,6 +115,12 @@ public:
 	 *                           a new line.
 	 */
 	void print(const char *message, const bool printTimeOnNewline = true);
+
+	/**
+	 * Retrieve the path of the currently open log file, if any.
+	 */
+	Common::String getLogFilePath() { return _logFilePath; }
+
 private:
 	/**
 	 * Prints a time stamp in the form: "[YYYY-MM-DD HH:MM:SS] ".
@@ -116,6 +141,16 @@ private:
 	 * Whether we are at the start of a line.
 	 */
 	bool _startOfLine;
+
+	/**
+	 * The path of the currently open log file, if any.
+	 *
+	 * @note This is currently a string and not an FSNode for simplicity;
+	 * e.g. we don't need to include fs.h here, and currently the
+	 * only use of this value is to use it to open the log file in an
+	 * editor; for that, we need it only as a string anyway.
+	 */
+	Common::String _logFilePath;
 };
 
 } // End of namespace Common

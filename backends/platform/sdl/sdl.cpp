@@ -146,15 +146,10 @@ void OSystem_SDL::init() {
 	// Disable OS cursor
 	SDL_ShowCursor(SDL_DISABLE);
 
-	if (!_logger)
+	if (!_logger) {
 		_logger = new Common::Log(this);
-
-	if (_logger) {
-		Common::WriteStream *logFile = createLogFile();
-		if (logFile)
-			_logger->open(logFile);
+		_logger->open(getDefaultLogFileName());
 	}
-
 
 	// Creates the early needed managers, if they don't exist yet
 	// (we check for this to allow subclasses to provide their own).
@@ -425,22 +420,6 @@ void OSystem_SDL::logMessage(LogMessageType::Type type, const char *message) {
 	// Then log into file (via the logger)
 	if (_logger)
 		_logger->print(message);
-}
-
-Common::WriteStream *OSystem_SDL::createLogFile() {
-	// Start out by resetting _logFilePath, so that in case
-	// of a failure, we know that no log file is open.
-	_logFilePath.clear();
-
-	Common::String logFile = getDefaultLogFileName();
-	if (logFile.empty())
-		return nullptr;
-
-	Common::FSNode file(logFile);
-	Common::WriteStream *stream = file.createWriteStream();
-	if (stream)
-		_logFilePath = logFile;
-	return stream;
 }
 
 Common::String OSystem_SDL::getSystemLanguage() const {

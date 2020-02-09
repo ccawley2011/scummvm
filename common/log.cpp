@@ -21,6 +21,7 @@
  */
 
 #include "common/log.h"
+#include "common/fs.h"
 #include "common/stream.h"
 #include "common/str.h"
 #include "common/system.h"
@@ -50,6 +51,21 @@ void Log::open(WriteStream *stream) {
 	_startOfLine = true;
 }
 
+void Log::open(Common::String fileName) {
+	// Close the previous log
+	close();
+
+	if (fileName.empty())
+		return;
+
+	Common::FSNode file(fileName);
+	Common::WriteStream *stream = file.createWriteStream();
+	if (stream) {
+		open(stream);
+		_logFilePath = fileName;
+	}
+}
+
 void Log::close() {
 	if (_stream) {
 		// Output a message to indicate that the log was closed successfully
@@ -58,6 +74,7 @@ void Log::close() {
 		delete _stream;
 		_stream = 0;
 	}
+	_logFilePath.clear();
 }
 
 void Log::print(const char *message, const bool printTime) {
