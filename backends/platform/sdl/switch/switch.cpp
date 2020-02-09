@@ -152,10 +152,6 @@ void OSystem_Switch::logMessage(LogMessageType::Type type, const char *message) 
 	printf("%s\n", message);
 }
 
-Common::String OSystem_Switch::getDefaultLogFileName() {
-	return "scummvm.log";
-}
-
 Common::HardwareInputSet *OSystem_Switch::getHardwareInputSet() {
 	using namespace Common;
 

@@ -197,6 +197,10 @@ Common::String OSystem::getDefaultConfigFileName() {
 	return "scummvm.ini";
 }
 
+Common::String OSystem::getDefaultLogFileName() {
+	return "scummvm.log";
+}
+
 Common::String OSystem::getSystemLanguage() const {
 	return "en_US";
 }

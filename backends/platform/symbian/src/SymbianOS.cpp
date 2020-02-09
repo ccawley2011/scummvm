@@ -41,6 +41,7 @@
 #include "backends/mixer/symbiansdl/symbiansdl-mixer.h"
 
 #define DEFAULT_CONFIG_FILE "scummvm.ini"
+#define DEFAULT_LOG_FILE "scummvm.log"
 #define DEFAULT_SAVE_PATH "Savegames"
 
 ////////// extern "C" ///////////////////////////////////////////////////
@@ -166,6 +167,13 @@ Common::String OSystem_SDL_Symbian::getDefaultConfigFileName() {
 	strcpy(configFile, Symbian::GetExecutablePath());
 	strcat(configFile, DEFAULT_CONFIG_FILE);
 	return configFile;
+}
+
+Common::String OSystem_SDL_Symbian::getDefaultLogFileName() {
+	char logFile[MAXPATHLEN];
+	strcpy(logFile, Symbian::GetExecutablePath());
+	strcat(logFile, DEFAULT_LOG_FILE);
+	return logFile;
 }
 
 bool OSystem_SDL_Symbian::hasFeature(Feature f) {

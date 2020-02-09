@@ -38,6 +38,7 @@ public:
 	virtual void engineInit();
 	virtual void engineDone();
 	virtual Common::String getDefaultConfigFileName();
+	virtual Common::String getDefaultLogFileName();
 	virtual bool hasFeature(Feature f);
 
 	/**
