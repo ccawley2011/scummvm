@@ -28,7 +28,6 @@
 #include "backends/modular-backend.h"
 #include "backends/mixer/sdl/sdl-mixer.h"
 #include "backends/events/sdl/sdl-events.h"
-#include "backends/log/log.h"
 #include "backends/platform/sdl/sdl-window.h"
 
 #include "common/array.h"
@@ -137,7 +136,6 @@ protected:
 
 	// Logging
 	virtual Common::WriteStream *createLogFile();
-	Backends::Log::Log *_logger;
 
 #ifdef USE_OPENGL
 	int _desktopWidth, _desktopHeight;

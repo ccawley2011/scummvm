@@ -42,6 +42,7 @@
 #include "backends/events/default/default-events.h"
 #include "backends/events/sdl/legacy-sdl-events.h"
 #include "backends/keymapper/hardware-input.h"
+#include "backends/log/log.h"
 #include "backends/mutex/sdl/sdl-mutex.h"
 #include "backends/timer/sdl/sdl-timer.h"
 #include "backends/graphics/surfacesdl/surfacesdl-graphics.h"
@@ -82,7 +83,6 @@ OSystem_SDL::OSystem_SDL()
 #ifdef USE_SDL_NET
 	_initedSDLnet(false),
 #endif
-	_logger(0),
 	_mixerManager(0),
 	_eventSource(0),
 	_window(0) {
@@ -124,9 +124,6 @@ OSystem_SDL::~OSystem_SDL() {
 	_timerManager = 0;
 	delete _mutexManager;
 	_mutexManager = 0;
-
-	delete _logger;
-	_logger = 0;
 
 #ifdef USE_SDL_NET
 	if (_initedSDLnet) SDLNet_Quit();
