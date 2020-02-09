@@ -36,6 +36,7 @@
 #include "backends/dialogs/macosx/macosx-dialogs.h"
 #include "backends/platform/sdl/macosx/macosx_wrapper.h"
 #include "backends/fs/posix/posix-fs.h"
+#include "backends/log/log.h"
 
 #include "common/archive.h"
 #include "common/config-manager.h"
@@ -124,12 +125,13 @@ bool OSystem_MacOSX::hasFeature(Feature f) {
 bool OSystem_MacOSX::displayLogFile() {
 	// Use LaunchServices to open the log file, if possible.
 
-	if (_logFilePath.empty())
+	Common::String logFilePath = _logger->getLogFilePath();
+	if (logFilePath.empty())
 		return false;
 
-    CFURLRef url = CFURLCreateFromFileSystemRepresentation(kCFAllocatorDefault, (const UInt8 *)_logFilePath.c_str(), _logFilePath.size(), false);
-    OSStatus err = LSOpenCFURLRef(url, NULL);
-    CFRelease(url);
+	CFURLRef url = CFURLCreateFromFileSystemRepresentation(kCFAllocatorDefault, (const UInt8 *)logFilePath.c_str(), logFilePath.size(), false);
+	OSStatus err = LSOpenCFURLRef(url, NULL);
+	CFRelease(url);
 
 	return err != noErr;
 }

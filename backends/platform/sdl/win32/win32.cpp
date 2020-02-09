@@ -49,6 +49,7 @@
 #include "backends/taskbar/win32/win32-taskbar.h"
 #include "backends/updates/win32/win32-updates.h"
 #include "backends/dialogs/win32/win32-dialogs.h"
+#include "backends/log/log.h"
 
 #include "common/memstream.h"
 #include "common/ustr.h"
@@ -143,12 +144,13 @@ bool OSystem_Win32::hasFeature(Feature f) {
 }
 
 bool OSystem_Win32::displayLogFile() {
-	if (_logFilePath.empty())
+	Common::String logFilePath = _logger->getLogFilePath();
+	if (logFilePath.empty())
 		return false;
 
 	// Try opening the log file with the default text editor
 	// log files should be registered as "txtfile" by default and thus open in the default text editor
-	HINSTANCE shellExec = ShellExecute(getHwnd(), NULL, _logFilePath.c_str(), NULL, NULL, SW_SHOWNORMAL);
+	HINSTANCE shellExec = ShellExecute(getHwnd(), NULL, logFilePath.c_str(), NULL, NULL, SW_SHOWNORMAL);
 	if ((intptr_t)shellExec > 32)
 		return true;
 
@@ -160,7 +162,7 @@ bool OSystem_Win32::displayLogFile() {
 	startupInfo.cb = sizeof(startupInfo);
 
 	char cmdLine[MAX_PATH * 2];  // CreateProcess may change the contents of cmdLine
-	sprintf(cmdLine, "rundll32 shell32.dll,OpenAs_RunDLL %s", _logFilePath.c_str());
+	sprintf(cmdLine, "rundll32 shell32.dll,OpenAs_RunDLL %s", logFilePath.c_str());
 	BOOL result = CreateProcess(NULL,
 	                            cmdLine,
 	                            NULL,

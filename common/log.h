@@ -24,6 +24,7 @@
 #define COMMON_LOG_H
 
 #include "common/scummsys.h"
+#include "common/str.h"
 
 namespace Common {
 class WriteStream;
@@ -57,6 +58,24 @@ public:
 	virtual void open(WriteStream *stream) = 0;
 
 	/**
+	 * Opens a new log file.
+	 *
+	 * The previous log, which was handled by this logger, will be closed
+	 * before the new stream is associated.
+	 *
+	 * Calling open with fileName being empty is valid and will result in the
+	 * same behavior as calling close, but it may have additional overhead.
+	 * @see close
+	 *
+	 * This function will output information about the ScummVM version and
+	 * the features built into ScummVM automatically. It will also add a short
+	 * notice to indicate that the log was opened successfully.
+	 *
+	 * @param fileName Name of the file to output the log contents to.
+	 */
+	virtual void open(Common::String fileName) = 0;
+
+	/**
 	 * Closes the current log file.
 	 *
 	 * This function will output a line saying that the log was closed
@@ -83,6 +102,11 @@ public:
 	 *                           a new line.
 	 */
 	virtual void print(const char *message, const bool printTimeOnNewline = true) = 0;
+
+	/**
+	 * Retrieve the path of the currently open log file, if any.
+	 */
+	virtual String getLogFilePath() = 0;
 };
 
 } // End of namespace Common

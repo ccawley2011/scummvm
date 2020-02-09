@@ -39,6 +39,7 @@
 #include "backends/fs/posix/posix-fs.h"
 #include "backends/taskbar/unity/unity-taskbar.h"
 #include "backends/dialogs/gtk/gtk-dialogs.h"
+#include "backends/log/log.h"
 
 #ifdef USE_LINUXCD
 #include "backends/audiocd/linux/linux-audiocd.h"
@@ -307,7 +308,8 @@ Common::String OSystem_POSIX::getDefaultLogFileName() {
 }
 
 bool OSystem_POSIX::displayLogFile() {
-	if (_logFilePath.empty())
+	Common::String logFilePath = _logger->getLogFilePath();
+	if (logFilePath.empty())
 		return false;
 
 	// FIXME: This may not work perfectly when in fullscreen mode.
@@ -322,7 +324,7 @@ bool OSystem_POSIX::displayLogFile() {
 	} else if (pid == 0) {
 
 		// Try xdg-open first
-		execlp("xdg-open", "xdg-open", _logFilePath.c_str(), (char *)0);
+		execlp("xdg-open", "xdg-open", logFilePath.c_str(), (char *)0);
 
 		// If we're here, that clearly failed.
 
@@ -331,7 +333,7 @@ bool OSystem_POSIX::displayLogFile() {
 
 		// Try xterm+less next
 
-		execlp("xterm", "xterm", "-e", "less", _logFilePath.c_str(), (char *)0);
+		execlp("xterm", "xterm", "-e", "less", logFilePath.c_str(), (char *)0);
 
 		// TODO: If less does not exist we could fall back to 'more'.
 		// However, we'll have to use 'xterm -hold' for that to prevent the
