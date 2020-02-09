@@ -151,7 +151,7 @@ void OSystem_SDL::init() {
 	SDL_ShowCursor(SDL_DISABLE);
 
 	if (!_logger)
-		_logger = new Backends::Log::Log(this);
+		_logger = new Common::Log(this);
 
 	if (_logger) {
 		Common::WriteStream *logFile = createLogFile();

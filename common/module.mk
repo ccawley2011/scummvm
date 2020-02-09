@@ -18,6 +18,7 @@ MODULE_OBJS := \
 	json.o \
 	language.o \
 	localization.o \
+	log.o \
 	macresman.o \
 	memorypool.o \
 	md5.o \

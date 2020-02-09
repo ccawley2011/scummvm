@@ -29,10 +29,6 @@ class OSystem;
 
 namespace Common {
 class WriteStream;
-} // End of namespace Common
-
-namespace Backends {
-namespace Log {
 
 /**
  * Log file writer.
@@ -71,7 +67,7 @@ public:
 	 * @param stream Stream where to output the log contents.
 	 *               Note that the stream will be deleted by the logger.
 	 */
-	void open(Common::WriteStream *stream);
+	void open(WriteStream *stream);
 
 	/**
 	 * Closes the current log file.
@@ -114,7 +110,7 @@ private:
 	/**
 	 * Where to write the output too.
 	 */
-	Common::WriteStream *_stream;
+	WriteStream *_stream;
 
 	/**
 	 * Whether we are at the start of a line.
@@ -122,7 +118,6 @@ private:
 	bool _startOfLine;
 };
 
-} // End of namespace Log
-} // End of namespace Backends
+} // End of namespace Common
 
 #endif

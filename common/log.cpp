@@ -20,23 +20,21 @@
  *
  */
 
-#include "backends/log/log.h"
-
+#include "common/log.h"
 #include "common/stream.h"
 #include "common/str.h"
 #include "common/system.h"
 
 #include "base/version.h"
 
-namespace Backends {
-namespace Log {
+namespace Common {
 
 Log::Log(OSystem *system)
     : _system(system), _stream(0), _startOfLine(true) {
 	assert(system);
 }
 
-void Log::open(Common::WriteStream *stream) {
+void Log::open(WriteStream *stream) {
 	// Close the previous log
 	close();
 
@@ -97,10 +95,9 @@ void Log::printTimeStamp() {
 	_system->getTimeAndDate(date);
 	curMonth = date.tm_mon + 1; // month is base 0, we need base 1 (1 = january and so on)
 
-	_stream->writeString(Common::String::format("[%d-%02d-%02d %02d:%02d:%02d] ",
+	_stream->writeString(String::format("[%d-%02d-%02d %02d:%02d:%02d] ",
 	                     date.tm_year + 1900, curMonth, date.tm_mday,
 	                     date.tm_hour, date.tm_min, date.tm_sec));
 }
 
-} // End of namespace Log
-} // End of namespace Backends
+} // End of namespace Common

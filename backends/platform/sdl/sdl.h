@@ -28,10 +28,10 @@
 #include "backends/modular-backend.h"
 #include "backends/mixer/sdl/sdl-mixer.h"
 #include "backends/events/sdl/sdl-events.h"
-#include "backends/log/log.h"
 #include "backends/platform/sdl/sdl-window.h"
 
 #include "common/array.h"
+#include "common/log.h"
 
 /**
  * Base OSystem class for all SDL ports.
@@ -138,7 +138,7 @@ protected:
 	// Logging
 	virtual Common::String getDefaultLogFileName() { return Common::String(); }
 	virtual Common::WriteStream *createLogFile();
-	Backends::Log::Log *_logger;
+	Common::Log *_logger;
 
 #ifdef USE_OPENGL
 	int _desktopWidth, _desktopHeight;
