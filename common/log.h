@@ -20,34 +20,17 @@
  *
  */
 
-#ifndef BACKENDS_LOG_LOG_H
-#define BACKENDS_LOG_LOG_H
+#ifndef COMMON_LOG_H
+#define COMMON_LOG_H
 
-#include "common/log.h"
-
-class OSystem;
+#include "common/scummsys.h"
 
 namespace Common {
 class WriteStream;
-} // End of namespace Common
 
-namespace Backends {
-namespace Log {
-
-/**
- * Log file writer.
- *
- * This can be used by the backends to implement file logging functionality.
- */
-class Log : public Common::Log {
+class Log {
 public:
-	/**
-	 * Constructor for the logger object.
-	 *
-	 * @param system The OSystem instance to use. Must be non-null.
-	 */
-	Log(OSystem *system);
-	~Log() override { close(); }
+	virtual ~Log() {}
 
 	/**
 	 * Opens a new log file.
@@ -71,7 +54,7 @@ public:
 	 * @param stream Stream where to output the log contents.
 	 *               Note that the stream will be deleted by the logger.
 	 */
-	virtual void open(Common::WriteStream *stream) override;
+	virtual void open(WriteStream *stream) = 0;
 
 	/**
 	 * Closes the current log file.
@@ -80,7 +63,7 @@ public:
 	 * successfully. This can be used to check whether a log is incomplete
 	 * because of whatever reasons.
 	 */
-	virtual void close() override;
+	virtual void close() = 0;
 
 	/**
 	 * Prints a message to the log stream.
@@ -99,30 +82,9 @@ public:
 	 * @param printTimeOnNewline Whether to print a timestamp on the start of
 	 *                           a new line.
 	 */
-	virtual void print(const char *message, const bool printTimeOnNewline = true) override;
-private:
-	/**
-	 * Prints a time stamp in the form: "[YYYY-MM-DD HH:MM:SS] ".
-	 */
-	void printTimeStamp();
-
-	/**
-	 * The OSystem instance used to query data like the time.
-	 */
-	OSystem *_system;
-
-	/**
-	 * Where to write the output too.
-	 */
-	Common::WriteStream *_stream;
-
-	/**
-	 * Whether we are at the start of a line.
-	 */
-	bool _startOfLine;
+	virtual void print(const char *message, const bool printTimeOnNewline = true) = 0;
 };
 
-} // End of namespace Log
-} // End of namespace Backends
+} // End of namespace Common
 
 #endif
