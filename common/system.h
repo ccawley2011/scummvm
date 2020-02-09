@@ -1453,6 +1453,13 @@ public:
 	virtual bool displayLogFile() { return false; }
 
 	/**
+	 * Get the default file name (or even path) where the log file of ScummVM
+	 * will be saved.
+	 * Note that not all ports may use this.
+	 */
+	virtual Common::String getDefaultLogFileName();
+
+	/**
 	 * Returns whether there is text available in the clipboard.
 	 *
 	 * The kFeatureClipboardSupport feature flag can be used to
