@@ -61,6 +61,8 @@
 #include "backends/fs/ps2/ps2-fs-factory.h"
 #include "backends/plugins/ps2/ps2-provider.h"
 
+#include "backends/audiocd/default/default-audiocd.h"
+#include "backends/events/default/default-events.h"
 #include "backends/timer/default/default-timer.h"
 
 #include "audio/mixer_intern.h"
@@ -391,6 +393,13 @@ void OSystem_PS2::init(void) {
 
 	// _screen->wantAnim(false);
 	// fillScreen(0);
+}
+
+void OSystem_PS2::initBackend() {
+	_eventManager = new DefaultEventManager(this);
+	_audiocdManager = new DefaultAudioCDManager();
+
+	BaseBackend::initBackend();
 }
 
 void OSystem_PS2::config(void) {

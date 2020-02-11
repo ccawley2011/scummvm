@@ -24,17 +24,11 @@
 #define BACKENDS_BASE_BACKEND_H
 
 #include "common/system.h"
-#include "common/events.h"
 
 class BaseBackend : public OSystem {
 	virtual void displayMessageOnOSD(const char *msg);
 	virtual void displayActivityIconOnOSD(const Graphics::Surface *icon) {}
 	virtual void fillScreen(uint32 col);
-};
-
-class EventsBaseBackend : public BaseBackend, Common::EventSource {
-public:
-	virtual void initBackend();
 };
 
 
