@@ -36,6 +36,7 @@
 #include "backends/saves/default/default-saves.h"
 #include "backends/timer/default/default-timer.h"
 #include "backends/events/default/default-events.h"
+#include "backends/audiocd/default/default-audiocd.h"
 #include "backends/mutex/null/null-mutex.h"
 #include "backends/graphics/null/null-graphics.h"
 #include "audio/mixer_intern.h"
@@ -61,7 +62,6 @@ public:
 
 	virtual void initBackend();
 
-	virtual Common::EventSource *getDefaultEventSource() { return this; }
 	virtual bool pollEvent(Common::Event &event);
 
 	virtual uint32 getMillis(bool skipRecord = false);
@@ -99,6 +99,8 @@ void OSystem_NULL::initBackend() {
 	_mixer = new Audio::MixerImpl(22050);
 
 	((Audio::MixerImpl *)_mixer)->setReady(false);
+
+	_audiocdManager = new DefaultAudioCDManager();
 
 	// Note that both the mixer and the timer manager are useless
 	// this way; they need to be hooked into the system somehow to

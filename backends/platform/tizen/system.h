@@ -90,7 +90,6 @@ private:
 	void logMessage(LogMessageType::Type type, const char *message);
 	void addSysArchivesToSearchSet(Common::SearchSet &s, int priority);
 
-	Common::EventSource *getDefaultEventSource() { return this; }
 	Common::SeekableReadStream *createConfigReadStream();
 	Common::WriteStream *createConfigWriteStream();
 
