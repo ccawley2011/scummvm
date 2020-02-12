@@ -55,11 +55,8 @@ page at: <https://www.scummvm.org/>
         Dialog](#325-sierra-agi-games-predictive-input-dialog)
       - [3.26) Sierra SCI games: Simultaneous speech and
         subtitles](#326-sierra-sci-games-simultaneous-speech-and-subtitles)
-      - [3.27) Zork games notes](#327-zork-games-notes)
-          - [3.27.1) Zork Nemesis: The Forbidden
-            Lands](#3271-zork-nemesis-the-forbidden-lands)
-          - [3.27.2) Zork: Grand
-            Inquisitor](#3272-zork-grand-inquisitor)
+      - [3.27) Zork Nemesis: The Forbidden
+         Lands](#3271-zork-nemesis-the-forbidden-lands)
       - [3.28) Commodore64 games notes](#328-commodore64-games-notes)
       - [3.29) Macintosh games notes](#329-macintosh-games-notes)
   - [4.0) Supported Platforms](#40-supported-platforms)
@@ -1220,29 +1217,10 @@ Captioning" from the in-game "Game" menu. Speech can be disabled by
 selecting "Audio Mixer" from the in-game "Game" menu and setting the
 speech volume to zero.
 
-### 3.27) Zork games notes
+### 3.27) Zork Nemesis: The Forbidden Lands notes
 
-To run the supported Zork games (Zork Nemesis: The Forbidden Lands and
-Zork: Grand Inquisitor) you need to copy some (extra) data to its
-corresponding destination.
-
-#### 3.27.1) Zork Nemesis: The Forbidden Lands
-
-Download the Liberation(tm) fonts package
-<https://releases.pagure.org/liberation-fonts/liberation-fonts-ttf-2.00.1.tar.gz>
-and unpack all the ttf files into your ScummVM extras directory.
-Alternatively, ScummVM comes with the GNU FreeFont fonts, though at the
-time of writing these fonts cause some text rendering issues. Download
-the subtitles patch <https://www.thezorklibrary.com/installguides/znpatch.zip>
+Download the subtitles patch <https://www.thezorklibrary.com/installguides/znpatch.zip>
 and unzip the addon directory into the game root directory
-
-#### 3.27.2) Zork: Grand Inquisitor
-
-Download the Liberation(tm) fonts package
-<https://releases.pagure.org/liberation-fonts/liberation-fonts-ttf-2.00.1.tar.gz>
-and unpack all the ttf files into your ScummVM extras directory.
-Alternatively, ScummVM comes with the GNU FreeFont fonts, though at the
-time of writing these fonts cause some text rendering issues.
 
 ### 3.28) Commodore64 games notes
 
