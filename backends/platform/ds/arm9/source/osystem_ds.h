@@ -78,65 +78,65 @@ public:
 
 	static OSystem_DS *instance() { return _instance; }
 
-	virtual bool hasFeature(Feature f);
-	virtual void setFeatureState(Feature f, bool enable);
-	virtual bool getFeatureState(Feature f);
-	virtual void initSize(uint width, uint height, const Graphics::PixelFormat *format);
-	virtual int16 getHeight();
-	virtual int16 getWidth();
+	virtual bool hasFeature(Feature f) override;
+	virtual void setFeatureState(Feature f, bool enable) override;
+	virtual bool getFeatureState(Feature f) override;
+	virtual void initSize(uint width, uint height, const Graphics::PixelFormat *format) override;
+	virtual int16 getHeight() override;
+	virtual int16 getWidth() override;
 
-	virtual PaletteManager *getPaletteManager() { return this; }
+	virtual PaletteManager *getPaletteManager() override { return this; }
 protected:
 	// PaletteManager API
-	virtual void setPalette(const byte *colors, uint start, uint num);
-	virtual void grabPalette(byte *colors, uint start, uint num) const;
+	virtual void setPalette(const byte *colors, uint start, uint num) override;
+	virtual void grabPalette(byte *colors, uint start, uint num) const override;
 
 public:
 	void restoreHardwarePalette();
 
-	virtual void copyRectToScreen(const void *buf, int pitch, int x, int y, int w, int h);
-	virtual void updateScreen();
-	virtual void setShakePos(int shakeXOffset, int shakeYOffset);
+	virtual void copyRectToScreen(const void *buf, int pitch, int x, int y, int w, int h) override;
+	virtual void updateScreen() override;
+	virtual void setShakePos(int shakeXOffset, int shakeYOffset) override;
 
-	virtual void showOverlay();
-	virtual void hideOverlay();
-	virtual void clearOverlay();
-	virtual void grabOverlay(void *buf, int pitch);
-	virtual void copyRectToOverlay(const void *buf, int pitch, int x, int y, int w, int h);
-	virtual int16 getOverlayHeight();
-	virtual int16 getOverlayWidth();
-	virtual Graphics::PixelFormat getOverlayFormat() const { return Graphics::createPixelFormat<1555>(); }
+	virtual void showOverlay() override;
+	virtual void hideOverlay() override;
+	virtual void clearOverlay() override;
+	virtual void grabOverlay(void *buf, int pitch) override;
+	virtual void copyRectToOverlay(const void *buf, int pitch, int x, int y, int w, int h) override;
+	virtual int16 getOverlayHeight() override;
+	virtual int16 getOverlayWidth() override;
+	virtual Graphics::PixelFormat getOverlayFormat() const override { return Graphics::createPixelFormat<1555>(); }
 
-	virtual bool showMouse(bool visible);
+	virtual bool showMouse(bool visible) override;
 
-	virtual void warpMouse(int x, int y);
-	virtual void setMouseCursor(const void *buf, uint w, uint h, int hotspotX, int hotspotY, u32 keycolor, bool dontScale, const Graphics::PixelFormat *format);
+	virtual void warpMouse(int x, int y) override;
+	virtual void setMouseCursor(const void *buf, uint w, uint h, int hotspotX, int hotspotY, u32 keycolor, bool dontScale, const Graphics::PixelFormat *format) override;
 
-	virtual bool pollEvent(Common::Event &event);
-	virtual uint32 getMillis(bool skipRecord = false);
-	virtual void delayMillis(uint msecs);
-	virtual void getTimeAndDate(TimeDate &t) const;
+	virtual bool pollEvent(Common::Event &event) override;
+	virtual uint32 getMillis(bool skipRecord = false) override;
+	virtual void delayMillis(uint msecs) override;
+	virtual void getTimeAndDate(TimeDate &t) const override;
 
-	virtual MutexRef createMutex(void);
-	virtual void lockMutex(MutexRef mutex);
-	virtual void unlockMutex(MutexRef mutex);
-	virtual void deleteMutex(MutexRef mutex);
+	virtual MutexRef createMutex(void) override;
+	virtual void lockMutex(MutexRef mutex) override;
+	virtual void unlockMutex(MutexRef mutex) override;
+	virtual void deleteMutex(MutexRef mutex) override;
 
-	virtual void quit();
+	virtual void quit() override;
 
 	void addEvent(const Common::Event& e);
 	bool isEventQueueEmpty() const { return queuePos == 0; }
 
-	virtual void setFocusRectangle(const Common::Rect& rect);
+	virtual void setFocusRectangle(const Common::Rect& rect) override;
 
-	virtual void clearFocusRectangle();
+	virtual void clearFocusRectangle() override;
 
-	virtual void initBackend();
+	virtual void initBackend() override;
 
-	virtual Graphics::Surface *lockScreen();
-	virtual void unlockScreen();
+	virtual Graphics::Surface *lockScreen() override;
+	virtual void unlockScreen() override;
 
-	virtual Audio::Mixer *getMixer() { return _mixer; }
+	virtual Audio::Mixer *getMixer() override { return _mixer; }
 	Audio::MixerImpl *getMixerImpl() { return _mixer; }
 
 	static int timerHandler(int t);
@@ -149,18 +149,18 @@ public:
 	u16 getDSPaletteEntry(u32 entry) const { return _palette[entry]; }
 	u16 getDSCursorPaletteEntry(u32 entry) const { return !_disableCursorPalette? _cursorPalette[entry]: _palette[entry]; }
 
-	virtual void setCursorPalette(const byte *colors, uint start, uint num);
+	virtual void setCursorPalette(const byte *colors, uint start, uint num) override;
 
 	void refreshCursor();
 
-	virtual Common::String getDefaultConfigFileName();
+	virtual Common::String getDefaultConfigFileName() override;
 
-	virtual void logMessage(LogMessageType::Type type, const char *message);
+	virtual void logMessage(LogMessageType::Type type, const char *message) override;
 
 	u16 applyGamma(u16 color);
 	void setGammaValue(int gamma) { _gammaValue = gamma; }
 
-	void engineDone();
+	virtual void engineDone() override;
 };
 
 #endif

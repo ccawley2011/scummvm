@@ -43,7 +43,7 @@ public:
 	~DSOptionsDialog();
 
 protected:
-	virtual void handleCommand(GUI::CommandSender *sender, uint32 cmd, uint32 data);
+	virtual void handleCommand(GUI::CommandSender *sender, uint32 cmd, uint32 data) override;
 	void updateConfigManager();
 
 	GUI::TabWidget *_tab;
