@@ -42,9 +42,10 @@
 #include "common/str.h"
 #include "graphics/surface.h"
 #include "touchkeyboard.h"
-#include "backends/fs/ds/ds-fs-factory.h"
 
 #include "backends/audiocd/default/default-audiocd.h"
+#include "backends/fs/posix/posix-fs-factory.h"
+#include "backends/saves/default/default-saves.h"
 #include "backends/timer/default/default-timer.h"
 
 #ifdef ENABLE_AGI
@@ -94,16 +95,13 @@ OSystem_DS::OSystem_DS()
 	_instance = this;
 //	_mixer = NULL;
 	//_frameBufferExists = false;
+
+	_fsFactory = new POSIXFilesystemFactory();
 }
 
 OSystem_DS::~OSystem_DS() {
 	delete _mixer;
 	_mixer = 0;
-
-	// If _savefileManager is not 0, then it points to the OSystem_DS
-	// member variable mpSaveManager. Hence we set _savefileManager to
-	// 0, to prevent the OSystem destructor from trying to delete it.
-	_savefileManager = 0;
 }
 
 int OSystem_DS::timerHandler(int t) {
@@ -116,10 +114,7 @@ void OSystem_DS::initBackend() {
 	ConfMan.setInt("autosave_period", 0);
 	ConfMan.setBool("FM_medium_quality", true);
 
-	if (DS::isGBAMPAvailable()) {
-		_savefileManager = &mpSaveManager;
-	}
-
+	_savefileManager = new DefaultSaveFileManager();
 	_timerManager = new DefaultTimerManager();
     DS::setTimerCallback(&OSystem_DS::timerHandler, 10);
 
@@ -668,10 +663,6 @@ void OSystem_DS::getTimeAndDate(TimeDate &td) const {
 	td.tm_mon = t.tm_mon;
 	td.tm_year = t.tm_year;
 	td.tm_wday = t.tm_wday;
-}
-
-FilesystemFactory *OSystem_DS::getFilesystemFactory() {
-	return &DSFilesystemFactory::instance();
 }
 
 OSystem::MutexRef OSystem_DS::createMutex(void) {

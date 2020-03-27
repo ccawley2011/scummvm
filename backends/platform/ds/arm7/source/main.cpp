@@ -26,8 +26,6 @@
 // -- modified by Darkain and others
 //////////////////////////////////////////////////////////////////////
 
-// #define USE_LIBCARTRESET
-
 #include <nds.h>
 
 #include <bios.h>
@@ -43,8 +41,6 @@
 #ifdef USE_DEBUGGER
 #include <dswifi7.h>
 #endif
-
-#include "cartreset_nolibfat.h"
 
 #define TOUCH_CAL_X1 (*(vs16 *)0x027FFCD8)
 #define TOUCH_CAL_Y1 (*(vs16 *)0x027FFCDA)
@@ -536,12 +532,6 @@ void initDebugger() {
 }
 #endif
 
-#ifdef USE_LIBCARTRESET
-void reboot() {
-	cartExecute();
-}
-#endif
-
 int main(int argc, char ** argv) {
 #ifdef USE_DEBUGGER
 	REG_IPC_FIFO_CR = IPC_FIFO_ENABLE | IPC_FIFO_SEND_CLEAR;
@@ -598,12 +588,6 @@ int main(int argc, char ** argv) {
 			performSleep();
 			needSleep = false;
 		}
-
-#ifdef USE_LIBCARTRESET
-		if (passmeloopQuery()) {
-			reboot();
-		}
-#endif
 
 		if (IPC->reset) {
 			powerOff();

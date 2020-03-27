@@ -285,11 +285,9 @@ HAVE_GCC3 = true
 PORT_OBJS := \
 	$(portdir)/source/blitters_arm.o \
 	$(portdir)/source/dsmain.o \
-	$(portdir)/source/gbampsave.o \
 	$(portdir)/source/scummhelp.o \
 	$(portdir)/source/osystem_ds.o \
 	$(portdir)/source/touchkeyboard.o \
-	$(portdir)/source/zipreader.o \
 	$(portdir)/source/dsoptions.o \
 	$(portdir)/source/keys.o \
 	$(portdir)/source/wordcompletion.o \
@@ -306,24 +304,6 @@ DATA_OBJS := \
 	$(portdir)/data/keyboard_pal.o \
 	$(portdir)/data/default_font.o \
 	$(portdir)/data/8x8font_tga.o
-
-FAT_OBJS := \
-	$(portdir)/source/fat/disc_io.o \
-	$(portdir)/source/fat/gba_nds_fat.o \
-	$(portdir)/source/fat/io_fcsr.o \
-	$(portdir)/source/fat/io_m3cf.o \
-	$(portdir)/source/fat/io_mpcf.o \
-	$(portdir)/source/fat/io_sccf.o \
-	$(portdir)/source/fat/io_m3sd.o \
-	$(portdir)/source/fat/io_nmmc.o \
-	$(portdir)/source/fat/io_scsd.o \
-	$(portdir)/source/fat/io_scsd_asm.o \
-	$(portdir)/source/fat/io_njsd.o \
-	$(portdir)/source/fat/io_mmcf.o \
-	$(portdir)/source/fat/io_sd_common.o \
-	$(portdir)/source/fat/io_m3_common.o \
-	$(portdir)/source/fat/io_dldi.o \
-	$(portdir)/source/fat/m3sd.o
 
 
 # Files in this list will be optimisied for speed, otherwise they will be optimised for space
@@ -342,7 +322,7 @@ endif
 OPT_SIZE := -Os -mthumb
 
 
-OBJS := $(DATA_OBJS) $(PORT_OBJS) $(FAT_OBJS)
+OBJS := $(DATA_OBJS) $(PORT_OBJS)
 
 
 

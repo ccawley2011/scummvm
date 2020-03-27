@@ -10,7 +10,7 @@
 #---------------------------------------------------------------------------------
 TARGET	:=	arm7
 BUILD		:=	build
-SOURCES	:=	gfx source source/libcartreset data
+SOURCES	:=	gfx source data
 INCLUDES	:=	include build
 
 
@@ -110,7 +110,7 @@ export OFILES	:=	$(MAPFILES:.map=.o) $(RAWFILES:.raw=.o) $(PALFILES:.pal=.o) $(B
 export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) -Iquote -I$(CURDIR)/../commoninclude\
 					$(foreach dir,$(LIBDIRS),-I$(dir)/include) \
 					$(foreach dir,$(LIBDIRS),-I$(dir)/include/nds)\
-					-I$(CURDIR)/$(BUILD) -I$(CURDIR)/source/libcartreset
+					-I$(CURDIR)/$(BUILD)
 
 export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib)
 

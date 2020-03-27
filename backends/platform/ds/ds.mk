@@ -166,10 +166,6 @@ dsclean:
 #
 #############################################################################
 
-# HACK/FIXME: C compiler, for cartreset.c -- we should switch this to use CXX
-# as soon as possible.
-CC := $(DEVKITPRO)/devkitARM/bin/arm-none-eabi-gcc
-
 #
 # Set various flags
 #
@@ -181,7 +177,6 @@ ARM7_CFLAGS	:=	-g -Wall -O2\
 		-mcpu=arm7tdmi -mtune=arm7tdmi -fomit-frame-pointer\
 		-ffast-math \
 		$(ARM7_ARCH) \
-		-I$(srcdir)/$(ndsdir)/arm7/source/libcartreset \
 		-I$(srcdir)/$(ndsdir)/commoninclude \
 		-I$(DEVKITPRO)/libnds/include \
 		-I$(DEVKITPRO)/libnds/include/nds \
@@ -191,25 +186,12 @@ ARM7_CXXFLAGS	:= $(ARM7_CFLAGS) -fno-exceptions -fno-rtti
 
 ARM7_LDFLAGS	:= -g $(ARM7_ARCH) -mfloat-abi=soft
 
-# HACK/FIXME: Define a custom build rule for cartreset.c.
-# We do this because it is a .c file, not a .cpp file and so is outside our
-# regular build system anyway. But this is *bad*. It should be changed into a
-# .cpp file and this rule be removed.
-%.o: %.c
-	$(MKDIR) $(*D)/$(DEPDIR)
-	$(CC) -Wp,-MMD,"$(*D)/$(DEPDIR)/$(*F).d",-MQ,"$@",-MP $(CXXFLAGS) $(CPPFLAGS) -c $(<) -o $*.o
-
-# Set custom build flags for cartreset.o
-$(ndsdir)/arm7/source/libcartreset/cartreset.o: CXXFLAGS=$(ARM7_CFLAGS)
-$(ndsdir)/arm7/source/libcartreset/cartreset.o: CPPFLAGS=
-
 # Set custom build flags for main.o
 $(ndsdir)/arm7/source/main.o: CXXFLAGS=$(ARM7_CXXFLAGS)
 $(ndsdir)/arm7/source/main.o: CPPFLAGS=
 
 # Rule for creating ARM7 .elf files by linking .o files together with a special linker script
 $(ndsdir)/arm7/arm7.elf: \
-	$(ndsdir)/arm7/source/libcartreset/cartreset.o \
 	$(ndsdir)/arm7/source/main.o
 	$(CXX) $(ARM7_LDFLAGS) -specs=ds_arm7.specs $+ -L$(DEVKITPRO)/libnds/lib -lnds7  -o $@
 

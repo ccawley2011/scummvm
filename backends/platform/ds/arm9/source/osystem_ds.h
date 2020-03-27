@@ -31,8 +31,6 @@
 #include "backends/base-backend.h"
 #include "common/events.h"
 #include "nds.h"
-#include "gbampsave.h"
-#include "backends/saves/default/default-saves.h"
 #include "audio/mixer_intern.h"
 #include "graphics/surface.h"
 #include "graphics/colormasks.h"
@@ -47,7 +45,6 @@ protected:
 	Common::Event eventQueue[96];
 	int queuePos;
 
-	GBAMPSaveFileManager mpSaveManager;
 	Audio::MixerImpl *_mixer;
 	Graphics::Surface _framebuffer;
 	bool _frameBufferExists;
@@ -153,8 +150,6 @@ public:
 	u16 getDSCursorPaletteEntry(u32 entry) const { return !_disableCursorPalette? _cursorPalette[entry]: _palette[entry]; }
 
 	virtual void setCursorPalette(const byte *colors, uint start, uint num);
-
-	virtual FilesystemFactory *getFilesystemFactory();
 
 	void refreshCursor();
 

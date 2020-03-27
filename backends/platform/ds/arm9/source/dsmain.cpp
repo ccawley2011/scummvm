@@ -77,6 +77,7 @@
 #include <nds/registers_alt.h>
 #include <nds/arm9/exceptions.h>
 #include <nds/arm9/console.h>
+#include <fat.h>
 
 //#include <ARM9/console.h> //basic print funcionality
 
@@ -87,13 +88,10 @@
 #include "dsmain.h"
 #include "osystem_ds.h"
 #include "icons_raw.h"
-#include "fat/gba_nds_fat.h"
-#include "fat/disc_io.h"
 #include "keyboard_raw.h"
 #include "keyboard_pal_raw.h"
 #define V16(a, b) ((a << 12) | b)
 #include "touchkeyboard.h"
-//#include "compact_flash.h"
 #include "dsoptions.h"
 #ifdef USE_DEBUGGER
 #include "user_debugger.h"
@@ -106,7 +104,6 @@
 #include "engine.h"
 
 #include "backends/plugins/ds/ds-provider.h"
-#include "backends/fs/ds/ds-fs.h"
 #include "base/version.h"
 #include "common/util.h"
 
@@ -2799,33 +2796,6 @@ void fastRamReset() {
 	fastRamPointer = &fastRamData[0];
 }
 
-
-/////////////////
-// GBAMP
-/////////////////
-
-bool GBAMPAvail = false;
-
-bool initGBAMP(int mode) {
-	if (FAT_InitFiles()) {
-		if (mode == 2)	{
-			disc_IsInserted();
-		}
-		GBAMPAvail = true;
-//		consolePrintf("Found flash card reader!\n");
-		return true;
-	} else {
-		GBAMPAvail = false;
-//		consolePrintf("Flash card reader not found!\n");
-		return false;
-	}
-}
-
-bool isGBAMPAvailable() {
-	return GBAMPAvail;
-}
-
-
 #ifdef USE_DEBUGGER
 void initDebugger() {
 	set_verbosity(VERBOSE_INFO | VERBOSE_ERROR);
@@ -3079,92 +3049,9 @@ int main(void) {
 	consolePrintf("\n");
 #endif
 
-
-#ifdef USE_BUILT_IN_DRIVER_SELECTION
-	// Do M3 detection selectioon
-	int extraData = DSSaveFileManager::getExtraData();
-	bool present = DSSaveFileManager::isExtraDataPresent();
-
-	for (int r = 0; r < 30; r++) {
-		swiWaitForVBlank();
+	if (!fatInitDefault()) {
+		iprintf("fatInitDefault failed\n");
 	}
-
-	int mode = extraData & 0x03;
-
-	if (mode == 0) {
-		if ((keysHeld() & KEY_L) && !(keysHeld() & KEY_R)) {
-			mode = 1;
-		} else if (!(keysHeld() & KEY_L) && (keysHeld() & KEY_R)) {
-			mode = 2;
-		}
-	} else {
-		if ((keysHeld() & KEY_L) && !(keysHeld() & KEY_R)) {
-			mode = 0;
-		}
-	}
-
-
-	if (mode == 0) {
-		consolePrintf("On startup hold L if you have\n");
-		consolePrintf("an M3 SD or R for an SC SD\n");
-	} else if (mode == 1) {
-		consolePrintf("Using M3 SD Mode.\n");
-		consolePrintf("Hold L on startup to disable.\n");
-	} else if (mode == 2) {
-		consolePrintf("Using SC SD Mode.\n");
-		consolePrintf("Hold L on startup to disable.\n");
-	}
-
-	disc_setEnable(mode);
-	DSSaveFileManager::setExtraData(mode);
-#else
-
-	int mode = 0;
-
-#endif
-
-
-/*
-	if ((present) && (extraData & 0x00000001)) {
-
-		if (keysHeld() & KEY_L) {
-			extraData &= ~0x00000001;
-			consolePrintf("M3 SD Detection: OFF\n");
-			DSSaveFileManager::setExtraData(extraData);
-		} else {
-			consolePrintf("M3 SD Detection: ON\n");
-			consolePrintf("Hold L on startup to disable.\n");
-		}
-
-	} else if (keysHeld() & KEY_L) {
-		consolePrintf("M3 SD Detection: ON\n");
-		extraData |= 0x00000001;
-		DSSaveFileManager::setExtraData(extraData);
-	} else {
-		consolePrintf("M3 SD Detection: OFF\n");
-		consolePrintf("Hold L on startup to enable.\n");
-	}
-
-	disc_setM3SDEnable(extraData & 0x00000001);
-*/
-	// Create a file system node to force search for a zip file in GBA rom space
-
-	DSFileSystemNode *node = new DSFileSystemNode();
-	if (!node->getZip() || (!node->getZip()->isReady())) {
-		// If not found, init CF/SD driver
-		initGBAMP(mode);
-
-		if (!initGBAMP(mode)) {
-			consolePrintf("\nNo file system was found.\n");
-			consolePrintf("View the readme file\n");
-			consolePrintf("for more information.\n");
-
-			while (1);
-		}
-	}
-	delete node;
-
-
 
 	updateStatus();
 
