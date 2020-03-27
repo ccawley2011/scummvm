@@ -284,7 +284,6 @@ HAVE_GCC3 = true
 
 PORT_OBJS := \
 	$(portdir)/source/blitters_arm.o \
-	$(portdir)/source/cdaudio.o \
 	$(portdir)/source/dsmain.o \
 	$(portdir)/source/gbampsave.o \
 	$(portdir)/source/scummhelp.o \

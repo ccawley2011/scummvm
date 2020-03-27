@@ -40,7 +40,6 @@
 #include "nds/registers_alt.h"
 #include "common/config-manager.h"
 #include "common/str.h"
-#include "cdaudio.h"
 #include "graphics/surface.h"
 #include "touchkeyboard.h"
 #include "backends/fs/ds/ds-fs-factory.h"
@@ -133,10 +132,7 @@ void OSystem_DS::initBackend() {
 	_mixer = new Audio::MixerImpl(DS::getSoundFrequency());
 	_mixer->setReady(true);
 
-	/* TODO/FIXME: The NDS should use a custom AudioCD manager instance!
-	if (!_audiocdManager)
-		_audiocdManager = new DSAudioCDManager();
-	*/
+	_audiocdManager = new DefaultAudioCDManager();
 
 	EventsBaseBackend::initBackend();
 }
@@ -645,7 +641,6 @@ uint32 OSystem_DS::getMillis(bool skipRecord) {
 void OSystem_DS::delayMillis(uint msecs) {
 	int st = getMillis();
 	DS::addEventsToQueue();
-	DS::CD::update();
 
 	DS::doSoundCallback();
 	while (st + msecs >= getMillis()) {
@@ -690,29 +685,6 @@ void OSystem_DS::unlockMutex(MutexRef mutex) {
 }
 
 void OSystem_DS::deleteMutex(MutexRef mutex) {
-}
-
-// FIXME/TODO: The CD API as follows is *obsolete*
-// and should be replaced by an AudioCDManager subclass,
-// see backends/audiocd/ and common/system.h
-
-bool OSystem_DS::openCD() {
-	return DS::CD::checkCD();
-}
-
-bool OSystem_DS::pollCD() {
-	return DS::CD::isPlaying();
-}
-
-void OSystem_DS::playCD(int track, int num_loops, int start_frame, int duration) {
-	DS::CD::playTrack(track, num_loops, start_frame, duration);
-}
-
-void OSystem_DS::stopCD() {
-	DS::CD::stopTrack();
-}
-
-void OSystem_DS::updateCD() {
 }
 
 void OSystem_DS::quit() {
@@ -853,8 +825,6 @@ u16 OSystem_DS::applyGamma(u16 color) {
 }
 
 void OSystem_DS::engineDone() {
-	// Scumm games appear not to stop their CD audio, so I stop the CD here.
-	stopCD();
 	DS::exitGame();
 
 #ifdef ENABLE_AGI

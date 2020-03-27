@@ -6,7 +6,6 @@ ARM7_MODULE_OBJS := \
 
 PORT_OBJS := \
 	arm9/source/blitters_arm.o \
-	arm9/source/cdaudio.o \
 	arm9/source/dsmain.o \
 	arm9/source/gbampsave.o \
 	arm9/source/scummhelp.o \
