@@ -63,10 +63,26 @@ static const PlainGameDescriptor lureGames[] = {
 };
 
 
-#ifdef USE_TTS
-#define GAMEOPTION_TTS_NARRATOR 	GUIO_GAMEOPTIONS1
+#define GAMEOPTION_CLICKABLE_MENUS	GUIO_GAMEOPTIONS1
+#define GAMEOPTION_TTS_NARRATOR 	GUIO_GAMEOPTIONS2
 
 static const ADExtraGuiOptionsMap optionsList[] = {
+
+	{
+		GAMEOPTION_CLICKABLE_MENUS,
+		{
+			_s("Clickable Menus"),
+			_s("Clickable Menus"),
+			"clickable_menus",
+#if defined(__SYMBIAN32__) || defined(WEBOS) || defined(__ANDROID__) || defined(__WII__) || defined(__DS__)
+			true
+#else
+			false
+#endif
+		}
+	},
+
+#ifdef USE_TTS
 	{
 		GAMEOPTION_TTS_NARRATOR,
 		{
@@ -76,11 +92,11 @@ static const ADExtraGuiOptionsMap optionsList[] = {
 			false
 		}
 	},
+#endif
 
 	AD_EXTRA_GUI_OPTIONS_TERMINATOR
 };
 
-#endif
 
 namespace Lure {
 
@@ -94,9 +110,9 @@ static const LureGameDescription gameDescriptions[] = {
 			Common::kPlatformDOS,
 			ADGF_NO_FLAGS,
 			#ifdef USE_TTS
-				GUIO1(GAMEOPTION_TTS_NARRATOR)
+				GUIO2(GAMEOPTION_CLICKABLE_MENUS, GAMEOPTION_TTS_NARRATOR)
 			#else
-				GUIO0()
+				GUIO1(GAMEOPTION_CLICKABLE_MENUS)
 			#endif
 		},
 		GF_FLOPPY,
@@ -111,9 +127,9 @@ static const LureGameDescription gameDescriptions[] = {
 			Common::kPlatformDOS,
 			ADGF_NO_FLAGS,
 			#ifdef USE_TTS
-				GUIO1(GAMEOPTION_TTS_NARRATOR)
+				GUIO2(GAMEOPTION_CLICKABLE_MENUS, GAMEOPTION_TTS_NARRATOR)
 			#else
-				GUIO0()
+				GUIO1(GAMEOPTION_CLICKABLE_MENUS)
 			#endif
 
 		},
@@ -128,7 +144,7 @@ static const LureGameDescription gameDescriptions[] = {
 			Common::IT_ITA,
 			Common::kPlatformDOS,
 			ADGF_NO_FLAGS,
-			GUIO0()
+			GUIO1(GAMEOPTION_CLICKABLE_MENUS)
 		},
 		GF_FLOPPY,
 	},
@@ -141,7 +157,7 @@ static const LureGameDescription gameDescriptions[] = {
 			Common::IT_ITA,
 			Common::kPlatformDOS,
 			ADGF_NO_FLAGS,
-			GUIO0()
+			GUIO1(GAMEOPTION_CLICKABLE_MENUS)
 		},
 		GF_FLOPPY | GF_EGA,
 	},
@@ -154,7 +170,7 @@ static const LureGameDescription gameDescriptions[] = {
 			Common::DE_DEU,
 			Common::kPlatformDOS,
 			ADGF_NO_FLAGS,
-			GUIO0()
+			GUIO1(GAMEOPTION_CLICKABLE_MENUS)
 		},
 		GF_FLOPPY,
 	},
@@ -167,7 +183,7 @@ static const LureGameDescription gameDescriptions[] = {
 			Common::DE_DEU,
 			Common::kPlatformDOS,
 			ADGF_NO_FLAGS,
-			GUIO0()
+			GUIO1(GAMEOPTION_CLICKABLE_MENUS)
 		},
 		GF_FLOPPY,
 	},
@@ -180,7 +196,7 @@ static const LureGameDescription gameDescriptions[] = {
 			Common::FR_FRA,
 			Common::kPlatformDOS,
 			ADGF_NO_FLAGS,
-			GUIO0()
+			GUIO1(GAMEOPTION_CLICKABLE_MENUS)
 		},
 		GF_FLOPPY,
 	},
@@ -193,7 +209,7 @@ static const LureGameDescription gameDescriptions[] = {
 			Common::ES_ESP,
 			Common::kPlatformDOS,
 			ADGF_NO_FLAGS,
-			GUIO0()
+			GUIO1(GAMEOPTION_CLICKABLE_MENUS)
 		},
 		GF_FLOPPY,
 	},
@@ -207,7 +223,7 @@ static const LureGameDescription gameDescriptions[] = {
 			Common::RU_RUS,
 			Common::kPlatformDOS,
 			ADGF_NO_FLAGS,
-			GUIO0()
+			GUIO1(GAMEOPTION_CLICKABLE_MENUS)
 		},
 		GF_FLOPPY,
 	},
@@ -221,7 +237,7 @@ static const LureGameDescription gameDescriptions[] = {
 			Common::RU_RUS,
 			Common::kPlatformDOS,
 			ADGF_NO_FLAGS,
-			GUIO0()
+			GUIO1(GAMEOPTION_CLICKABLE_MENUS)
 		},
 		GF_FLOPPY,
 	},
@@ -234,11 +250,7 @@ static const LureGameDescription gameDescriptions[] = {
 
 class LureMetaEngine : public AdvancedMetaEngine {
 public:
-	LureMetaEngine() : AdvancedMetaEngine(Lure::gameDescriptions, sizeof(Lure::LureGameDescription), lureGames
-			#ifdef USE_TTS
-			, optionsList
-			#endif
-			) {
+	LureMetaEngine() : AdvancedMetaEngine(Lure::gameDescriptions, sizeof(Lure::LureGameDescription), lureGames, optionsList) {
 		_md5Bytes = 1024;
 
 		// Use kADFlagUseExtraAsHint to distinguish between EGA and VGA versions
