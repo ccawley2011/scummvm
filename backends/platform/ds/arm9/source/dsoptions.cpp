@@ -241,7 +241,7 @@ void DSOptionsDialog::updateConfigManager() {
 		zoomLevel = 200;
 	}
 
-	consolePrintf("Saved zoom: %d\n", zoomLevel);
+	iprintf("Saved zoom: %ld\n", zoomLevel);
 
 	ConfMan.setInt("topscreenzoom", zoomLevel, "ds");
 

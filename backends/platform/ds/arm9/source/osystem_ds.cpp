@@ -174,7 +174,7 @@ int16 OSystem_DS::getWidth() {
 }
 
 void OSystem_DS::setPalette(const byte *colors, uint start, uint num) {
-//	consolePrintf("Setpal %d, %d\n", start, num);
+//	iprintf("Setpal %d, %d\n", start, num);
 
 	for (unsigned int r = start; r < start + num; r++) {
 		int red = *colors;
@@ -200,7 +200,7 @@ void OSystem_DS::setPalette(const byte *colors, uint start, uint num) {
 
 			_palette[r] = paletteValue;
 		}
-	//	if (num == 255) consolePrintf("pal:%d r:%d g:%d b:%d\n", r, red, green, blue);
+	//	if (num == 255) iprintf("pal:%d r:%d g:%d b:%d\n", r, red, green, blue);
 
 		colors += 3;
 	}
@@ -220,7 +220,7 @@ void OSystem_DS::restoreHardwarePalette() {
 
 void OSystem_DS::setCursorPalette(const byte *colors, uint start, uint num) {
 
-//	consolePrintf("Cursor palette set: start: %d, cols: %d\n", start, num);
+//	iprintf("Cursor palette set: start: %d, cols: %d\n", start, num);
 	for (unsigned int r = start; r < start + num; r++) {
 		int red = *colors;
 		int green = *(colors + 1);
@@ -241,7 +241,7 @@ void OSystem_DS::setCursorPalette(const byte *colors, uint start, uint num) {
 }
 
 void OSystem_DS::grabPalette(unsigned char *colors, uint start, uint num) const {
-//	consolePrintf("Grabpalette");
+//	iprintf("Grabpalette");
 
 	for (unsigned int r = start; r < start + num; r++) {
 		*colors++ = (BG_PALETTE[r] & 0x001F) << 3;
@@ -259,7 +259,7 @@ void OSystem_DS::copyRectToScreen(const void *buf, int pitch, int x, int y, int 
 	if (h < 0) return;
 	if (!DS::getIsDisplayMode8Bit()) return;
 
-//	consolePrintf("CopyRectToScreen %d\n", w * h);
+//	iprintf("CopyRectToScreen %d\n", w * h);
 
 	u16 *bg;
 	s32 stride;
@@ -394,7 +394,7 @@ void OSystem_DS::copyRectToScreen(const void *buf, int pitch, int x, int y, int 
 			}
 		}
 
-//		consolePrintf("Slow method used!\n");
+//		iprintf("Slow method used!\n");
 
 
 	} else {
@@ -438,12 +438,12 @@ void OSystem_DS::copyRectToScreen(const void *buf, int pitch, int x, int y, int 
 			}
 		}
 	}
-//	consolePrintf("Done\n");
+//	iprintf("Done\n");
 }
 
 void OSystem_DS::updateScreen() {
 //	static int cnt = 0;
-//	consolePrintf("updatescr %d\n", cnt++);
+//	iprintf("updatescr %d\n", cnt++);
 
 	if ((_frameBufferExists) && (DS::getIsDisplayMode8Bit())) {
 		_frameBufferExists = false;
@@ -469,7 +469,7 @@ void OSystem_DS::setShakePos(int shakeXOffset, int shakeYOffset) {
 }
 
 void OSystem_DS::showOverlay() {
-//	consolePrintf("showovl\n");
+//	iprintf("showovl\n");
 	DS::displayMode16Bit();
 }
 
@@ -479,11 +479,11 @@ void OSystem_DS::hideOverlay() {
 
 void OSystem_DS::clearOverlay() {
 	memset((u16 *) DS::get16BitBackBuffer(), 0, 512 * 256 * 2);
-//	consolePrintf("clearovl\n");
+//	iprintf("clearovl\n");
 }
 
 void OSystem_DS::grabOverlay(void *buf, int pitch) {
-//	consolePrintf("grabovl\n")
+//	iprintf("grabovl\n")
 	u16 *start = DS::get16BitBackBuffer();
 
 	for (int y = 0; y < 200; y++) {
@@ -504,7 +504,7 @@ void OSystem_DS::copyRectToOverlay(const void *buf, int pitch, int x, int y, int
 //	if (x + w > 256) w = 256 - x;
 	//if (x + h > 256) h = 256 - y;
 
-//	consolePrintf("Copy rect ovl %d, %d   %d, %d  %d\n", x, y, w, h, pitch);
+//	iprintf("Copy rect ovl %d, %d   %d, %d  %d\n", x, y, w, h, pitch);
 
 
 
@@ -515,8 +515,8 @@ void OSystem_DS::copyRectToOverlay(const void *buf, int pitch, int x, int y, int
 		for (int dx = x; dx < x + w; dx++) {
 
 			*(bg + (dy * 512) + dx) = *src;
-			//if ((*src) != 0) consolePrintf("%d,%d: %d   ", dx, dy, *src);
-			//consolePrintf("%d,", *src);
+			//if ((*src) != 0) iprintf("%d,%d: %d   ", dx, dy, *src);
+			//iprintf("%d,", *src);
 			src++;
 		}
 		source += pitch;
@@ -530,17 +530,17 @@ void OSystem_DS::copyRectToOverlay(const void *buf, int pitch, int x, int y, int
 		src += pitch;*/
 	}
 
-//	consolePrintf("Copy rect ovl done");
+//	iprintf("Copy rect ovl done");
 
 }
 
 int16 OSystem_DS::getOverlayHeight() {
-//	consolePrintf("getovlheight\n");
+//	iprintf("getovlheight\n");
 	return getHeight();
 }
 
 int16 OSystem_DS::getOverlayWidth() {
-//	consolePrintf("getovlwid\n");
+//	iprintf("getovlwid\n");
 	return getWidth();
 }
 
@@ -589,11 +589,11 @@ bool OSystem_DS::pollEvent(Common::Event &event) {
 			event.kbd.ascii = 0;
 			event.kbd.keycode = Common::KEYCODE_INVALID;
 			event.kbd.flags = 0;
-//			consolePrintf("type: %d\n", event.type);
+//			iprintf("type: %d\n", event.type);
 			return false;
 		} else {
 			event = eventQueue[eventNum++];
-//			consolePrintf("type: %d\n", event.type);
+//			iprintf("type: %d\n", event.type);
 			return true;
 		}
 	}
@@ -613,12 +613,12 @@ bool OSystem_DS::pollEvent(Common::Event &event) {
 			if (DS::getPenDown()) {
 				event.type = Common::EVENT_LBUTTONDOWN;
 				event.mouse = Common::Point(DS::getPenX(), DS::getPenY());
-				consolePrintf("Down %d, %d  ", event.mouse.x, event.mouse.y);
+				iprintf("Down %d, %d  ", event.mouse.x, event.mouse.y);
 				return true;
 			} else if (DS::getPenReleased()) {
 				event.type = Common::EVENT_LBUTTONUP;
 				event.mouse = Common::Point(DS::getPenX(), DS::getPenY());
-				consolePrintf("Up %d, %d ", event.mouse.x, event.mouse.y);
+				iprintf("Up %d, %d ", event.mouse.x, event.mouse.y);
 				return true;
 			} else {
 				return false;
@@ -679,7 +679,7 @@ void OSystem_DS::deleteMutex(MutexRef mutex) {
 }
 
 void OSystem_DS::quit() {
-/*	consolePrintf("Soft resetting...");
+/*	iprintf("Soft resetting...");
 	IPC->reset = 1;
 	REG_IE = 0;
 
@@ -785,7 +785,8 @@ Common::String OSystem_DS::getDefaultConfigFileName() {
 void OSystem_DS::logMessage(LogMessageType::Type type, const char *message) {
 #ifndef DISABLE_TEXT_CONSOLE
 	nocashMessage((char *)message);
-//	consolePrintf((char *)message);
+#else
+	iprintf("%s", message);
 #endif
 }
 

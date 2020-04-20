@@ -52,15 +52,6 @@
 // FIXME: What is "NO_DEBUG_MSGS" good for?
 #define NO_DEBUG_MSGS
 
-// This is defined in dsmain.cpp
-#ifdef __cplusplus
-extern "C" {
-#endif
-void consolePrintf(const char *format, ...);
-#ifdef __cplusplus
-}
-#endif
-
 
 #ifdef assert
 #undef assert
@@ -77,7 +68,7 @@ void consolePrintf(const char *format, ...);
 #define assert(s) \
 	do { \
 		if (!(s)) { \
-			consolePrintf("Assertion failed: '##s##' at file %s, line %d\n", __FILE__, __LINE__); \
+			iprintf("Assertion failed: '##s##' at file %s, line %d\n", __FILE__, __LINE__); \
 		} \
 	} while (0)
 

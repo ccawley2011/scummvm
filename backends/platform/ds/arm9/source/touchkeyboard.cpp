@@ -297,7 +297,7 @@ void drawAutoComplete() {
 
 	} else {
 
-		consolePrintf("time: %d\n", typingTimeout);
+		iprintf("time: %d\n", typingTimeout);
 
 		// Otherwise, draw autocompletions if one isn't being entered and there are
 		// some available.
@@ -360,7 +360,7 @@ void typeCompletion(int current) {
 	strcat(autoCompleteBuffer, &autoCompleteWord[current][charactersEntered]);
 	strcat(autoCompleteBuffer, " ");
 
-/*	consolePrintf("Typing word: %s\n", autoCompleteWord[current]);
+/*	iprintf("Typing word: %s\n", autoCompleteWord[current]);
 
 	for (int r = charactersEntered; r < strlen(autoCompleteWord[current]); r++) {
 		event.kbd.keycode = autoCompleteWord[current][r];
@@ -497,7 +497,7 @@ void addKeyboardEvents() {
 		tx -= keyboardX;
 		ty -= keyboardY;
 
-//		consolePrintf("x=%d y=%d\n", tx, ty);
+//		iprintf("x=%d y=%d\n", tx, ty);
 
 		for (int r = 0; r < DS_NUM_KEYS; r++) {
 			if (( (tx >= keys[r].x) && (tx <= keys[r].x + 1)) &&
@@ -505,7 +505,7 @@ void addKeyboardEvents() {
 				OSystem_DS *system = OSystem_DS::instance();
 				Common::Event event;
 
-//				consolePrintf("Key: %d\n", r);
+//				iprintf("Key: %d\n", r);
 				if ((keys[r].character == Common::KEYCODE_INVALID)) {
 					// Close button
 					//DS::closed = true;
