@@ -28,139 +28,26 @@
 #define FORBIDDEN_SYMBOL_EXCEPTION_printf
 #define FORBIDDEN_SYMBOL_EXCEPTION_unistd_h
 
-#include "backends/base-backend.h"
-#include "common/events.h"
-#include "nds.h"
-#include "audio/mixer_intern.h"
-#include "graphics/surface.h"
-#include "graphics/colormasks.h"
-#include "graphics/palette.h"
+#include "backends/modular-backend.h"
 
-class OSystem_DS : public EventsBaseBackend, public PaletteManager {
-protected:
-
-	int eventNum;
-	int lastPenFrame;
-
-	Common::Event eventQueue[96];
-	int queuePos;
-
-	Audio::MixerImpl *_mixer;
-	Graphics::Surface _framebuffer;
-	bool _frameBufferExists;
-	bool _graphicsEnable;
-
-	static OSystem_DS *_instance;
-
-	u16 _palette[256];
-	u16 _cursorPalette[256];
-
-	u8 _cursorImage[64 * 64];
-	uint _cursorW;
-	uint _cursorH;
-	int _cursorHotX;
-	int _cursorHotY;
-	byte _cursorKey;
-	int _cursorScale;
-
-
-	Graphics::Surface *createTempFrameBuffer();
-	bool _disableCursorPalette;
-
-	int _gammaValue;
-
+class OSystem_DS : public ModularBackend, Common::EventSource {
 public:
-	typedef void (*SoundProc)(byte *buf, int len);
-	typedef int  (*TimerProc)(int interval);
-
 	OSystem_DS();
 	virtual ~OSystem_DS();
 
-	static OSystem_DS *instance() { return _instance; }
-
-	virtual bool hasFeature(Feature f) override;
-	virtual void setFeatureState(Feature f, bool enable) override;
-	virtual bool getFeatureState(Feature f) override;
-	virtual void initSize(uint width, uint height, const Graphics::PixelFormat *format) override;
-	virtual int16 getHeight() override;
-	virtual int16 getWidth() override;
-
-	virtual PaletteManager *getPaletteManager() override { return this; }
-protected:
-	// PaletteManager API
-	virtual void setPalette(const byte *colors, uint start, uint num) override;
-	virtual void grabPalette(byte *colors, uint start, uint num) const override;
-
 public:
-	void restoreHardwarePalette();
-
-	virtual void copyRectToScreen(const void *buf, int pitch, int x, int y, int w, int h) override;
-	virtual void updateScreen() override;
-	virtual void setShakePos(int shakeXOffset, int shakeYOffset) override;
-
-	virtual void showOverlay() override;
-	virtual void hideOverlay() override;
-	virtual void clearOverlay() override;
-	virtual void grabOverlay(void *buf, int pitch) override;
-	virtual void copyRectToOverlay(const void *buf, int pitch, int x, int y, int w, int h) override;
-	virtual int16 getOverlayHeight() override;
-	virtual int16 getOverlayWidth() override;
-	virtual Graphics::PixelFormat getOverlayFormat() const override { return Graphics::createPixelFormat<1555>(); }
-
-	virtual bool showMouse(bool visible) override;
-
-	virtual void warpMouse(int x, int y) override;
-	virtual void setMouseCursor(const void *buf, uint w, uint h, int hotspotX, int hotspotY, u32 keycolor, bool dontScale, const Graphics::PixelFormat *format) override;
-
+	virtual Common::EventSource *getDefaultEventSource() { return this; }
 	virtual bool pollEvent(Common::Event &event) override;
+
 	virtual uint32 getMillis(bool skipRecord = false) override;
 	virtual void delayMillis(uint msecs) override;
 	virtual void getTimeAndDate(TimeDate &t) const override;
 
-	virtual MutexRef createMutex(void) override;
-	virtual void lockMutex(MutexRef mutex) override;
-	virtual void unlockMutex(MutexRef mutex) override;
-	virtual void deleteMutex(MutexRef mutex) override;
-
 	virtual void quit() override;
-
-	void addEvent(const Common::Event& e);
-	bool isEventQueueEmpty() const { return queuePos == 0; }
-
-	virtual void setFocusRectangle(const Common::Rect& rect) override;
-
-	virtual void clearFocusRectangle() override;
 
 	virtual void initBackend() override;
 
-	virtual Graphics::Surface *lockScreen() override;
-	virtual void unlockScreen() override;
-
-	virtual Audio::Mixer *getMixer() override { return _mixer; }
-	Audio::MixerImpl *getMixerImpl() { return _mixer; }
-
-	static int timerHandler(int t);
-
-
-	virtual void addAutoComplete(const char *word);
-	virtual void clearAutoComplete();
-	virtual void setCharactersEntered(int count);
-
-	u16 getDSPaletteEntry(u32 entry) const { return _palette[entry]; }
-	u16 getDSCursorPaletteEntry(u32 entry) const { return !_disableCursorPalette? _cursorPalette[entry]: _palette[entry]; }
-
-	virtual void setCursorPalette(const byte *colors, uint start, uint num) override;
-
-	void refreshCursor();
-
-	virtual Common::String getDefaultConfigFileName() override;
-
 	virtual void logMessage(LogMessageType::Type type, const char *message) override;
-
-	u16 applyGamma(u16 color);
-	void setGammaValue(int gamma) { _gammaValue = gamma; }
-
-	virtual void engineDone() override;
 };
 
 #endif

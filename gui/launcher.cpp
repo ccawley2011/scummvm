@@ -263,14 +263,6 @@ void LauncherDialog::updateListing() {
 	const ConfigManager::DomainMap &domains = ConfMan.getGameDomains();
 	ConfigManager::DomainMap::const_iterator iter;
 	for (iter = domains.begin(); iter != domains.end(); ++iter) {
-#ifdef __DS__
-		// DS port uses an extra section called 'ds'.  This prevents the section from being
-		// detected as a game.
-		if (iter->_key == "ds") {
-			continue;
-		}
-#endif
-
 		String gameid(iter->_value.getVal("gameid"));
 		String description(iter->_value.getVal("description"));
 		Common::FSNode path(iter->_value.getVal("path"));

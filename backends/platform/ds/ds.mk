@@ -1,78 +1,7 @@
-# To approximate the DS builds A, B, C, ... run our configure like this
-#   configure --host=ds --disable-translation --disable-all-engines OPTIONS
-# where OPTIONS is...
-# build A:  --enable-scumm
-# build B:  --enable-sky --enable-queen
-# build C:  --enable-agos
-# build D:  --enable-gob --enable-cine --enable-agi
-# build E:  --enable-saga --disable-mad
-# build F:  --enable-kyra --disable-mad
-# build G:  --enable-lure
-# build H:  --enable-parallaction
-# build I:  --enable-made --disable-mad
-# build K:  --enable-cruise --disable-mad
-#
-# However, this could be automated using a simple script, which generates
-# subdirs for each build, and runs configure in those subdirs with the right
-# parameters (all builds would still share the same set of source code files,
-# thanks to our "out of tree" building support).
-#
-# This does not currently take care of some things:
-# * It does not #define DS_BUILD_A etc. -- most uses of that should be
-#   eliminated, though. Only usage should be for selecting the default config
-#   file (and for that we should really rather allow overriding the value of
-#   DEFAULT_CONFIG_FILE).
-#   There are a few game specific hacks which are currently controlled by this,
-#   too; we need to investigate those.
-# * It does not currently adjust the logo. Ideally, if we ever get real plugin
-#   support, that should be necessary anymore anyway.
-# * No support for USE_DEBUGGER and USE_PROFILER yet. I envision that we would
-#  integrate them with the --enable-debug and --enable-profiling configure options,
-#  I simply haven't gotten around to do that yet.
-# * ...
-
 # Set location of ndsdir so that we can easily refer to files in it
 ndsdir = backends/platform/ds
 
-
-# Until we fix logo support, always use the A logo
-LOGO = logoa.bmp
-
-# Uncomment the following line to enable support for the
-# ace DS Debugger (remembering to make the same change in the arm7 makefile):
-#USE_DEBUGGER = 1
-# TODO: Need to reimplement this (for arm9 and arm7).
-#ifdef USE_DEBUGGER
-#	DEFINES += -DUSE_DEBUGGER
-#	CFLAGS += -g
-#endif
-
-# Uncomment the following line to enable the profiler
-#USE_PROFILER = 1
-# TODO: Need to reimplement this; and maybe replace it by the --enable-profiling
-#       configure directive. Below is USE_PROFILER related code from the old NDS
-#       build system:
-#ifdef USE_PROFILER
-#	CFLAGS += -mpoke-function-name -finstrument-functions -g
-#	DEFINES += -DUSE_PROFILER
-#endif
-# And this for module.mk:
-#ifdef USE_PROFILER
-#	PORT_OBJS += arm9/source/profiler/cyg-profile.o
-#endif
-
-
-
-# NOTE: The header and libs for the debugger is assumed to be in the libnds
-# folder.
-
-
-ifdef WRAP_MALLOC
-	LDFLAGS += -Wl,--wrap,malloc
-	DEFINES += -DWRAP_MALLOC
-endif
-
-
+LOGO = logo.bmp
 
 # Compiler options for files which should be optimised for speed
 OPT_SPEED := -O3 -marm
@@ -88,7 +17,6 @@ CXXFLAGS += $(OPT_SIZE)
 # we replicate the *precise* list from the old DS makefile, to ensure full compatibility.
 # Eventually, we should tune this list.
 $(ndsdir)/arm9/source/blitters.o: CXXFLAGS:=$(CXXFLAGS) $(OPT_SPEED)
-$(ndsdir)/arm9/source/dsmain.o: CXXFLAGS:=$(CXXFLAGS) $(OPT_SPEED)
 $(ndsdir)/arm9/source/osystem_ds.o: CXXFLAGS:=$(CXXFLAGS) $(OPT_SPEED)
 base/main.o: CXXFLAGS:=$(CXXFLAGS) $(OPT_SPEED)
 sound/rate.o: CXXFLAGS:=$(CXXFLAGS) $(OPT_SPEED)
@@ -134,68 +62,19 @@ engines/teenagent/actor.o: CXXFLAGS:=$(CXXFLAGS) $(OPT_SPEED)
 #
 #############################################################################
 
-# FIXME: Newer versions of devkitARM don't include dsbuild, which is needed to create scummvm.ds.gba
-all: scummvm.nds # scummvm.ds.gba
+all: scummvm.nds
 
 clean: dsclean
 
 dsclean:
-	$(RM) $(addprefix $(ndsdir)/, $(ARM7_MODULE_OBJS)) scummvm.nds scummvm.ds.gba
+	$(RM) $(addprefix $(ndsdir)/, $(ARM7_MODULE_OBJS)) scummvm.nds
 
 .PHONY: dsclean
 
 # TODO: Add a 'dsdist' target ?
 
-%.nds: %.elf $(ndsdir)/arm7/arm7.elf
-	ndstool -c $@ -9 $< -7 $(ndsdir)/arm7/arm7.elf -b $(srcdir)/$(ndsdir)/$(LOGO) "$(@F);ScummVM $(VERSION);DS Port"
-
-%.ds.gba: %.nds
-	dsbuild $< -o $@ -l $(srcdir)/$(ndsdir)/arm9/ndsloader.bin
-	padbin 16 $@
-
-#############################################################################
-#############################################################################
-#############################################################################
-
-
-#############################################################################
-#
-# ARM7 rules.
-# For ARM7 files, we need different compiler flags, which leads to the
-# extra rules for .o files below
-#
-#############################################################################
-
-#
-# Set various flags
-#
-ARM7_ARCH	:=	-mthumb-interwork
-
-# note: arm7tdmi isn't the correct CPU arch, but anything newer and LD
-# *insists* it has a FPU or VFP, and it won't take no for an answer!
-ARM7_CFLAGS	:=	-g -Wall -O2\
-		-mcpu=arm7tdmi -mtune=arm7tdmi -fomit-frame-pointer\
-		-ffast-math \
-		$(ARM7_ARCH) \
-		-I$(srcdir)/$(ndsdir)/commoninclude \
-		-I$(DEVKITPRO)/libnds/include \
-		-I$(DEVKITPRO)/libnds/include/nds \
-		-DARM7
-
-ARM7_CXXFLAGS	:= $(ARM7_CFLAGS) -fno-exceptions -fno-rtti
-
-ARM7_LDFLAGS	:= -g $(ARM7_ARCH) -mfloat-abi=soft
-
-# Set custom build flags for main.o
-$(ndsdir)/arm7/source/main.o: CXXFLAGS=$(ARM7_CXXFLAGS)
-$(ndsdir)/arm7/source/main.o: CPPFLAGS=
-
-# Rule for creating ARM7 .elf files by linking .o files together with a special linker script
-$(ndsdir)/arm7/arm7.elf: \
-	$(ndsdir)/arm7/source/main.o
-	$(CXX) $(ARM7_LDFLAGS) -specs=ds_arm7.specs $+ -L$(DEVKITPRO)/libnds/lib -lnds7  -o $@
-
-
+%.nds: %.elf
+	ndstool -c $@ -9 $< -b $(srcdir)/$(ndsdir)/$(LOGO) "$(@F);ScummVM $(VERSION);DS Port"
 
 
 
