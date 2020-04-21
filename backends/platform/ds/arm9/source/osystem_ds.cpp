@@ -31,7 +31,7 @@
 #include "backends/audiocd/default/default-audiocd.h"
 #include "backends/events/default/default-events.h"
 #include "backends/fs/posix/posix-fs-factory.h"
-#include "backends/graphics/null/null-graphics.h"
+#include "backends/graphics/ds/ds-graphics.h"
 #include "backends/mutex/null/null-mutex.h"
 #include "backends/saves/default/default-saves.h"
 #include "backends/timer/default/default-timer.h"
@@ -54,7 +54,7 @@ void OSystem_DS::initBackend() {
 	_timerManager = new DefaultTimerManager();
 	_eventManager = new DefaultEventManager(this);
 	_savefileManager = new DefaultSaveFileManager();
-	_graphicsManager = new NullGraphicsManager();
+	_graphicsManager = new DS::DSGraphicsManager();
 
 	_mixer = new Audio::MixerImpl(22050);
 	((Audio::MixerImpl *)_mixer)->setReady(false);

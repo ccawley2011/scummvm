@@ -271,6 +271,8 @@ MODULE_OBJS += \
 	fs/posix/posix-fs.o \
 	fs/posix/posix-fs-factory.o \
 	fs/posix/posix-iostream.o \
+	graphics/ds/ds-graphics.o \
+	graphics/ds/background.o \
 	plugins/ds/ds-provider.o
 endif
 
