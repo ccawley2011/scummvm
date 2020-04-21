@@ -38,6 +38,7 @@ public:
 public:
 	virtual Common::EventSource *getDefaultEventSource() { return this; }
 	virtual bool pollEvent(Common::Event &event) override;
+	virtual Common::HardwareInputSet *getHardwareInputSet() override;
 
 	virtual uint32 getMillis(bool skipRecord = false) override;
 	virtual void delayMillis(uint msecs) override;
@@ -48,6 +49,12 @@ public:
 	virtual void initBackend() override;
 
 	virtual void logMessage(LogMessageType::Type type, const char *message) override;
+
+private:
+	Common::Queue<Common::Event> _eventQueue;
+	bool _rescanKeys;
+
+	void doJoyEvent(u32 keysPressed, u32 keysReleased, u32 ndsKey, uint8 svmButton);
 };
 
 #endif

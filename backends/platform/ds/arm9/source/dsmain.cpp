@@ -67,17 +67,6 @@ int main(int argc, char *argv[]) {
 	iprintf("ScummVM DS\n");
 	iprintf("Version %s ", gScummVMVersion);
 	iprintf("-------------------------------\n");
-	iprintf("L/R + D-pad/pen:    Scroll view\n");
-	iprintf("D-pad left:   Left mouse button\n");
-	iprintf("D-pad right: Right mouse button\n");
-	iprintf("D-pad up:           Hover mouse\n");
-	iprintf("B button:        Skip cutscenes\n");
-	iprintf("Select:         DS Options menu\n");
-	iprintf("Start:   Game menu (some games)\n");
-	iprintf("Y (in game):     Toggle console\n");
-	iprintf("X:              Toggle keyboard\n");
-	iprintf("A:                 Swap screens\n");
-	iprintf("L+R (on start):      Clear SRAM\n");
 	iprintf("\n");
 
 	if (!fatInitDefault()) {

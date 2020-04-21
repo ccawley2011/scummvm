@@ -3,7 +3,6 @@ MODULE := backends/platform/ds
 PORT_OBJS := \
 	arm9/source/blitters_arm.o \
 	arm9/source/dsmain.o \
-	arm9/source/scummhelp.o \
 	arm9/source/osystem_ds.o
 
 DATA_OBJS := \
