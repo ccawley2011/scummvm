@@ -48,6 +48,15 @@ OSystem_DS::OSystem_DS() : _rescanKeys(true) {
 OSystem_DS::~OSystem_DS() {
 }
 
+static volatile uint32 timer_ms;
+
+static void timer_callback() {
+	DefaultTimerManager *tm = (DefaultTimerManager *)g_system->getTimerManager();
+	tm->handler();
+
+	timer_ms++;
+}
+
 void OSystem_DS::initBackend() {
 	ConfMan.setInt("autosave_period", 0);
 	ConfMan.setBool("FM_medium_quality", true);
@@ -57,6 +66,9 @@ void OSystem_DS::initBackend() {
 	_eventManager = new DefaultEventManager(this);
 	_savefileManager = new DefaultSaveFileManager();
 	_graphicsManager = new DS::DSGraphicsManager();
+
+	timer_ms = 0;
+	timerStart(2, ClockDivider_1024, TIMER_FREQ_1024(1000), timer_callback);
 
 	_mixer = new Audio::MixerImpl(22050);
 	((Audio::MixerImpl *)_mixer)->setReady(false);
@@ -158,10 +170,12 @@ bool OSystem_DS::pollEvent(Common::Event &event) {
 }
 
 uint32 OSystem_DS::getMillis(bool skipRecord) {
-	return 0;
+	return timer_ms;
 }
 
 void OSystem_DS::delayMillis(uint msecs) {
+	uint32 start = getMillis();
+	while (start + msecs >= getMillis());
 }
 
 
