@@ -386,7 +386,7 @@ void Cursor_v2::enable() {
 
 void Cursor_v2::showFrame(uint16 frame) {
 	int offset = _width * _height * frame * 4;
-	CursorMan.replaceCursor((const byte *)(_img + offset), _width, _height, _width >> 1, _height >> 1, 0, false, &_format);
+	CursorMan.replaceCursor((const byte *)(_img + offset), _width, _height, _width >> 1, _height >> 1, 0, false, _format);
 }
 
 

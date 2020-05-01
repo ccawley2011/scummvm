@@ -67,13 +67,32 @@ public:
 	 *                  the maximum color value as defined by format.
 	 * @param dontScale	Whether the cursor should never be scaled. An exception are high ppi displays, where the cursor
 	 *                  would be too small to notice otherwise, these are allowed to scale the cursor anyway.
-	 * @param format	a pointer to the pixel format which the cursor graphic uses,
-	 *					CLUT8 will be used if this is NULL or not specified.
 	 * @note It is ok for the buffer to be a NULL pointer. It is sometimes
 	 *       useful to push a "dummy" cursor and modify it later. The
 	 *       cursor will be added to the stack, but not to the backend.
 	 */
-	void pushCursor(const void *buf, uint w, uint h, int hotspotX, int hotspotY, uint32 keycolor, bool dontScale = false, const Graphics::PixelFormat *format = NULL);
+	void pushCursor(const void *buf, uint w, uint h, int hotspotX, int hotspotY, uint32 keycolor, bool dontScale = false);
+
+	/**
+	 * Push a new cursor onto the stack, and set it in the backend. A local
+	 * copy will be made of the cursor data, so the original buffer can be
+	 * safely freed afterwards.
+	 *
+	 * @param buf		the new cursor data
+	 * @param w			the width
+	 * @param h			the height
+	 * @param hotspotX	the hotspot X coordinate
+	 * @param hotspotY	the hotspot Y coordinate
+	 * @param keycolor	the color value for the transparent color. This may not exceed
+	 *                  the maximum color value as defined by format.
+	 * @param dontScale	Whether the cursor should never be scaled. An exception are high ppi displays, where the cursor
+	 *                  would be too small to notice otherwise, these are allowed to scale the cursor anyway.
+	 * @param format	the pixel format which the cursor graphic uses
+	 * @note It is ok for the buffer to be a NULL pointer. It is sometimes
+	 *       useful to push a "dummy" cursor and modify it later. The
+	 *       cursor will be added to the stack, but not to the backend.
+	 */
+	void pushCursor(const void *buf, uint w, uint h, int hotspotX, int hotspotY, uint32 keycolor, bool dontScale, const Graphics::PixelFormat &format);
 
 	/**
 	 * Pop a cursor from the stack, and restore the previous one to the
@@ -95,10 +114,26 @@ public:
 	 *                  the maximum color value as defined by format.
 	 * @param dontScale	Whether the cursor should never be scaled. An exception are high ppi displays, where the cursor
 	 *                  would be too small to notice otherwise, these are allowed to scale the cursor anyway.
-	 * @param format	a pointer to the pixel format which the cursor graphic uses,
-	 *					CLUT8 will be used if this is NULL or not specified.
 	 */
-	void replaceCursor(const void *buf, uint w, uint h, int hotspotX, int hotspotY, uint32 keycolor, bool dontScale = false, const Graphics::PixelFormat *format = NULL);
+	void replaceCursor(const void *buf, uint w, uint h, int hotspotX, int hotspotY, uint32 keycolor, bool dontScale = false);
+
+	/**
+	 * Replace the current cursor on the stack. If the stack is empty, the
+	 * cursor is pushed instead. It's a slightly more optimized way of
+	 * popping the old cursor before pushing the new one.
+	 *
+	 * @param buf		the new cursor data
+	 * @param w		the width
+	 * @param h		the height
+	 * @param hotspotX	the hotspot X coordinate
+	 * @param hotspotY	the hotspot Y coordinate
+	 * @param keycolor	the color value for the transparent color. This may not exceed
+	 *                  the maximum color value as defined by format.
+	 * @param dontScale	Whether the cursor should never be scaled. An exception are high ppi displays, where the cursor
+	 *                  would be too small to notice otherwise, these are allowed to scale the cursor anyway.
+	 * @param format	the pixel format which the cursor graphic uses.
+	 */
+	void replaceCursor(const void *buf, uint w, uint h, int hotspotX, int hotspotY, uint32 keycolor, bool dontScale, const Graphics::PixelFormat &format);
 
 	/**
 	 * Replace the current cursor on the stack. If the stack is empty, the
@@ -198,7 +233,7 @@ private:
 		// _format set to default by Graphics::PixelFormat default constructor
 		Cursor() : _data(0), _visible(false), _width(0), _height(0), _hotspotX(0), _hotspotY(0), _keycolor(0), _dontScale(false), _size(0) {}
 
-		Cursor(const void *data, uint w, uint h, int hotspotX, int hotspotY, uint32 keycolor, bool dontScale = false, const Graphics::PixelFormat *format = NULL);
+		Cursor(const void *data, uint w, uint h, int hotspotX, int hotspotY, uint32 keycolor, bool dontScale, const Graphics::PixelFormat &format);
 		~Cursor();
 	};
 
