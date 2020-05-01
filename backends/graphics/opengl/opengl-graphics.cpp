@@ -188,17 +188,12 @@ int OpenGLGraphicsManager::getGraphicsMode() const {
 }
 
 Graphics::PixelFormat OpenGLGraphicsManager::getScreenFormat() const {
-#ifdef USE_RGB_COLOR
 	return _currentState.gameFormat;
-#else
-	return Graphics::PixelFormat::createFormatCLUT8();
-#endif
 }
 
 Common::List<Graphics::PixelFormat> OpenGLGraphicsManager::getSupportedFormats() const {
 	Common::List<Graphics::PixelFormat> formats;
 
-#ifdef USE_RGB_COLOR
 	// Our default mode is (memory layout wise) RGBA8888 which is a different
 	// logical layout depending on the endianness. We chose this mode because
 	// it is the only 32bit color mode we can safely assume to be present in
@@ -229,7 +224,6 @@ Common::List<Graphics::PixelFormat> OpenGLGraphicsManager::getSupportedFormats()
 #endif
 	// RGB555, this is used by SCUMM HE 16 bit games.
 	formats.push_back(Graphics::PixelFormat(2, 5, 5, 5, 0, 10, 5, 0, 0));
-#endif
 
 	formats.push_back(Graphics::PixelFormat::createFormatCLUT8());
 
@@ -304,7 +298,6 @@ OSystem::TransactionError OpenGLGraphicsManager::endGFXTransaction() {
 		setupNewGameScreen = true;
 	}
 
-#ifdef USE_RGB_COLOR
 	if (_oldState.gameFormat != _currentState.gameFormat) {
 		setupNewGameScreen = true;
 	}
@@ -316,20 +309,13 @@ OSystem::TransactionError OpenGLGraphicsManager::endGFXTransaction() {
 		_currentState.gameFormat = Graphics::PixelFormat::createFormatCLUT8();
 		transactionError |= OSystem::kTransactionFormatNotSupported;
 	}
-#endif
 
 	do {
 		const uint desiredAspect = getDesiredGameAspectRatio();
 		const uint requestedWidth  = _currentState.gameWidth;
 		const uint requestedHeight = intToFrac(requestedWidth) / desiredAspect;
 
-		if (!loadVideoMode(requestedWidth, requestedHeight,
-#ifdef USE_RGB_COLOR
-		                   _currentState.gameFormat
-#else
-		                   Graphics::PixelFormat::createFormatCLUT8()
-#endif
-		                  )
+		if (!loadVideoMode(requestedWidth, requestedHeight, _currentState.gameFormat)
 		   // HACK: This is really nasty but we don't have any guarantees of
 		   // a context existing before, which means we don't know the maximum
 		   // supported texture size before this. Thus, we check whether the
@@ -346,11 +332,9 @@ OSystem::TransactionError OpenGLGraphicsManager::endGFXTransaction() {
 						transactionError |= OSystem::kTransactionSizeChangeFailed;
 					}
 
-#ifdef USE_RGB_COLOR
 					if (_oldState.gameFormat != _currentState.gameFormat) {
 						transactionError |= OSystem::kTransactionFormatNotSupported;
 					}
-#endif
 
 					if (_oldState.aspectRatioCorrection != _currentState.aspectRatioCorrection) {
 						transactionError |= OSystem::kTransactionAspectRatioFailed;
@@ -389,11 +373,7 @@ OSystem::TransactionError OpenGLGraphicsManager::endGFXTransaction() {
 		delete _gameScreen;
 		_gameScreen = nullptr;
 
-#ifdef USE_RGB_COLOR
 		_gameScreen = createSurface(_currentState.gameFormat);
-#else
-		_gameScreen = createSurface(Graphics::PixelFormat::createFormatCLUT8());
-#endif
 		assert(_gameScreen);
 		if (_gameScreen->hasPalette()) {
 			_gameScreen->setPalette(0, 256, _gamePalette);
@@ -402,15 +382,11 @@ OSystem::TransactionError OpenGLGraphicsManager::endGFXTransaction() {
 		_gameScreen->allocate(_currentState.gameWidth, _currentState.gameHeight);
 		_gameScreen->enableLinearFiltering(_currentState.filtering);
 		// We fill the screen to all black or index 0 for CLUT8.
-#ifdef USE_RGB_COLOR
 		if (_currentState.gameFormat.bytesPerPixel == 1) {
 			_gameScreen->fill(0);
 		} else {
 			_gameScreen->fill(_gameScreen->getSurface()->format.RGBToColor(0, 0, 0));
 		}
-#else
-		_gameScreen->fill(0);
-#endif
 	}
 
 	// Update our display area and cursor scaling. This makes sure we pick up
@@ -432,14 +408,12 @@ int OpenGLGraphicsManager::getScreenChangeID() const {
 
 void OpenGLGraphicsManager::initSize(uint width, uint height, const Graphics::PixelFormat *format) {
 	Graphics::PixelFormat requestedFormat;
-#ifdef USE_RGB_COLOR
 	if (!format) {
 		requestedFormat = Graphics::PixelFormat::createFormatCLUT8();
 	} else {
 		requestedFormat = *format;
 	}
 	_currentState.gameFormat = requestedFormat;
-#endif
 
 	_currentState.gameWidth = width;
 	_currentState.gameHeight = height;
@@ -697,15 +671,11 @@ void OpenGLGraphicsManager::setMouseCursor(const void *buf, uint w, uint h, int 
 	}
 
 	Graphics::PixelFormat inputFormat;
-#ifdef USE_RGB_COLOR
 	if (format) {
 		inputFormat = *format;
 	} else {
 		inputFormat = Graphics::PixelFormat::createFormatCLUT8();
 	}
-#else
-	inputFormat = Graphics::PixelFormat::createFormatCLUT8();
-#endif
 
 	// In case the color format has changed we will need to create the texture.
 	if (!_cursor || _cursor->getFormat() != inputFormat) {

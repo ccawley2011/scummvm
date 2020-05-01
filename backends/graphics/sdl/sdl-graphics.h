@@ -111,10 +111,7 @@ public:
 		bool aspectRatio;
 		bool fullscreen;
 		bool cursorPalette;
-
-#ifdef USE_RGB_COLOR
 		Graphics::PixelFormat pixelFormat;
-#endif
 	};
 
 	/**

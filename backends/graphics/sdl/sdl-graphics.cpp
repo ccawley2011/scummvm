@@ -68,19 +68,13 @@ SdlGraphicsManager::State SdlGraphicsManager::getState() const {
 	state.aspectRatio   = getFeatureState(OSystem::kFeatureAspectRatioCorrection);
 	state.fullscreen    = getFeatureState(OSystem::kFeatureFullscreenMode);
 	state.cursorPalette = getFeatureState(OSystem::kFeatureCursorPalette);
-#ifdef USE_RGB_COLOR
 	state.pixelFormat   = getScreenFormat();
-#endif
 	return state;
 }
 
 bool SdlGraphicsManager::setState(const State &state) {
 	beginGFXTransaction();
-#ifdef USE_RGB_COLOR
 		initSize(state.screenWidth, state.screenHeight, &state.pixelFormat);
-#else
-		initSize(state.screenWidth, state.screenHeight, nullptr);
-#endif
 		setFeatureState(OSystem::kFeatureAspectRatioCorrection, state.aspectRatio);
 		setFeatureState(OSystem::kFeatureFullscreenMode, state.fullscreen);
 		setFeatureState(OSystem::kFeatureCursorPalette, state.cursorPalette);

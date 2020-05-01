@@ -166,28 +166,21 @@ protected:
 	// Transaction support
 	//
 	struct VideoState {
-		VideoState() : valid(false), gameWidth(0), gameHeight(0),
-#ifdef USE_RGB_COLOR
-		    gameFormat(),
-#endif
+		VideoState() : valid(false), gameWidth(0), gameHeight(0), gameFormat(),
 		    aspectRatioCorrection(false), graphicsMode(GFX_OPENGL), filtering(true) {
 		}
 
 		bool valid;
 
 		uint gameWidth, gameHeight;
-#ifdef USE_RGB_COLOR
 		Graphics::PixelFormat gameFormat;
-#endif
 		bool aspectRatioCorrection;
 		int graphicsMode;
 		bool filtering;
 
 		bool operator==(const VideoState &right) {
 			return gameWidth == right.gameWidth && gameHeight == right.gameHeight
-#ifdef USE_RGB_COLOR
 			    && gameFormat == right.gameFormat
-#endif
 			    && aspectRatioCorrection == right.aspectRatioCorrection
 			    && graphicsMode == right.graphicsMode
 				&& filtering == right.filtering;

@@ -159,7 +159,7 @@ static Common::Error runGame(const Plugin *plugin, OSystem &system, const Common
 	Common::Error err = Common::kNoError;
 	Engine *engine = 0;
 
-#if defined(SDL_BACKEND) && defined(USE_OPENGL) && defined(USE_RGB_COLOR)
+#if defined(SDL_BACKEND) && defined(USE_OPENGL)
 	// HACK: We set up the requested graphics mode setting here to allow the
 	// backend to switch from Surface SDL to OpenGL if necessary. This is
 	// needed because otherwise the g_system->getSupportedFormats might return
