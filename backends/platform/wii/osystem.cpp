@@ -73,7 +73,6 @@ OSystem_Wii::OSystem_Wii() :
 	_pfGame(Graphics::PixelFormat::createFormatCLUT8()),
 	_pfGameTexture(Graphics::PixelFormat::createFormatCLUT8()),
 	_pfCursor(Graphics::PixelFormat::createFormatCLUT8()),
-#endif
 
 	_optionsDlgActive(false),
 	_consoleVisible(false),

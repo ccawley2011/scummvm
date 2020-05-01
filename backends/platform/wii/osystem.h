@@ -90,7 +90,6 @@ private:
 	Graphics::PixelFormat _pfGame;
 	Graphics::PixelFormat _pfGameTexture;
 	Graphics::PixelFormat _pfCursor;
-#endif
 
 	bool _consoleVisible;
 	bool _optionsDlgActive;
