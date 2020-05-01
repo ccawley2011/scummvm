@@ -74,7 +74,7 @@ SdlGraphicsManager::State SdlGraphicsManager::getState() const {
 
 bool SdlGraphicsManager::setState(const State &state) {
 	beginGFXTransaction();
-		initSize(state.screenWidth, state.screenHeight, &state.pixelFormat);
+		initSize(state.screenWidth, state.screenHeight, state.pixelFormat);
 		setFeatureState(OSystem::kFeatureAspectRatioCorrection, state.aspectRatio);
 		setFeatureState(OSystem::kFeatureFullscreenMode, state.fullscreen);
 		setFeatureState(OSystem::kFeatureCursorPalette, state.cursorPalette);

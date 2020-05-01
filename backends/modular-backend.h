@@ -79,7 +79,7 @@ public:
 	virtual void resetGraphicsScale() override final;
 	virtual Graphics::PixelFormat getScreenFormat() const override final;
 	virtual Common::List<Graphics::PixelFormat> getSupportedFormats() const override final;
-	virtual void initSize(uint width, uint height, const Graphics::PixelFormat *format = NULL) override final;
+	virtual void initSize(uint width, uint height, const Graphics::PixelFormat &format) override final;
 	virtual void initSizeHint(const Graphics::ModeList &modes) override final;
 	virtual int getScreenChangeID() const override final;
 
@@ -109,7 +109,7 @@ public:
 
 	virtual bool showMouse(bool visible) override final;
 	virtual void warpMouse(int x, int y) override final;
-	virtual void setMouseCursor(const void *buf, uint w, uint h, int hotspotX, int hotspotY, uint32 keycolor, bool dontScale = false, const Graphics::PixelFormat *format = NULL) override final;
+	virtual void setMouseCursor(const void *buf, uint w, uint h, int hotspotX, int hotspotY, uint32 keycolor, bool dontScale, const Graphics::PixelFormat &format) override final;
 	virtual void setCursorPalette(const byte *colors, uint start, uint num) override final;
 
 	//@}

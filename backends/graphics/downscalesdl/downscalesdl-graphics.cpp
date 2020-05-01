@@ -76,7 +76,7 @@ ScalerProc *DownscaleSdlGraphicsManager::getGraphicsScalerProc(int mode) const {
 	return newScalerProc;
 }
 
-void DownscaleSdlGraphicsManager::initSize(uint w, uint h, const Graphics::PixelFormat *format) {
+void DownscaleSdlGraphicsManager::initSize(uint w, uint h, const Graphics::PixelFormat &format) {
 	assert(_transactionMode == kTransactionActive);
 
 	_gameScreenShakeXOffset = 0;
@@ -84,18 +84,11 @@ void DownscaleSdlGraphicsManager::initSize(uint w, uint h, const Graphics::Pixel
 
 #ifdef USE_RGB_COLOR
 	// Avoid redundant format changes
-	Graphics::PixelFormat newFormat;
-	if (!format)
-		newFormat = Graphics::PixelFormat::createFormatCLUT8();
-	else
-		newFormat = *format;
-
-	assert(newFormat.bytesPerPixel > 0);
-
-	if (newFormat != _videoMode.format) {
-		_videoMode.format = newFormat;
+	assert(format.bytesPerPixel > 0);
+	if (format != _videoMode.format) {
+		_videoMode.format = format;
 		_transactionDetails.formatChanged = true;
-		_screenFormat = newFormat;
+		_screenFormat = format;
 	}
 #endif
 

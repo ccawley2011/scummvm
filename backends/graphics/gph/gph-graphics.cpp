@@ -30,7 +30,7 @@ GPHGraphicsManager::GPHGraphicsManager(SdlEventSource *sdlEventSource, SdlWindow
 	: DownscaleSdlGraphicsManager(sdlEventSource, window) {
 }
 
-void GPHGraphicsManager::initSize(uint w, uint h, const Graphics::PixelFormat *format) {
+void GPHGraphicsManager::initSize(uint w, uint h, const Graphics::PixelFormat &format) {
 	DownscaleSdlGraphicsManager::initSize(w, h, format);
 
 	_videoMode.overlayWidth = 320;

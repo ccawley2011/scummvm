@@ -29,7 +29,7 @@ class GPHGraphicsManager : public DownscaleSdlGraphicsManager {
 public:
 	GPHGraphicsManager(SdlEventSource *boss, SdlWindow *window);
 
-	void initSize(uint w, uint h, const Graphics::PixelFormat *format = NULL) override;
+	void initSize(uint w, uint h, const Graphics::PixelFormat &format) override;
 	bool loadGFXMode() override;
 
 protected:

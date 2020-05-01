@@ -135,8 +135,7 @@ public:
 	// Graphics
 	inline Graphics::PixelFormat getScreenFormat() const { return _pfGame; }
 	virtual Common::List<Graphics::PixelFormat> getSupportedFormats() const;
-	void initSize(uint width, uint height,
-	              const Graphics::PixelFormat *format = NULL);
+	void initSize(uint width, uint height, const Graphics::PixelFormat &format);
 	virtual int getScreenChangeID() const { return _screenChangeId; };
 	GraphicsModeID chooseMode(Graphics::PixelFormat *format);
 	bool setGraphicsMode(GraphicsModeID modeID);
@@ -171,8 +170,8 @@ public:
 	bool showMouse(bool visible);
 	void warpMouse(int x, int y);
 	void setMouseCursor(const void *buf, uint w, uint h, int hotspotX,
-	                    int hotspotY, uint32 keycolor, bool dontScale = false,
-	                    const Graphics::PixelFormat *format = NULL);
+	                    int hotspotY, uint32 keycolor, bool dontScale,
+	                    const Graphics::PixelFormat &format);
 	void setCursorPalette(const byte *colors, uint start, uint num);
 
 	// Transform point from touchscreen coords into gamescreen coords

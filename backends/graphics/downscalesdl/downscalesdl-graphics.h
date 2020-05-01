@@ -35,7 +35,7 @@ public:
 
 	int getDefaultGraphicsMode() const override;
 
-	void initSize(uint w, uint h, const Graphics::PixelFormat *format = NULL) override;
+	void initSize(uint w, uint h, const Graphics::PixelFormat &format) override;
 	const OSystem::GraphicsMode *getSupportedGraphicsModes() const override;
 	int getGraphicsModeScale(int mode) const override;
 	ScalerProc *getGraphicsScalerProc(int mode) const override;

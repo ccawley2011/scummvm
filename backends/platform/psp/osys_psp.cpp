@@ -155,11 +155,11 @@ Common::List<Graphics::PixelFormat> OSystem_PSP::getSupportedFormats() const {
 	return _displayManager.getSupportedPixelFormats();
 }
 
-void OSystem_PSP::initSize(uint width, uint height, const Graphics::PixelFormat *format) {
+void OSystem_PSP::initSize(uint width, uint height, const Graphics::PixelFormat &format) {
 	DEBUG_ENTER_FUNC();
 	_displayManager.waitUntilRenderFinished();
 	_pendingUpdate = false;
-	_displayManager.setSizeAndPixelFormat(width, height, format);
+	_displayManager.setSizeAndPixelFormat(width, height, &format);
 
 	_cursor.setVisible(false);
 	_cursor.setLimits(_screen.getWidth(), _screen.getHeight());
@@ -292,21 +292,18 @@ void OSystem_PSP::warpMouse(int x, int y) {
 	_cursor.setXY(x, y);
 }
 
-void OSystem_PSP::setMouseCursor(const void *buf, uint w, uint h, int hotspotX, int hotspotY, uint32 keycolor, bool dontScale, const Graphics::PixelFormat *format) {
+void OSystem_PSP::setMouseCursor(const void *buf, uint w, uint h, int hotspotX, int hotspotY, uint32 keycolor, bool dontScale, const Graphics::PixelFormat &format) {
 	DEBUG_ENTER_FUNC();
 	_displayManager.waitUntilRenderFinished();
 	_pendingUpdate = false;
 
-	PSP_DEBUG_PRINT("pbuf[%p], w[%u], h[%u], hotspot:X[%d], Y[%d], keycolor[%d], scale[%d], pformat[%p]\n", buf, w, h, hotspotX, hotspotY, keycolor, !dontScale, format);
-	if (format) {
-		PSP_DEBUG_PRINT("format: bpp[%d], rLoss[%d], gLoss[%d], bLoss[%d], aLoss[%d], rShift[%d], gShift[%d], bShift[%d], aShift[%d]\n", format->bytesPerPixel, format->rLoss, format->gLoss, format->bLoss, format->aLoss, format->rShift, format->gShift, format->bShift, format->aShift);
-	}
+	PSP_DEBUG_PRINT("pbuf[%p], w[%u], h[%u], hotspot:X[%d], Y[%d], keycolor[%d], scale[%d], format[%s]\n", buf, w, h, hotspotX, hotspotY, keycolor, !dontScale, format.toString.c_str());
 
 	_cursor.setKeyColor(keycolor);
 	// TODO: The old target scale was saved but never used. Should the new
 	// "do not scale" logic be implemented?
 	//_cursor.setCursorTargetScale(cursorTargetScale);
-	_cursor.setSizeAndScummvmPixelFormat(w, h, format);
+	_cursor.setSizeAndScummvmPixelFormat(w, h, &format);
 	_cursor.setHotspot(hotspotX, hotspotY);
 	_cursor.clearKeyColor();
 	_cursor.copyFromArray((const byte *)buf);

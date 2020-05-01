@@ -65,7 +65,7 @@ void CursorManager::pushCursor(const void *buf, uint w, uint h, int hotspotX, in
 	cur->_visible = isVisible();
 	_cursorStack.push(cur);
 
-	g_system->setMouseCursor(cur->_data, w, h, hotspotX, hotspotY, keycolor, dontScale, format);
+	g_system->setMouseCursor(cur->_data, w, h, hotspotX, hotspotY, keycolor, dontScale, cur->_format);
 }
 
 void CursorManager::popCursor() {
@@ -77,9 +77,9 @@ void CursorManager::popCursor() {
 
 	if (!_cursorStack.empty()) {
 		cur = _cursorStack.top();
-		g_system->setMouseCursor(cur->_data, cur->_width, cur->_height, cur->_hotspotX, cur->_hotspotY, cur->_keycolor, cur->_dontScale, &cur->_format);
+		g_system->setMouseCursor(cur->_data, cur->_width, cur->_height, cur->_hotspotX, cur->_hotspotY, cur->_keycolor, cur->_dontScale, cur->_format);
 	} else {
-		g_system->setMouseCursor(nullptr, 0, 0, 0, 0, 0);
+		g_system->setMouseCursor(nullptr, 0, 0, 0, 0, 0, false, Graphics::PixelFormat::createFormatCLUT8());
 	}
 
 	g_system->showMouse(isVisible());
@@ -99,7 +99,7 @@ void CursorManager::popAllCursors() {
 		}
 	}
 
-	g_system->setMouseCursor(nullptr, 0, 0, 0, 0, 0);
+	g_system->setMouseCursor(nullptr, 0, 0, 0, 0, 0, false, Graphics::PixelFormat::createFormatCLUT8());
 	g_system->showMouse(isVisible());
 }
 
@@ -112,15 +112,11 @@ void CursorManager::replaceCursor(const void *buf, uint w, uint h, int hotspotX,
 
 	Cursor *cur = _cursorStack.top();
 
-#ifdef USE_RGB_COLOR
 	uint size;
 	if (!format)
 		size = w * h;
 	else
 		size = w * h * format->bytesPerPixel;
-#else
-	uint size = w * h;
-#endif
 
 	if (cur->_size < size) {
 		delete[] cur->_data;
@@ -137,14 +133,12 @@ void CursorManager::replaceCursor(const void *buf, uint w, uint h, int hotspotX,
 	cur->_hotspotY = hotspotY;
 	cur->_keycolor = keycolor;
 	cur->_dontScale = dontScale;
-#ifdef USE_RGB_COLOR
 	if (format)
 		cur->_format = *format;
 	else
 		cur->_format = Graphics::PixelFormat::createFormatCLUT8();
-#endif
 
-	g_system->setMouseCursor(cur->_data, w, h, hotspotX, hotspotY, keycolor, dontScale, format);
+	g_system->setMouseCursor(cur->_data, w, h, hotspotX, hotspotY, keycolor, dontScale, cur->_format);
 }
 
 void CursorManager::replaceCursor(const Graphics::Cursor *cursor) {
@@ -243,18 +237,12 @@ void CursorManager::lock(bool locked) {
 }
 
 CursorManager::Cursor::Cursor(const void *data, uint w, uint h, int hotspotX, int hotspotY, uint32 keycolor, bool dontScale, const Graphics::PixelFormat *format) {
-#ifdef USE_RGB_COLOR
 	if (!format)
 		_format = Graphics::PixelFormat::createFormatCLUT8();
 	 else
 		_format = *format;
 	_size = w * h * _format.bytesPerPixel;
 	_keycolor = keycolor & ((1 << (_format.bytesPerPixel << 3)) - 1);
-#else
-	_format = Graphics::PixelFormat::createFormatCLUT8();
-	_size = w * h;
-	_keycolor = keycolor & 0xFF;
-#endif
 	_data = new byte[_size];
 	if (data && _data)
 		memcpy(_data, data, _size);

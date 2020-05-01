@@ -914,7 +914,7 @@ TestExitStatus GFXtests::scaledCursors() {
 		g_system->beginGFXTransaction();
 
 			bool isGFXModeSet = g_system->setGraphicsMode(gfxMode->id);
-			g_system->initSize(320, 200);
+			g_system->initSize(320, 200, Graphics::PixelFormat::createFormatCLUT8());
 
 		OSystem::TransactionError gfxError = g_system->endGFXTransaction();
 
@@ -951,7 +951,7 @@ TestExitStatus GFXtests::scaledCursors() {
 	g_system->beginGFXTransaction();
 
 		bool isGFXModeSet = g_system->setGraphicsMode(currGFXMode);
-		g_system->initSize(320, 200);
+		g_system->initSize(320, 200, Graphics::PixelFormat::createFormatCLUT8());
 
 		if (isAspectRatioCorrected) {
 			g_system->setFeatureState(OSystem::kFeatureAspectRatioCorrection, true);
@@ -1254,7 +1254,7 @@ TestExitStatus GFXtests::pixelFormats() {
 
 		// Switch to that pixel Format
 		g_system->beginGFXTransaction();
-			g_system->initSize(320, 200, &(*iter));
+			g_system->initSize(320, 200, *iter);
 		g_system->endGFXTransaction();
 		Testsuite::clearScreen(true);
 
@@ -1300,7 +1300,7 @@ TestExitStatus GFXtests::pixelFormats() {
 
 	// Revert back to 8bpp
 	g_system->beginGFXTransaction();
-		g_system->initSize(320, 200);
+		g_system->initSize(320, 200, Graphics::PixelFormat::createFormatCLUT8());
 	g_system->endGFXTransaction();
 	GFXTestSuite::setCustomColor(255, 0, 0);
 	initMousePalette();

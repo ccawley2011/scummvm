@@ -293,16 +293,12 @@ void initGraphics(int width, int height, const Graphics::PixelFormat *format) {
 	g_system->beginGFXTransaction();
 
 		initCommonGFX();
-#ifdef USE_RGB_COLOR
 		if (format)
-			g_system->initSize(width, height, format);
+			g_system->initSize(width, height, *format);
 		else {
 			Graphics::PixelFormat bestFormat = g_system->getSupportedFormats().front();
-			g_system->initSize(width, height, &bestFormat);
+			g_system->initSize(width, height, bestFormat);
 		}
-#else
-		g_system->initSize(width, height);
-#endif
 
 	OSystem::TransactionError gfxError = g_system->endGFXTransaction();
 
@@ -402,7 +398,7 @@ void GUIErrorMessage(const Common::String &msg, const char *url) {
 	g_system->setWindowCaption("Error");
 	g_system->beginGFXTransaction();
 		initCommonGFX();
-		g_system->initSize(320, 200);
+		g_system->initSize(320, 200, Graphics::PixelFormat::createFormatCLUT8());
 	if (g_system->endGFXTransaction() == OSystem::kTransactionSuccess) {
 		if (url) {
 			GUI::MessageDialogWithURL dialog(msg, url);

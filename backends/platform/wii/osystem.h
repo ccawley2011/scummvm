@@ -154,7 +154,7 @@ public:
 	virtual Common::List<Graphics::PixelFormat> getSupportedFormats() const;
 	virtual int getGraphicsMode() const;
 	virtual void initSize(uint width, uint height,
-							const Graphics::PixelFormat *format);
+							const Graphics::PixelFormat &format);
 	virtual int16 getWidth();
 	virtual int16 getHeight();
 
@@ -187,7 +187,7 @@ public:
 	virtual void setMouseCursor(const void *buf, uint w, uint h, int hotspotX,
 								int hotspotY, uint32 keycolor,
 								bool dontScale,
-								const Graphics::PixelFormat *format);
+								const Graphics::PixelFormat &format);
 
 	virtual bool pollEvent(Common::Event &event);
 	virtual uint32 getMillis(bool skipRecord = false);

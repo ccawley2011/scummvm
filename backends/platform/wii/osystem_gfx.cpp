@@ -220,17 +220,11 @@ Common::List<Graphics::PixelFormat> OSystem_Wii::getSupportedFormats() const {
 }
 
 void OSystem_Wii::initSize(uint width, uint height,
-							const Graphics::PixelFormat *format) {
+							const Graphics::PixelFormat &format) {
 	bool update = false;
 	gfx_tex_format_t tex_format;
 
-	Graphics::PixelFormat newFormat;
-
-	if (format)
-		newFormat = *format;
-	else
-		newFormat = Graphics::PixelFormat::createFormatCLUT8();
-
+	Graphics::PixelFormat newFormat = format;
 	if (newFormat.bytesPerPixel > 2)
 		newFormat = Graphics::PixelFormat::createFormatCLUT8();
 
@@ -279,11 +273,10 @@ void OSystem_Wii::initSize(uint width, uint height,
 			_pfGameTexture = _pfRGB565;
 		}
 
-		printf("initSize %u*%u*%u (%u%u%u -> %u%u%u match: %d)\n",
+		printf("initSize %u*%u*%u (%s -> %s match: %d)\n",
 				_gameWidth, _gameHeight, _pfGame.bytesPerPixel * 8,
-				8 - _pfGame.rLoss, 8 - _pfGame.gLoss, 8 - _pfGame.bLoss,
-				8 - _pfGameTexture.rLoss, 8 - _pfGameTexture.gLoss,
-				8 - _pfGameTexture.bLoss, _pfGame == _pfGameTexture);
+				_pfGame.toString().c_str(), _pfGameTexture.toString().c_str(),
+				_pfGame == _pfGameTexture);
 
 		_gamePixels = (u8 *) memalign(32, _gameWidth * _gameHeight *
 										_pfGame.bytesPerPixel);
@@ -623,16 +616,13 @@ void OSystem_Wii::warpMouse(int x, int y) {
 void OSystem_Wii::setMouseCursor(const void *buf, uint w, uint h, int hotspotX,
 									int hotspotY, uint32 keycolor,
 									bool dontScale,
-									const Graphics::PixelFormat *format) {
+									const Graphics::PixelFormat &format) {
 	gfx_tex_format_t tex_format = GFX_TF_PALETTE_RGB5A3;
 	uint tw, th;
 	bool tmpBuf = false;
 	uint32 oldKeycolor = _mouseKeyColor;
 
-	if (!format)
-		_pfCursor = Graphics::PixelFormat::createFormatCLUT8();
-	else
-		_pfCursor = *format;
+	_pfCursor = format;
 
 	if (_pfCursor.bytesPerPixel > 1) {
 		tex_format = GFX_TF_RGB5A3;

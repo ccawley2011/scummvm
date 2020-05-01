@@ -39,7 +39,7 @@ public:
 	virtual void setFeatureState(OSystem::Feature f, bool enable) override;
 	virtual bool getFeatureState(OSystem::Feature f) const override;
 
-	virtual void initSize(uint w, uint h, const Graphics::PixelFormat *format) override;
+	virtual void initSize(uint w, uint h, const Graphics::PixelFormat &format) override;
 	virtual void updateScreen() override;
 
 	// EventObserver API

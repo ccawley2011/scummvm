@@ -756,7 +756,7 @@ public:
 	 * @param height	the new virtual screen height
 	 * @param format	the new virtual screen pixel format
 	 */
-	virtual void initSize(uint width, uint height, const Graphics::PixelFormat *format = nullptr) = 0;
+	virtual void initSize(uint width, uint height, const Graphics::PixelFormat &format) = 0;
 
 	/**
 	 * Send a list of graphics modes to the backend so it can make a decision
@@ -1085,9 +1085,9 @@ public:
 	 *                          value. (The SDL backend will just assert to prevent abuse of this).
 	 * @param dontScale			Whether the cursor should never be scaled. An exception are high ppi displays, where the cursor
 	 *                          would be too small to notice otherwise, these are allowed to scale the cursor anyway.
-	 * @param format			pointer to the pixel format which cursor graphic uses (0 means CLUT8)
+	 * @param format			the pixel format which cursor graphic uses
 	 */
-	virtual void setMouseCursor(const void *buf, uint w, uint h, int hotspotX, int hotspotY, uint32 keycolor, bool dontScale = false, const Graphics::PixelFormat *format = nullptr) = 0;
+	virtual void setMouseCursor(const void *buf, uint w, uint h, int hotspotX, int hotspotY, uint32 keycolor, bool dontScale, const Graphics::PixelFormat &format) = 0;
 
 	/**
 	 * Replace the specified range of cursor the palette with new colors.

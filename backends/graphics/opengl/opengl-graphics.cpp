@@ -406,17 +406,10 @@ int OpenGLGraphicsManager::getScreenChangeID() const {
 	return _screenChangeID;
 }
 
-void OpenGLGraphicsManager::initSize(uint width, uint height, const Graphics::PixelFormat *format) {
-	Graphics::PixelFormat requestedFormat;
-	if (!format) {
-		requestedFormat = Graphics::PixelFormat::createFormatCLUT8();
-	} else {
-		requestedFormat = *format;
-	}
-	_currentState.gameFormat = requestedFormat;
-
+void OpenGLGraphicsManager::initSize(uint width, uint height, const Graphics::PixelFormat &format) {
 	_currentState.gameWidth = width;
 	_currentState.gameHeight = height;
+	_currentState.gameFormat = format;
 	_gameScreenShakeXOffset = 0;
 	_gameScreenShakeYOffset = 0;
 }
@@ -657,7 +650,7 @@ void multiplyColorWithAlpha(const byte *src, byte *dst, const uint w, const uint
 }
 } // End of anonymous namespace
 
-void OpenGLGraphicsManager::setMouseCursor(const void *buf, uint w, uint h, int hotspotX, int hotspotY, uint32 keycolor, bool dontScale, const Graphics::PixelFormat *format) {
+void OpenGLGraphicsManager::setMouseCursor(const void *buf, uint w, uint h, int hotspotX, int hotspotY, uint32 keycolor, bool dontScale, const Graphics::PixelFormat &format) {
 
 	_cursorKeyColor = keycolor;
 	_cursorHotspotX = hotspotX;
@@ -670,29 +663,22 @@ void OpenGLGraphicsManager::setMouseCursor(const void *buf, uint w, uint h, int 
 		return;
 	}
 
-	Graphics::PixelFormat inputFormat;
-	if (format) {
-		inputFormat = *format;
-	} else {
-		inputFormat = Graphics::PixelFormat::createFormatCLUT8();
-	}
-
 	// In case the color format has changed we will need to create the texture.
-	if (!_cursor || _cursor->getFormat() != inputFormat) {
+	if (!_cursor || _cursor->getFormat() != format) {
 		delete _cursor;
 		_cursor = nullptr;
 
 		GLenum glIntFormat, glFormat, glType;
 
 		Graphics::PixelFormat textureFormat;
-		if (inputFormat.bytesPerPixel == 1 || (inputFormat.aBits() && getGLPixelFormat(inputFormat, glIntFormat, glFormat, glType))) {
+		if (format.bytesPerPixel == 1 || (format.aBits() && getGLPixelFormat(format, glIntFormat, glFormat, glType))) {
 			// There is two cases when we can use the cursor format directly.
 			// The first is when it's CLUT8, here color key handling can
 			// always be applied because we use the alpha channel of
 			// _defaultFormatAlpha for that.
 			// The other is when the input format has alpha bits and
 			// furthermore is directly supported.
-			textureFormat = inputFormat;
+			textureFormat = format;
 		} else {
 			textureFormat = _defaultFormatAlpha;
 		}
@@ -702,16 +688,16 @@ void OpenGLGraphicsManager::setMouseCursor(const void *buf, uint w, uint h, int 
 	}
 
 	_cursor->allocate(w, h);
-	if (inputFormat.bytesPerPixel == 1) {
+	if (format.bytesPerPixel == 1) {
 		// For CLUT8 cursors we can simply copy the input data into the
 		// texture.
-		_cursor->copyRectToTexture(0, 0, w, h, buf, w * inputFormat.bytesPerPixel);
+		_cursor->copyRectToTexture(0, 0, w, h, buf, w * format.bytesPerPixel);
 	} else {
 		// Otherwise it is a bit more ugly because we have to handle a key
 		// color properly.
 
 		Graphics::Surface *dst = _cursor->getSurface();
-		const uint srcPitch = w * inputFormat.bytesPerPixel;
+		const uint srcPitch = w * format.bytesPerPixel;
 
 		// Copy the cursor data to the actual texture surface. This will make
 		// sure that the data is also converted to the expected format.
@@ -721,20 +707,20 @@ void OpenGLGraphicsManager::setMouseCursor(const void *buf, uint w, uint h, int 
 		// color fringes due to filtering.
 
 		if (dst->format.bytesPerPixel == 2) {
-			if (inputFormat.bytesPerPixel == 2) {
+			if (format.bytesPerPixel == 2) {
 				multiplyColorWithAlpha<uint16, uint16>((const byte *) buf, (byte *) dst->getPixels(), w, h,
-				                                       inputFormat, dst->format, srcPitch, dst->pitch, keycolor);
-			} else if (inputFormat.bytesPerPixel == 4) {
+				                                       format, dst->format, srcPitch, dst->pitch, keycolor);
+			} else if (format.bytesPerPixel == 4) {
 				multiplyColorWithAlpha<uint32, uint16>((const byte *) buf, (byte *) dst->getPixels(), w, h,
-				                                       inputFormat, dst->format, srcPitch, dst->pitch, keycolor);
+				                                       format, dst->format, srcPitch, dst->pitch, keycolor);
 			}
 		} else {
-			if (inputFormat.bytesPerPixel == 2) {
+			if (format.bytesPerPixel == 2) {
 				multiplyColorWithAlpha<uint16, uint32>((const byte *) buf, (byte *) dst->getPixels(), w, h,
-				                                       inputFormat, dst->format, srcPitch, dst->pitch, keycolor);
-			} else if (inputFormat.bytesPerPixel == 4) {
+				                                       format, dst->format, srcPitch, dst->pitch, keycolor);
+			} else if (format.bytesPerPixel == 4) {
 				multiplyColorWithAlpha<uint32, uint32>((const byte *) buf, (byte *) dst->getPixels(), w, h,
-				                                       inputFormat, dst->format, srcPitch, dst->pitch, keycolor);
+				                                       format, dst->format, srcPitch, dst->pitch, keycolor);
 			}
 		}
 
@@ -743,7 +729,7 @@ void OpenGLGraphicsManager::setMouseCursor(const void *buf, uint w, uint h, int 
 	}
 
 	// In case we actually use a palette set that up properly.
-	if (inputFormat.bytesPerPixel == 1) {
+	if (format.bytesPerPixel == 1) {
 		updateCursorPalette();
 	}
 
