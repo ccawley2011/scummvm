@@ -65,10 +65,9 @@ public:
 	virtual bool setStretchMode(int mode) { return false; }
 	virtual int getStretchMode() const { return 0; }
 
-#ifdef USE_RGB_COLOR
 	virtual Graphics::PixelFormat getScreenFormat() const = 0;
 	virtual Common::List<Graphics::PixelFormat> getSupportedFormats() const = 0;
-#endif
+
 	virtual void initSize(uint width, uint height, const Graphics::PixelFormat *format = NULL) = 0;
 	virtual void initSizeHint(const Graphics::ModeList &modes) {}
 	virtual int getScreenChangeID() const = 0;

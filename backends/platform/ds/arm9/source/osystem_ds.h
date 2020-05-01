@@ -87,6 +87,16 @@ public:
 	virtual int16 getHeight();
 	virtual int16 getWidth();
 
+	virtual Graphics::PixelFormat getScreenFormat() const {
+		return Graphics::PixelFormat::createFormatCLUT8();
+	}
+
+	virtual Common::List<Graphics::PixelFormat> getSupportedFormats() const {
+		Common::List<Graphics::PixelFormat> list;
+		list.push_back(Graphics::PixelFormat::createFormatCLUT8());
+		return list;
+	}
+
 	virtual PaletteManager *getPaletteManager() { return this; }
 protected:
 	// PaletteManager API

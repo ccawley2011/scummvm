@@ -600,7 +600,6 @@ public:
 	 */
 	virtual void resetGraphicsScale() {}
 
-#ifdef USE_RGB_COLOR
 	/**
 	 * Determine the pixel format currently in use for screen rendering.
 	 * @return the active screen pixel format.
@@ -630,17 +629,6 @@ public:
 	 *       order, even if hardware uses BGR or some other color order.
 	 */
 	virtual Common::List<Graphics::PixelFormat> getSupportedFormats() const = 0;
-#else
-	inline Graphics::PixelFormat getScreenFormat() const {
-		return Graphics::PixelFormat::createFormatCLUT8();
-	};
-
-	inline Common::List<Graphics::PixelFormat> getSupportedFormats() const {
-		Common::List<Graphics::PixelFormat> list;
-		list.push_back(Graphics::PixelFormat::createFormatCLUT8());
-		return list;
-	};
-#endif
 
 	/**
 	 * Retrieve a list of all hardware shaders supported by this backend.

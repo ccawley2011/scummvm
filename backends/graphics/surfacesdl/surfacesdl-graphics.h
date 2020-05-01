@@ -84,10 +84,8 @@ public:
 	virtual bool setGraphicsMode(int mode) override;
 	virtual int getGraphicsMode() const override;
 	virtual void resetGraphicsScale() override;
-#ifdef USE_RGB_COLOR
 	virtual Graphics::PixelFormat getScreenFormat() const override { return _screenFormat; }
 	virtual Common::List<Graphics::PixelFormat> getSupportedFormats() const override;
-#endif
 #if SDL_VERSION_ATLEAST(2, 0, 0)
 	virtual const OSystem::GraphicsMode *getSupportedStretchModes() const override;
 	virtual int getDefaultStretchMode() const override;

@@ -32,9 +32,7 @@
 #include "common/util.h"
 #include "common/file.h"
 #include "common/frac.h"
-#ifdef USE_RGB_COLOR
 #include "common/list.h"
-#endif
 #include "graphics/font.h"
 #include "graphics/fontman.h"
 #include "graphics/scaler.h"
@@ -580,6 +578,12 @@ void SurfaceSdlGraphicsManager::detectSupportedFormats() {
 
 	// Finally, we always supposed 8 bit palette graphics
 	_supportedFormats.push_back(Graphics::PixelFormat::createFormatCLUT8());
+}
+#else
+Common::List<Graphics::PixelFormat> SurfaceSdlGraphicsManager::getSupportedFormats() const {
+	Common::List<Graphics::PixelFormat> list;
+	list.push_back(Graphics::PixelFormat::createFormatCLUT8());
+	return list;
 }
 #endif
 

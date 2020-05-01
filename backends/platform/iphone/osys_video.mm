@@ -68,7 +68,6 @@ int OSystem_IPHONE::getGraphicsMode() const {
 	return _videoContext->graphicsMode;
 }
 
-#ifdef USE_RGB_COLOR
 Common::List<Graphics::PixelFormat> OSystem_IPHONE::getSupportedFormats() const {
 	Common::List<Graphics::PixelFormat> list;
 	// RGB565
@@ -77,7 +76,6 @@ Common::List<Graphics::PixelFormat> OSystem_IPHONE::getSupportedFormats() const 
 	list.push_back(Graphics::PixelFormat::createFormatCLUT8());
 	return list;
 }
-#endif
 
 void OSystem_IPHONE::initSize(uint width, uint height, const Graphics::PixelFormat *format) {
 	//printf("initSize(%u, %u, %p)\n", width, height, (const void *)format);

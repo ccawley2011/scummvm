@@ -111,8 +111,6 @@ void ModularGraphicsBackend::resetGraphicsScale() {
 	_graphicsManager->resetGraphicsScale();
 }
 
-#ifdef USE_RGB_COLOR
-
 Graphics::PixelFormat ModularGraphicsBackend::getScreenFormat() const {
 	return _graphicsManager->getScreenFormat();
 }
@@ -120,8 +118,6 @@ Graphics::PixelFormat ModularGraphicsBackend::getScreenFormat() const {
 Common::List<Graphics::PixelFormat> ModularGraphicsBackend::getSupportedFormats() const {
 	return _graphicsManager->getSupportedFormats();
 }
-
-#endif
 
 void ModularGraphicsBackend::initSize(uint w, uint h, const Graphics::PixelFormat *format ) {
 	_graphicsManager->initSize(w, h, format);

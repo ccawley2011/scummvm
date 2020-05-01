@@ -75,10 +75,9 @@ public:
 	int getDefaultGraphicsMode() const;
 	bool setGraphicsMode(int mode);
 	int getGraphicsMode() const;
-#ifdef USE_RGB_COLOR
+
 	virtual Graphics::PixelFormat getScreenFormat() const;
 	virtual Common::List<Graphics::PixelFormat> getSupportedFormats() const;
-#endif
 
 	// Screen size
 	void initSize(uint width, uint height, const Graphics::PixelFormat *format);

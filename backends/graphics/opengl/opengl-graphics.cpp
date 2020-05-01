@@ -187,14 +187,18 @@ int OpenGLGraphicsManager::getGraphicsMode() const {
 	return _currentState.graphicsMode;
 }
 
-#ifdef USE_RGB_COLOR
 Graphics::PixelFormat OpenGLGraphicsManager::getScreenFormat() const {
+#ifdef USE_RGB_COLOR
 	return _currentState.gameFormat;
+#else
+	return Graphics::PixelFormat::createFormatCLUT8();
+#endif
 }
 
 Common::List<Graphics::PixelFormat> OpenGLGraphicsManager::getSupportedFormats() const {
 	Common::List<Graphics::PixelFormat> formats;
 
+#ifdef USE_RGB_COLOR
 	// Our default mode is (memory layout wise) RGBA8888 which is a different
 	// logical layout depending on the endianness. We chose this mode because
 	// it is the only 32bit color mode we can safely assume to be present in
@@ -225,12 +229,12 @@ Common::List<Graphics::PixelFormat> OpenGLGraphicsManager::getSupportedFormats()
 #endif
 	// RGB555, this is used by SCUMM HE 16 bit games.
 	formats.push_back(Graphics::PixelFormat(2, 5, 5, 5, 0, 10, 5, 0, 0));
+#endif
 
 	formats.push_back(Graphics::PixelFormat::createFormatCLUT8());
 
 	return formats;
 }
-#endif
 
 namespace {
 const OSystem::GraphicsMode glStretchModes[] = {

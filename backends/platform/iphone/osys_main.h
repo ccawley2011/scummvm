@@ -134,10 +134,8 @@ public:
 	virtual int16 getHeight();
 	virtual int16 getWidth();
 
-#ifdef USE_RGB_COLOR
 	virtual Graphics::PixelFormat getScreenFormat() const { return _framebuffer.format; }
 	virtual Common::List<Graphics::PixelFormat> getSupportedFormats() const;
-#endif
 
 	virtual PaletteManager *getPaletteManager() { return this; }
 protected:

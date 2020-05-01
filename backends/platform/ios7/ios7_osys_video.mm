@@ -131,7 +131,6 @@ int OSystem_iOS7::getGraphicsMode() const {
 	return _videoContext->graphicsMode;
 }
 
-#ifdef USE_RGB_COLOR
 Common::List<Graphics::PixelFormat> OSystem_iOS7::getSupportedFormats() const {
 	Common::List<Graphics::PixelFormat> list;
 	// RGB565
@@ -140,7 +139,6 @@ Common::List<Graphics::PixelFormat> OSystem_iOS7::getSupportedFormats() const {
 	list.push_back(Graphics::PixelFormat::createFormatCLUT8());
 	return list;
 }
-#endif
 
 static inline void execute_on_main_thread(void (^block)(void)) {
 	if ([NSThread currentThread] == [NSThread mainThread]) {

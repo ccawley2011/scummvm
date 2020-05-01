@@ -32,9 +32,6 @@
 #include "common/translation.h"
 #include "common/util.h"
 #include "common/frac.h"
-#ifdef USE_RGB_COLOR
-#include "common/list.h"
-#endif
 #include "graphics/font.h"
 #include "graphics/fontman.h"
 #include "graphics/scaler.h"

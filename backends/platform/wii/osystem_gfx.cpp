@@ -207,19 +207,23 @@ int OSystem_Wii::getGraphicsMode() const {
 	return _configGraphicsMode;
 }
 
-#ifdef USE_RGB_COLOR
 Graphics::PixelFormat OSystem_Wii::getScreenFormat() const {
+#ifdef USE_RGB_COLOR
 	return _pfGame;
+#else
+	return Graphics::PixelFormat::createFormatCLUT8();
+#endif
 }
 
 Common::List<Graphics::PixelFormat> OSystem_Wii::getSupportedFormats() const {
 	Common::List<Graphics::PixelFormat> res;
+#ifdef USE_RGB_COLOR
 	res.push_back(_pfRGB565);
+#endif
 	res.push_back(Graphics::PixelFormat::createFormatCLUT8());
 
 	return res;
 }
-#endif
 
 void OSystem_Wii::initSize(uint width, uint height,
 							const Graphics::PixelFormat *format) {
