@@ -737,9 +737,6 @@ protected:
 	ImagesMap _bitmaps;
 	AImagesMap _abitmaps;
 	Graphics::PixelFormat _overlayFormat;
-#ifdef USE_RGB_COLOR
-	Graphics::PixelFormat _cursorFormat;
-#endif
 
 	/** List of all the dirty screens that must be blitted to the overlay. */
 	Common::List<Common::Rect> _dirtyScreen;

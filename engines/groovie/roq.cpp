@@ -33,13 +33,10 @@
 #include "common/substream.h"
 #include "common/textconsole.h"
 
+#include "graphics/conversion.h"
 #include "graphics/palette.h"
 #include "image/jpeg.h"
 
-#ifdef USE_RGB_COLOR
-// Required for the YUV to RGB conversion
-#include "graphics/conversion.h"
-#endif
 #include "audio/audiostream.h"
 #include "audio/mixer.h"
 #include "audio/decoders/raw.h"

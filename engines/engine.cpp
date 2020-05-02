@@ -318,14 +318,12 @@ void initGraphics(int width, int height, const Graphics::PixelFormat *format) {
 	}
 
 	// Just show warnings then these occur:
-#ifdef USE_RGB_COLOR
 	if (gfxError & OSystem::kTransactionFormatNotSupported) {
 		Common::String message = _("Could not initialize color format.");
 
 		GUI::MessageDialog dialog(message);
 		dialog.runModal();
 	}
-#endif
 
 	if (gfxError & OSystem::kTransactionModeSwitchFailed) {
 		Common::String message;
@@ -368,14 +366,12 @@ void initGraphics(int width, int height, const Graphics::PixelFormat *format) {
  *					or PixelFormat::createFormatCLUT8() if no matching formats were found.
  */
 inline Graphics::PixelFormat findCompatibleFormat(const Common::List<Graphics::PixelFormat> &backend, const Common::List<Graphics::PixelFormat> &frontend) {
-#ifdef USE_RGB_COLOR
 	for (Common::List<Graphics::PixelFormat>::const_iterator i = backend.begin(); i != backend.end(); ++i) {
 		for (Common::List<Graphics::PixelFormat>::const_iterator j = frontend.begin(); j != frontend.end(); ++j) {
 			if (*i == *j)
 				return *i;
 		}
 	}
-#endif
 	return Graphics::PixelFormat::createFormatCLUT8();
 }
 
