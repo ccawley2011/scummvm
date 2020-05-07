@@ -9,6 +9,7 @@ MODULE_OBJS := \
 	pcx.o \
 	pict.o \
 	png.o \
+	rosprite.o \
 	tga.o \
 	codecs/bmp_raw.o \
 	codecs/cdtoons.o \
