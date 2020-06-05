@@ -20,36 +20,19 @@
  *
  */
 
-#if defined(POSIX) || defined(__DS__)
-
-#define FORBIDDEN_SYMBOL_ALLOW_ALL
+#ifndef DEVOPTAB_FILESYSTEM_FACTORY_H
+#define DEVOPTAB_FILESYSTEM_FACTORY_H
 
 #include "backends/fs/posix-drives/posix-drives-fs-factory.h"
-#include "backends/fs/posix-drives/posix-drives-fs.h"
 
-#include <unistd.h>
-
-void DrivesPOSIXFilesystemFactory::addDrive(const Common::String &name) {
-	_config.drives.push_back(Common::normalizePath(name, '/'));
-}
-
-void DrivesPOSIXFilesystemFactory::configureBuffering(DrivePOSIXFilesystemNode::BufferingMode bufferingMode, uint32 bufferSize) {
-	_config.bufferingMode = bufferingMode;
-	_config.bufferSize = bufferSize;
-}
-
-AbstractFSNode *DrivesPOSIXFilesystemFactory::makeRootFileNode() const {
-	return new DrivePOSIXFilesystemNode(_config);
-}
-
-AbstractFSNode *DrivesPOSIXFilesystemFactory::makeCurrentDirectoryFileNode() const {
-	char buf[MAXPATHLEN];
-	return getcwd(buf, MAXPATHLEN) ? new DrivePOSIXFilesystemNode(buf, _config) : nullptr;
-}
-
-AbstractFSNode *DrivesPOSIXFilesystemFactory::makeFileNodePath(const Common::String &path) const {
-	assert(!path.empty());
-	return new DrivePOSIXFilesystemNode(path, _config);
-}
+/**
+ * A FilesystemFactory implementation for filesystems with a special
+ * top-level directory listing all registered devoptab devices but
+ * that otherwise implement the POSIX APIs.
+ */
+class DevoptabFilesystemFactory : public DrivesPOSIXFilesystemFactory {
+public:
+	DevoptabFilesystemFactory();
+};
 
 #endif

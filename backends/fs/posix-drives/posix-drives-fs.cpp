@@ -20,7 +20,7 @@
  *
  */
 
-#if defined(POSIX)
+#if defined(POSIX) || defined(__DS__)
 
 #define FORBIDDEN_SYMBOL_ALLOW_ALL
 
