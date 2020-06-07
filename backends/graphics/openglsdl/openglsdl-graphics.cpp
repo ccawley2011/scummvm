@@ -349,8 +349,8 @@ void OpenGLSdlGraphicsManager::handleResizeImpl(const int width, const int heigh
 	SdlGraphicsManager::handleResizeImpl(width, height, xdpi, ydpi);
 }
 
-bool OpenGLSdlGraphicsManager::saveScreenshot(const Common::String &filename) const {
-	return OpenGLGraphicsManager::saveScreenshot(filename);
+bool OpenGLSdlGraphicsManager::saveScreenshot(Common::WriteStream &out) const {
+	return OpenGLGraphicsManager::saveScreenshot(out);
 }
 
 bool OpenGLSdlGraphicsManager::setupMode(uint width, uint height) {

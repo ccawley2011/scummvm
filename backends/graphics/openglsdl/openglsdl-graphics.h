@@ -58,7 +58,7 @@ protected:
 
 	virtual void handleResizeImpl(const int width, const int height, const int xdpi, const int ydpi) override;
 
-	virtual bool saveScreenshot(const Common::String &filename) const override;
+	virtual bool saveScreenshot(Common::WriteStream &out) const override;
 
 	virtual int getGraphicsModeScale(int mode) const override { return 1; }
 

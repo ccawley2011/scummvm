@@ -46,7 +46,7 @@ public:
 	virtual void addSysArchivesToSearchSet(Common::SearchSet &s, int priority = 0);
 
 	//Screenshots
-	virtual Common::String getScreenshotsPath();
+	virtual Common::FSNode getScreenshotsPath();
 
 protected:
 	virtual Common::String getDefaultConfigFileName();

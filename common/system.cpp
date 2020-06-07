@@ -23,6 +23,7 @@
 #define FORBIDDEN_SYMBOL_EXCEPTION_exit
 
 #include "common/system.h"
+#include "common/config-manager.h"
 #include "common/events.h"
 #include "common/fs.h"
 #include "common/savefile.h"
@@ -216,6 +217,11 @@ Common::WriteStream *OSystem::createConfigWriteStream() {
 
 Common::String OSystem::getDefaultConfigFileName() {
 	return "scummvm.ini";
+}
+
+Common::FSNode OSystem::getScreenshotsPath() {
+	Common::String path = ConfMan.get("screenshotpath");
+	return Common::FSNode(path);
 }
 
 Common::String OSystem::getSystemLanguage() const {

@@ -236,11 +236,11 @@ Common::String OSystem_POSIX::getXdgUserDir(const char *name) {
 	return directoryPath;
 }
 
-Common::String OSystem_POSIX::getScreenshotsPath() {
+Common::FSNode OSystem_POSIX::getScreenshotsPath() {
 	// If the user has configured a screenshots path, use it
-	const Common::String path = OSystem_SDL::getScreenshotsPath();
+	Common::String path = ConfMan.get("screenshotpath");
 	if (!path.empty()) {
-		return path;
+		return Common::FSNode(path);
 	}
 
 	// Otherwise, the default screenshots path is the "ScummVM Screenshots"
@@ -248,7 +248,7 @@ Common::String OSystem_POSIX::getScreenshotsPath() {
 	// xdg-user-dirs spec: https://www.freedesktop.org/wiki/Software/xdg-user-dirs/
 	Common::String picturesPath = getXdgUserDir("PICTURES");
 	if (picturesPath.empty()) {
-		return "";
+		return Common::FSNode("");
 	}
 
 	if (!picturesPath.hasSuffix("/")) {
@@ -257,10 +257,10 @@ Common::String OSystem_POSIX::getScreenshotsPath() {
 
 	static const char *SCREENSHOTS_DIR_NAME = "ScummVM Screenshots";
 	if (!Posix::assureDirectoryExists(SCREENSHOTS_DIR_NAME, picturesPath.c_str())) {
-		return "";
+		return Common::FSNode("");
 	}
 
-	return picturesPath + SCREENSHOTS_DIR_NAME + "/";
+	return Common::FSNode(picturesPath + SCREENSHOTS_DIR_NAME);
 }
 
 void OSystem_POSIX::addSysArchivesToSearchSet(Common::SearchSet &s, int priority) {

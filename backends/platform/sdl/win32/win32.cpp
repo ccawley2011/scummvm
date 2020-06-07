@@ -220,12 +220,10 @@ Common::String OSystem_Win32::getSystemLanguage() const {
 	return OSystem_SDL::getSystemLanguage();
 }
 
-Common::String OSystem_Win32::getScreenshotsPath() {
+Common::FSNode OSystem_Win32::getScreenshotsPath() {
 	Common::String screenshotsPath = ConfMan.get("screenshotpath");
 	if (!screenshotsPath.empty()) {
-		if (!screenshotsPath.hasSuffix("\\") && !screenshotsPath.hasSuffix("/"))
-			screenshotsPath += "\\";
-		return screenshotsPath;
+		return Common::FSNode(screenshotsPath);
 	}
 
 	// Use the My Pictures folder.
@@ -233,7 +231,7 @@ Common::String OSystem_Win32::getScreenshotsPath() {
 
 	if (SHGetFolderPathFunc(NULL, CSIDL_MYPICTURES, NULL, SHGFP_TYPE_CURRENT, picturesPath) != S_OK) {
 		warning("Unable to access My Pictures directory");
-		return Common::String();
+		return Common::FSNode("");
 	}
 
 	screenshotsPath = Common::String(picturesPath) + "\\ScummVM Screenshots\\";
@@ -245,7 +243,7 @@ Common::String OSystem_Win32::getScreenshotsPath() {
 			error("Cannot create ScummVM Screenshots folder");
 	}
 
-	return screenshotsPath;
+	return Common::FSNode(screenshotsPath);
 }
 
 Common::String OSystem_Win32::getDefaultConfigFileName() {

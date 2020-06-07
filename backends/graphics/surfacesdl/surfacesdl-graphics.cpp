@@ -30,7 +30,6 @@
 #include "common/textconsole.h"
 #include "common/translation.h"
 #include "common/util.h"
-#include "common/file.h"
 #include "common/frac.h"
 #ifdef USE_RGB_COLOR
 #include "common/list.h"
@@ -1405,15 +1404,10 @@ void SurfaceSdlGraphicsManager::internUpdateScreen() {
 	_cursorNeedsRedraw = false;
 }
 
-bool SurfaceSdlGraphicsManager::saveScreenshot(const Common::String &filename) const {
+bool SurfaceSdlGraphicsManager::saveScreenshot(Common::WriteStream &out) const {
 	assert(_hwScreen != NULL);
 
 	Common::StackLock lock(_graphicsMutex);
-
-	Common::DumpFile out;
-	if (!out.open(filename)) {
-		return false;
-	}
 
 	int result = SDL_LockSurface(_hwScreen);
 	if (result < 0) {

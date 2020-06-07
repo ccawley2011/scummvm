@@ -38,7 +38,7 @@ public:
 
 	virtual void addSysArchivesToSearchSet(Common::SearchSet &s, int priority = 0) override;
 
-	Common::String getScreenshotsPath() override;
+	Common::FSNode getScreenshotsPath() override;
 
 protected:
 	virtual Common::String getDefaultConfigFileName() override;

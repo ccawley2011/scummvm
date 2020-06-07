@@ -87,9 +87,6 @@ public:
 	virtual Common::TimerManager *getTimerManager() override;
 	virtual Common::SaveFileManager *getSavefileManager() override;
 
-	//Screenshots
-	virtual Common::String getScreenshotsPath();
-
 protected:
 	bool _inited;
 	bool _initedSDL;

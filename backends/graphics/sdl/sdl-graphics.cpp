@@ -28,6 +28,7 @@
 #include "backends/keymapper/keymap.h"
 #include "common/config-manager.h"
 #include "common/fs.h"
+#include "common/stream.h"
 #include "common/textconsole.h"
 #include "common/translation.h"
 #include "graphics/scaler/aspect.h"
@@ -282,12 +283,7 @@ bool SdlGraphicsManager::createOrUpdateWindow(int width, int height, const Uint3
 #endif
 
 void SdlGraphicsManager::saveScreenshot() {
-	Common::String filename;
-
-	Common::String screenshotsPath;
-	OSystem_SDL *sdl_g_system = dynamic_cast<OSystem_SDL*>(g_system);
-	if (sdl_g_system)
-		screenshotsPath = sdl_g_system->getScreenshotsPath();
+	Common::FSNode screenshotsPath = g_system->getScreenshotsPath();
 
 	// Use the name of the running target as a base for screenshot file names
 	Common::String currentTarget = ConfMan.getActiveDomainName();
@@ -298,27 +294,25 @@ void SdlGraphicsManager::saveScreenshot() {
 	const char *extension = "bmp";
 #endif
 
+	Common::FSNode file;
+	Common::String filename;
 	for (int n = 0;; n++) {
 		filename = Common::String::format("scummvm%s%s-%05d.%s", currentTarget.empty() ? "" : "-",
 		                                  currentTarget.c_str(), n, extension);
 
-		Common::FSNode file = Common::FSNode(screenshotsPath + filename);
+		file = screenshotsPath.getChild(filename);
 		if (!file.exists()) {
 			break;
 		}
 	}
 
-	if (saveScreenshot(screenshotsPath + filename)) {
-		if (screenshotsPath.empty())
-			debug("Saved screenshot '%s' in current directory", filename.c_str());
-		else
-			debug("Saved screenshot '%s' in directory '%s'", filename.c_str(), screenshotsPath.c_str());
+	Common::WriteStream *out = file.createWriteStream();
+	if (saveScreenshot(*out)) {
+		debug("Saved screenshot '%s' in directory '%s'", filename.c_str(), screenshotsPath.getPath().c_str());
 	} else {
-		if (screenshotsPath.empty())
-			warning("Could not save screenshot in current directory");
-		else
-			warning("Could not save screenshot in directory '%s'", screenshotsPath.c_str());
+		warning("Could not save screenshot in directory '%s'", screenshotsPath.getPath().c_str());
 	}
+	delete out;
 }
 
 bool SdlGraphicsManager::notifyEvent(const Common::Event &event) {

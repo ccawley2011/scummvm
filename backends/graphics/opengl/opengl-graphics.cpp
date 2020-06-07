@@ -32,7 +32,6 @@
 #include "common/textconsole.h"
 #include "common/translation.h"
 #include "common/algorithm.h"
-#include "common/file.h"
 #include "gui/debugger.h"
 #include "engines/engine.h"
 #ifdef USE_OSD
@@ -1304,7 +1303,7 @@ const Graphics::Font *OpenGLGraphicsManager::getFontOSD() const {
 }
 #endif
 
-bool OpenGLGraphicsManager::saveScreenshot(const Common::String &filename) const {
+bool OpenGLGraphicsManager::saveScreenshot(Common::WriteStream &out) const {
 	const uint width  = _windowWidth;
 	const uint height = _windowHeight;
 
@@ -1316,11 +1315,6 @@ bool OpenGLGraphicsManager::saveScreenshot(const Common::String &filename) const
 	// GL_PACK_ALIGNMENT is 4, so this line padding is required for PNG too
 	const uint linePaddingSize = 0;
 	const uint lineSize        = width * 4 + linePaddingSize;
-
-	Common::DumpFile out;
-	if (!out.open(filename)) {
-		return false;
-	}
 
 	Common::Array<uint8> pixels;
 	pixels.resize(lineSize * height);

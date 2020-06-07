@@ -25,6 +25,7 @@
 
 #include "common/scummsys.h"
 #include "common/noncopyable.h"
+#include "common/fs.h" // For OSystem::getScreenshotsPath()
 #include "common/array.h" // For OSystem::getGlobalKeymaps()
 #include "common/list.h" // For OSystem::getSupportedFormats()
 #include "graphics/pixelformat.h"
@@ -1415,6 +1416,11 @@ public:
 	 * Note that not all ports may use this.
 	 */
 	virtual Common::String getDefaultConfigFileName();
+
+	/**
+	 * Get the default FSNode where screenshots will be saved.
+	 */
+	virtual Common::FSNode getScreenshotsPath();
 
 	/**
 	 * Logs a given message.

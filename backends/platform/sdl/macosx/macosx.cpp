@@ -231,13 +231,11 @@ Common::String OSystem_MacOSX::getDefaultLogFileName() {
 	return Common::String(prefix) + "/Library/Logs/scummvm.log";
 }
 
-Common::String OSystem_MacOSX::getScreenshotsPath() {
+Common::FSNode OSystem_MacOSX::getScreenshotsPath() {
 	Common::String path = ConfMan.get("screenshotpath");
 	if (path.empty())
 		path = getDesktopPathMacOSX();
-	if (!path.empty() && !path.hasSuffix("/"))
-		path += "/";
-	return path;
+	return Common::FSNode(path);
 }
 
 AudioCDManager *OSystem_MacOSX::createAudioCDManager() {

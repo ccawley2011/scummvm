@@ -259,10 +259,10 @@ protected:
 	/**
 	 * Saves a screenshot of the entire window, excluding window decorations.
 	 *
-	 * @param filename The output filename.
+	 * @param out The output stream to write to
 	 * @return true on success, false otherwise
 	 */
-	bool saveScreenshot(const Common::String &filename) const;
+	bool saveScreenshot(Common::WriteStream &out) const;
 
 private:
 	//
