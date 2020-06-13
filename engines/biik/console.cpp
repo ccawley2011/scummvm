@@ -136,7 +136,7 @@ bool Console::Cmd_dumpScript(int argc, const char** argv) {
 		return true;
 	}
 
-	dumpFile.writeStream(stream);
+	dumpFile.writeStream(compressedStream);
 	dumpFile.flush();
 	dumpFile.close();
 

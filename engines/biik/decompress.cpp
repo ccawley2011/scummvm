@@ -116,7 +116,7 @@ uint32 DecompressorLZW::decode(Common::SeekableReadStream *stream, byte *out, ui
 
 			for (int i = j; i > 0; i--) {
 				out[size++] = temp[i-1];
-				if (size > outsize)
+				if (size >= outsize)
 					return size;
 			}
 		}
