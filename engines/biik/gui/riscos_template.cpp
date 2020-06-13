@@ -37,8 +37,6 @@ Template::~Template() {
 }
 
 void Template::destroy() {
-	memset(&_windowDef, 0, sizeof(WindowDef));
-	_iconDefs.clear();
 	_index.clear();
 	_id = -1;
 }
@@ -79,10 +77,7 @@ bool Template::open(Common::SeekableReadStream *stream, Common::String name) {
 	}
 
 	stream->seek(_index[_id].offset);
-	loadWindowDef(stream);
-
-	for (uint32 i = 0; i < _windowDef.numIcons; i++)
-		loadIconDef(stream);
+	_windowDef = loadWindowDef(stream);
 
 	return true;
 }
@@ -104,37 +99,44 @@ bool Template::loadIndex(Common::SeekableReadStream *stream) {
 	return true;
 }
 
-void Template::loadWindowDef(Common::SeekableReadStream *stream) {
-	_windowDef.minx = stream->readUint32LE();
-	_windowDef.miny = stream->readUint32LE();
-	_windowDef.maxx = stream->readUint32LE();
-	_windowDef.maxy = stream->readUint32LE();
-	_windowDef.scrollx = stream->readUint32LE();
-	_windowDef.scrolly = stream->readUint32LE();
-	_windowDef.handleBehind = stream->readUint32LE();
-	_windowDef.windowFlags = stream->readUint32LE();
-	_windowDef.titleFgColour = stream->readByte();
-	_windowDef.titleBgColour = stream->readByte();
-	_windowDef.workAreaFgColour = stream->readByte();
-	_windowDef.workAreaBgColour = stream->readByte();
-	_windowDef.scrollOuterColour = stream->readByte();
-	_windowDef.scrollInnerColour = stream->readByte();
-	_windowDef.titleFocusBgColour = stream->readByte();
-	_windowDef.reserved = stream->readByte();
-	_windowDef.workAreaMinX = stream->readUint32LE();
-	_windowDef.workAreaMinY = stream->readUint32LE();
-	_windowDef.workAreaMaxX = stream->readUint32LE();
-	_windowDef.workAreaMaxY = stream->readUint32LE();
-	_windowDef.titleFlags = stream->readUint32LE();
-	_windowDef.workAreaFlags = stream->readUint32LE();
-	_windowDef.spriteAreaControlBlock = stream->readUint32LE();
-	_windowDef.minWidth = stream->readUint16LE();
-	_windowDef.minHeight = stream->readUint16LE();
-	_windowDef.titleData = readIndirectedData(stream, _windowDef.titleFlags);
-	_windowDef.numIcons = stream->readUint32LE();
+Template::WindowDef Template::loadWindowDef(Common::SeekableReadStream *stream) {
+	WindowDef windowDef;
+
+	windowDef.minx = stream->readUint32LE();
+	windowDef.miny = stream->readUint32LE();
+	windowDef.maxx = stream->readUint32LE();
+	windowDef.maxy = stream->readUint32LE();
+	windowDef.scrollx = stream->readUint32LE();
+	windowDef.scrolly = stream->readUint32LE();
+	windowDef.handleBehind = stream->readUint32LE();
+	windowDef.windowFlags = stream->readUint32LE();
+	windowDef.titleFgColour = stream->readByte();
+	windowDef.titleBgColour = stream->readByte();
+	windowDef.workAreaFgColour = stream->readByte();
+	windowDef.workAreaBgColour = stream->readByte();
+	windowDef.scrollOuterColour = stream->readByte();
+	windowDef.scrollInnerColour = stream->readByte();
+	windowDef.titleFocusBgColour = stream->readByte();
+	windowDef.reserved = stream->readByte();
+	windowDef.workAreaMinX = stream->readUint32LE();
+	windowDef.workAreaMinY = stream->readUint32LE();
+	windowDef.workAreaMaxX = stream->readUint32LE();
+	windowDef.workAreaMaxY = stream->readUint32LE();
+	windowDef.titleFlags = stream->readUint32LE();
+	windowDef.workAreaFlags = stream->readUint32LE();
+	windowDef.spriteAreaControlBlock = stream->readUint32LE();
+	windowDef.minWidth = stream->readUint16LE();
+	windowDef.minHeight = stream->readUint16LE();
+	windowDef.titleData = readIndirectedData(stream, _windowDef.titleFlags);
+	windowDef.numIcons = stream->readUint32LE();
+
+	for (uint32 i = 0; i < windowDef.numIcons; i++)
+		windowDef.iconDefs.push_back(loadIconDef(stream));
+
+	return windowDef;
 }
 
-void Template::loadIconDef(Common::SeekableReadStream *stream) {
+Template::IconDef Template::loadIconDef(Common::SeekableReadStream *stream) {
 	IconDef iconDef;
 
 	iconDef.minx = stream->readUint32LE();
@@ -144,7 +146,7 @@ void Template::loadIconDef(Common::SeekableReadStream *stream) {
 	iconDef.flags = stream->readUint32LE();
 	iconDef.iconData = readIndirectedData(stream, iconDef.flags);
 
-	_iconDefs.push_back(iconDef);
+	return iconDef;
 }
 
 Template::IndirectedData Template::readIndirectedData(Common::SeekableReadStream *stream, uint32 flags) {
