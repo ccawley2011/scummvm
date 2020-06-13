@@ -48,6 +48,38 @@ public:
 		Common::String valid;
 	};
 
+	enum IconFlags {
+		ICON_CONTAINS_TEXT        = 1 << 0,
+		ICON_CONTAINS_SPRITE      = 1 << 1,
+		ICON_HAS_BORDER           = 1 << 2,
+		ICON_CENTRED_HORIZONTALLY = 1 << 3,
+		ICON_CENTRED_VERTICALLY   = 1 << 4,
+		ICON_HAS_BACKGROUND       = 1 << 5,
+		ICON_ANTI_ALIASED_FONT    = 1 << 6,
+		ICON_MANUAL_REDRAW        = 1 << 7,
+		ICON_IS_INDIRECTED        = 1 << 8,
+		ICON_RIGHT_ALIGN          = 1 << 9,
+
+		ICON_IS_SELECTED          = 1 << 21,
+		ICON_IS_SHADED            = 1 << 22,
+		ICON_IS_DELETED           = 1 << 23,
+
+		ICON_FOREGROUND_COLOUR    = 0xF << 24,
+		ICON_BACKGROUND_COLOUR    = 0xF << 28,
+
+		ICON_FONT_HANDLE          = 0xFF << 24
+	};
+
+	struct IconDef {
+		Common::Rect rect;
+		uint32 minx;
+		uint32 miny;
+		uint32 maxx;
+		uint32 maxy;
+		uint32 flags;
+		IndirectedData iconData;
+	};
+
 	struct WindowDef {
 		uint32 minx;
 		uint32 miny;
@@ -76,46 +108,8 @@ public:
 		uint16 minHeight;
 		IndirectedData titleData;
 		uint32 numIcons;
-	};
 
-	enum IconFlags {
-		ICON_CONTAINS_TEXT        = 1 << 0,
-		ICON_CONTAINS_SPRITE      = 1 << 1,
-		ICON_HAS_BORDER           = 1 << 2,
-		ICON_CENTRED_HORIZONTALLY = 1 << 3,
-		ICON_CENTRED_VERTICALLY   = 1 << 4,
-		ICON_HAS_BACKGROUND       = 1 << 5,
-		ICON_ANTI_ALIASED_FONT    = 1 << 6,
-		ICON_MANUAL_REDRAW        = 1 << 7,
-		ICON_IS_INDIRECTED        = 1 << 8,
-		ICON_RIGHT_ALIGN          = 1 << 9,
-
-		ICON_IS_SELECTED          = 1 << 21,
-		ICON_IS_SHADED            = 1 << 22,
-		ICON_IS_DELETED           = 1 << 23,
-
-		ICON_FOREGROUND_COLOUR    = 0xF << 24,
-		ICON_BACKGROUND_COLOUR    = 0xF << 28,
-
-		ICON_FONT_HANDLE          = 0xFF << 24
-	};
-
-
-	struct IconDef {
-		Common::Rect rect;
-		uint32 minx;
-		uint32 miny;
-		uint32 maxx;
-		uint32 maxy;
-		uint32 flags;
-		IndirectedData iconData;
-	};
-
-	struct Index {
-		uint32 offset;
-		uint32 size;
-		uint32 entryType;
-		char identifier[12];
+		Common::Array<IconDef> iconDefs;
 	};
 
 	Template();
@@ -124,18 +118,24 @@ public:
 	void destroy();
 	bool open(const Common::String &fileName, Common::String name);
 	bool open(Common::SeekableReadStream *stream, Common::String name);
-	const WindowDef *getWindowDef() const { return &_windowDef; }
-	const Common::Array<IconDef> &getIconDefs() const { return _iconDefs; }
+	const WindowDef &getWindowDef() const { return _windowDef; }
 
 private:
+	struct Index {
+		uint32 offset;
+		uint32 size;
+		uint32 entryType;
+		char identifier[12];
+	};
+
 	int _id;
 	Common::Array<Index> _index;
 	WindowDef _windowDef;
-	Common::Array<IconDef> _iconDefs;
 
 	bool loadIndex(Common::SeekableReadStream *stream);
-	void loadWindowDef(Common::SeekableReadStream *stream);
-	void loadIconDef(Common::SeekableReadStream *stream);
+	WindowDef loadWindowDef(Common::SeekableReadStream *stream);
+	IconDef loadIconDef(Common::SeekableReadStream *stream);
+
 	IndirectedData readIndirectedData(Common::SeekableReadStream *stream, uint32 flags);
 	Common::String readString(Common::SeekableReadStream *stream, int32 offset, size_t bufLength);
 	Common::String readString(Common::SeekableReadStream *stream, int32 offset);

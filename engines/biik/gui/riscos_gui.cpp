@@ -64,27 +64,27 @@ Common::Error RISCOSGUI::init() {
 
 	_cursorMan = new RISCOSCursorManager(_spriteArea);
 
-	Template sketchpad;
+	Template templates;
 	const char *templateName = _vm->getFileName(GAME_TEMPLATEFILE);
-	if (!templateName || !sketchpad.open(templateName, "sketchpad")) {
+	if (!templateName || !templates.open(templateName, "sketchpad")) {
 		warning("Failed to load file '%s'", templateName);
 		return Common::kNoGameDataFoundError;
 	}
 
-	const Template::WindowDef *windowDef = sketchpad.getWindowDef();
-	int width = (windowDef->workAreaMaxX - windowDef->workAreaMinX) / 2;
-	int height = (windowDef->workAreaMaxY - windowDef->workAreaMinY) / 2;
+	const Template::WindowDef &sketchpad = templates.getWindowDef();
+	int width = (sketchpad.workAreaMaxX - sketchpad.workAreaMinX) / 2;
+	int height = (sketchpad.workAreaMaxY - sketchpad.workAreaMinY) / 2;
 
 	// The width and height usually ends up as 638 * 438
 	initGraphics(width, height);
 	_screen = new Graphics::Screen();
 	_screen->setPalette(Image::riscos_palette_256, 0, 256);
-	_screen->clear(Image::riscos_palette_16_to_256[windowDef->workAreaBgColour]);
+	_screen->clear(Image::riscos_palette_16_to_256[sketchpad.workAreaBgColour]);
 
 	const Graphics::Font *font = FontMan.getFontByUsage(Graphics::FontManager::kBigGUIFont);
 
 	int id = 0;
-	for (Common::Array<Template::IconDef>::const_iterator it = sketchpad.getIconDefs().begin(); it != sketchpad.getIconDefs().end(); it++) {
+	for (Common::Array<Template::IconDef>::const_iterator it = sketchpad.iconDefs.begin(); it != sketchpad.iconDefs.end(); it++) {
 
 		Common::Rect rect(it->minx / 2, height - (it->maxy / 2), it->maxx / 2, height - (it->miny / 2));
 		Element *element = new Element(*_screen, rect, id++);
