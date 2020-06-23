@@ -23,6 +23,7 @@
 #include <FApp.h>
 #include <FSysSystemTime.h>
 
+#include "common/osd_message_queue.h"
 #include "common/translation.h"
 #include "base/main.h"
 
@@ -47,7 +48,6 @@ using namespace Tizen::Ui::Controls;
 //
 TizenAppForm::TizenAppForm() :
 	_gestureMode(false),
-	_osdMessage(NULL),
 	_gameThread(NULL),
 	_eventQueueLock(NULL),
 	_state(kInitState),
@@ -200,14 +200,6 @@ bool TizenAppForm::pollEvent(Common::Event &event) {
 		event = _eventQueue.pop();
 		result = true;
 	}
-	if (_osdMessage) {
-		TizenSystem *system = (TizenSystem *)g_system;
-		TizenGraphicsManager *graphics = system->getGraphics();
-		if (graphics) {
-			graphics->displayMessageOnOSD(_osdMessage);
-			_osdMessage = NULL;
-		}
-	}
 	_eventQueueLock->Release();
 
 	return result;
@@ -259,29 +251,21 @@ void TizenAppForm::pushKey(Common::KeyCode keycode) {
 void TizenAppForm::setButtonShortcut() {
 	switch (_buttonState) {
 	case kLeftButton:
-		setMessage(_s("Right Click Once"));
+		OSDQueue.addMessage(_s("Right Click Once"));
 		_buttonState = kRightButtonOnce;
 		break;
 	case kRightButtonOnce:
-		setMessage(_s("Right Click"));
+		OSDQueue.addMessage(_s("Right Click"));
 		_buttonState = kRightButton;
 		break;
 	case kRightButton:
-		setMessage(_s("Move Only"));
+		OSDQueue.addMessage(_s("Move Only"));
 		_buttonState = kMoveOnly;
 		break;
 	case kMoveOnly:
-		setMessage(_s("Left Click"));
+		OSDQueue.addMessage(_s("Left Click"));
 		_buttonState = kLeftButton;
 		break;
-	}
-}
-
-void TizenAppForm::setMessage(const char *message) {
-	if (_eventQueueLock) {
-		_eventQueueLock->Acquire();
-		_osdMessage = message;
-		_eventQueueLock->Release();
 	}
 }
 
@@ -290,22 +274,22 @@ void TizenAppForm::setShortcut() {
 	// cycle to the next shortcut
 	switch (_shortcut) {
 	case kControlMouse:
-		setMessage(_s("Escape Key"));
+		OSDQueue.addMessage(_s("Escape Key"));
 		_shortcut = kEscapeKey;
 		break;
 
 	case kEscapeKey:
-		setMessage(_s("Game Menu"));
+		OSDQueue.addMessage(_s("Game Menu"));
 		_shortcut = kGameMenu;
 		break;
 
 	case kGameMenu:
-		setMessage(_s("Show Keypad"));
+		OSDQueue.addMessage(_s("Show Keypad"));
 		_shortcut = kShowKeypad;
 		break;
 
 	case kShowKeypad:
-		setMessage(_s("Control Mouse"));
+		OSDQueue.addMessage(_s("Control Mouse"));
 		_shortcut = kControlMouse;
 		break;
 	}

@@ -41,6 +41,7 @@
 #include "common/error.h"
 #include "common/list.h"
 #include "common/memstream.h"
+#include "common/osd_message_queue.h"
 #include "common/savefile.h"
 #include "common/scummsys.h"
 #include "common/taskbar.h"
@@ -509,7 +510,7 @@ void Engine::saveAutosaveIfEnabled() {
 
 		if (saveFlag && saveGameState(getAutosaveSlot(), _("Autosave"), true).getCode() != Common::kNoError) {
 			// Couldn't autosave at the designated time
-			g_system->displayMessageOnOSD(_("Error occurred making autosave"));
+			OSDQueue.addMessage(_("Error occurred making autosave"));
 			saveFlag = false;
 		}
 
@@ -741,7 +742,7 @@ bool Engine::canSaveGameStateCurrently() {
 
 bool Engine::loadGameDialog() {
 	if (!canLoadGameStateCurrently()) {
-		g_system->displayMessageOnOSD(_("Loading game is currently unavailable"));
+		OSDQueue.addMessage(_("Loading game is currently unavailable"));
 		return false;
 	}
 
@@ -770,7 +771,7 @@ bool Engine::loadGameDialog() {
 
 bool Engine::saveGameDialog() {
 	if (!canSaveGameStateCurrently()) {
-		g_system->displayMessageOnOSD(_("Saving game is currently unavailable"));
+		OSDQueue.addMessage(_("Saving game is currently unavailable"));
 		return false;
 	}
 

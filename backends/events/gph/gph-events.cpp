@@ -34,6 +34,7 @@
 
 #include "common/util.h"
 #include "common/events.h"
+#include "common/osd_message_queue.h"
 #include "common/translation.h"
 
 #define JOY_DEADZONE 2200
@@ -420,11 +421,11 @@ bool GPHEventSource::handleJoyButtonDown(SDL_Event &ev, Common::Event &event) {
 		if (_buttonStateL == true) {
 			ToggleTapMode();
 			if (_tapmodeLevel == TAPMODE_LEFT) {
-				g_system->displayMessageOnOSD(_("Touchscreen 'Tap Mode' - Left Click"));
+				OSDQueue.addMessage(_("Touchscreen 'Tap Mode' - Left Click"));
 			} else if (_tapmodeLevel == TAPMODE_RIGHT) {
-				g_system->displayMessageOnOSD(_("Touchscreen 'Tap Mode' - Right Click"));
+				OSDQueue.addMessage(_("Touchscreen 'Tap Mode' - Right Click"));
 			} else if (_tapmodeLevel == TAPMODE_HOVER) {
-				g_system->displayMessageOnOSD(_("Touchscreen 'Tap Mode' - Hover (No Click)"));
+				OSDQueue.addMessage(_("Touchscreen 'Tap Mode' - Hover (No Click)"));
 			}
 		} else {
 			event.kbd.keycode = Common::KEYCODE_SPACE;
@@ -444,17 +445,17 @@ bool GPHEventSource::handleJoyButtonDown(SDL_Event &ev, Common::Event &event) {
 	case BUTTON_VOLUP:
 		WIZ_HW::mixerMoveVolume(2);
 		if (WIZ_HW::volumeLevel == 100) {
-			g_system->displayMessageOnOSD(_("Maximum Volume"));
+			OSDQueue.addMessage(_("Maximum Volume"));
 		} else {
-			g_system->displayMessageOnOSD(_("Increasing Volume"));
+			OSDQueue.addMessage(_("Increasing Volume"));
 		}
 		break;
 	case BUTTON_VOLDOWN:
 		WIZ_HW::mixerMoveVolume(1);
 		if (WIZ_HW::volumeLevel == 0) {
-			g_system->displayMessageOnOSD(_("Minimal Volume"));
+			OSDQueue.addMessage(_("Minimal Volume"));
 		} else {
-			g_system->displayMessageOnOSD(_("Decreasing Volume"));
+			OSDQueue.addMessage(_("Decreasing Volume"));
 		}
 		break;
 	case BUTTON_HOLD:
@@ -463,11 +464,11 @@ bool GPHEventSource::handleJoyButtonDown(SDL_Event &ev, Common::Event &event) {
 	case BUTTON_HELP2:
 		ToggleTapMode();
 		if (_tapmodeLevel == TAPMODE_LEFT) {
-			g_system->displayMessageOnOSD(_("Touchscreen 'Tap Mode' - Left Click"));
+			OSDQueue.addMessage(_("Touchscreen 'Tap Mode' - Left Click"));
 		} else if (_tapmodeLevel == TAPMODE_RIGHT) {
-			g_system->displayMessageOnOSD(_("Touchscreen 'Tap Mode' - Right Click"));
+			OSDQueue.addMessage(_("Touchscreen 'Tap Mode' - Right Click"));
 		} else if (_tapmodeLevel == TAPMODE_HOVER) {
-			g_system->displayMessageOnOSD(_("Touchscreen 'Tap Mode' - Hover (No Click)"));
+			OSDQueue.addMessage(_("Touchscreen 'Tap Mode' - Hover (No Click)"));
 		}
 		break;
 	}

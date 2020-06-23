@@ -27,6 +27,7 @@
 #include "backends/events/sdl/sdl-events.h"
 #include "common/config-manager.h"
 #include "common/mutex.h"
+#include "common/osd_message_queue.h"
 #include "common/textconsole.h"
 #include "common/translation.h"
 #include "common/util.h"
@@ -2472,7 +2473,7 @@ void SurfaceSdlGraphicsManager::handleScalerHotkeys(int scalefactor, int scalerT
 				newScalerName,
 				_videoMode.screenWidth, _videoMode.screenHeight,
 				_hwScreen->w, _hwScreen->h);
-			displayMessageOnOSD(message.c_str());
+			OSDQueue.addMessage(message.c_str());
 		}
 #endif
 
@@ -2512,7 +2513,7 @@ bool SurfaceSdlGraphicsManager::notifyEvent(const Common::Event &event) {
 			                                 _videoMode.screenWidth, _videoMode.screenHeight,
 			                                 _hwScreen->w, _hwScreen->h
 			);
-		displayMessageOnOSD(message.c_str());
+		OSDQueue.addMessage(message.c_str());
 #endif
 		internUpdateScreen();
 		return true;
@@ -2525,9 +2526,9 @@ bool SurfaceSdlGraphicsManager::notifyEvent(const Common::Event &event) {
 		endGFXTransaction();
 #ifdef USE_OSD
 		if (getFeatureState(OSystem::kFeatureFilteringMode)) {
-			displayMessageOnOSD(_("Filtering enabled"));
+			OSDQueue.addMessage(_("Filtering enabled"));
 		} else {
-			displayMessageOnOSD(_("Filtering disabled"));
+			OSDQueue.addMessage(_("Filtering disabled"));
 		}
 #endif
 		_forceRedraw = true;
@@ -2558,7 +2559,7 @@ bool SurfaceSdlGraphicsManager::notifyEvent(const Common::Event &event) {
 		                                                _("Stretch mode"),
 		                                                _(s_supportedStretchModes[index].description)
 		);
-		displayMessageOnOSD(message.c_str());
+		OSDQueue.addMessage(message.c_str());
 #endif
 		_forceRedraw = true;
 		internUpdateScreen();

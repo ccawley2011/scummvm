@@ -26,6 +26,7 @@
 
 #include "backends/events/maemosdl/maemosdl-events.h"
 #include "backends/platform/maemo/maemo.h"
+#include "common/osd_message_queue.h"
 #include "common/translation.h"
 
 namespace Maemo {
@@ -100,7 +101,7 @@ bool MaemoSdlEventSource::handleMouseButtonUp(SDL_Event &ev, Common::Event &even
 
 bool MaemoSdlEventSource::toggleClickMode() {
 	_clickEnabled = !_clickEnabled;
-	_graphicsManager->displayMessageOnOSD(
+	OSDQueue.addMessage(
 	  _clickEnabled ? _("Clicking Enabled") : _("Clicking Disabled"));
 
 	return _clickEnabled;

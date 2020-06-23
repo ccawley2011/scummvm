@@ -29,6 +29,7 @@
 #include "common/textconsole.h"
 #include "common/config-manager.h"
 #ifdef USE_OSD
+#include "common/osd_message_queue.h"
 #include "common/translation.h"
 #endif
 
@@ -584,7 +585,7 @@ bool OpenGLSdlGraphicsManager::notifyEvent(const Common::Event &event) {
 		int windowWidth = 0, windowHeight = 0;
 		getWindowSizeFromSdl(&windowWidth, &windowHeight);
 		const Common::String osdMsg = Common::String::format(_("Resolution: %dx%d"), windowWidth, windowHeight);
-		displayMessageOnOSD(osdMsg.c_str());
+		OSDQueue.addMessage(osdMsg.c_str());
 #endif
 
 		return true;
@@ -606,9 +607,9 @@ bool OpenGLSdlGraphicsManager::notifyEvent(const Common::Event &event) {
 
 #ifdef USE_OSD
 		if (getFeatureState(OSystem::kFeatureAspectRatioCorrection))
-			displayMessageOnOSD(_("Enabled aspect ratio correction"));
+			OSDQueue.addMessage(_("Enabled aspect ratio correction"));
 		else
-			displayMessageOnOSD(_("Disabled aspect ratio correction"));
+			OSDQueue.addMessage(_("Disabled aspect ratio correction"));
 #endif
 
 		return true;
@@ -629,9 +630,9 @@ bool OpenGLSdlGraphicsManager::notifyEvent(const Common::Event &event) {
 
 #ifdef USE_OSD
 		if (getFeatureState(OSystem::kFeatureFilteringMode)) {
-			displayMessageOnOSD(_("Filtering enabled"));
+			OSDQueue.addMessage(_("Filtering enabled"));
 		} else {
-			displayMessageOnOSD(_("Filtering disabled"));
+			OSDQueue.addMessage(_("Filtering disabled"));
 		}
 #endif
 
@@ -663,7 +664,7 @@ bool OpenGLSdlGraphicsManager::notifyEvent(const Common::Event &event) {
 			_("Stretch mode"),
 			_(stretchModes[index].description)
 			);
-		displayMessageOnOSD(message.c_str());
+		OSDQueue.addMessage(message.c_str());
 #endif
 
 		return true;

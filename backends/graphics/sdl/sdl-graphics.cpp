@@ -32,7 +32,7 @@
 #include "common/translation.h"
 #include "graphics/scaler/aspect.h"
 #ifdef USE_OSD
-#include "common/translation.h"
+#include "common/osd_message_queue.h"
 #endif
 
 SdlGraphicsManager::SdlGraphicsManager(SdlEventSource *source, SdlWindow *window)
@@ -353,9 +353,9 @@ void SdlGraphicsManager::toggleFullScreen() {
 	endGFXTransaction();
 #ifdef USE_OSD
 	if (getFeatureState(OSystem::kFeatureFullscreenMode))
-		displayMessageOnOSD(_("Fullscreen mode"));
+		OSDQueue.addMessage(_("Fullscreen mode"));
 	else
-		displayMessageOnOSD(_("Windowed mode"));
+		OSDQueue.addMessage(_("Windowed mode"));
 #endif
 }
 

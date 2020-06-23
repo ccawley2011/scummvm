@@ -100,7 +100,6 @@ private:
 	void pushEvent(Common::EventType type, const Point &currentPosition);
 	void terminate();
 	void setButtonShortcut();
-	void setMessage(const char *message);
 	void setShortcut();
 	void invokeShortcut();
 	int  getTouchCount();
@@ -108,7 +107,6 @@ private:
 
 	// event handling
 	bool _gestureMode;
-	const char *_osdMessage;
 	Tizen::Base::Runtime::Thread *_gameThread;
 	Tizen::Base::Runtime::Mutex *_eventQueueLock;
 	Common::Queue<Common::Event> _eventQueue;

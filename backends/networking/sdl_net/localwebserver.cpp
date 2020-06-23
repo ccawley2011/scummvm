@@ -25,6 +25,7 @@
 #include "backends/networking/sdl_net/localwebserver.h"
 #include "backends/networking/sdl_net/getclienthandler.h"
 #include "common/memstream.h"
+#include "common/osd_message_queue.h"
 #include "common/str.h"
 #include "common/system.h"
 #include "common/timer.h"
@@ -120,7 +121,7 @@ void LocalWebserver::start(bool useMinimalMode) {
 	if (!_serverSocket) {
 		warning("LocalWebserver: SDLNet_TCP_Open: %s", SDLNet_GetError());
 		stopTimer();
-		g_system->displayMessageOnOSD(_("Failed to start local webserver.\nCheck whether selected port is not used by another application and try again."));
+		OSDQueue.addMessage(_("Failed to start local webserver.\nCheck whether selected port is not used by another application and try again."));
 		_handleMutex.unlock();
 		return;
 	}

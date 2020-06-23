@@ -33,6 +33,7 @@
 #include "backends/platform/3ds/config.h"
 #include "backends/platform/3ds/options-dialog.h"
 #include "backends/timer/default/default-timer.h"
+#include "common/osd_message_queue.h"
 #include "common/translation.h"
 #include "engines/engine.h"
 #include "gui/gui-manager.h"
@@ -354,9 +355,9 @@ bool OSystem_3DS::pollEvent(Common::Event &event) {
 			updateSize();
 			if (savedInputMode == MODE_DRAG) {
 				inputMode = savedInputMode;
-				displayMessageOnOSD(_("Magnify Mode Off. Reactivating Drag Mode.\nReturning to Launcher..."));
+				OSDQueue.addMessage(_("Magnify Mode Off. Reactivating Drag Mode.\nReturning to Launcher..."));
 			} else {
-				displayMessageOnOSD(_("Magnify Mode Off. Returning to Launcher..."));
+				OSDQueue.addMessage(_("Magnify Mode Off. Returning to Launcher..."));
 			}
 		}
 	}
@@ -390,42 +391,42 @@ bool OSystem_3DS::notifyEvent(const Common::Event &event) {
 	case k3DSEventToggleDragMode:
 		if (inputMode == MODE_DRAG) {
 			inputMode = savedInputMode = MODE_HOVER;
-			displayMessageOnOSD(_("Hover Mode"));
+			OSDQueue.addMessage(_("Hover Mode"));
 		} else {
 			if (_magnifyMode == MODE_MAGOFF) {
 				inputMode = savedInputMode = MODE_DRAG;
-				displayMessageOnOSD(_("Drag Mode"));
+				OSDQueue.addMessage(_("Drag Mode"));
 			} else {
-				displayMessageOnOSD(_("Cannot Switch to Drag Mode while Magnify Mode is On"));
+				OSDQueue.addMessage(_("Cannot Switch to Drag Mode while Magnify Mode is On"));
 			}
 		}
 		return true;
 
 	case k3DSEventToggleMagnifyMode:
 		if (_overlayVisible) {
-			displayMessageOnOSD(_("Magnify Mode cannot be activated in menus."));
+			OSDQueue.addMessage(_("Magnify Mode cannot be activated in menus."));
 		} else if (config.screen != kScreenBoth && _magnifyMode == MODE_MAGOFF) {
 			// TODO: Automatically enable both screens while magnify mode is on
-			displayMessageOnOSD(_("Magnify Mode can only be activated\n when both screens are enabled."));
+			OSDQueue.addMessage(_("Magnify Mode can only be activated\n when both screens are enabled."));
 		} else if (_gameWidth <= 400 && _gameHeight <= 240) {
-			displayMessageOnOSD(_("In-game resolution too small to magnify."));
+			OSDQueue.addMessage(_("In-game resolution too small to magnify."));
 		} else {
 			if (_magnifyMode == MODE_MAGOFF) {
 				_magnifyMode = MODE_MAGON;
 				if (inputMode == MODE_DRAG) {
 					inputMode = MODE_HOVER;
-					displayMessageOnOSD(_("Magnify Mode On. Switching to Hover Mode..."));
+					OSDQueue.addMessage(_("Magnify Mode On. Switching to Hover Mode..."));
 				} else {
-					displayMessageOnOSD(_("Magnify Mode On"));
+					OSDQueue.addMessage(_("Magnify Mode On"));
 				}
 			} else {
 				_magnifyMode = MODE_MAGOFF;
 				updateSize();
 				if (savedInputMode == MODE_DRAG) {
 					inputMode = savedInputMode;
-					displayMessageOnOSD(_("Magnify Mode Off. Reactivating Drag Mode..."));
+					OSDQueue.addMessage(_("Magnify Mode Off. Reactivating Drag Mode..."));
 				} else {
-					displayMessageOnOSD(_("Magnify Mode Off"));
+					OSDQueue.addMessage(_("Magnify Mode Off"));
 				}
 			}
 		}

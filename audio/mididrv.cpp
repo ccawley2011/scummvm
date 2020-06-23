@@ -23,6 +23,7 @@
 #include "common/config-manager.h"
 #include "common/error.h"
 #include "common/gui_options.h"
+#include "common/osd_message_queue.h"
 #include "common/str.h"
 #include "common/system.h"
 #include "common/textconsole.h"
@@ -705,7 +706,7 @@ byte MidiDriver::correctInstrumentBank(byte outputChannel, byte patchId) {
 }
 
 void MidiDriver_BASE::midiDumpInit() {
-	g_system->displayMessageOnOSD(_("Starting MIDI dump"));
+	OSDQueue.addMessage(_("Starting MIDI dump"));
 	_midiDumpCache.clear();
 	_prevMillis = g_system->getMillis(true);
 }
@@ -793,7 +794,7 @@ void MidiDriver_BASE::midiDumpFinish() {
 	midiDumpFile->finalize();
 	midiDumpFile->close();
 	const char msg[] = "Ending MIDI dump, created 'dump.mid'";
-	g_system->displayMessageOnOSD(_(msg));		//TODO: why it doesn't appear?
+	OSDQueue.addMessage(_(msg));		//TODO: why it doesn't appear?
 	debug("%s", msg);
 }
 

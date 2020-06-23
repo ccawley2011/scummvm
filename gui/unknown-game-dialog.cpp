@@ -25,6 +25,7 @@
 #include "common/translation.h"
 #include "common/str-array.h"
 #include "common/system.h"
+#include "common/osd_message_queue.h"
 
 #include "gui/gui-manager.h"
 #include "gui/message.h"
@@ -152,10 +153,10 @@ void UnknownGameDialog::handleCommand(CommandSender *sender, uint32 cmd, uint32 
 		Common::String report = generateUnknownGameReport(_detectedGame, false, false);
 
 		if (g_system->setTextInClipboard(report)) {
-			g_system->displayMessageOnOSD(
+			OSDQueue.addMessage(
 					_("All necessary information about your game has been copied into the clipboard"));
 		} else {
-			g_system->displayMessageOnOSD(_("Copying the game information to the clipboard has failed!"));
+			OSDQueue.addMessage(_("Copying the game information to the clipboard has failed!"));
 		}
 		break;
 	}

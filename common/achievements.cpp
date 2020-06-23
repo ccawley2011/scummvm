@@ -23,6 +23,7 @@
 
 #include "common/achievements.h"
 #include "common/debug.h"
+#include "common/osd_message_queue.h"
 #include "common/system.h"
 #include "common/translation.h"
 
@@ -90,7 +91,7 @@ bool AchievementsManager::setAchievement(const String &id, const String &display
 	if (!displayedMessage.empty() && g_system) {
 		String msg;
 		msg = Common::String::format("%s\n%s", _("Achievement unlocked!"), displayedMessage.c_str());
-		g_system->displayMessageOnOSD(msg.c_str());
+		OSDQueue.addMessage(msg.c_str());
 	}
 
 	return true;

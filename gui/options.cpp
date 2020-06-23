@@ -56,6 +56,7 @@
 #ifdef USE_LIBCURL
 #include "backends/cloud/cloudmanager.h"
 #include "gui/downloaddialog.h"
+#include "common/osd_message_queue.h"
 #endif
 
 #ifdef USE_SDL_NET
@@ -2978,7 +2979,7 @@ void GlobalOptionsDialog::storageConnectionCallback(Networking::ErrorResponse re
 	Common::String message = "...";
 	if (!response.failed && !response.interrupted) {
 		// success
-		g_system->displayMessageOnOSD(_("Storage connected."));
+		OSDQueue.addMessage(_("Storage connected."));
 	} else {
 		message = _("Failed to connect storage.");
 		if (response.failed) {
@@ -3002,7 +3003,7 @@ void GlobalOptionsDialog::storageErrorCallback(Networking::ErrorResponse respons
 	debug(9, "%s", response.response.c_str());
 
 	if (!response.interrupted)
-		g_system->displayMessageOnOSD(_("Request failed.\nCheck your Internet connection."));
+		OSDQueue.addMessage(_("Request failed.\nCheck your Internet connection."));
 }
 #endif // USE_LIBCURL
 #endif // USE_CLOUD

@@ -32,6 +32,7 @@
 #include "backends/graphics/openpandora/op-graphics.h"
 #include "backends/platform/openpandora/op-sdl.h"
 
+#include "common/osd_message_queue.h"
 #include "common/translation.h"
 #include "common/util.h"
 #include "common/events.h"
@@ -162,13 +163,13 @@ bool OPEventSource::remapKey(SDL_Event &ev, Common::Event &event) {
 		case SDLK_PAGEUP:
 			ToggleTapMode();
 			if (_tapmodeLevel == TAPMODE_LEFT) {
-				g_system->displayMessageOnOSD(_("Touchscreen 'Tap Mode' - Left Click"));
+				OSDQueue.addMessage(_("Touchscreen 'Tap Mode' - Left Click"));
 			} else if (_tapmodeLevel == TAPMODE_RIGHT) {
-				g_system->displayMessageOnOSD(_("Touchscreen 'Tap Mode' - Right Click"));
+				OSDQueue.addMessage(_("Touchscreen 'Tap Mode' - Right Click"));
 			} else if (_tapmodeLevel == TAPMODE_HOVER) {
-				g_system->displayMessageOnOSD(_("Touchscreen 'Tap Mode' - Hover (No Click)"));
+				OSDQueue.addMessage(_("Touchscreen 'Tap Mode' - Hover (No Click)"));
 			} else if (_tapmodeLevel == TAPMODE_HOVER_DPAD) {
-				g_system->displayMessageOnOSD(_("Touchscreen 'Tap Mode' - Hover (DPad Clicks)"));
+				OSDQueue.addMessage(_("Touchscreen 'Tap Mode' - Hover (DPad Clicks)"));
 			}
 			break;
 		case SDLK_RSHIFT:
