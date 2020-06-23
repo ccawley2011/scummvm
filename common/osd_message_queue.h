@@ -67,6 +67,9 @@ private:
 	uint32 _lastUpdate;
 };
 
+/** Shortcut for accessing the OSD message queue. */
+#define OSDQueue Common::OSDMessageQueue::instance()
+
 } // End of namespace Common
 
 #endif

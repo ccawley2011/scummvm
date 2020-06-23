@@ -239,9 +239,9 @@ void Storage::savesSyncDefaultErrorCallback(Networking::ErrorResponse error) {
 	printErrorResponse(error);
 
 	if (error.interrupted)
-		Common::OSDMessageQueue::instance().addMessage(_("Saved games sync was cancelled."));
+		OSDQueue.addMessage(_("Saved games sync was cancelled."));
 	else
-		Common::OSDMessageQueue::instance().addMessage(_("Saved games sync failed.\nCheck your Internet connection."));
+		OSDQueue.addMessage(_("Saved games sync failed.\nCheck your Internet connection."));
 }
 
 ///// DownloadFolderRequest-related /////
@@ -349,7 +349,7 @@ void Storage::directoryDownloadedCallback(FileArrayResponse response) {
 	} else {
 		message = _("Download complete.");
 	}
-	Common::OSDMessageQueue::instance().addMessage(message.c_str());
+	OSDQueue.addMessage(message.c_str());
 }
 
 void Storage::directoryDownloadedErrorCallback(Networking::ErrorResponse error) {
@@ -357,7 +357,7 @@ void Storage::directoryDownloadedErrorCallback(Networking::ErrorResponse error) 
 	_downloadFolderRequest = nullptr;
 	_runningRequestsMutex.unlock();
 
-	Common::OSDMessageQueue::instance().addMessage(_("Download failed."));
+	OSDQueue.addMessage(_("Download failed."));
 }
 
 } // End of namespace Cloud

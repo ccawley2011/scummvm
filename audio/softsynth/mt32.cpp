@@ -77,7 +77,7 @@ public:
 		error("MT32emu: Init Error - Missing PCM ROM image");
 	}
 	void showLCDMessage(const char *message) {
-		Common::OSDMessageQueue::instance().addMessage(message);
+		OSDQueue.addMessage(message);
 	}
 
 	// Unused callbacks
