@@ -33,6 +33,7 @@ static const PlainGameDescriptor biikGames[] = {
 	{"betsi", "Betsi the Tudor Dog"},
 	{"mouse", "A Mouse in Holland"},
 	{"guardians", "Guardians of the Greenwood"},
+	{"puppy", "Patch the Puppy"},
 	{"finditfixit", "Find It, Fix It"},
 	{0, 0}
 };
@@ -44,6 +45,7 @@ static const char *const directoryGlobs[] = {
 	"mode21",
 	"BETSI",
 	"data",
+	"Puppy",
 	0
 };
 
