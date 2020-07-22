@@ -38,7 +38,7 @@ public:
 	bool Cmd_dumpArchive(int argc, const char** argv);
 	bool Cmd_dumpScript(int argc, const char** argv);
 
-	BiikGame *_engine;
+	BiikGame *_vm;
 };
 
 }

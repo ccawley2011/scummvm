@@ -100,7 +100,7 @@ Common::Error BiikGame::run() {
 	if (guiError.getCode() != Common::kNoError)
 		return guiError;
 
-	_archive = new BiikArchive(getPlatform() == Common::kPlatformMacintosh);
+	_archive = new BiikArchive(isBigEndian());
 	if (!_archive->open(getFileName(GAME_STARTFILE)))
 		return Common::kNoGameDataFoundError;
 
