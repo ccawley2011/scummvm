@@ -30,8 +30,8 @@
 
 namespace Biik {
 
-Console::Console(BiikGame *engine) {
-	_engine = engine;
+Console::Console(BiikGame *vm) {
+	_vm = vm;
 
 	registerCmd("listArchive", WRAP_METHOD(Console, Cmd_listArchive));
 	registerCmd("dumpArchive", WRAP_METHOD(Console, Cmd_dumpArchive));
@@ -45,7 +45,7 @@ bool Console::Cmd_listArchive(int argc, const char** argv) {
 		return true;
 	}
 
-	BiikArchive archive;
+	BiikArchive archive(_vm->isBigEndian());
 	if (!archive.open(argv[1])) {
 		debugPrintf("Failed to open archive '%s'\n", argv[1]);
 		return true;
@@ -68,7 +68,7 @@ bool Console::Cmd_dumpArchive(int argc, const char** argv) {
 		return true;
 	}
 
-	BiikArchive archive;
+	BiikArchive archive(_vm->isBigEndian());
 	if (!archive.open(argv[1])) {
 		debugPrintf("Failed to open archive '%s'\n", argv[1]);
 		return true;
@@ -107,7 +107,7 @@ bool Console::Cmd_dumpScript(int argc, const char** argv) {
 		return true;
 	}
 
-	BiikArchive archive;
+	BiikArchive archive(_vm->isBigEndian());
 	archive.open(argv[1]);
 
 	Common::ArchiveMemberList files;
@@ -119,8 +119,8 @@ bool Console::Cmd_dumpScript(int argc, const char** argv) {
 		return true;
 	}
 
-	/* uint32 page = */ stream->readUint32LE();
-	uint32 outSize = stream->readUint32LE();
+	/* uint32 page = _vm->isBigEndian() ? stream->readUint32BE() : */ stream->readUint32LE();
+	uint32 outSize = _vm->isBigEndian() ? stream->readUint32BE() : stream->readUint32LE();
 
 	Common::SeekableReadStream *compressedStream = Biik::decompressLZW(stream, outSize);
 	if (!compressedStream) {

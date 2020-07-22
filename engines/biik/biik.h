@@ -59,6 +59,7 @@ public:
 	Common::Platform getPlatform() const;
 	uint32 getFeatures() const;
 	const char *getFileName(int type) const;
+	bool isBigEndian() const { return getPlatform() == Common::kPlatformMacintosh; }
 
 	BiikArchive *_archive;
 	BiikGUI *_gui;
