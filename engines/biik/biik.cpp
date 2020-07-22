@@ -63,7 +63,9 @@ static const struct {
 	{ "betsi", Common::kPlatformWindows, "BETSI" },
 	{ "betsi", Common::kPlatformMacintosh, "data" },
 	{ "guardians", Common::kPlatformAcorn, "!Guardians" },
-	{ "guardians", Common::kPlatformAcorn, "!Guardians/mode21" }
+	{ "guardians", Common::kPlatformAcorn, "!Guardians/mode21" },
+	{ "puppy", Common::kPlatformWindows, "Puppy" },
+	{ "puppy", Common::kPlatformMacintosh, "data" }
 };
 
 Common::Error BiikGame::run() {
