@@ -7,6 +7,7 @@ MODULE_OBJS = \
 	decompress.o \
 	detection.o \
 	script.o \
+	sound.o \
 	gui/cursors.o \
 	gui/element.o \
 	gui/gui.o \

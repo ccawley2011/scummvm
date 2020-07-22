@@ -24,6 +24,7 @@
 #include "biik/archive.h"
 #include "biik/console.h"
 #include "biik/script.h"
+#include "biik/sound.h"
 
 #include "biik/gui/riscos_gui.h"
 #include "biik/gui/windows_gui.h"
@@ -59,19 +60,24 @@ static const struct {
 	const char *gameId;
 	Common::Platform platform;
 	const char *subdirectory;
+	bool isWaveDir;
 } searchPaths[] = {
-	{ "betsi", Common::kPlatformWindows, "BETSI" },
-	{ "betsi", Common::kPlatformMacintosh, "data" },
-	{ "guardians", Common::kPlatformAcorn, "!Guardians" },
-	{ "guardians", Common::kPlatformAcorn, "!Guardians/mode21" },
-	{ "puppy", Common::kPlatformWindows, "Puppy" },
-	{ "puppy", Common::kPlatformMacintosh, "data" }
+	{ "betsi", Common::kPlatformWindows, "BETSI", true },
+	{ "betsi", Common::kPlatformWindows, "Audio", true },
+	{ "betsi", Common::kPlatformMacintosh, "data", false },
+	{ "guardians", Common::kPlatformAcorn, "!Guardians", false },
+	{ "guardians", Common::kPlatformAcorn, "!Guardians/mode21", false },
+	{ "puppy", Common::kPlatformWindows, "Puppy", true },
+	{ "puppy", Common::kPlatformWindows, "AUDIO", true },
+	{ "puppy", Common::kPlatformMacintosh, "data", false },
+	{ "puppy", Common::kPlatformMacintosh, "AUDIO", true },
 };
 
 Common::Error BiikGame::run() {
 	setDebugger(new Console(this));
 
 	const Common::FSNode gameDataDir(ConfMan.get("path"));
+	Common::FSNode waveDir(gameDataDir);
 	for (int i = 0; i < ARRAYSIZE(searchPaths); i++) {
 		if (strcmp(searchPaths[i].gameId, getGameId()) != 0)
 			continue;
@@ -80,6 +86,9 @@ Common::Error BiikGame::run() {
 			continue;
 
 		SearchMan.addSubDirectoryMatching(gameDataDir, searchPaths[i].subdirectory);
+
+		if (searchPaths[i].isWaveDir)
+			waveDir = waveDir.getChild(searchPaths[i].subdirectory);
 	}
 
 	switch (getPlatform()) {
@@ -99,6 +108,8 @@ Common::Error BiikGame::run() {
 	Common::Error guiError = _gui->init();
 	if (guiError.getCode() != Common::kNoError)
 		return guiError;
+
+	_sound = new Sound(this, waveDir);
 
 	_archive = new BiikArchive(isBigEndian());
 	if (!_archive->open(getFileName(GAME_STARTFILE)))

@@ -20,26 +20,55 @@
  *
  */
 
-#ifndef BIIK_CONSOLE_H
-#define BIIK_CONSOLE_H
+#ifndef BIIK_SOUND_H
+#define BIIK_SOUND_H
 
-#include "gui/debugger.h"
+#include "audio/mixer.h"
+
+#include "common/fs.h"
+#include "common/str.h"
 
 namespace Biik {
 
 class BiikGame;
 
-class Console : public GUI::Debugger {
+class Sound {
 public:
-	explicit Console(BiikGame *engine);
-	virtual ~Console(void) {}
+	Sound(BiikGame *vm, const Common::FSNode &waveDir);
+	~Sound();
 
-	bool Cmd_listArchive(int argc, const char** argv);
-	bool Cmd_dumpArchive(int argc, const char** argv);
-	bool Cmd_dumpScript(int argc, const char** argv);
-	bool Cmd_playWaveFile(int argc, const char** argv);
+//	void play(const Common::String &filename);
+//	void kill();
+//	void pause();
+//	void start();
+//	void playFrom(int position);
+//	void playMemory(void *addr, int size);
+//	void volume(int volume);
+//	int readInfo(int reason);
 
+//	void loadMemory(void *addr, int size);
+//	void playSFX(int pattern);
+//	void pauseTune();
+
+	bool playWaveFile(const Common::String &filename);
+	void killWaveFile();
+//	void setWaveBufferSize();
+//	void pauseWave();
+//	void pollWave();
+
+//	void waveBufferLoaded();
+
+	void setCurrentDir(const Common::String &dir);
+
+private:
 	BiikGame *_vm;
+
+	Audio::Mixer *_mixer;
+	Audio::SoundHandle _waveHandle;
+	Common::FSNode _waveDir, _currentDir;
+
+	Common::String convertPath(Common::String str);
+	Common::FSNode convertPath(const Common::String &str, Common::FSNode node);
 };
 
 }

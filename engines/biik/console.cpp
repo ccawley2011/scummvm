@@ -24,6 +24,7 @@
 #include "biik/biik.h"
 #include "biik/archive.h"
 #include "biik/decompress.h"
+#include "biik/sound.h"
 
 #include "common/file.h"
 #include "common/stream.h"
@@ -36,6 +37,7 @@ Console::Console(BiikGame *vm) {
 	registerCmd("listArchive", WRAP_METHOD(Console, Cmd_listArchive));
 	registerCmd("dumpArchive", WRAP_METHOD(Console, Cmd_dumpArchive));
 	registerCmd("dumpScript", WRAP_METHOD(Console, Cmd_dumpScript));
+	registerCmd("playWaveFile", WRAP_METHOD(Console, Cmd_playWaveFile));
 }
 
 bool Console::Cmd_listArchive(int argc, const char** argv) {
@@ -141,6 +143,22 @@ bool Console::Cmd_dumpScript(int argc, const char** argv) {
 	dumpFile.close();
 
 	delete compressedStream;
+
+	return true;
+}
+
+bool Console::Cmd_playWaveFile(int argc, const char** argv) {
+	if (argc != 2 && argc != 3) {
+		debugPrintf("Usage: %s <filename> [<path>]\n", argv[0]);
+		debugPrintf("Play the specified wave file\n");
+		return true;
+	}
+
+	if (argc == 3)
+		_vm->_sound->setCurrentDir(argv[2]);
+
+	if (!_vm->_sound->playWaveFile(argv[1]))
+		debugPrintf("Failed to play wave file '%s'\n", argv[1]);
 
 	return true;
 }
