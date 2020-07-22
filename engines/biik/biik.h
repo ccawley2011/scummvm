@@ -33,6 +33,7 @@ namespace Biik {
 class BiikArchive;
 class BiikGUI;
 class Script;
+class Sound;
 
 enum BiikDebugChannels {
 	kDebugGeneral = 1 << 0,
@@ -64,6 +65,7 @@ public:
 	BiikArchive *_archive;
 	BiikGUI *_gui;
 	Script *_script;
+	Sound *_sound;
 
 protected:
 	virtual bool hasFeature(EngineFeature f) const override;
