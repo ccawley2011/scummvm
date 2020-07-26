@@ -52,15 +52,38 @@ public:
 	 * @note Uses space, horizontal tab, carriage return, newline, form feed and vertical tab as delimiters by default.
 	 */
 	StringTokenizer(const String &str, const String &delimiters = " \t\r\n\f\v");
+	virtual ~StringTokenizer() {}
+
 	void reset();       ///< Resets the tokenizer to its initial state
 	bool empty() const; ///< Returns true if there are no more tokens left in the string, false otherwise
 	String nextToken(); ///< Returns the next token from the string (Or an empty string if there are no more tokens)
 
-private:
+protected:
+	virtual bool nextDelimiter(uint start, uint &pos) const;
+	virtual bool nextNonDelimiter(uint start, uint &pos) const;
+
 	const String _str;        ///< The string to be tokenized
 	const String _delimiters; ///< String containing all the delimiter characters
 	uint         _tokenBegin; ///< Latest found token's begin (Valid after a call to nextToken(), zero otherwise)
 	uint         _tokenEnd;   ///< Latest found token's end (Valid after a call to nextToken(), zero otherwise)
+};
+
+/**
+ * A more advanced non-optimized string tokenizer.
+ *
+ * Example of use:
+ * AdvancedStringTokenizer("Now, this is an advanced (and complex!) test!", " ,!", "(", ")") gives tokens "Now", "this", "is", "an", "advanced", "(and complex!)" and "test" using nextToken().
+ */
+class AdvancedStringTokenizer : public StringTokenizer {
+public:
+	AdvancedStringTokenizer(const Common::String &str, const Common::String &delimiters, const String &openChars, const String &closeChars)
+		: StringTokenizer(str, delimiters), _openChars(openChars), _closeChars(closeChars) {}
+
+protected:
+	virtual bool nextNonDelimiter(uint start, uint &pos) const override;
+
+	const String _openChars;
+	const String _closeChars;
 };
 
 /**

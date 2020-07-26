@@ -33,23 +33,66 @@ void StringTokenizer::reset() {
 
 bool StringTokenizer::empty() const {
 	// Search for the next token's start (i.e. the next non-delimiter character)
-	for (uint i = _tokenEnd; i < _str.size(); i++) {
-		if (!_delimiters.contains(_str[i]))
-			return false; // Found a token so the tokenizer is not empty
-	}
-	// Didn't find any more tokens so the tokenizer is empty
-	return true;
+	uint pos;
+	return !nextDelimiter(_tokenEnd, pos);
 }
 
 String StringTokenizer::nextToken() {
 	// Seek to next token's start (i.e. jump over the delimiters before next token)
-	for (_tokenBegin = _tokenEnd; _tokenBegin < _str.size() && _delimiters.contains(_str[_tokenBegin]); _tokenBegin++)
-		;
+	nextDelimiter(_tokenEnd, _tokenBegin);
+
 	// Seek to the token's end (i.e. jump over the non-delimiters)
-	for (_tokenEnd = _tokenBegin; _tokenEnd < _str.size() && !_delimiters.contains(_str[_tokenEnd]); _tokenEnd++)
-		;
+	nextNonDelimiter(_tokenBegin, _tokenEnd);
+
 	// Return the found token
 	return String(_str.c_str() + _tokenBegin, _tokenEnd - _tokenBegin);
+}
+
+bool StringTokenizer::nextDelimiter(uint start, uint &pos) const {
+	pos = start;
+	while (pos < _str.size()) {
+		if (!_delimiters.contains(_str[pos]))
+			return true;
+
+		pos++;
+	}
+	return false;
+}
+
+bool StringTokenizer::nextNonDelimiter(uint start, uint &pos) const {
+	pos = start;
+	while (pos < _str.size()) {
+		if (_delimiters.contains(_str[pos]))
+			return true;
+
+		pos++;
+	}
+	return false;
+}
+
+bool AdvancedStringTokenizer::nextNonDelimiter(uint start, uint &pos) const {
+	char openChar = 0, closeChar = 0;
+	int levels = 0;
+	pos = start;
+	while (pos < _str.size()) {
+		if (levels > 0) {
+			if (_str[pos] == closeChar)
+				levels--;
+			else if (_str[pos] == openChar)
+				levels++;
+		} else {
+			size_t openPos = _openChars.find(_str[pos]);
+			if (openPos != Common::String::npos) {
+				openChar = _openChars[openPos];
+				closeChar = _closeChars[openPos];
+				levels++;
+			} else if (_delimiters.contains(_str[pos])) {
+				return true;
+			}
+		}
+		pos++;
+	}
+	return false;
 }
 
 U32StringTokenizer::U32StringTokenizer(const U32String &str, const String &delimiters) : _str(str), _delimiters(delimiters) {
