@@ -117,6 +117,7 @@ Common::Error BiikGame::run() {
 
 	_script = new Script(this);
 	_script->load(_archive, "Text");
+	_script->run("page001");
 
 	return _gui->run();
 }

@@ -46,12 +46,29 @@ public:
 	bool load(Common::SeekableReadStream *stream);
 	bool load(Common::Archive *archive, Common::String name);
 
+	void run(const Common::String id);
+
+	void command(const Common::String &command);
+
 private:
 	BiikGame *_vm;
 	Common::StringMap _script;
 
 	Common::StringArray _stringVars;
 	Common::Array<int16> _intVars;
+
+	typedef void (Script::*Command)(const Common::String &command);
+
+	struct CommandListEntry {
+		const char *prefix;
+		Command func;
+	};
+
+	static const CommandListEntry _commandList[];
+
+	void cmd_Call(const Common::String &command);
+	void cmd_SetInt(const Common::String &command);
+	void cmd_SetString(const Common::String &command);
 };
 
 }

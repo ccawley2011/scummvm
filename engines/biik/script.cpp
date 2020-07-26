@@ -26,11 +26,14 @@
 
 #include "common/archive.h"
 #include "common/stream.h"
+#include "common/tokenizer.h"
 
 namespace Biik {
 
 Script::Script(BiikGame *vm)
 	: _vm(vm) {
+	_intVars.resize(100);
+	_stringVars.resize(100);
 }
 
 Script::~Script() {
@@ -40,7 +43,7 @@ bool Script::load(Common::SeekableReadStream *stream) {
 	_script.clear();
 
 	uint32 outSize;
-	if (_vm->getPlatform() == Common::kPlatformMacintosh) {
+	if (_vm->isBigEndian()) {
 		/* uint32 unknown = */ stream->readUint32BE();
 		outSize = stream->readUint32BE();
 	} else {
@@ -58,8 +61,8 @@ bool Script::load(Common::SeekableReadStream *stream) {
 			continue;
 
 		size_t colon = line.find(':');
-		Common::String id = Common::String(line.c_str(), colon);
-		Common::String commands = Common::String(line.c_str() + colon + 1, line.size() - colon - 1);
+		Common::String id = line.substr(0, colon);
+		Common::String commands = line.substr(colon + 1);
 
 		_script[id] = commands;
 	}
@@ -76,6 +79,55 @@ bool Script::load(Common::Archive *archive, Common::String name) {
 		return false;
 
 	return load(stream);
+}
+
+void Script::run(Common::String id) {
+	Common::AdvancedStringTokenizer tokenizer(_script[id], ";", "[", "]");
+	while (!tokenizer.empty()) {
+		command(tokenizer.nextToken());
+	}
+}
+
+const Script::CommandListEntry Script::_commandList[] = {
+	{ "#", &Script::cmd_SetInt },
+	{ "$", &Script::cmd_SetString },
+	{ "C", &Script::cmd_Call },
+	{ nullptr, nullptr }
+};
+
+void Script::command(const Common::String &command) {
+	for (const CommandListEntry *cmd = &_commandList[0]; cmd->prefix; ++cmd) {
+		if (strncmp(command.c_str(), cmd->prefix, strlen(cmd->prefix)) != 0)
+			continue;
+
+		if (cmd->func)
+			(this->*(cmd->func))(command);
+		else
+			warning("Ignoring unimplemented command '%s'", command.c_str());
+		return;
+	}
+
+	warning("Ignoring unrecognized command '%s'", command.c_str());
+}
+
+void Script::cmd_Call(const Common::String &command) {
+	run(command.substr(1));
+}
+
+void Script::cmd_SetInt(const Common::String &command) {
+	size_t equals = command.find('=');
+	Common::String var = command.substr(1, equals - 1);
+	Common::String val = command.substr(equals + 1);
+
+	warning("Setting an integer variable: %s = %s", var.c_str(), val.c_str());
+}
+
+void Script::cmd_SetString(const Common::String &command) {
+	size_t equals = command.find('=');
+	Common::String var = command.substr(1, equals - 1);
+	Common::String val = command.substr(equals + 1);
+
+	warning("Setting a string variable: %s = %s", var.c_str(), val.c_str());
 }
 
 }
