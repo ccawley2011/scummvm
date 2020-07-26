@@ -16,6 +16,15 @@ public:
 		}
 		TS_ASSERT(strTokenizer.empty());
 
+		Common::AdvancedStringTokenizer advancedStrTokenizer("Now, this is an advanced (and complex!) test!", " ,!", "(", ")");
+		Common::String advancedTokenArray[] = {"Now", "this", "is", "an", "advanced", "(and complex!)", "test"};
+
+		for (int i = 0; i < ARRAYSIZE(advancedTokenArray); ++i) {
+			// make sure nextToken works correctly
+			TS_ASSERT_EQUALS(advancedTokenArray[i], advancedStrTokenizer.nextToken());
+		}
+		TS_ASSERT(advancedStrTokenizer.empty());
+
 		// Test edge cases:
 
 		// empty string
