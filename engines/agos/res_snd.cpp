@@ -189,8 +189,6 @@ void AGOSEngine::playModule(uint16 music) {
 
 	if (getGameType() == GType_ELVIRA1 && getFeatures() & GF_DEMO)
 		sprintf(filename, "elvira2");
-	else if (getPlatform() == Common::kPlatformAcorn)
-		sprintf(filename, "%dtune.DAT", music);
 	else
 		sprintf(filename, "%dtune", music);
 
