@@ -25,6 +25,7 @@
 #include "biik/gui/element.h"
 #include "biik/gui/riscos_template.h"
 #include "biik/biik.h"
+#include "biik/detection.h"
 
 #include "common/file.h"
 

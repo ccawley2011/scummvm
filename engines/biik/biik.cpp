@@ -23,6 +23,7 @@
 #include "biik/biik.h"
 #include "biik/archive.h"
 #include "biik/console.h"
+#include "biik/detection.h"
 #include "biik/script.h"
 #include "biik/sound.h"
 

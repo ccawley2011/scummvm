@@ -23,6 +23,7 @@
 #include "biik/gui/windows_gui.h"
 #include "biik/gui/cursors.h"
 #include "biik/biik.h"
+#include "biik/detection.h"
 
 #include "common/archive.h"
 #include "common/fs.h"

@@ -20,10 +20,7 @@
  *
  */
 
-#include "biik/biik.h"
-
-#include "base/plugins.h"
-
+#include "biik/detection.h"
 #include "engines/advancedDetector.h"
 
 static const PlainGameDescriptor biikGames[] = {
@@ -49,29 +46,9 @@ static const char *const directoryGlobs[] = {
 	0
 };
 
-namespace Biik {
-
-const char *BiikGame::getGameId() const { return _gameDescription->gameId; }
-Common::Platform BiikGame::getPlatform() const { return _gameDescription->platform; }
-uint32 BiikGame::getFeatures() const { return _gameDescription->flags; }
-
-const char *BiikGame::getFileName(int type) const {
-	for (int i = 0; _gameDescription->filesDescriptions[i].fileType; i++) {
-		if (_gameDescription->filesDescriptions[i].fileType == type)
-			return _gameDescription->filesDescriptions[i].fileName;
-	}
-	return nullptr;
-}
-
-bool BiikGame::hasFeature(EngineFeature f) const {
-	return (f == kSupportsReturnToLauncher); // TODO: Support loading and saving...
-}
-
-} // End of namespace Biik
-
-class BiikMetaEngine : public AdvancedMetaEngine {
+class BiikMetaEngineDetection : public AdvancedMetaEngineDetection {
 public:
-	BiikMetaEngine() : AdvancedMetaEngine(Biik::gameDescriptions, sizeof(ADGameDescription), biikGames) {
+	BiikMetaEngineDetection() : AdvancedMetaEngineDetection(Biik::gameDescriptions, sizeof(ADGameDescription), biikGames) {
 		_maxScanDepth = 3;
 		_directoryGlobs = directoryGlobs;
 	}
@@ -87,25 +64,6 @@ public:
 	virtual const char *getOriginalCopyright() const override {
 		return "Biik Engine (C) 1993-1997 4Mation Educational Resources Ltd";
 	}
-
-	virtual bool hasFeature(MetaEngineFeature f) const override;
-	virtual bool createInstance(OSystem *syst, Engine **engine, const ADGameDescription *desc) const override;
 };
 
-bool BiikMetaEngine::hasFeature(MetaEngineFeature f) const {
-	return false; // TODO: Support loading and saving...
-}
-
-bool BiikMetaEngine::createInstance(OSystem *syst, Engine **engine, const ADGameDescription *desc) const {
-	if (desc) {
-		*engine = new Biik::BiikGame(syst, desc);
-	}
-
-	return desc != nullptr;
-}
-
-#if PLUGIN_ENABLED_DYNAMIC(BIIK)
-REGISTER_PLUGIN_DYNAMIC(BIIK, PLUGIN_TYPE_ENGINE, BiikMetaEngine);
-#else
-REGISTER_PLUGIN_STATIC(BIIK, PLUGIN_TYPE_ENGINE, BiikMetaEngine);
-#endif
+REGISTER_PLUGIN_STATIC(BIIK_DETECTION, PLUGIN_TYPE_ENGINE_DETECTION, BiikMetaEngineDetection);
