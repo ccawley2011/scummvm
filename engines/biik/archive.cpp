@@ -72,29 +72,23 @@ bool BiikArchive::open(const Common::String &filename) {
 	while (subStream.pos() < (int32)(indexOffset + indexSize) && !subStream.eos()) {
 		FileEntry entry;
 
-		uint32 nameLength = subStream.readUint32() - 8;
+		uint32 nextOffset = subStream.pos() + subStream.readUint32();
 		uint32 headerOffset = subStream.readUint32();
-		Common::String name;
-		while (nameLength--)
-			name += subStream.readByte();
+		Common::String name = subStream.readString();
 
-		uint32 backOffset = subStream.pos();
 		subStream.seek(headerOffset);
-
 		entry.type = subStream.readUint32();
 		uint32 fileSize = subStream.readUint32();
 		uint32 headerSize = subStream.readUint32();
+		Common::String headerName = subStream.readString();
+
 		entry.size = fileSize - headerSize;
 		entry.offset = headerOffset + headerSize;
 
-		headerSize -= 12;
-		Common::String headerName;
-		while (headerSize--)
-			headerName += subStream.readByte();
 		if (name != headerName)
 			warning("Filenames in the index (%s) and the header (%s) don't match", name.c_str(), headerName.c_str());
 
-		subStream.seek(backOffset);
+		subStream.seek(nextOffset);
 		_map[name] = entry;
 	}
 
