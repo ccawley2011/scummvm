@@ -20,50 +20,18 @@
  *
  */
 
-#ifndef BIIK_BIIK_H
-#define BIIK_BIIK_H
-
-#include "common/str.h"
-
-#include "engines/engine.h"
-
-struct ADGameDescription;
+#ifndef BIIK_DETECTION_H
+#define BIIK_DETECTION_H
 
 namespace Biik {
-class BiikArchive;
-class BiikGUI;
-class Script;
-class Sound;
 
-enum BiikDebugChannels {
-	kDebugGeneral = 1 << 0,
-	kDebugGUI     = 1 << 1
-};
-
-class BiikGame : public Engine {
-public:
-	BiikGame(OSystem *syst, const ADGameDescription *gameDesc);
-	~BiikGame();
-
-	virtual Common::Error run() override;
-
-	// Detection related functions
-	const ADGameDescription *_gameDescription;
-	const char *getGameId() const;
-	Common::Platform getPlatform() const;
-	uint32 getFeatures() const;
-	const char *getFileName(int type) const;
-	bool isBigEndian() const { return getPlatform() == Common::kPlatformMacintosh; }
-
-	BiikArchive *_archive;
-	BiikGUI *_gui;
-	Script *_script;
-	Sound *_sound;
-
-protected:
-	virtual bool hasFeature(EngineFeature f) const override;
+enum GameFileTypes {
+	GAME_STARTFILE = 1 << 0,
+	GAME_SPRITEFILE = 1 << 1,
+	GAME_TEMPLATEFILE  = 1 << 2,
+	GAME_EXEFILE = 1 << 3
 };
 
 } // End of namespace Biik
 
-#endif
+#endif // BIIK_DETECTION_H

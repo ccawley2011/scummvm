@@ -23,6 +23,7 @@
 #include "biik/gui/mac_gui.h"
 #include "biik/gui/cursors.h"
 #include "biik/biik.h"
+#include "biik/detection.h"
 
 #include "common/macresman.h"
 #include "engines/dialogs.h"

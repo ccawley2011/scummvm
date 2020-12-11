@@ -5,7 +5,7 @@ MODULE_OBJS = \
 	biik.o \
 	console.o \
 	decompress.o \
-	detection.o \
+	metaengine.o \
 	script.o \
 	sound.o \
 	gui/cursors.o \
@@ -23,3 +23,6 @@ endif
 
 # Include common rules
 include $(srcdir)/rules.mk
+
+# Detection objects
+DETECT_OBJS += $(MODULE)/detection.o
