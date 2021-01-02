@@ -38,7 +38,7 @@ typedef struct {
 
 struct GfxMode3DS;
 
-class Sprite : public Graphics::Surface {
+class Sprite final : public Graphics::Surface {
 public:
 	Sprite();
 	~Sprite();

@@ -44,14 +44,14 @@ enum {
 
 extern bool optionMenuOpened;
 
-class OptionsDialog : public GUI::Dialog {
+class OptionsDialog final : public GUI::Dialog {
 
 public:
 	OptionsDialog();
 	~OptionsDialog();
 
 	// GuiObject API
-	void reflowLayout() override;
+	virtual void reflowLayout() override;
 
 	bool getShowCursor() const;
 	bool getSnapToBorder() const;
@@ -59,7 +59,7 @@ public:
 	int getSensitivity() const;
 	int getScreen() const;
 protected:
-	void handleCommand(GUI::CommandSender *sender, uint32 cmd, uint32 data) override;
+	virtual void handleCommand(GUI::CommandSender *sender, uint32 cmd, uint32 data) override;
 
 	GUI::CheckboxWidget *_showCursorCheckbox;
 	GUI::CheckboxWidget *_snapToBorderCheckbox;

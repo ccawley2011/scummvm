@@ -93,7 +93,7 @@ struct GfxState {
 };
 
 
-class OSystem_3DS : public EventsBaseBackend, public PaletteManager, public Common::EventObserver {
+class OSystem_3DS final : public EventsBaseBackend, public PaletteManager, public Common::EventObserver {
 public:
 	OSystem_3DS();
 	virtual ~OSystem_3DS();
@@ -101,81 +101,80 @@ public:
 	volatile bool exiting;
 	volatile bool sleeping;
 
-	virtual void initBackend();
+	virtual void initBackend() override;
 
-	virtual bool hasFeature(OSystem::Feature f);
-	virtual void setFeatureState(OSystem::Feature f, bool enable);
-	virtual bool getFeatureState(OSystem::Feature f);
+	virtual bool hasFeature(OSystem::Feature f) override;
+	virtual void setFeatureState(OSystem::Feature f, bool enable) override;
+	virtual bool getFeatureState(OSystem::Feature f) override;
 
-	bool pollEvent(Common::Event &event) override;
-	bool notifyEvent(const Common::Event &event) override;
-	Common::HardwareInputSet *getHardwareInputSet() override;
-	Common::KeymapArray getGlobalKeymaps() override;
-	Common::KeymapperDefaultBindings *getKeymapperDefaultBindings() override;
+	virtual bool pollEvent(Common::Event &event) override;
+	virtual bool notifyEvent(const Common::Event &event) override;
+	virtual Common::HardwareInputSet *getHardwareInputSet() override;
+	virtual Common::KeymapArray getGlobalKeymaps() override;
+	virtual Common::KeymapperDefaultBindings *getKeymapperDefaultBindings() override;
 
-	virtual uint32 getMillis(bool skipRecord = false);
-	virtual void delayMillis(uint msecs);
-	virtual void getTimeAndDate(TimeDate &t) const;
+	virtual uint32 getMillis(bool skipRecord = false) override;
+	virtual void delayMillis(uint msecs) override;
+	virtual void getTimeAndDate(TimeDate &t) const override;
 
-	virtual MutexRef createMutex();
-	virtual void lockMutex(MutexRef mutex);
-	virtual void unlockMutex(MutexRef mutex);
-	virtual void deleteMutex(MutexRef mutex);
+	virtual MutexRef createMutex() override;
+	virtual void lockMutex(MutexRef mutex) override;
+	virtual void unlockMutex(MutexRef mutex) override;
+	virtual void deleteMutex(MutexRef mutex) override;
 
-	virtual void logMessage(LogMessageType::Type type, const char *message);
+	virtual void logMessage(LogMessageType::Type type, const char *message) override;
 
-	virtual Audio::Mixer *getMixer();
-	virtual PaletteManager *getPaletteManager() { return this; }
-	virtual Common::String getSystemLanguage() const;
-	virtual void fatalError();
-	virtual void quit();
+	virtual Audio::Mixer *getMixer() override;
+	virtual PaletteManager *getPaletteManager() override { return this; }
+	virtual Common::String getSystemLanguage() const override;
+	virtual void fatalError() override;
+	virtual void quit() override;
 
-	virtual Common::String getDefaultConfigFileName();
-	void addSysArchivesToSearchSet(Common::SearchSet &s, int priority) override;
+	virtual Common::String getDefaultConfigFileName() override;
+	virtual void addSysArchivesToSearchSet(Common::SearchSet &s, int priority) override;
 
 	// Graphics
-	inline Graphics::PixelFormat getScreenFormat() const { return _pfGame; }
-	virtual Common::List<Graphics::PixelFormat> getSupportedFormats() const;
-	void initSize(uint width, uint height,
-	              const Graphics::PixelFormat *format = NULL);
-	virtual int getScreenChangeID() const { return _screenChangeId; };
+	virtual Graphics::PixelFormat getScreenFormat() const override { return _pfGame; }
+	virtual Common::List<Graphics::PixelFormat> getSupportedFormats() const override;
+	virtual void initSize(uint width, uint height, const Graphics::PixelFormat *format = NULL) override;
+	virtual int getScreenChangeID() const override { return _screenChangeId; };
 	GraphicsModeID chooseMode(Graphics::PixelFormat *format);
 	bool setGraphicsMode(GraphicsModeID modeID);
 
-	void beginGFXTransaction();
-	OSystem::TransactionError endGFXTransaction();
-	int16 getHeight(){ return _gameHeight; }
-	int16 getWidth(){ return _gameWidth; }
+	virtual void beginGFXTransaction() override;
+	virtual OSystem::TransactionError endGFXTransaction() override;
+	virtual int16 getHeight() override { return _gameHeight; }
+	virtual int16 getWidth() override { return _gameWidth; }
 	float getScaleRatio() const;
-	void setPalette(const byte *colors, uint start, uint num);
-	void grabPalette(byte *colors, uint start, uint num) const;
-	void copyRectToScreen(const void *buf, int pitch, int x, int y, int w,
-	                      int h);
-	Graphics::Surface *lockScreen();
-	void unlockScreen();
-	void updateScreen();
-	void setShakePos(int shakeXOffset, int shakeYOffset);
-	void setFocusRectangle(const Common::Rect &rect);
-	void clearFocusRectangle();
-	void showOverlay();
-	void hideOverlay();
-	bool isOverlayVisible() const { return _overlayVisible; }
-	Graphics::PixelFormat getOverlayFormat() const;
-	void clearOverlay();
-	void grabOverlay(void *buf, int pitch);
-	void copyRectToOverlay(const void *buf, int pitch, int x, int y, int w,
-	                       int h);
-	virtual int16 getOverlayHeight();
-	virtual int16 getOverlayWidth();
-	void displayMessageOnOSD(const Common::U32String &msg) override;
-	void displayActivityIconOnOSD(const Graphics::Surface *icon) override;
+	virtual void setPalette(const byte *colors, uint start, uint num) override;
+	virtual void grabPalette(byte *colors, uint start, uint num) const override;
+	virtual void copyRectToScreen(const void *buf, int pitch, int x, int y, int w, int h) override;
+	virtual Graphics::Surface *lockScreen() override;
+	virtual void unlockScreen() override;
+	virtual void updateScreen() override;
+	virtual void setShakePos(int shakeXOffset, int shakeYOffset) override;
+	virtual void setFocusRectangle(const Common::Rect &rect) override;
+	virtual void clearFocusRectangle() override;
 
-	bool showMouse(bool visible);
-	void warpMouse(int x, int y);
-	void setMouseCursor(const void *buf, uint w, uint h, int hotspotX,
-	                    int hotspotY, uint32 keycolor, bool dontScale = false,
-	                    const Graphics::PixelFormat *format = NULL);
-	void setCursorPalette(const byte *colors, uint start, uint num);
+	virtual void showOverlay() override;
+	virtual void hideOverlay() override;
+	virtual bool isOverlayVisible() const override { return _overlayVisible; }
+	virtual Graphics::PixelFormat getOverlayFormat() const override;
+	virtual void clearOverlay() override;
+	virtual void grabOverlay(void *buf, int pitch) override;
+	virtual void copyRectToOverlay(const void *buf, int pitch, int x, int y, int w, int h) override;
+	virtual int16 getOverlayHeight() override;
+	virtual int16 getOverlayWidth() override;
+
+	virtual void displayMessageOnOSD(const Common::U32String &msg) override;
+	virtual void displayActivityIconOnOSD(const Graphics::Surface *icon) override;
+
+	virtual bool showMouse(bool visible) override;
+	virtual void warpMouse(int x, int y) override;
+	virtual void setMouseCursor(const void *buf, uint w, uint h, int hotspotX,
+	                            int hotspotY, uint32 keycolor, bool dontScale = false,
+	                            const Graphics::PixelFormat *format = NULL) override;
+	virtual void setCursorPalette(const byte *colors, uint start, uint num) override;
 
 	// Transform point from touchscreen coords into gamescreen coords
 	void transformPoint(touchPosition &point);
