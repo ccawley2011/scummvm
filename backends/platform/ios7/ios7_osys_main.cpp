@@ -86,7 +86,7 @@ SoundProc OSystem_iOS7::s_soundCallback = NULL;
 void *OSystem_iOS7::s_soundParam = NULL;
 
 #ifdef IPHONE_SANDBOXED
-class SandboxedSaveFileManager : public DefaultSaveFileManager {
+class SandboxedSaveFileManager final : public DefaultSaveFileManager {
 	Common::String _sandboxRootPath;
 public:
 
