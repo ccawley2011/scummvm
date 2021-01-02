@@ -55,7 +55,7 @@ class DCHardware {
   DCHardware() { dc_init_hardware(); }
 };
 
-class DCCDManager : public DefaultAudioCDManager {
+class DCCDManager final : public DefaultAudioCDManager {
 public:
 	// Poll cdrom status
 	// Returns true if cd audio is playing
@@ -69,7 +69,7 @@ public:
 	void stop() override;
 };
 
-class OSystem_Dreamcast : private DCHardware, public EventsBaseBackend, public PaletteManager, public FilesystemFactory
+class OSystem_Dreamcast final : private DCHardware, public EventsBaseBackend, public PaletteManager, public FilesystemFactory
 #ifdef DYNAMIC_MODULES
   , public FilePluginProvider
 #endif
@@ -78,110 +78,110 @@ class OSystem_Dreamcast : private DCHardware, public EventsBaseBackend, public P
  public:
   OSystem_Dreamcast();
 
-  virtual void initBackend();
+  virtual void initBackend() override;
 
   // Determine whether the backend supports the specified feature.
-  bool hasFeature(Feature f);
+  virtual bool hasFeature(Feature f) override;
 
   // En-/disable the specified feature.
-  void setFeatureState(Feature f, bool enable);
+  virtual void setFeatureState(Feature f, bool enable) override;
 
   // Query the state of the specified feature.
-  bool getFeatureState(Feature f);
+  virtual bool getFeatureState(Feature f) override;
 
   // Set colors of the palette
-  PaletteManager *getPaletteManager() { return this; }
+  virtual PaletteManager *getPaletteManager() override { return this; }
 protected:
 	// PaletteManager API
-  void setPalette(const byte *colors, uint start, uint num);
-  void grabPalette(byte *colors, uint start, uint num) const;
+  virtual void setPalette(const byte *colors, uint start, uint num) override;
+  virtual void grabPalette(byte *colors, uint start, uint num) const override;
 
 public:
 
   // Determine the pixel format currently in use for screen rendering.
-  Graphics::PixelFormat getScreenFormat() const;
+  virtual Graphics::PixelFormat getScreenFormat() const override;
 
   // Returns a list of all pixel formats supported by the backend.
-  Common::List<Graphics::PixelFormat> getSupportedFormats() const;
+  virtual Common::List<Graphics::PixelFormat> getSupportedFormats() const override;
 
   // Set the size of the video bitmap.
   // Typically, 320x200
-  void initSize(uint w, uint h, const Graphics::PixelFormat *format);
-  int16 getHeight() { return _screen_h; }
-  int16 getWidth() { return _screen_w; }
+  virtual void initSize(uint w, uint h, const Graphics::PixelFormat *format) override;
+  virtual int16 getHeight() override { return _screen_h; }
+  virtual int16 getWidth() override { return _screen_w; }
 
   // Draw a bitmap to screen.
   // The screen will not be updated to reflect the new bitmap
-  void copyRectToScreen(const void *buf, int pitch, int x, int y, int w, int h);
+  virtual void copyRectToScreen(const void *buf, int pitch, int x, int y, int w, int h) override;
 
-	virtual Graphics::Surface *lockScreen();
-	virtual void unlockScreen();
+  virtual Graphics::Surface *lockScreen() override;
+  virtual void unlockScreen() override;
 
   // Update the dirty areas of the screen
-  void updateScreen();
+  virtual void updateScreen() override;
 
   // Either show or hide the mouse cursor
-  bool showMouse(bool visible);
+  virtual bool showMouse(bool visible) override;
 
   // Move ("warp") the mouse cursor to the specified position.
-  void warpMouse(int x, int y);
+  virtual void warpMouse(int x, int y) override;
 
   // Set the bitmap that's used when drawing the cursor.
-  void setMouseCursor(const void *buf, uint w, uint h, int hotspot_x, int hotspot_y, uint32 keycolor, bool dontScale, const Graphics::PixelFormat *format);
+  virtual void setMouseCursor(const void *buf, uint w, uint h, int hotspot_x, int hotspot_y, uint32 keycolor, bool dontScale, const Graphics::PixelFormat *format) override;
 
   // Replace the specified range of cursor the palette with new colors.
-  void setCursorPalette(const byte *colors, uint start, uint num);
+  virtual void setCursorPalette(const byte *colors, uint start, uint num) override;
 
   // Shaking is used in SCUMM. Set current shake position.
-  void setShakePos(int shake_x_pos, int shake_y_pos);
+  virtual void setShakePos(int shake_x_pos, int shake_y_pos) override;
 
   // Get the number of milliseconds since the program was started.
-  uint32 getMillis(bool skipRecord = false);
+  virtual uint32 getMillis(bool skipRecord = false) override;
 
   // Delay for a specified amount of milliseconds
-  void delayMillis(uint msecs);
+  virtual void delayMillis(uint msecs) override;
 
   // Get the current time and date. Correspond to time()+localtime().
-  void getTimeAndDate(TimeDate &t) const;
+  virtual void getTimeAndDate(TimeDate &t) const override;
 
   // Get the next event.
   // Returns true if an event was retrieved.
-  bool pollEvent(Common::Event &event);
+  virtual bool pollEvent(Common::Event &event) override;
 
   // Quit
-  void quit();
+  virtual void quit() override;
 
   // Overlay
-  int16 getOverlayHeight();
-  int16 getOverlayWidth();
-  bool isOverlayVisible() const { return _overlay_visible; }
-  void showOverlay();
-  void hideOverlay();
-  void clearOverlay();
-  void grabOverlay(void *buf, int pitch);
-  void copyRectToOverlay(const void *buf, int pitch, int x, int y, int w, int h);
-  virtual Graphics::PixelFormat getOverlayFormat() const { return Graphics::PixelFormat(2, 4, 4, 4, 4, 8, 4, 0, 12); }
+  virtual int16 getOverlayHeight() override;
+  virtual int16 getOverlayWidth() override;
+  virtual bool isOverlayVisible() const override { return _overlay_visible; }
+  virtual void showOverlay() override;
+  virtual void hideOverlay() override;
+  virtual void clearOverlay() override;
+  virtual void grabOverlay(void *buf, int pitch) override;
+  virtual void copyRectToOverlay(const void *buf, int pitch, int x, int y, int w, int h) override;
+  virtual Graphics::PixelFormat getOverlayFormat() const override { return Graphics::PixelFormat(2, 4, 4, 4, 4, 8, 4, 0, 12); }
 
   // Mutex handling
-  MutexRef createMutex();
-  void lockMutex(MutexRef mutex);
-  void unlockMutex(MutexRef mutex);
-  void deleteMutex(MutexRef mutex);
+  virtual MutexRef createMutex() override;
+  virtual void lockMutex(MutexRef mutex) override;
+  virtual void unlockMutex(MutexRef mutex) override;
+  virtual void deleteMutex(MutexRef mutex) override;
 
   // Set a window caption or any other comparable status display to the
   // given value.
-  void setWindowCaption(const Common::U32String &caption);
+  virtual void setWindowCaption(const Common::U32String &caption) override;
 
   // Modulatized backend
-  Audio::Mixer *getMixer() { return _mixer; }
+  virtual Audio::Mixer *getMixer() override { return _mixer; }
 
   // Extra SoftKbd support
   void mouseToSoftKbd(int x, int y, int &rx, int &ry) const;
 
   // Filesystem
-  AbstractFSNode *makeRootFileNode() const;
-  AbstractFSNode *makeCurrentDirectoryFileNode() const;
-  AbstractFSNode *makeFileNodePath(const Common::String &path) const;
+  virtual AbstractFSNode *makeRootFileNode() const override;
+  virtual AbstractFSNode *makeCurrentDirectoryFileNode() const override;
+  virtual AbstractFSNode *makeFileNodePath(const Common::String &path) const override;
 
  private:
 
@@ -227,21 +227,21 @@ public:
 
   Common::SaveFileManager *createSavefileManager();
 
-  Common::SeekableReadStream *createConfigReadStream();
-  Common::WriteStream *createConfigWriteStream();
+  virtual Common::SeekableReadStream *createConfigReadStream() override;
+  virtual Common::WriteStream *createConfigWriteStream() override;
 
-  void logMessage(LogMessageType::Type type, const char *message);
-  Common::String getSystemLanguage() const;
+  virtual void logMessage(LogMessageType::Type type, const char *message) override;
+  virtual Common::String getSystemLanguage() const override;
 
 #ifdef DYNAMIC_MODULES
   class DCPlugin;
 
  protected:
-  Plugin* createPlugin(const Common::FSNode &node) const;
-  bool isPluginFilename(const Common::FSNode &node) const;
-  void addCustomDirectories(Common::FSList &dirs) const;
+  virtual Plugin* createPlugin(const Common::FSNode &node) const override;
+  virtual bool isPluginFilename(const Common::FSNode &node) const override;
+  virtual void addCustomDirectories(Common::FSList &dirs) const override;
  public:
-  PluginList getPlugins();
+  virtual PluginList getPlugins() override;
  private:
   const char *pluginCustomDirectory;
 #endif

@@ -29,7 +29,7 @@
 
 class OSystem_Dreamcast;
 
-class SoftKeyboard : public Interactive
+class SoftKeyboard final : public Interactive
 {
  private:
 
@@ -43,8 +43,8 @@ class SoftKeyboard : public Interactive
   virtual ~SoftKeyboard() {}
 
   void draw(float x, float y, int transp = 0);
-  int key(int k, byte &shiftFlags);
-  void mouse(int x, int y);
+  virtual int key(int k, byte &shiftFlags) override;
+  virtual void mouse(int x, int y) override;
 };
 
 #endif /* DC_SOFTKBD_H */

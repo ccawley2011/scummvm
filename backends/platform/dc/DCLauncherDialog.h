@@ -20,7 +20,7 @@
  *
  */
 
-class DCLauncherDialog {
+class DCLauncherDialog final {
  public:
   DCLauncherDialog() {}
   int runModal();

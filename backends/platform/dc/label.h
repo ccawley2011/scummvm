@@ -23,7 +23,7 @@
 #ifndef DC_LABEL_H
 #define DC_LABEL_H
 
-class Label
+class Label final
 {
  private:
   void *texture;

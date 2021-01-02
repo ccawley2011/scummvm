@@ -237,15 +237,15 @@ bool deleteSaveGame(const char *filename)
 }
 
 
-class InVMSave : public Common::InSaveFile {
+class InVMSave final : public Common::InSaveFile {
 private:
   char *buffer;
   int _pos, _size;
   bool _eos;
 
-  uint32 read(void *buf, uint32 cnt);
-  bool skip(uint32 offset);
-  bool seek(int32 offs, int whence);
+  virtual uint32 read(void *buf, uint32 cnt) override;
+  virtual bool skip(uint32 offset) override;
+  virtual bool seek(int32 offs, int whence) override;
 
 public:
   InVMSave()
@@ -257,16 +257,16 @@ public:
     delete[] buffer;
   }
 
-  bool eos() const { return _eos; }
-  void clearErr() { _eos = false; }
-  int32 pos() const { return _pos; }
-  int32 size() const { return _size; }
+  virtual bool eos() const override { return _eos; }
+  virtual void clearErr() override { _eos = false; }
+  virtual int32 pos() const override { return _pos; }
+  virtual int32 size() const override { return _size; }
 
   bool readSaveGame(const char *filename)
   { return ::readSaveGame(buffer, _size, filename); }
 };
 
-class OutVMSave : public Common::WriteStream {
+class OutVMSave final : public Common::WriteStream {
 private:
   char *buffer;
   int _pos, size, committed;
@@ -274,8 +274,8 @@ private:
   bool iofailed;
 
 public:
-  uint32 write(const void *buf, uint32 cnt);
-  virtual int32 pos() const { return _pos; }
+  virtual uint32 write(const void *buf, uint32 cnt) override;
+  virtual int32 pos() const override { return _pos; }
 
   OutVMSave(const char *_filename)
     : _pos(0), committed(-1), iofailed(false)
@@ -286,19 +286,19 @@ public:
 
   ~OutVMSave();
 
-  bool err() const { return iofailed; }
-  void clearErr() { iofailed = false; }
-  void finalize();
+  virtual bool err() const override { return iofailed; }
+  virtual void clearErr() override { iofailed = false; }
+  virtual void finalize() override;
 };
 
-class VMSaveManager : public Common::SaveFileManager {
+class VMSaveManager final : public Common::SaveFileManager {
 private:
 	static int nameCompare(const unsigned char *entry, const char *match) {
 		return !scumm_strnicmp(reinterpret_cast<const char *>(entry), match, 12);
 	}
 
 public:
-	virtual void updateSavefilesList(Common::StringArray &lockedFiles) {
+	virtual void updateSavefilesList(Common::StringArray &lockedFiles) override {
 		// TODO: implement this (locks files, preventing them from being listed, saved or loaded)
 	}
 
@@ -306,7 +306,7 @@ public:
 		vmsfs_name_compare_function = nameCompare;
 	}
 
-	virtual Common::InSaveFile *openRawFile(const Common::String &filename) {
+	virtual Common::InSaveFile *openRawFile(const Common::String &filename) override {
 		InVMSave *s = new InVMSave();
 		if (s->readSaveGame(filename.c_str())) {
 			return s;
@@ -316,12 +316,12 @@ public:
 		}
 	}
 
-	virtual Common::OutSaveFile *openForSaving(const Common::String &filename, bool compress = true) {
+	virtual Common::OutSaveFile *openForSaving(const Common::String &filename, bool compress = true) override {
 		OutVMSave *s = new OutVMSave(filename.c_str());
 		return new Common::OutSaveFile(compress ? Common::wrapCompressedWriteStream(s) : s);
 	}
 
-  virtual Common::InSaveFile *openForLoading(const Common::String &filename) {
+  virtual Common::InSaveFile *openForLoading(const Common::String &filename) override {
 	InVMSave *s = new InVMSave();
 	if (s->readSaveGame(filename.c_str())) {
 	  return Common::wrapCompressedReadStream(s);
@@ -331,11 +331,11 @@ public:
 	}
   }
 
-  virtual bool removeSavefile(const Common::String &filename) {
+  virtual bool removeSavefile(const Common::String &filename) override {
 	return ::deleteSaveGame(filename.c_str());
   }
 
-  virtual Common::StringArray listSavefiles(const Common::String &pattern);
+  virtual Common::StringArray listSavefiles(const Common::String &pattern) override;
 };
 
 void OutVMSave::finalize()

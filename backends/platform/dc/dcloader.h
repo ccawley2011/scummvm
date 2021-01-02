@@ -27,7 +27,7 @@
 
 #define MAXDLERRLEN 80
 
-class DLObject {
+class DLObject final {
  private:
   char *errbuf; /* For error messages, at least MAXDLERRLEN in size */
 

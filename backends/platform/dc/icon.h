@@ -23,7 +23,7 @@
 #ifndef DC_ICON_H
 #define DC_ICON_H
 
-class Icon
+class Icon final
 {
  private:
   unsigned char bitmap[32*32/2];

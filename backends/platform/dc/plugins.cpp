@@ -65,11 +65,11 @@ static void drawPluginProgress(const Common::String &filename)
 }
 
 
-class OSystem_Dreamcast::DCPlugin : public DynamicPlugin {
+class OSystem_Dreamcast::DCPlugin final : public DynamicPlugin {
 protected:
 	void *_dlHandle;
 
-	virtual VoidFunc findSymbol(const char *symbol) {
+	virtual VoidFunc findSymbol(const char *symbol) override {
 		void *func = dlsym(_dlHandle, symbol);
 		if (!func)
 			warning("Failed loading symbol '%s' from plugin '%s' (%s)", symbol, _filename.c_str(), dlerror());
@@ -88,7 +88,7 @@ public:
 	DCPlugin(const Common::String &filename)
 		: DynamicPlugin(filename), _dlHandle(0) {}
 
-	bool loadPlugin() {
+	virtual bool loadPlugin() override {
 		assert(!_dlHandle);
 		drawPluginProgress(_filename);
 		_dlHandle = dlopen(_filename.c_str(), RTLD_LAZY);
@@ -106,7 +106,7 @@ public:
 		return ret;
 	}
 
-	void unloadPlugin() {
+	virtual void unloadPlugin() override {
 		DynamicPlugin::unloadPlugin();
 		if (_dlHandle) {
 			if (dlclose(_dlHandle) != 0)
