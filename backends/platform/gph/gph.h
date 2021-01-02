@@ -31,23 +31,23 @@
 #include "backends/events/gph/gph-events.h"
 #include "backends/graphics/gph/gph-graphics.h"
 
-class OSystem_GPH : public OSystem_POSIX {
+class OSystem_GPH final : public OSystem_POSIX {
 public:
 	OSystem_GPH();
 
 	/* Platform Setup Stuff */
-	void addSysArchivesToSearchSet(Common::SearchSet &s, int priority);
-	void initBackend();
-	void quit();
-	bool hasFeature(Feature f);
+	virtual void addSysArchivesToSearchSet(Common::SearchSet &s, int priority) override;
+	virtual void initBackend() override;
+	virtual void quit() override;
+	virtual bool hasFeature(Feature f) override;
 
 protected:
 	bool _inited;
 	bool _initedSDL;
-	virtual void initSDL();
+	virtual void initSDL() override;
 
 private:
-	Common::String getCurrentDirectory();
+	Common::String getCurrentDirectory() override;
 };
 
 #endif

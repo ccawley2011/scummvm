@@ -29,7 +29,7 @@
  * SDL Events manager for GPH devices.
  */
 
-class GPHEventSource : public LegacySdlEventSource {
+class GPHEventSource final : public LegacySdlEventSource {
 public:
 	GPHEventSource();
 
@@ -43,11 +43,11 @@ protected:
 
 	void ToggleTapMode();
 
-	bool handleJoyButtonDown(SDL_Event &ev, Common::Event &event);
-	bool handleJoyButtonUp(SDL_Event &ev, Common::Event &event);
-	bool handleMouseButtonDown(SDL_Event &ev, Common::Event &event);
-	bool handleMouseButtonUp(SDL_Event &ev, Common::Event &event);
-	bool remapKey(SDL_Event &ev, Common::Event &event);
+	virtual bool handleJoyButtonDown(SDL_Event &ev, Common::Event &event) override;
+	virtual bool handleJoyButtonUp(SDL_Event &ev, Common::Event &event) override;
+	virtual bool handleMouseButtonDown(SDL_Event &ev, Common::Event &event) override;
+	virtual bool handleMouseButtonUp(SDL_Event &ev, Common::Event &event) override;
+	virtual bool remapKey(SDL_Event &ev, Common::Event &event) override;
 };
 
 #endif /* BACKEND_EVENTS_GPH_H */

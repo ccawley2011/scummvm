@@ -25,15 +25,15 @@
 
 #include "backends/graphics/downscalesdl/downscalesdl-graphics.h"
 
-class GPHGraphicsManager : public DownscaleSdlGraphicsManager {
+class GPHGraphicsManager final : public DownscaleSdlGraphicsManager {
 public:
 	GPHGraphicsManager(SdlEventSource *boss, SdlWindow *window);
 
-	void initSize(uint w, uint h, const Graphics::PixelFormat *format = NULL) override;
-	bool loadGFXMode() override;
+	virtual void initSize(uint w, uint h, const Graphics::PixelFormat *format = NULL) override;
+	virtual bool loadGFXMode() override;
 
 protected:
-	void setupHardwareSize() override;
+	virtual void setupHardwareSize() override;
 };
 
 #endif /* BACKENDS_GRAPHICS_GPH_H */
