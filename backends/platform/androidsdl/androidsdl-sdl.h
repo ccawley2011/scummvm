@@ -25,12 +25,12 @@
 
 #include "backends/platform/sdl/posix/posix.h"
 
-class OSystem_ANDROIDSDL : public OSystem_POSIX {
+class OSystem_ANDROIDSDL final : public OSystem_POSIX {
 public:
-	virtual void initBackend();
-	virtual void setFeatureState(Feature f, bool enable);
-	virtual bool getFeatureState(Feature f);
-	virtual bool hasFeature(Feature f);
+	virtual void initBackend() override;
+	virtual void setFeatureState(Feature f, bool enable) override;
+	virtual bool getFeatureState(Feature f) override;
+	virtual bool hasFeature(Feature f) override;
 	void touchpadMode(bool enable);
 	void swapMenuAndBackButtons(bool enable);
 	void switchToDirectMouseMode();

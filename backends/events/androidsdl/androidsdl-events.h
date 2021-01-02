@@ -28,11 +28,11 @@
 /**
  * SDL events manager for ANDROIDSDL
  */
-class AndroidSdlEventSource : public SdlEventSource {
+class AndroidSdlEventSource final : public SdlEventSource {
 protected:
-	virtual bool handleMouseButtonDown(SDL_Event &ev, Common::Event &event);
-	virtual bool remapKey(SDL_Event &ev, Common::Event &event);
-	virtual int mapKey(SDL_Keycode key, SDL_Keymod mod, Uint16 unicode);
+	virtual bool handleMouseButtonDown(SDL_Event &ev, Common::Event &event) override;
+	virtual bool remapKey(SDL_Event &ev, Common::Event &event) override;
+	virtual int mapKey(SDL_Keycode key, SDL_Keymod mod, Uint16 unicode) override;
 };
 
 #endif
