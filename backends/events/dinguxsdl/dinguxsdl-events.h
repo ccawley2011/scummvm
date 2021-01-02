@@ -25,9 +25,9 @@
 
 #include "backends/events/sdl/legacy-sdl-events.h"
 
-class DINGUXSdlEventSource : public LegacySdlEventSource {
+class DINGUXSdlEventSource final : public LegacySdlEventSource {
 protected:
-	bool remapKey(SDL_Event &ev, Common::Event &event);
+	bool remapKey(SDL_Event &ev, Common::Event &event) override;
 };
 
 #endif /* BACKENDS_EVENTS_SDL_DINGUX_H */

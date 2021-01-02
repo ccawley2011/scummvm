@@ -33,18 +33,18 @@ class DownscaleSdlGraphicsManager : public SurfaceSdlGraphicsManager {
 public:
 	DownscaleSdlGraphicsManager(SdlEventSource *boss, SdlWindow *window);
 
-	int getDefaultGraphicsMode() const override;
+	virtual int getDefaultGraphicsMode() const override;
 
-	void initSize(uint w, uint h, const Graphics::PixelFormat *format = NULL) override;
-	const OSystem::GraphicsMode *getSupportedGraphicsModes() const override;
-	int getGraphicsModeScale(int mode) const override;
-	ScalerProc *getGraphicsScalerProc(int mode) const override;
-	void internUpdateScreen() override;
-	void showOverlay() override;
-	void hideOverlay() override;
-	void drawMouse() override;
-	void undrawMouse() override;
-	void warpMouse(int x, int y) override;
+	virtual void initSize(uint w, uint h, const Graphics::PixelFormat *format = NULL) override;
+	virtual const OSystem::GraphicsMode *getSupportedGraphicsModes() const override;
+	virtual int getGraphicsModeScale(int mode) const override;
+	virtual ScalerProc *getGraphicsScalerProc(int mode) const override;
+	virtual void internUpdateScreen() override;
+	virtual void showOverlay() override;
+	virtual void hideOverlay() override;
+	virtual void drawMouse() override;
+	virtual void undrawMouse() override;
+	virtual void warpMouse(int x, int y) override;
 
 	virtual void transformMouseCoordinates(Common::Point &point);
 

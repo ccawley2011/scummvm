@@ -27,10 +27,10 @@
 
 #include "backends/platform/sdl/posix/posix.h"
 
-class OSystem_SDL_Dingux : public OSystem_POSIX {
+class OSystem_SDL_Dingux final : public OSystem_POSIX {
 public:
-	void initBackend();
-	bool hasFeature(Feature f);
+	void initBackend() override;
+	bool hasFeature(Feature f) override;
 };
 
 
