@@ -30,13 +30,13 @@
 
 bool pakfs_deleteSaveGame(const char *filename);
 
-class InPAKSave : public Common::InSaveFile {
+class InPAKSave final : public Common::InSaveFile {
 private:
 	PAKFILE *fd;
 
-	uint32 read(void *buf, uint32 cnt);
-	bool skip(uint32 offset);
-	bool seek(int32 offs, int whence);
+	virtual uint32 read(void *buf, uint32 cnt) override;
+	virtual bool skip(uint32 offset) override;
+	virtual bool seek(int32 offs, int whence) override;
 
 public:
 	InPAKSave() : fd(NULL) { }
@@ -46,16 +46,16 @@ public:
 			pakfs_close(fd);
 	}
 
-	bool eos() const {
+	virtual bool eos() const override {
 		return pakfs_eof(fd);
 	}
-	void clearErr() {
+	virtual void clearErr() override {
 		pakfs_clearerr(fd);
 	}
-	int32 pos() const {
+	virtual int32 pos() const override {
 		return pakfs_tell(fd);
 	}
-	int32 size() const {
+	virtual int32 size() const override {
 		return fd->size;
 	}
 
@@ -65,14 +65,14 @@ public:
 	}
 };
 
-class OutPAKSave : public Common::WriteStream {
+class OutPAKSave final : public Common::WriteStream {
 private:
 	PAKFILE *fd;
 
 public:
-	uint32 write(const void *buf, uint32 cnt);
+	virtual uint32 write(const void *buf, uint32 cnt) override;
 
-	virtual int32 pos() const {
+	virtual int32 pos() const override {
 		return pakfs_tell(fd);
 	}
 
@@ -88,21 +88,21 @@ public:
 		}
 	}
 
-	bool err() const {
+	virtual bool err() const override {
 		if (fd)
 			return (pakfs_error(fd) == 1);
 		else
 			return true;
 	}
-	void clearErr() {
+	virtual void clearErr() override {
 		pakfs_clearerr(fd);
 	}
-	void finalize() {
+	virtual void finalize() override {
 		pakfs_flush(fd);
 	}
 };
 
-class PAKSaveManager : public Common::SaveFileManager {
+class PAKSaveManager final : public Common::SaveFileManager {
 public:
 	virtual void updateSavefilesList(Common::StringArray &lockedFiles) {
 		// this method is used to lock saves while cloud syncing
@@ -110,7 +110,7 @@ public:
 		// thus it's not implemtented
 	}
 
-	virtual Common::InSaveFile *openRawFile(const Common::String &filename) {
+	virtual Common::InSaveFile *openRawFile(const Common::String &filename) override {
 		InPAKSave *s = new InPAKSave();
 		if (s->readSaveGame(filename.c_str())) {
 			return s;
@@ -120,7 +120,7 @@ public:
 		}
 	}
 
-	virtual Common::OutSaveFile *openForSaving(const Common::String &filename, bool compress = true) {
+	virtual Common::OutSaveFile *openForSaving(const Common::String &filename, bool compress = true) override {
 		OutPAKSave *s = new OutPAKSave(filename.c_str());
 		if (!s->err()) {
 			return new Common::OutSaveFile(compress ? Common::wrapCompressedWriteStream(s) : s);
@@ -130,7 +130,7 @@ public:
 		}
 	}
 
-	virtual Common::InSaveFile *openForLoading(const Common::String &filename) {
+	virtual Common::InSaveFile *openForLoading(const Common::String &filename) override {
 		InPAKSave *s = new InPAKSave();
 		if (s->readSaveGame(filename.c_str())) {
 			return Common::wrapCompressedReadStream(s);
@@ -140,11 +140,11 @@ public:
 		}
 	}
 
-	virtual bool removeSavefile(const Common::String &filename) {
+	virtual bool removeSavefile(const Common::String &filename) override {
 		return ::pakfs_deleteSaveGame(filename.c_str());
 	}
 
-	virtual Common::StringArray listSavefiles(const Common::String &pattern);
+	virtual Common::StringArray listSavefiles(const Common::String &pattern) override;
 };
 
 
