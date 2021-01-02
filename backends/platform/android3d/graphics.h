@@ -26,7 +26,7 @@
 #include "common/scummsys.h"
 #include "backends/graphics3d/graphics3d.h"
 
-class AndroidGraphicsManager : public Graphics3dManager {
+class AndroidGraphicsManager final : public Graphics3dManager {
 public:
 	AndroidGraphicsManager();
 	virtual ~AndroidGraphicsManager();
@@ -34,16 +34,16 @@ public:
 	void initSurface();
 	void deinitSurface();
 
-	void updateScreen() override;
+	virtual void updateScreen() override;
 
-	void displayMessageOnOSD(const Common::U32String &msg);
+	virtual void displayMessageOnOSD(const Common::U32String &msg) override;
 
 	bool notifyMousePosition(Common::Point &mouse);
 	Common::Point getMousePosition() { return Common::Point(_cursorX, _cursorY); }
 	void setMousePosition(int x, int y) { _cursorX = x; _cursorY = y; }
 
-	virtual void beginGFXTransaction() {}
-	virtual OSystem::TransactionError endGFXTransaction() { return OSystem::kTransactionSuccess; }
+	virtual void beginGFXTransaction() override {}
+	virtual OSystem::TransactionError endGFXTransaction() override { return OSystem::kTransactionSuccess; }
 
 	virtual const OSystem::GraphicsMode *getSupportedGraphicsModes() const override;
 	virtual int getDefaultGraphicsMode() const override;
@@ -75,7 +75,7 @@ public:
 									int w, int h) override;
 	virtual Graphics::Surface *lockScreen() override;
 	virtual void unlockScreen() override;
-	virtual void fillScreen(uint32 col);
+	virtual void fillScreen(uint32 col) override;
 
 	virtual void initSize(uint width, uint height,
 							const Graphics::PixelFormat *format) override;

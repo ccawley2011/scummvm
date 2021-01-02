@@ -102,7 +102,7 @@ extern void checkGlError(const char *expr, const char *file, int line);
 #define GLTHREADCHECK do {  } while (false)
 #endif
 
-class OSystem_Android : public ModularMutexBackend, public ModularGraphicsBackend, Common::EventSource {
+class OSystem_Android final : public ModularMutexBackend, public ModularGraphicsBackend, Common::EventSource {
 private:
 	// passed from the dark side
 	int _audio_sample_rate;
@@ -133,11 +133,11 @@ public:
 	OSystem_Android(int audio_sample_rate, int audio_buffer_size);
 	virtual ~OSystem_Android();
 
-	virtual void initBackend();
+	virtual void initBackend() override;
 
-	virtual bool hasFeature(OSystem::Feature f);
-	virtual void setFeatureState(OSystem::Feature f, bool enable);
-	virtual bool getFeatureState(OSystem::Feature f);
+	virtual bool hasFeature(OSystem::Feature f) override;
+	virtual void setFeatureState(OSystem::Feature f, bool enable) override;
+	virtual bool getFeatureState(OSystem::Feature f) override;
 
 public:
 	void pushEvent(int type, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6);
@@ -167,28 +167,28 @@ public:
 
 	virtual void pushEvent(const Common::Event &event);
 	virtual void pushKeyPressEvent(Common::Event &event);
-	virtual bool pollEvent(Common::Event &event);
-	virtual Common::KeymapperDefaultBindings *getKeymapperDefaultBindings();
+	virtual bool pollEvent(Common::Event &event) override;
+	virtual Common::KeymapperDefaultBindings *getKeymapperDefaultBindings() override;
 
-	virtual uint32 getMillis(bool skipRecord = false);
-	virtual void delayMillis(uint msecs);
+	virtual uint32 getMillis(bool skipRecord = false) override;
+	virtual void delayMillis(uint msecs) override;
 
-	virtual void quit();
+	virtual void quit() override;
 
-	virtual void setWindowCaption(const Common::U32String &caption);
+	virtual void setWindowCaption(const Common::U32String &caption) override;
 	virtual void showVirtualKeyboard(bool enable);
 
-	virtual Audio::Mixer *getMixer();
-	virtual void getTimeAndDate(TimeDate &t) const;
-	virtual void logMessage(LogMessageType::Type type, const char *message);
+	virtual Audio::Mixer *getMixer() override;
+	virtual void getTimeAndDate(TimeDate &t) const override;
+	virtual void logMessage(LogMessageType::Type type, const char *message) override;
 	virtual void addSysArchivesToSearchSet(Common::SearchSet &s,
-											int priority = 0);
-	virtual bool openUrl(const Common::String &url);
-	virtual bool hasTextInClipboard();
-	virtual Common::U32String getTextFromClipboard();
-	virtual bool setTextInClipboard(const Common::U32String &text);
-	virtual bool isConnectionLimited();
-	virtual Common::String getSystemLanguage() const;
+											int priority = 0) override;
+	virtual bool openUrl(const Common::String &url) override;
+	virtual bool hasTextInClipboard() override;
+	virtual Common::U32String getTextFromClipboard() override;
+	virtual bool setTextInClipboard(const Common::U32String &text) override;
+	virtual bool isConnectionLimited() override;
+	virtual Common::String getSystemLanguage() const override;
 
 	void updateEventScale(const GLESBaseTexture *tex);
 	TouchControls* getTouchControls() { return &_touchControls; }

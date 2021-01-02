@@ -30,7 +30,7 @@
 #include "backends/platform/android3d/events.h"
 #include "backends/platform/android3d/texture.h"
 
-class TouchControls {
+class TouchControls final {
 public:
 	TouchControls();
 	~TouchControls();

@@ -201,61 +201,61 @@ protected:
 public:
 	virtual ~GLESTexture();
 
-	virtual void allocBuffer(GLuint w, GLuint h);
+	virtual void allocBuffer(GLuint w, GLuint h) override;
 
 	virtual void updateBuffer(GLuint x, GLuint y, GLuint width, GLuint height,
-								const void *buf, int pitch_buf);
-	virtual void fillBuffer(uint32 color);
+								const void *buf, int pitch_buf) override;
+	virtual void fillBuffer(uint32 color) override;
 
-	virtual void drawTexture(GLshort x, GLshort y, GLshort w, GLshort h) {
+	virtual void drawTexture(GLshort x, GLshort y, GLshort w, GLshort h) override {
 		drawTexture(x, y, w, h, Common::Rect(0, 0, width(), height()));
 	}
-	virtual void drawTexture(GLshort x, GLshort y, GLshort w, GLshort h, const Common::Rect &clip);
+	virtual void drawTexture(GLshort x, GLshort y, GLshort w, GLshort h, const Common::Rect &clip) override;
 
 protected:
 	byte *_pixels;
 	byte *_buf;
 };
 
-class GLES8888Texture : public GLESTexture {
+class GLES8888Texture final : public GLESTexture {
 public:
 	GLES8888Texture();
 	virtual ~GLES8888Texture();
 
-	static Graphics::PixelFormat pixelFormat() {
+	static Graphics::PixelFormat pixelFormat() override {
 		return Graphics::PixelFormat(4, 8, 8, 8, 8, 24, 16, 8, 0);
 	}
 };
 
 // RGBA4444 texture
-class GLES4444Texture : public GLESTexture {
+class GLES4444Texture final : public GLESTexture {
 public:
 	GLES4444Texture();
 	virtual ~GLES4444Texture();
 
-	static Graphics::PixelFormat pixelFormat() {
+	static Graphics::PixelFormat pixelFormat() override {
 		return Graphics::PixelFormat(2, 4, 4, 4, 4, 12, 8, 4, 0);
 	}
 };
 
 // RGBA5551 texture
-class GLES5551Texture : public GLESTexture {
+class GLES5551Texture final : public GLESTexture {
 public:
 	GLES5551Texture();
 	virtual ~GLES5551Texture();
 
-	static inline Graphics::PixelFormat pixelFormat() {
+	static inline Graphics::PixelFormat pixelFormat() override {
 		return Graphics::PixelFormat(2, 5, 5, 5, 1, 11, 6, 1, 0);
 	}
 };
 
 // RGB565 texture
-class GLES565Texture : public GLESTexture {
+class GLES565Texture final : public GLESTexture {
 public:
 	GLES565Texture();
 	virtual ~GLES565Texture();
 
-	static inline Graphics::PixelFormat pixelFormat() {
+	static inline Graphics::PixelFormat pixelFormat() override {
 		return Graphics::PixelFormat(2, 5, 6, 5, 0, 11, 5, 0, 0);
 	}
 };
@@ -268,26 +268,26 @@ protected:
 public:
 	virtual ~GLESFakePaletteTexture();
 
-	virtual void allocBuffer(GLuint w, GLuint h);
+	virtual void allocBuffer(GLuint w, GLuint h) override;
 	virtual void updateBuffer(GLuint x, GLuint y, GLuint width, GLuint height,
-								const void *buf, int pitch_buf);
-	virtual void fillBuffer(uint32 color);
+								const void *buf, int pitch_buf) override;
+	virtual void fillBuffer(uint32 color) override;
 
-	virtual void drawTexture(GLshort x, GLshort y, GLshort w, GLshort h) {
+	virtual void drawTexture(GLshort x, GLshort y, GLshort w, GLshort h) override {
 		drawTexture(x, y, w, h, Common::Rect(0, 0, width(), height()));
 	}
-	virtual void drawTexture(GLshort x, GLshort y, GLshort w, GLshort h, const Common::Rect &clip);
+	virtual void drawTexture(GLshort x, GLshort y, GLshort w, GLshort h, const Common::Rect &clip) override;
 
-	virtual const byte *palette_const() const {
+	virtual const byte *palette_const() const override {
 		return (byte *)_palette;
 	};
 
-	virtual byte *palette() {
+	virtual byte *palette() override {
 		setDirty();
 		return (byte *)_palette;
 	};
 
-	virtual const Graphics::PixelFormat &getPixelFormat() const;
+	virtual const Graphics::PixelFormat &getPixelFormat() const override;
 
 protected:
 	Graphics::PixelFormat _fake_format;
@@ -296,13 +296,13 @@ protected:
 	uint16 *_buf;
 };
 
-class GLESFakePalette565Texture : public GLESFakePaletteTexture {
+class GLESFakePalette565Texture final : public GLESFakePaletteTexture {
 public:
 	GLESFakePalette565Texture();
 	virtual ~GLESFakePalette565Texture();
 };
 
-class GLESFakePalette5551Texture : public GLESFakePaletteTexture {
+class GLESFakePalette5551Texture final : public GLESFakePaletteTexture {
 public:
 	GLESFakePalette5551Texture();
 	virtual ~GLESFakePalette5551Texture();
