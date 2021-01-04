@@ -685,13 +685,13 @@ void TextureCLUT8GPU::updateGLTexture() {
 
 void TextureCLUT8GPU::lookUpColors() {
 	// Setup pipeline to do color look up.
-	Pipeline *oldPipeline = g_context.setPipeline(_clut8Pipeline);
+	Pipeline *oldPipeline = g_pipelineManager.setPipeline(_clut8Pipeline);
 
 	// Do color look up.
-	g_context.getActivePipeline()->drawTexture(_clut8Texture, _clut8Vertices);
+	g_pipelineManager.getActivePipeline()->drawTexture(_clut8Texture, _clut8Vertices);
 
 	// Restore old state.
-	g_context.setPipeline(oldPipeline);
+	g_pipelineManager.setPipeline(oldPipeline);
 }
 #endif // !USE_FORCED_GLES
 

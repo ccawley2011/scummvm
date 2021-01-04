@@ -97,7 +97,7 @@ void Framebuffer::applyViewport() {
 }
 
 void Framebuffer::applyProjectionMatrix() {
-	g_context.getActivePipeline()->setProjectionMatrix(_projectionMatrix);
+	g_pipelineManager.getActivePipeline()->setProjectionMatrix(_projectionMatrix);
 }
 
 void Framebuffer::applyClearColor() {

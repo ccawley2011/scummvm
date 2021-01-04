@@ -121,6 +121,32 @@ private:
 	bool _isActive;
 };
 
+class PipelineManager {
+private:
+	/** Currently active rendering pipeline. */
+	Pipeline *activePipeline;
+
+public:
+	void reset() { activePipeline = nullptr; }
+
+	/**
+	 * Set new pipeline.
+	 *
+	 * Client is responsible for any memory management related to pipelines.
+	 *
+	 * @param pipeline Pipeline to activate.
+	 * @return Formerly active pipeline.
+	 */
+	Pipeline *setPipeline(Pipeline *pipeline);
+
+	/**
+	 * Query the currently active rendering pipeline.
+	 */
+	Pipeline *getActivePipeline() const { return activePipeline; }
+};
+
+extern PipelineManager g_pipelineManager;
+
 } // End of namespace OpenGL
 
 #endif

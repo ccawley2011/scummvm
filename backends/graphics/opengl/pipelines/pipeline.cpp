@@ -63,4 +63,20 @@ Framebuffer *Pipeline::setFramebuffer(Framebuffer *framebuffer) {
 	return oldFramebuffer;
 }
 
+Pipeline *PipelineManager::setPipeline(Pipeline *pipeline) {
+	Pipeline *oldPipeline = activePipeline;
+	if (oldPipeline) {
+		oldPipeline->deactivate();
+	}
+
+	activePipeline = pipeline;
+	if (activePipeline) {
+		activePipeline->activate();
+	}
+
+	return oldPipeline;
+}
+
+PipelineManager g_pipelineManager;
+
 } // End of namespace OpenGL

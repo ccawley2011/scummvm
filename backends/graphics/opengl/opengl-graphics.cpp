@@ -74,6 +74,7 @@ OpenGLGraphicsManager::OpenGLGraphicsManager()
     {
 	memset(_gamePalette, 0, sizeof(_gamePalette));
 	g_context.reset();
+	g_pipelineManager.reset();
 }
 
 OpenGLGraphicsManager::~OpenGLGraphicsManager() {
@@ -520,21 +521,21 @@ void OpenGLGraphicsManager::updateScreen() {
 	_backBuffer.enableBlend(Framebuffer::kBlendModeDisabled);
 
 	// First step: Draw the (virtual) game screen.
-	g_context.getActivePipeline()->drawTexture(_gameScreen->getGLTexture(), _gameDrawRect.left, _gameDrawRect.top, _gameDrawRect.width(), _gameDrawRect.height());
+	g_pipelineManager.getActivePipeline()->drawTexture(_gameScreen->getGLTexture(), _gameDrawRect.left, _gameDrawRect.top, _gameDrawRect.width(), _gameDrawRect.height());
 
 	// Second step: Draw the overlay if visible.
 	if (_overlayVisible) {
 		int dstX = (_windowWidth - _overlayDrawRect.width()) / 2;
 		int dstY = (_windowHeight - _overlayDrawRect.height()) / 2;
 		_backBuffer.enableBlend(Framebuffer::kBlendModeTraditionalTransparency);
-		g_context.getActivePipeline()->drawTexture(_overlay->getGLTexture(), dstX, dstY, _overlayDrawRect.width(), _overlayDrawRect.height());
+		g_pipelineManager.getActivePipeline()->drawTexture(_overlay->getGLTexture(), dstX, dstY, _overlayDrawRect.width(), _overlayDrawRect.height());
 	}
 
 	// Third step: Draw the cursor if visible.
 	if (_cursorVisible && _cursor) {
 		_backBuffer.enableBlend(Framebuffer::kBlendModePremultipliedTransparency);
 
-		g_context.getActivePipeline()->drawTexture(_cursor->getGLTexture(),
+		g_pipelineManager.getActivePipeline()->drawTexture(_cursor->getGLTexture(),
 		                         _cursorX - _cursorHotspotXScaled,
 		                         _cursorY - _cursorHotspotYScaled,
 		                         _cursorWidthScaled, _cursorHeightScaled);
@@ -564,17 +565,17 @@ void OpenGLGraphicsManager::updateScreen() {
 		}
 
 		// Set the OSD transparency.
-		g_context.getActivePipeline()->setColor(1.0f, 1.0f, 1.0f, _osdMessageAlpha / 100.0f);
+		g_pipelineManager.getActivePipeline()->setColor(1.0f, 1.0f, 1.0f, _osdMessageAlpha / 100.0f);
 
 		int dstX = (_windowWidth - _osdMessageSurface->getWidth()) / 2;
 		int dstY = (_windowHeight - _osdMessageSurface->getHeight()) / 2;
 
 		// Draw the OSD texture.
-		g_context.getActivePipeline()->drawTexture(_osdMessageSurface->getGLTexture(),
+		g_pipelineManager.getActivePipeline()->drawTexture(_osdMessageSurface->getGLTexture(),
 		                                           dstX, dstY, _osdMessageSurface->getWidth(), _osdMessageSurface->getHeight());
 
 		// Reset color.
-		g_context.getActivePipeline()->setColor(1.0f, 1.0f, 1.0f, 1.0f);
+		g_pipelineManager.getActivePipeline()->setColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 		if (_osdMessageAlpha <= 0) {
 			delete _osdMessageSurface;
@@ -587,7 +588,7 @@ void OpenGLGraphicsManager::updateScreen() {
 		int dstY = kOSDIconTopMargin;
 
 		// Draw the OSD icon texture.
-		g_context.getActivePipeline()->drawTexture(_osdIconSurface->getGLTexture(),
+		g_pipelineManager.getActivePipeline()->drawTexture(_osdIconSurface->getGLTexture(),
 		                                           dstX, dstY, _osdIconSurface->getWidth(), _osdIconSurface->getHeight());
 	}
 #endif
@@ -1006,21 +1007,21 @@ void OpenGLGraphicsManager::notifyContextCreate(const Graphics::PixelFormat &def
 	}
 #endif
 
-	g_context.setPipeline(_pipeline);
+	g_pipelineManager.setPipeline(_pipeline);
 
 	// Disable 3D properties.
 	GL_CALL(glDisable(GL_CULL_FACE));
 	GL_CALL(glDisable(GL_DEPTH_TEST));
 	GL_CALL(glDisable(GL_DITHER));
 
-	g_context.getActivePipeline()->setColor(1.0f, 1.0f, 1.0f, 1.0f);
+	g_pipelineManager.getActivePipeline()->setColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 	// Setup backbuffer state.
 
 	// Default to black as clear color.
 	_backBuffer.setClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-	g_context.getActivePipeline()->setFramebuffer(&_backBuffer);
+	g_pipelineManager.getActivePipeline()->setFramebuffer(&_backBuffer);
 
 	// We use a "pack" alignment (when reading from textures) to 4 here,
 	// since the only place where we really use it is the BMP screenshot
@@ -1091,7 +1092,7 @@ void OpenGLGraphicsManager::notifyContextDestroy() {
 #endif
 
 	// Destroy rendering pipeline.
-	g_context.setPipeline(nullptr);
+	g_pipelineManager.setPipeline(nullptr);
 	delete _pipeline;
 	_pipeline = nullptr;
 

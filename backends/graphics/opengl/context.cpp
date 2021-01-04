@@ -42,22 +42,6 @@ void Context::reset() {
 #define GL_FUNC_DEF(ret, name, param) name = nullptr;
 #include "backends/graphics/opengl/opengl-func.h"
 #undef GL_FUNC_DEF
-
-	activePipeline = nullptr;
-}
-
-Pipeline *Context::setPipeline(Pipeline *pipeline) {
-	Pipeline *oldPipeline = activePipeline;
-	if (oldPipeline) {
-		oldPipeline->deactivate();
-	}
-
-	activePipeline = pipeline;
-	if (activePipeline) {
-		activePipeline->activate();
-	}
-
-	return oldPipeline;
 }
 
 Context g_context;

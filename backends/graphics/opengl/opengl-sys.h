@@ -85,9 +85,6 @@ enum ContextType {
 	kContextGLES2
 };
 
-class Pipeline;
-class Framebuffer;
-
 /**
  * Description structure of the OpenGL (ES) context.
  */
@@ -121,31 +118,6 @@ struct Context {
 #define GL_FUNC_DEF(ret, name, param) ret (GL_CALL_CONV *name)param
 #include "backends/graphics/opengl/opengl-func.h"
 #undef GL_FUNC_DEF
-
-	//
-	// Wrapper functionality to handle fixed-function pipelines and
-	// programmable pipelines in the same fashion.
-	//
-
-private:
-	/** Currently active rendering pipeline. */
-	Pipeline *activePipeline;
-
-public:
-	/**
-	 * Set new pipeline.
-	 *
-	 * Client is responsible for any memory management related to pipelines.
-	 *
-	 * @param pipeline Pipeline to activate.
-	 * @return Formerly active pipeline.
-	 */
-	Pipeline *setPipeline(Pipeline *pipeline);
-
-	/**
-	 * Query the currently active rendering pipeline.
-	 */
-	Pipeline *getActivePipeline() const { return activePipeline; }
 };
 
 /**
