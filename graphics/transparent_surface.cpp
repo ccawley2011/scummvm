@@ -786,8 +786,8 @@ TransparentSurface *TransparentSurface::convertTo(const PixelFormat &dstFormat, 
 	if (format.bytesPerPixel == 0 || format.bytesPerPixel > 4)
 		error("Surface::convertTo(): Can only convert from 1Bpp, 2Bpp, 3Bpp, and 4Bpp");
 
-	if (dstFormat.bytesPerPixel != 2 && dstFormat.bytesPerPixel != 4)
-		error("Surface::convertTo(): Can only convert to 2Bpp and 4Bpp");
+	if (dstFormat.bytesPerPixel < 2 || dstFormat.bytesPerPixel > 4)
+		error("Surface::convertTo(): Can only convert to 2Bpp, 3Bpp and 4Bpp");
 
 	surface->create(w, h, dstFormat);
 
