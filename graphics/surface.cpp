@@ -94,17 +94,7 @@ void Surface::init(uint16 width, uint16 height, uint16 newPitch, void *newPixels
 
 void Surface::copyFrom(const Surface &surf) {
 	create(surf.w, surf.h, surf.format);
-	if (surf.pitch == pitch) {
-		memcpy(pixels, surf.pixels, h * pitch);
-	} else {
-		const byte *src = (const byte *)surf.pixels;
-		byte *dst = (byte *)pixels;
-		for (int y = h; y > 0; --y) {
-			memcpy(dst, src, w * format.bytesPerPixel);
-			src += surf.pitch;
-			dst += pitch;
-		}
-	}
+	copyBlit((byte *)pixels, (const byte *)surf.pixels, pitch, surf.pitch, w, h, format.bytesPerPixel);
 }
 
 Surface Surface::getSubArea(const Common::Rect &area) {
@@ -144,13 +134,7 @@ void Surface::copyRectToSurface(const void *buffer, int srcPitch, int destX, int
 	assert(width > 0 && destX + width <= w);
 
 	// Copy buffer data to internal buffer
-	const byte *src = (const byte *)buffer;
-	byte *dst = (byte *)getBasePtr(destX, destY);
-	for (int i = 0; i < height; i++) {
-		memcpy(dst, src, width * format.bytesPerPixel);
-		src += srcPitch;
-		dst += pitch;
-	}
+	copyBlit((byte *)getBasePtr(destX, destY), (const byte *)buffer, pitch, srcPitch, width, height, format.bytesPerPixel);
 }
 
 void Surface::copyRectToSurface(const Graphics::Surface &srcSurface, int destX, int destY, const Common::Rect subRect) {
@@ -430,26 +414,7 @@ void Surface::convertToInPlace(const PixelFormat &dstFormat, const byte *palette
 	if (format.bytesPerPixel == 1) {
 		assert(palette);
 
-		for (int y = h; y > 0; --y) {
-			const byte *srcRow = (const byte *)pixels + y * pitch - 1;
-			byte *dstRow = (byte *)pixels + y * w * dstFormat.bytesPerPixel - dstFormat.bytesPerPixel;
-
-			for (int x = 0; x < w; x++) {
-				byte index = *srcRow--;
-				byte r = palette[index * 3];
-				byte g = palette[index * 3 + 1];
-				byte b = palette[index * 3 + 2];
-
-				uint32 color = dstFormat.RGBToColor(r, g, b);
-
-				if (dstFormat.bytesPerPixel == 2)
-					*((uint16 *)dstRow) = color;
-				else
-					*((uint32 *)dstRow) = color;
-
-				dstRow -= dstFormat.bytesPerPixel;
-			}
-		}
+		crossBlitPalette((byte *)pixels, (const byte *)pixels, w * dstFormat.bytesPerPixel, pitch, w, h, dstFormat, palette);
 	} else {
 		crossBlit((byte *)pixels, (const byte *)pixels, w * dstFormat.bytesPerPixel, pitch, w, h, dstFormat, format);
 	}
@@ -491,60 +456,10 @@ Graphics::Surface *Surface::convertTo(const PixelFormat &dstFormat, const byte *
 		// Converting from paletted to high color
 		assert(palette);
 
-		for (int y = 0; y < h; y++) {
-			const byte *srcRow = (const byte *)getBasePtr(0, y);
-			byte *dstRow = (byte *)surface->getBasePtr(0, y);
-
-			for (int x = 0; x < w; x++) {
-				byte index = *srcRow++;
-				byte r = palette[index * 3];
-				byte g = palette[index * 3 + 1];
-				byte b = palette[index * 3 + 2];
-
-				uint32 color = dstFormat.RGBToColor(r, g, b);
-
-				if (dstFormat.bytesPerPixel == 2)
-					*((uint16 *)dstRow) = color;
-				else if (dstFormat.bytesPerPixel == 3)
-					WRITE_UINT24(dstRow, color);
-				else
-					*((uint32 *)dstRow) = color;
-
-				dstRow += dstFormat.bytesPerPixel;
-			}
-		}
+		crossBlitPalette((byte *)surface->getPixels(), (const byte *)pixels, surface->pitch, pitch, w, h, dstFormat, palette);
 	} else {
 		// Converting from high color to high color
-		for (int y = 0; y < h; y++) {
-			const byte *srcRow = (const byte *)getBasePtr(0, y);
-			byte *dstRow = (byte *)surface->getBasePtr(0, y);
-
-			for (int x = 0; x < w; x++) {
-				uint32 srcColor;
-				if (format.bytesPerPixel == 2)
-					srcColor = READ_UINT16(srcRow);
-				else if (format.bytesPerPixel == 3)
-					srcColor = READ_UINT24(srcRow);
-				else
-					srcColor = READ_UINT32(srcRow);
-
-				srcRow += format.bytesPerPixel;
-
-				// Convert that color to the new format
-				byte r, g, b, a;
-				format.colorToARGB(srcColor, a, r, g, b);
-				uint32 color = dstFormat.ARGBToColor(a, r, g, b);
-
-				if (dstFormat.bytesPerPixel == 2)
-					*((uint16 *)dstRow) = color;
-				else if (dstFormat.bytesPerPixel == 3)
-					WRITE_UINT24(dstRow, color);
-				else
-					*((uint32 *)dstRow) = color;
-
-				dstRow += dstFormat.bytesPerPixel;
-			}
-		}
+		crossBlit((byte *)surface->getPixels(), (const byte *)pixels, surface->pitch, pitch, w, h, dstFormat, format);
 	}
 
 	return surface;
