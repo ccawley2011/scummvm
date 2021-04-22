@@ -214,6 +214,78 @@ bool crossBlit(byte *dst, const byte *src,
 
 namespace {
 
+template<typename DstColor, int DstSize>
+inline void crossBlitLookupLogic(byte *dst, const byte *src, const uint w, const uint h,
+						   const uint srcDelta, const uint dstDelta, const uint32 *lookup) {
+	uint32 color;
+	uint8 *col = (uint8 *)&color;
+#ifdef SCUMM_BIG_ENDIAN
+	col++;
+#endif
+	for (uint y = 0; y < h; ++y) {
+		for (uint x = 0; x < w; ++x) {
+			color = lookup[*src++];
+
+			if (DstSize == 3)
+				memcpy(dst, col, 3);
+			else
+				*(DstColor *)dst = color;
+
+			dst += DstSize;
+		}
+
+		src += srcDelta;
+		dst += dstDelta;
+	}
+}
+
+} // End of anonymous namespace
+
+// Function to convert a palette to a lookup table
+void convertPalette(uint32 *dst, const byte *src, uint colors, const Graphics::PixelFormat &format) {
+	while (colors-- > 0) {
+		*dst++ = format.RGBToColor(src[0], src[1], src[2]);
+		src += 3;
+	}
+}
+
+// Function to blit a rect from paletted to high color
+bool crossBlitPalette(byte *dst, const byte *src,
+			   const uint dstPitch, const uint srcPitch,
+			   const uint w, const uint h,
+			   const Graphics::PixelFormat &dstFmt, const byte *palette) {
+	uint32 lookup[256];
+	convertPalette(lookup, palette, 256, dstFmt);
+
+	return crossBlitLookup(dst, src, dstPitch, srcPitch, w, h, dstFmt.bytesPerPixel, lookup);
+}
+
+// Function to blit a rect using a 256 entry lookup table
+bool crossBlitLookup(byte *dst, const byte *src,
+			   const uint dstPitch, const uint srcPitch,
+			   const uint w, const uint h,
+			   const uint bytesPerPixel, const uint32 *lookup) {
+	// Faster, but larger, to provide optimized handling for each case.
+	const uint srcDelta = (srcPitch - w);
+	const uint dstDelta = (dstPitch - w * bytesPerPixel);
+
+	if (bytesPerPixel == 1) {
+		crossBlitLookupLogic<uint8, 1>(dst, src, w, h, srcDelta, dstDelta, lookup);
+	} else if (bytesPerPixel == 2) {
+		crossBlitLookupLogic<uint16, 1>(dst, src, w, h, srcDelta, dstDelta, lookup);
+	} else if (bytesPerPixel == 3) {
+		crossBlitLookupLogic<uint8, 3>(dst, src, w, h, srcDelta, dstDelta, lookup);
+	} else if (bytesPerPixel == 4) {
+		crossBlitLookupLogic<uint32, 1>(dst, src, w, h, srcDelta, dstDelta, lookup);
+	} else {
+		return false;
+	}
+
+	return true;
+}
+
+namespace {
+
 template <typename Size>
 void scaleNN(byte *dst, const byte *src,
 			   const uint dstPitch, const uint srcPitch,
