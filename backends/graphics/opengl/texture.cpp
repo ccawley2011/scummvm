@@ -31,6 +31,8 @@
 #include "common/rect.h"
 #include "common/textconsole.h"
 
+#include "graphics/conversion.h"
+
 namespace OpenGL {
 
 GLTexture::GLTexture(GLenum glIntFormat, GLenum glFormat, GLenum glType)
@@ -306,8 +308,8 @@ void Texture::updateGLTexture() {
 }
 
 TextureCLUT8::TextureCLUT8(GLenum glIntFormat, GLenum glFormat, GLenum glType, const Graphics::PixelFormat &format)
-	: Texture(glIntFormat, glFormat, glType, format), _clut8Data(), _palette(new byte[256 * format.bytesPerPixel]) {
-	memset(_palette, 0, sizeof(byte) * format.bytesPerPixel);
+	: Texture(glIntFormat, glFormat, glType, format), _clut8Data(), _palette(new uint32[256]) {
+	memset(_palette, 0, sizeof(uint32) * 256);
 }
 
 TextureCLUT8::~TextureCLUT8() {
@@ -337,59 +339,18 @@ void TextureCLUT8::setColorKey(uint colorKey) {
 	// to avoid color fringes due to filtering.
 	// Erasing the color data is not a problem as the palette is always fully re-initialized
 	// before setting the key color.
-	if (_format.bytesPerPixel == 2) {
-		uint16 *palette = (uint16 *)_palette + colorKey;
-		*palette = 0;
-	} else if (_format.bytesPerPixel == 4) {
-		uint32 *palette = (uint32 *)_palette + colorKey;
-		*palette = 0;
-	} else {
-		warning("TextureCLUT8::setColorKey: Unsupported pixel depth %d", _format.bytesPerPixel);
-	}
+	_palette[colorKey] = 0;
 
 	// A palette changes means we need to refresh the whole surface.
 	flagDirty();
 }
-
-namespace {
-template<typename ColorType>
-inline void convertPalette(ColorType *dst, const byte *src, uint colors, const Graphics::PixelFormat &format) {
-	while (colors-- > 0) {
-		*dst++ = format.RGBToColor(src[0], src[1], src[2]);
-		src += 3;
-	}
-}
-} // End of anonymous namespace
 
 void TextureCLUT8::setPalette(uint start, uint colors, const byte *palData) {
-	if (_format.bytesPerPixel == 2) {
-		convertPalette<uint16>((uint16 *)_palette + start, palData, colors, _format);
-	} else if (_format.bytesPerPixel == 4) {
-		convertPalette<uint32>((uint32 *)_palette + start, palData, colors, _format);
-	} else {
-		warning("TextureCLUT8::setPalette: Unsupported pixel depth: %d", _format.bytesPerPixel);
-	}
+	Graphics::convertPalette(_palette + start, palData, colors, _format);
 
 	// A palette changes means we need to refresh the whole surface.
 	flagDirty();
 }
-
-namespace {
-template<typename PixelType>
-inline void doPaletteLookUp(PixelType *dst, const byte *src, uint width, uint height, uint dstPitch, uint srcPitch, const PixelType *palette) {
-	uint srcAdd = srcPitch - width;
-	uint dstAdd = dstPitch - width * sizeof(PixelType);
-
-	while (height-- > 0) {
-		for (uint x = width; x > 0; --x) {
-			*dst++ = palette[*src++];
-		}
-
-		dst = (PixelType *)((byte *)dst + dstAdd);
-		src += srcAdd;
-	}
-}
-} // End of anonymous namespace
 
 void TextureCLUT8::updateGLTexture() {
 	if (!isDirty()) {
@@ -401,19 +362,9 @@ void TextureCLUT8::updateGLTexture() {
 
 	Common::Rect dirtyArea = getDirtyArea();
 
-	if (outSurf->format.bytesPerPixel == 2) {
-		doPaletteLookUp<uint16>((uint16 *)outSurf->getBasePtr(dirtyArea.left, dirtyArea.top),
-		                        (const byte *)_clut8Data.getBasePtr(dirtyArea.left, dirtyArea.top),
-		                        dirtyArea.width(), dirtyArea.height(),
-		                        outSurf->pitch, _clut8Data.pitch, (const uint16 *)_palette);
-	} else if (outSurf->format.bytesPerPixel == 4) {
-		doPaletteLookUp<uint32>((uint32 *)outSurf->getBasePtr(dirtyArea.left, dirtyArea.top),
-		                        (const byte *)_clut8Data.getBasePtr(dirtyArea.left, dirtyArea.top),
-		                        dirtyArea.width(), dirtyArea.height(),
-		                        outSurf->pitch, _clut8Data.pitch, (const uint32 *)_palette);
-	} else {
-		warning("TextureCLUT8::updateGLTexture: Unsupported pixel depth: %d", outSurf->format.bytesPerPixel);
-	}
+	byte *dst = (byte *)outSurf->getBasePtr(dirtyArea.left, dirtyArea.top);
+	const byte *src = (const byte *)_clut8Data.getBasePtr(dirtyArea.left, dirtyArea.top);
+	Graphics::crossBlitLookup(dst, src, outSurf->pitch, _clut8Data.pitch, dirtyArea.width(), dirtyArea.height(), outSurf->format.bytesPerPixel, _palette);
 
 	// Do generic handling of updating the texture.
 	Texture::updateGLTexture();

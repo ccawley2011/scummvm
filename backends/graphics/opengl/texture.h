@@ -315,7 +315,7 @@ public:
 	virtual void updateGLTexture();
 private:
 	Graphics::Surface _clut8Data;
-	byte *_palette;
+	uint32 *_palette;
 };
 
 #if !USE_FORCED_GL
