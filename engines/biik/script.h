@@ -67,6 +67,7 @@ private:
 	static const CommandListEntry _commandList[];
 
 	void cmd_Call(const Common::String &command);
+	void cmd_Page(const Common::String &command);
 	void cmd_SetInt(const Common::String &command);
 	void cmd_SetString(const Common::String &command);
 };

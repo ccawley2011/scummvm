@@ -111,16 +111,27 @@ Common::Error BiikGame::run() {
 		return guiError;
 
 	_sound = new Sound(this, waveDir);
-
 	_archive = new BiikArchive(isBigEndian());
-	if (!_archive->open(getFileName(GAME_STARTFILE)))
-		return Common::kNoGameDataFoundError;
-
 	_script = new Script(this);
-	_script->load(_archive, "Text");
-	_script->run("page001");
+
+	load(getFileName(GAME_STARTFILE), "page001");
 
 	return _gui->run();
 }
+
+bool BiikGame::load(const Common::String &archive, const Common::String &start) {
+	Common::String filename(archive);
+	if (getPlatform() == Common::kPlatformWindows && !filename.hasSuffixIgnoreCase(".das"))
+		filename += ".das";
+
+	if (!_archive->open(filename))
+		return false;
+
+	_script->load(_archive, "Text");
+	_script->run(start);
+
+	return true;
+}
+
 
 } // End of namespace Biik
