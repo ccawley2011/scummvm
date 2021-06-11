@@ -47,6 +47,8 @@ public:
 
 	virtual Common::Error run() override;
 
+	bool load(const Common::String &archive, const Common::String &start);
+
 	// Detection related functions
 	const ADGameDescription *_gameDescription;
 	const char *getGameId() const;

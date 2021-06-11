@@ -92,6 +92,7 @@ const Script::CommandListEntry Script::_commandList[] = {
 	{ "#", &Script::cmd_SetInt },
 	{ "$", &Script::cmd_SetString },
 	{ "C", &Script::cmd_Call },
+	{ "P", &Script::cmd_Page },
 	{ nullptr, nullptr }
 };
 
@@ -112,6 +113,16 @@ void Script::command(const Common::String &command) {
 
 void Script::cmd_Call(const Common::String &command) {
 	run(command.substr(1));
+}
+
+void Script::cmd_Page(const Common::String &command) {
+	size_t equals = command.find('@');
+	Common::String page = command.substr(1, equals - 1);
+	Common::String archive = command.substr(equals + 1);
+
+	warning("Switching to page: %s @ %s", page.c_str(), archive.c_str());
+	if (!_vm->load(archive, "page" + page))
+		error("Failed to load archive %s", archive.c_str());
 }
 
 void Script::cmd_SetInt(const Common::String &command) {
