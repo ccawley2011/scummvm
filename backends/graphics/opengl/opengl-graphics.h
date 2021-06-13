@@ -288,7 +288,7 @@ private:
 	 */
 	Pipeline *_pipeline;
 
-protected:
+public:
 	/**
 	 * Query the address of an OpenGL function by name.
 	 *
@@ -302,6 +302,7 @@ protected:
 	 */
 	virtual void *getProcAddress(const char *name) const = 0;
 
+protected:
 	/**
 	 * Try to determine the internal parameters for a given pixel format.
 	 *
