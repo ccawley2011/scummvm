@@ -199,7 +199,4 @@ const char *gScummVMFeatures = ""
 #ifdef USE_GLES2
 	"OpenGL ES 2 "
 #endif
-#ifdef USE_GLEW
-	"GLEW "
-#endif
 	;
