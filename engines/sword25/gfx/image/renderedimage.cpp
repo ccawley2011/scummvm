@@ -99,8 +99,7 @@ static byte *readSavegameThumbnail(const Common::String &filename, uint &fileSiz
 	return pFileData;
 }
 
-RenderedImage::RenderedImage(const Common::String &filename, bool &result) :
-	_isTransparent(true) {
+RenderedImage::RenderedImage(const Common::String &filename, bool &result) {
 	result = false;
 
 	PackageManager *pPackage = Kernel::getInstance()->getPackage();
@@ -144,7 +143,7 @@ RenderedImage::RenderedImage(const Common::String &filename, bool &result) :
 
 #if defined(SCUMM_LITTLE_ENDIAN)
 	// Makes sense for LE only at the moment
-	checkForTransparency();
+	_surface.setAlphaMode(checkForTransparency());
 #endif
 
 	return;
@@ -152,8 +151,7 @@ RenderedImage::RenderedImage(const Common::String &filename, bool &result) :
 
 // -----------------------------------------------------------------------------
 
-RenderedImage::RenderedImage(uint width, uint height, bool &result) :
-	_isTransparent(true) {
+RenderedImage::RenderedImage(uint width, uint height, bool &result) {
 
 	_surface.create(width, height, Graphics::PixelFormat(4, 8, 8, 8, 8, 24, 16, 8, 0));
 
@@ -165,7 +163,7 @@ RenderedImage::RenderedImage(uint width, uint height, bool &result) :
 	return;
 }
 
-RenderedImage::RenderedImage() : _isTransparent(true) {
+RenderedImage::RenderedImage() {
 	_backSurface = Kernel::getInstance()->getGfx()->getSurface();
 
 	_surface.format = Graphics::PixelFormat(4, 8, 8, 8, 8, 24, 16, 8, 0);
@@ -250,18 +248,19 @@ void RenderedImage::copyDirectly(int posX, int posY) {
 	g_system->copyRectToScreen(data, _backSurface->pitch, posX, posY, w, h);
 }
 
-void RenderedImage::checkForTransparency() {
+Graphics::AlphaType RenderedImage::checkForTransparency() {
 	// Check if the source bitmap has any transparent pixels at all
-	_isTransparent = false;
+	bool isTransparent = false;
 	byte *data = (byte *)_surface.getPixels();
 	for (int i = 0; i < _surface.h; i++) {
 		for (int j = 0; j < _surface.w; j++) {
-			_isTransparent = data[3] != 0xff;
-			if (_isTransparent)
-				return;
+			isTransparent = data[3] != 0xff;
+			if (isTransparent)
+				return Graphics::ALPHA_FULL;
 			data += 4;
 		}
 	}
+	return Graphics::ALPHA_OPAQUE;
 }
 
 } // End of namespace Sword25

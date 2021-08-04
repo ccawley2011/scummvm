@@ -105,17 +105,16 @@ public:
 		return true;
 	}
 
-	void setIsTransparent(bool isTransparent) { _isTransparent = isTransparent; }
-	bool isSolid() const override { return !_isTransparent; }
+	void setIsTransparent(bool isTransparent) { _surface.setAlphaMode(isTransparent ? Graphics::ALPHA_FULL : Graphics::ALPHA_OPAQUE); }
+	bool isSolid() const override { return (_surface.getAlphaMode() == Graphics::ALPHA_OPAQUE); }
 
 private:
 	Graphics::TransparentSurface _surface;
 	bool _doCleanup;
-	bool _isTransparent;
 
 	Graphics::Surface *_backSurface;
 
-	void checkForTransparency();
+	Graphics::AlphaType checkForTransparency();
 };
 
 } // End of namespace Sword25
