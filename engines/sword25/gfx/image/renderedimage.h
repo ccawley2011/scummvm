@@ -79,7 +79,7 @@ public:
 	                  int width = -1, int height = -1,
 					  RectangleList *updateRects = 0) override;
 	bool fill(const Common::Rect *pFillRect, uint color) override;
-	bool setContent(const byte *pixeldata, uint size, uint offset = 0, uint stride = 0) override;
+	bool setContent(const Graphics::Surface *src) override;
 	void replaceContent(byte *pixeldata, int width, int height);
 	uint getPixel(int x, int y) override;
 

@@ -603,7 +603,7 @@ uint VectorImage::getPixel(int x, int y) {
 
 // -----------------------------------------------------------------------------
 
-bool VectorImage::setContent(const byte *pixeldata, uint size, uint offset, uint stride) {
+bool VectorImage::setContent(const Graphics::Surface *src) {
 	error("SetContent() is not supported.");
 	return 0;
 }

@@ -162,7 +162,7 @@ public:
 	    @return Gibt false zurück, falls der Aufruf fehlgeschlagen ist.
 	    @remark Ein Aufruf dieser Methode ist nur erlaubt, wenn IsSetContentAllowed() true zurückgibt.
 	*/
-	virtual bool    setContent(const byte *pixeldata, uint size, uint offset = 0, uint stride = 0) = 0;
+	virtual bool    setContent(const Graphics::Surface *src) = 0;
 
 	virtual bool    isScalingAllowed() const = 0;
 	virtual bool    isAlphaAllowed() const = 0;

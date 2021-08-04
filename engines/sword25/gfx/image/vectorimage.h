@@ -204,7 +204,7 @@ public:
 	bool isSetContentAllowed() const override {
 		return false;
 	}
-	bool setContent(const byte *pixeldata, uint size, uint offset, uint stride) override;
+	bool setContent(const Graphics::Surface *src) override;
 	bool blit(int posX = 0, int posY = 0,
 	                  int flipping = Graphics::FLIP_NONE,
 	                  Common::Rect *pPartRect = NULL,

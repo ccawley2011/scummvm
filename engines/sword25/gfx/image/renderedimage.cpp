@@ -192,21 +192,8 @@ bool RenderedImage::fill(const Common::Rect *pFillRect, uint color) {
 
 // -----------------------------------------------------------------------------
 
-bool RenderedImage::setContent(const byte *pixeldata, uint size, uint offset, uint stride) {
-	// Check if PixelData contains enough pixel to create an image with image size equals width * height
-	if (size < static_cast<uint>(_surface.w * _surface.h * 4)) {
-		error("PixelData vector is too small to define a 32 bit %dx%d image.", _surface.w, _surface.h);
-		return false;
-	}
-
-	const byte *in = &pixeldata[offset];
-	byte *out = (byte *)_surface.getPixels();
-
-	for (int i = 0; i < _surface.h; i++) {
-		memcpy(out, in, _surface.w * 4);
-		out += _surface.w * 4;
-		in += stride;
-	}
+bool RenderedImage::setContent(const Graphics::Surface *src) {
+	_surface.copyFrom(*src);
 
 	return true;
 }

@@ -48,7 +48,7 @@ public:
 
 	uint getPixel(int x, int y) const override;
 
-	bool setContent(const byte *pixeldata, uint size, uint offset, uint stride) override;
+	bool setContent(const Graphics::Surface *src) override;
 
 	bool isScalingAllowed() const override;
 	bool isAlphaAllowed() const override;

@@ -58,7 +58,7 @@ public:
 	                  int width = -1, int height = -1,
 					  RectangleList *updateRects = 0) override;
 	bool fill(const Common::Rect *fillRectPtr, uint color) override;
-	bool setContent(const byte *pixeldata, uint size, uint offset, uint stride) override;
+	bool setContent(const Graphics::Surface *src) override;
 	uint getPixel(int x, int y) override;
 
 	bool isBlitSource() const override               {

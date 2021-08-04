@@ -83,7 +83,7 @@ bool SWImage::fill(const Common::Rect *pFillRect, uint color) {
 	return false;
 }
 
-bool SWImage::setContent(const byte *pixeldata, uint size, uint offset, uint stride) {
+bool SWImage::setContent(const Graphics::Surface *src) {
 	error("SetContent() is not supported.");
 	return false;
 }

@@ -128,7 +128,7 @@ uint StaticBitmap::getPixel(int x, int y) const {
 	return result;
 }
 
-bool StaticBitmap::setContent(const byte *pixeldata, uint size, uint offset, uint stride) {
+bool StaticBitmap::setContent(const Graphics::Surface *src) {
 	error("SetContent() ist not supported with this object.");
 	return false;
 }

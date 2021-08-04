@@ -134,7 +134,7 @@ public:
 	    @return returns false, if the call failed.
 	    @remark A call of this methode is only allowd if IsSetContentAllowed() returns true.
 	*/
-	virtual bool setContent(const byte *pixeldata, uint size, uint offset, uint stride) = 0;
+	virtual bool setContent(const Graphics::Surface *src) = 0;
 
 	/**
 	    @brief Reads out a pixel of the image.

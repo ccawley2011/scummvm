@@ -114,9 +114,9 @@ bool DynamicBitmap::doRender(RectangleList *updateRects) {
 	return result;
 }
 
-bool DynamicBitmap::setContent(const byte *pixeldata, uint size, uint offset, uint stride) {
+bool DynamicBitmap::setContent(const Graphics::Surface *src) {
 	++_version; // Update version to display the new video image
-	return _image->setContent(pixeldata, size, offset, stride);
+	return _image->setContent(src);
 }
 
 bool DynamicBitmap::isScalingAllowed() const {
@@ -165,9 +165,7 @@ bool DynamicBitmap::unpersist(InputPersistenceBlock &reader) {
 	warning("Unpersisting a BS_DynamicBitmap. Bitmap contents are missing.");
 
 	// Initialize a transparent image.
-	byte *transparentImageData = (byte *)calloc(_width * _height * 4, 1);
-	_image->setContent(transparentImageData, _width * _height);
-	free(transparentImageData);
+	_image->fill(0, 0);
 
 	result &= RenderObject::unpersistChildren(reader);
 
