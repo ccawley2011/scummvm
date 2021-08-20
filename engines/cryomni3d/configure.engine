@@ -1,4 +1,5 @@
-# add_engine [name] [desc] [build-by-default] [subengines] [base games] [deps]
+# This file is included from the main "configure" script
+# add_engine [name] [desc] [build-by-default] [subengines] [base games] [deps] [optional-deps]
 add_engine cryomni3d "Cryo Omni3D games" yes "versailles" "" "highres"
 add_engine versailles "Versailles 1685" yes
 

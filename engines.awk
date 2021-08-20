@@ -65,6 +65,11 @@ function get_engine_dependencies(engine, deps) {
 	return get_values("_engine_" engine "_deps", deps)
 }
 
+# Get the optional dependencies
+function get_engine_optional_dependencies(engine, deps) {
+	return get_values("_engine_" engine "_optional_deps", deps)
+}
+
 # Get the base engine game support description
 function get_engine_base(engine) {
 	return ENVIRON["_engine_" engine "_base"]
@@ -107,6 +112,24 @@ function check_engine_deps(engine) {
 	}
 }
 
+function check_engine_optional_deps(engine) {
+	unmet_deps = ""
+
+	# Check whether the engine is enabled
+	if (get_engine_build(engine) != "no") {
+		# Collect unmet dependencies
+		depcount = get_engine_optional_dependencies(engine, deps)
+		for (d = 1; d <= depcount; d++) {
+			if (get_feature_state(deps[d]) == "no")
+				unmet_deps = unmet_deps get_feature_name(deps[d]) " "
+		}
+
+		# Check whether there is any unmet dependency
+		if (unmet_deps) {
+			print("WARNING: Engine " get_engine_name(engine) " may lack certain features because the following dependencies are unmet: " unmet_deps)
+		}
+	}
+}
 # Prepare the strings about the engines to build
 function prepare_engine_build_strings(engine) {
 	if (string = get_engine_build_string(engine, "static"))
@@ -247,6 +270,7 @@ END {
 	for (e = 1; e <= engine_count; e++) {
 		engine = engines[e]
 		check_engine_deps(engine)
+		check_engine_optional_deps(engine)
 		if (get_engine_sub(engine) == "no") {
 			# It's a main engine
 			if (get_engine_build(engine) == "no") {

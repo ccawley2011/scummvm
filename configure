@@ -108,6 +108,7 @@ add_engine() {
 	set_var _engine_${1}_subengines "${4}"
 	set_var _engine_${1}_base "${5}"
 	set_var _engine_${1}_deps "${6}"
+	set_var _engine_${1}_optional_deps "${7}"
 	for sub in ${4}; do
 		set_var _engine_${sub}_sub "yes"
 		set_var _engine_${sub}_parent "${1}"
