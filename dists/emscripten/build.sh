@@ -17,7 +17,6 @@ if [[ ! -d "$DIST_FOLDER" ]]; then
   exit 1
 fi
 if [[ "$1" =~ ^(clean)$ ]]; then
-  make clean
   make distclean
   rm -rf ./dists/emscripten/libs/build
   rm -rf ./dists/emscripten/libs/*/
@@ -98,16 +97,6 @@ fi
 
 cd "$ROOT_FOLDER"
 
-## Emscripten configuration (should probably go into the configure file)
-## IMPORTANT: ASYNCIFY WITH -O0 doesnt work (presumably because the stack gets too big)
-export LDFLAGS="-O2 -s ASSERTIONS=1 -s GL_ASSERTIONS=1 -s LLD_REPORT_UNDEFINED -s INITIAL_MEMORY=33554432"
-
-#debugging
-export LDFLAGS="${LDFLAGS} -g -gseparate-dwarf=scummvm.debug.wasm -s SEPARATE_DWARF_URL=\"http://localhost:8080/scummvm.debug.wasm\""
-
-# linker flags (bundle JS and default assets)
-export LDFLAGS_LINKER=" --pre-js ./dists/emscripten/pre.js --post-js ./dists/emscripten/post.js --shell-file ./dists/emscripten/custom_shell.html "
-
 if [[ "$1" =~ ^(configure|all)$ ]]; then
 
   echo "clean, & configure"
@@ -126,14 +115,6 @@ if [[ "$1" =~ ^(configure|all)$ ]]; then
   # https://github.com/emscripten-core/emscripten/wiki/Linking
   # https://freecontent.manning.com/dynamic-linking-a-crash-course/
   # https://iandouglasscott.com/2019/07/18/experimenting-with-webassembly-dynamic-linking-with-clang/
-
-  # HACK: the preload flags break emcc during configure as emcc enables NODERAWFS when run as part of configure
-  # which doesn't support preloading assets, so we have to manually add those after configure to the config.mk file
-  echo "LDFLAGS += ${LDFLAGS_LINKER}" >>config.mk
-
-  # configure currently doesn't clean up all files it created
-  rm scummvm-conf.*
-
 fi
 
 if [[ "$1" =~ ^(data|all)$ ]]; then
@@ -188,19 +169,9 @@ fi
 if [[ "$1" =~ ^(make|all)$ ]]; then
   cd "${ROOT_FOLDER}"
   emmake make
-  emmake make dist-generic
-  # preload data
-  "$EMSDK_PYTHON" "$EMSDK/upstream/emscripten/tools/file_packager.py" files.data --preload ./dist-generic/scummvm/data@/scummvm --use-preload-cache --js-output=files.js
-  rm -rf dist-generic/
 fi
 
 if [[ "$1" =~ ^(dist|all)$ ]]; then
   cd "${ROOT_FOLDER}"
-  mkdir -p build-emscripten
-  mv scummvm.* build-emscripten/
-  mv files.* build-emscripten/
-  cp dists/emscripten/scummvm-512.png build-emscripten/
-  cp dists/emscripten/scummvm-192.png build-emscripten/
-  cp dists/emscripten/manifest.json build-emscripten/
-
+  emmake make dist-emscripten
 fi
