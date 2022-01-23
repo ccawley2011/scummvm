@@ -76,7 +76,7 @@ public:
 	void messageBox(LogMessageType::Type type, const char *message) override;
 #endif
 
-#if SDL_VERSION_ATLEAST(2, 0, 14)
+#if 0 // SDL_VERSION_ATLEAST(2, 0, 14)
 	bool openUrl(const Common::String &url) override;
 #endif
 

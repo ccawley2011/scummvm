@@ -174,7 +174,7 @@ bool OSystem_SDL::hasFeature(Feature f) {
 #if SDL_VERSION_ATLEAST(2, 0, 0)
 	if (f == kFeatureClipboardSupport) return true;
 #endif
-#if SDL_VERSION_ATLEAST(2, 0, 14)
+#if 0 // SDL_VERSION_ATLEAST(2, 0, 14)
 	if (f == kFeatureOpenUrl) return true;
 #endif
 	if (f == kFeatureJoystickDeadzone || f == kFeatureKbdMouseSpeed) {
@@ -631,7 +631,7 @@ void OSystem_SDL::messageBox(LogMessageType::Type type, const char *message) {
 }
 #endif
 
-#if SDL_VERSION_ATLEAST(2, 0, 14)
+#if 0 // SDL_VERSION_ATLEAST(2, 0, 14)
 bool OSystem_SDL::openUrl(const Common::String &url) {
 	if (SDL_OpenURL(url.c_str()) != 0) {
 		warning("Failed to open URL: %s", SDL_GetError());
