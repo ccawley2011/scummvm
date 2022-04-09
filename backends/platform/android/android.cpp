@@ -146,8 +146,7 @@ OSystem_Android::OSystem_Android(int audio_sample_rate, int audio_buffer_size) :
 	_firstPointerId(-1),
 	_secondPointerId(-1),
 	_thirdPointerId(-1),
-	_trackball_scale(2),
-	_joystick_scale(10) {
+	_trackball_scale(2) {
 
 	_fsFactory = new POSIXFilesystemFactory();
 
@@ -503,7 +502,9 @@ bool OSystem_Android::hasFeature(Feature f) {
 		return false;
 	if (f == kFeatureVirtualKeyboard ||
 			f == kFeatureOpenUrl ||
-			f == kFeatureClipboardSupport) {
+			f == kFeatureClipboardSupport ||
+			f == kFeatureKbdMouseSpeed ||
+			f == kFeatureJoystickDeadzone) {
 		return true;
 	}
 	return ModularGraphicsBackend::hasFeature(f);

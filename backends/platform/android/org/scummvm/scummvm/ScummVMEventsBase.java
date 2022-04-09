@@ -364,14 +364,12 @@ public class ScummVMEventsBase implements
 		case KeyEvent.KEYCODE_BUTTON_START:
 		case KeyEvent.KEYCODE_BUTTON_SELECT:
 		case KeyEvent.KEYCODE_BUTTON_MODE:
-			type = JE_GAMEPAD;
-			break;
 		case KeyEvent.KEYCODE_BUTTON_1:
 		case KeyEvent.KEYCODE_BUTTON_2:
 		case KeyEvent.KEYCODE_BUTTON_3:
 		case KeyEvent.KEYCODE_BUTTON_4:
 			// These are oddly detected with SOURCE_KEYBOARD for joystick so don't bother checking the e.getSource()
-			type = JE_JOYSTICK;
+			type = JE_GAMEPAD;
 			break;
 		default:
 			if (e.isSystem()) {

@@ -105,8 +105,8 @@ public class ScummVMEventsModern extends ScummVMEventsBase {
 
 	private boolean repeatMove() {
 		_scummvm.pushEvent(JE_JOYSTICK, MotionEvent.ACTION_MOVE,
-			(int) (repeatingX * 100),
-			(int) (repeatingY * 100),
+			(int) (repeatingX * 32767),
+			(int) (repeatingY * 32767),
 			0, 0, 0);
 		return true;
 	}
