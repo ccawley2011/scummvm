@@ -275,7 +275,7 @@ MODULE_OBJS += \
 	events/riscossdl/riscossdl-events.o \
 	fs/riscos/riscos-fs.o \
 	fs/riscos/riscos-fs-factory.o \
-	platform/sdl/riscos/riscos-utils.o
+	plugins/riscos/riscos-provider.o
 endif
 
 ifdef PLAYSTATION3
