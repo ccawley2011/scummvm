@@ -2,13 +2,14 @@
 RISC OS
 =============================
 
-This page contains all the information you need to get ScummVM up and running on the RISC operating system.
+This page contains all the information you need to get ScummVM up and running on the RISC OS operating system.
 
 What you'll need
 ===================
 
-- A system running RISC OS 5
-- The `SharedUnixLibrary <https://www.riscos.info/index.php/SharedUnixLibrary>`_, `DRenderer <https://www.riscos.info/packages/LibraryDetails.html#DRendererarm>`_ and `Iconv <https://www.netsurf-browser.org/projects/iconv/>`_ modules installed. SharedUnixLibrary and DRenderer can be installed using `Packman <https://www.riscos.info/index.php/PackMan>`_.
+- A system running RISC OS 5.
+- A minimum of 64 MB RAM. 32 MB may work in some circumstances, but is not generally recommended.
+- The `SharedUnixLibrary <https://www.riscos.info/index.php/SharedUnixLibrary>`_ and `DRenderer <https://www.riscos.info/packages/LibraryDetails.html#DRendererarm>`_ modules installed. These can be installed using `Packman <https://www.riscos.info/index.php/PackMan>`_.
 
 Installing ScummVM
 ======================================
