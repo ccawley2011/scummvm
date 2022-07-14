@@ -72,11 +72,56 @@ protected:
 
 		_kernel_swi(OS_SynchroniseCodeAreas, &regs, &regs);
 	}
-
 };
 
+/**
+ * On 26-bit RISC OS, plugins need to be allocated in the first 64 MB
+ * of RAM so that it can be executed. This may not be the case when using
+ * the default allocators, which use dynamic areas for large allocations.
+ *
+ * TODO: Use the application slot instead?
+ * TODO: Make more of an effort to free the memory in the event of a crash.
+ */
+class RiscOSDLObject_RMA : public RiscOSDLObject {
+protected:
+	void *allocateMemory(uint32 align, uint32 size) override {
+		_kernel_swi_regs regs;
+
+		if (align < sizeof(uintptr))
+			align = sizeof(uintptr);
+
+		regs.r[0] = 6;
+		regs.r[3] = size + align + sizeof(uintptr);
+
+		if (_kernel_swi(OS_Module, &regs, &regs) != NULL)
+			return NULL;
+
+		uintptr ptr = (regs.r[2] + align - 1) & ~(align - 1);
+		*((uintptr *)ptr - 1) = regs.r[2];
+
+		return (void *)ptr;
+
+	}
+
+	void deallocateMemory(void *ptr, uint32 size) override {
+		_kernel_swi_regs regs;
+
+		regs.r[0] = 7;
+		regs.r[2] = *((uintptr *)ptr - 1);
+
+		_kernel_swi(OS_Module, &regs, &regs);
+	}
+};
+
+RiscOSPluginProvider::RiscOSPluginProvider() : _is32bit(false) {
+}
+
 Plugin *RiscOSPluginProvider::createPlugin(const Common::FSNode &node) const {
-	return new TemplatedELFPlugin<RiscOSDLObject>(node.getPath());
+	if (_is32bit) {
+		return new TemplatedELFPlugin<RiscOSDLObject>(node.getPath());
+	} else {
+		return new TemplatedELFPlugin<RiscOSDLObject_RMA>(node.getPath());
+	}
 }
 
 #endif // defined(DYNAMIC_MODULES) && defined(RISCOS)
