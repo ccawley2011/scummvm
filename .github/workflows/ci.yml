@@ -163,8 +163,8 @@ jobs:
       - name: Add Ubuntu Xenial package sources
         if: matrix.platform == 'ubuntu-20.04'
         run: |
-          echo 'deb http://dk.archive.ubuntu.com/ubuntu/ xenial main' > /etc/apt/sources.list
-          echo 'deb http://dk.archive.ubuntu.com/ubuntu/ xenial universe' > /etc/apt/sources.list
+          apt-add-repository deb http://dk.archive.ubuntu.com/ubuntu/ xenial main
+          apt-add-repository deb http://dk.archive.ubuntu.com/ubuntu/ xenial universe
       - name: Install packages
         run: |
           sudo apt-get update
