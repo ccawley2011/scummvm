@@ -21,21 +21,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "common/translation.h"
-
 #include "engines/metaengine.h"
 
 #include "sword2/detection.h"
 #include "sword2/detection_internal.h"
-
-static const ExtraGuiOption sword2ExtraGuiOption = {
-	_s("Show object labels"),
-	_s("Show labels for objects on mouse hover"),
-	"object_labels",
-	false,
-	0,
-	0
-};
 
 class Sword2MetaEngineDetection : public MetaEngineDetection {
 public:
@@ -51,7 +40,6 @@ public:
 	}
 
 	PlainGameList getSupportedGames() const override;
-	const ExtraGuiOptions getExtraGuiOptions(const Common::String &target) const override;
 	PlainGameDescriptor findGame(const char *gameid) const override;
 	DetectedGames detectGames(const Common::FSList &fslist, uint32 /*skipADFlags*/, bool /*skipIncomplete*/) override;
 };
@@ -64,12 +52,6 @@ PlainGameList Sword2MetaEngineDetection::getSupportedGames() const {
 		g++;
 	}
 	return games;
-}
-
-const ExtraGuiOptions Sword2MetaEngineDetection::getExtraGuiOptions(const Common::String &target) const {
-	ExtraGuiOptions options;
-	options.push_back(sword2ExtraGuiOption);
-	return options;
 }
 
 PlainGameDescriptor Sword2MetaEngineDetection::findGame(const char *gameid) const {

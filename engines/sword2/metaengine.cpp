@@ -30,6 +30,7 @@
 #include "common/gui_options.h"
 #include "common/savefile.h"
 #include "common/system.h"
+#include "common/translation.h"
 
 #include "sword2/sword2.h"
 #include "sword2/saveload.h"
@@ -46,6 +47,8 @@ public:
 	SaveStateList listSaves(const char *target) const override;
 	int getMaximumSaveSlot() const override;
 	void removeSaveState(const char *target, int slot) const override;
+
+	const ExtraGuiOptions getExtraGuiOptions(const Common::String &target) const override;
 
 	Common::Error createInstance(OSystem *syst, Engine **engine) override;
 };
@@ -103,6 +106,21 @@ void Sword2MetaEngine::removeSaveState(const char *target, int slot) const {
 	filename += Common::String::format(".%03d", slot);
 
 	g_system->getSavefileManager()->removeSavefile(filename);
+}
+
+static const ExtraGuiOption sword2ExtraGuiOption = {
+	_s("Show object labels"),
+	_s("Show labels for objects on mouse hover"),
+	"object_labels",
+	false,
+	0,
+	0
+};
+
+const ExtraGuiOptions Sword2MetaEngine::getExtraGuiOptions(const Common::String &target) const {
+	ExtraGuiOptions options;
+	options.push_back(sword2ExtraGuiOption);
+	return options;
 }
 
 Common::Error Sword2MetaEngine::createInstance(OSystem *syst, Engine **engine) {
