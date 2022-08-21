@@ -30,6 +30,7 @@
 #include "common/translation.h"
 #include "common/file.h"
 #include "common/fs.h"
+#include "common/gui_options.h"
 
 #include "gui/message.h"
 
@@ -51,6 +52,9 @@ class SkyMetaEngine : public MetaEngine {
 	SaveStateDescriptor querySaveMetaInfos(const char *target, int slot) const override;
 
 	Common::KeymapArray initKeymaps(const char *target) const override;
+
+	const ExtraGuiOptions getExtraGuiOptions(const Common::String &target) const override;
+
 	Common::String getSavegameFile(int saveGameIdx, const char *target) const override {
 		if (saveGameIdx == kSavegameFilePattern)
 			return Common::String::format("SKY-VM.###");
@@ -139,6 +143,34 @@ Common::KeymapArray SkyMetaEngine::initKeymaps(const char *target) const {
 	keymaps[1] = shortcutsKeymap;
 
 	return keymaps;
+}
+
+static const ExtraGuiOption skyExtraGuiOption = {
+	_s("Floppy intro"),
+	_s("Use the floppy version's intro (CD version only)"),
+	"alt_intro",
+	false,
+	0,
+	0
+};
+
+const ExtraGuiOptions SkyMetaEngine::getExtraGuiOptions(const Common::String &target) const {
+	Common::String guiOptions;
+	ExtraGuiOptions options;
+
+	if (target.empty()) {
+		options.push_back(skyExtraGuiOption);
+		return options;
+	}
+
+	if (ConfMan.hasKey("guioptions", target)) {
+		guiOptions = ConfMan.get("guioptions", target);
+		guiOptions = parseGameGUIOptions(guiOptions);
+	}
+
+	if (!guiOptions.contains(GUIO_NOSPEECH))
+		options.push_back(skyExtraGuiOption);
+	return options;
 }
 
 Common::Error SkyMetaEngine::createInstance(OSystem *syst, Engine **engine) {
