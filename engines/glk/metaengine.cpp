@@ -68,6 +68,7 @@
 #include "graphics/surface.h"
 #include "common/config-manager.h"
 #include "common/file.h"
+#include "common/translation.h"
 
 #define MAX_SAVES 99
 
@@ -86,6 +87,8 @@ public:
 	int getMaximumSaveSlot() const override;
 	void removeSaveState(const char *target, int slot) const override;
 	SaveStateDescriptor querySaveMetaInfos(const char *target, int slot) const override;
+
+	const ExtraGuiOptions getExtraGuiOptions(const Common::String &target) const override;
 };
 
 bool GlkMetaEngine::hasFeature(MetaEngineFeature f) const {
@@ -289,6 +292,31 @@ SaveStateDescriptor GlkMetaEngine::querySaveMetaInfos(const char *target, int sl
 		return ssd;
 
 	return SaveStateDescriptor();
+}
+
+const ExtraGuiOptions GlkMetaEngine::getExtraGuiOptions(const Common::String &) const {
+	ExtraGuiOptions  options;
+#if defined(USE_TTS)
+	static const ExtraGuiOption ttsSpeakOptions = {
+		_s("Enable Text to Speech"),
+		_s("Use TTS to read the text"),
+		"speak",
+		false,
+	        0,
+		0
+	};
+	static const ExtraGuiOption ttsSpeakInputOptions = {
+		_s("Also read input text"),
+		_s("Use TTS to read the input text"),
+		"speak_input",
+		false,
+		0,
+		0
+	};
+	options.push_back(ttsSpeakOptions);
+	options.push_back(ttsSpeakInputOptions);
+#endif
+	return options;
 }
 
 #if PLUGIN_ENABLED_DYNAMIC(GLK)
