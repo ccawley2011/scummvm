@@ -27,12 +27,9 @@ static const TonyGameDescription gameDescriptions[] = {
 		{
 			"tony",
 			0,
-			{
-				{ "roasted.mpc", 0, "57c4a3860cf899443c357e0078ea6f49", 366773 },
-				{ "roasted.mpr", 0, "06203dbbc85fdd1e6dc8fc211c1a6207", 135911071 },
-				{ "voices.vdb",  0, "aebc6eb607ee19cc94bfe9c11898bb8c", 243003502 },
-				AD_LISTEND
-			},
+			AD_ENTRY3s("roasted.mpc", "57c4a3860cf899443c357e0078ea6f49", 366773,
+			           "roasted.mpr", "06203dbbc85fdd1e6dc8fc211c1a6207", 135911071,
+			           "voices.vdb",  "aebc6eb607ee19cc94bfe9c11898bb8c", 243003502),
 			Common::EN_ANY,
 			Common::kPlatformWindows,
 			ADGF_DROPPLATFORM,
@@ -45,12 +42,9 @@ static const TonyGameDescription gameDescriptions[] = {
 		{
 			"tony",
 			0,
-			{
-				{ "roasted.mpc", 0, "a8283a101878f3ca105f1f83f07e2c40", 386491 },
-				{ "roasted.mpr", 0, "06203dbbc85fdd1e6dc8fc211c1a6207", 135911071 },
-				{ "voices.vdb",  0, "3384bdcb70d1e1ecedbde26e79683ede", 299019523 },
-				AD_LISTEND
-			},
+			AD_ENTRY3s("roasted.mpc", "a8283a101878f3ca105f1f83f07e2c40", 386491,
+			           "roasted.mpr", "06203dbbc85fdd1e6dc8fc211c1a6207", 135911071,
+			           "voices.vdb",  "3384bdcb70d1e1ecedbde26e79683ede", 299019523),
 			Common::CS_CZE,
 			Common::kPlatformWindows,
 			ADGF_DROPPLATFORM,
@@ -63,12 +57,9 @@ static const TonyGameDescription gameDescriptions[] = {
 		{
 			"tony",
 			0,
-			{
-				{ "roasted.mpc", 0, "e890c6a41238827bdfa9874a65618b69", 374135 },
-				{ "roasted.mpr", 0, "06203dbbc85fdd1e6dc8fc211c1a6207", 135911071 },
-				{ "voices.vdb",  0, "aebc6eb607ee19cc94bfe9c11898bb8c", 243003502 },
-				AD_LISTEND
-			},
+			AD_ENTRY3s("roasted.mpc", "e890c6a41238827bdfa9874a65618b69", 374135,
+			           "roasted.mpr", "06203dbbc85fdd1e6dc8fc211c1a6207", 135911071,
+			           "voices.vdb",  "aebc6eb607ee19cc94bfe9c11898bb8c", 243003502),
 			Common::FR_FRA,
 			Common::kPlatformWindows,
 			ADGF_DROPPLATFORM,
@@ -81,12 +72,9 @@ static const TonyGameDescription gameDescriptions[] = {
 		{
 			"tony",
 			0,
-			{
-				{ "roasted.mpc", 0, "bcca7985db2fba9c1c4a0886618ec835", 515967 },
-				{ "roasted.mpr", 0, "06203dbbc85fdd1e6dc8fc211c1a6207", 135911071 },
-				{ "voices.vdb", 0, "aebc6eb607ee19cc94bfe9c11898bb8c", 243003502 },
-				AD_LISTEND
-			},
+			AD_ENTRY3s("roasted.mpc", "bcca7985db2fba9c1c4a0886618ec835", 515967,
+			           "roasted.mpr", "06203dbbc85fdd1e6dc8fc211c1a6207", 135911071,
+			           "voices.vdb",  "aebc6eb607ee19cc94bfe9c11898bb8c", 243003502),
 			Common::ES_ESP,
 			Common::kPlatformWindows,
 			ADGF_DROPPLATFORM,
@@ -99,12 +87,9 @@ static const TonyGameDescription gameDescriptions[] = {
 		{
 			"tony",
 			0,
-			{
-				{ "roasted.mpc", 0, "ccf7ab939a34de1b13df538596431684", 389554 },
-				{ "roasted.mpr", 0, "06203dbbc85fdd1e6dc8fc211c1a6207", 135911071 },
-				{ "voices.vdb",  0, "6a3c2f5426ab762bf4dc9826796aa320", 279745055 },
-				AD_LISTEND
-			},
+			AD_ENTRY3s("roasted.mpc", "ccf7ab939a34de1b13df538596431684", 389554,
+			           "roasted.mpr", "06203dbbc85fdd1e6dc8fc211c1a6207", 135911071,
+			           "voices.vdb",  "6a3c2f5426ab762bf4dc9826796aa320", 279745055),
 			Common::DE_DEU,
 			Common::kPlatformWindows,
 			ADGF_DROPPLATFORM,
@@ -117,12 +102,9 @@ static const TonyGameDescription gameDescriptions[] = {
 		{
 			"tony",
 			0,
-			{
-				{ "roasted.mpc", 0, "187de6f88f4083808cb66342ab55a7fd", 389904 },
-				{ "roasted.mpr", 0, "06203dbbc85fdd1e6dc8fc211c1a6207", 135911071 },
-				{ "voices.vdb",  0, 0, -1 },	// FIXME
-				AD_LISTEND
-			},
+			AD_ENTRY3s("roasted.mpc", "187de6f88f4083808cb66342ab55a7fd", 389904,
+			           "roasted.mpr", "06203dbbc85fdd1e6dc8fc211c1a6207", 135911071,
+			           "voices.vdb",  0, -1),	// FIXME
 			Common::DE_DEU,
 			Common::kPlatformWindows,
 			ADGF_DROPPLATFORM,
@@ -135,12 +117,9 @@ static const TonyGameDescription gameDescriptions[] = {
 		{
 			"tony",
 			0,
-			{
-				{ "roasted.mpc", 0, "1dc896cdb945170d7408598f803411c1", 380001 },
-				{ "roasted.mpr", 0, "06203dbbc85fdd1e6dc8fc211c1a6207", 135911071 },
-				{ "voices.vdb",  0, "f9f1ac8f63a909bb3ed972490dae65c4", 286130226 },
-				AD_LISTEND
-			},
+			AD_ENTRY3s("roasted.mpc", "1dc896cdb945170d7408598f803411c1", 380001,
+			           "roasted.mpr", "06203dbbc85fdd1e6dc8fc211c1a6207", 135911071,
+			           "voices.vdb",  "f9f1ac8f63a909bb3ed972490dae65c4", 286130226),
 			Common::IT_ITA,
 			Common::kPlatformWindows,
 			ADGF_DROPPLATFORM,
@@ -153,12 +132,9 @@ static const TonyGameDescription gameDescriptions[] = {
 		{
 			"tony",
 			0,
-			{
-				{ "roasted.mpc", 0, "6202816f991b15af82aab84e3e4be011", 380183 },
-				{ "roasted.mpr", 0, "06203dbbc85fdd1e6dc8fc211c1a6207", 135911071 },
-				{ "voices.vdb",  0, "f9f1ac8f63a909bb3ed972490dae65c4", 286130226 },
-				AD_LISTEND
-			},
+			AD_ENTRY3s("roasted.mpc", "6202816f991b15af82aab84e3e4be011", 380183,
+			           "roasted.mpr", "06203dbbc85fdd1e6dc8fc211c1a6207", 135911071,
+			           "voices.vdb",  "f9f1ac8f63a909bb3ed972490dae65c4", 286130226),
 			Common::IT_ITA,
 			Common::kPlatformWindows,
 			ADGF_DROPPLATFORM,
@@ -171,12 +147,9 @@ static const TonyGameDescription gameDescriptions[] = {
 		{
 			"tony",
 			0,
-			{
-				{ "roasted.mpc", 0, "c212a81e34edf92bc177a80f24780bd2", 380200 },
-				{ "roasted.mpr", 0, "06203dbbc85fdd1e6dc8fc211c1a6207", 135911071 },
-				{ "voices.vdb",  0, "544b1db3a41b0f89567267d0664183bb", 321349288 },
-				AD_LISTEND
-			},
+			AD_ENTRY3s("roasted.mpc", "c212a81e34edf92bc177a80f24780bd2", 380200,
+			           "roasted.mpr", "06203dbbc85fdd1e6dc8fc211c1a6207", 135911071,
+			           "voices.vdb",  "544b1db3a41b0f89567267d0664183bb", 321349288),
 			Common::PL_POL,
 			Common::kPlatformWindows,
 			ADGF_DROPPLATFORM,
@@ -189,12 +162,9 @@ static const TonyGameDescription gameDescriptions[] = {
 		{
 			"tony",
 			0,
-			{
-				{ "roasted.mpc", 0, "89733ea710669acc8e7900b115f4afef", 389625 },
-				{ "roasted.mpr", 0, "06203dbbc85fdd1e6dc8fc211c1a6207", 135911071 },
-				{ "voices.vdb",  0, "544b1db3a41b0f89567267d0664183bb", 310906270 },
-				AD_LISTEND
-			},
+			AD_ENTRY3s("roasted.mpc", "89733ea710669acc8e7900b115f4afef", 389625,
+			           "roasted.mpr", "06203dbbc85fdd1e6dc8fc211c1a6207", 135911071,
+			           "voices.vdb",  "544b1db3a41b0f89567267d0664183bb", 310906270),
 			Common::PL_POL,
 			Common::kPlatformWindows,
 			ADGF_DROPPLATFORM,
@@ -207,12 +177,9 @@ static const TonyGameDescription gameDescriptions[] = {
 		{
 			"tony",
 			0,
-			{
-				{ "roasted.mpc", 0, "377d6e24adeedc6c5c09c31b92231218", 391536 },
-				{ "roasted.mpr", 0, "06203dbbc85fdd1e6dc8fc211c1a6207", 135911071 },
-				{ "voices.vdb",  0, "af4061f49b934086710f0d41e6250a15", 325225827 },
-				AD_LISTEND
-			},
+			AD_ENTRY3s("roasted.mpc", "377d6e24adeedc6c5c09c31b92231218", 391536,
+			           "roasted.mpr", "06203dbbc85fdd1e6dc8fc211c1a6207", 135911071,
+			           "voices.vdb",  "af4061f49b934086710f0d41e6250a15", 325225827),
 			Common::RU_RUS,
 			Common::kPlatformWindows,
 			ADGF_DROPPLATFORM,
@@ -225,12 +192,9 @@ static const TonyGameDescription gameDescriptions[] = {
 		{
 			"tony",
 			"Extracted Demo",
-			{
-				{ "roasted.mpc", 0, "1e247922ec869712bfd96625bc4d3c7c", 39211 },
-				{ "roasted.mpr", 0, "06203dbbc85fdd1e6dc8fc211c1a6207", 14972409 },
-				{ "voices.vdb",  0, "f9f1ac8f63a909bb3ed972490dae65c4", 20189260 },
-				AD_LISTEND
-			},
+			AD_ENTRY3s("roasted.mpc", "1e247922ec869712bfd96625bc4d3c7c", 39211,
+			           "roasted.mpr", "06203dbbc85fdd1e6dc8fc211c1a6207", 14972409,
+			           "voices.vdb",  "f9f1ac8f63a909bb3ed972490dae65c4", 20189260),
 			Common::EN_ANY,
 			Common::kPlatformWindows,
 			ADGF_DEMO | ADGF_DROPPLATFORM,
@@ -260,11 +224,8 @@ static const TonyGameDescription gameDescriptions[] = {
 		{
 			"tony",
 			"Demo",
-			{
-				{ "data1.cab", 0, "7d8b6d308f96aee3968ad7910fb11e6d", 58660608 },
-				{ "data.tag", 0, "e9af151040745e83081e691356abeed7", 137 },
-				AD_LISTEND
-			},
+			AD_ENTRY2s("data1.cab", "7d8b6d308f96aee3968ad7910fb11e6d", 58660608,
+			           "data.tag",  "e9af151040745e83081e691356abeed7", 137),
 			Common::EN_ANY,
 			Common::kPlatformWindows,
 			ADGF_DEMO | GF_COMPRESSED | ADGF_DROPPLATFORM,

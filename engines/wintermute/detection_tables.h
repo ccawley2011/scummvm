@@ -194,9 +194,9 @@ static const PlainGameDescriptor wintermuteGames[] = {
 };
 
 // Duplicates WME_ENTRY1s, for consistency
-#define WME_ENTRY1s(f1, h1, s1) { {f1, 0, h1, s1}, AD_LISTEND }
-#define WME_ENTRY2s(f1, h1, s1, f2, h2, s2) { {f1, 0, h1, s1}, {f2, 0, h2, s2}, AD_LISTEND }
-#define WME_ENTRY3s(f1, h1, s1, f2, h2, s2, f3, h3, s3) { {f1, 0, h1, s1}, {f2, 0, h2, s2}, {f3, 0, h3, s3}, AD_LISTEND }
+#define WME_ENTRY1s(f1, h1, s1) AD_ENTRY1s(f1, h1, s1)
+#define WME_ENTRY2s(f1, h1, s1, f2, h2, s2) AD_ENTRY2s(f1, h1, s1, f2, h2, s2)
+#define WME_ENTRY3s(f1, h1, s1, f2, h2, s2, f3, h3, s3) AD_ENTRY3s(f1, h1, s1, f2, h2, s2, f3, h3, s3)
 
 #define WME_PLATENTRY(shortName, extraName, hashEntry, lang, plat, status, version) \
 	{ \

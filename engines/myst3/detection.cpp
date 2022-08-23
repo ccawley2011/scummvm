@@ -54,10 +54,8 @@ static const char *directoryGlobs[] = {
 	{                                                                           \
 		"myst3",                                                                \
 		extra,                                                                  \
-		{                                                                       \
-			{ "RSRC.m3r", 0, "a2c8ed69800f60bf5667e5c76a88e481", 1223862 },     \
-			{ langFile, 0, md5lang, -1 },                                       \
-		},                                                                      \
+		AD_ENTRY2s("RSRC.m3r", "a2c8ed69800f60bf5667e5c76a88e481", 1223862,     \
+		           langFile, md5lang, -1),                                      \
 		lang,                                                                   \
 		Common::kPlatformWindows,                                               \
 		ADGF_NO_FLAGS,                                                          \
@@ -71,11 +69,9 @@ static const char *directoryGlobs[] = {
 	{                                                                           \
 		"myst3",                                                                \
 		extra,                                                                  \
-		{                                                                       \
-			{ "RSRC.m3r",    0, "a2c8ed69800f60bf5667e5c76a88e481", 1223862 },  \
-			{ "ENGLISH.m3t", 0, "74726de866c0594d3f2a05ff754c973d", 3407120 },  \
-			{ langFile, 0, md5lang, -1 },                                       \
-		},                                                                      \
+		AD_ENTRY3s("RSRC.m3r",    "a2c8ed69800f60bf5667e5c76a88e481", 1223862,  \
+		           "ENGLISH.m3t", "74726de866c0594d3f2a05ff754c973d", 3407120,  \
+		           langFile, md5lang, -1),                                      \
 		lang,                                                                   \
 		Common::kPlatformWindows,                                               \
 		ADGF_NO_FLAGS,                                                          \
@@ -89,10 +85,8 @@ static const char *directoryGlobs[] = {
 	{                                                                           \
 		"myst3",                                                                \
 		0,                                                                      \
-		{                                                                       \
-			{ "RSRC.m3r", 0, "3de23eb5a036a62819186105478f9dde", 1226192 },     \
-			{ langFile, 0, md5lang, -1 },                                       \
-		},                                                                      \
+		AD_ENTRY2s("RSRC.m3r", "3de23eb5a036a62819186105478f9dde", 1226192,     \
+		           langFile, md5lang, -1),                                      \
 		lang,                                                                   \
 		Common::kPlatformXbox,                                                  \
 		ADGF_UNSTABLE,                                                          \
@@ -140,11 +134,9 @@ static const Myst3GameDescription gameDescriptions[] = {
 		{
 			"myst3",
 			_s("Missing game code"), // Lacks OVER101.m3o file
-			{
-				{ "RSRC.m3r",      0, "a2c8ed69800f60bf5667e5c76a88e481", 1223862 },
-				{ "localized.m3t", 0, "3a9f299f8d061ce3d2862d985edb84e3", 2341588 },
-				{ "ENGLISHjp.m3t", 0, "19dcba1074f235ec2119313242d891de", 5658925 },
-			},
+			AD_ENTRY3s("RSRC.m3r",      "a2c8ed69800f60bf5667e5c76a88e481", 1223862,
+			           "localized.m3t", "3a9f299f8d061ce3d2862d985edb84e3", 2341588,
+			           "ENGLISHjp.m3t", "19dcba1074f235ec2119313242d891de", 5658925),
 			Common::ZH_CHN,
 			Common::kPlatformWindows,
 			ADGF_UNSUPPORTED,

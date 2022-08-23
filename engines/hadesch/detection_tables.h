@@ -32,12 +32,9 @@ static const ADGameDescription gameDescriptions[] = {
 	{
 		"hadesch",
 		0,
-		{
-			{"hadesch.exe", 0, "178b3a69171cb5a4eeeddd0d5993b8c5", 1134592},
-			{"WD.POD", 0, "be7030fc4229e69e719ee2c756eb6ba1", 7479768},
-			{"ol.pod", 0, "7cabba8d1d4f1239e312e045ef4e9735", 5621074},
-			AD_LISTEND
-		},
+		AD_ENTRY3s("hadesch.exe", "178b3a69171cb5a4eeeddd0d5993b8c5", 1134592,
+		           "WD.POD", "be7030fc4229e69e719ee2c756eb6ba1", 7479768,
+		           "ol.pod", "7cabba8d1d4f1239e312e045ef4e9735", 5621074),
 		Common::EN_ANY,
 		Common::kPlatformWindows,
 		ADGF_DROPPLATFORM,
@@ -46,12 +43,9 @@ static const ADGameDescription gameDescriptions[] = {
 	{
 		"hadesch",
 		0,
-		{
-			{"Hades Challenge PPC", 0, "0a1dd550e5efe7f36370e689811fac73", 28945},
-			{"WD.POD", 0, "be7030fc4229e69e719ee2c756eb6ba1", 7479768},
-			{"ol.pod", 0, "7cabba8d1d4f1239e312e045ef4e9735", 5621074},
-			AD_LISTEND
-		},
+		AD_ENTRY3s("Hades Challenge PPC", "0a1dd550e5efe7f36370e689811fac73", 28945,
+		           "WD.POD", "be7030fc4229e69e719ee2c756eb6ba1", 7479768,
+		           "ol.pod", "7cabba8d1d4f1239e312e045ef4e9735", 5621074),
 		Common::EN_ANY,
 		Common::kPlatformMacintosh,
 		ADGF_DROPPLATFORM | ADGF_MACRESFORK,
@@ -61,12 +55,9 @@ static const ADGameDescription gameDescriptions[] = {
 	{
 		"hadesch",
 		0,
-		{
-			{"hadesch.exe", 0, "660735787346ab1bfe0d219bea441486", 1007616},
-			{"WD.POD", 0, "5098edae755135814bb86f2676c41cc2", 8691909},
-			{"ol.pod", 0, "c82e105d9013edc2cc20f0a630e304d5", 5684953},
-			AD_LISTEND
-		},
+		AD_ENTRY3s("hadesch.exe", "660735787346ab1bfe0d219bea441486", 1007616,
+		           "WD.POD", "5098edae755135814bb86f2676c41cc2", 8691909,
+		           "ol.pod", "c82e105d9013edc2cc20f0a630e304d5", 5684953),
 		Common::RU_RUS,
 		Common::kPlatformWindows,
 		ADGF_DROPPLATFORM,
@@ -76,11 +67,8 @@ static const ADGameDescription gameDescriptions[] = {
 	{
 		"hadesch",
 		0,
-		{
-			{"setup.exe", 0, "853c199f1ef35d576213f71092bcd0c3", 7491209},
-			{"ol.pod", 0, "c82e105d9013edc2cc20f0a630e304d5", 5684953},
-			AD_LISTEND
-		},
+		AD_ENTRY2s("setup.exe", "853c199f1ef35d576213f71092bcd0c3", 7491209,
+		           "ol.pod", "c82e105d9013edc2cc20f0a630e304d5", 5684953),
 		Common::RU_RUS,
 		Common::kPlatformWindows,
 		ADGF_DROPPLATFORM,
@@ -92,12 +80,9 @@ static const ADGameDescription gameDescriptions[] = {
 	{
 		"hadesch",
 		0,
-		{
-			{"hadesch.exe", 0, "178b3a69171cb5a4eeeddd0d5993b8c5", 1134592},
-			{"WD.POD", 0, "be7030fc4229e69e719ee2c756eb6ba1", 7479768},
-			{"ol.pod", 0, "d41d8cd98f00b204e9800998ecf8427e", 5621074},
-			AD_LISTEND
-		},
+		AD_ENTRY3s("hadesch.exe", "178b3a69171cb5a4eeeddd0d5993b8c5", 1134592,
+		           "WD.POD", "be7030fc4229e69e719ee2c756eb6ba1", 7479768,
+		           "ol.pod", "d41d8cd98f00b204e9800998ecf8427e", 5621074),
 		Common::EN_ANY,
 		Common::kPlatformWindows,
 		ADGF_DROPPLATFORM | ADGF_PIRATED,
@@ -106,12 +91,9 @@ static const ADGameDescription gameDescriptions[] = {
 	{
 		"hadesch",
 		0,
-		{
-			{"hadesch.exe", 0, "178b3a69171cb5a4eeeddd0d5993b8c5", 1134592},
-			{"WD.POD", 0, "be7030fc4229e69e719ee2c756eb6ba1", 7479768},
-			{"ol.pod", 0, "6bf95a48f366bdf8af3a198c7b723c77", 5621074},
-			AD_LISTEND
-		},
+		AD_ENTRY3s("hadesch.exe", "178b3a69171cb5a4eeeddd0d5993b8c5", 1134592,
+		           "WD.POD", "be7030fc4229e69e719ee2c756eb6ba1", 7479768,
+		           "ol.pod", "6bf95a48f366bdf8af3a198c7b723c77", 5621074),
 		Common::EN_ANY,
 		Common::kPlatformWindows,
 		ADGF_DROPPLATFORM | ADGF_PIRATED,

@@ -59,12 +59,9 @@ static const XeenGameDescription gameDescriptions[] = {
 		{
 			"worldofxeen",
 			nullptr,
-			{
-				{"xeen.cc", 0, "f4e4b3ddc43bd102dbe1637f480f1fa1", 13214150},
-				{"dark.cc", 0, "84a86bbbc5f2fe96c0b0325485ed8203", 11173657},
-				{"intro.cc", 0, "e47a7ab0223cf32b2d87eed91d024c35", 8899953},
-				AD_LISTEND
-			},
+			AD_ENTRY3s("xeen.cc", "f4e4b3ddc43bd102dbe1637f480f1fa1", 13214150,
+			           "dark.cc", "84a86bbbc5f2fe96c0b0325485ed8203", 11173657,
+			           "intro.cc", "e47a7ab0223cf32b2d87eed91d024c35", 8899953),
 			Common::DE_DEU,
 			Common::kPlatformDOS,
 			ADGF_UNSTABLE,

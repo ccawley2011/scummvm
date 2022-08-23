@@ -128,11 +128,8 @@ static const AdlGameDescription gameFileDescriptions[] = {
 	{ // Hi-Res Adventure #1: Mystery House - Apple II - Simi Valley
 		{
 			"hires1", "On-Line Systems [A]",
-			{
-				{ "ADVENTURE", 0, "22d9e63a11d69fa033ba1738715ad09a", 29952 },
-				{ "AUTO LOAD OBJ", 0, "a2ab7be25842e1fa9f1343b0894a8b6f", 4095 },
-				AD_LISTEND
-			},
+			AD_ENTRY2s("ADVENTURE", "22d9e63a11d69fa033ba1738715ad09a", 29952,
+			           "AUTO LOAD OBJ", "a2ab7be25842e1fa9f1343b0894a8b6f", 4095),
 			Common::EN_ANY,
 			Common::kPlatformApple2,
 			ADGF_NO_FLAGS,
@@ -144,11 +141,8 @@ static const AdlGameDescription gameFileDescriptions[] = {
 	{ // Hi-Res Adventure #1: Mystery House - Apple II - Coarsegold - Without MIXEDON
 		{
 			"hires1", "On-Line Systems [B]",
-			{
-				{ "ADVENTURE", 0, "22d9e63a11d69fa033ba1738715ad09a", 29952 },
-				{ "AUTO LOAD OBJ", 0, "669b5f313ffdfb373ab8dce5961688d3", 12288 },
-				AD_LISTEND
-			},
+			AD_ENTRY2s("ADVENTURE", "22d9e63a11d69fa033ba1738715ad09a", 29952,
+			           "AUTO LOAD OBJ", "669b5f313ffdfb373ab8dce5961688d3", 12288),
 			Common::EN_ANY,
 			Common::kPlatformApple2,
 			ADGF_NO_FLAGS,
@@ -160,11 +154,8 @@ static const AdlGameDescription gameFileDescriptions[] = {
 	{ // Hi-Res Adventure #1: Mystery House - Apple II - French - Without MIXEDON
 		{
 			"hires1", "Malibu Microcomputing [A]",
-			{
-				{ "ADVENTURE", 0, "6e2245979871b44a9fec46b4b2ba590a", 29952 },
-				{ "AUTO LOAD OBJ", 0, "3d417e923e70abe9a82e51155974027d", 12288 },
-				AD_LISTEND
-			},
+			AD_ENTRY2s("ADVENTURE", "6e2245979871b44a9fec46b4b2ba590a", 29952,
+			           "AUTO LOAD OBJ", "3d417e923e70abe9a82e51155974027d", 12288),
 			Common::FR_FRA,
 			Common::kPlatformApple2,
 			ADGF_NO_FLAGS,
@@ -176,11 +167,8 @@ static const AdlGameDescription gameFileDescriptions[] = {
 	{ // Hi-Res Adventure #1: Mystery House - Apple II - French - Modified parser
 		{
 			"hires1", "Malibu Microcomputing [B]",
-			{
-				{ "ADVENTURE", 0, "f9a1add3609b4bc24b5dc4a9db1fec67", 29952 },
-				{ "AUTO LOAD OBJ", 0, "2a348058363da4c78a069ee5a2d81a31", 12287 },
-				AD_LISTEND
-			},
+			AD_ENTRY2s("ADVENTURE", "f9a1add3609b4bc24b5dc4a9db1fec67", 29952,
+			           "AUTO LOAD OBJ", "2a348058363da4c78a069ee5a2d81a31", 12287),
 			Common::FR_FRA,
 			Common::kPlatformApple2,
 			ADGF_NO_FLAGS,
@@ -192,11 +180,8 @@ static const AdlGameDescription gameFileDescriptions[] = {
 	{ // Hi-Res Adventure #1: Mystery House - Apple II - Coarsegold - With MIXEDON
 		{
 			"hires1", "On-Line Systems [C]",
-			{
-				{ "ADVENTURE", 0, "22d9e63a11d69fa033ba1738715ad09a", 29952 },
-				{ "AUTO LOAD OBJ", 0, "f6a6ac60c04c6ba6dff68b92cc279ba2", 12291 },
-				AD_LISTEND
-			},
+			AD_ENTRY2s("ADVENTURE", "22d9e63a11d69fa033ba1738715ad09a", 29952,
+			           "AUTO LOAD OBJ", "f6a6ac60c04c6ba6dff68b92cc279ba2", 12291),
 			Common::EN_ANY,
 			Common::kPlatformApple2,
 			ADGF_NO_FLAGS,
@@ -208,11 +193,8 @@ static const AdlGameDescription gameFileDescriptions[] = {
 	{ // Hi-Res Adventure #1: Mystery House - Apple II - Public Domain
 		{
 			"hires1", "Public Domain",
-			{
-				{ "ADVENTURE", 0, "22d9e63a11d69fa033ba1738715ad09a", 29952 },
-				{ "AUTO LOAD OBJ", 0, "23bfccfe9fcff9b22cf6c41bde9078ac", 12291 },
-				AD_LISTEND
-			},
+			AD_ENTRY2s("ADVENTURE", "22d9e63a11d69fa033ba1738715ad09a", 29952,
+			           "AUTO LOAD OBJ", "23bfccfe9fcff9b22cf6c41bde9078ac", 12291),
 			Common::EN_ANY,
 			Common::kPlatformApple2,
 			ADGF_NO_FLAGS,
@@ -372,11 +354,8 @@ static const AdlGameDescription gameDiskDescriptions[] = {
 	{ // Hi-Res Adventure #4: Ulysses and the Golden Fleece - Apple II - Load 'N' Go
 		{
 			"hires4", "",
-			{
-				{ "ulyssesa", 0, "1eaeb2f1a773ce2d1cb9f16b2ef09049", 143360 },
-				{ "ulyssesb", 1, "9fa8552255ae651b252844168b8b6617", 143360 },
-				AD_LISTEND
-			},
+			AD_ENTRY2ts("ulyssesa", 0, "1eaeb2f1a773ce2d1cb9f16b2ef09049", 143360,
+			            "ulyssesb", 1, "9fa8552255ae651b252844168b8b6617", 143360),
 			Common::EN_ANY,
 			Common::kPlatformApple2,
 			ADGF_NO_FLAGS,
@@ -388,13 +367,10 @@ static const AdlGameDescription gameDiskDescriptions[] = {
 	{ // Hi-Res Adventure #4: Ulysses and the Golden Fleece - Atari 8-bit - Re-release
 		{
 			"hires4", "",
-			{
-				{ "ulys1b", 0, "bb6aab9a35b41d160b6eefa088165f56", 92160 },
-				{ "ulys1a", 0, "c227eeee34d0bacd62b2d6231c409204", 92160 },
-				// Load 'N' Go Software release XAG-0646 appears to be missing the second disk
-				{ "ulys2c", 0, "8c6a76d1767e4ffa2f0118c9c56c0e90", 92160 },
-				AD_LISTEND
-			},
+			AD_ENTRY3s("ulys1b", "bb6aab9a35b41d160b6eefa088165f56", 92160,
+			           "ulys1a", "c227eeee34d0bacd62b2d6231c409204", 92160,
+			           // Load 'N' Go Software release XAG-0646 appears to be missing the second disk
+			           "ulys2c", 0, "8c6a76d1767e4ffa2f0118c9c56c0e90", 92160),
 			Common::EN_ANY,
 			Common::kPlatformAtari8Bit,
 			ADGF_UNSTABLE,
@@ -432,13 +408,10 @@ static const AdlGameDescription gameDiskDescriptions[] = {
 	{ // Hi-Res Adventure #6: The Dark Crystal - Apple II - Roberta Williams Anthology / SierraVenture
 		{
 			"hires6", "SierraVenture [A]",
-			{
-				{ "dark1a", 0, "9a5968a8f378c84454d88f4cd4e143a9", 143360 },
-				{ "dark1b", 3, "1271ff9c3e1bdb4942301dd37dd0ef87", 143360 },
-				{ "dark2a", 4, "090e77563add7b4c9ab25f444d727316", 143360 },
-				{ "dark2b", 5, "f2db96af0955324900b800505af4d91f", 143360 },
-				AD_LISTEND
-			},
+			AD_ENTRY4ts("dark1a", 0, "9a5968a8f378c84454d88f4cd4e143a9", 143360,
+			            "dark1b", 3, "1271ff9c3e1bdb4942301dd37dd0ef87", 143360,
+			            "dark2a", 4, "090e77563add7b4c9ab25f444d727316", 143360,
+			            "dark2b", 5, "f2db96af0955324900b800505af4d91f", 143360),
 			Common::EN_ANY,
 			Common::kPlatformApple2,
 			ADGF_NO_FLAGS,
@@ -450,13 +423,10 @@ static const AdlGameDescription gameDiskDescriptions[] = {
 	{ // Hi-Res Adventure #6: The Dark Crystal - Apple II - SierraVenture
 		{
 			"hires6", "SierraVenture [B]",
-			{
-				{ "dark1a", 0, "d0b8e808b02564b6ce58b5ea5cc61ead", 143360 },
-				{ "dark1b", 3, "1271ff9c3e1bdb4942301dd37dd0ef87", 143360 },
-				{ "dark2a", 4, "090e77563add7b4c9ab25f444d727316", 143360 },
-				{ "dark2b", 5, "f2db96af0955324900b800505af4d91f", 143360 },
-				AD_LISTEND
-			},
+			AD_ENTRY4ts("dark1a", 0, "d0b8e808b02564b6ce58b5ea5cc61ead", 143360,
+			            "dark1b", 3, "1271ff9c3e1bdb4942301dd37dd0ef87", 143360,
+			            "dark2a", 4, "090e77563add7b4c9ab25f444d727316", 143360,
+			            "dark2b", 5, "f2db96af0955324900b800505af4d91f", 143360),
 			Common::EN_ANY,
 			Common::kPlatformApple2,
 			ADGF_NO_FLAGS,

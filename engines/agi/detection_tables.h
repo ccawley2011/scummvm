@@ -216,11 +216,8 @@ static const AGIGameDescription gameDescriptions[] = {
 		{
 			"bc",
 			"Booter 1.1J",
-			{
-				{ "bc-d1.img", BooterDisk1, "1d29a82b41c9c7491e2b68d16864bd11", 368640},
-				{ "bc-d2.img", BooterDisk2, "5568f7a52e787305656246f95e2aa375", 368640},
-				AD_LISTEND
-			},
+			AD_ENTRY2ts("bc-d1.img", BooterDisk1, "1d29a82b41c9c7491e2b68d16864bd11", 368640,
+			            "bc-d2.img", BooterDisk2, "5568f7a52e787305656246f95e2aa375", 368640),
 			Common::EN_ANY,
 			Common::kPlatformDOS,
 			ADGF_NO_FLAGS,
@@ -237,11 +234,8 @@ static const AGIGameDescription gameDescriptions[] = {
 		{
 			"bc",
 			"Booter 1.1K",
-			{
-				{ "bc-d1.img", BooterDisk1, "98a51d3a372baa9df288b6c0f0232567", 368640},
-				{ "bc-d2.img", BooterDisk2, "5568f7a52e787305656246f95e2aa375", 368640},
-				AD_LISTEND
-			},
+			AD_ENTRY2ts("bc-d1.img", BooterDisk1, "98a51d3a372baa9df288b6c0f0232567", 368640,
+			            "bc-d2.img", BooterDisk2, "5568f7a52e787305656246f95e2aa375", 368640),
 			Common::EN_ANY,
 			Common::kPlatformDOS,
 			ADGF_NO_FLAGS,
@@ -258,11 +252,8 @@ static const AGIGameDescription gameDescriptions[] = {
 		{
 			"bc",
 			"Booter 1.1M",
-			{
-				{ "bc-d1.img", BooterDisk1, "edc0e5befbe5e44bb109cdf9137ee12d", 368640},
-				{ "bc-d2.img", BooterDisk2, "5568f7a52e787305656246f95e2aa375", 368640},
-				AD_LISTEND
-			},
+			AD_ENTRY2ts("bc-d1.img", BooterDisk1, "edc0e5befbe5e44bb109cdf9137ee12d", 368640,
+			            "bc-d2.img", BooterDisk2, "5568f7a52e787305656246f95e2aa375", 368640),
 			Common::EN_ANY,
 			Common::kPlatformDOS,
 			ADGF_NO_FLAGS,
@@ -431,11 +422,8 @@ static const AGIGameDescription gameDescriptions[] = {
 		{
 			"kq2",
 			"Early King\'s Quest releases are not currently supported.",
-			{
-				{ "kq2-d1.img", BooterDisk1, "68302776c012f5036ceb66e36920d353", 368640},
-				{ "kq2-d2.img", BooterDisk2, "5fa6d8222608aee556627c67cb5fb4d4", 368640},
-				AD_LISTEND
-			},
+			AD_ENTRY2ts("kq2-d1.img", BooterDisk1, "68302776c012f5036ceb66e36920d353", 368640,
+			            "kq2-d2.img", BooterDisk2, "5fa6d8222608aee556627c67cb5fb4d4", 368640),
 			Common::EN_ANY,
 			Common::kPlatformDOS,
 			ADGF_UNSUPPORTED,
@@ -452,11 +440,8 @@ static const AGIGameDescription gameDescriptions[] = {
 		{
 			"kq2",
 			"Early King\'s Quest releases are not currently supported.",
-			{
-				{ "kq2-d1.img", BooterDisk1, "c7216589aca72348bc063950cb80b266", 368640},
-				{ "kq2-d2.img", BooterDisk2, "9d29b6d41740945dce569cb59b2a6c5f", 368640},
-				AD_LISTEND
-			},
+			AD_ENTRY2ts("kq2-d1.img", BooterDisk1, "c7216589aca72348bc063950cb80b266", 368640,
+			            "kq2-d2.img", BooterDisk2, "9d29b6d41740945dce569cb59b2a6c5f", 368640),
 			Common::EN_ANY,
 			Common::kPlatformDOS,
 			ADGF_UNSUPPORTED,

@@ -73,16 +73,64 @@ struct ADGameFileDescription {
 #define AD_ENTRY1s(f, x, s) {{ f, 0, x, s}, AD_LISTEND}
 
 /**
+ * A shortcut to produce a list of ADGameFileDescription records with only one
+ * record that contains just a filename with an MD5, plus a file size.
+ */
+#define AD_ENTRY1ts(f, t, x, s) {{ f, t, x, s}, AD_LISTEND}
+
+/**
+ * A shortcut to produce a list of ADGameFileDescription records with only two
+ * records that contain just a filename with an MD5, and no file size.
+ */
+#define AD_ENTRY2(f1, x1, f2, x2) {{f1, 0, x1, -1}, {f2, 0, x2, -1}, AD_LISTEND}
+
+/**
  * A shortcut to produce a list of ADGameFileDescription records with only two
  * records that contain just a filename with an MD5, plus a file size.
  */
 #define AD_ENTRY2s(f1, x1, s1, f2, x2, s2) {{f1, 0, x1, s1}, {f2, 0, x2, s2}, AD_LISTEND}
 
 /**
+ * A shortcut to produce a list of ADGameFileDescription records with only two
+ * records that contain just a filename with an MD5, plus a file size.
+ */
+#define AD_ENTRY2ts(f1, t1, x1, s1, f2, t2, x2, s2) {{f1, t1, x1, s1}, {f2, t2, x2, s2}, AD_LISTEND}
+
+/**
+ * A shortcut to produce a list of ADGameFileDescription records with only three
+ * records that contain just a filename with an MD5, and no file size.
+ */
+#define AD_ENTRY3(f1, x1, f2, x2, f3, x3) {{f1, 0, x1, -1}, {f2, 0, x2, -1}, {f3, 0, x3, -1}, AD_LISTEND}
+
+/**
  * A shortcut to produce a list of ADGameFileDescription records with only three
  * records that contain just a filename with an MD5, plus a file size.
  */
 #define AD_ENTRY3s(f1, x1, s1, f2, x2, s2, f3, x3, s3) {{f1, 0, x1, s1}, {f2, 0, x2, s2}, {f3, 0, x3, s3}, AD_LISTEND}
+
+/**
+ * A shortcut to produce a list of ADGameFileDescription records with only three
+ * records that contain just a filename with an MD5, plus a file size.
+ */
+#define AD_ENTRY3ts(f1, t1, x1, s1, f2, t2, x2, s2, f3, t3, x3, s3) {{f1, t1, x1, s1}, {f2, t2, x2, s2}, {f3, t3, x3, s3}, AD_LISTEND}
+
+/**
+ * A shortcut to produce a list of ADGameFileDescription records with only four
+ * records that contain just a filename with an MD5, and no file size.
+ */
+#define AD_ENTRY4(f1, x1, f2, x2, f3, x3, f4, x4) {{f1, 0, x1, -1}, {f2, 0, x2, -1}, {f3, 0, x3, -1}, {f4, 0, x4, -1}, AD_LISTEND}
+
+/**
+ * A shortcut to produce a list of ADGameFileDescription records with only four
+ * records that contain just a filename with an MD5, plus a file size.
+ */
+#define AD_ENTRY4s(f1, x1, s1, f2, x2, s2, f3, x3, s3, f4, x4, s4) {{f1, 0, x1, s1}, {f2, 0, x2, s2}, {f3, 0, x3, s3}, {f4, 0, x4, s4}, AD_LISTEND}
+
+/**
+ * A shortcut to produce a list of ADGameFileDescription records with only four
+ * records that contain just a filename with an MD5, plus a file size.
+ */
+#define AD_ENTRY4ts(f1, t1, x1, s1, f2, t2, x2, s2, f3, t3, x3, s3, f4, t4, x4, s4) {{f1, t1, x1, s1}, {f2, t2, x2, s2}, {f3, t3, x3, s3}, {f4, t4, x4, s4}, AD_LISTEND}
 
 /**
  * Flags used in the game description.

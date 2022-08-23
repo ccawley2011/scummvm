@@ -88,12 +88,9 @@ static const Nancy::NancyGameDescription gameDescriptions[] = {
 	{ // MD5 by fracturehill
 		{
 			"nancy1", nullptr,
-			{
-				{"data1.hdr", 0, "39b33ad649d3e7261508d3c6907f237f", 139814},
-				{"data1.cab", 0, "f900861c47b0cb88191f5c6189db6cb1", 1916153},
-				{"data2.cab", 0, "9c652edb9846a721839cb7e1dcc94a3e", 462008320},
-				AD_LISTEND
-			},
+			AD_ENTRY3s("data1.hdr", "39b33ad649d3e7261508d3c6907f237f", 139814,
+			           "data1.cab", "f900861c47b0cb88191f5c6189db6cb1", 1916153,
+			           "data2.cab", "9c652edb9846a721839cb7e1dcc94a3e", 462008320),
 			Common::RU_RUS,
 			Common::kPlatformWindows,
 			Nancy::GF_COMPRESSED,
@@ -126,12 +123,9 @@ static const Nancy::NancyGameDescription gameDescriptions[] = {
 	{ // MD5 by waltervn
 		{
 			"nancy3", nullptr,
-			{
-				{"data1.hdr", 0, "44906f3d2242f73f16feb8eb6a5161cb", 207327},
-				{"data1.cab", 0, "e258cc871e5de5ae004d03c4e31431c7", 1555916},
-				{"data2.cab", 0, "364dfd25677026da505f1fa6edd5571f", 137373135},
-				AD_LISTEND
-			},
+			AD_ENTRY3s("data1.hdr", "44906f3d2242f73f16feb8eb6a5161cb", 207327,
+			           "data1.cab", "e258cc871e5de5ae004d03c4e31431c7", 1555916,
+			           "data2.cab", "364dfd25677026da505f1fa6edd5571f", 137373135),
 			Common::EN_ANY,
 			Common::kPlatformWindows,
 			Nancy::GF_COMPRESSED,
@@ -153,12 +147,9 @@ static const Nancy::NancyGameDescription gameDescriptions[] = {
 	{ // MD5 by waltervn
 		{
 			"nancy4", nullptr,
-			{
-				{"data1.hdr", 0, "fa4e7a1c411053557169a7731f287012", 263443},
-				{"data1.cab", 0, "8f689f92fcca443d6a03faa5de7e2f1c", 1568756},
-				{"data2.cab", 0, "5525aa428041f3f1421a6fb5d1b8dba1", 140518758},
-				AD_LISTEND
-			},
+			AD_ENTRY3s("data1.hdr", "fa4e7a1c411053557169a7731f287012", 263443,
+			           "data1.cab", "8f689f92fcca443d6a03faa5de7e2f1c", 1568756,
+			           "data2.cab", "5525aa428041f3f1421a6fb5d1b8dba1", 140518758),
 			Common::EN_ANY,
 			Common::kPlatformWindows,
 			Nancy::GF_COMPRESSED,
@@ -180,12 +171,9 @@ static const Nancy::NancyGameDescription gameDescriptions[] = {
 	{ // MD5 by waltervn
 		{
 			"nancy5", nullptr,
-			{
-				{"data1.hdr", 0, "261105fba2a1226eedb090c2ce79fd35", 284091},
-				{"data1.cab", 0, "7d27bb947ef7305831f1faaf1512a598", 1446301},
-				{"data2.cab", 0, "00719c86cab733c1094b27079ce030f3", 145857935},
-				AD_LISTEND
-			},
+			AD_ENTRY3s("data1.hdr", 0, "261105fba2a1226eedb090c2ce79fd35", 284091,
+			           "data1.cab", 0, "7d27bb947ef7305831f1faaf1512a598", 1446301,
+			           "data2.cab", 0, "00719c86cab733c1094b27079ce030f3", 145857935),
 			Common::EN_ANY,
 			Common::kPlatformWindows,
 			Nancy::GF_COMPRESSED,
@@ -196,12 +184,9 @@ static const Nancy::NancyGameDescription gameDescriptions[] = {
 	{ // MD5 by clone2727
 		{
 			"nancy5", nullptr,
-			{
-				{"data1.hdr", 0, "258e27792fa7cc7a7125fd74d89f8487", 284091},
-				{"data1.cab", 0, "70433b30b6114031d54d0c991ad44577", 1446301},
-				{"data2.cab", 0, "66f47e4f5e6d431f815aa5250eb044bc", 145857937},
-				AD_LISTEND
-			},
+			AD_ENTRY3s("data1.hdr", "258e27792fa7cc7a7125fd74d89f8487", 284091,
+			           "data1.cab", "70433b30b6114031d54d0c991ad44577", 1446301,
+			           "data2.cab", "66f47e4f5e6d431f815aa5250eb044bc", 145857937),
 			Common::EN_ANY,
 			Common::kPlatformWindows,
 			Nancy::GF_COMPRESSED,

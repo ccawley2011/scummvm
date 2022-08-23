@@ -121,10 +121,9 @@ static const ADGameDescription gameDescriptions[] = {
 	{
 		"sword25",
 		"Extracted",
-		{{"_includes.lua", 0, 0, -1},
-		 {"boot.lua", 0, 0, -1},
-		 {"kernel.lua", 0, 0, -1},
-		 AD_LISTEND},
+		AD_ENTRY3("_includes.lua", 0,
+		          "boot.lua", 0,
+		          "kernel.lua", 0),
 		Common::UNK_LANG,
 		Common::kPlatformUnknown,
 		GF_EXTRACTED | ADGF_NO_FLAGS,

@@ -36,12 +36,9 @@ static const DreamWebGameDescription gameDescriptions[] = {
 		{
 			"dreamweb",
 			"",
-			{
-				{"dreamweb.r00", 0, "3b5c87717fc40cc5a5ae19c155662ee3", 152918},
-				{"dreamweb.r02", 0, "28458718167a040d7e988cf7d2298eae", 210466},
-				{"dreamweb.exe", 0, "56b1d73aa56e964b45872ff552402341", 64985},
-				AD_LISTEND
-			},
+			AD_ENTRY3s("dreamweb.r00", "3b5c87717fc40cc5a5ae19c155662ee3", 152918,
+			           "dreamweb.r02", "28458718167a040d7e988cf7d2298eae", 210466,
+			           "dreamweb.exe", "56b1d73aa56e964b45872ff552402341", 64985),
 			Common::EN_ANY,
 			Common::kPlatformDOS,
 			0,
@@ -71,12 +68,9 @@ static const DreamWebGameDescription gameDescriptions[] = {
 		{
 			"dreamweb",
 			"CD",
-			{
-				{"dreamweb.r00", 0, "3b5c87717fc40cc5a5ae19c155662ee3", 152918},
-				{"dreamweb.r02", 0, "28458718167a040d7e988cf7d2298eae", 210466},
-				{"dreamweb.exe", 0, "dd1c7793b151489e67b83cd1ecab51cd", -1},
-				AD_LISTEND
-			},
+			AD_ENTRY3s("dreamweb.r00", "3b5c87717fc40cc5a5ae19c155662ee3", 152918,
+			           "dreamweb.r02", "28458718167a040d7e988cf7d2298eae", 210466,
+			           "dreamweb.exe", "dd1c7793b151489e67b83cd1ecab51cd", -1),
 			Common::EN_GRB,
 			Common::kPlatformDOS,
 			ADGF_CD,
@@ -217,12 +211,9 @@ static const DreamWebGameDescription gameDescriptions[] = {
 		{
 			"dreamweb",
 			"CD",
-			{
-				{"dreamweb.exe", 0, "44d1708535cdb863b9cca372ad0b05dd", 65370},
-				{"dreamweb.r00", 0, "66dcab08354232f423c590156335f819", 155448},
-				{"dreamweb.r02", 0, "87a026e9f80ed4f94169381f871ee305", 199676},
-				AD_LISTEND
-			},
+			AD_ENTRY3s("dreamweb.exe", "44d1708535cdb863b9cca372ad0b05dd", 65370,
+			           "dreamweb.r00", "66dcab08354232f423c590156335f819", 155448,
+			           "dreamweb.r02", "87a026e9f80ed4f94169381f871ee305", 199676),
 			Common::IT_ITA,
 			Common::kPlatformDOS,
 			ADGF_CD,
@@ -236,12 +227,9 @@ static const DreamWebGameDescription gameDescriptions[] = {
 		{
 			"dreamweb",
 			"CD",
-			{
-				{"dreamweb.r00", 0, "3b5c87717fc40cc5a5ae19c155662ee3", 152918},
-				{"dreamweb.r02", 0, "28458718167a040d7e988cf7d2298eae", 210466},
-				{"dreamweb.exe", 0, "40cc15bdc8fa3a785b5fd1ecd6194119", 65440},
-				AD_LISTEND
-			},
+			AD_ENTRY3s("dreamweb.r00", "3b5c87717fc40cc5a5ae19c155662ee3", 152918,
+			           "dreamweb.r02", "28458718167a040d7e988cf7d2298eae", 210466,
+			           "dreamweb.exe", "40cc15bdc8fa3a785b5fd1ecd6194119", 65440),
 			Common::CS_CZE,
 			Common::kPlatformDOS,
 			ADGF_CD,
@@ -254,12 +242,9 @@ static const DreamWebGameDescription gameDescriptions[] = {
 		{
 			"dreamweb",
 			"CD",
-			{
-				{"dreamweb.r00", 0, "b457b515f1042d345c07e4e58a7ef792", 151975},
-				{"dreamweb.r02", 0, "eebf681cef5a06ee12a2630512c5eb83", 197091},
-				{"dreamweb.exe", 0, "9386c192d3bdce2ef4de2135c29fa66d", 65370},
-				AD_LISTEND
-			},
+			AD_ENTRY3s("dreamweb.r00", "b457b515f1042d345c07e4e58a7ef792", 151975,
+			           "dreamweb.r02", "eebf681cef5a06ee12a2630512c5eb83", 197091,
+			           "dreamweb.exe", "9386c192d3bdce2ef4de2135c29fa66d", 65370),
 			Common::RU_RUS,
 			Common::kPlatformDOS,
 			ADGF_CD,
@@ -272,12 +257,9 @@ static const DreamWebGameDescription gameDescriptions[] = {
 		{
 			"dreamweb",
 			"Demo",
-			{
-				{"dreamweb.r57", 0, "dba78ab266054ad98151db0a9aa845f6", 102904},
-				{"dreamweb.r59", 0, "b1635ce312c7273b343eb0c2946361af", 199262},
-				{"dreamweb.exe", 0, "2362f28683ffe4ae4986c21226e132c9", 63656},
-				AD_LISTEND
-			},
+			AD_ENTRY3s("dreamweb.r57", "dba78ab266054ad98151db0a9aa845f6", 102904,
+			           "dreamweb.r59", "b1635ce312c7273b343eb0c2946361af", 199262,
+			           "dreamweb.exe", "2362f28683ffe4ae4986c21226e132c9", 63656),
 			Common::EN_ANY,
 			Common::kPlatformDOS,
 			ADGF_DEMO,
@@ -290,12 +272,9 @@ static const DreamWebGameDescription gameDescriptions[] = {
 		{
 			"dreamweb",
 			"CD Demo",
-			{
-				{"dreamweb.r60", 0, "45fb1438d165da9f098852cc8e14ad92", 108933},
-				{"dreamweb.r22", 0, "35537525b55837b91b56f2468500ea43", 190222},
-				{"dreamweb.exe", 0, "34218e66ffd0e0d65d71282e57ac4fcc", 64445},
-				AD_LISTEND
-			},
+			AD_ENTRY3s("dreamweb.r60", "45fb1438d165da9f098852cc8e14ad92", 108933,
+			           "dreamweb.r22", "35537525b55837b91b56f2468500ea43", 190222,
+			           "dreamweb.exe", "34218e66ffd0e0d65d71282e57ac4fcc", 64445),
 			Common::EN_ANY,
 			Common::kPlatformDOS,
 			ADGF_CD|ADGF_DEMO,
@@ -308,12 +287,9 @@ static const DreamWebGameDescription gameDescriptions[] = {
 		{
 			"dreamweb",
 			"Demo",
-			{
-				{"dreamweb.r57", 0, "f52b88b8417c7bddc8c63b684c6ad1dd", 117720},
-				{"dreamweb.r59", 0, "996dfe6d963c27a302952c77a297b0fa", 223764},
-				{"dreamweb",	 0,	"093103deb9712340ee34c4bed94aab12", 51496},
-				AD_LISTEND
-			},
+			AD_ENTRY3s("dreamweb.r57", "f52b88b8417c7bddc8c63b684c6ad1dd", 117720,
+			           "dreamweb.r59", "996dfe6d963c27a302952c77a297b0fa", 223764,
+			           "dreamweb",     "093103deb9712340ee34c4bed94aab12", 51496),
 			Common::EN_ANY,
 			Common::kPlatformAmiga,
 			ADGF_DEMO,

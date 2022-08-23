@@ -32,20 +32,14 @@ static const PlainGameDescriptor trecisionGames[] = {
 namespace Trecision {
 
 #define AD_NL_ENTRY(md5, size) \
-	{ \
-		{"data.nl", 0, md5, size}, \
-		{"nlanim.cd1", 0, nullptr, -1}, \
-		{"nlanim.cd2", 0, nullptr, -1}, \
-		{"nlanim.cd3", 0, nullptr, -1}, \
-		AD_LISTEND \
-	}
+	AD_ENTRY4s("data.nl", md5, size, \
+	           "nlanim.cd1", nullptr, -1, \
+	           "nlanim.cd2", nullptr, -1, \
+	           "nlanim.cd3", nullptr, -1)
 
 #define AD_NL_DEMO_ENTRY(md5, size) \
-	{ \
-		{"data.nl", 0, md5, size}, \
-		{"nlanim.cd1", 0, nullptr, -1}, \
-		AD_LISTEND \
-	}
+	AD_ENTRY2s("data.nl", md5, size, \
+	           "nlanim.cd1", nullptr, -1)
 
 static const ADGameDescription gameDescriptions[] = {
 	{
@@ -197,10 +191,8 @@ static const ADGameDescription gameDescriptions[] = {
 	{
 		"aot",
 		_s("Missing game code"),
-		{
-			{"dialogue.dat", 0, "afc71fe29b1be3a9b145b8d61dfa4539", 166155130},
-			{"sentence.dat", 0, "f38afcd22e7de14f9a2343e911eaa126", 75668232},
-		},
+		AD_ENTRY2s("dialogue.dat", "afc71fe29b1be3a9b145b8d61dfa4539", 166155130,
+		           "sentence.dat", "f38afcd22e7de14f9a2343e911eaa126", 75668232),
 		Common::EN_ANY,
 		Common::kPlatformDOS,
 		ADGF_UNSUPPORTED,

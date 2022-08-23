@@ -182,13 +182,10 @@
 	{
 		"adi2",
 		"Non-Interactive Demo",
-		{
-			{"demo.scn", 0, "8b5ba359fd87d586ad39c1754bf6ea35", 168},
-			{"demadi2t.vmd", 0, "08a1b18cfe2015d3b43270da35cc813d", 7250723},
-			{"demarch.vmd", 0, "4c4a4616585d40ef3df209e3c3911062", 5622731},
-			{"demobou.vmd", 0, "2208b9855775564d15c4a5a559da0aec", 3550511},
-			{0, 0, 0, 0}
-		},
+		AD_ENTRY4s("demo.scn", "8b5ba359fd87d586ad39c1754bf6ea35", 168,
+		           "demadi2t.vmd", "08a1b18cfe2015d3b43270da35cc813d", 7250723,
+		           "demarch.vmd", "4c4a4616585d40ef3df209e3c3911062", 5622731,
+		           "demobou.vmd", "2208b9855775564d15c4a5a559da0aec", 3550511),
 		EN_ANY,
 		kPlatformDOS,
 		ADGF_NO_FLAGS,

@@ -33,13 +33,9 @@ static const AGOSGameDescription gameDescriptions[] = {
 		{
 			"pn",
 			"Floppy",
-
-			{
-				{ "icon.tmp",		GAME_ICONFILE,	"cd94091218ac2c46918fd3c0cbd81d5e", -1},
-				{ "night.dbm",		GAME_BASEFILE,	"712c445d8e938956403a759978eab01b", -1},
-				{ "night.txt",		GAME_TEXTFILE,	"52630ad100f473a2cdc7c699536d6730", -1},
-				AD_LISTEND
-			},
+			AD_ENTRY3ts("icon.tmp",		GAME_ICONFILE,	"cd94091218ac2c46918fd3c0cbd81d5e", -1,
+			            "night.dbm",		GAME_BASEFILE,	"712c445d8e938956403a759978eab01b", -1,
+			            "night.txt",		GAME_TEXTFILE,	"52630ad100f473a2cdc7c699536d6730", -1),
 			Common::EN_ANY,
 			Common::kPlatformAmiga,
 			ADGF_NO_FLAGS,
@@ -56,13 +52,9 @@ static const AGOSGameDescription gameDescriptions[] = {
 		{
 			"pn",
 			"Non-Interactive Demo",
-
-			{
-				{ "01.IN",		GAME_VGAFILE,	"23a4c8c4c9ac460fee7281080b5274e3", 756},
-				{ "02.IN",		GAME_VGAFILE,	"31be87808826538f0c0caebd5fedd48f", 73100},
-				{ "03.IN",		GAME_VGAFILE,	"0e125f3df4e4b800936ebdcc8dc96060", 101664},
-				AD_LISTEND
-			},
+			AD_ENTRY3ts("01.IN",		GAME_VGAFILE,	"23a4c8c4c9ac460fee7281080b5274e3", 756,
+			            "02.IN",		GAME_VGAFILE,	"31be87808826538f0c0caebd5fedd48f", 73100,
+			            "03.IN",		GAME_VGAFILE,	"0e125f3df4e4b800936ebdcc8dc96060", 101664),
 			Common::EN_ANY,
 			Common::kPlatformAtariST,
 			ADGF_DEMO,
@@ -79,13 +71,9 @@ static const AGOSGameDescription gameDescriptions[] = {
 		{
 			"pn",
 			"Floppy",
-
-			{
-				{ "night.dbm",		GAME_BASEFILE,	"712c445d8e938956403a759978eab01b", -1},
-				{ "night.txt",		GAME_TEXTFILE,	"52630ad100f473a2cdc7c699536d6730", -1},
-				{ "test.prg",		GAME_ICONFILE,	"0f316bbd7341a98c8d5f27d16fe50524", -1},
-				AD_LISTEND
-			},
+			AD_ENTRY3ts("night.dbm",		GAME_BASEFILE,	"712c445d8e938956403a759978eab01b", -1,
+			            "night.txt",		GAME_TEXTFILE,	"52630ad100f473a2cdc7c699536d6730", -1,
+			            "test.prg",		GAME_ICONFILE,	"0f316bbd7341a98c8d5f27d16fe50524", -1),
 			Common::EN_ANY,
 			Common::kPlatformAtariST,
 			ADGF_NO_FLAGS,
@@ -102,13 +90,9 @@ static const AGOSGameDescription gameDescriptions[] = {
 		{
 			"pn",
 			"Floppy",
-
-			{
-				{ "icon.out",		GAME_ICONFILE,	"40d8347c3154bfa8b642d6860a4b9481", -1},
-				{ "night.dbm",		GAME_BASEFILE,	"177311ae059243f6a2740e950585d786", -1},
-				{ "night.txt",		GAME_TEXTFILE,	"861fc1fa0864eef585f5865dee52e325", -1},
-				AD_LISTEND
-			},
+			AD_ENTRY3ts("icon.out",		GAME_ICONFILE,	"40d8347c3154bfa8b642d6860a4b9481", -1,
+			            "night.dbm",		GAME_BASEFILE,	"177311ae059243f6a2740e950585d786", -1,
+			            "night.txt",		GAME_TEXTFILE,	"861fc1fa0864eef585f5865dee52e325", -1),
 			Common::EN_ANY,
 			Common::kPlatformDOS,
 			ADGF_NO_FLAGS,
@@ -125,13 +109,9 @@ static const AGOSGameDescription gameDescriptions[] = {
 		{
 			"elvira1",
 			"Non-Interactive Demo",
-
-			{
-				{ "agos.mdf",		GAME_MENUFILE,	"825bc8eecd599f4c26732902ba2c2c77", 98},
-				{ "englishdemo",	GAME_BASEFILE,	"7bbc2dfe8619ef579004ff57674c6e92", 21587},
-				{ "icon.dat",		GAME_ICONFILE,	"68b329da9893e34099c7d8ad5cb9c940", 1},
-				AD_LISTEND
-			},
+			AD_ENTRY3ts("agos.mdf",		GAME_MENUFILE,	"825bc8eecd599f4c26732902ba2c2c77", 98,
+			            "englishdemo",	GAME_BASEFILE,	"7bbc2dfe8619ef579004ff57674c6e92", 21587,
+			            "icon.dat",		GAME_ICONFILE,	"68b329da9893e34099c7d8ad5cb9c940", 1),
 			Common::EN_ANY,
 			Common::kPlatformAmiga,
 			ADGF_DEMO,
@@ -148,11 +128,8 @@ static const AGOSGameDescription gameDescriptions[] = {
 		{
 			"elvira1",
 			"Floppy",
-			{
-				{ "gameamiga",		GAME_BASEFILE,	"7bdaff4a118d8035047cf9b1393b3fa0", 218977},
-				{ "icon.dat",		GAME_ICONFILE,	"2db931e84f1ca01f0816dddfae3f49e1", 36573},
-				AD_LISTEND
-			},
+			AD_ENTRY2ts("gameamiga",		GAME_BASEFILE,	"7bdaff4a118d8035047cf9b1393b3fa0", 218977,
+			            "icon.dat",		GAME_ICONFILE,	"2db931e84f1ca01f0816dddfae3f49e1", 36573),
 			Common::EN_ANY,
 			Common::kPlatformAmiga,
 			ADGF_NO_FLAGS,
@@ -169,11 +146,8 @@ static const AGOSGameDescription gameDescriptions[] = {
 		{
 			"elvira1",
 			"Floppy",
-			{
-				{ "gameamiga",		GAME_BASEFILE,	"ab1a0798f74e71cc58a06e7e0db6f8a7", -1},
-				{ "icon.dat",		GAME_ICONFILE,	"2db931e84f1ca01f0816dddfae3f49e1", -1},
-				AD_LISTEND
-			},
+			AD_ENTRY2ts("gameamiga",		GAME_BASEFILE,	"ab1a0798f74e71cc58a06e7e0db6f8a7", -1,
+			            "icon.dat",		GAME_ICONFILE,	"2db931e84f1ca01f0816dddfae3f49e1", -1),
 			Common::FR_FRA,
 			Common::kPlatformAmiga,
 			ADGF_NO_FLAGS,
@@ -190,11 +164,8 @@ static const AGOSGameDescription gameDescriptions[] = {
 		{
 			"elvira1",
 			"Floppy",
-			{
-				{ "gameamiga",		GAME_BASEFILE,	"bde0334344c7b3a278ccc9a300f3085c", -1},
-				{ "icon.dat",		GAME_ICONFILE,	"2db931e84f1ca01f0816dddfae3f49e1", -1},
-				AD_LISTEND
-			},
+			AD_ENTRY2ts("gameamiga",		GAME_BASEFILE,	"bde0334344c7b3a278ccc9a300f3085c", -1,
+			            "icon.dat",		GAME_ICONFILE,	"2db931e84f1ca01f0816dddfae3f49e1", -1),
 			Common::DE_DEU,
 			Common::kPlatformAmiga,
 			ADGF_NO_FLAGS,
@@ -211,13 +182,9 @@ static const AGOSGameDescription gameDescriptions[] = {
 		{
 			"elvira1",
 			"Non-Interactive Demo",
-
-			{
-				{ "991.out",		GAME_VGAFILE,	"9238242d3274bb770cb4925d2b268f83", 1822},
-				{ "992.out",		GAME_VGAFILE,	"5526cd64e515f1c5f9ff8f2fb569c4eb", 192236},
-				{ "993.out",		GAME_VGAFILE,	"d41d8cd98f00b204e9800998ecf8427e", 0},
-				AD_LISTEND
-			},
+			AD_ENTRY3ts("991.out",		GAME_VGAFILE,	"9238242d3274bb770cb4925d2b268f83", 1822,
+			            "992.out",		GAME_VGAFILE,	"5526cd64e515f1c5f9ff8f2fb569c4eb", 192236,
+			            "993.out",		GAME_VGAFILE,	"d41d8cd98f00b204e9800998ecf8427e", 0),
 			Common::EN_ANY,
 			Common::kPlatformAtariST,
 			ADGF_DEMO,
@@ -234,13 +201,9 @@ static const AGOSGameDescription gameDescriptions[] = {
 		{
 			"elvira1",
 			"Floppy",
-
-			{
-				{ "gamest",		GAME_BASEFILE,	"8942859018fcfb2dbed13e83d974d1ab", -1},
-				{ "icon.dat",	GAME_ICONFILE,	"2db931e84f1ca01f0816dddfae3f49e1", -1},
-				{ "tbllist",	GAME_TBLFILE,	"5b6ff494bf7e24213758598ef4ac0a8b", -1},
-				AD_LISTEND
-			},
+			AD_ENTRY3ts("gamest",		GAME_BASEFILE,	"8942859018fcfb2dbed13e83d974d1ab", -1,
+			            "icon.dat",	GAME_ICONFILE,	"2db931e84f1ca01f0816dddfae3f49e1", -1,
+			            "tbllist",	GAME_TBLFILE,	"5b6ff494bf7e24213758598ef4ac0a8b", -1),
 			Common::EN_ANY,
 			Common::kPlatformAtariST,
 			ADGF_NO_FLAGS,
@@ -257,9 +220,7 @@ static const AGOSGameDescription gameDescriptions[] = {
 		{
 			"elvira1",
 			"Floppy",
-
-			{
-				{ "gamest",		GAME_BASEFILE,	"ce2100ba71284f55ac302847d7f94747", 119851},
+			AD_ENTRY3ts("gamest",		GAME_BASEFILE,	"ce2100ba71284f55ac302847d7f94747", 119851},
 				{ "icon.dat",	GAME_ICONFILE,	"2db931e84f1ca01f0816dddfae3f49e1", 36573},
 				{ "tbllist",	GAME_TBLFILE,	"5b6ff494bf7e24213758598ef4ac0a8b", 476},
 				AD_LISTEND

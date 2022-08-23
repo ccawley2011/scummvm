@@ -33,10 +33,9 @@ namespace Sci {
 #define GUIO_STD16_MAC_SPEECH GUIO3(GAMEOPTION_PREFER_DIGITAL_SFX, GAMEOPTION_MIDI_MODE, GAMEOPTION_RGB_RENDERING)
 
 #define FANMADE_L(name, resMapMd5, resMapSize, resMd5, resSize, resVol, lang) \
-	{"sci-fanmade", name, { \
-		{"resource.map", 0, resMapMd5, resMapSize}, \
-		{resVol, 0, resMd5, resSize}, \
-		AD_LISTEND}, lang, Common::kPlatformDOS, ADGF_USEEXTRAASTITLE | ADGF_AUTOGENTARGET, GUIO_STD16 \
+	{"sci-fanmade", name, \
+		AD_ENTRY2s("resource.map", resMapMd5, resMapSize, resVol, resMd5, resSize), \
+		lang, Common::kPlatformDOS, ADGF_USEEXTRAASTITLE | ADGF_AUTOGENTARGET, GUIO_STD16 \
 	}
 
 #define FANMADE(name, resMapMd5, resMapSize, resMd5, resSize) FANMADE_L(name, resMapMd5, resMapSize, resMd5, resSize, "resource.001", Common::EN_ANY)

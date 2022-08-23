@@ -406,12 +406,10 @@ static const MTropolisGameDescription gameDescriptions[] = {
 		{
 			"mti",
 			"Demo",
-			{
-				{ "MTIWIN95.EXE", 0, "aad51b462d0961fb02d9c1422a41937f", 840192 },
-				{ "GROUP3.R95",	  0, "3b01850e511727aa270aff1d6cb1fcf8", 89088 },
-				{ "MTIKIT.R95",	  0, "f7183d9ff845a3a607f764920fc23b18", 101376 },
-				{ "MUP_DATA.MPL", 0, "aea8ca15455991278213d09674a183ed", 51678610 },
-				AD_LISTEND
+			AD_ENTRY4s("MTIWIN95.EXE", "aad51b462d0961fb02d9c1422a41937f", 840192,
+			           "GROUP3.R95",   "3b01850e511727aa270aff1d6cb1fcf8", 89088,
+			           "MTIKIT.R95",   "f7183d9ff845a3a607f764920fc23b18", 101376,
+			           "MUP_DATA.MPL", "aea8ca15455991278213d09674a183ed", 51678610),
 			},
 			Common::EN_ANY,
 			Common::kPlatformWindows,

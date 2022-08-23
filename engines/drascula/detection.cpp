@@ -45,14 +45,11 @@ static const DrasculaGameDescription gameDescriptions[] = {
 		{
 			"drascula",
 			nullptr,
-			{
-				{"packet.001", 0, "c6a8697396e213a18472542d5f547cb4", 32847563},
-				// HACK: List packet.001 twice to ensure this detector entry
-				// is ranked just as high as the others (which each have two
-				// detection files).
-				{"packet.001", 0, "c6a8697396e213a18472542d5f547cb4", 32847563},
-				AD_LISTEND
-			},
+			// HACK: List packet.001 twice to ensure this detector entry
+			// is ranked just as high as the others (which each have two
+			// detection files).
+			AD_ENTRY2s("packet.001", "c6a8697396e213a18472542d5f547cb4", 32847563,
+			           "packet.001", "c6a8697396e213a18472542d5f547cb4", 32847563),
 			Common::EN_ANY,
 			Common::kPlatformDOS,
 			GF_PACKED,
@@ -65,11 +62,8 @@ static const DrasculaGameDescription gameDescriptions[] = {
 		{
 			"drascula",
 			nullptr,
-			{
-				{"packet.001", 0, "c6a8697396e213a18472542d5f547cb4", 32847563},
-				{"packet.002", 1, "4401123400f22f212b89f15fb4b43013", 721122},
-				AD_LISTEND
-			},
+			AD_ENTRY2ts("packet.001", 0, "c6a8697396e213a18472542d5f547cb4", 32847563,
+			            "packet.002", 1, "4401123400f22f212b89f15fb4b43013", 721122),
 			Common::FR_FRA,
 			Common::kPlatformDOS,
 			GF_PACKED,
@@ -82,11 +76,8 @@ static const DrasculaGameDescription gameDescriptions[] = {
 		{
 			"drascula",
 			nullptr,
-			{
-				{"packet.001", 0, "c6a8697396e213a18472542d5f547cb4", 32847563},
-				{"packet.002", 1, "7b83cedb9bb326ed5143e5c459508d43", 722383},
-				AD_LISTEND
-			},
+			AD_ENTRY2ts("packet.001", 0, "c6a8697396e213a18472542d5f547cb4", 32847563,
+			            "packet.002", 1, "7b83cedb9bb326ed5143e5c459508d43", 722383),
 			Common::FR_FRA,
 			Common::kPlatformDOS,
 			GF_PACKED,
@@ -99,11 +90,8 @@ static const DrasculaGameDescription gameDescriptions[] = {
 		{
 			"drascula",
 			nullptr,
-			{
-				{"packet.001", 0, "c6a8697396e213a18472542d5f547cb4", 32847563},
-				{"packet.003", 1, "e8f4dc6091037329bab4ddb1cba35807", 719728},
-				AD_LISTEND
-			},
+			AD_ENTRY2ts("packet.001", 0, "c6a8697396e213a18472542d5f547cb4", 32847563,
+			            "packet.003", 1, "e8f4dc6091037329bab4ddb1cba35807", 719728),
 			Common::DE_DEU,
 			Common::kPlatformDOS,
 			GF_PACKED,
@@ -129,11 +117,8 @@ static const DrasculaGameDescription gameDescriptions[] = {
 		{
 			"drascula",
 			nullptr,
-			{
-				{"packet.001", 0, "c6a8697396e213a18472542d5f547cb4", 32847563},
-				{"packet.005", 1, "58caac54b891f5d7f335e710e45e5d29", 16209623},
-				AD_LISTEND
-			},
+			AD_ENTRY2ts("packet.001", 0, "c6a8697396e213a18472542d5f547cb4", 32847563,
+			            "packet.005", 1, "58caac54b891f5d7f335e710e45e5d29", 16209623),
 			Common::IT_ITA,
 			Common::kPlatformDOS,
 			GF_PACKED,
@@ -159,11 +144,8 @@ static const DrasculaGameDescription gameDescriptions[] = {
 		{
 			"drascula",
 			nullptr,
-			{
-				{"packet.001", 0, "c6a8697396e213a18472542d5f547cb4", 32847563},
-				{"packet.004", 1, "a289d3cf80d50f25ec569b653248437e", 17205838},
-				AD_LISTEND
-			},
+			AD_ENTRY2ts("packet.001", 0, "c6a8697396e213a18472542d5f547cb4", 32847563,
+			            "packet.004", 1, "a289d3cf80d50f25ec569b653248437e", 17205838),
 			Common::ES_ESP,
 			Common::kPlatformDOS,
 			GF_PACKED,
@@ -176,11 +158,8 @@ static const DrasculaGameDescription gameDescriptions[] = {
 		{
 			"drascula",
 			nullptr,
-			{
-				{"packet.001", 0, "c6a8697396e213a18472542d5f547cb4", 32847563},
-				{"packet.006", 1, "e464b99de7f226391337510d5c328258", 697173},
-				AD_LISTEND
-			},
+			AD_ENTRY2ts("packet.001", 0, "c6a8697396e213a18472542d5f547cb4", 32847563,
+			            "packet.006", 1, "e464b99de7f226391337510d5c328258", 697173),
 			Common::RU_RUS,
 			Common::kPlatformDOS,
 			GF_PACKED,

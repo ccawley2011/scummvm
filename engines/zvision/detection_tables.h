@@ -114,11 +114,8 @@ static const ZVisionGameDescription gameDescriptions[] = {
 		{
 			"znemesis",
 			0,
-			{
-				{ "CSCR.ZFS", 0, "88226e51a205d2e50c67a5237f3bd5f2", 2397741 },
-				{ "ASCR.ZFS", 0, "9a1e1a48a56cf12a22bad2d2e47f6c92", 917452 },
-				AD_LISTEND
-			},
+			AD_ENTRY2s("CSCR.ZFS", "88226e51a205d2e50c67a5237f3bd5f2", 2397741,
+			           "ASCR.ZFS", "9a1e1a48a56cf12a22bad2d2e47f6c92", 917452),
 			Common::EN_ANY,
 			Common::kPlatformDOS,
 			ADGF_NO_FLAGS,
@@ -177,11 +174,8 @@ static const ZVisionGameDescription gameDescriptions[] = {
 		{
 			"znemesis",
 			0,
-			{
-				{ "CSCR.ZFS", 0, "88226e51a205d2e50c67a5237f3bd5f2", 2397741 },
-				{ "ASCR.ZFS", 0, "127f59f96be3d13eafac665eeede080d", 765413 },
-				AD_LISTEND
-			},
+			AD_ENTRY2s("CSCR.ZFS", "88226e51a205d2e50c67a5237f3bd5f2", 2397741,
+			           "ASCR.ZFS", "127f59f96be3d13eafac665eeede080d", 765413),
 			Common::KO_KOR,
 			Common::kPlatformDOS,
 			ADGF_NO_FLAGS,
@@ -198,11 +192,8 @@ static const ZVisionGameDescription gameDescriptions[] = {
 		{
 			"znemesis",
 			_s("Missing game code"), // Reason for being unsupported
-			{
-				{ "CSCR.ZFS", 0, "ce26cbb17bfbaa774742b3187262a7c0", 2597635 },
-				{ "ASCR.ZFS", 0, "5ee98db1bf73983eb8148da231342085", 929931 },
-				AD_LISTEND
-			},
+			AD_ENTRY2s("CSCR.ZFS", "ce26cbb17bfbaa774742b3187262a7c0", 2597635,
+			           "ASCR.ZFS", "5ee98db1bf73983eb8148da231342085", 929931),
 			Common::EN_ANY,
 			Common::kPlatformMacintosh,
 			ADGF_UNSUPPORTED | ADGF_MACRESFORK,
@@ -218,11 +209,8 @@ static const ZVisionGameDescription gameDescriptions[] = {
 		{
 			"znemesis",
 			_s("Missing game code"), // Reason for being unsupported
-			{
-				{ "CSCR.ZFS", 0, "afcf3b38c210db13988fe7b22d5b2288", 2597888 },
-				{ "ASCR.ZFS", 0, "75e07b46ef60967c9ea66a19e4916b0f", 930176 },
-				AD_LISTEND
-			},
+			AD_ENTRY2s("CSCR.ZFS", "afcf3b38c210db13988fe7b22d5b2288", 2597888,
+			           "ASCR.ZFS", "75e07b46ef60967c9ea66a19e4916b0f", 930176),
 			Common::EN_ANY,
 			Common::kPlatformMacintosh,
 			ADGF_UNSUPPORTED,

@@ -76,12 +76,9 @@ static const TinselGameDescription gameDescriptions[] = {
 		{
 			"dw",
 			"CD Demo",
-			{
-				{"dw.scn", 0, "cfc40a8d5d476a1c9d3abf826fa46f8c", 1272686},
-				{"english.txt", 0, "c69b5d2067e9114a63569a61e9a82faa", 228878},
-				{"english.smp", 0, NULL, -1},
-				AD_LISTEND
-			},
+			AD_ENTRY3s("dw.scn", "cfc40a8d5d476a1c9d3abf826fa46f8c", 1272686,
+			           "english.txt", "c69b5d2067e9114a63569a61e9a82faa", 228878,
+			           "english.smp", NULL, -1),
 			Common::EN_ANY,
 			Common::kPlatformMacintosh,
 			ADGF_DEMO | ADGF_CD,
@@ -257,12 +254,9 @@ static const TinselGameDescription gameDescriptions[] = {
 		{
 			"dw",
 			"CD",
-			{
-				{"dw.gra", 0, "c8808ccd988d603dd35dff42013ae7fd", 781656},
-				{"english.txt", 0, "15f0703f85477d7fab4280bf938b61c1", 237774},
-				{"english.smp", 0, NULL, -1},
-				AD_LISTEND
-			},
+			AD_ENTRY3s("dw.gra", "c8808ccd988d603dd35dff42013ae7fd", 781656,
+			           "english.txt", "15f0703f85477d7fab4280bf938b61c1", 237774,
+			           "english.smp", NULL, -1),
 			Common::IT_ITA,
 			Common::kPlatformDOS,
 			ADGF_DROPLANGUAGE | ADGF_CD,
@@ -547,12 +541,9 @@ static const TinselGameDescription gameDescriptions[] = {
 		{
 			"dw",
 			"CD",
-			{
-				{"dw.scn", 0, "133041bde59d05c1bf084fd6f1bdce4b", 776524},
-				{"english.txt", 0, "f73dcbd7b136b37c2adf7c9448ea336d", 231821},
-				{"english.smp", 0, NULL, -1},
-				AD_LISTEND
-			},
+			AD_ENTRY3s("dw.scn", "133041bde59d05c1bf084fd6f1bdce4b", 776524,
+			           "english.txt", "f73dcbd7b136b37c2adf7c9448ea336d", 231821,
+			           "english.smp", NULL, -1),
 			Common::RU_RUS,
 			Common::kPlatformDOS,
 			ADGF_CD,
@@ -585,12 +576,9 @@ static const TinselGameDescription gameDescriptions[] = {
 		{
 			"dw",
 			"CD v1.1",
-			{
-				{"dw.scn", 0, "133041bde59d05c1bf084fd6f1bdce4b", 776524},
-				{"english.txt", 0, "317542cf2e50106d9c9421ddcf821e22", 221656},
-				{"english.smp", 0, NULL, -1},
-				AD_LISTEND
-			},
+			AD_ENTRY3s("dw.scn", "133041bde59d05c1bf084fd6f1bdce4b", 776524,
+			           "english.txt", "317542cf2e50106d9c9421ddcf821e22", 221656,
+			           "english.smp", NULL, -1),
 			Common::RU_RUS,
 			Common::kPlatformDOS,
 			ADGF_CD,
@@ -606,12 +594,9 @@ static const TinselGameDescription gameDescriptions[] = {
 		{
 			"dw",
 			"CD",
-			{
-				{"dw.scn", 0, "fa169d2c98660215ebd84b49c1899eef", 776396},
-				{"english.txt", 0, "c1a53eb7ec812689dab70e2bb22cf2ab", 224151},
-				{"english.smp", 0, NULL, -1},
-				AD_LISTEND
-			},
+			AD_ENTRY3s("dw.scn", "fa169d2c98660215ebd84b49c1899eef", 776396,
+			           "english.txt", "c1a53eb7ec812689dab70e2bb22cf2ab", 224151,
+			           "english.smp", NULL, -1),
 			Common::PL_POL,
 			Common::kPlatformDOS,
 			ADGF_CD,
@@ -715,12 +700,9 @@ static const TinselGameDescription gameDescriptions[] = {
 		{
 			"dw2",
 			"CD",
-			{
-				{"dw2.scn", 0, "c6d15ce9720a9d8fef06e6582dcf3f34", 103593},
-				{"english1.smp", 0, NULL, -1},
-				{"italian1.txt", 0, "d443249f8b55489b5888c227b9096f4e", 246495},
-				AD_LISTEND
-			},
+			AD_ENTRY3s("dw2.scn", "c6d15ce9720a9d8fef06e6582dcf3f34", 103593,
+			           "english1.smp", NULL, -1,
+			           "italian1.txt", "d443249f8b55489b5888c227b9096f4e", 246495),
 			Common::IT_ITA,
 			Common::kPlatformDOS,
 			ADGF_NO_FLAGS,
@@ -735,12 +717,9 @@ static const TinselGameDescription gameDescriptions[] = {
 		{
 			"dw2",
 			"CD",
-			{
-				{"dw2.scn", 0, "c6d15ce9720a9d8fef06e6582dcf3f34", 103593},
-				{"english1.smp", 0, NULL, -1},
-				{"spanish1.txt", 0, "bc6e147c5f542db228ac577357e4d897", 230323},
-				AD_LISTEND
-			},
+			AD_ENTRY3s("dw2.scn", "c6d15ce9720a9d8fef06e6582dcf3f34", 103593,
+			           "english1.smp", NULL, -1,
+			           "spanish1.txt", "bc6e147c5f542db228ac577357e4d897", 230323),
 			Common::ES_ESP,
 			Common::kPlatformDOS,
 			ADGF_NO_FLAGS,
@@ -756,12 +735,9 @@ static const TinselGameDescription gameDescriptions[] = {
 		{
 			"dw2",
 			"CD",
-			{
-				{"dw2.scn", 0, "c6d15ce9720a9d8fef06e6582dcf3f34", 103593},
-				{"english1.smp", 0, NULL, -1},
-				{"english1.txt", 0, "b522e19d7b2cd7b85e50e36fe48e36a9", 274444},
-				AD_LISTEND
-			},
+			AD_ENTRY3s("dw2.scn", "c6d15ce9720a9d8fef06e6582dcf3f34", 103593,
+			           "english1.smp", NULL, -1,
+			           "english1.txt", "b522e19d7b2cd7b85e50e36fe48e36a9", 274444),
 			Common::RU_RUS,
 			Common::kPlatformDOS,
 			ADGF_NO_FLAGS,

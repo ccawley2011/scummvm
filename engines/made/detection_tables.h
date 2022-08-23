@@ -145,11 +145,8 @@ static const MadeGameDescription gameDescriptions[] = {
 		{
 			"rtz",
 			"V1.2, 9/29/94, CD",
-			{
-				{ "rtzcd.red", 0, "946997d8b0aa6cb4e848bad02a1fc3d2", 276584 },
-				{ "rtzcd.prj", 0, "974d74410c3c29d50e857863e8bf40e2", 43016792 },
-				AD_LISTEND
-			},
+			AD_ENTRY2s("rtzcd.red", "946997d8b0aa6cb4e848bad02a1fc3d2", 276584,
+			           "rtzcd.prj", "974d74410c3c29d50e857863e8bf40e2", 43016792),
 			Common::EN_ANY,
 			Common::kPlatformDOS,
 			ADGF_CD,
@@ -276,11 +273,8 @@ static const MadeGameDescription gameDescriptions[] = {
 		{
 			"rtz",
 			"V1.2, 9/29/94, CD",
-			{
-				{ "rtzcd.red", 0, "946997d8b0aa6cb4e848bad02a1fc3d2", 276584 },
-				{ "rtzcd.prj", 0, "3c8644f7ce77b74968637c035c3532d8", 48083511 },
-				AD_LISTEND
-			},
+			AD_ENTRY2s("rtzcd.red", "946997d8b0aa6cb4e848bad02a1fc3d2", 276584,
+			           "rtzcd.prj", "3c8644f7ce77b74968637c035c3532d8", 48083511),
 			Common::KO_KOR,
 			Common::kPlatformDOS,
 			ADGF_CD,

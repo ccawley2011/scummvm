@@ -59,12 +59,9 @@ static const ADGameDescription labDescriptions[] = {
 	{
 		"lab",
 		"Rerelease",
-		{
-			{ "doors",   0, "d77536010e7e5ae17ee066323ceb9585", 2537 }, // game/doors
-			{ "noteold.fon", 0, "6c1d90ad55149556e79d3f7bfddb4bd7", 9252 }, // game/spict/noteold.fon
-			{ "wyrmkeep",0, "97c7064c54c28b952d37c4ebff6efa50", 52286 }, // game/spict/intro
-			{ nullptr, 0, nullptr, 0 }
-		},
+		AD_ENTRY3s("doors",       "d77536010e7e5ae17ee066323ceb9585", 2537, // game/doors
+		           "noteold.fon", "6c1d90ad55149556e79d3f7bfddb4bd7", 9252, // game/spict/noteold.fon
+		           "wyrmkeep",    "97c7064c54c28b952d37c4ebff6efa50", 52286), // game/spict/intro
 		Common::EN_ANY,
 		Common::kPlatformWindows,
 		ADGF_NO_FLAGS,

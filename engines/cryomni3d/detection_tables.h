@@ -28,11 +28,10 @@ namespace CryOmni3D {
 // We use files common to all installations except the documentation links and the binary
 // We only check the file presence to simplify and use program to discriminate the version
 #define VERSAILLES_ENTRY(f, x, s, lien_doc_ext) { \
-	{ "11D_LEB1.HNM", 0, nullptr, -1}, \
-	{ "COFBOUM.HNM", 0, nullptr, -1}, \
-	{ "lien_doc." lien_doc_ext, 0, nullptr, -1}, \
-	{ f, 0, x, s}, \
-	AD_LISTEND}
+	AD_ENTRY4s("11D_LEB1.HNM", nullptr, -1, \
+	           "COFBOUM.HNM", nullptr, -1, \
+	           "lien_doc." lien_doc_ext, nullptr, -1, \
+	           f, x, s),
 
 #define VERSAILLES_ENTRY_DEF(f, x, s) VERSAILLES_ENTRY(f, x, s, "txt")
 
