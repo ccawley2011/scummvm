@@ -422,7 +422,7 @@ OSystem::TransactionError SurfaceSdlGraphicsManager::endGFXTransaction() {
 	return (OSystem::TransactionError)errors;
 }
 
-Graphics::PixelFormat SurfaceSdlGraphicsManager::convertSDLPixelFormat(SDL_PixelFormat *in) const {
+Graphics::PixelFormat SurfaceSdlGraphicsManager::convertSDLPixelFormat(SDL_PixelFormat *in) {
 	Graphics::PixelFormat out(in->BytesPerPixel,
 		8 - in->Rloss, 8 - in->Gloss,
 		8 - in->Bloss, 8 - in->Aloss,
@@ -992,12 +992,12 @@ void SurfaceSdlGraphicsManager::unloadGFXMode() {
 
 #ifdef USE_OSD
 	if (_osdMessageSurface) {
-		SDL_FreeSurface(_osdMessageSurface);
+		delete _osdMessageSurface;
 		_osdMessageSurface = nullptr;
 	}
 
 	if (_osdIconSurface) {
-		SDL_FreeSurface(_osdIconSurface);
+		delete _osdIconSurface;
 		_osdIconSurface = nullptr;
 	}
 #endif
@@ -2186,15 +2186,7 @@ void SurfaceSdlGraphicsManager::drawMouse() {
 #pragma mark -
 
 #ifdef USE_OSD
-void SurfaceSdlGraphicsManager::displayMessageOnOSD(const Common::U32String &msg) {
-	assert(_transactionMode == kTransactionNone);
-	assert(!msg.empty());
-	Common::U32String textToSay = msg;
-
-	Common::StackLock lock(_graphicsMutex);	// Lock the mutex until this function ends
-
-	removeOSDMessage();
-
+SurfaceSdlGraphicsManager::OSDIcon::OSDIcon(const Common::U32String &msg, int maxWidth, int maxHeight, SDL_PixelFormat *format) : Common::OSDIcon() {
 	// The font we are going to use:
 	const Graphics::Font *font = FontMan.getFontByUsage(Graphics::FontManager::kLocalizedFont);
 
@@ -2224,44 +2216,107 @@ void SurfaceSdlGraphicsManager::displayMessageOnOSD(const Common::U32String &msg
 	}
 
 	// Clip the rect
-	if (width > _hwScreen->w)
-		width = _hwScreen->w;
-	if (height > _hwScreen->h)
-		height = _hwScreen->h;
+	if (width > maxWidth)
+		width = maxWidth;
+	if (height > maxHeight)
+		height = maxHeight;
 
-	_osdMessageSurface = SDL_CreateRGBSurface(
+	_surface = SDL_CreateRGBSurface(
 		SDL_SWSURFACE | SDL_RLEACCEL | SDL_SRCALPHA,
-		width, height, 16, _hwScreen->format->Rmask, _hwScreen->format->Gmask, _hwScreen->format->Bmask, _hwScreen->format->Amask
+		width, height, format->BitsPerPixel, format->Rmask, format->Gmask, format->Bmask, format->Amask
 	);
 
 	// Lock the surface
-	if (SDL_LockSurface(_osdMessageSurface))
+	if (SDL_LockSurface(_surface))
 		error("displayMessageOnOSD: SDL_LockSurface failed: %s", SDL_GetError());
 
 	// Draw a dark gray rect
 	// TODO: Rounded corners ? Border?
-	SDL_FillRect(_osdMessageSurface, nullptr, SDL_MapRGB(_osdMessageSurface->format, 64, 64, 64));
+	SDL_FillRect(_surface, nullptr, SDL_MapRGB(_surface->format, 64, 64, 64));
 
 	Graphics::Surface dst;
-	dst.init(_osdMessageSurface->w, _osdMessageSurface->h, _osdMessageSurface->pitch, _osdMessageSurface->pixels,
-		convertSDLPixelFormat(_osdMessageSurface->format));
+	dst.init(_surface->w, _surface->h, _surface->pitch, _surface->pixels, convertSDLPixelFormat(_surface->format));
 
 	// Render the message, centered, and in white
 	for (i = 0; i < lines.size(); i++) {
 		font->drawString(&dst, lines[i],
 			0, 0 + i * lineHeight + vOffset + lineSpacing, width,
-			SDL_MapRGB(_osdMessageSurface->format, 255, 255, 255),
+			SDL_MapRGB(_surface->format, 255, 255, 255),
 			Graphics::kTextAlignCenter, 0, true);
 	}
 
 	// Finished drawing, so unlock the OSD message surface
-	SDL_UnlockSurface(_osdMessageSurface);
+	SDL_UnlockSurface(_surface);
+}
+
+SurfaceSdlGraphicsManager::OSDIcon::OSDIcon(const Graphics::Surface *icon) : Common::OSDIcon() {
+	const Graphics::PixelFormat &iconFormat = icon->format;
+
+	_surface = SDL_CreateRGBSurface(
+			SDL_SWSURFACE | SDL_RLEACCEL | SDL_SRCALPHA,
+			icon->w, icon->h, iconFormat.bytesPerPixel * 8,
+			((0xFF >> iconFormat.rLoss) << iconFormat.rShift),
+			((0xFF >> iconFormat.gLoss) << iconFormat.gShift),
+			((0xFF >> iconFormat.bLoss) << iconFormat.bShift),
+			((0xFF >> iconFormat.aLoss) << iconFormat.aShift)
+	);
+
+	// Lock the surface
+	if (SDL_LockSurface(_surface))
+		error("displayActivityIconOnOSD: SDL_LockSurface failed: %s", SDL_GetError());
+
+	byte *dst = (byte *) _surface->pixels;
+	const byte *src = (const byte *) icon->getPixels();
+	for (int y = 0; y < icon->h; y++) {
+		memcpy(dst, src, icon->w * iconFormat.bytesPerPixel);
+		src += icon->pitch;
+		dst += _surface->pitch;
+	}
+
+	// Finished drawing, so unlock the OSD icon surface
+	SDL_UnlockSurface(_surface);
+}
+
+SurfaceSdlGraphicsManager::OSDIcon::~OSDIcon() {
+	SDL_FreeSurface(_surface);
+	_surface = nullptr;
+}
+
+void SurfaceSdlGraphicsManager::OSDIcon::setAlpha(uint8 alpha) {
+	SDL_SetAlpha(_surface, SDL_RLEACCEL | SDL_SRCALPHA, alpha);
+	Common::OSDIcon::setAlpha(alpha);
+}
+
+void SurfaceSdlGraphicsManager::OSDIcon::blit(SDL_Surface *dst) {
+	Common::Point point = getPosition(Common::Rect(10, 10, dst->w - 10, dst->h - 10));
+
+	SDL_Rect dstRect;
+	dstRect.x = point.x;
+	dstRect.y = point.y;
+	dstRect.w = _surface->w;
+	dstRect.h = _surface->h;
+
+	SDL_BlitSurface(_surface, nullptr, dst, &dstRect);
+}
+
+void SurfaceSdlGraphicsManager::displayMessageOnOSD(const Common::U32String &msg) {
+	assert(_transactionMode == kTransactionNone);
+	assert(!msg.empty());
+	Common::U32String textToSay = msg;
+
+	Common::StackLock lock(_graphicsMutex);	// Lock the mutex until this function ends
+
+	removeOSDMessage();
+
+	_osdMessageSurface = new OSDIcon(msg, _hwScreen->w, _hwScreen->h, _hwScreen->format);
 
 	// Init the OSD display parameters, and the fade out
 	_osdMessageAlpha = SDL_ALPHA_TRANSPARENT + kOSDInitialAlpha * (SDL_ALPHA_OPAQUE - SDL_ALPHA_TRANSPARENT) / 100;
 	_osdMessageFadeStartTime = SDL_GetTicks() + kOSDFadeOutDelay;
+	// Position the message in the centre of the screen
+	_osdMessageSurface->setAlignment(OSDIcon::kAlignCentre);
 	// Enable alpha blending
-	SDL_SetAlpha(_osdMessageSurface, SDL_RLEACCEL | SDL_SRCALPHA, _osdMessageAlpha);
+	_osdMessageSurface->setAlpha(_osdMessageAlpha);
 
 #if defined(MACOSX)
 	macOSTouchbarUpdate(msg.encode().c_str());
@@ -2276,15 +2331,6 @@ void SurfaceSdlGraphicsManager::displayMessageOnOSD(const Common::U32String &msg
 	}
 }
 
-SDL_Rect SurfaceSdlGraphicsManager::getOSDMessageRect() const {
-	SDL_Rect rect;
-	rect.x = (_hwScreen->w - _osdMessageSurface->w) / 2;
-	rect.y = (_hwScreen->h - _osdMessageSurface->h) / 2;
-	rect.w = _osdMessageSurface->w;
-	rect.h = _osdMessageSurface->h;
-	return rect;
-}
-
 void SurfaceSdlGraphicsManager::displayActivityIconOnOSD(const Graphics::Surface *icon) {
 	assert(_transactionMode == kTransactionNone);
 
@@ -2296,52 +2342,20 @@ void SurfaceSdlGraphicsManager::displayActivityIconOnOSD(const Graphics::Surface
 	}
 
 	if (_osdIconSurface) {
-		SDL_FreeSurface(_osdIconSurface);
+		delete _osdIconSurface;
 		_osdIconSurface = nullptr;
 	}
 
 	if (icon) {
-		const Graphics::PixelFormat &iconFormat = icon->format;
-
-		_osdIconSurface = SDL_CreateRGBSurface(
-				SDL_SWSURFACE | SDL_RLEACCEL | SDL_SRCALPHA,
-				icon->w, icon->h, iconFormat.bytesPerPixel * 8,
-				((0xFF >> iconFormat.rLoss) << iconFormat.rShift),
-				((0xFF >> iconFormat.gLoss) << iconFormat.gShift),
-				((0xFF >> iconFormat.bLoss) << iconFormat.bShift),
-				((0xFF >> iconFormat.aLoss) << iconFormat.aShift)
-		);
-
-		// Lock the surface
-		if (SDL_LockSurface(_osdIconSurface))
-			error("displayActivityIconOnOSD: SDL_LockSurface failed: %s", SDL_GetError());
-
-		byte *dst = (byte *) _osdIconSurface->pixels;
-		const byte *src = (const byte *) icon->getPixels();
-		for (int y = 0; y < icon->h; y++) {
-			memcpy(dst, src, icon->w * iconFormat.bytesPerPixel);
-			src += icon->pitch;
-			dst += _osdIconSurface->pitch;
-		}
-
-		// Finished drawing, so unlock the OSD icon surface
-		SDL_UnlockSurface(_osdIconSurface);
+		_osdIconSurface = new OSDIcon(icon);
+		_osdIconSurface->setAlignment(OSDIcon::kAlignTopRight);
 	}
-}
-
-SDL_Rect SurfaceSdlGraphicsManager::getOSDIconRect() const {
-	SDL_Rect dstRect;
-	dstRect.x = _hwScreen->w - _osdIconSurface->w - 10;
-	dstRect.y = 10;
-	dstRect.w = _osdIconSurface->w;
-	dstRect.h = _osdIconSurface->h;
-	return dstRect;
 }
 
 void SurfaceSdlGraphicsManager::removeOSDMessage() {
 	// Remove the previous message
 	if (_osdMessageSurface) {
-		SDL_FreeSurface(_osdMessageSurface);
+		delete _osdMessageSurface;
 		_forceRedraw = true;
 	}
 
@@ -2367,7 +2381,7 @@ void SurfaceSdlGraphicsManager::updateOSD() {
 				const int startAlpha = SDL_ALPHA_TRANSPARENT + kOSDInitialAlpha * (SDL_ALPHA_OPAQUE - SDL_ALPHA_TRANSPARENT) / 100;
 				_osdMessageAlpha = startAlpha + diff * (SDL_ALPHA_TRANSPARENT - startAlpha) / kOSDFadeOutDuration;
 			}
-			SDL_SetAlpha(_osdMessageSurface, SDL_RLEACCEL | SDL_SRCALPHA, _osdMessageAlpha);
+			_osdMessageSurface->setAlpha(_osdMessageAlpha);
 		}
 
 		if (_osdMessageAlpha == SDL_ALPHA_TRANSPARENT) {
@@ -2383,13 +2397,11 @@ void SurfaceSdlGraphicsManager::updateOSD() {
 
 void SurfaceSdlGraphicsManager::drawOSD() {
 	if (_osdMessageSurface) {
-		SDL_Rect dstRect = getOSDMessageRect();
-		SDL_BlitSurface(_osdMessageSurface, nullptr, _hwScreen, &dstRect);
+		_osdMessageSurface->blit(_hwScreen);
 	}
 
 	if (_osdIconSurface) {
-		SDL_Rect dstRect = getOSDIconRect();
-		SDL_BlitSurface(_osdIconSurface, nullptr, _hwScreen, &dstRect);
+		_osdIconSurface->blit(_hwScreen);
 	}
 }
 

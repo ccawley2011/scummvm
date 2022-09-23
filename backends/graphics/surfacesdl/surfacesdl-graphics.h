@@ -29,6 +29,7 @@
 #include "graphics/scalerplugin.h"
 #include "common/events.h"
 #include "common/mutex.h"
+#include "common/osd.h"
 
 #include "backends/events/sdl/sdl-events.h"
 
@@ -106,7 +107,7 @@ protected:
 	 * @param in    The SDL pixel format to convert
 	 * @param out   A pixel format to be written to
 	 */
-	Graphics::PixelFormat convertSDLPixelFormat(SDL_PixelFormat *in) const;
+	static Graphics::PixelFormat convertSDLPixelFormat(SDL_PixelFormat *in);
 public:
 	void copyRectToScreen(const void *buf, int pitch, int x, int y, int w, int h) override;
 	Graphics::Surface *lockScreen() override;
@@ -140,8 +141,26 @@ public:
 
 protected:
 #ifdef USE_OSD
+	class OSDIcon final : public Common::OSDIcon {
+	public:
+		OSDIcon(const Common::U32String &msg, int maxWidth, int maxHeight, SDL_PixelFormat *format);
+		OSDIcon(const Graphics::Surface *icon);
+		~OSDIcon() override;
+
+		void setAlpha(uint8 alpha) override;
+		uint getWidth() const override { return _surface->w; }
+		uint getHeight() const override { return _surface->h; }
+
+		void blit(SDL_Surface *dst);
+
+	private:
+		uint8 _alpha;
+		Alignment _align;
+		SDL_Surface *_surface;
+	};
+
 	/** Surface containing the OSD message */
-	SDL_Surface *_osdMessageSurface;
+	OSDIcon *_osdMessageSurface;
 	/** Transparency level of the OSD message */
 	uint8 _osdMessageAlpha;
 	/** When to start the fade out */
@@ -157,7 +176,7 @@ protected:
 	/** Clear the currently displayed OSD message if any */
 	void removeOSDMessage();
 	/** Surface containing the OSD background activity icon */
-	SDL_Surface *_osdIconSurface;
+	OSDIcon *_osdIconSurface;
 	/** Screen rectangle where the OSD background activity icon is drawn */
 	SDL_Rect getOSDIconRect() const;
 
@@ -188,9 +207,9 @@ protected:
 
 	virtual SDL_Surface *SDL_SetVideoMode(int width, int height, int bpp, Uint32 flags);
 	virtual void SDL_UpdateRects(SDL_Surface *screen, int numrects, SDL_Rect *rects);
-	int SDL_SetColors(SDL_Surface *surface, SDL_Color *colors, int firstcolor, int ncolors);
-	int SDL_SetAlpha(SDL_Surface *surface, Uint32 flag, Uint8 alpha);
-	int SDL_SetColorKey(SDL_Surface *surface, Uint32 flag, Uint32 key);
+	static int SDL_SetColors(SDL_Surface *surface, SDL_Color *colors, int firstcolor, int ncolors);
+	static int SDL_SetAlpha(SDL_Surface *surface, Uint32 flag, Uint8 alpha);
+	static int SDL_SetColorKey(SDL_Surface *surface, Uint32 flag, Uint32 key);
 	bool _vsync;
 #endif
 
