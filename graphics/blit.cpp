@@ -24,7 +24,7 @@
  *
  */
 
-#include "graphics/conversion.h"
+#include "graphics/blit.h"
 #include "graphics/pixelformat.h"
 #include "graphics/transform_struct.h"
 

@@ -19,8 +19,8 @@
  *
  */
 
-#ifndef GRAPHICS_CONVERSION_H
-#define GRAPHICS_CONVERSION_H
+#ifndef GRAPHICS_BLIT_H
+#define GRAPHICS_BLIT_H
 
 #include "graphics/pixelformat.h"
 
@@ -31,10 +31,10 @@ struct Point;
 namespace Graphics {
 
 /**
- * @defgroup graphics_conversion Conversions
+ * @defgroup graphics_blit Blit
  * @ingroup graphics
  *
- * @brief Graphics conversion operations.
+ * @brief Graphics blitting operations.
  *
  * @{
  */

@@ -1,7 +1,7 @@
 MODULE := graphics
 
 MODULE_OBJS := \
-	conversion.o \
+	blit.o \
 	cursorman.o \
 	font.o \
 	fontman.o \
