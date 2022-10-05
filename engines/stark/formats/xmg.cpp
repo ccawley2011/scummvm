@@ -23,9 +23,9 @@
 #include "engines/stark/debug.h"
 #include "engines/stark/gfx/driver.h"
 
-#include "graphics/conversion.h"
 #include "graphics/pixelformat.h"
 #include "graphics/surface.h"
+#include "graphics/yuv_to_rgb.h"
 #include "common/stream.h"
 #include "common/textconsole.h"
 

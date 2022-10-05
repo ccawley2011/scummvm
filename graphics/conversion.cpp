@@ -34,8 +34,6 @@
 
 namespace Graphics {
 
-// TODO: YUV to RGB conversion function
-
 // Function to blit a rect
 void copyBlit(byte *dst, const byte *src,
 			   const uint dstPitch, const uint srcPitch,

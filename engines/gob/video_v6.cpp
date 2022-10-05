@@ -22,7 +22,7 @@
 #include "common/endian.h"
 #include "common/savefile.h"
 
-#include "graphics/conversion.h"
+#include "graphics/yuv_to_rgb.h"
 
 #include "gob/gob.h"
 #include "gob/video.h"
