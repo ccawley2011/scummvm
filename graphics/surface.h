@@ -331,6 +331,19 @@ public:
 	void copyRectToSurfaceWithKey(const Graphics::Surface &srcSurface, int destX, int destY, const Common::Rect subRect, uint32 key);
 
 	/**
+	 * Convert the data from another surface.
+	 *
+	 * This calls @ref free on the current surface to assure that it is
+	 * clean. Make sure that the current data was created using @ref create.
+	 * Otherwise, the results are undefined.
+	 *
+	 * @param surf       The surface to convert from.
+	 * @param dstFormat  The desired format.
+	 * @param palette    The palette (in RGB888), if the source format has a bpp of 1.
+	 */
+	void convertFrom(const Surface &surf, const PixelFormat &dstFormat, const byte *palette = 0);
+
+	/**
 	 * Convert the data to another pixel format.
 	 *
 	 * This works in-place. This means it does not create an additional buffer

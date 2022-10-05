@@ -437,6 +437,37 @@ Graphics::Surface *Surface::rotoscale(const TransformStruct &transform, bool fil
 	return target;
 }
 
+void Surface::convertFrom(const Surface &surf, const PixelFormat &dstFormat, const byte *palette) {
+	assert(surf.pixels);
+
+	// If the target format is the same, just copy
+	if (surf.format == dstFormat) {
+		copyFrom(surf);
+		return;
+	}
+
+	if (surf.format.bytesPerPixel == 0 || surf.format.bytesPerPixel > 4)
+		error("Surface::convertTo(): Can only convert from 1Bpp, 2Bpp, 3Bpp, and 4Bpp but have %dbpp", surf.format.bytesPerPixel);
+
+	if (dstFormat.bytesPerPixel < 2 || dstFormat.bytesPerPixel > 4)
+		error("Surface::convertToInPlace(): Can only convert to 2Bpp, 3Bpp and 4Bpp but requested %dbpp", dstFormat.bytesPerPixel);
+
+	create(surf.w, surf.h, dstFormat);
+
+	if (format.bytesPerPixel == 1) {
+		// Converting from paletted to high color
+		assert(palette);
+
+		uint32 map[256];
+		convertPaletteToMap(map, palette, 256, format);
+
+		crossBlitMap((byte *)pixels, (const byte *)surf.pixels, pitch, surf.pitch, w, h, format.bytesPerPixel, map);
+	} else {
+		// Converting from high color to high color
+		crossBlit((byte *)pixels, (const byte *)surf.pixels, pitch, surf.pitch, w, h, format, surf.format);
+	}
+}
+
 void Surface::convertToInPlace(const PixelFormat &dstFormat, const byte *palette) {
 	// Do not convert to the same format and ignore empty surfaces.
 	if (format == dstFormat || pixels == 0) {
