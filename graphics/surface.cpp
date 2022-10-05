@@ -95,17 +95,7 @@ void Surface::init(int16 width, int16 height, int16 newPitch, void *newPixels, c
 
 void Surface::copyFrom(const Surface &surf) {
 	create(surf.w, surf.h, surf.format);
-	if (surf.pitch == pitch) {
-		memcpy(pixels, surf.pixels, h * pitch);
-	} else {
-		const byte *src = (const byte *)surf.pixels;
-		byte *dst = (byte *)pixels;
-		for (int y = h; y > 0; --y) {
-			memcpy(dst, src, w * format.bytesPerPixel);
-			src += surf.pitch;
-			dst += pitch;
-		}
-	}
+	copyBlit((byte *)pixels, (const byte *)surf.pixels, pitch, surf.pitch, w, h, format.bytesPerPixel);
 }
 
 Surface Surface::getSubArea(const Common::Rect &area) {
@@ -176,11 +166,7 @@ void Surface::copyRectToSurface(const void *buffer, int srcPitch, int destX, int
 	// Copy buffer data to internal buffer
 	const byte *src = (const byte *)buffer;
 	byte *dst = (byte *)getBasePtr(destX, destY);
-	for (int i = 0; i < height; i++) {
-		memcpy(dst, src, width * format.bytesPerPixel);
-		src += srcPitch;
-		dst += pitch;
-	}
+	copyBlit(dst, src, pitch, srcPitch, width, height, format.bytesPerPixel);
 }
 
 void Surface::copyRectToSurface(const Graphics::Surface &srcSurface, int destX, int destY, const Common::Rect subRect) {
@@ -200,7 +186,7 @@ void Surface::copyRectToSurfaceWithKey(const void *buffer, int srcPitch, int des
 	// Copy buffer data to internal buffer
 	const byte *src = (const byte *)buffer;
 	byte *dst = (byte *)getBasePtr(destX, destY);
-	Graphics::keyBlit(dst, src, pitch, srcPitch, width, height, format.bytesPerPixel, key);
+	keyBlit(dst, src, pitch, srcPitch, width, height, format.bytesPerPixel, key);
 }
 
 void Surface::copyRectToSurfaceWithKey(const Graphics::Surface &srcSurface, int destX, int destY, const Common::Rect subRect, uint32 key) {
@@ -460,8 +446,8 @@ void Surface::convertToInPlace(const PixelFormat &dstFormat, const byte *palette
 	if (format.bytesPerPixel == 0 || format.bytesPerPixel > 4)
 		error("Surface::convertToInPlace(): Can only convert from 1Bpp, 2Bpp, 3Bpp, and 4Bpp but have %dbpp", format.bytesPerPixel);
 
-	if (dstFormat.bytesPerPixel != 2 && dstFormat.bytesPerPixel != 4)
-		error("Surface::convertToInPlace(): Can only convert to 2Bpp and 4Bpp but requested %dbpp", dstFormat.bytesPerPixel);
+	if (dstFormat.bytesPerPixel < 2 || dstFormat.bytesPerPixel > 4)
+		error("Surface::convertToInPlace(): Can only convert to 2Bpp, 3Bpp and 4Bpp but requested %dbpp", dstFormat.bytesPerPixel);
 
 	// In case the surface data needs more space allocate it.
 	if (dstFormat.bytesPerPixel > format.bytesPerPixel) {
@@ -479,28 +465,12 @@ void Surface::convertToInPlace(const PixelFormat &dstFormat, const byte *palette
 	if (format.bytesPerPixel == 1) {
 		assert(palette);
 
-		for (int y = h; y > 0; --y) {
-			const byte *srcRow = (const byte *)pixels + y * pitch - 1;
-			byte *dstRow = (byte *)pixels + y * w * dstFormat.bytesPerPixel - dstFormat.bytesPerPixel;
+		uint32 map[256];
+		convertPaletteToMap(map, palette, 256, dstFormat);
 
-			for (int x = 0; x < w; x++) {
-				byte index = *srcRow--;
-				byte r = palette[index * 3];
-				byte g = palette[index * 3 + 1];
-				byte b = palette[index * 3 + 2];
-
-				uint32 color = dstFormat.RGBToColor(r, g, b);
-
-				if (dstFormat.bytesPerPixel == 2)
-					*((uint16 *)dstRow) = color;
-				else
-					*((uint32 *)dstRow) = color;
-
-				dstRow -= dstFormat.bytesPerPixel;
-			}
-		}
+		crossBlitMap((byte *)pixels, (const byte *)pixels, pitch, pitch, w, h, dstFormat.bytesPerPixel, map);
 	} else {
-		crossBlit((byte *)pixels, (const byte *)pixels, w * dstFormat.bytesPerPixel, pitch, w, h, dstFormat, format);
+		crossBlit((byte *)pixels, (const byte *)pixels, pitch, pitch, w, h, dstFormat, format);
 	}
 
 	// In case the surface data got smaller, free up some memory.
@@ -553,60 +523,13 @@ Graphics::Surface *Surface::convertTo(const PixelFormat &dstFormat, const byte *
 		// Converting from paletted to high color
 		assert(srcPalette);
 
-		for (int y = 0; y < h; y++) {
-			const byte *srcRow = (const byte *)getBasePtr(0, y);
-			byte *dstRow = (byte *)surface->getBasePtr(0, y);
+		uint32 map[256];
+		convertPaletteToMap(map, srcPalette, srcPaletteCount ? srcPaletteCount : 256, surface->format);
 
-			for (int x = 0; x < w; x++) {
-				byte index = *srcRow++;
-				byte r = srcPalette[index * 3];
-				byte g = srcPalette[index * 3 + 1];
-				byte b = srcPalette[index * 3 + 2];
-
-				uint32 color = dstFormat.RGBToColor(r, g, b);
-
-				if (dstFormat.bytesPerPixel == 2)
-					*((uint16 *)dstRow) = color;
-				else if (dstFormat.bytesPerPixel == 3)
-					WRITE_UINT24(dstRow, color);
-				else
-					*((uint32 *)dstRow) = color;
-
-				dstRow += dstFormat.bytesPerPixel;
-			}
-		}
+		crossBlitMap((byte *)surface->pixels, (const byte *)pixels, surface->pitch, pitch, w, h, surface->format.bytesPerPixel, map);
 	} else {
 		// Converting from high color to high color
-		for (int y = 0; y < h; y++) {
-			const byte *srcRow = (const byte *)getBasePtr(0, y);
-			byte *dstRow = (byte *)surface->getBasePtr(0, y);
-
-			for (int x = 0; x < w; x++) {
-				uint32 srcColor;
-				if (format.bytesPerPixel == 2)
-					srcColor = READ_UINT16(srcRow);
-				else if (format.bytesPerPixel == 3)
-					srcColor = READ_UINT24(srcRow);
-				else
-					srcColor = READ_UINT32(srcRow);
-
-				srcRow += format.bytesPerPixel;
-
-				// Convert that color to the new format
-				byte r, g, b, a;
-				format.colorToARGB(srcColor, a, r, g, b);
-				uint32 color = dstFormat.ARGBToColor(a, r, g, b);
-
-				if (dstFormat.bytesPerPixel == 2)
-					*((uint16 *)dstRow) = color;
-				else if (dstFormat.bytesPerPixel == 3)
-					WRITE_UINT24(dstRow, color);
-				else
-					*((uint32 *)dstRow) = color;
-
-				dstRow += dstFormat.bytesPerPixel;
-			}
-		}
+		crossBlit((byte *)surface->pixels, (const byte *)pixels, surface->pitch, pitch, w, h, surface->format, format);
 	}
 
 	return surface;
