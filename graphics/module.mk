@@ -2,6 +2,7 @@ MODULE := graphics
 
 MODULE_OBJS := \
 	blit.o \
+	blit-scaled.o \
 	cursorman.o \
 	font.o \
 	fontman.o \
