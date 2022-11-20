@@ -100,7 +100,8 @@ void BiikArchive::close() {
 	_map.clear();
 }
 
-bool BiikArchive::hasFile(const Common::String &name) const {
+bool BiikArchive::hasFile(const Common::Path &path) const {
+	Common::String name = path.toString();
 	return _map.contains(name);
 }
 
@@ -111,11 +112,13 @@ int BiikArchive::listMembers(Common::ArchiveMemberList &list) const {
 	return _map.size();
 }
 
-const Common::ArchiveMemberPtr BiikArchive::getMember(const Common::String &name) const {
+const Common::ArchiveMemberPtr BiikArchive::getMember(const Common::Path &path) const {
+	Common::String name = path.toString();
 	return Common::ArchiveMemberPtr(new Common::GenericArchiveMember(name, this));
 }
 
-Common::SeekableReadStream *BiikArchive::createReadStreamForMember(const Common::String &name) const {
+Common::SeekableReadStream *BiikArchive::createReadStreamForMember(const Common::Path &path) const {
+	Common::String name = path.toString();
 	if (!_stream || !_map.contains(name))
 		return nullptr;
 
@@ -124,7 +127,8 @@ Common::SeekableReadStream *BiikArchive::createReadStreamForMember(const Common:
 	return new Common::SeekableSubReadStream(_stream, entry.offset, entry.offset + entry.size, DisposeAfterUse::YES);
 }
 
-Common::String BiikArchive::getMemberFileType(const Common::String &name) const {
+Common::String BiikArchive::getMemberFileType(const Common::Path &path) const {
+	Common::String name = path.toString();
 	if (!_stream || !_map.contains(name))
 		return nullptr;
 

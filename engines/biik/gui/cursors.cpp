@@ -178,15 +178,15 @@ Graphics::MacCursor *MacCursorManager::loadCursor(Common::MacResManager *resMan,
 }
 
 void MacCursorManager::setDefaultCursor() {
-	_wm->pushArrowCursor();
+	_wm->replaceCursor(Graphics::kMacCursorArrow);
 }
 
 void MacCursorManager::setPtrClickCursor() {
-	_wm->pushCustomCursor(_ptr_click);
+	_wm->replaceCursor(Graphics::kMacCursorCustom, _ptr_click);
 }
 
 void MacCursorManager::setPtrNoTouch() {
-	_wm->pushCustomCursor(_ptr_notouch);
+	_wm->replaceCursor(Graphics::kMacCursorCustom, _ptr_notouch);
 }
 
 }

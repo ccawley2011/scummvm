@@ -53,11 +53,11 @@ public:
 		_directoryGlobs = directoryGlobs;
 	}
 
-	virtual const char *getEngineId() const override {
+	virtual const char *getName() const override {
 		return "biik";
 	}
 
-	virtual const char *getName() const override {
+	virtual const char *getEngineName() const override {
 		return "Biik Engine";
 	}
 
