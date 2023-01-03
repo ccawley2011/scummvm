@@ -956,6 +956,51 @@ void OpenGLGraphicsManager::osdMessageUpdateSurface() {
 	_osdMessageNextData.clear();
 	_osdMessageChangeRequest = false;
 }
+
+OpenGLGraphicsManager::OSDIcon::OSDIcon(const Graphics::Surface *icon, Surface *surface) : Common::OSDIcon() {
+
+	_surface = surface;
+	assert(_surface);
+	// We always filter the osd with GL_LINEAR. This assures it's
+	// readable in case it needs to be scaled and does not affect it
+	// otherwise.
+	_surface->enableLinearFiltering(true);
+
+	_surface->allocate(icon->w, icon->h);
+
+	Graphics::Surface *dst = _surface->getSurface();
+
+	// Copy the icon to the texture
+	dst->copyRectToSurface(*icon, 0, 0, Common::Rect(0, 0, icon->w, icon->h));
+}
+
+OpenGLGraphicsManager::OSDIcon::~OSDIcon() {
+	delete _surface;
+}
+
+uint OpenGLGraphicsManager::OSDIcon::getWidth() const {
+	return _surface->getWidth();
+}
+
+uint OpenGLGraphicsManager::OSDIcon::getHeight() const {
+	return _surface->getHeight();
+}
+
+const GLTexture &OpenGLGraphicsManager::OSDIcon::getGLTexture() const {
+	return _surface->getGLTexture();
+}
+
+void OpenGLGraphicsManager::OSDIcon::destroy() {
+	_surface->destroy();
+}
+
+void OpenGLGraphicsManager::OSDIcon::recreate() {
+	_surface->recreate();
+}
+
+void OpenGLGraphicsManager::OSDIcon::updateGLTexture() {
+	_surface->updateGLTexture();
+}
 #endif
 
 void OpenGLGraphicsManager::displayActivityIconOnOSD(const Graphics::Surface *icon) {
@@ -971,19 +1016,7 @@ void OpenGLGraphicsManager::displayActivityIconOnOSD(const Graphics::Surface *ic
 	if (icon) {
 		Graphics::Surface *converted = icon->convertTo(_defaultFormatAlpha);
 
-		_osdIconSurface = createSurface(_defaultFormatAlpha);
-		assert(_osdIconSurface);
-		// We always filter the osd with GL_LINEAR. This assures it's
-		// readable in case it needs to be scaled and does not affect it
-		// otherwise.
-		_osdIconSurface->enableLinearFiltering(true);
-
-		_osdIconSurface->allocate(converted->w, converted->h);
-
-		Graphics::Surface *dst = _osdIconSurface->getSurface();
-
-		// Copy the icon to the texture
-		dst->copyRectToSurface(*converted, 0, 0, Common::Rect(0, 0, converted->w, converted->h));
+		_osdIconSurface = new OSDIcon(converted, createSurface(_defaultFormatAlpha));
 
 		converted->free();
 		delete converted;

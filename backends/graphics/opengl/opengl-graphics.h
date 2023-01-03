@@ -27,6 +27,7 @@
 
 #include "common/frac.h"
 #include "common/mutex.h"
+#include "common/osd.h"
 #include "common/ustr.h"
 
 #include "graphics/surface.h"
@@ -427,6 +428,24 @@ protected:
 	virtual const Graphics::Font *getFontOSD() const;
 
 private:
+	class OSDIcon final : public Common::OSDIcon {
+	public:
+		//OSDIcon(const Common::U32String &msg, int maxWidth, int maxHeight, SDL_PixelFormat *format);
+		OSDIcon(const Graphics::Surface *icon, Surface *surface);
+		~OSDIcon() override;
+
+		uint getWidth() const override;
+		uint getHeight() const override;
+
+		const GLTexture &getGLTexture() const;
+		void destroy();
+		void recreate();
+		void updateGLTexture();
+
+	private:
+		Surface *_surface;
+	};
+
 	/**
 	 * Request for the OSD icon surface to be updated.
 	 */
@@ -469,7 +488,7 @@ private:
 	/**
 	 * The OSD background activity icon's contents.
 	 */
-	Surface *_osdIconSurface;
+	OSDIcon *_osdIconSurface;
 
 	enum {
 		kOSDIconTopMargin = 10,
