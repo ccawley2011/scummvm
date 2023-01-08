@@ -206,7 +206,6 @@ void DrillerEngine::gotoArea(uint16 areaID, int entranceID) {
 
 	if (areaID != _startArea || entranceID != _startEntrance) {
 		g_system->warpMouse(_crossairPosition.x, _crossairPosition.y);
-		_lastMousePos = _crossairPosition;
 		rotate(0, 0);
 	}
 }
@@ -1159,13 +1158,13 @@ void DrillerEngine::drawInfoMenu() {
 					_gfx->setViewport(_fullscreenViewArea);
 					g_system->lockMouse(false);
 					loadGameDialog();
-					g_system->lockMouse(true);
+					g_system->lockMouse(!_shootMode);
 					_gfx->setViewport(_viewArea);
 				} else if (event.kbd.keycode == Common::KEYCODE_s) {
 					_gfx->setViewport(_fullscreenViewArea);
 					g_system->lockMouse(false);
 					saveGameDialog();
-					g_system->lockMouse(true);
+					g_system->lockMouse(!_shootMode);
 					_gfx->setViewport(_viewArea);
 				} else if (isDOS() && event.kbd.keycode == Common::KEYCODE_t) {
 					// TODO
@@ -1500,7 +1499,6 @@ void DrillerEngine::initGameState() {
 	_noClipMode = false;
 	_shootingFrames = 0;
 	_underFireFrames = 0;
-	_lastMousePos = Common::Point(0, 0);
 	_yaw = 0;
 	_pitch = 0;
 

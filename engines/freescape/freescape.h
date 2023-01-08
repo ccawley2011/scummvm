@@ -188,11 +188,11 @@ public:
 	bool tryStepDown(Math::Vector3d currentPosition);
 	bool _hasFallen;
 
-	void rotate(Common::Point lastMousePos, Common::Point mousePos);
 	void rotate(float xoffset, float yoffset);
+	void rotateMouse(const Common::Point &relMouse);
+
 	// Input state
 	float _lastFrame;
-	Common::Point _lastMousePos;
 
 	// Interaction
 	void shoot();
@@ -209,7 +209,6 @@ public:
 
 	// Camera options
 	Common::Point _crossairPosition;
-	float _mouseSensitivity;
 	float _movementSpeed;
 	Math::Vector3d _upVector; // const
 	Math::Vector3d _cameraFront, _cameraRight;

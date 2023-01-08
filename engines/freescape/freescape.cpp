@@ -88,7 +88,6 @@ FreescapeEngine::FreescapeEngine(OSystem *syst, const ADGameDescription *gd)
 	_pitch = 0;
 	_upVector = Math::Vector3d(0, 1, 0);
 	_movementSpeed = 1.5f;
-	_mouseSensitivity = 0.25f;
 	_demoMode = false;
 	_shootMode = false;
 	_demoIndex = 0;
@@ -119,7 +118,6 @@ FreescapeEngine::FreescapeEngine(OSystem *syst, const ADGameDescription *gd)
 	_fontLoaded = false;
 	_dataBundle = nullptr;
 
-	_lastMousePos = Common::Point(0, 0);
 	_lastFrame = 0;
 	_nearClipPlane = 2;
 	_farClipPlane = 8192 + 1802; // Added some extra distance to avoid flickering
@@ -343,7 +341,6 @@ void FreescapeEngine::processInput() {
 	float deltaTime = 20.0;
 	_lastFrame = currentFrame;
 	Common::Event event;
-	Common::Point mousePos;
 
 	if (_demoMode && !_demoEvents.empty()) {
 		g_system->getEventManager()->purgeMouseEvents();
@@ -418,15 +415,19 @@ void FreescapeEngine::processInput() {
 				_gfx->setViewport(_fullscreenViewArea);
 				g_system->lockMouse(false);
 				openMainMenuDialog();
-				g_system->lockMouse(true);
+				g_system->lockMouse(!_shootMode);
 				_gfx->setViewport(_viewArea);
 				_savedScreen->free();
 				delete _savedScreen;
 				break;
 			case Common::KEYCODE_SPACE:
 				_shootMode = !_shootMode;
-				if (!_shootMode)
+				if (!_shootMode) {
+					g_system->lockMouse(true);
 					centerCrossair();
+				} else {
+					g_system->lockMouse(false);
+				}
 				break;
 			case Common::KEYCODE_i:
 				drawInfoMenu();
@@ -449,41 +450,16 @@ void FreescapeEngine::processInput() {
 		case Common::EVENT_MOUSEMOVE:
 			if (_hasFallen)
 				break;
-			mousePos = event.mouse;
 
 			if (_demoMode)
-				g_system->warpMouse(mousePos.x, mousePos.y);
+				g_system->warpMouse(event.mouse.x, event.mouse.y);
 
 			if (_shootMode) {
-				_crossairPosition = mousePos;
+				_crossairPosition = event.mouse;
 				break;
 			}
 
-			if (mousePos.x <= 5 || mousePos.x >= _screenW - 5) {
-				g_system->warpMouse(_screenW / 2, mousePos.y);
-
-				_lastMousePos.x = _screenW / 2;
-				_lastMousePos.y = mousePos.y;
-				if (mousePos.x <= 5)
-					mousePos.x = _lastMousePos.x + 3;
-				else
-					mousePos.x = _lastMousePos.x - 3;
-
-				mousePos.y = _lastMousePos.y;
-
-			} else if (mousePos.y <= 5 || mousePos.y >= _screenH - 5) {
-				g_system->warpMouse(mousePos.x, _screenH / 2);
-				_lastMousePos.x = mousePos.x;
-				_lastMousePos.y = _screenH / 2;
-				if (mousePos.y <= 5)
-					mousePos.y = _lastMousePos.y + 3;
-				else
-					mousePos.y = _lastMousePos.y - 3;
-
-				mousePos.x = _lastMousePos.x;
-			}
-			rotate(_lastMousePos, mousePos);
-			_lastMousePos = mousePos;
+			rotateMouse(event.relMouse);
 			break;
 
 		case Common::EVENT_LBUTTONDOWN:
@@ -558,7 +534,7 @@ Common::Error FreescapeEngine::run() {
 	bool endGame = false;
 	// Draw first frame
 
-	rotate(_lastMousePos, _lastMousePos);
+	rotate(0, 0);
 	drawFrame();
 	_gfx->flipBuffer();
 	g_system->updateScreen();
@@ -644,29 +620,13 @@ void FreescapeEngine::rotate(float xoffset, float yoffset) {
 	updateCamera();
 }
 
-void FreescapeEngine::rotate(Common::Point lastMousePos, Common::Point mousePos) {
-	if (lastMousePos != Common::Point(0, 0)) {
-		float xoffset = mousePos.x - lastMousePos.x;
-		float yoffset = mousePos.y - lastMousePos.y;
+void FreescapeEngine::rotateMouse(const Common::Point &relMouse) {
+	float speed = 25.0f / 150.0f;
 
-		xoffset *= _mouseSensitivity;
-		yoffset *= _mouseSensitivity;
+	Common::Rect screen = _gfx->viewport();
+	speed *= _screenH / (float) screen.height();
 
-		_yaw -= xoffset;
-		_pitch += yoffset;
-
-		// Make sure that when pitch is out of bounds, screen doesn't get flipped
-		if (_pitch > 360.0f)
-			_pitch -= 360.0f;
-		if (_pitch < 0.0f)
-			_pitch += 360.0f;
-
-		if (_yaw > 360.0f)
-			_yaw -= 360.0f;
-		if (_yaw < 0.0f)
-			_yaw += 360.0f;
-	}
-	updateCamera();
+	rotate(relMouse.x * speed, relMouse.y * speed);
 }
 
 void FreescapeEngine::updateCamera() {
