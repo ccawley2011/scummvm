@@ -31,7 +31,7 @@
 #include "graphics/opengl/context.h"
 
 namespace OpenGL {
-	class FrameBuffer;
+	class BaseFrameBuffer;
 	class SurfaceRenderer;
 	class TiledSurface;
 }
@@ -190,8 +190,8 @@ protected:
 	void drawOverlay();
 	void closeOverlay();
 
-	OpenGL::FrameBuffer *_frameBuffer;
-	OpenGL::FrameBuffer *createFramebuffer(uint width, uint height);
+	OpenGL::BaseFrameBuffer *_frameBuffer;
+	OpenGL::BaseFrameBuffer *createFramebuffer(uint width, uint height);
 	bool shouldRenderToFramebuffer() const;
 
 protected:
