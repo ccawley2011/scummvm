@@ -357,7 +357,7 @@ void BlitImage::tglBlitRLE(int dstX, int dstY, int srcX, int srcY, int srcWidth,
 							if (aDst != 0xFF) {
 								c->fb->writePixel((dstX + x) + (dstY + (l._y - srcY)) * fbWidth, aDst, rDst, gDst, bDst);
 							} else {
-								dstBuf.setPixelAt(x + (l._y - srcY) * fbWidth, aDst, rDst, gDst, bDst);
+								c->fb->setPixelAt((dstX + x) + (dstY + (l._y - srcY)) * fbWidth, aDst, rDst, gDst, bDst);
 							}
 						} else {
 							c->fb->writePixel((dstX + x) + (dstY + (l._y - srcY)) * fbWidth, aDst * aTint, rDst * rTint, gDst * gTint, bDst * bTint);
@@ -388,7 +388,6 @@ void BlitImage::tglBlitSimple(int dstX, int dstY, int srcX, int srcY, int srcWid
 		srcBuf.shiftBy((srcY * _surface.w));
 	}
 
-	Graphics::PixelBuffer dstBuf(c->fb->getPixelFormat(), c->fb->getPixelBuffer());
 	int fbWidth = c->fb->getPixelBufferWidth();
 
 	for (int y = 0; y < clampHeight; y++) {
@@ -403,13 +402,13 @@ void BlitImage::tglBlitSimple(int dstX, int dstY, int srcX, int srcY, int srcWid
 			// Those branches are needed to favor speed: avoiding writePixel always yield a huge performance boost when blitting images.
 			if (kDisableColoring) {
 				if (kDisableBlending && aDst != 0) {
-					dstBuf.setPixelAt((dstX + x) + (dstY + y) * fbWidth, aDst, rDst, gDst, bDst);
+					c->fb->setPixelAt((dstX + x) + (dstY + y) * fbWidth, aDst, rDst, gDst, bDst);
 				} else {
 					c->fb->writePixel((dstX + x) + (dstY + y) * fbWidth, aDst, rDst, gDst, bDst);
 				}
 			} else {
 				if (kDisableBlending && aDst * aTint != 0) {
-					dstBuf.setPixelAt((dstX + x) + (dstY + y) * fbWidth, aDst * aTint, rDst * rTint, gDst * gTint, bDst * bTint);
+					c->fb->setPixelAt((dstX + x) + (dstY + y) * fbWidth, aDst * aTint, rDst * rTint, gDst * gTint, bDst * bTint);
 				} else {
 					c->fb->writePixel((dstX + x) + (dstY + y) * fbWidth, aDst * aTint, rDst * rTint, gDst * gTint, bDst * bTint);
 				}
@@ -437,7 +436,6 @@ void BlitImage::tglBlitScale(int dstX, int dstY, int width, int height, int srcX
 	Graphics::PixelBuffer srcBuf(_surface.format, (byte *)_surface.getPixels());
 	srcBuf.shiftBy(srcX + (srcY * _surface.w));
 
-	Graphics::PixelBuffer dstBuf(c->fb->getPixelFormat(), c->fb->getPixelBuffer());
 	int fbWidth = c->fb->getPixelBufferWidth();
 
 	for (int y = 0; y < clampHeight; y++) {
@@ -460,13 +458,13 @@ void BlitImage::tglBlitScale(int dstX, int dstY, int width, int height, int srcX
 
 			if (kDisableColoring) {
 				if (kDisableBlending && aDst != 0) {
-					dstBuf.setPixelAt((dstX + x) + (dstY + y) * fbWidth, aDst, rDst, gDst, bDst);
+					c->fb->setPixelAt((dstX + x) + (dstY + y) * fbWidth, aDst, rDst, gDst, bDst);
 				} else {
 					c->fb->writePixel((dstX + x) + (dstY + y) * fbWidth, aDst, rDst, gDst, bDst);
 				}
 			} else {
 				if (kDisableBlending && aDst * aTint != 0) {
-					dstBuf.setPixelAt((dstX + x) + (dstY + y) * fbWidth, aDst * aTint, rDst * rTint, gDst * gTint, bDst * bTint);
+					c->fb->setPixelAt((dstX + x) + (dstY + y) * fbWidth, aDst * aTint, rDst * rTint, gDst * gTint, bDst * bTint);
 				} else {
 					c->fb->writePixel((dstX + x) + (dstY + y) * fbWidth, aDst * aTint, rDst * rTint, gDst * gTint, bDst * bTint);
 				}
@@ -528,8 +526,6 @@ void BlitImage::tglBlitRotoScale(int dstX, int dstY, int width, int height, int 
 	srcBuf.shiftBy(srcX + (srcY * _surface.w));
 	int fbWidth = c->fb->getPixelBufferWidth();
 
-	Graphics::PixelBuffer dstBuf(c->fb->getPixelFormat(), c->fb->getPixelBuffer());
-
 	// Transform destination rectangle accordingly.
 	Common::Rect destinationRectangle = rotateRectangle(dstX, dstY, width, height, rotation, originX, originY);
 
@@ -583,13 +579,13 @@ void BlitImage::tglBlitRotoScale(int dstX, int dstY, int width, int height, int 
 				srcBuf.getARGBAt(dy * _surface.w + dx, aDst, rDst, gDst, bDst);
 				if (kDisableColoring) {
 					if (kDisableBlending && aDst != 0) {
-						dstBuf.setPixelAt((dstX + x) + (dstY + y) * fbWidth, aDst, rDst, gDst, bDst);
+						c->fb->setPixelAt((dstX + x) + (dstY + y) * fbWidth, aDst, rDst, gDst, bDst);
 					} else {
 						c->fb->writePixel((dstX + x) + (dstY + y) * fbWidth, aDst, rDst, gDst, bDst);
 					}
 				} else {
 					if (kDisableBlending && aDst * aTint != 0) {
-						dstBuf.setPixelAt((dstX + x) + (dstY + y) * fbWidth, aDst * aTint, rDst * rTint, gDst * gTint, bDst * bTint);
+						c->fb->setPixelAt((dstX + x) + (dstY + y) * fbWidth, aDst * aTint, rDst * rTint, gDst * gTint, bDst * bTint);
 					} else {
 						c->fb->writePixel((dstX + x) + (dstY + y) * fbWidth, aDst * aTint, rDst * rTint, gDst * gTint, bDst * bTint);
 					}
