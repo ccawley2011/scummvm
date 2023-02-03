@@ -29,12 +29,6 @@ PixelBuffer::PixelBuffer()
 
 }
 
-PixelBuffer::PixelBuffer(const PixelFormat &format, int buffersize, DisposeAfterUse::Flag dispose)
-	: _buffer(nullptr),
-	_dispose(DisposeAfterUse::NO) {
-	create(format, buffersize, dispose);
-}
-
 PixelBuffer::PixelBuffer(const PixelFormat &format, byte *buffer)
 	: _buffer(buffer),
 	  _format(format),
@@ -47,38 +41,11 @@ PixelBuffer::PixelBuffer(const PixelBuffer &buf) {
 }
 
 PixelBuffer::~PixelBuffer() {
-	if (_dispose == DisposeAfterUse::YES)
-		free();
-}
-
-void PixelBuffer::create(const Graphics::PixelFormat &format, int buffersize, DisposeAfterUse::Flag dispose) {
-	if (_dispose == DisposeAfterUse::YES)
-		free();
-
-	_format = format;
-	_dispose = dispose;
-	_buffer = new byte[buffersize * format.bytesPerPixel];
-}
-
-void PixelBuffer::create(int buffersize, DisposeAfterUse::Flag dispose) {
-	if (_dispose == DisposeAfterUse::YES)
-		free();
-
-	_dispose = dispose;
-	_buffer = new byte[buffersize * _format.bytesPerPixel];
 }
 
 void PixelBuffer::set(const Graphics::PixelFormat &format, byte *buffer) {
-	if (_dispose == DisposeAfterUse::YES)
-		free();
-
 	_format = format;
 	_buffer = buffer;
-}
-
-void PixelBuffer::free() {
-	delete[] _buffer;
-	_buffer = nullptr;
 }
 
 void PixelBuffer::clear(uint length) {

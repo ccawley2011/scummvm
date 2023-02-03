@@ -46,14 +46,6 @@ public:
 	 */
 	PixelBuffer();
 	/**
-	 * Construct a PixelBuffer, allocating the internal buffer.
-	 *
-	 * @param format The format of the pixels in this buffer.
-	 * @param buffersize The number of pixels the buffer will store.
-	 * @param dispose If YES the internal buffer will be deleted when this object is destroyed,
-	 */
-	PixelBuffer(const Graphics::PixelFormat &format, int buffersize, DisposeAfterUse::Flag dispose);
-	/**
 	 * Construct a PixelBuffer, using an already allocated buffer.
 	 *
 	 * @param format The format of the pixels in this buffer.
@@ -73,32 +65,10 @@ public:
 	/**
 	 * Initialize the buffer.
 	 *
-	 * @param format The format of the pixels.
-	 * @param buffersize The number of pixels the buffer will store.
-	 * @param dispose If YES the internal buffer will be deleted when this object is destroyed,
-	 */
-	void create(const Graphics::PixelFormat &format, int buffersize, DisposeAfterUse::Flag dispose);
-	/**
-	 * Initialize the buffer, using the already set pixel format.
-	 * @note If the pixel format was not set before the results are undefined.
-	 *
-	 * @param buffersize The number of pixels the buffer will store.
-	 * @param dispose If YES the internal buffer will be deleted when this object is destroyed,
-	 */
-	void create(int buffersize, DisposeAfterUse::Flag dispose);
-
-	/**
-	 * Initialize the buffer.
-	 *
 	 * @param format The format of the pixels in this buffer.
 	 * @param buffer The raw buffer containing the pixels.
 	 */
 	void set(const Graphics::PixelFormat &format, byte *buffer);
-
-	/**
-	 * Delete the internal pixel buffer.
-	 */
-	void free();
 
 	/**
 	 * Reset the value of the pixels.
