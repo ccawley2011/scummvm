@@ -36,14 +36,34 @@ Common::Rect rotateRectangle(int x, int y, int width, int height, int rotation, 
 
 struct BlitImage {
 public:
-	BlitImage() : _isDisposed(false), _version(0), _binaryTransparent(false), _refcount(1) { }
+	BlitImage() : _pixels(nullptr), _width(0), _height(0), _isDisposed(false), _version(0), _binaryTransparent(false), _refcount(1) { }
 
 	void loadData(const Graphics::Surface &surface, uint32 colorKey, bool applyColorKey) {
 		const Graphics::PixelFormat textureFormat(4, 8, 8, 8, 8, 0, 8, 16, 24);
-		int size = surface.w * surface.h;
-		_surface.create(surface.w, surface.h, textureFormat);
+		int newsize = surface.w * surface.h * textureFormat.bytesPerPixel;
+		int oldsize = _width * _height * _format.bytesPerPixel;
+
+		if (!_pixels) {
+			_pixels = (byte *)gl_malloc(newsize);
+			if (!_pixels) {
+				return;
+			}
+		} else if (newsize != oldsize) {
+			byte *newPixels = (byte *)gl_realloc(_pixels, newsize);
+			if (newPixels) {
+				_pixels = newPixels;
+			} else if (newsize < oldsize) {
+				return;
+			}
+		}
+
+		_width = surface.w;
+		_height = surface.h;
+		_format = textureFormat;
+
+		int size = _width * _height;
 		Graphics::PixelBuffer buffer(surface.format, (byte *)const_cast<void *>(surface.getPixels()));
-		Graphics::PixelBuffer dataBuffer(textureFormat, (byte *)const_cast<void *>(_surface.getPixels()));
+		Graphics::PixelBuffer dataBuffer(textureFormat, _pixels);
 		dataBuffer.copyBuffer(0, 0, size, buffer);
 		if (applyColorKey) {
 			for (int x = 0; x < size; x++) {
@@ -91,7 +111,7 @@ public:
 	}
 
 	~BlitImage() {
-		_surface.free();
+		gl_free(_pixels);
 	}
 
 	struct Line {
@@ -107,8 +127,8 @@ public:
 
 	bool clipBlitImage(TinyGL::GLContext *c, int &srcX, int &srcY, int &srcWidth, int &srcHeight, int &width, int &height, int &dstX, int &dstY, int &clampWidth, int &clampHeight) {
 		if (srcWidth == 0 || srcHeight == 0) {
-			srcWidth = _surface.w;
-			srcHeight = _surface.h;
+			srcWidth = _width;
+			srcHeight = _height;
 		}
 
 		if (width == 0 && height == 0) {
@@ -160,7 +180,7 @@ public:
 		TinyGL::GLContext *c = TinyGL::gl_get_context();
 
 		int clampWidth, clampHeight;
-		int width = _surface.w, height = _surface.h;
+		int width = _width, height = _height;
 		int srcWidth = 0, srcHeight = 0;
 		int srcX = 0, srcY = 0;
 		if (clipBlitImage(c, srcX, srcY, srcWidth, srcHeight, width, height, dstX, dstY, clampWidth, clampHeight) == false)
@@ -168,16 +188,16 @@ public:
 
 		int fbWidth = c->fb->getPixelBufferWidth();
 
-		Graphics::PixelBuffer srcBuf(_surface.format, (byte *)const_cast<void *>(_surface.getPixels())); // Blit image buffer
-		Graphics::PixelBuffer dstBuf(_surface.format, (byte *)const_cast<uint *>(c->fb->getZBuffer())); // TinyGL z buffer
+		Graphics::PixelBuffer srcBuf(_format, _pixels); // Blit image buffer
+		Graphics::PixelBuffer dstBuf(_format, (byte *)const_cast<uint *>(c->fb->getZBuffer())); // TinyGL z buffer
 
-		srcBuf.shiftBy(srcY * _surface.w);
+		srcBuf.shiftBy(srcY * _width);
 
 		dstBuf.shiftBy(dstY * fbWidth);
 		for (int y = 0; y < clampHeight; y++) {
 			dstBuf.copyBuffer(dstX, srcX, clampWidth, srcBuf);
 			dstBuf.shiftBy(fbWidth);
-			srcBuf.shiftBy(_surface.w);
+			srcBuf.shiftBy(_width);
 		}
 	}
 
@@ -225,8 +245,8 @@ public:
 		}
 	}
 
-	int getWidth() const { return _surface.w; }
-	int getHeight() const { return _surface.h; }
+	int getWidth() const { return _width; }
+	int getHeight() const { return _height; }
 	void incRefCount() { _refcount++; }
 	void dispose() { if (--_refcount == 0) _isDisposed = true; }
 	bool isDisposed() const { return _isDisposed; }
@@ -234,7 +254,10 @@ private:
 	bool _isDisposed;
 	bool _binaryTransparent;
 	Common::Array<Line> _lines;
-	Graphics::Surface _surface;
+	Graphics::PixelFormat _format;
+	byte *_pixels;
+	int _width;
+	int _height;
 	int _version;
 	int _refcount;
 };
@@ -293,8 +316,8 @@ void BlitImage::tglBlitRLE(int dstX, int dstY, int srcX, int srcY, int srcWidth,
 
 	int fbWidth = c->fb->getPixelBufferWidth();
 
-	Graphics::PixelBuffer srcBuf(_surface.format, (byte *)_surface.getPixels());
-	srcBuf.shiftBy(srcX + (srcY * _surface.w));
+	Graphics::PixelBuffer srcBuf(_format, _pixels);
+	srcBuf.shiftBy(srcX + (srcY * _width));
 
 	Graphics::PixelBuffer dstBuf(c->fb->getPixelFormat(), c->fb->getPixelBuffer());
 	dstBuf.shiftBy(dstY * fbWidth + dstX);
@@ -323,12 +346,12 @@ void BlitImage::tglBlitRLE(int dstX, int dstY, int srcX, int srcY, int srcWidth,
 				} else {
 					int xStart = MAX(l._x - srcX, 0);
 					if (kDisableColoring) {
-						Graphics::PixelBuffer buf(_surface.format, l._pixels);
+						Graphics::PixelBuffer buf(_format, l._pixels);
 						dstBuf.copyBuffer(xStart + (l._y - srcY) * fbWidth, skipStart, length, buf);
 					} else {
 						for(int x = xStart; x < xStart + length; x++) {
 							byte aDst, rDst, gDst, bDst;
-							srcBuf.getARGBAt((l._y - srcY) * _surface.w + x, aDst, rDst, gDst, bDst);
+							srcBuf.getARGBAt((l._y - srcY) * _width + x, aDst, rDst, gDst, bDst);
 							c->fb->writePixel((dstX + x) + (dstY + (l._y - srcY)) * fbWidth, aDst * aTint, rDst * rTint, gDst * gTint, bDst * bTint);
 						}
 					}
@@ -352,7 +375,7 @@ void BlitImage::tglBlitRLE(int dstX, int dstY, int srcX, int srcY, int srcWidth,
 					int xStart = MAX(l._x - srcX, 0);
 					for(int x = xStart; x < xStart + length; x++) {
 						byte aDst, rDst, gDst, bDst;
-						srcBuf.getARGBAt((l._y - srcY) * _surface.w + x, aDst, rDst, gDst, bDst);
+						srcBuf.getARGBAt((l._y - srcY) * _width + x, aDst, rDst, gDst, bDst);
 						if (kDisableColoring) {
 							if (aDst != 0xFF) {
 								c->fb->writePixel((dstX + x) + (dstY + (l._y - srcY)) * fbWidth, aDst, rDst, gDst, bDst);
@@ -380,12 +403,12 @@ void BlitImage::tglBlitSimple(int dstX, int dstY, int srcX, int srcY, int srcWid
 	if (clipBlitImage(c, srcX, srcY, srcWidth, srcHeight, width, height, dstX, dstY, clampWidth, clampHeight) == false)
 		return;
 
-	Graphics::PixelBuffer srcBuf(_surface.format, (byte *)_surface.getPixels());
+	Graphics::PixelBuffer srcBuf(_format, _pixels);
 
 	if (kFlipVertical) {
-		srcBuf.shiftBy(((srcHeight - srcY - 1) * _surface.w));
+		srcBuf.shiftBy(((srcHeight - srcY - 1) * _width));
 	} else {
-		srcBuf.shiftBy((srcY * _surface.w));
+		srcBuf.shiftBy((srcY * _width));
 	}
 
 	int fbWidth = c->fb->getPixelBufferWidth();
@@ -415,9 +438,9 @@ void BlitImage::tglBlitSimple(int dstX, int dstY, int srcX, int srcY, int srcWid
 			}
 		}
 		if (kFlipVertical) {
-			srcBuf.shiftBy(-_surface.w);
+			srcBuf.shiftBy(-_width);
 		} else {
-			srcBuf.shiftBy(_surface.w);
+			srcBuf.shiftBy(_width);
 		}
 	}
 }
@@ -433,8 +456,8 @@ void BlitImage::tglBlitScale(int dstX, int dstY, int width, int height, int srcX
 	if (clipBlitImage(c, srcX, srcY, srcWidth, srcHeight, width, height, dstX, dstY, clampWidth, clampHeight) == false)
 		return;
 
-	Graphics::PixelBuffer srcBuf(_surface.format, (byte *)_surface.getPixels());
-	srcBuf.shiftBy(srcX + (srcY * _surface.w));
+	Graphics::PixelBuffer srcBuf(_format, (byte *)_pixels);
+	srcBuf.shiftBy(srcX + (srcY * _width));
 
 	int fbWidth = c->fb->getPixelBufferWidth();
 
@@ -454,7 +477,7 @@ void BlitImage::tglBlitScale(int dstX, int dstY, int width, int height, int srcX
 				xSource = x;
 			}
 
-			srcBuf.getARGBAt(((ySource * srcHeight) / height) * _surface.w + ((xSource * srcWidth) / width), aDst, rDst, gDst, bDst);
+			srcBuf.getARGBAt(((ySource * srcHeight) / height) * _width + ((xSource * srcWidth) / width), aDst, rDst, gDst, bDst);
 
 			if (kDisableColoring) {
 				if (kDisableBlending && aDst != 0) {
@@ -522,8 +545,8 @@ void BlitImage::tglBlitRotoScale(int dstX, int dstY, int width, int height, int 
 	if (clipBlitImage(c, srcX, srcY, srcWidth, srcHeight, width, height, dstX, dstY, clampWidth, clampHeight) == false)
 		return;
 
-	Graphics::PixelBuffer srcBuf(_surface.format, (byte *)_surface.getPixels());
-	srcBuf.shiftBy(srcX + (srcY * _surface.w));
+	Graphics::PixelBuffer srcBuf(_format, _pixels);
+	srcBuf.shiftBy(srcX + (srcY * _width));
 	int fbWidth = c->fb->getPixelBufferWidth();
 
 	// Transform destination rectangle accordingly.
@@ -576,7 +599,7 @@ void BlitImage::tglBlitRotoScale(int dstX, int dstY, int width, int height, int 
 			}
 
 			if ((dx >= 0) && (dy >= 0) && (dx < srcWidth) && (dy < srcHeight)) {
-				srcBuf.getARGBAt(dy * _surface.w + dx, aDst, rDst, gDst, bDst);
+				srcBuf.getARGBAt(dy * _width + dx, aDst, rDst, gDst, bDst);
 				if (kDisableColoring) {
 					if (kDisableBlending && aDst != 0) {
 						c->fb->setPixelAt((dstX + x) + (dstY + y) * fbWidth, aDst, rDst, gDst, bDst);
