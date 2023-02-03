@@ -70,7 +70,7 @@ public:
 					_binaryTransparent = false;
 				}
 				if (a == 0 && start >= 0) {
-					_lines.push_back(Line(start, y, x - start, srcBuf.getRawBuffer(start), textureFormat));
+					_lines.push_back(Line(start, y, x - start, srcBuf.getRawBuffer(start)));
 					start = -1;
 				} else if (a != 0 && start == -1) {
 					start = x;
@@ -78,7 +78,7 @@ public:
 			}
 			// end of the bitmap line. if start is an actual pixel save the line.
 			if (start >= 0) {
-				_lines.push_back(Line(start, y, surface.w - start, srcBuf.getRawBuffer(start), textureFormat));
+				_lines.push_back(Line(start, y, surface.w - start, srcBuf.getRawBuffer(start)));
 			}
 			srcBuf.shiftBy(surface.w);
 		}
@@ -99,41 +99,10 @@ public:
 		int _y;
 		int _length;
 		byte *_pixels;
-		Graphics::PixelBuffer _buf; // This is needed for the conversion.
 
 		Line() : _x(0), _y(0), _length(0), _pixels(nullptr) { }
-		Line(int x, int y, int length, byte *pixels, const Graphics::PixelFormat &textureFormat) :
-				_buf(gl_get_context()->fb->getPixelFormat(), length, DisposeAfterUse::NO),
-				_x(x), _y(y), _length(length) {
-			// Performing texture to screen conversion.
-			Graphics::PixelBuffer srcBuf(textureFormat, pixels);
-			_buf.copyBuffer(0, 0, length, srcBuf);
-			_pixels = _buf.getRawBuffer();
-		}
-
-		Line &operator=(const Line &other) {
-			if (this == &other)
-				return *this;
-			_x = other._x;
-			_y = other._y;
-			if (_length != other._length || _buf.getFormat() != other._buf.getFormat()) {
-				_buf.free();
-				_buf.create(other._buf.getFormat(), other._length, DisposeAfterUse::NO);
-				_length = other._length;
-			}
-			_buf.copyBuffer(0, 0, _length, other._buf);
-			_pixels = _buf.getRawBuffer();
-			return *this;
-		}
-
-		Line(const Line& other) : _buf(other._buf.getFormat(), other._length, DisposeAfterUse::NO), _x(other._x), _y(other._y), _length(other._length) {
-			_buf.copyBuffer(0, 0, _length, other._buf);
-			_pixels = _buf.getRawBuffer();
-		}
-
-		~Line() {
-			_buf.free();
-		}
+		Line(int x, int y, int length, byte *pixels) :
+				_x(x), _y(y), _length(length), _pixels(pixels) { }
 	};
 
 	bool clipBlitImage(TinyGL::GLContext *c, int &srcX, int &srcY, int &srcWidth, int &srcHeight, int &width, int &height, int &dstX, int &dstY, int &clampWidth, int &clampHeight) {
@@ -354,7 +323,8 @@ void BlitImage::tglBlitRLE(int dstX, int dstY, int srcX, int srcY, int srcWidth,
 				} else {
 					int xStart = MAX(l._x - srcX, 0);
 					if (kDisableColoring) {
-						dstBuf.copyBuffer(xStart + (l._y - srcY) * fbWidth, skipStart, length, l._buf);
+						Graphics::PixelBuffer buf(_surface.format, l._pixels);
+						dstBuf.copyBuffer(xStart + (l._y - srcY) * fbWidth, skipStart, length, buf);
 					} else {
 						for(int x = xStart; x < xStart + length; x++) {
 							byte aDst, rDst, gDst, bDst;
