@@ -2194,11 +2194,18 @@ void SurfaceSdlGraphicsManager::undrawMouse() {
 	// The mouse is undrawn using virtual coordinates, i.e. they may be
 	// scaled and aspect-ratio corrected.
 
-	if (_mouseLastRect.w != 0 && _mouseLastRect.h != 0)
-		addDirtyRect(_mouseLastRect.x - hotX, _mouseLastRect.y - hotY, _mouseLastRect.w, _mouseLastRect.h, _overlayInGUI);
+	int actualDirtyRects = _numDirtyRects;
+	if (_isDoubleBuf) {
+		actualDirtyRects += _numPrevDirtyRects;
+	}
 
-	if (_mouseNextRect.w != 0 && _mouseNextRect.h != 0)
-		addDirtyRect(_mouseNextRect.x - hotX, _mouseNextRect.y - hotY, _mouseNextRect.w, _mouseNextRect.h, _overlayInGUI);
+	if (_cursorNeedsRedraw || (actualDirtyRects > 0 && _cursorFormat.aBits() > 1)) {
+		if (_mouseLastRect.w != 0 && _mouseLastRect.h != 0)
+			addDirtyRect(_mouseLastRect.x - hotX, _mouseLastRect.y - hotY, _mouseLastRect.w, _mouseLastRect.h, _overlayInGUI);
+
+		if (_mouseNextRect.w != 0 && _mouseNextRect.h != 0)
+			addDirtyRect(_mouseNextRect.x - hotX, _mouseNextRect.y - hotY, _mouseNextRect.w, _mouseNextRect.h, _overlayInGUI);
+	}
 }
 
 void SurfaceSdlGraphicsManager::drawMouse() {
