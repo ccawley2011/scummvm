@@ -80,8 +80,21 @@ Common::Error Videotests::videoTest(Common::SeekableReadStream *stream, const Co
 		}
 	}
 
+#ifdef __NDS__
+	uint width = 256, height = 192;
+#elif defined(USE_HIGHRES)
+	uint width = 640, height = 480;
+#else
+	uint width = 320, height = 200;
+#endif
+
+	if (video->getWidth() > width || video->getHeight() > height) {
+		width = video->getWidth();
+		height = video->getHeight();
+	}
+
 	warning("Actual pixel format: %s", pixelformat.toString().c_str());
-	initGraphics(640, 480, &pixelformat);
+	initGraphics(width, height, &pixelformat);
 
 	video->start();
 
@@ -109,7 +122,7 @@ Common::Error Videotests::videoTest(Common::SeekableReadStream *stream, const Co
 					x = (g_system->getWidth() - surf->w) >> 1;
 					y = (g_system->getHeight() - surf->h) >> 1;
 				}
-				g_system->copyRectToScreen(surf->getPixels(), surf->pitch, x, y, MIN<uint16>(surf->w, 640), MIN<uint16>(surf->h, 480));
+				g_system->copyRectToScreen(surf->getPixels(), surf->pitch, x, y, MIN<uint16>(surf->w, width), MIN<uint16>(surf->h, height));
 
 				if (conv) {
 					conv->free();
