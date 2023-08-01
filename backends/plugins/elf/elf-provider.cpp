@@ -93,6 +93,13 @@ DynamicPlugin::VoidFunc ELFPlugin::findSymbol(const char *symbol) {
 	return tmp;
 }
 
+const char *ELFPlugin::addrToName(const void *ptr) {
+	if (_dlHandle)
+		return _dlHandle->addrToName(ptr);
+	else
+		return nullptr;
+}
+
  /**
   * Test the size of the plugin.
   */
@@ -145,7 +152,7 @@ bool ELFPlugin::loadPlugin() {
 	}
 #endif
 
-	_dlHandle->discardSymtab();
+	// _dlHandle->discardSymtab();
 
 	return ret;
 }

@@ -420,6 +420,7 @@ bool DLObject::open(const char *path) {
 
 	debug(2, "elfloader: open(\"%s\")", path);
 
+	_path = path;
 	_file = Common::FSNode(path).createReadStream();
 
 	if (!_file) {
@@ -495,6 +496,28 @@ void *DLObject::symbol(const char *name) {
 
 	// We didn't find the symbol
 	warning("elfloader: Symbol \"%s\" not found.", name);
+	return 0;
+}
+
+const char *DLObject::addrToName(const void *ptr) {
+	debug(2, "elfloader: addrToName(%p)", ptr);
+
+	if (!_symtab || !_strtab || _symbol_cnt < 1) {
+		warning("elfloader: No symbol table loaded for %s.", _path.c_str());
+		return 0;
+	}
+
+	Elf32_Sym *s = _symtab;
+
+	for (uint32 c = _symbol_cnt; c--; s++) {
+		if ((uintptr)ptr >= s->st_value && (uintptr)ptr < s->st_value + s->st_size) {
+			// We found the symbol
+			debug(2, "elfloader: => %s", _strtab + s->st_name);
+			return _strtab + s->st_name;
+		}
+	}
+
+	// We didn't find the symbol
 	return 0;
 }
 

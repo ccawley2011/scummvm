@@ -65,6 +65,8 @@ public:
 	virtual bool loadPlugin();
 	virtual void unloadPlugin();
 	void trackSize();
+
+	const char *addrToName(const void *ptr);
 };
 
 template<class T>

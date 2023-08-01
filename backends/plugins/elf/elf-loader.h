@@ -43,6 +43,7 @@
 class DLObject {
 protected:
 	Common::SeekableReadStream *_file;
+	Common::String _path;
 
 	byte *_segment;
 	Elf32_Sym *_symtab;
@@ -99,6 +100,7 @@ public:
 	bool open(const char *path);
 	bool close();
 	void *symbol(const char *name);
+	const char *addrToName(const void *ptr);
 	void discardSymtab();
 };
 

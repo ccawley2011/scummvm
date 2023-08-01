@@ -26,6 +26,7 @@
 #include <filesystem.h>
 
 #include "backends/platform/ds/osystem_ds.h"
+#include "backends/platform/ds/dsmain.h"
 
 #include "common/config-manager.h"
 #include "common/translation.h"
@@ -69,7 +70,7 @@ void timerTickHandler() {
 }
 
 void OSystem_DS::initBackend() {
-	defaultExceptionHandler();
+	DS::scummvmExceptionHandler();
 
 	ConfMan.setInt("autosave_period", 0);
 	ConfMan.setBool("FM_medium_quality", true);

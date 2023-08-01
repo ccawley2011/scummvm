@@ -5,6 +5,7 @@ MODULE_OBJS := \
 	blitters_arm.o \
 	ds-graphics.o \
 	dsmain.o \
+	exception.o \
 	keyboard.o \
 	osystem_ds.o \
 	gfx/banner.o

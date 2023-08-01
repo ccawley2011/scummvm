@@ -30,6 +30,9 @@ namespace DS {
 void	fastRamReset();
 void*	fastRamAlloc(int size);
 
+// Exception handling
+void	scummvmExceptionHandler();
+
 } // End of namespace DS
 
 #endif
