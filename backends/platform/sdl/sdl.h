@@ -162,14 +162,25 @@ protected:
 	virtual Common::WriteStream *createLogFile();
 	Backends::Log::Log *_logger;
 
+#if SDL_VERSION_ATLEAST(2, 0, 0) || defined(USE_OPENGL)
+	enum GraphicsManagerType {
+		GraphicsManagerSurfaceSDL,
+#if SDL_VERSION_ATLEAST(2, 0, 0)
+		GraphicsManagerRenderSDL,
+#endif
 #ifdef USE_OPENGL
+		GraphicsManagerOpenGL,
+#endif
+		GraphicsManagerCount
+	};
+
 	typedef Common::Array<GraphicsMode> GraphicsModeArray;
 	GraphicsModeArray _graphicsModes;
 	Common::Array<int> _graphicsModeIds;
 	int _graphicsMode;
-	int _firstGLMode;
-	int _defaultSDLMode;
-	int _defaultGLMode;
+	int _firstMode[GraphicsManagerCount];
+	int _lastMode[GraphicsManagerCount];
+	int _defaultMode[GraphicsManagerCount];
 
 	/**
 	 * Create the merged graphics modes list.
@@ -181,8 +192,8 @@ protected:
 	 */
 	void clearGraphicsModes();
 
-	enum GraphicsManagerType { GraphicsManagerSDL, GraphicsManagerOpenGL };
-	virtual GraphicsManagerType getDefaultGraphicsManager() const { return GraphicsManagerSDL; }
+	virtual GraphicsManagerType getDefaultGraphicsManager() const;
+	SdlGraphicsManager *createGraphicsManager(SdlEventSource *sdlEventSource, SdlWindow *window, GraphicsManagerType type);
 	const OSystem::GraphicsMode *getSupportedGraphicsModes() const override;
 	int getDefaultGraphicsMode() const override;
 	bool setGraphicsMode(int mode, uint flags) override;
