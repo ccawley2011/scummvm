@@ -121,7 +121,7 @@ RenderSdlGraphicsManager::RenderSdlGraphicsManager(SdlEventSource *sdlEventSourc
 	_screenFormat(Graphics::PixelFormat::createFormatCLUT8()),
 	_cursorFormat(Graphics::PixelFormat::createFormatCLUT8()),
 	_useOldSrc(false),
-	_overlayscreen(nullptr), _tmpscreen2(nullptr),
+	_overlayTexture(nullptr), _overlaySurface(nullptr),
 	_screenChangeCount(0),
 	_mouseTexture(nullptr), _mouseScaler(nullptr), _mouseSurface(nullptr),
 	_mouseOrigSurface(nullptr), _cursorDontScale(false), _cursorPaletteDisabled(true),
@@ -134,23 +134,12 @@ RenderSdlGraphicsManager::RenderSdlGraphicsManager(SdlEventSource *sdlEventSourc
 #endif
 	_transactionMode(kTransactionNone),
 	_scalerPlugins(ScalerMan.getPlugins()), _scalerPlugin(nullptr), _scaler(nullptr),
-	_needRestoreAfterOverlay(false), _isInOverlayPalette(false), _isDoubleBuf(false), _prevForceRedraw(false), _numPrevDirtyRects(0),
+	_isDoubleBuf(false), _prevForceRedraw(false), _numPrevDirtyRects(0),
 	_mouseKeyColor(0) {
 
 	// allocate palette storage
 	_currentPalette = (SDL_Color *)calloc(sizeof(SDL_Color), 256);
-	_overlayPalette = (SDL_Color *)calloc(sizeof(SDL_Color), 256);
 	_cursorPalette = (SDL_Color *)calloc(sizeof(SDL_Color), 256);
-
-	// Generate RGB332 palette for overlay
-	for (uint i = 0; i < 256; i++) {
-		_overlayPalette[i].r = ((i >> 5) & 7) << 5;
-		_overlayPalette[i].g = ((i >> 2) & 7) << 5;
-		_overlayPalette[i].b = (i & 3) << 6;
-#if SDL_VERSION_ATLEAST(2, 0, 0)
-		_overlayPalette[i].a = 0xff;
-#endif
-	}
 
 #ifdef USE_SDL_DEBUG_FOCUSRECT
 	if (ConfMan.hasKey("use_sdl_debug_focusrect"))
@@ -194,11 +183,13 @@ RenderSdlGraphicsManager::~RenderSdlGraphicsManager() {
 		SDL_FreeSurface(_mouseSurface);
 	}
 	free(_currentPalette);
-	free(_overlayPalette);
 	free(_cursorPalette);
 }
 
 bool RenderSdlGraphicsManager::hasFeature(OSystem::Feature f) const {
+	if (f == OSystem::kFeatureOverlaySupportsAlpha)
+		return _overlayFormat.aBits() > 3;
+
 	return
 		(f == OSystem::kFeatureFullscreenMode) ||
 #ifdef USE_SCALERS
@@ -365,8 +356,6 @@ OSystem::TransactionError RenderSdlGraphicsManager::endGFXTransaction() {
 
 			_videoMode.screenWidth = _oldVideoMode.screenWidth;
 			_videoMode.screenHeight = _oldVideoMode.screenHeight;
-			_videoMode.overlayWidth = _oldVideoMode.overlayWidth;
-			_videoMode.overlayHeight = _oldVideoMode.overlayHeight;
 		}
 
 		// Our new video mode would now be exactly the same as the
@@ -859,9 +848,6 @@ void RenderSdlGraphicsManager::fixupResolutionForAspectRatio(AspectRatio desired
 }
 
 void RenderSdlGraphicsManager::setupHardwareSize() {
-	_videoMode.overlayWidth = _videoMode.screenWidth * _videoMode.scaleFactor;
-	_videoMode.overlayHeight = _videoMode.screenHeight * _videoMode.scaleFactor;
-
 	if (_videoMode.screenHeight != 200 && _videoMode.screenHeight != 400)
 		_videoMode.aspectRatioCorrection = false;
 
@@ -869,7 +855,6 @@ void RenderSdlGraphicsManager::setupHardwareSize() {
 	_videoMode.hardwareHeight = _videoMode.screenHeight * _videoMode.scaleFactor;
 
 	if (_videoMode.aspectRatioCorrection) {
-		_videoMode.overlayHeight = real2Aspect(_videoMode.overlayHeight);
 		_videoMode.hardwareHeight = real2Aspect(_videoMode.hardwareHeight);
 	}
 }
@@ -994,37 +979,6 @@ bool RenderSdlGraphicsManager::loadGFXMode() {
 									_videoMode.screenWidth, _videoMode.screenHeight, _maxExtraPixels);
 	}
 
-	_overlayscreen = SDL_CreateRGBSurface(SDL_SWSURFACE, _videoMode.overlayWidth, _videoMode.overlayHeight,
-						_hwScreen->format->BitsPerPixel,
-						_hwScreen->format->Rmask,
-						_hwScreen->format->Gmask,
-						_hwScreen->format->Bmask,
-						_hwScreen->format->Amask);
-
-	if (_overlayscreen == nullptr)
-		error("allocating _overlayscreen failed");
-
-	_overlayFormat = convertSDLPixelFormat(_overlayscreen->format);
-	// Overlay uses RGB332 palette
-	if (_overlayFormat.bytesPerPixel == 1 && _overlayFormat.rBits() == 0)
-		_overlayFormat = Graphics::PixelFormat(1, 3, 3, 2, 0, 5, 2, 0, 0);
-
-	_tmpscreen2 = SDL_CreateRGBSurface(SDL_SWSURFACE, _videoMode.overlayWidth + _maxExtraPixels * 2,
-						_videoMode.overlayHeight + _maxExtraPixels * 2,
-						_hwScreen->format->BitsPerPixel,
-						_hwScreen->format->Rmask,
-						_hwScreen->format->Gmask,
-						_hwScreen->format->Bmask,
-						_hwScreen->format->Amask);
-
-	if (_tmpscreen2 == nullptr)
-		error("allocating _tmpscreen2 failed");
-
-	if (_videoMode.isHwPalette) {
-		SDL_SetColors(_tmpscreen2, _overlayPalette, 0, 256);
-		SDL_SetColors(_overlayscreen, _overlayPalette, 0, 256);
-	}
-
 	return true;
 }
 
@@ -1051,6 +1005,16 @@ void RenderSdlGraphicsManager::unloadGFXMode() {
 		_mouseTexture = nullptr;
 	}
 
+	if (_overlayTexture) {
+		SDL_DestroyTexture(_overlayTexture);
+		_overlayTexture = nullptr;
+	}
+
+	if (_overlaySurface) {
+		SDL_FreeSurface(_overlaySurface);
+		_overlaySurface = nullptr;
+	}
+
 #if SDL_VERSION_ATLEAST(2, 0, 0)
 	deinitializeRenderer();
 #endif
@@ -1063,16 +1027,6 @@ void RenderSdlGraphicsManager::unloadGFXMode() {
 	if (_tmpscreen) {
 		SDL_FreeSurface(_tmpscreen);
 		_tmpscreen = nullptr;
-	}
-
-	if (_tmpscreen2) {
-		SDL_FreeSurface(_tmpscreen2);
-		_tmpscreen2 = nullptr;
-	}
-
-	if (_overlayscreen) {
-		SDL_FreeSurface(_overlayscreen);
-		_overlayscreen = nullptr;
 	}
 
 #if defined(WIN32) && !SDL_VERSION_ATLEAST(2, 0, 0)
@@ -1088,12 +1042,10 @@ bool RenderSdlGraphicsManager::hotswapGFXMode() {
 	if (!_screen)
 		return false;
 
-	// Keep around the old _screen & _overlayscreen so we can restore the screen data
+	// Keep around the old _screen so we can restore the screen data
 	// after the mode switch.
 	SDL_Surface *old_screen = _screen;
 	_screen = nullptr;
-	SDL_Surface *old_overlayscreen = _overlayscreen;
-	_overlayscreen = nullptr;
 
 	// Release the HW screen surface
 	if (_hwScreen) {
@@ -1104,17 +1056,12 @@ bool RenderSdlGraphicsManager::hotswapGFXMode() {
 		SDL_FreeSurface(_tmpscreen);
 		_tmpscreen = nullptr;
 	}
-	if (_tmpscreen2) {
-		SDL_FreeSurface(_tmpscreen2);
-		_tmpscreen2 = nullptr;
-	}
 
 	// Setup the new GFX mode
 	if (!loadGFXMode()) {
 		unloadGFXMode();
 
 		_screen = old_screen;
-		_overlayscreen = old_overlayscreen;
 
 		return false;
 	}
@@ -1124,11 +1071,9 @@ bool RenderSdlGraphicsManager::hotswapGFXMode() {
 
 	// Restore old screen content
 	SDL_BlitSurface(old_screen, nullptr, _screen, nullptr);
-	SDL_BlitSurface(old_overlayscreen, nullptr, _overlayscreen, nullptr);
 
 	// Free the old surfaces
 	SDL_FreeSurface(old_screen);
-	SDL_FreeSurface(old_overlayscreen);
 
 	// Update cursor to new scale
 	blitCursor();
@@ -1218,7 +1163,7 @@ void RenderSdlGraphicsManager::internUpdateScreen() {
 			SDL_SetColors(_tmpscreen, _currentPalette + _paletteDirtyStart,
 				      _paletteDirtyStart,
 				      _paletteDirtyEnd - _paletteDirtyStart);
-		if (_videoMode.isHwPalette && !_isInOverlayPalette)
+		if (_videoMode.isHwPalette)
 			SDL_SetColors(_hwScreen, _currentPalette + _paletteDirtyStart,
 				       _paletteDirtyStart,
 				       _paletteDirtyEnd - _paletteDirtyStart);
@@ -1230,42 +1175,15 @@ void RenderSdlGraphicsManager::internUpdateScreen() {
 
 	int oldScaleFactor;
 
-	if (!_overlayVisible) {
-		if (_needRestoreAfterOverlay) {
-			// This is needed for the Edge scaler which seems to be the only scaler to use the "_useOldSrc" feature.
-			// Otherwise the screen will not be properly restored after removing the overlay. We need to trigger a
-			// regeneration of SourceScaler::_bufferedOutput. The call to _scaler->setFactor() down below could
-			// do that in theory, but it won't unless the factor actually changes (which it doesn't). Now, the code
-			// in SourceScaler::setSource() looks a bit fishy, e. g. the *src argument isn't even used. But otherwise
-			// it does what we want here at least...
-			_scaler->setSource(nullptr, _tmpscreen->pitch, _videoMode.screenWidth, _videoMode.screenHeight, _maxExtraPixels);
-		}
-
-		origSurf = _screen;
-		srcSurf = _tmpscreen;
-		width = _videoMode.screenWidth;
-		height = _videoMode.screenHeight;
-		oldScaleFactor = scale1 = _videoMode.scaleFactor;
-		_needRestoreAfterOverlay = false;
-	} else {
-		origSurf = _overlayscreen;
-		srcSurf = _tmpscreen2;
-		width = _videoMode.overlayWidth;
-		height = _videoMode.overlayHeight;
-		scale1 = 1;
-		oldScaleFactor = _scaler->setFactor(1);
-		_needRestoreAfterOverlay = _useOldSrc;
-	}
+	origSurf = _screen;
+	srcSurf = _tmpscreen;
+	width = _videoMode.screenWidth;
+	height = _videoMode.screenHeight;
+	oldScaleFactor = scale1 = _videoMode.scaleFactor;
 
 #ifdef USE_OSD
 	updateOSD();
 #endif
-
-	if (_videoMode.isHwPalette && _isInOverlayPalette != _overlayVisible) {
-		SDL_SetColors(_hwScreen, _overlayVisible ? _overlayPalette : _currentPalette, 0, 256);
-		_forceRedraw = true;
-		_isInOverlayPalette = _overlayVisible;
-	}
 
 	// In case of double buferring partially good version may be on another page,
 	// so we need to fully redraw
@@ -1473,6 +1391,7 @@ void RenderSdlGraphicsManager::internUpdateScreen() {
 
 	SDL_RenderClear(_renderer);
 	drawScreen();
+	drawOverlay();
 	drawMouse();
 #ifdef USE_OSD
 	drawOSD();
@@ -1612,7 +1531,7 @@ void RenderSdlGraphicsManager::copyRectToScreen(const void *buf, int pitch, int 
 	assert(h > 0 && y + h <= _videoMode.screenHeight);
 	assert(w > 0 && x + w <= _videoMode.screenWidth);
 
-	addDirtyRect(x, y, w, h, false);
+	addDirtyRect(x, y, w, h);
 
 	// Try to lock the screen surface
 	if (SDL_LockSurface(_screen) == -1)
@@ -1684,7 +1603,7 @@ void RenderSdlGraphicsManager::fillScreen(const Common::Rect &r, uint32 col) {
 	unlockScreen();
 }
 
-void RenderSdlGraphicsManager::addDirtyRect(int x, int y, int w, int h, bool inOverlay, bool realCoordinates) {
+void RenderSdlGraphicsManager::addDirtyRect(int x, int y, int w, int h) {
 	if (_forceRedraw)
 		return;
 
@@ -1693,26 +1612,17 @@ void RenderSdlGraphicsManager::addDirtyRect(int x, int y, int w, int h, bool inO
 		return;
 	}
 
-	int height, width;
-
-	if (!inOverlay && !realCoordinates) {
-		width = _videoMode.screenWidth;
-		height = _videoMode.screenHeight;
-	} else {
-		width = _videoMode.overlayWidth;
-		height = _videoMode.overlayHeight;
-	}
+	int width = _videoMode.screenWidth;
+	int height = _videoMode.screenHeight;
 
 	// Extend the dirty region for scalers
 	// that "smear" the screen, e.g. 2xSAI
-	if (!realCoordinates) {
-		// Aspect ratio correction requires this to be at least one
-		int adjust = MAX(_extraPixels, (uint)1);
-		x -= adjust;
-		y -= adjust;
-		w += adjust * 2;
-		h += adjust * 2;
-	}
+	// Aspect ratio correction requires this to be at least one
+	int adjust = MAX(_extraPixels, (uint)1);
+	x -= adjust;
+	y -= adjust;
+	w += adjust * 2;
+	h += adjust * 2;
 
 	// clip
 	if (x < 0) {
@@ -1734,7 +1644,7 @@ void RenderSdlGraphicsManager::addDirtyRect(int x, int y, int w, int h, bool inO
 	}
 
 #ifdef USE_ASPECT
-	if (_videoMode.aspectRatioCorrection && !_overlayInGUI && !realCoordinates)
+	if (_videoMode.aspectRatioCorrection)
 		makeRectStretchable(x, y, w, h, _videoMode.filtering);
 #endif
 
@@ -1844,7 +1754,7 @@ void RenderSdlGraphicsManager::setFocusRectangle(const Common::Rect &rect) {
 
 	// We just fake this as a dirty rect for now, to easily force a screen update whenever
 	// the rect changes.
-	addDirtyRect(_focusRect.left, _focusRect.top, _focusRect.width(), _focusRect.height(), _overlayVisible);
+	addDirtyRect(_focusRect.left, _focusRect.top, _focusRect.width(), _focusRect.height());
 #endif
 }
 
@@ -1858,7 +1768,7 @@ void RenderSdlGraphicsManager::clearFocusRectangle() {
 
 	// We just fake this as a dirty rect for now, to easily force a screen update whenever
 	// the rect changes.
-	addDirtyRect(_focusRect.left, _focusRect.top, _focusRect.width(), _focusRect.height(), _overlayVisible);
+	addDirtyRect(_focusRect.left, _focusRect.top, _focusRect.width(), _focusRect.height());
 #endif
 }
 
@@ -1872,75 +1782,41 @@ void RenderSdlGraphicsManager::clearOverlay() {
 	if (!_overlayVisible)
 		return;
 
-	// Clear the overlay by making the game screen "look through" everywhere.
-	SDL_Rect src, dst;
-	src.x = src.y = 0;
-	dst.x = dst.y = _maxExtraPixels;
-	src.w = dst.w = _videoMode.screenWidth;
-	src.h = dst.h = _videoMode.screenHeight;
-	if (SDL_BlitSurface(_screen, &src, _tmpscreen, &dst) != 0)
+	if (SDL_FillRect(_overlaySurface, NULL, 0) != 0)
 		error("SDL_BlitSurface failed: %s", SDL_GetError());
 
-	SDL_LockSurface(_tmpscreen);
-	SDL_LockSurface(_overlayscreen);
-
-	// Transpose from game palette to RGB332 (overlay palette)
-	if (_videoMode.isHwPalette) {
-		byte *p = (byte *)(_tmpscreen->pixels) + _maxExtraPixels * _tmpscreen->pitch + _maxExtraPixels * _tmpscreen->format->BytesPerPixel;
-		int pitchSkip = _tmpscreen->pitch - _videoMode.screenWidth;
-		for (int y = 0; y < _videoMode.screenHeight; y++) {
-			for (int x = 0; x < _videoMode.screenWidth; x++, p++) {
-				const SDL_Color &col = _currentPalette[*p];
-				*p = (col.r & 0xe0) | ((col.g >> 3) & 0x1c) | ((col.b >> 6) & 0x03);
-			}
-			p += pitchSkip;
-		}
-	}
-
-	_scaler->scale((byte *)(_tmpscreen->pixels) + _maxExtraPixels * _tmpscreen->pitch + _maxExtraPixels * _tmpscreen->format->BytesPerPixel, _tmpscreen->pitch,
-	(byte *)_overlayscreen->pixels, _overlayscreen->pitch, _videoMode.screenWidth, _videoMode.screenHeight, 0, 0);
-
-#ifdef USE_ASPECT
-	if (_videoMode.aspectRatioCorrection)
-		stretch200To240((uint8 *)_overlayscreen->pixels, _overlayscreen->pitch,
-						_videoMode.overlayWidth, _videoMode.screenHeight * _videoMode.scaleFactor, 0, 0, 0,
-						_videoMode.filtering, _overlayFormat);
-#endif
-	SDL_UnlockSurface(_tmpscreen);
-	SDL_UnlockSurface(_overlayscreen);
-
-	_forceRedraw = true;
+	_overlayDirty = true;
 }
 
 void RenderSdlGraphicsManager::grabOverlay(Graphics::Surface &surface) const {
 	assert(_transactionMode == kTransactionNone);
 
-	if (_overlayscreen == nullptr)
+	if (_overlaySurface == nullptr)
 		return;
 
-	if (SDL_LockSurface(_overlayscreen) == -1)
+	if (SDL_LockSurface(_overlaySurface) == -1)
 		error("SDL_LockSurface failed: %s", SDL_GetError());
 
-	assert(surface.w >= _videoMode.overlayWidth);
-	assert(surface.h >= _videoMode.overlayHeight);
+	assert(surface.w >= _overlaySurface->w);
+	assert(surface.h >= _overlaySurface->h);
 	assert(surface.format.bytesPerPixel == _overlayFormat.bytesPerPixel);
 
-	byte *src = (byte *)_overlayscreen->pixels;
+	byte *src = (byte *)_overlaySurface->pixels;
 	byte *dst = (byte *)surface.getPixels();
-	Graphics::copyBlit(dst, src, surface.pitch, _overlayscreen->pitch,
-		_videoMode.overlayWidth, _videoMode.overlayHeight, _overlayFormat.bytesPerPixel);
+	Graphics::copyBlit(dst, src, surface.pitch, _overlaySurface->pitch,
+		_overlaySurface->w, _overlaySurface->h, _overlayFormat.bytesPerPixel);
 
-	SDL_UnlockSurface(_overlayscreen);
+	SDL_UnlockSurface(_overlaySurface);
 }
 
 void RenderSdlGraphicsManager::copyRectToOverlay(const void *buf, int pitch, int x, int y, int w, int h) {
 	assert(_transactionMode == kTransactionNone);
 
-	if (_overlayscreen == nullptr)
+	if (_overlaySurface == nullptr)
 		return;
 
 	const byte *src = (const byte *)buf;
-	uint bpp = _overlayscreen->format->BytesPerPixel;
+	uint bpp = _overlaySurface->format->BytesPerPixel;
 
 	// Clip the coordinates
 	if (x < 0) {
@@ -1955,33 +1831,130 @@ void RenderSdlGraphicsManager::copyRectToOverlay(const void *buf, int pitch, int
 		y = 0;
 	}
 
-	if (w > _videoMode.overlayWidth - x) {
-		w = _videoMode.overlayWidth - x;
+	if (w > _overlaySurface->w - x) {
+		w = _overlaySurface->w - x;
 	}
 
-	if (h > _videoMode.overlayHeight - y) {
-		h = _videoMode.overlayHeight - y;
+	if (h > _overlaySurface->h - y) {
+		h = _overlaySurface->h - y;
 	}
 
 	if (w <= 0 || h <= 0)
 		return;
 
-	// Mark the modified region as dirty
-	addDirtyRect(x, y, w, h, true);
+	// Mark the overlay as dirty
+	_overlayDirty = true;
 
-	if (SDL_LockSurface(_overlayscreen) == -1)
+	if (SDL_LockSurface(_overlaySurface) == -1)
 		error("SDL_LockSurface failed: %s", SDL_GetError());
 
-	byte *dst = (byte *)_overlayscreen->pixels + y * _overlayscreen->pitch + x * bpp;
-	do {
-		memcpy(dst, src, w * bpp);
-		dst += _overlayscreen->pitch;
-		src += pitch;
-	} while (--h);
+	byte *dst = (byte *)_overlaySurface->pixels + y * _overlaySurface->pitch + x * bpp;
+	Graphics::copyBlit(dst, src, _overlaySurface->pitch, pitch, w, h, bpp);
 
-	SDL_UnlockSurface(_overlayscreen);
+	SDL_UnlockSurface(_overlaySurface);
 }
 
+void RenderSdlGraphicsManager::drawOverlay() {
+	if (!_overlayTexture || !_overlaySurface || !_overlayVisible)
+		return;
+
+	if (_overlayDirty) {
+		SDL_UpdateTexture(_overlayTexture, NULL, _overlaySurface->pixels, _overlaySurface->pitch);
+		_overlayDirty = false;
+	}
+
+	SDL_Rect viewport;
+
+	Common::Rect &drawRect = _overlayDrawRect;
+	viewport.x = drawRect.left;
+	viewport.y = drawRect.top;
+	viewport.w = drawRect.width();
+	viewport.h = drawRect.height();
+
+	SDL_RenderCopy(_renderer, _overlayTexture, nullptr, &viewport);
+}
+
+void RenderSdlGraphicsManager::recreateOverlay(const int width, const int height) {
+
+	SDL_RendererInfo info;
+	if (SDL_GetRendererInfo(_renderer, &info) < 0)
+		error("SDL_GetRendererInfo failed: %s", SDL_GetError());
+
+	uint overlayWidth = width;
+	uint overlayHeight = height;
+	Uint32 overlayFormat = SDL_PIXELFORMAT_UNKNOWN;
+
+	// WORKAROUND: We can only support surfaces up to the maximum supported
+	// texture size. Thus, in case we encounter a physical size bigger than
+	// this maximum texture size we will simply use an overlay as big as
+	// possible and then scale it to the physical display size. This sounds
+	// bad but actually all recent chips should support full HD resolution
+	// anyway. Thus, it should not be a real issue for modern hardware.
+	if (   overlayWidth  > (uint)info.max_texture_width
+	    || overlayHeight > (uint)info.max_texture_height) {
+		const frac_t outputAspect = intToFrac(_windowWidth) / _windowHeight;
+
+		if (outputAspect > (frac_t)FRAC_ONE) {
+			overlayWidth  = info.max_texture_width;
+			overlayHeight = intToFrac(overlayWidth) / outputAspect;
+		} else {
+			overlayHeight = info.max_texture_height;
+			overlayWidth  = fracToInt(overlayHeight * outputAspect);
+		}
+	}
+
+	// HACK: We limit the minimal overlay size to 256x200, which is the
+	// minimum of the dimensions of the two resolutions 256x240 (NES) and
+	// 320x200 (many DOS games use this). This hopefully assure that our
+	// GUI has working layouts.
+	overlayWidth = MAX<uint>(overlayWidth, 256);
+	overlayHeight = MAX<uint>(overlayHeight, 200);
+
+	// Pick the best pixel format for the overlay based on what the
+	// renderer supports - prefer ones with alpha and higher bit depths.
+	for (Uint32 i = 0; i < info.num_texture_formats; i++) {
+		if (!SDL_ISPIXELFORMAT_PACKED(info.texture_formats[i]))
+			continue;
+
+		if (SDL_BITSPERPIXEL(info.texture_formats[i]) > SDL_BITSPERPIXEL(overlayFormat) &&
+		   !SDL_ISPIXELFORMAT_ALPHA(overlayFormat)) {
+			overlayFormat = info.texture_formats[i];
+			continue;
+		}
+
+		if (SDL_BITSPERPIXEL(info.texture_formats[i]) > SDL_BITSPERPIXEL(overlayFormat) &&
+		    SDL_ISPIXELFORMAT_ALPHA(info.texture_formats[i])) {
+			overlayFormat = info.texture_formats[i];
+			continue;
+		}
+	}
+	if (overlayFormat == SDL_PIXELFORMAT_UNKNOWN)
+		overlayFormat = SDL_PIXELFORMAT_RGBA32;
+
+	// Recreate the overlay surface and texture with the new information.
+
+	if (_overlaySurface) {
+		SDL_FreeSurface(_overlaySurface);
+	}
+	_overlaySurface = SDL_CreateRGBSurfaceWithFormat(SDL_SWSURFACE, overlayWidth, overlayHeight,
+						SDL_BITSPERPIXEL(overlayFormat), overlayFormat);
+
+	if (_overlaySurface == nullptr)
+		error("allocating _overlaySurface failed");
+
+	_overlayFormat = convertSDLPixelFormat(_overlaySurface->format);
+
+	if (_overlayTexture) {
+		SDL_DestroyTexture(_overlayTexture);
+	}
+	_overlayTexture = SDL_CreateTexture(_renderer, _overlaySurface->format->format, SDL_TEXTUREACCESS_STREAMING,
+						_overlaySurface->w, _overlaySurface->h);
+
+	if (_overlayTexture == nullptr)
+		error("allocating _overlayTexture failed");
+
+	SDL_SetTextureBlendMode(_overlayTexture, SDL_BLENDMODE_BLEND);
+}
 
 #pragma mark -
 #pragma mark --- Mouse ---
@@ -2401,7 +2374,7 @@ void RenderSdlGraphicsManager::recalculateCursorScaling() {
 
 	// In case scaling is actually enabled we will scale the cursor according
 	// to the game screen.
-	/* if (!_cursorDontScale) */ {
+	if (!_cursorDontScale) {
 		const frac_t screenScaleFactorX = intToFrac(_gameDrawRect.width()) / _hwScreen->w;
 		const frac_t screenScaleFactorY = intToFrac(_gameDrawRect.height()) / _hwScreen->h;
 
@@ -2626,7 +2599,7 @@ void RenderSdlGraphicsManager::drawOSD() {
 void RenderSdlGraphicsManager::drawScreen() {
 	SDL_Rect viewport;
 
-	Common::Rect &drawRect = (_overlayVisible) ? _overlayDrawRect : _gameDrawRect;
+	Common::Rect &drawRect = _gameDrawRect;
 	viewport.x = drawRect.left;
 	viewport.y = drawRect.top;
 	viewport.w = drawRect.width();
@@ -2637,8 +2610,13 @@ void RenderSdlGraphicsManager::drawScreen() {
 
 void RenderSdlGraphicsManager::handleResizeImpl(const int width, const int height) {
 	SdlGraphicsManager::handleResizeImpl(width, height);
+
+	recreateOverlay(width, height);
 	recalculateDisplayAreas();
 	recalculateCursorScaling();
+
+	// Something changed, so update the screen change ID.
+	_screenChangeCount++;
 }
 
 void RenderSdlGraphicsManager::handleScalerHotkeys(uint mode, int factor) {
