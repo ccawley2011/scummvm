@@ -577,26 +577,35 @@ Graphics::Surface *Surface::convertTo(const PixelFormat &dstFormat, const byte *
 		// Converting from paletted to high color
 		assert(srcPalette);
 
-		for (int y = 0; y < h; y++) {
-			const byte *srcRow = (const byte *)getBasePtr(0, y);
-			byte *dstRow = (byte *)surface->getBasePtr(0, y);
+		if (dstFormat.bytesPerPixel == 1 || dstFormat.bytesPerPixel == 2 || dstFormat.bytesPerPixel == 4) {
+			const byte *src = (const byte *)getPixels();
+			byte *dst = (byte *)surface->getPixels();
+			uint32 map[256];
 
-			for (int x = 0; x < w; x++) {
-				byte index = *srcRow++;
-				byte r = srcPalette[index * 3];
-				byte g = srcPalette[index * 3 + 1];
-				byte b = srcPalette[index * 3 + 2];
+			convertPaletteToMap(map, srcPalette, 256, dstFormat);
+			crossBlitMap(dst, src, surface->pitch, pitch, w, h, dstFormat.bytesPerPixel, map);
+		} else {
+			for (int y = 0; y < h; y++) {
+				const byte *srcRow = (const byte *)getBasePtr(0, y);
+				byte *dstRow = (byte *)surface->getBasePtr(0, y);
 
-				uint32 color = dstFormat.RGBToColor(r, g, b);
+				for (int x = 0; x < w; x++) {
+					byte index = *srcRow++;
+					byte r = srcPalette[index * 3];
+					byte g = srcPalette[index * 3 + 1];
+					byte b = srcPalette[index * 3 + 2];
 
-				if (dstFormat.bytesPerPixel == 2)
-					*((uint16 *)dstRow) = color;
-				else if (dstFormat.bytesPerPixel == 3)
-					WRITE_UINT24(dstRow, color);
-				else
-					*((uint32 *)dstRow) = color;
+					uint32 color = dstFormat.RGBToColor(r, g, b);
 
-				dstRow += dstFormat.bytesPerPixel;
+					if (dstFormat.bytesPerPixel == 2)
+						*((uint16 *)dstRow) = color;
+					else if (dstFormat.bytesPerPixel == 3)
+						WRITE_UINT24(dstRow, color);
+					else
+						*((uint32 *)dstRow) = color;
+
+					dstRow += dstFormat.bytesPerPixel;
+				}
 			}
 		}
 	} else {

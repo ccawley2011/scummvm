@@ -86,7 +86,9 @@ private:
 		uint16 getWidth() const { return _width; }
 		uint16 getHeight() const { return _height; }
 		Graphics::PixelFormat getPixelFormat() const { return _pixelFormat; }
-		bool setOutputPixelFormat(const Graphics::PixelFormat &format) { _pixelFormat = format; return true; }
+		// bool setOutputPixelFormat(const Graphics::PixelFormat &format) { _pixelFormat = format; return true; }
+		const byte *getPalette() const { return _palette; }
+		bool hasDirtyPalette() const { return true; }
 		int getCurFrame() const { return _curFrame; }
 		const Common::Rational &getFrameRate() const { return _frameRate; }
 		uint32 getNextFrameStartTime() const { return (uint32)(_nextFrameStartTime * 1000); }
@@ -104,6 +106,7 @@ private:
 		Graphics::Surface *_surface;
 		Graphics::Surface *_displaySurface;
 		Graphics::PixelFormat _pixelFormat;
+		byte _palette[256 * 3];
 		int _x;
 		int _y;
 		uint16 _width;

@@ -279,6 +279,9 @@ TheoraDecoder::TheoraVideoTrack::TheoraVideoTrack(th_info &theoraInfo, th_setup_
 	if (_pixelFormat.bytesPerPixel == 1)
 		_pixelFormat = Graphics::PixelFormat(4, 8, 8, 8, 8, 8, 16, 24, 0);
 
+	// HACK: Skip YUV to RGB conversion by returning a greyscale surface
+	_pixelFormat = Graphics::PixelFormat::createFormatCLUT8();
+
 	// Set the frame rate
 	_frameRate = Common::Rational(theoraInfo.fps_numerator, theoraInfo.fps_denominator);
 
@@ -287,6 +290,12 @@ TheoraDecoder::TheoraVideoTrack::TheoraVideoTrack(th_info &theoraInfo, th_setup_
 	_curFrame = -1;
 	_surface = nullptr;
 	_displaySurface = nullptr;
+
+	for (int i = 0; i < 256; i++) {
+		_palette[(i * 3) + 0] = i;
+		_palette[(i * 3) + 1] = i;
+		_palette[(i * 3) + 2] = i;
+	}
 }
 
 TheoraDecoder::TheoraVideoTrack::~TheoraVideoTrack() {
@@ -362,18 +371,22 @@ void TheoraDecoder::TheoraVideoTrack::translateYUVtoRGBA(th_ycbcr_buffer &YUVBuf
 		                      _surface->getBasePtr(_x, _y), _surface->format);
 	}
 
-	switch (_theoraPixelFormat) {
-	case TH_PF_420:
-		YUVToRGBMan.convert420(_surface, Graphics::YUVToRGBManager::kScaleITU, YUVBuffer[kBufferY].data, YUVBuffer[kBufferU].data, YUVBuffer[kBufferV].data, YUVBuffer[kBufferY].width, YUVBuffer[kBufferY].height, YUVBuffer[kBufferY].stride, YUVBuffer[kBufferU].stride);
-		break;
-	case TH_PF_422:
-		YUVToRGBMan.convert422(_surface, Graphics::YUVToRGBManager::kScaleITU, YUVBuffer[kBufferY].data, YUVBuffer[kBufferU].data, YUVBuffer[kBufferV].data, YUVBuffer[kBufferY].width, YUVBuffer[kBufferY].height, YUVBuffer[kBufferY].stride, YUVBuffer[kBufferU].stride);
-		break;
-	case TH_PF_444:
-		YUVToRGBMan.convert444(_surface, Graphics::YUVToRGBManager::kScaleITU, YUVBuffer[kBufferY].data, YUVBuffer[kBufferU].data, YUVBuffer[kBufferV].data, YUVBuffer[kBufferY].width, YUVBuffer[kBufferY].height, YUVBuffer[kBufferY].stride, YUVBuffer[kBufferU].stride);
-		break;
-	default:
-		error("Unsupported Theora pixel format");
+	if (_pixelFormat.isCLUT8()) {
+		_surface->copyRectToSurface(YUVBuffer[kBufferY].data, YUVBuffer[kBufferY].stride, 0, 0, YUVBuffer[kBufferY].width, YUVBuffer[kBufferY].height);
+	} else {
+		switch (_theoraPixelFormat) {
+		case TH_PF_420:
+			YUVToRGBMan.convert420(_surface, Graphics::YUVToRGBManager::kScaleITU, YUVBuffer[kBufferY].data, YUVBuffer[kBufferU].data, YUVBuffer[kBufferV].data, YUVBuffer[kBufferY].width, YUVBuffer[kBufferY].height, YUVBuffer[kBufferY].stride, YUVBuffer[kBufferU].stride);
+			break;
+		case TH_PF_422:
+			YUVToRGBMan.convert422(_surface, Graphics::YUVToRGBManager::kScaleITU, YUVBuffer[kBufferY].data, YUVBuffer[kBufferU].data, YUVBuffer[kBufferV].data, YUVBuffer[kBufferY].width, YUVBuffer[kBufferY].height, YUVBuffer[kBufferY].stride, YUVBuffer[kBufferU].stride);
+			break;
+		case TH_PF_444:
+			YUVToRGBMan.convert444(_surface, Graphics::YUVToRGBManager::kScaleITU, YUVBuffer[kBufferY].data, YUVBuffer[kBufferU].data, YUVBuffer[kBufferV].data, YUVBuffer[kBufferY].width, YUVBuffer[kBufferY].height, YUVBuffer[kBufferY].stride, YUVBuffer[kBufferU].stride);
+			break;
+		default:
+			error("Unsupported Theora pixel format");
+		}
 	}
 }
 

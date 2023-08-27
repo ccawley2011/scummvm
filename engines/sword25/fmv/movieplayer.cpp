@@ -127,9 +127,10 @@ void MoviePlayer::update() {
 			// Movie complete, so unload the movie
 			unloadMovie();
 		} else if (_decoder.needsUpdate()) {
-			const Graphics::Surface *s = _decoder.decodeNextFrame();
-			if (s) {
+			const Graphics::Surface *os = _decoder.decodeNextFrame();
+			if (os) {
 				// Transfer the next frame
+				Graphics::Surface *s = os->convertTo(g_system->getScreenFormat(), _decoder.getPalette());
 				assert(s->format.bytesPerPixel == 4);
 
 #ifdef THEORA_INDIRECT_RENDERING
@@ -139,6 +140,8 @@ void MoviePlayer::update() {
 				g_system->copyRectToScreen(s->getPixels(), s->pitch, _outX, _outY, MIN(s->w, _backSurface->w), MIN(s->h, _backSurface->h));
 				g_system->updateScreen();
 #endif
+				s->free();
+				delete s;
 			}
 		}
 	}
