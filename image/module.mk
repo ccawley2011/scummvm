@@ -10,6 +10,7 @@ MODULE_OBJS := \
 	pcx.o \
 	pict.o \
 	png.o \
+	rosprite.o \
 	scr.o \
 	tga.o \
 	xbm.o \
