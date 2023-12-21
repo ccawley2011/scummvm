@@ -532,7 +532,7 @@ static int ags_pf_ferror(void *userdata) {
 }
 
 // Custom PACKFILE callback table
-static PACKFILE_VTABLE ags_packfile_vtable = {
+static const PACKFILE_VTABLE ags_packfile_vtable = {
 	ags_pf_fclose,
 	ags_pf_getc,
 	ags_pf_ungetc,
