@@ -1125,7 +1125,7 @@ void load_person_ani(int16 ani_id, int16 p_nr) {
 	}
 }
 
-uint8 p_ani[MAX_PERSON - 1][5] = {
+static const uint8 p_ani[MAX_PERSON - 1][5] = {
 	{HO_WALK_L, HO_WALK_R, HO_BACK, HO_FRONT, HO_STAND_L},
 	{NI_WALK_L, NI_WALK_R, NI_BACK, NI_FRONT, NI_STAND_L}
 };

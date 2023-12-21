@@ -55,7 +55,7 @@ static const bool CREDITS_TYPE[65] = {
 	false, true, true, true, true
 };
 
-static const char *CREDITS_TEXT_EN[65] = {
+static const char *const CREDITS_TEXT_EN[65] = {
 	"Idea & Story:",
 	"Carsten Wieland",
 	"Programming:",
@@ -123,7 +123,7 @@ static const char *CREDITS_TEXT_EN[65] = {
 	"featuring Indhira Mohammed."
 };
 
-static const char *CREDITS_TEXT_DE[65] = {
+static const char *const CREDITS_TEXT_DE[65] = {
 	"Idee & Story:",
 	"Carsten Wieland",
 	"Programmierung:",

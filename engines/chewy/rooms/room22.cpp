@@ -54,7 +54,7 @@ static const MovLine BORK_MPKT2[2] = {
 	{ {  90, 125, 170 }, 1, 6 }
 };
 
-AniBlock ABLOCK14[2] = {
+static const AniBlock ABLOCK14[2] = {
 	{0, 1, ANI_FRONT, ANI_WAIT, 0},
 	{3, 255, ANI_FRONT, ANI_GO, 0},
 };
