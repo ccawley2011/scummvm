@@ -49,7 +49,7 @@
 
 namespace CGE {
 
-const char *savegameStr = "SCUMMVM_CGE";
+const char *const savegameStr = "SCUMMVM_CGE";
 
 //--------------------------------------------------------------------------
 
@@ -123,9 +123,9 @@ char *CGEEngine::mergeExt(char *buf, const char *name, const char *ext) {
 	return buf;
 }
 
-int CGEEngine::takeEnum(const char **tab, const char *text) {
+int CGEEngine::takeEnum(const char *const *tab, const char *text) {
 	if (text) {
-		for (const char **e = tab; *e; e++) {
+		for (const char *const *e = tab; *e; e++) {
 			if (scumm_stricmp(text, *e) == 0) {
 				return e - tab;
 			}
@@ -1021,15 +1021,15 @@ void Sprite::touch(uint16 mask, int x, int y) {
 }
 
 void CGEEngine::loadSprite(const char *fname, int ref, int scene, int col = 0, int row = 0, int pos = 0) {
-	static const char *Comd[] = { "Name", "Type", "Phase", "East",
-	                              "Left", "Right", "Top", "Bottom",
-	                              "Seq", "Near", "Take",
-	                              "Portable", "Transparent",
-	                              nullptr
-	                            };
-	static const char *Type[] = { "DEAD", "AUTO", "WALK", "NEWTON", "LISSAJOUS",
-	                              "FLY", nullptr
-	                            };
+	static const char *const Comd[] = { "Name", "Type", "Phase", "East",
+	                                    "Left", "Right", "Top", "Bottom",
+	                                    "Seq", "Near", "Take",
+	                                    "Portable", "Transparent",
+	                                    nullptr
+	                                  };
+	static const char *const Type[] = { "DEAD", "AUTO", "WALK", "NEWTON", "LISSAJOUS",
+	                                    "FLY", nullptr
+	                                  };
 
 	int shpcnt = 0;
 	int type = 0; // DEAD

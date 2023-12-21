@@ -186,7 +186,7 @@ Sprite *Sprite::expand() {
 	if (!*_file)
 		return this;
 
-	static const char *Comd[] = { "Name", "Phase", "Seq", "Near", "Take", nullptr };
+	static const char *const Comd[] = { "Name", "Phase", "Seq", "Near", "Take", nullptr };
 	char fname[kPathMax];
 
 	Common::Array<BitmapPtr> shplist;

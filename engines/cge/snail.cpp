@@ -35,7 +35,7 @@
 
 namespace CGE {
 
-const char *CommandHandler::_commandText[] = {
+const char *const CommandHandler::_commandText[] = {
 	"LABEL",  "PAUSE",  "WAIT",    "LEVEL",   "HIDE",
 	"SAY",    "INF",    "TIME",    "CAVE",    "KILL",
 	"RSEQ",   "SEQ",    "SEND",    "SWAP",    "KEEP",

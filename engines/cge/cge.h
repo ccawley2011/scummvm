@@ -126,7 +126,7 @@ struct SavegameHeader {
 	uint32 playTime;
 };
 
-extern const char *savegameStr;
+extern const char *const savegameStr;
 
 struct Bar {
 	uint8 _horz;
@@ -289,7 +289,7 @@ public:
 	void showBak(int ref);
 	void initSceneValues();
 	char *mergeExt(char *buf, const char *name, const char *ext);
-	int  takeEnum(const char **tab, const char *text);
+	int  takeEnum(const char *const *tab, const char *text);
 	int  newRandom(int range);
 	void sndSetVolume();
 	Sprite *locate(int ref);
