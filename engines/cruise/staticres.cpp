@@ -325,31 +325,31 @@ const byte mouseCursorMagnifyingGlass[] = {
 	0xfe, 0xc0, 0xfc, 0x00, 0xf8, 0x00, 0x00, 0x00
 };
 
-const char *englishLanguageStrings[13] = {
+const char *const englishLanguageStrings[13] = {
 	"Pause", nullptr, nullptr, nullptr, nullptr, "Inventory", "Speak about...", "Player Menu", nullptr,
 	"Save", "Load", "Start Again", "Quit"
 };
-const char *frenchLanguageStrings[13] = {
+const char *const frenchLanguageStrings[13] = {
 	"", nullptr, nullptr, nullptr, nullptr, "Inventaire", "Parler de...", "Menu Joueur", nullptr,
 	"Sauvegarde", "Chargement", "Recommencer le jeu", "Quitter"
 };
 // The original Amiga version does use "Speilermen\xFC" instead of "Spielermen\xFC", if we want to correct
 // this typo, we can easily do so.
-const char *germanLanguageStrings[13] = {
+const char *const germanLanguageStrings[13] = {
 	" ", nullptr, nullptr, nullptr, nullptr, "Inventar", "Sprechen ""\xFC""ber", "Speilermen\xFC", "Speicherlaufwerk",
 	"Speichern", "Laden", "Neu beginnen", "Ende"
 };
-const char *italianLanguageStrings[13] = {
+const char *const italianLanguageStrings[13] = {
 	"Pausa", nullptr, nullptr, nullptr, nullptr, "Inventario", "Parla di...", "Menu giocatore", nullptr,
 	"Salva", "Carica", "Ricomincia", "Esci"
 };
 
-const char *spanishLanguageStrings[13] = {
+const char *const spanishLanguageStrings[13] = {
 	"Pausa", nullptr, nullptr, nullptr, nullptr, "Inventario", "Hablar de...", "Menu del jugador", nullptr,
 	"Salvar", "Cargar", "Recomenzar", "Salir"
 };
 
-const char *russianLanguageStrings[13] = {
+const char *const russianLanguageStrings[13] = {
 	"\x8F\xA0\xE3\xA7\xA0", // Пауза
 	nullptr, nullptr, nullptr, nullptr,
 	"\x82\xA5\xE9\xA8", // 	"Вещи",

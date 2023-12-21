@@ -147,7 +147,7 @@ bool CruiseEngine::loadLanguageStrings() {
 
 	} else {
 		// Try and use one of the pre-defined language lists
-		const char **p = nullptr;
+		const char *const *p = nullptr;
 		switch (getLanguage()) {
 		case Common::EN_ANY:
 			p = englishLanguageStrings;
