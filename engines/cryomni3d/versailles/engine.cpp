@@ -306,7 +306,7 @@ static bool checkFilePath(const Common::Path &basePath, Common::String &baseName
 
 Common::Path CryOmni3DEngine_Versailles::getFilePath(FileType fileType,
 		const Common::String &baseName) const {
-	const char **extensions = nullptr;
+	const char *const *extensions = nullptr;
 	bool hasLevel = false;
 	const char *baseDir = nullptr;
 
@@ -314,12 +314,12 @@ Common::Path CryOmni3DEngine_Versailles::getFilePath(FileType fileType,
 		case kFileTypeAnimacti:
 		case kFileTypeDialAnim:
 		case kFileTypeWarpHNM: {
-			static const char *extensions_[] = { "hnm", nullptr };
+			static const char *const extensions_[] = { "hnm", nullptr };
 			extensions = extensions_;
 			break;
 		}
 		case kFileTypeTransScene: {
-			static const char *extensions_[] = { "hns", "hnm", nullptr };
+			static const char *const extensions_[] = { "hns", "hnm", nullptr };
 			extensions = extensions_;
 			break;
 		}
@@ -329,14 +329,14 @@ Common::Path CryOmni3DEngine_Versailles::getFilePath(FileType fileType,
 		case kFileTypeObject:
 		case kFileTypeTransSceneI:
 		case kFileTypeWarpCyclo: {
-			static const char *extensions_[] = { "hlz", nullptr };
+			static const char *const extensions_[] = { "hlz", nullptr };
 			extensions = extensions_;
 			break;
 		}
 		case kFileTypeDialSound:
 		case kFileTypeMusic:
 		case kFileTypeSound: {
-			static const char *extensions_[] = { "wav", nullptr };
+			static const char *const extensions_[] = { "wav", nullptr };
 			extensions = extensions_;
 			break;
 		}
