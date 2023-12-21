@@ -34,7 +34,7 @@
 
 namespace CGE2 {
 
-const char *CommandHandler::_commandText[] = {
+const char *const CommandHandler::_commandText[] = {
 	"NOP", "USE", "PAUSE", "INF", "CAVE", "SETX", "SETY", "SETZ", "ADD",
 	"FLASH", "CYCLE", "CLEAR", "MOUSE", "MAP", "MIDI", ".DUMMY.", "WAIT",
 	"HIDE", "ROOM", "SAY", "SOUND", "KILL", "RSEQ", "SEQ", "SEND", "SWAP",
