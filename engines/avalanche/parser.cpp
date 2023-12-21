@@ -34,8 +34,8 @@
 
 namespace Avalanche {
 
-const char *Parser::kCopyright = "1995";
-const char *Parser::kVersionNum = "1.30";
+const char *const Parser::kCopyright = "1995";
+const char *const Parser::kVersionNum = "1.30";
 
 Parser::Parser(AvalancheEngine *vm) {
 	_vm = vm;
