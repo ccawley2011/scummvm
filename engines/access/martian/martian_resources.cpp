@@ -119,7 +119,7 @@ const char *const ASK_TBL[] = {
 	"LARRY HAMMOND", nullptr
 };
 
-byte HELP[] = {
+const byte HELP[] = {
 	1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 	1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 	1, 1, 1, 1, 1, 1, 1, 1, 1, 1,

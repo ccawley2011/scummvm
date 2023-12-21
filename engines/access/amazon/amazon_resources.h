@@ -109,7 +109,7 @@ extern const int DOWNRIVEROBJ[14][4];
 extern RiverStruct RIVER0OBJECTS[46];
 extern RiverStruct RIVER1OBJECTS[50];
 extern RiverStruct RIVER2OBJECTS[54];
-extern RiverStruct *RIVER_OBJECTS[3][2];
+extern RiverStruct *const RIVER_OBJECTS[3][2];
 enum { RIVER_START = 0, RIVER_END = 1 };
 
 extern const int HELP1COORDS[2][4];
