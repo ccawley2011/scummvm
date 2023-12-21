@@ -1064,19 +1064,19 @@ Common::Rect SystemUI::createRect(int16 x, int16 adjX, int16 y, int16 adjY, int1
 #define SYSTEMUI_BUTTONEDGE_APPLEIIGS_WIDTH 8
 #define SYSTEMUI_BUTTONEDGE_APPLEIIGS_HEIGHT 5
 
-static byte buttonEdgeAppleIIgsDefault[] = {
+static const byte buttonEdgeAppleIIgsDefault[] = {
 	0x07, 0x1C, 0x33, 0x6E, 0xDC
 };
 
-static byte buttonEdgeAppleIIgsDefaultActive[] = {
+static const byte buttonEdgeAppleIIgsDefaultActive[] = {
 	0x07, 0x1C, 0x33, 0x6F, 0xDF
 };
 
-static byte buttonEdgeAppleIIgsNonDefault[] = {
+static const byte buttonEdgeAppleIIgsNonDefault[] = {
 	0x00, 0x00, 0x03, 0x0E, 0x1C
 };
 
-static byte buttonEdgeAppleIIgsNonDefaultActive[] = {
+static const byte buttonEdgeAppleIIgsNonDefaultActive[] = {
 	0x00, 0x00, 0x03, 0x0F, 0x1F
 };
 
@@ -1101,7 +1101,7 @@ void SystemUI::drawButton(SystemUIButtonEntry *button) {
 void SystemUI::drawButtonAppleIIgs(SystemUIButtonEntry *button) {
 	byte  foregroundColor = 0;
 	byte  backgroundColor = 15;
-	byte *edgeBitmap = nullptr;
+	const byte *edgeBitmap = nullptr;
 
 	if (button->active) {
 		SWAP<byte>(foregroundColor, backgroundColor);
@@ -1147,7 +1147,7 @@ void SystemUI::drawButtonAppleIIgs(SystemUIButtonEntry *button) {
 	_gfx->copyDisplayRectToScreen(button->rect.left, -5, button->rect.top, -3, button->rect.width(), +10, button->rect.height(), +6);
 }
 
-void SystemUI::drawButtonAppleIIgsEdgePixels(int16 x, int16 adjX, int16 y, int16 adjY, byte *edgeBitmap, bool mirrored, bool upsideDown) {
+void SystemUI::drawButtonAppleIIgsEdgePixels(int16 x, int16 adjX, int16 y, int16 adjY, const byte *edgeBitmap, bool mirrored, bool upsideDown) {
 	int8 directionY = upsideDown ? -1 : +1;
 	int8 directionX = mirrored ? -1 : +1;
 	int8 curY = 0;

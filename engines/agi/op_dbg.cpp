@@ -27,7 +27,7 @@ namespace Agi {
 #define ip   (_game.logics[lognum].cIP)
 #define code (_game.logics[lognum].data)
 
-const char *logicNamesIf[] = {
+static const char *const logicNamesIf[] = {
 	"OR", "NOT", "ELSE", "IF"
 };
 

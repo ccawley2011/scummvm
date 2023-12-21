@@ -112,7 +112,7 @@ private:
 
 	void drawButton(SystemUIButtonEntry *button);
 	void drawButtonAppleIIgs(SystemUIButtonEntry *buttonEntry);
-	void drawButtonAppleIIgsEdgePixels(int16 x, int16 adjX, int16 y, int16 adjY, byte *edgeBitmap, bool mirrored, bool upsideDown);
+	void drawButtonAppleIIgsEdgePixels(int16 x, int16 adjX, int16 y, int16 adjY, const byte *edgeBitmap, bool mirrored, bool upsideDown);
 	void drawButtonAmiga(SystemUIButtonEntry *buttonEntry);
 	void drawButtonAtariST(SystemUIButtonEntry *buttonEntry);
 

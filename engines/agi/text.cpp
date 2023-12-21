@@ -155,7 +155,7 @@ void TextMgr::charPos_SetInsideWindow(int16 windowRow, int16 windowColumn) {
 	_textPos.column = _messageState.textPos.column + windowColumn;
 }
 
-static byte charAttrib_CGA_Conversion[] = {
+static const byte charAttrib_CGA_Conversion[] = {
 	0, 1, 1, 1, 2, 2, 2, 3, 3, 1, 1, 1, 2, 2, 2
 };
 
