@@ -51,10 +51,10 @@ class Subtitles {
 	static const int  kMaxLanguageSelectionNum = 1024;   // Max allowed number of languages to select from (should be available in the MIX file)
 	static const uint32  kMinDuration          = 1000;    // Min allowed duration for a queued subtitle
 
-	static const char *SUBTITLES_FILENAME_PREFIXES[kMaxTextResourceEntries];
-	static const char *SUBTITLES_FONT_FILENAME_EXTERNAL;
-	static const char *SUBTITLES_VERSION_TRENAME;
-	static const char *EXTRA_TRENAME;
+	static const char *const SUBTITLES_FILENAME_PREFIXES[kMaxTextResourceEntries];
+	static const char *const SUBTITLES_FONT_FILENAME_EXTERNAL;
+	static const char *const SUBTITLES_VERSION_TRENAME;
+	static const char *const EXTRA_TRENAME;
 
 	static const Color256 kTextColors[];
 

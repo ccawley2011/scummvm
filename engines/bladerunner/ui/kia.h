@@ -66,7 +66,7 @@ enum KIASections {
 };
 
 class KIA {
-	static const char *kPogo;
+	static const char *const kPogo;
 	static const int kPlayerActorDialogueQueueCapacity = 31;
 
 	struct ActorDialogueQueueEntry {

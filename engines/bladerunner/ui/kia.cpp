@@ -63,7 +63,7 @@
 
 namespace BladeRunner {
 
-const char *KIA::kPogo = "POGO";
+const char *const KIA::kPogo = "POGO";
 
 KIA::KIA(BladeRunnerEngine *vm) {
 	_vm = vm;

@@ -23,7 +23,7 @@
 
 namespace BladeRunner {
 
-static int kPoliceMazePS11TargetCount = 20;
+static const int kPoliceMazePS11TargetCount = 20;
 int SceneScriptPS11::getPoliceMazePS11TargetCount() {
 	return kPoliceMazePS11TargetCount;
 }
@@ -44,7 +44,7 @@ void SceneScriptPS11::InitializeScene() {
 }
 
 static const int *getPoliceMazePS11TrackData9() {   // Enemy (kItemPS11Target1) - Starts activated
-	static int trackData[] = {
+	static const int trackData[] = {
 		kPMTIActivate,        kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 		kPMTIVariableInc,     kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 #if !BLADERUNNER_ORIGINAL_BUGS
@@ -80,7 +80,7 @@ static const int *getPoliceMazePS11TrackData9() {   // Enemy (kItemPS11Target1) 
 }
 
 static const int *getPoliceMazePS11TrackData10() {  // Enemy (kItemPS11Target2, kItemPS11Target3) - Rotating reveal (as kItemPS11Target3)
-	static int trackData[] = {
+	static const int trackData[] = {
 		kPMTIActivate,        kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 		kPMTIVariableInc,     kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 #if !BLADERUNNER_ORIGINAL_BUGS
@@ -116,7 +116,7 @@ static const int *getPoliceMazePS11TrackData10() {  // Enemy (kItemPS11Target2, 
 }
 
 static const int *getPoliceMazePS11TrackData11() {  // Enemy (kItemPS11Target2, kItemPS11Target3)
-	static int trackData[] = {
+	static const int trackData[] = {
 		kPMTIFacing,          860,
 		kPMTIPosition,        0,
 		kPMTIEnemyReset,      kItemPS11Target3,		// [redundant after bug fix] target 2-3 still is not revealed as enemy
@@ -144,7 +144,7 @@ static const int *getPoliceMazePS11TrackData11() {  // Enemy (kItemPS11Target2, 
 }
 
 static const int *getPoliceMazePS11TrackData12() {  // Innocent (kItemPS11Target4)
-	static int trackData[] = {
+	static const int trackData[] = {
 		kPMTIActivate,        kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 		kPMTIVariableInc,     kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 #if !BLADERUNNER_ORIGINAL_BUGS
@@ -185,7 +185,7 @@ static const int *getPoliceMazePS11TrackData12() {  // Innocent (kItemPS11Target
 }
 
 static const int *getPoliceMazePS11TrackData13() {  // Enemy (kItemPS11Target5)  - Starts activated
-	static int trackData[] = {
+	static const int trackData[] = {
 		kPMTIActivate,        kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 		kPMTIVariableInc,     kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 #if !BLADERUNNER_ORIGINAL_BUGS
@@ -232,7 +232,7 @@ static const int *getPoliceMazePS11TrackData13() {  // Enemy (kItemPS11Target5) 
 }
 
 static const int *getPoliceMazePS11TrackData14() {  // Enemy (kItemPS11Target6) - Rotating reveal
-	static int trackData[] = {
+	static const int trackData[] = {
 		kPMTIActivate,        kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 		kPMTIVariableInc,     kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 #if !BLADERUNNER_ORIGINAL_BUGS
@@ -276,7 +276,7 @@ static const int *getPoliceMazePS11TrackData14() {  // Enemy (kItemPS11Target6) 
 }
 
 static const int *getPoliceMazePS11TrackData15() {  // Special (kItemPS11Target7, kItemPS11Target8) - Innocent x2
-	static int trackData[] = {
+	static const int trackData[] = {
 		kPMTIActivate,        kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 		kPMTIVariableInc,     kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 #if !BLADERUNNER_ORIGINAL_BUGS
@@ -313,7 +313,7 @@ static const int *getPoliceMazePS11TrackData15() {  // Special (kItemPS11Target7
 }
 
 static const int *getPoliceMazePS11TrackData16() {  // Innocent (kItemPS11Target7, kItemPS11Target8)
-	static int trackData[] = {
+	static const int trackData[] = {
 		kPMTIFacing,          860,
 		kPMTIPosition,        0,
 		kPMTIObstacleSet,     kItemPS11Target8,
@@ -341,7 +341,7 @@ static const int *getPoliceMazePS11TrackData16() {  // Innocent (kItemPS11Target
 }
 
 static const int *getPoliceMazePS11TrackData17() {  // Special (kItemPS11Target9) - Enemy x3
-	static int trackData[] = {
+	static const int trackData[] = {
 		kPMTIActivate,        kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 		kPMTIVariableInc,     kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 #if !BLADERUNNER_ORIGINAL_BUGS
@@ -396,7 +396,7 @@ static const int *getPoliceMazePS11TrackData17() {  // Special (kItemPS11Target9
 }
 
 static const int *getPoliceMazePS11TrackData18() {  // Special (kItemPS11Target10, kItemPS11Target11) - Rotating reveal and Enemy x2
-	static int trackData[] = {
+	static const int trackData[] = {
 		kPMTIActivate,        kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 		kPMTIVariableInc,     kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 #if !BLADERUNNER_ORIGINAL_BUGS
@@ -447,7 +447,7 @@ static const int *getPoliceMazePS11TrackData18() {  // Special (kItemPS11Target1
 }
 
 static const int *getPoliceMazePS11TrackData19() {  // Special (kItemPS11Target10, kItemPS11Target11) - becomes an Enemy again
-	static int trackData[] = {
+	static const int trackData[] = {
 		kPMTIFacing,          512,
 		kPMTIPosition,        0,
 		kPMTIEnemySet,        kItemPS11Target11,    // [redundant after bug fix]
@@ -474,7 +474,7 @@ static const int *getPoliceMazePS11TrackData19() {  // Special (kItemPS11Target1
 }
 
 static const int *getPoliceMazePS11TrackData20() {  // Enemy (kItemPS11Target12) - Starts activated
-	static int trackData[] = {
+	static const int trackData[] = {
 		kPMTIActivate,        kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 		kPMTIVariableInc,     kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 #if !BLADERUNNER_ORIGINAL_BUGS
@@ -505,7 +505,7 @@ static const int *getPoliceMazePS11TrackData20() {  // Enemy (kItemPS11Target12)
 }
 
 static const int *getPoliceMazePS11TrackData21() {  // Innocent (kItemPS11Target13)
-	static int trackData[] = {
+	static const int trackData[] = {
 		kPMTIActivate,        kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 		kPMTIVariableInc,     kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 #if !BLADERUNNER_ORIGINAL_BUGS
@@ -538,7 +538,7 @@ static const int *getPoliceMazePS11TrackData21() {  // Innocent (kItemPS11Target
 }
 
 static const int *getPoliceMazePS11TrackData22() {  // Enemy (kItemPS11Target14)
-	static int trackData[] = {
+	static const int trackData[] = {
 		kPMTIActivate,        kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 		kPMTIVariableInc,     kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 #if !BLADERUNNER_ORIGINAL_BUGS
@@ -573,7 +573,7 @@ static const int *getPoliceMazePS11TrackData22() {  // Enemy (kItemPS11Target14)
 }
 
 static const int *getPoliceMazePS11TrackData23() {  // Innocent (kItemPS11Target15) - Starts activated
-	static int trackData[] = {
+	static const int trackData[] = {
 		kPMTIActivate,        kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 		kPMTIVariableInc,     kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 #if !BLADERUNNER_ORIGINAL_BUGS
@@ -604,7 +604,7 @@ static const int *getPoliceMazePS11TrackData23() {  // Innocent (kItemPS11Target
 }
 
 static const int *getPoliceMazePS11TrackData27() {  // Enemy (kItemPS11Target16)
-	static int trackData[] = {
+	static const int trackData[] = {
 		kPMTIActivate,        kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 		kPMTIVariableInc,     kVariablePoliceMazePS11TargetCounter, kPoliceMazePS11TargetCount,
 #if !BLADERUNNER_ORIGINAL_BUGS

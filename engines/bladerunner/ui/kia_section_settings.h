@@ -45,7 +45,7 @@ class KIASectionSettings : public KIASectionBase {
 		kStateLanguageSelect = 1
 	};
 
-	static const char *kLeary;
+	static const char *const kLeary;
 	static const Color256 kColors[];
 
 	UIContainer   *_uiContainer;

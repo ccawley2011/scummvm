@@ -60,10 +60,10 @@ namespace BladeRunner {
  * DONE - OK - CHECK what happens in VQA when no corresponding TRE subs file?
  */
 
-const char *Subtitles::SUBTITLES_FONT_FILENAME_EXTERNAL = "SUBTLS_E.FON";
+const char *const Subtitles::SUBTITLES_FONT_FILENAME_EXTERNAL = "SUBTLS_E.FON";
 
-const char *Subtitles::SUBTITLES_VERSION_TRENAME        = "SBTLVERS"; // addon resource file for Subtitles version info - can only be SBTLVERS.TRE
-const char *Subtitles::EXTRA_TRENAME                    = "EXTRA";
+const char *const Subtitles::SUBTITLES_VERSION_TRENAME        = "SBTLVERS"; // addon resource file for Subtitles version info - can only be SBTLVERS.TRE
+const char *const Subtitles::EXTRA_TRENAME                    = "EXTRA";
 
 const Color256 Subtitles::kTextColors[] = {
 	{ 0, 0, 0 },
@@ -89,7 +89,7 @@ const Color256 Subtitles::kTextColors[] = {
  * And all entries should get the suffix extension ".TRx"; the last letter in extension "TR*" should also be the language code
  * If/When adding new Text Resources here --> Update kMaxTextResourceEntries and also update method getIdxForSubsTreName()
  */
-const char *Subtitles::SUBTITLES_FILENAME_PREFIXES[kMaxTextResourceEntries] = {
+const char *const Subtitles::SUBTITLES_FILENAME_PREFIXES[kMaxTextResourceEntries] = {
 	"INGQUO",           // 0 // (in-game subtitles, not VQA subtitles)
 	"WSTLGO",           // 1 // all game (language) versions have the English ('E') version of WSTLGO
 	"BRLOGO",           // 2 // all game (language) versions have the English ('E') version of BRLOGO

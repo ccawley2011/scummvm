@@ -143,9 +143,9 @@ struct ClueWeight {
 };
 
 #if BLADERUNNER_ORIGINAL_BUGS
-static ClueWeight ClueWeightsForSteele[44] = {
+static const ClueWeight ClueWeightsForSteele[44] = {
 #else
-static ClueWeight ClueWeightsForSteele[45] = {
+static const ClueWeight ClueWeightsForSteele[45] = {
 #endif // BLADERUNNER_ORIGINAL_BUGS
 	{kClueMcCoyRetiredZuben, 100},
 	{kClueMcCoyShotZubenInTheBack, 100},
@@ -197,7 +197,7 @@ static ClueWeight ClueWeightsForSteele[45] = {
 #endif // BLADERUNNER_ORIGINAL_BUGS
 };
 
-static ClueWeight ClueWeightsForGordo[28] = {
+static const ClueWeight ClueWeightsForGordo[28] = {
 	{kClueMcCoyShotZubenInTheBack, 70},
 	{kClueMcCoyIsAnnoying, 65},
 	{kClueMcCoyIsKind, 70},
@@ -228,7 +228,7 @@ static ClueWeight ClueWeightsForGordo[28] = {
 	{kClueSightingMcCoyRuncitersShop, 65}
 };
 
-static ClueWeight ClueWeightsForDektora[46] = {
+static const ClueWeight ClueWeightsForDektora[46] = {
 	{kClueMcCoyShotZubenInTheBack, 70},
 	{kClueMcCoyIsAnnoying, 45},
 	{kClueMcCoyIsKind, 70},
@@ -277,7 +277,7 @@ static ClueWeight ClueWeightsForDektora[46] = {
 	{kClueSightingMcCoyRuncitersShop, 65}
 };
 
-static ClueWeight ClueWeightsForGuzza[23] = {
+static const ClueWeight ClueWeightsForGuzza[23] = {
 	{kClueMcCoyIsKind, 90},
 	{kClueMcCoyIsInsane, 90},
 	{kClueMcCoyIsAnnoying, 70},
@@ -303,7 +303,7 @@ static ClueWeight ClueWeightsForGuzza[23] = {
 	{kClueMcCoyKilledRunciter1, 55}
 };
 
-static ClueWeight ClueWeightsForClovis[46] = {
+static const ClueWeight ClueWeightsForClovis[46] = {
 	{kClueMcCoyShotZubenInTheBack, 70},
 	{kClueMcCoyIsKind, 70},
 	{kClueMcCoyKilledRunciter1, 70},
@@ -352,7 +352,7 @@ static ClueWeight ClueWeightsForClovis[46] = {
 	{kClueMcCoyShotGuzza, 45}
 };
 
-static ClueWeight ClueWeightsForLucy[47] = {
+static const ClueWeight ClueWeightsForLucy[47] = {
 	{kClueMcCoyShotZubenInTheBack, 70},
 	{kClueMcCoyIsAnnoying, 45},
 	{kClueMcCoyIsKind, 70},
@@ -402,7 +402,7 @@ static ClueWeight ClueWeightsForLucy[47] = {
 	{kClueSightingMcCoyRuncitersShop, 65}
 };
 
-static ClueWeight ClueWeightsForIzoAndSadik[47] = {
+static const ClueWeight ClueWeightsForIzoAndSadik[47] = {
 	{kClueMcCoyShotZubenInTheBack, 70},
 	{kClueMcCoyIsAnnoying, 45},
 	{kClueMcCoyIsKind, 70},
@@ -452,7 +452,7 @@ static ClueWeight ClueWeightsForIzoAndSadik[47] = {
 	{kClueSightingMcCoyRuncitersShop, 65}
 };
 
-static ClueWeight ClueWeightsForCrazylegs[49] = {
+static const ClueWeight ClueWeightsForCrazylegs[49] = {
 	{kClueMcCoyIsKind, 70},
 	{kClueMcCoyKilledRunciter1, 70},
 	{kClueMcCoyIsABladeRunner, 70},
@@ -504,7 +504,7 @@ static ClueWeight ClueWeightsForCrazylegs[49] = {
 	{kClueHowieLeeInterview, 40}
 };
 
-static ClueWeight ClueWeightsForLuther[44] = {
+static const ClueWeight ClueWeightsForLuther[44] = {
 	{kClueMcCoyIsKind, 70},
 	{kClueGordoBlabs, 70},
 	{kClueDNATyrell, 70},
