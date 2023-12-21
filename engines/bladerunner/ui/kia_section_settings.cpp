@@ -48,7 +48,7 @@
 
 namespace BladeRunner {
 
-const char *KIASectionSettings::kLeary = "LEARY";
+const char *const KIASectionSettings::kLeary = "LEARY";
 
 const Color256 KIASectionSettings::kColors[] = {
 	{   0,   0,   0 }, // Black - unpressed (framing rectange)

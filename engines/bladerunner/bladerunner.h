@@ -131,9 +131,9 @@ public:
 	// 2: all time code uses uint32 (since July 17 2019),
 	static const int kBladeRunnerScummVMVersion = 2;
 
-	static const char *kGameplayKeymapId;
-	static const char *kKiaKeymapId;
-	static const char *kCommonKeymapId;
+	static const char *const kGameplayKeymapId;
+	static const char *const kKiaKeymapId;
+	static const char *const kCommonKeymapId;
 
 	bool _gameIsRunning;
 	bool _windowIsActive;

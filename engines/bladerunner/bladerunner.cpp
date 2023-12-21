@@ -99,9 +99,9 @@
 
 namespace BladeRunner {
 
-const char *BladeRunnerEngine::kGameplayKeymapId = "bladerunner-gameplay";
-const char *BladeRunnerEngine::kKiaKeymapId = "bladerunner-kia";
-const char *BladeRunnerEngine::kCommonKeymapId = "bladerunner-common";
+const char *const BladeRunnerEngine::kGameplayKeymapId = "bladerunner-gameplay";
+const char *const BladeRunnerEngine::kKiaKeymapId = "bladerunner-kia";
+const char *const BladeRunnerEngine::kCommonKeymapId = "bladerunner-common";
 
 BladeRunnerEngine::BladeRunnerEngine(OSystem *syst, const ADGameDescription *desc)
 	: Engine(syst),

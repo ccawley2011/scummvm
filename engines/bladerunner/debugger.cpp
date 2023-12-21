@@ -701,7 +701,7 @@ bool isAllZeroes(Common::String valStr) {
 // For example, the re-used track "Iron Fist" from Command & Conquer - The Covert Operations (OST),
 // which is played at the NightClub Row (NR01), is "kSfxMUSBLEED" (looping).
 // TODO maybe support those too?
-const char* kMusicTracksArr[] = {"Animoid Row (G)",                 // kMusicArabLoop
+const char *const kMusicTracksArr[] = {"Animoid Row (G)",                 // kMusicArabLoop
 								 "Battle Theme",                    // kMusicBatl226M
 								 "Blade Runner Blues",              // kMusicBRBlues
 								 "Etsuko Theme",                    // kMusicKyoto
