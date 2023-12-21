@@ -1842,7 +1842,7 @@ int16 Op_UserWait() {
 	return 0;
 }
 
-opcodeFunction opcodeTablePtr[] = {
+static const opcodeFunction opcodeTablePtr[] = {
 	nullptr, // 0x00
 	Op_FadeIn,
 	Op_FadeOut,
