@@ -59,7 +59,7 @@ public:
 		void *_spritePtr;
 		CallbackType _cbType;
 	} *_commandList;
-	static const char *_commandText[];
+	static const char *const _commandText[];
 	bool _talkEnable;
 
 	CommandHandler(CGEEngine *vm, bool turbo);
