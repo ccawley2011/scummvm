@@ -44,7 +44,7 @@ namespace Asylum {
 #define KEYWORD_MASK 0xFFF
 
 #define OPCODE_NAME(index) (index > 25 ? "INVALID" : opcodeNames[index])
-const char *opcodeNames[] = {
+static const char *const opcodeNames[] = {
 	"Return",
 	"SetScriptVariable",
 	"SetCounterFromVars",
