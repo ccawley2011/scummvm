@@ -531,9 +531,9 @@ private:
 
 	void makeTables();
 	void getSinCosTables(unsigned short angle, signed char **cos_table, signed char **sin_table);
-	void rotatePoint(XYZ *point, XYZ *rpoint);
-	void mapPoint(XYZ *point, short *x, short *y);
-	short calcFaceArea(XYZ *face);
+	void rotatePoint(const XYZ *point, XYZ *rpoint);
+	void mapPoint(const XYZ *point, short *x, short *y);
+	short calcFaceArea(const XYZ *face);
 	void paintPixel(XYZ *point, unsigned char pixel);
 	void paintFace0(XYZ *point);
 	void paintFace1(XYZ *point);
@@ -551,7 +551,7 @@ private:
 	void incZoom();
 	void decZoom();
 
-	CubeCursor *_pcCursor;
+	const CubeCursor *_pcCursor;
 
 	int16 tab1[30];
 	int16 tab2[30];
