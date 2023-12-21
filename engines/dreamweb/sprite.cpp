@@ -946,7 +946,7 @@ static const ReelSound g_roomSound55[] = {
 	{ 255,0 }
 };
 
-static const ReelSound *g_roomByRoom[] = {
+static const ReelSound *const g_roomByRoom[] = {
 	g_roomSound0,g_roomSound1,g_roomSound2,g_roomSound0,g_roomSound0,
 	g_roomSound0,g_roomSound6,g_roomSound0,g_roomSound8,g_roomSound9,
 	g_roomSound10,g_roomSound11,g_roomSound12,g_roomSound13,g_roomSound14,
