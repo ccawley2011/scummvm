@@ -1241,7 +1241,7 @@ static const char *const musicFileNames[11] = {
 	"TELESONG.DAT",
 };
 
-static uint8 musicCDTracks[11] = {
+static const uint8 musicCDTracks[11] = {
 	20, 21, 22, 23, 24, 25, 26, 27, 28, 30, 22,
 };
 
@@ -1272,7 +1272,7 @@ void PCSound::playMusic() {
 	}
 }
 
-static uint8 bgCDTracks[49] = {
+static const uint8 bgCDTracks[49] = {
 	0, 21, 21, 23, 0, 29, 0, 0, 0, 0,
 	0, 27,  0,  0, 0, 0, 0, 0, 0, 0,
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
