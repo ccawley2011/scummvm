@@ -98,8 +98,8 @@ private:
 		char _title[20];
 	};
 
-	static const char *kCopyright;
-	static const char *kVersionNum;
+	static const char *const kCopyright;
+	static const char *const kVersionNum;
 
 	Common::String _thats;
 	byte _thing2;
