@@ -223,14 +223,14 @@ class EventManager {
 	void commandTurnParty(CommandType cmdType); // @ F0365_COMMAND_ProcessTypes1To2_TurnParty
 	void commandMoveParty(CommandType cmdType); // @ F0366_COMMAND_ProcessTypes3To6_MoveParty
 	bool isLeaderHandObjThrown(int16 posX, int16 posY); // @ F0375_COMMAND_ProcessType80_ClickInDungeonView_IsLeaderHandObjectThrown
-	void setMousePointerFromSpriteData(byte *mouseSprite);
+	void setMousePointerFromSpriteData(const byte *mouseSprite);
 
 	Box _highlightScreenBox; // @ G0336_i_HighlightBoxX1
 public:
 	explicit EventManager(DMEngine *vm);
 	~EventManager();
 
-	MouseInput *_primaryMouseInput;// @ G0441_ps_PrimaryMouseInput
+	const MouseInput *_primaryMouseInput;// @ G0441_ps_PrimaryMouseInput
 	MouseInput *_secondaryMouseInput;// @ G0442_ps_SecondaryMouseInput
 	bool _mousePointerBitmapUpdated; // @ G0598_B_MousePointerBitmapUpdated
 	bool _refreshMousePointerInMainLoop; // @ G0326_B_RefreshMousePointerInMainLoop
@@ -262,7 +262,7 @@ public:
 	Common::EventType processInput(Common::Event *grabKey = nullptr, Common::Event *grabMouseClick = nullptr);
 	void processPendingClick(); // @ F0360_COMMAND_ProcessPendingClick
 	void processClick(Common::Point mousePos, MouseButton button); // @ F0359_COMMAND_ProcessClick_CPSC
-	CommandType getCommandTypeFromMouseInput(MouseInput *input, Common::Point mousePos, MouseButton button); // @ F0358_COMMAND_GetCommandFromMouseInput_CPSC
+	CommandType getCommandTypeFromMouseInput(const MouseInput *input, Common::Point mousePos, MouseButton button); // @ F0358_COMMAND_GetCommandFromMouseInput_CPSC
 	void processCommandQueue(); // @ F0380_COMMAND_ProcessQueue_CPSC
 
 	void commandSetLeader(ChampionIndex index); // @ F0368_COMMAND_SetLeader
@@ -315,7 +315,7 @@ public:
 	MouseInput _primaryMouseInputViewportDialog4Choices[5]; // @ G0474_as_Graphic561_PrimaryMouseInput_ViewportDialog4Choices[5]
 	MouseInput _primaryMouseInputScreenDialog4Choices[5]; // @ G0478_as_Graphic561_PrimaryMouseInput_ScreenDialog4Choices[5]
 
-	MouseInput *_primaryMouseInputDialogSets[2][4]; // @ G0480_aaps_PrimaryMouseInput_DialogSets
+	const MouseInput *_primaryMouseInputDialogSets[2][4]; // @ G0480_aaps_PrimaryMouseInput_DialogSets
 
 	void initArrays();
 };

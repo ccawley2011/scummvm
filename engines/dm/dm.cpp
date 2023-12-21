@@ -288,7 +288,7 @@ void DMEngine::initializeGame() {
 }
 
 void DMEngine::initMemoryManager() {
-	static uint16 palSwoosh[16] = {0x000, 0xFFF, 0xFFF, 0xFFF, 0xFFF, 0xFFF, 0xFFF, 0xFFF, 0x000, 0xFFF, 0xAAA, 0xFFF, 0xAAA, 0x444, 0xFF0, 0xFF0}; // @ K0057_aui_Palette_Swoosh
+	static const uint16 palSwoosh[16] = {0x000, 0xFFF, 0xFFF, 0xFFF, 0xFFF, 0xFFF, 0xFFF, 0xFFF, 0x000, 0xFFF, 0xAAA, 0xFFF, 0xAAA, 0x444, 0xFF0, 0xFF0}; // @ K0057_aui_Palette_Swoosh
 
 	_displayMan->buildPaletteChangeCopperList(palSwoosh, palSwoosh);
 	for (uint16 i = 0; i < 16; ++i) {
@@ -298,9 +298,9 @@ void DMEngine::initMemoryManager() {
 }
 
 void DMEngine::startGame() {
-	static Box boxScreenTop(0, 319, 0, 32); // @ G0061_s_Graphic562_Box_ScreenTop
-	static Box boxScreenRight(224, 319, 33, 169); // @ G0062_s_Graphic562_Box_ScreenRight
-	static Box boxScreenBottom(0, 319, 169, 199); // @ G0063_s_Graphic562_Box_ScreenBottom
+	static const Box boxScreenTop(0, 319, 0, 32); // @ G0061_s_Graphic562_Box_ScreenTop
+	static const Box boxScreenRight(224, 319, 33, 169); // @ G0062_s_Graphic562_Box_ScreenRight
+	static const Box boxScreenBottom(0, 319, 169, 199); // @ G0063_s_Graphic562_Box_ScreenBottom
 
 	_pressingEye = false;
 	_stopPressingEye = false;
@@ -743,12 +743,12 @@ T0444017:
 
 
 void DMEngine::drawEntrance() {
-	static Box doorsUpperHalfBox = Box(0, 231, 0, 80);
-	static Box doorsLowerHalfBox = Box(0, 231, 81, 160);
-	static Box closedDoorLeftBox = Box(0, 104, 30, 190);
-	static Box closedDoorRightBox = Box(105, 231, 30, 190);
+	static const Box doorsUpperHalfBox = Box(0, 231, 0, 80);
+	static const Box doorsLowerHalfBox = Box(0, 231, 81, 160);
+	static const Box closedDoorLeftBox = Box(0, 104, 30, 190);
+	static const Box closedDoorRightBox = Box(105, 231, 30, 190);
 	/* Atari ST: { 0x000, 0x333, 0x444, 0x420, 0x654, 0x210, 0x040, 0x050, 0x432, 0x700, 0x543, 0x321, 0x222, 0x555, 0x310, 0x777 }, RGB colors are different */
-	static uint16 palEntrance[16] = {0x000, 0x666, 0x888, 0x840, 0xCA8, 0x0C0, 0x080, 0x0A0, 0x864, 0xF00, 0xA86, 0x642, 0x444, 0xAAA, 0x620, 0xFFF}; // @ G0020_aui_Graphic562_Palette_Entrance
+	static const uint16 palEntrance[16] = {0x000, 0x666, 0x888, 0x840, 0xCA8, 0x0C0, 0x080, 0x0A0, 0x864, 0xF00, 0xA86, 0x642, 0x444, 0xAAA, 0x620, 0xFFF}; // @ G0020_aui_Graphic562_Palette_Entrance
 
 	byte **microDungeonCurrentMapData = new byte*[32];
 

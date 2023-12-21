@@ -172,9 +172,9 @@ DisplayMan::DisplayMan(DMEngine *dmEngine) : _vm(dmEngine) {
 }
 
 void DisplayMan::initConstants() {
-	const byte palChangesDoorButtonAndWallOrnD3[16] = {0, 0, 120, 30, 40, 30, 0, 60, 30, 90, 100, 110, 0, 10, 0, 20}; // @ G0198_auc_Graphic558_PaletteChanges_DoorButtonAndWallOrnament_D3
-	const byte palChangesDoorButtonAndWallOrnD2[16] = {0, 120, 10, 30, 40, 30, 60, 70, 50, 90, 100, 110, 0, 20, 140, 130}; // @ G0199_auc_Graphic558_PaletteChanges_DoorButtonAndWallOrnament_D2
-	const FieldAspect fieldAspects188[12] = { // @ G0188_as_Graphic558_FieldAspects
+	static const byte palChangesDoorButtonAndWallOrnD3[16] = {0, 0, 120, 30, 40, 30, 0, 60, 30, 90, 100, 110, 0, 10, 0, 20}; // @ G0198_auc_Graphic558_PaletteChanges_DoorButtonAndWallOrnament_D3
+	static const byte palChangesDoorButtonAndWallOrnD2[16] = {0, 120, 10, 30, 40, 30, 60, 70, 50, 90, 100, 110, 0, 20, 140, 130}; // @ G0199_auc_Graphic558_PaletteChanges_DoorButtonAndWallOrnament_D2
+	static const FieldAspect fieldAspects188[12] = { // @ G0188_as_Graphic558_FieldAspects
 	/* { NativeBitmapRelativeIndex, BaseStartUnitIndex, Transparent color, Mask, ByteWidth, Height, X, BitPlaneWordCount } */
 		FieldAspect(0, 63, 0x8A, 0xFF,  0,   0,  0, 64),  /* D3C */
 		FieldAspect(0, 63, 0x0A, 0x80, 48,  51, 11, 64),  /* D3L */
@@ -190,7 +190,7 @@ void DisplayMan::initConstants() {
 		FieldAspect(0, 63, 0x0A, 0x03, 16, 136,  0, 64)   /* D0R */
 	};
 
-	const ExplosionAspect explosionAspects[k4_ExplosionAspectCount] = { // @ G0211_as_Graphic558_ExplosionAspects
+	static const ExplosionAspect explosionAspects[k4_ExplosionAspectCount] = { // @ G0211_as_Graphic558_ExplosionAspects
 		// ByteWidth, Height
 		ExplosionAspect(80, 111),   // Fire
 		ExplosionAspect(64,  97),   // Spell
@@ -198,8 +198,8 @@ void DisplayMan::initConstants() {
 		ExplosionAspect(80,  91)    // Death
 	};
 
-	const byte palChangeSmoke[16] = {0, 10, 20, 30, 40, 50, 120, 10, 80, 90, 100, 110, 120, 130, 140, 150}; // @ G0212_auc_Graphic558_PaletteChanges_Smoke
-	const byte projectileScales[7] = {
+	static const byte palChangeSmoke[16] = {0, 10, 20, 30, 40, 50, 120, 10, 80, 90, 100, 110, 120, 130, 140, 150}; // @ G0212_auc_Graphic558_PaletteChanges_Smoke
+	static const byte projectileScales[7] = {
 		13,   /* D4 Back  */
 		16,   /* D4 Front */
 		19,   /* D3 Back  */
@@ -209,7 +209,7 @@ void DisplayMan::initConstants() {
 		32    /* D1 Back  */
 	};
 
-	const Frame frameWalls163[12] = { // @ G0163_as_Graphic558_Frame_Walls
+	static const Frame frameWalls163[12] = { // @ G0163_as_Graphic558_Frame_Walls
 		/* { X1, X2, Y1, Y2, pixelWidth, Height, X, Y } */
 		Frame(74, 149, 25,  75,  64,  51,  18, 0),  /* D3C */
 		Frame(0,  83, 25,  75,  64,  51,  32, 0),   /* D3L */
@@ -225,7 +225,7 @@ void DisplayMan::initConstants() {
 		Frame(192, 223,  0, 135,  16, 136,   0, 0)  /* D0R */
 	};
 
-	const CreatureAspect creatureAspects219[k27_CreatureTypeCount] = { // @ G0219_as_Graphic558_CreatureAspects
+	static const CreatureAspect creatureAspects219[k27_CreatureTypeCount] = { // @ G0219_as_Graphic558_CreatureAspects
 	/* { FirstNativeBitmapRelativeIndex, FirstDerivedBitmapIndex, pixelWidthFront, HeightFront,
 		 pixelWidthSide, HeightSide, pixelWidthAttack, HeightAttack, CoordinateSet / TransparentColor,
 		 Replacement Color Set Index for color 10 / Replacement Color Set Index for color 9 } */
@@ -257,7 +257,7 @@ void DisplayMan::initConstants() {
 		CreatureAspect(85, 0, 32 ,  93,  0 ,   0,  0 ,   0, 0x04, 0xCB),   /* Creature #25 Lord Order */
 		CreatureAspect(86, 0, 32 ,  93,  0 ,   0,  0 ,   0, 0x04, 0xCB)    /* Creature #26 Grey Lord */
 	};
-	static ObjectAspect objectAspects209[k85_ObjAspectCount] = { // @ G0209_as_Graphic558_ObjectAspects
+	static const ObjectAspect objectAspects209[k85_ObjAspectCount] = { // @ G0209_as_Graphic558_ObjectAspects
 		/* FirstNativeBitmapRelativeIndex, FirstDerivedBitmapRelativeIndex, ByteWidth, Height, GraphicInfo, CoordinateSet */
 		ObjectAspect(0,   0, 24, 27, 0x11, 0),
 		ObjectAspect(2,   6, 24,  8, 0x00, 1),
@@ -346,7 +346,7 @@ void DisplayMan::initConstants() {
 		ObjectAspect(85, 176, 32, 17, 0x00, 0)
 	};
 
-	static ProjectileAspect projectileAspect[k14_ProjectileAspectCount] = { // @ G0210_as_Graphic558_ProjectileAspects
+	static const ProjectileAspect projectileAspect[k14_ProjectileAspectCount] = { // @ G0210_as_Graphic558_ProjectileAspects
 		/* ProjectileAspect( FirstNativeBitmapRelativeIndex, FirstDerivedBitmapRelativeIndex, ByteWidth, Height, GraphicInfo ) */
 		ProjectileAspect(0,   0, 32, 11, 0x0011),   /* Arrow */
 		ProjectileAspect(3,  18, 16, 11, 0x0011),   /* Dagger */
@@ -365,8 +365,8 @@ void DisplayMan::initConstants() {
 	};
 
 	/* Atari ST: { 0x003, 0x055, 0x773, 0x420, 0x774, 0x000, 0x040, 0x500, 0x642, 0x775, 0x742, 0x760, 0x750, 0x000, 0x310, 0x776 }, RGB colors are different */
-	static uint16 palCredits[16] = {0x006, 0x0AA, 0xFF6, 0x840, 0xFF8, 0x000, 0x080, 0xA00, 0xC84, 0xFFA, 0xF84, 0xFC0, 0xFA0, 0x000, 0x620, 0xFFC}; // @ G0019_aui_Graphic562_Palette_Credits
-	static uint16 palDungeonView[6][16] = { // @ G0021_aaui_Graphic562_Palette_DungeonView
+	static const uint16 palCredits[16] = {0x006, 0x0AA, 0xFF6, 0x840, 0xFF8, 0x000, 0x080, 0xA00, 0xC84, 0xFFA, 0xF84, 0xFC0, 0xFA0, 0x000, 0x620, 0xFFC}; // @ G0019_aui_Graphic562_Palette_Credits
+	static const uint16 palDungeonView[6][16] = { // @ G0021_aaui_Graphic562_Palette_DungeonView
 		/* Atari ST: { 0x000, 0x333, 0x444, 0x310, 0x066, 0x420, 0x040, 0x060, 0x700, 0x750, 0x643, 0x770, 0x222, 0x555, 0x007, 0x777 }, RGB colors are different */
 		{ 0x000, 0x666, 0x888, 0x620, 0x0CC, 0x840, 0x080, 0x0C0, 0xF00, 0xFA0, 0xC86, 0xFF0, 0x444, 0xAAA, 0x00F, 0xFFF },
 		/* Atari ST: { 0x000, 0x222, 0x333, 0x310, 0x066, 0x410, 0x030, 0x050, 0x600, 0x640, 0x532, 0x760, 0x111, 0x444, 0x006, 0x666 }, RGB colors are different */
@@ -381,13 +381,13 @@ void DisplayMan::initConstants() {
 		{ 0x000, 0x000, 0x000, 0x000, 0x0CC, 0x000, 0x000, 0x020, 0x400, 0x000, 0x000, 0x640, 0x000, 0x000, 0x004, 0x444 }
 	};
 
-	static byte palChangesCreatureD3[16] = {0, 120, 10, 30, 40, 30, 0, 60, 30, 0, 0, 110, 0, 20, 0, 130}; // @ G0221_auc_Graphic558_PaletteChanges_Creature_D3
-	static byte palChangesCreatureD2[16] = {0, 10, 20, 30, 40, 30, 60, 70, 50, 0, 0, 110, 120, 130, 140, 150}; // @ G0222_auc_Graphic558_PaletteChanges_Creature_D2
-	static byte palChangesNoChanges[16] = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150}; // @ G0017_auc_Graphic562_PaletteChanges_NoChanges
-	static byte palChangesFloorOrnD3[16] = {0, 120, 10, 30, 40, 30, 0, 60, 30, 90, 100, 110, 0, 20, 140, 130}; // @ G0213_auc_Graphic558_PaletteChanges_FloorOrnament_D3
-	static byte palChangesFloorOrnD2[16] = {0, 10, 20, 30, 40, 30, 60, 70, 50, 90, 100, 110, 120, 130, 140, 150}; // @ G0214_auc_Graphic558_PaletteChanges_FloorOrnament_D2
+	static const byte palChangesCreatureD3[16] = {0, 120, 10, 30, 40, 30, 0, 60, 30, 0, 0, 110, 0, 20, 0, 130}; // @ G0221_auc_Graphic558_PaletteChanges_Creature_D3
+	static const byte palChangesCreatureD2[16] = {0, 10, 20, 30, 40, 30, 60, 70, 50, 0, 0, 110, 120, 130, 140, 150}; // @ G0222_auc_Graphic558_PaletteChanges_Creature_D2
+	static const byte palChangesNoChanges[16] = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150}; // @ G0017_auc_Graphic562_PaletteChanges_NoChanges
+	static const byte palChangesFloorOrnD3[16] = {0, 120, 10, 30, 40, 30, 0, 60, 30, 90, 100, 110, 0, 20, 140, 130}; // @ G0213_auc_Graphic558_PaletteChanges_FloorOrnament_D3
+	static const byte palChangesFloorOrnD2[16] = {0, 10, 20, 30, 40, 30, 60, 70, 50, 90, 100, 110, 120, 130, 140, 150}; // @ G0214_auc_Graphic558_PaletteChanges_FloorOrnament_D2
 
-	static byte const wallOrnamentCoordSets[8][13][6] = { // @ G0205_aaauc_Graphic558_WallOrnamentCoordinateSets
+	static const byte wallOrnamentCoordSets[8][13][6] = { // @ G0205_aaauc_Graphic558_WallOrnamentCoordinateSets
 			/* { X1, X2, Y1, Y2, ByteWidth, Height } */
 			{
 					{80,  83, 41,  45,  8,   5},   /* D3L */
@@ -511,7 +511,7 @@ void DisplayMan::initConstants() {
 			}
 	};
 
-	static uint16 const doorOrnCoordSets[4][3][6] = { // @ G0207_aaauc_Graphic558_DoorOrnamentCoordinateSets
+	static const uint16 doorOrnCoordSets[4][3][6] = { // @ G0207_aaauc_Graphic558_DoorOrnamentCoordinateSets
 			/* { X1, X2, Y1, Y2, ByteWidth, Height } */
 			{
 					{17, 31,  8, 17,  8, 10},   /* D3LCR */
@@ -1052,7 +1052,7 @@ void DisplayMan::blitToBitmap(byte *srcBitmap, byte *destBitmap, const Box &box,
 	}
 }
 
-void DisplayMan::fillScreenBox(Box &box, Color color) {
+void DisplayMan::fillScreenBox(const Box &box, Color color) {
 	uint16 width = box._rect.right + 1 - box._rect.left; // + 1 for inclusive boundaries
 	for (int16 y = box._rect.top; y < box._rect.bottom + 1; ++y) // + 1 for inclusive boundaries
 		memset(_bitmapScreen + y * _screenWidth + box._rect.left, color, sizeof(byte) * width);
@@ -1063,7 +1063,7 @@ void DisplayMan::fillBoxBitmap(byte *destBitmap, Box &box, Color color, int16 by
 		memset(destBitmap + y * byteWidth * 2 + box._rect.left, color, sizeof(byte) * (box._rect.right - box._rect.left + 1)); // + 1 for inclusive boundaries
 }
 
-void DisplayMan::blitBoxFilledWithMaskedBitmap(byte *src, byte *dest, byte *mask, byte *tmp, Box& box,
+void DisplayMan::blitBoxFilledWithMaskedBitmap(byte *src, byte *dest, byte *mask, byte *tmp, const Box& box,
 											   int16 lastUnitIndex, int16 firstUnitIndex, int16 destByteWidth, Color transparent,
 											   int16 xPos, int16 yPos, int16 destHeight, int16 height2) {
 
@@ -1198,7 +1198,7 @@ void DisplayMan::copyBitmapAndFlipHorizontal(byte *srcBitmap, byte *destBitmap, 
 }
 
 void DisplayMan::drawFloorOrnament(uint16 floorOrnOrdinal, ViewFloor viewFloorIndex) {
-	static byte g191_floorOrnNativeBitmapndexInc[9] = { // @ G0191_auc_Graphic558_FloorOrnamentNativeBitmapIndexIncrements
+	static const byte g191_floorOrnNativeBitmapndexInc[9] = { // @ G0191_auc_Graphic558_FloorOrnamentNativeBitmapIndexIncrements
 		0,   /* D3L */
 		1,   /* D3C */
 		0,   /* D3R */
@@ -1209,7 +1209,7 @@ void DisplayMan::drawFloorOrnament(uint16 floorOrnOrdinal, ViewFloor viewFloorIn
 		5,   /* D1C */
 		4};  /* D1R */
 
-	static uint16 g206_floorOrnCoordSets[3][9][6] = { // @ G0206_aaauc_Graphic558_FloorOrnamentCoordinateSets
+	static const uint16 g206_floorOrnCoordSets[3][9][6] = { // @ G0206_aaauc_Graphic558_FloorOrnamentCoordinateSets
 		/* { X1, X2, Y1, Y2, ByteWidth, Height } */
 		{
 			{32,  79, 66,  71, 24,  6},   /* D3L */
@@ -1255,7 +1255,7 @@ void DisplayMan::drawFloorOrnament(uint16 floorOrnOrdinal, ViewFloor viewFloorIn
 		uint16 floorOrnIndex = floorOrnOrdinal;
 		int16 nativeBitmapIndex = _currMapFloorOrnInfo[floorOrnIndex].nativeIndice
 			+ g191_floorOrnNativeBitmapndexInc[viewFloorIndex];
-		uint16 *coordSets = g206_floorOrnCoordSets[_currMapFloorOrnInfo[floorOrnIndex].coordinateSet][viewFloorIndex];
+		const uint16 *coordSets = g206_floorOrnCoordSets[_currMapFloorOrnInfo[floorOrnIndex].coordinateSet][viewFloorIndex];
 		byte *bitmap;
 		if ((viewFloorIndex == kDMViewFloorD1R) || (viewFloorIndex == kDMViewFloorD2R)
 			|| (viewFloorIndex == kDMViewFloorD3R)
@@ -1314,8 +1314,8 @@ void DisplayMan::drawDoor(uint16 doorThingIndex, DoorState doorState, int16 *doo
 }
 
 void DisplayMan::drawDoorOrnament(int16 doorOrnOrdinal, DoorOrnament doorOrnament) {
-	static byte palChangesDoorOrnD3[16] = {0, 120, 10, 30, 40, 30, 0, 60, 30, 90, 100, 110, 0, 20, 0, 130}; // @ G0200_auc_Graphic558_PaletteChanges_DoorOrnament_D3
-	static byte palChangesDoorOrnd2[16] = {0, 10, 20, 30, 40, 30, 60, 70, 50, 90, 100, 110, 120, 130, 140, 150}; // @ G0201_auc_Graphic558_PaletteChanges_DoorOrnament_D2
+	static const byte palChangesDoorOrnD3[16] = {0, 120, 10, 30, 40, 30, 0, 60, 30, 90, 100, 110, 0, 20, 0, 130}; // @ G0200_auc_Graphic558_PaletteChanges_DoorOrnament_D3
+	static const byte palChangesDoorOrnd2[16] = {0, 10, 20, 30, 40, 30, 60, 70, 50, 90, 100, 110, 120, 130, 140, 150}; // @ G0201_auc_Graphic558_PaletteChanges_DoorOrnament_D2
 
 
 	int16 height = doorOrnOrdinal;
@@ -2427,9 +2427,9 @@ void DisplayMan::loadWallSet(WallSet set) {
 }
 
 void DisplayMan::loadCurrentMapGraphics() {
-	static Box boxWallD3LCR = Box(0, 115, 0, 50); // @ G0161_s_Graphic558_Box_WallBitmap_D3LCR
-	static Box boxWallD2LCR = Box(0, 135, 0, 70); // @ G0162_s_Graphic558_Box_WallBitmap_D2LCR
-	static byte doorOrnCoordIndices[12] = { // @ G0196_auc_Graphic558_DoorOrnamentCoordinateSetIndices
+	static const Box boxWallD3LCR = Box(0, 115, 0, 50); // @ G0161_s_Graphic558_Box_WallBitmap_D3LCR
+	static const Box boxWallD2LCR = Box(0, 135, 0, 70); // @ G0162_s_Graphic558_Box_WallBitmap_D2LCR
+	static const byte doorOrnCoordIndices[12] = { // @ G0196_auc_Graphic558_DoorOrnamentCoordinateSetIndices
 		0,   /* Door Ornament #00 Square Grid */
 		1,   /* Door Ornament #01 Iron Bars */
 		1,   /* Door Ornament #02 Jewels */
@@ -2443,7 +2443,7 @@ void DisplayMan::loadCurrentMapGraphics() {
 		1,   /* Door Ornament #10 Ra Door */
 		1    /* Door Ornament #11 Iron Door Damages */
 	};
-	static byte floorOrnCoordSetIndices[9] = { // @ G0195_auc_Graphic558_FloorOrnamentCoordinateSetIndices
+	static const byte floorOrnCoordSetIndices[9] = { // @ G0195_auc_Graphic558_FloorOrnamentCoordinateSetIndices
 		0,   /* Floor Ornament 00 Square Grate */
 		0,   /* Floor Ornament 01 Square Pressure Pad */
 		0,   /* Floor Ornament 02 Moss */
@@ -2454,7 +2454,7 @@ void DisplayMan::loadCurrentMapGraphics() {
 		2,   /* Floor Ornament 07 Tiny Pressure Pad */
 		0    /* Floor Ornament 08 Puddle */
 	};
-	static byte g194_WallOrnCoordSetIndices[60] = { // @ G0194_auc_Graphic558_WallOrnamentCoordinateSetIndices
+	static const byte g194_WallOrnCoordSetIndices[60] = { // @ G0194_auc_Graphic558_WallOrnamentCoordinateSetIndices
 		1,   /* Wall Ornament 00 Unreadable Inscription */
 		1,   /* Wall Ornament 01 Square Alcove */
 		1,   /* Wall Ornament 02 Vi Altar */
@@ -2516,11 +2516,11 @@ void DisplayMan::loadCurrentMapGraphics() {
 		6,   /* Wall Ornament 58 Amalgam (Without Gem) */
 		7    /* Wall Ornament 59 Lord Order (Outside) */
 	};
-	static byte g192_AlcoveOrnIndices[k3_AlcoveOrnCount] = { // @ G0192_auc_Graphic558_AlcoveOrnamentIndices
+	static const byte g192_AlcoveOrnIndices[k3_AlcoveOrnCount] = { // @ G0192_auc_Graphic558_AlcoveOrnamentIndices
 		1,   /* Square Alcove */
 		2,   /* Vi Altar */
 		3};  /* Arched Alcove */
-	static int16 g193_FountainOrnIndices[k1_FountainOrnCount] = {35}; // @ G0193_ai_Graphic558_FountainOrnamentIndices
+	static const int16 g193_FountainOrnIndices[k1_FountainOrnCount] = {35}; // @ G0193_ai_Graphic558_FountainOrnamentIndices
 
 	DungeonMan &dungeon = *_vm->_dungeonMan;
 
@@ -2667,7 +2667,7 @@ void DisplayMan::loadCurrentMapGraphics() {
 }
 
 void DisplayMan::applyCreatureReplColors(int replacedColor, int replacementColor) {
-	CreatureReplColorSet creatureReplColorSets[13] = { // @ G0220_as_Graphic558_CreatureReplacementColorSets
+	static const CreatureReplColorSet creatureReplColorSets[13] = { // @ G0220_as_Graphic558_CreatureReplacementColorSets
 		/* { Color, Color, Color, Color, Color, Color, D2 replacement color index (x10), D3 replacement color index (x10) } */
 		CreatureReplColorSet(0x0CA0, 0x0A80, 0x0860, 0x0640, 0x0420, 0x0200,  90,  90),    /* Atari ST: { 0x0650, 0x0540, 0x0430, 0x0320, 0x0210, 0x0100,  90,  90 }, RGB colors are different */
 		CreatureReplColorSet(0x0060, 0x0040, 0x0020, 0x0000, 0x0000, 0x0000,   0,   0),    /* Atari ST: { 0x0030, 0x0020, 0x0010, 0x0000, 0x0000, 0x0000,   0,   0 }, */
@@ -2706,7 +2706,7 @@ void DisplayMan::drawFloorPitOrStairsBitmapFlippedHorizontally(uint16 nativeInde
 }
 
 bool DisplayMan::isDrawnWallOrnAnAlcove(int16 wallOrnOrd, ViewWall viewWallIndex) {
-	static Box boxWallPatchBehindInscription = Box(110, 113, 37, 63); // @ G0202_ac_Graphic558_Box_WallPatchBehindInscription
+	static const Box boxWallPatchBehindInscription = Box(110, 113, 37, 63); // @ G0202_ac_Graphic558_Box_WallPatchBehindInscription
 	static const byte inscriptionLineY[4] = { // @ G0203_auc_Graphic558_InscriptionLineY
 		48,   /* 1 Line  */
 		59,   /* 2 lines */
@@ -2728,7 +2728,7 @@ bool DisplayMan::isDrawnWallOrnAnAlcove(int16 wallOrnOrd, ViewWall viewWallIndex
 		4    /* D1R Left */
 	};
 
-	static byte unreadableInscriptionBoxY2[15] = { // @ G0204_auc_Graphic558_UnreadableInscriptionBoxY2
+	static const byte unreadableInscriptionBoxY2[15] = { // @ G0204_auc_Graphic558_UnreadableInscriptionBoxY2
 		/* { Y for 1 line, Y for 2 lines, Y for 3 lines } */
 		45, 48, 53,   /* D3L Right, D3R Left */
 		43, 49, 56,   /* D3L Front, D3C Front, D3R Front */
@@ -2738,7 +2738,7 @@ bool DisplayMan::isDrawnWallOrnAnAlcove(int16 wallOrnOrd, ViewWall viewWallIndex
 	};
 
 
-	static Box boxChampionPortraitOnWall = Box(96, 127, 35, 63); // G0109_s_Graphic558_Box_ChampionPortraitOnWall
+	static const Box boxChampionPortraitOnWall = Box(96, 127, 35, 63); // G0109_s_Graphic558_Box_ChampionPortraitOnWall
 
 	if (!wallOrnOrd)
 		return false;
@@ -2872,7 +2872,7 @@ bool DisplayMan::isDrawnWallOrnAnAlcove(int16 wallOrnOrd, ViewWall viewWallIndex
 
 void DisplayMan::blitToBitmapShrinkWithPalChange(byte *srcBitmap, byte *destBitmap,
 													  int16 srcPixelWidth, int16 srcHeight,
-													  int16 destPixelWidth, int16 destHeight, byte *palChange) {
+													  int16 destPixelWidth, int16 destHeight, const byte *palChange) {
 	warning("DUMMY CODE: f129_blitToBitmapShrinkWithPalChange");
 	warning("MISSING CODE: No palette change takes place in f129_blitToBitmapShrinkWithPalChange");
 
@@ -2954,7 +2954,7 @@ void DisplayMan::drawObjectsCreaturesProjectilesExplosions(Thing thingParam, Dir
 #define AL_4_explosionAspectIndex L0127_i_Multiple
 	ObjectAspect *objectAspect;
 	uint32 remainingViewCellOrdinalsToProcess;
-	byte *coordinateSet;
+	const byte *coordinateSet;
 	int16 derivedBitmapIndex = -1;
 	bool L0135_B_DrawAlcoveObjects;
 	int16 byteWidth;
@@ -3002,9 +3002,9 @@ void DisplayMan::drawObjectsCreaturesProjectilesExplosions(Thing thingParam, Dir
 	bool projectileFlipVertical = false;
 
 	/* This is the full dungeon view */
-	static Box boxExplosionPatternD0C = Box(0, 223, 0, 135); // @ G0105_s_Graphic558_Box_ExplosionPattern_D0C
+	static const Box boxExplosionPatternD0C = Box(0, 223, 0, 135); // @ G0105_s_Graphic558_Box_ExplosionPattern_D0C
 
-	static byte explosionBaseScales[5] = { // @ G0216_auc_Graphic558_ExplosionBaseScales
+	static const byte explosionBaseScales[5] = { // @ G0216_auc_Graphic558_ExplosionBaseScales
 		10,  /* D4 */
 		16,  /* D3 */
 		23,  /* D2 */
@@ -3012,7 +3012,7 @@ void DisplayMan::drawObjectsCreaturesProjectilesExplosions(Thing thingParam, Dir
 		32   /* D0 */
 	};
 
-	static byte objectPileShiftSetIndices[16][2] = { // @ G0217_aauc_Graphic558_ObjectPileShiftSetIndices
+	static const byte objectPileShiftSetIndices[16][2] = { // @ G0217_aauc_Graphic558_ObjectPileShiftSetIndices
 	/* { X shift index, Y shift index } */
 		{2, 5},
 		{0, 6},
@@ -3032,7 +3032,7 @@ void DisplayMan::drawObjectsCreaturesProjectilesExplosions(Thing thingParam, Dir
 		{5, 3}
 	};
 
-	static byte objectCoordinateSets[3][10][5][2] = { // @ G0218_aaaauc_Graphic558_ObjectCoordinateSets
+	static const byte objectCoordinateSets[3][10][5][2] = { // @ G0218_aaaauc_Graphic558_ObjectCoordinateSets
 	/* { {X, Y }, {X, Y }, {X, Y }, {X, Y }, {X, Y } } */
 		{
 			{{  0,   0}, {  0,   0}, {125,  72}, { 95,  72}, {112, 64}},     /* D3C */
@@ -3072,13 +3072,13 @@ void DisplayMan::drawObjectsCreaturesProjectilesExplosions(Thing thingParam, Dir
 		}
 	};
 
-	static int16 shiftSets[3][8] = { // @ G0223_aac_Graphic558_ShiftSets
+	static const int16 shiftSets[3][8] = { // @ G0223_aac_Graphic558_ShiftSets
 		{0, 1, 2, 3, 0, -3, -2, -1},   /* D0 Back or D1 Front */
 		{0, 1, 1, 2, 0, -2, -1, -1},   /* D1 Back or D2 Front */
 		{0, 1, 1, 1, 0, -1, -1, -1}    /* D2 Back or D3 Front */
 	};
 
-	static byte creatureCoordinateSets[3][11][5][2] = { // @ G0224_aaaauc_Graphic558_CreatureCoordinateSets
+	static const byte creatureCoordinateSets[3][11][5][2] = { // @ G0224_aaaauc_Graphic558_CreatureCoordinateSets
 	/* { { X, Y }, { X, Y }, { X, Y }, { X, Y }, { X, Y } } */
 		{
 			{{ 95,  70}, {127,  70}, {129,  75}, { 93,  75}, {111,  72}},     /* D3C */
@@ -3121,7 +3121,7 @@ void DisplayMan::drawObjectsCreaturesProjectilesExplosions(Thing thingParam, Dir
 		}
 	};
 
-	static int16 explosionCoordinatesArray[15][2][2] = { // @ G0226_aaai_Graphic558_ExplosionCoordinates
+	static const int16 explosionCoordinatesArray[15][2][2] = { // @ G0226_aaai_Graphic558_ExplosionCoordinates
 	/* { { Front Left X, Front Left Y }, { Front Right X, Front Right Y } } */
 		{{100, 47}, {122, 47}},   /* D4C */
 		{{ 52, 47}, { 76, 47}},   /* D4L */
@@ -3140,7 +3140,7 @@ void DisplayMan::drawObjectsCreaturesProjectilesExplosions(Thing thingParam, Dir
 		{{256, 60}, {296, 60}}    /* D0R */
 	};
 
-	static int16 rebirthStep2ExplosionCoordinates[7][3] = { // @ G0227_aai_Graphic558_RebirthStep2ExplosionCoordinates
+	static const int16 rebirthStep2ExplosionCoordinates[7][3] = { // @ G0227_aai_Graphic558_RebirthStep2ExplosionCoordinates
 	/* { X, Y, Scale } */
 		{113, 57, 12},   /* D3C */
 		{ 24, 57, 12},   /* D3L */
@@ -3151,7 +3151,7 @@ void DisplayMan::drawObjectsCreaturesProjectilesExplosions(Thing thingParam, Dir
 		{112, 76, 24}    /* D1C */
 	};
 
-	static int16 rebirthStep1ExplosionCoordinates[7][3] = { // @ G0228_aai_Graphic558_RebirthStep1ExplosionCoordinates
+	static const int16 rebirthStep1ExplosionCoordinates[7][3] = { // @ G0228_aai_Graphic558_RebirthStep1ExplosionCoordinates
 	/* { X, Y, Scale } */
 		{112, 53, 15},   /* D3C */
 		{ 24, 53, 15},   /* D3L */
@@ -3162,7 +3162,7 @@ void DisplayMan::drawObjectsCreaturesProjectilesExplosions(Thing thingParam, Dir
 		{112, 70, 32} /* D1C */
 	};
 
-	static int16 centeredExplosionCoordinates[15][2] = { // @ G0225_aai_Graphic558_CenteredExplosionCoordinates
+	static const int16 centeredExplosionCoordinates[15][2] = { // @ G0225_aai_Graphic558_CenteredExplosionCoordinates
 		/* { X, Y } */
 		{111, 47},   /* D4C */
 		{ 57, 47},   /* D4L */
@@ -3745,7 +3745,7 @@ T0115171_BackFromT0115015_DrawProjectileAsObject:;
 		return;
 
 	Explosion *fluxcageExplosion = nullptr;
-	int16 *explosionCoordinates;
+	const int16 *explosionCoordinates;
 
 	AL_1_viewSquareExplosionIndex = AL_10_viewSquareIndexBackup + 3; /* Convert square index to square index for explosions */
 	AL_10_explosionScaleIndex = AL_1_viewSquareExplosionIndex / 3;
@@ -3930,7 +3930,7 @@ uint16 DisplayMan::getDarkenedColor(uint16 RGBcolor) {
 	return RGBcolor;
 }
 
-void DisplayMan::startEndFadeToPalette(uint16 *P0849_pui_Palette) {
+void DisplayMan::startEndFadeToPalette(const uint16 *P0849_pui_Palette) {
 	uint16 *paletteRegister = _paletteFadeTemporary;
 
 	for (int16 i = 0; i < 16; i++)
@@ -3985,7 +3985,7 @@ void DisplayMan::startEndFadeToPalette(uint16 *P0849_pui_Palette) {
 	}
 }
 
-void DisplayMan::buildPaletteChangeCopperList(uint16 *middleScreen, uint16 *topAndBottom) {
+void DisplayMan::buildPaletteChangeCopperList(const uint16 *middleScreen, const uint16 *topAndBottom) {
 	_paletteFadeFrom = topAndBottom;
 	byte colorPalette[32 * 3];
 	for (int i = 0; i < 16; ++i) {

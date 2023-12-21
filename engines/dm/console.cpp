@@ -48,7 +48,7 @@ public:
 };
 
 const char *Console::debugGetDirectionName(int16 dir) {
-	static const char *directionNames[] = {"North", "East", "South", "West"};
+	static const char *const directionNames[] = {"North", "East", "South", "West"};
 	if (dir < 0 || dir > 3)
 		return "Invalid direction";
 	return directionNames[dir];

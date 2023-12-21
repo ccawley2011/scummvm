@@ -79,7 +79,7 @@ public:
 	void drawPanelScroll(Scroll *scroll); // @ F0341_INVENTORY_DrawPanel_Scroll
 	void openAndDrawChest(Thing thingToOpen, Container *chest, bool isPressingEye); // @ F0333_INVENTORY_OpenAndDrawChest
 	void drawIconToViewport(IconIndice iconIndex, int16 xPos, int16 yPos); // @ F0332_INVENTORY_DrawIconToViewport
-	void buildObjectAttributeString(int16 potentialAttribMask, int16 actualAttribMask, const char ** attribStrings,
+	void buildObjectAttributeString(int16 potentialAttribMask, int16 actualAttribMask, const char *const *attribStrings,
 									char *destString, const char *prefixString, const char *suffixString); // @ F0336_INVENTORY_DrawPanel_BuildObjectAttributesString
 	void drawPanelObjectDescriptionString(const char *descString); // @ F0335_INVENTORY_DrawPanel_ObjectDescriptionString
 	void drawPanelArrowOrEye(bool pressingEye); // @ F0339_INVENTORY_DrawPanel_ArrowOrEye

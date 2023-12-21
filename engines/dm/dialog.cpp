@@ -165,7 +165,7 @@ int16 DialogMan::getChoice(uint16 choiceCount, uint16 dialogSetIndex, int16 driv
 	DisplayMan &displMan = *_vm->_displayMan;
 
 	evtMan.hideMouse();
-	MouseInput *primaryMouseInputBackup = evtMan._primaryMouseInput;
+	const MouseInput *primaryMouseInputBackup = evtMan._primaryMouseInput;
 	MouseInput *secondaryMouseInputBackup = evtMan._secondaryMouseInput;
 	KeyboardInput *primaryKeyboardInputBackup = evtMan._primaryKeyboardInput;
 	KeyboardInput *secondaryKeyboardInputBackup = evtMan._secondaryKeyboardInput;

@@ -51,7 +51,7 @@ SoundMan *SoundMan::getSoundMan(DMEngine *vm, const DMADGameDescription *gameVer
 }
 
 void SoundMan::initConstants() {
-	Sound sounds[kDMSoundCount] = {
+	static const Sound sounds[kDMSoundCount] = {
 		Sound(533, 112,  11, 3, 6), /* k00_soundMETALLIC_THUD 0 */
 		Sound(534, 112,  15, 0, 3), /* k01_soundSWITCH 1 */
 		Sound(535, 112,  72, 3, 6), /* k02_soundDOOR_RATTLE 2 */
@@ -132,7 +132,7 @@ void SoundMan::playPendingSound() {
 }
 
 bool SoundMan::soundGetVolume(int16 mapX, int16 mapY, uint8 *leftVolume, uint8 *rightVolume) {
-	static byte distanceToSoundVolume[25][25] = {
+	static const byte distanceToSoundVolume[25][25] = {
 		{1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4,  5,  5,  5,  5,  5,  5,  5, 5, 4, 4, 4, 4, 4},
 		{1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 5,  6,  6,  6,  6,  5,  5,  5, 5, 5, 5, 4, 4, 4},
 		{1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 4, 5,  6,  6,  6,  6,  6,  6,  5, 5, 5, 5, 5, 4, 4},

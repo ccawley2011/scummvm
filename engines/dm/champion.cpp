@@ -75,19 +75,19 @@ void Champion::setAttributeFlag(ChampionAttribute flag, bool value) {
 }
 
 void ChampionMan::initConstants() {
-	static const char *baseSkillNameEN[4] = {"FIGHTER", "NINJA", "PRIEST", "WIZARD"};
-	static const char *baseSkillNameDE[4] = {"KAEMPFER", "NINJA", "PRIESTER", "MAGIER"};
-	static const char *baseSkillNameFR[4] = {"GUERRIER", "NINJA", "PRETRE", "SORCIER"};
-	static Box boxChampionIcons[4] = {
+	static const char *const baseSkillNameEN[4] = {"FIGHTER", "NINJA", "PRIEST", "WIZARD"};
+	static const char *const baseSkillNameDE[4] = {"KAEMPFER", "NINJA", "PRIESTER", "MAGIER"};
+	static const char *const baseSkillNameFR[4] = {"GUERRIER", "NINJA", "PRETRE", "SORCIER"};
+	static const Box boxChampionIcons[4] = {
 		Box(281, 299,  0, 13),
 		Box(301, 319,  0, 13),
 		Box(301, 319, 15, 28),
 		Box(281, 299, 15, 28)
 	};
 
-	static Color championColor[4] = {kDMColorLightGreen, kDMColorYellow, kDMColorRed, kDMColorBlue};
-	int16 lightPowerToLightAmount[16] = {0, 5, 12, 24, 33, 40, 46, 51, 59, 68, 76, 82, 89, 94, 97, 100};
-	uint16 slotMasks[38] = {  // @ G0038_ai_Graphic562_SlotMasks
+	static const Color championColor[4] = {kDMColorLightGreen, kDMColorYellow, kDMColorRed, kDMColorBlue};
+	static const int16 lightPowerToLightAmount[16] = {0, 5, 12, 24, 33, 40, 46, 51, 59, 68, 76, 82, 89, 94, 97, 100};
+	static const uint16 slotMasks[38] = {  // @ G0038_ai_Graphic562_SlotMasks
 		/* 30 for champion inventory, 8 for chest */
 		0xFFFF,   /* Ready Hand       Mouth/Head/Neck/Torso/Legs/Feet/Quiver 1/Quiver 2/Pouch/Hands/Chest */
 		0xFFFF,   /* Action Hand      Mouth/Head/Neck/Torso/Legs/Feet/Quiver 1/Quiver 2/Pouch/Hands/Chest */
@@ -131,7 +131,7 @@ void ChampionMan::initConstants() {
 
 	_boxChampionPortrait = Box(0, 31, 0, 28); // @ G0047_s_Graphic562_Box_ChampionPortrait
 
-	const char **baseSkillName;
+	const char *const *baseSkillName;
 	switch (_vm->getGameLanguage()) { // localized
 	case Common::EN_ANY:
 		baseSkillName = baseSkillNameEN;

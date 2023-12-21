@@ -103,7 +103,7 @@ public:
 	void drawEnabledMenus(); // @ F0457_START_DrawEnabledMenus_CPSF
 	int16 getClickOnSpellCastResult(); // @ F0408_MENUS_GetClickOnSpellCastResult
 	int16 getChampionSpellCastResult(uint16 champIndex); // @ F0412_MENUS_GetChampionSpellCastResult
-	Spell *getSpellFromSymbols(byte *symbols); // @ F0409_MENUS_GetSpellFromSymbols
+	const Spell *getSpellFromSymbols(byte *symbols); // @ F0409_MENUS_GetSpellFromSymbols
 	void menusPrintSpellFailureMessage(Champion *champ, uint16 failureType, uint16 skillIndex); // @ F0410_MENUS_PrintSpellFailureMessage
 	Potion *getEmptyFlaskInHand(Champion *champ, Thing *potionThing); // @ F0411_MENUS_GetEmptyFlaskInHand
 	void createEvent70_light(int16 lightPower, int16 ticks); // @ F0404_MENUS_CreateEvent70_Light
@@ -121,7 +121,7 @@ public:
 	bool isGroupFrightenedByAction(int16 champIndex, uint16 actionIndex, int16 mapX, int16 mapY); // @ F0401_MENUS_IsGroupFrightenedByAction
 	void printMessageAfterReplacements(const char *str); // @ F0381_MENUS_PrintMessageAfterReplacements
 	void processCommands116To119_setActingChampion(uint16 champIndex); // @ F0389_MENUS_ProcessCommands116To119_SetActingChampion
-	void setActionList(ActionSet *actionSet); // @ F0383_MENUS_SetActionList
+	void setActionList(const ActionSet *actionSet); // @ F0383_MENUS_SetActionList
 	int16 getActionObjectChargeCount(); // @ F0382_MENUS_GetActionObjectChargeCount
 	void drawActionDamage(int16 damage); // @ F0385_MENUS_DrawActionDamage
 
