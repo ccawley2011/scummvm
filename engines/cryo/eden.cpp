@@ -7529,7 +7529,7 @@ void EdenGame::displayMappingLine(int16 r3, int16 r4, byte *target, byte *textur
 }
 
 // PC cursor
-CubeCursor _cursorsPC[9] = {
+static const CubeCursor _cursorsPC[9] = {
 		{ { 0, 0, 0, 0, 0, 0 }, 3, 2 },
 		{ { 1, 1, 0, 1, 1, 0 }, 2, -2 },
 		{ { 2, 2, 2, 2, 2, 2 }, 1, 2 },
@@ -7542,7 +7542,7 @@ CubeCursor _cursorsPC[9] = {
 		{ { 0, 8, 0, 0, 8, 8 }, 2, 2 }
 };
 
-XYZ _cubePC[6][3] = {
+static const XYZ _cubePC[6][3] = {
 		{ { -15, -15, -15 }, { -15, 15, -15 }, { 15, 15, -15 } },
 		{ { -15, -15, 15 }, { -15, 15, 15 }, { -15, 15, -15 } },
 		{ { -15, -15, 15 }, { -15, -15, -15 }, { 15, -15, -15 } },
@@ -7551,7 +7551,7 @@ XYZ _cubePC[6][3] = {
 		{ { 15, 15, 15 }, { 15, 15, -15 }, { -15, 15, -15 } }
 };
 
-signed short cosineTable[] = {
+static const signed short cosineTable[] = {
 	// = cos(n) << 7; n += 10;
 	128, 126, 120, 111, 98, 82, 64, 44, 22, 0, -22, -44, -64, -82, -98, -111, -120, -126,
 	-128, -126, -120, -111, -98, -82, -64, -44, -22, 0, 22, 44, 64, 82, 98, 111, 120, 126,
@@ -7583,7 +7583,7 @@ void EdenGame::getSinCosTables(unsigned short angle, signed char **cos_table, si
 }
 
 
-void EdenGame::rotatePoint(XYZ *point, XYZ *rpoint) {
+void EdenGame::rotatePoint(const XYZ *point, XYZ *rpoint) {
 	// see http://www.cprogramming.com/tutorial/3d/rotation.html
 	XYZ xrot;
 
@@ -7598,12 +7598,12 @@ void EdenGame::rotatePoint(XYZ *point, XYZ *rpoint) {
 	rpoint->z += _zoomZ;
 }
 
-void EdenGame::mapPoint(XYZ *point, short *x, short *y) {
+void EdenGame::mapPoint(const XYZ *point, short *x, short *y) {
 	*y = ((12800 / point->z) * point->y) >> 7;
 	*x = ((12800 / point->z) * point->x) >> 7;
 }
 
-short EdenGame::calcFaceArea(XYZ *face) {
+short EdenGame::calcFaceArea(const XYZ *face) {
 	XYZ rpoint;
 	short x[3], y[3];
 
