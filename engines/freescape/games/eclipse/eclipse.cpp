@@ -27,7 +27,7 @@
 
 namespace Freescape {
 
-static const char *rawMessagesTable[] = {
+static const char *const rawMessagesTable[] = {
 	"HEART  FAILURE",
 	"SUN ECLIPSED",
 	"CRUSHED TO DEATH",
@@ -65,7 +65,7 @@ EclipseEngine::EclipseEngine(OSystem *syst, const ADGameDescription *gd) : Frees
 	_playerDepth = 8;
 	_stepUpDistance = 32;
 
-	const char **messagePtr = rawMessagesTable;
+	const char *const *messagePtr = rawMessagesTable;
 	if (isDOS()) {
 		debugC(1, kFreescapeDebugParser, "String table:");
 		while (*messagePtr) {

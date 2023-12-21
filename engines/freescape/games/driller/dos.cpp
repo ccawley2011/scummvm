@@ -27,17 +27,17 @@
 
 namespace Freescape {
 
-extern byte kCGAPalettePinkBlueWhiteData[4][3];
-extern byte kEGADefaultPalette[16][3];
+extern const byte kCGAPalettePinkBlueWhiteData[4][3];
+extern const byte kEGADefaultPalette[16][3];
 
-byte kDrillerCGAPalettePinkBlue[4][3] = {
+const byte kDrillerCGAPalettePinkBlue[4][3] = {
 	{0x00, 0x00, 0x00},
 	{0x00, 0xaa, 0xaa},
 	{0xaa, 0x00, 0xaa},
 	{0xaa, 0xaa, 0xaa},
 };
 
-byte kDrillerCGAPaletteRedGreen[4][3] = {
+const byte kDrillerCGAPaletteRedGreen[4][3] = {
 	{0x00, 0x00, 0x00},
 	{0x00, 0xaa, 0x00},
 	{0xaa, 0x00, 0x00},
@@ -45,36 +45,36 @@ byte kDrillerCGAPaletteRedGreen[4][3] = {
 };
 
 static const CGAPaletteEntry rawCGAPaletteByArea[] {
-	{1, (byte *)kDrillerCGAPaletteRedGreen},
-	{2, (byte *)kDrillerCGAPalettePinkBlue},
-	{3, (byte *)kDrillerCGAPaletteRedGreen},
-	{4, (byte *)kDrillerCGAPalettePinkBlue},
-	{5, (byte *)kDrillerCGAPaletteRedGreen},
-	{6, (byte *)kDrillerCGAPalettePinkBlue},
-	{7, (byte *)kDrillerCGAPaletteRedGreen},
-	{8, (byte *)kDrillerCGAPalettePinkBlue},
-	{9, (byte *)kDrillerCGAPaletteRedGreen},
-	{10, (byte *)kDrillerCGAPalettePinkBlue},
-	{11, (byte *)kDrillerCGAPaletteRedGreen},
-	{12, (byte *)kDrillerCGAPalettePinkBlue},
-	{13, (byte *)kDrillerCGAPaletteRedGreen},
-	{14, (byte *)kDrillerCGAPalettePinkBlue},
-	{15, (byte *)kDrillerCGAPaletteRedGreen},
-	{16, (byte *)kDrillerCGAPalettePinkBlue},
-	{17, (byte *)kDrillerCGAPalettePinkBlue},
-	{18, (byte *)kDrillerCGAPalettePinkBlue},
-	{19, (byte *)kDrillerCGAPaletteRedGreen},
-	{20, (byte *)kDrillerCGAPalettePinkBlue},
-	{21, (byte *)kDrillerCGAPaletteRedGreen},
-	{22, (byte *)kDrillerCGAPalettePinkBlue},
-	{23, (byte *)kDrillerCGAPaletteRedGreen},
-	{25, (byte *)kDrillerCGAPalettePinkBlue},
-	{27, (byte *)kDrillerCGAPaletteRedGreen},
-	{28, (byte *)kDrillerCGAPalettePinkBlue},
+	{1, (const byte *)kDrillerCGAPaletteRedGreen},
+	{2, (const byte *)kDrillerCGAPalettePinkBlue},
+	{3, (const byte *)kDrillerCGAPaletteRedGreen},
+	{4, (const byte *)kDrillerCGAPalettePinkBlue},
+	{5, (const byte *)kDrillerCGAPaletteRedGreen},
+	{6, (const byte *)kDrillerCGAPalettePinkBlue},
+	{7, (const byte *)kDrillerCGAPaletteRedGreen},
+	{8, (const byte *)kDrillerCGAPalettePinkBlue},
+	{9, (const byte *)kDrillerCGAPaletteRedGreen},
+	{10, (const byte *)kDrillerCGAPalettePinkBlue},
+	{11, (const byte *)kDrillerCGAPaletteRedGreen},
+	{12, (const byte *)kDrillerCGAPalettePinkBlue},
+	{13, (const byte *)kDrillerCGAPaletteRedGreen},
+	{14, (const byte *)kDrillerCGAPalettePinkBlue},
+	{15, (const byte *)kDrillerCGAPaletteRedGreen},
+	{16, (const byte *)kDrillerCGAPalettePinkBlue},
+	{17, (const byte *)kDrillerCGAPalettePinkBlue},
+	{18, (const byte *)kDrillerCGAPalettePinkBlue},
+	{19, (const byte *)kDrillerCGAPaletteRedGreen},
+	{20, (const byte *)kDrillerCGAPalettePinkBlue},
+	{21, (const byte *)kDrillerCGAPaletteRedGreen},
+	{22, (const byte *)kDrillerCGAPalettePinkBlue},
+	{23, (const byte *)kDrillerCGAPaletteRedGreen},
+	{25, (const byte *)kDrillerCGAPalettePinkBlue},
+	{27, (const byte *)kDrillerCGAPaletteRedGreen},
+	{28, (const byte *)kDrillerCGAPalettePinkBlue},
 
-	{31, (byte *)kDrillerCGAPaletteRedGreen},
-	{32, (byte *)kDrillerCGAPalettePinkBlue},
-	{127, (byte *)kDrillerCGAPaletteRedGreen},
+	{31, (const byte *)kDrillerCGAPaletteRedGreen},
+	{32, (const byte *)kDrillerCGAPalettePinkBlue},
+	{127, (const byte *)kDrillerCGAPaletteRedGreen},
 	{0, 0}   // This marks the end
 };
 
@@ -239,7 +239,7 @@ Graphics::ManagedSurface *DrillerEngine::load8bitTitleImage(Common::SeekableRead
 	return surface;
 }
 
-byte kCGAPalettePinkBlueWhiteData[4][3] = {
+const byte kCGAPalettePinkBlueWhiteData[4][3] = {
 	{0x00, 0x00, 0x00},
 	{0x55, 0xff, 0xff},
 	{0xff, 0x55, 0xff},
@@ -301,13 +301,13 @@ void DrillerEngine::loadAssetsDOSFullGame() {
 		file.open("SCN1E.DAT");
 		if (file.isOpen()) {
 			_title = load8bitBinImage(&file, 0x0);
-			_title->setPalette((byte*)&kEGADefaultPalette, 0, 16);
+			_title->setPalette((const byte*)&kEGADefaultPalette, 0, 16);
 		}
 		file.close();
 		file.open("EGATITLE.RL");
 		if (file.isOpen()) {
 			_title = load8bitTitleImage(&file, 0x1b3);
-			_title->setPalette((byte*)&kEGADefaultPalette, 0, 16);
+			_title->setPalette((const byte*)&kEGADefaultPalette, 0, 16);
 		}
 		file.close();
 
@@ -321,18 +321,18 @@ void DrillerEngine::loadAssetsDOSFullGame() {
 		loadGlobalObjects(&file, 0x3b42, 8);
 		load8bitBinary(&file, 0x9b40, 16);
 		_border = load8bitBinImage(&file, 0x210);
-		_border->setPalette((byte*)&kEGADefaultPalette, 0, 16);
+		_border->setPalette((const byte*)&kEGADefaultPalette, 0, 16);
 	} else if (_renderMode == Common::kRenderCGA) {
 		file.open("SCN1C.DAT");
 		if (file.isOpen()) {
 			_title = load8bitBinImage(&file, 0x0);
-			_title->setPalette((byte*)&kCGAPalettePinkBlueWhiteData, 0, 4);
+			_title->setPalette((const byte*)&kCGAPalettePinkBlueWhiteData, 0, 4);
 		}
 		file.close();
 		file.open("CGATITLE.RL");
 		if (file.isOpen()) {
 			_title = load8bitTitleImage(&file, 0x1b3);
-			_title->setPalette((byte*)&kCGAPalettePinkBlueWhiteData, 0, 4);
+			_title->setPalette((const byte*)&kCGAPalettePinkBlueWhiteData, 0, 4);
 		}
 		file.close();
 		file.open("DRILLC.EXE");
@@ -345,7 +345,7 @@ void DrillerEngine::loadAssetsDOSFullGame() {
 		load8bitBinary(&file, 0x7bb0, 4);
 		loadGlobalObjects(&file, 0x1fa2, 8);
 		_border = load8bitBinImage(&file, 0x210);
-		_border->setPalette((byte*)&kCGAPalettePinkBlueWhiteData, 0, 4);
+		_border->setPalette((const byte*)&kCGAPalettePinkBlueWhiteData, 0, 4);
 		swapPalette(1);
 	} else
 		error("Unsupported video mode for DOS");
@@ -367,7 +367,7 @@ void DrillerEngine::loadAssetsDOSDemo() {
 		error("Failed to open 'd1' file");
 
 	_title = load8bitDemoImage(&file, 0x0);
-	_title->setPalette((byte*)&kCGAPalettePinkBlueWhiteData, 0, 4);
+	_title->setPalette((const byte*)&kCGAPalettePinkBlueWhiteData, 0, 4);
 
 	file.close();
 	file.open("d2");
@@ -379,7 +379,7 @@ void DrillerEngine::loadAssetsDOSDemo() {
 	load8bitBinary(&file, 0x55b0, 4);
 	loadGlobalObjects(&file, 0x8c, 5);
 	_border = load8bitDemoImage(&file, 0x6220);
-	_border->setPalette((byte*)&kCGAPalettePinkBlueWhiteData, 0, 4);
+	_border->setPalette((const byte*)&kCGAPalettePinkBlueWhiteData, 0, 4);
 
 	// Fixes corrupted area names in the demo data
 	_areaMap[2]->_name = "LAPIS LAZULI";

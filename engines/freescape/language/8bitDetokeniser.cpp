@@ -29,7 +29,7 @@
 
 namespace Freescape {
 
-uint8 k8bitMaxVariable = 64;
+const uint8 k8bitMaxVariable = 64;
 
 Common::String detokenise8bitCondition(Common::Array<uint16> &tokenisedCondition, FCLInstructionVector &instructions, bool isAmigaAtari) {
 	Common::String detokenisedStream;

@@ -121,7 +121,7 @@ public:
 
 	virtual void setStippleData(byte *data) {};
 	virtual void useStipple(bool enabled) {};
-	byte *_palette;
+	const byte *_palette;
 	void setColorMap(ColorMap *colorMap_);
 	ColorMap *_colorMap;
 	ColorReMap *_colorRemaps;

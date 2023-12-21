@@ -32,14 +32,14 @@ void DrillerEngine::initCPC() {
 	_viewArea = Common::Rect(36, 16, 284, 117);
 }
 
-byte kCPCPaletteTitleData[4][3] = {
+const byte kCPCPaletteTitleData[4][3] = {
 	{0x00, 0x00, 0x00},
 	{0x00, 0x80, 0xff},
 	{0xff, 0x00, 0x00},
 	{0xff, 0xff, 0x00},
 };
 
-byte kCPCPaletteBorderData[4][3] = {
+const byte kCPCPaletteBorderData[4][3] = {
 	{0x00, 0x00, 0x00},
 	{0xff, 0x80, 0x00},
 	{0x80, 0xff, 0xff},
@@ -133,7 +133,7 @@ void DrillerEngine::loadAssetsCPCFullGame() {
 		error("Failed to open DSCN1.BIN");
 
 	_title = readCPCImage(&file, true);
-	_title->setPalette((byte*)&kCPCPaletteTitleData, 0, 4);
+	_title->setPalette((const byte*)&kCPCPaletteTitleData, 0, 4);
 
 	file.close();
 	file.open("DSCN2.BIN");
@@ -141,7 +141,7 @@ void DrillerEngine::loadAssetsCPCFullGame() {
 		error("Failed to open DSCN2.BIN");
 
 	_border = readCPCImage(&file, true);
-	_border->setPalette((byte*)&kCPCPaletteBorderData, 0, 4);
+	_border->setPalette((const byte*)&kCPCPaletteBorderData, 0, 4);
 
 	file.close();
 	file.open("DRILL.BIN");

@@ -23,7 +23,8 @@
 
 namespace Freescape {
 
-byte kEGADefaultPalette[16][3] = {
+extern const byte kEGADefaultPalette[16][3];
+const byte kEGADefaultPalette[16][3] = {
 	{0x00, 0x00, 0x00},
 	{0x00, 0x00, 0xaa},
 	{0x00, 0xaa, 0x00},
@@ -42,7 +43,7 @@ byte kEGADefaultPalette[16][3] = {
 	{0xff, 0xff, 0xff}
 };
 
-byte kDrillerC64Palette[16][3] = {
+static const byte kDrillerC64Palette[16][3] = {
 	{0x00, 0x00, 0x00},
 	{0xFF, 0xFF, 0xFF},
 	{0x68, 0x37, 0x2B},
@@ -61,7 +62,7 @@ byte kDrillerC64Palette[16][3] = {
 	{0x95, 0x95, 0x95}
 };
 
-byte kDrillerZXPalette[9][3] = {
+static const byte kDrillerZXPalette[9][3] = {
 	{0x00, 0x00, 0x00},
 	{0x00, 0x00, 0xee},
 	{0xee, 0x00, 0x00},
@@ -73,7 +74,7 @@ byte kDrillerZXPalette[9][3] = {
 	{0x00, 0x00, 0x00},
 };
 
-byte kDrillerCPCPalette[32][3] = {
+static const byte kDrillerCPCPalette[32][3] = {
 	{0x80, 0x80, 0x80}, // 0: special case?
 	{0x00, 0x00, 0x00}, // 1: used in dark only?
 	{0x80, 0xff, 0x80}, // 2
@@ -110,13 +111,13 @@ byte kDrillerCPCPalette[32][3] = {
 
 void FreescapeEngine::loadColorPalette() {
 	if (_renderMode == Common::kRenderEGA) {
-		_gfx->_palette = (byte *)&kEGADefaultPalette;
+		_gfx->_palette = (const byte *)&kEGADefaultPalette;
 	} else if (_renderMode == Common::kRenderC64) {
-		_gfx->_palette = (byte *)&kDrillerC64Palette;
+		_gfx->_palette = (const byte *)&kDrillerC64Palette;
 	} else if (_renderMode == Common::kRenderZX) {
-		_gfx->_palette = (byte *)kDrillerZXPalette;
+		_gfx->_palette = (const byte *)kDrillerZXPalette;
 	} else if (_renderMode == Common::kRenderCPC) {
-		_gfx->_palette = (byte *)kDrillerCPCPalette;
+		_gfx->_palette = (const byte *)kDrillerCPCPalette;
 	} else if (_renderMode == Common::kRenderCGA) {
 		// palette depends on the area
 	} else if (_renderMode == Common::kRenderAmiga || _renderMode == Common::kRenderAtariST) {
@@ -207,9 +208,9 @@ void FreescapeEngine::swapPalette(uint16 levelID) {
 
 }
 
-byte *FreescapeEngine::findCGAPalette(uint16 levelID) {
+const byte *FreescapeEngine::findCGAPalette(uint16 levelID) {
 	const CGAPaletteEntry *entry = _rawCGAPaletteByArea;
-	byte *palette = nullptr;
+	const byte *palette = nullptr;
 	while (entry->areaId) {
 		if (entry->areaId == levelID) {
 			palette = entry->palette;

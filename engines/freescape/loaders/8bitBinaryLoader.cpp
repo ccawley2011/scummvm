@@ -488,7 +488,7 @@ Object *FreescapeEngine::load8bitObject(Common::SeekableReadStream *file) {
 	// Unreachable
 }
 
-static const char *eclipseRoomName[] = {
+static const char *const eclipseRoomName[] = {
 	"* SAHARA",
 	"HORAKHTY",
 	"NEPHTHYS",
@@ -843,7 +843,7 @@ void FreescapeEngine::load8bitBinary(Common::SeekableReadStream *file, int offse
 	_binaryBits = 8;
 }
 
-void FreescapeEngine::loadFonts(byte *font, int charNumber) {
+void FreescapeEngine::loadFonts(const byte *font, int charNumber) {
 	if (isDOS() || isSpectrum() || isCPC() || isC64()) {
 		_font.set_size(64 * charNumber);
 		_font.set_bits(font);

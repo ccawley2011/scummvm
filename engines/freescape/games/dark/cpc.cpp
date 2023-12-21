@@ -32,8 +32,8 @@ void DarkEngine::initCPC() {
 	_viewArea = Common::Rect(36, 24, 284, 125);
 }
 
-extern byte kCPCPaletteTitleData[4][3];
-extern byte kCPCPaletteBorderData[4][3];
+extern const byte kCPCPaletteTitleData[4][3];
+extern const byte kCPCPaletteBorderData[4][3];
 
 extern Graphics::ManagedSurface *readCPCImage(Common::SeekableReadStream *file, bool mode0);
 
@@ -45,7 +45,7 @@ void DarkEngine::loadAssetsCPCFullGame() {
 		error("Failed to open DARK1.SCR");
 
 	_title = readCPCImage(&file, false);
-	_title->setPalette((byte*)&kCPCPaletteTitleData, 0, 4);
+	_title->setPalette((const byte*)&kCPCPaletteTitleData, 0, 4);
 
 	file.close();
 	file.open("DARK2.SCR");
@@ -53,7 +53,7 @@ void DarkEngine::loadAssetsCPCFullGame() {
 		error("Failed to open DARK2.SCR");
 
 	_border = readCPCImage(&file, true);
-	_border->setPalette((byte*)&kCPCPaletteBorderData, 0, 4);
+	_border->setPalette((const byte*)&kCPCPaletteBorderData, 0, 4);
 
 	file.close();
 	file.open("DARKCODE.BIN");

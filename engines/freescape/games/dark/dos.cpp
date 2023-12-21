@@ -27,16 +27,16 @@
 
 namespace Freescape {
 
-extern byte kEGADefaultPalette[16][3];
+extern const byte kEGADefaultPalette[16][3];
 
-byte kDarkCGAPalettePinkBlue[4][3] = {
+const byte kDarkCGAPalettePinkBlue[4][3] = {
 	{0x00, 0x00, 0x00},
 	{0x00, 0xaa, 0xaa},
 	{0xaa, 0x00, 0xaa},
 	{0xaa, 0xaa, 0xaa},
 };
 
-byte kDarkCGAPaletteRedGreen[4][3] = {
+const byte kDarkCGAPaletteRedGreen[4][3] = {
 	{0x00, 0x00, 0x00},
 	{0xaa, 0x55, 0x00},
 	{0xaa, 0x00, 0x00},
@@ -44,37 +44,37 @@ byte kDarkCGAPaletteRedGreen[4][3] = {
 };
 
 static const CGAPaletteEntry rawCGAPaletteByArea[] {
-	{1, (byte *)kDarkCGAPaletteRedGreen},
-	{2, (byte *)kDarkCGAPalettePinkBlue},
-	{3, (byte *)kDarkCGAPaletteRedGreen},
-	{4, (byte *)kDarkCGAPalettePinkBlue},
-	{5, (byte *)kDarkCGAPaletteRedGreen},
-	{6, (byte *)kDarkCGAPalettePinkBlue},
-	{7, (byte *)kDarkCGAPaletteRedGreen},
-	{8, (byte *)kDarkCGAPaletteRedGreen}, // Verified
-	{9, (byte *)kDarkCGAPaletteRedGreen},
-	{10, (byte *)kDarkCGAPalettePinkBlue},
-	{11, (byte *)kDarkCGAPaletteRedGreen},
-	{12, (byte *)kDarkCGAPalettePinkBlue},
-	{13, (byte *)kDarkCGAPaletteRedGreen},
-	{14, (byte *)kDarkCGAPalettePinkBlue},
-	{15, (byte *)kDarkCGAPaletteRedGreen}, // Verified
-	{16, (byte *)kDarkCGAPalettePinkBlue},
-	{17, (byte *)kDarkCGAPalettePinkBlue},
-	{18, (byte *)kDarkCGAPaletteRedGreen}, // Verified
-	{19, (byte *)kDarkCGAPaletteRedGreen},
-	{20, (byte *)kDarkCGAPalettePinkBlue},
-	{21, (byte *)kDarkCGAPaletteRedGreen},
-	{22, (byte *)kDarkCGAPalettePinkBlue},
-	{23, (byte *)kDarkCGAPaletteRedGreen},
-	{24, (byte *)kDarkCGAPalettePinkBlue},
-	{25, (byte *)kDarkCGAPalettePinkBlue},
-	{27, (byte *)kDarkCGAPaletteRedGreen},
-	{28, (byte *)kDarkCGAPalettePinkBlue},
+	{1, (const byte *)kDarkCGAPaletteRedGreen},
+	{2, (const byte *)kDarkCGAPalettePinkBlue},
+	{3, (const byte *)kDarkCGAPaletteRedGreen},
+	{4, (const byte *)kDarkCGAPalettePinkBlue},
+	{5, (const byte *)kDarkCGAPaletteRedGreen},
+	{6, (const byte *)kDarkCGAPalettePinkBlue},
+	{7, (const byte *)kDarkCGAPaletteRedGreen},
+	{8, (const byte *)kDarkCGAPaletteRedGreen}, // Verified
+	{9, (const byte *)kDarkCGAPaletteRedGreen},
+	{10, (const byte *)kDarkCGAPalettePinkBlue},
+	{11, (const byte *)kDarkCGAPaletteRedGreen},
+	{12, (const byte *)kDarkCGAPalettePinkBlue},
+	{13, (const byte *)kDarkCGAPaletteRedGreen},
+	{14, (const byte *)kDarkCGAPalettePinkBlue},
+	{15, (const byte *)kDarkCGAPaletteRedGreen}, // Verified
+	{16, (const byte *)kDarkCGAPalettePinkBlue},
+	{17, (const byte *)kDarkCGAPalettePinkBlue},
+	{18, (const byte *)kDarkCGAPaletteRedGreen}, // Verified
+	{19, (const byte *)kDarkCGAPaletteRedGreen},
+	{20, (const byte *)kDarkCGAPalettePinkBlue},
+	{21, (const byte *)kDarkCGAPaletteRedGreen},
+	{22, (const byte *)kDarkCGAPalettePinkBlue},
+	{23, (const byte *)kDarkCGAPaletteRedGreen},
+	{24, (const byte *)kDarkCGAPalettePinkBlue},
+	{25, (const byte *)kDarkCGAPalettePinkBlue},
+	{27, (const byte *)kDarkCGAPaletteRedGreen},
+	{28, (const byte *)kDarkCGAPalettePinkBlue},
 
-	{31, (byte *)kDarkCGAPaletteRedGreen},
-	{32, (byte *)kDarkCGAPalettePinkBlue},
-	{127, (byte *)kDarkCGAPaletteRedGreen},
+	{31, (const byte *)kDarkCGAPaletteRedGreen},
+	{32, (const byte *)kDarkCGAPalettePinkBlue},
+	{127, (const byte *)kDarkCGAPaletteRedGreen},
 	{0, 0}   // This marks the end
 };
 
@@ -97,7 +97,7 @@ void DarkEngine::loadAssetsDOSDemo() {
 		file.open("SCN1E.DAT");
 		if (file.isOpen()) {
 			_title = load8bitBinImage(&file, 0x0);
-			_title->setPalette((byte *)&kEGADefaultPalette, 0, 16);
+			_title->setPalette((const byte *)&kEGADefaultPalette, 0, 16);
 		}
 		file.close();
 		file.open("DSIDEE.EXE");
@@ -110,7 +110,7 @@ void DarkEngine::loadAssetsDOSDemo() {
 		loadGlobalObjects(&file, 0x3d04, 23);
 		load8bitBinary(&file, 0xa700, 16);
 		_border = load8bitBinImage(&file, 0x210);
-		_border->setPalette((byte *)&kEGADefaultPalette, 0, 16);
+		_border->setPalette((const byte *)&kEGADefaultPalette, 0, 16);
 
 		for (auto &it : _areaMap) {
 			addWalls(it._value);
@@ -142,7 +142,7 @@ void DarkEngine::loadAssetsDOSFullGame() {
 		file.open("SCN1E.DAT");
 		if (file.isOpen()) {
 			_title = load8bitBinImage(&file, 0x0);
-			_title->setPalette((byte *)&kEGADefaultPalette, 0, 16);
+			_title->setPalette((const byte *)&kEGADefaultPalette, 0, 16);
 		}
 		file.close();
 		file.open("DSIDEE.EXE");
@@ -155,7 +155,7 @@ void DarkEngine::loadAssetsDOSFullGame() {
 		loadGlobalObjects(&file, 0x3d04, 23);
 		load8bitBinary(&file, 0xa280, 16);
 		_border = load8bitBinImage(&file, 0x210);
-		_border->setPalette((byte *)&kEGADefaultPalette, 0, 16);
+		_border->setPalette((const byte *)&kEGADefaultPalette, 0, 16);
 
 		for (auto &it : _areaMap) {
 			addWalls(it._value);
@@ -175,7 +175,7 @@ void DarkEngine::loadAssetsDOSFullGame() {
 		file.open("SCN1C.DAT");
 		if (file.isOpen()) {
 			_title = load8bitBinImage(&file, 0x0);
-			_title->setPalette((byte *)&kDarkCGAPalettePinkBlue, 0, 4);
+			_title->setPalette((const byte *)&kDarkCGAPalettePinkBlue, 0, 4);
 		}
 		file.close();
 		file.open("DSIDEC.EXE");
@@ -188,7 +188,7 @@ void DarkEngine::loadAssetsDOSFullGame() {
 		loadGlobalObjects(&file, 0x2554, 23);
 		load8bitBinary(&file, 0x8600, 16);
 		_border = load8bitBinImage(&file, 0x210);
-		_border->setPalette((byte *)&kDarkCGAPalettePinkBlue, 0, 4);
+		_border->setPalette((const byte *)&kDarkCGAPalettePinkBlue, 0, 4);
 
 		for (auto &it : _areaMap) {
 			addWalls(it._value);

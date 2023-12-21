@@ -32,8 +32,8 @@ void EclipseEngine::initCPC() {
 	_viewArea = Common::Rect(36 + 3, 24 + 8, 284, 130 + 3);
 }
 
-extern byte kCPCPaletteTitleData[4][3];
-extern byte kCPCPaletteBorderData[4][3];
+extern const byte kCPCPaletteTitleData[4][3];
+extern const byte kCPCPaletteBorderData[4][3];
 
 extern Graphics::ManagedSurface *readCPCImage(Common::SeekableReadStream *file, bool mode0);
 
@@ -45,7 +45,7 @@ void EclipseEngine::loadAssetsCPCDemo() {
 		error("Failed to open TECON.BIN");
 
 	_border = readCPCImage(&file, true);
-	_border->setPalette((byte*)&kCPCPaletteTitleData, 0, 4);
+	_border->setPalette((const byte*)&kCPCPaletteTitleData, 0, 4);
 
 	file.close();
 	file.open("TEPROG.BIN");

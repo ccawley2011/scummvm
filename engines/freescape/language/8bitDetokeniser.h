@@ -43,7 +43,7 @@ enum {
 	kConditionalActivated = 1 << 3,
 };
 
-extern uint8 k8bitMaxVariable;
+extern const uint8 k8bitMaxVariable;
 
 Common::String detokenise8bitCondition(Common::Array<uint16> &tokenisedCondition, FCLInstructionVector &instructions, bool enableActivated);
 

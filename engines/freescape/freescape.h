@@ -75,7 +75,7 @@ struct soundFx {
 
 struct CGAPaletteEntry {
 	int areaId;
-	byte *palette;
+	const byte *palette;
 };
 
 class SizedPCSpeaker : public Audio::PCSpeaker {
@@ -175,7 +175,7 @@ public:
 	Graphics::ManagedSurface *loadAndCenterScrImage(Common::SeekableReadStream *stream);
 	void loadPalettes(Common::SeekableReadStream *file, int offset);
 	void swapPalette(uint16 areaID);
-	virtual byte *findCGAPalette(uint16 levelID);
+	virtual const byte *findCGAPalette(uint16 levelID);
 	const CGAPaletteEntry *_rawCGAPaletteByArea;
 	Common::HashMap<uint16, byte *> _paletteByArea;
 	void loadColorPalette();
@@ -385,7 +385,7 @@ public:
 	void drawFullscreenMessage(Common::String message, uint32 front, Graphics::Surface *surface);
 
 	void loadFonts(Common::SeekableReadStream *file, int offset);
-	void loadFonts(byte *font, int charNumber);
+	void loadFonts(const byte *font, int charNumber);
 	Common::StringArray _currentAreaMessages;
 	Common::StringArray _currentEphymeralMessages;
 	Common::BitArray _font;
