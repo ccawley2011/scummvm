@@ -52,7 +52,7 @@ namespace AGS3 {
 namespace FreeType213 {
 
 
-static const char* blue_chars[AH_BLUE_MAX] = {
+static const char *const blue_chars[AH_BLUE_MAX] = {
 	"THEZOCQS",
 	"HEZLOCUS",
 	"xzroesc",

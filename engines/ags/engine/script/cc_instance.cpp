@@ -169,9 +169,9 @@ void script_commands_free() {
 	delete g_commands;
 }
 
-const char *regnames[] = { "null", "sp", "mar", "ax", "bx", "cx", "op", "dx" };
+const char *const regnames[] = { "null", "sp", "mar", "ax", "bx", "cx", "op", "dx" };
 
-const char *fixupnames[] = { "null", "fix_gldata", "fix_func", "fix_string", "fix_import", "fix_datadata", "fix_stack" };
+const char *const fixupnames[] = { "null", "fix_gldata", "fix_func", "fix_string", "fix_import", "fix_datadata", "fix_stack" };
 
 String cc_get_callstack(int max_lines) {
 	String callstack;

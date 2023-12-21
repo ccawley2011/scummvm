@@ -51,7 +51,7 @@ struct UTYPE_INFO {
 	int u_width_max;
 };
 
-static UTYPE_INFO utypes[] =
+static const UTYPE_INFO utypes[] =
 {
 	{ U_ASCII,    ascii_getc,    ascii_getx,    ascii_setc,    ascii_width,   ascii_cwidth,   ascii_isok,    1    },
 	{ U_UTF8,     utf8_getc,     utf8_getx,     utf8_setc,     utf8_width,    utf8_cwidth,    utf8_isok,     4     }
@@ -61,7 +61,7 @@ static UTYPE_INFO utypes[] =
 /* _find_utype:
  *  Helper for locating a string type description.
  */
-static UTYPE_INFO *find_utype(int type) {
+static const UTYPE_INFO *find_utype(int type) {
 	int i;
 
 	if (type == U_CURRENT)
@@ -75,7 +75,7 @@ static UTYPE_INFO *find_utype(int type) {
 }
 
 void set_uformat(int type) {
-	UTYPE_INFO *info = find_utype(type);
+	const UTYPE_INFO *info = find_utype(type);
 	assert(info);
 
 	if (info) {
