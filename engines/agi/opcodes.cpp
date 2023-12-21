@@ -145,7 +145,7 @@ const AgiOpCodeDefinitionEntry opCodesV1[] = {
 	{ "...",                "nv",       &cmdUnknown },          // 61 # clearbit
 };
 
-AgiOpCodeDefinitionEntry opCodesV2Cond[] = {
+const AgiOpCodeDefinitionEntry opCodesV2Cond[] = {
 	{ "",                   "",         &condUnknown },         // 00
 	{ "equaln",             "vn",       &condEqual },           // 01
 	{ "equalv",             "vv",       &condEqualV },          // 02
@@ -168,7 +168,7 @@ AgiOpCodeDefinitionEntry opCodesV2Cond[] = {
 	{ "in.motion.using.mouse", "",      &condUnknown13 }        // 13
 };
 
-AgiOpCodeDefinitionEntry opCodesV2[] = {
+const AgiOpCodeDefinitionEntry opCodesV2[] = {
 	{ "return",             "",         nullptr },              // 00
 	{ "increment",          "v",        &cmdIncrement },        // 01
 	{ "decrement",          "v",        &cmdDecrement },        // 02
