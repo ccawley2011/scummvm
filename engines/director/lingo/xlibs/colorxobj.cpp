@@ -59,14 +59,14 @@
 
 namespace Director {
 
-const char *ColorXObj::xlibName = "Color";
-const char *ColorXObj::fileNames[] = {
+const char *const ColorXObj::xlibName = "Color";
+const char *const ColorXObj::fileNames[] = {
 	"color",
 	"color.dll",
 	nullptr
 };
 
-static MethodProto xlibMethods[] = {
+static const MethodProto xlibMethods[] = {
 	{ "new",					ColorXObj::m_new,					1, 1,	400 },	// D4
 	{ "dispose",				ColorXObj::m_dispose,				0, 0,	400 },	// D4
 	{ "setOurColors",			ColorXObj::m_setOurColors,			0, 0,	400 },	// D4

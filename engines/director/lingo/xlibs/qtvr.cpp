@@ -61,14 +61,14 @@
 
 namespace Director {
 
-const char *QTVR::xlibName = "QTVRW";
-const char *QTVR::fileNames[] = {
+const char *const QTVR::xlibName = "QTVRW";
+const char *const QTVR::fileNames[] = {
 	"QTVR",
 	"QTVR.QTC",
 	nullptr
 };
 
-static MethodProto xlibMethods[] = {
+static const MethodProto xlibMethods[] = {
 	{ "new",					QTVR::m_new,					1, 1,	400 },	// D4
 	{ "dispose",				QTVR::m_dispose,				1, 1,	400 },	// D4
 	{ "getHPanAngle",			QTVR::m_getHPanAngle,			0, 0,	400 },	// D4

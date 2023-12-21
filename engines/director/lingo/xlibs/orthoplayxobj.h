@@ -31,8 +31,8 @@ public:
 
 namespace OrthoPlayXObj {
 
-extern const char *xlibName;
-extern const char *fileNames[];
+extern const char *const xlibName;
+extern const char *const fileNames[];
 
 void open(int type);
 void close(int type);

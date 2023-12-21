@@ -24,7 +24,7 @@
 
 namespace Director {
 
-const char *scriptTypes[] = {
+const char *const scriptTypes[] = {
 	"ScoreScript",
 	"CastScript",
 	"MovieScript",
@@ -47,7 +47,7 @@ const char *scriptType2str(ScriptType scr) {
 	return scriptTypes[scr];
 }
 
-const char *castTypes[] = {
+const char *const castTypes[] = {
 	"empty",
 	"bitmap",
 	"filmLoop",
@@ -76,7 +76,7 @@ const char *castType2str(CastType type) {
 	return "<unknown>";
 }
 
-const char *spriteType[] = {
+const char *const spriteType[] = {
 	"Inactive",
 	"Bitmap",
 	"Rectangle",

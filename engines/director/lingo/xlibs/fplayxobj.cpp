@@ -41,14 +41,14 @@
 
 namespace Director {
 
-const char *FPlayXObj::xlibName = "FPlay";
-const char *FPlayXObj::fileNames[] = {
+const char *const FPlayXObj::xlibName = "FPlay";
+const char *const FPlayXObj::fileNames[] = {
 	"FPlayXObj",
 	"FPlay",
 	nullptr
 };
 
-static BuiltinProto builtins[] = {
+static const BuiltinProto builtins[] = {
 	{ "FPlay",			FPlayXObj::b_fplay,		   -1,0, 200, CBLTIN },	// XCMD
 	{ "CopySnd",		FPlayXObj::b_copysnd,	   -1,0, 200, CBLTIN },	// XCMD
 	{ "EraseSnd",		FPlayXObj::b_erasesnd,	   -1,0, 200, CBLTIN },	// XCMD

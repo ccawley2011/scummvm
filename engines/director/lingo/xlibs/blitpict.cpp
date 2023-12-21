@@ -52,13 +52,13 @@ IIIIIIIIIIII     mSparkle            --Draws a sparkle from a bitmap
 
 namespace Director {
 
-const char *BlitPictXObj::xlibName = "blitpict";
-const char *BlitPictXObj::fileNames[] = {
+const char *const BlitPictXObj::xlibName = "blitpict";
+const char *const BlitPictXObj::fileNames[] = {
 	"blitpict",
 	nullptr
 };
 
-static MethodProto xlibMethods[] = {
+static const MethodProto xlibMethods[] = {
 	{ "new",				BlitPictXObj::m_new,		 0, 0,	400 },
 	{ "dispose",				BlitPictXObj::m_dispose,		 0, 0,	400 },
 	{ "name",				BlitPictXObj::m_name,		 0, 0,	400 },

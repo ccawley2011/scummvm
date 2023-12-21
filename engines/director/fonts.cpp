@@ -121,7 +121,7 @@ enum FXmpTokenType {
 	FXMP_TOKEN_ERROR
 };
 
-const char *FXmpTokenTypeStrings[] = {
+static const char *const FXmpTokenTypeStrings[] = {
 	"WORD",
 	"INT",
 	"STRING",

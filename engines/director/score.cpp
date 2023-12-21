@@ -754,7 +754,7 @@ bool Score::renderPrePaletteCycle(uint16 frameId, RenderMode mode) {
 			// For fade to black and fade to white palette transitions,
 			// the first half happens with the previous frame's layout.
 
-			byte *fadePal = nullptr;
+			const byte *fadePal = nullptr;
 			if (_currentFrame->_mainChannels.palette.fadeToBlack) {
 				// Fade everything except color index 0 to black
 				debugC(2, kDebugImages, "Score::renderPrePaletteCycle(): fading palette to black over %d frames", fadeFrames);
@@ -959,7 +959,7 @@ void Score::renderPaletteCycle(uint16 frameId, RenderMode mode) {
 				// then to the new palette
 				int halfway = frameCount / 2;
 
-				byte *fadePal = nullptr;
+				const byte *fadePal = nullptr;
 				if (_currentFrame->_mainChannels.palette.fadeToBlack) {
 					// Fade everything except color index 0 to black
 					fadePal = kBlackPalette;
@@ -1003,7 +1003,7 @@ void Score::renderPaletteCycle(uint16 frameId, RenderMode mode) {
 			// Do a full cycle in one frame transition
 			// For normal mode, we've already faded the palette in renderPrePaletteCycle
 			if (!_currentFrame->_mainChannels.palette.normal) {
-				byte *fadePal = nullptr;
+				const byte *fadePal = nullptr;
 				if (_currentFrame->_mainChannels.palette.fadeToBlack) {
 					// Fade everything except color index 0 to black
 					fadePal = kBlackPalette;

@@ -30,8 +30,8 @@ public:
 
 namespace DialogsXObj {
 
-extern const char *xlibNames[];
-extern const char *fileNames[];
+extern const char *const xlibNames[];
+extern const char *const fileNames[];
 
 void open(int type);
 void close(int type);

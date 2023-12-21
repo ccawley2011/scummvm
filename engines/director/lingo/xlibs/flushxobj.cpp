@@ -61,12 +61,12 @@
 
 namespace Director {
 
-const char *FlushXObj::xlibNames[] = {
+const char *const FlushXObj::xlibNames[] = {
 	"FlushXObj",
 	"Johnny",
 	nullptr,
 };
-const char *FlushXObj::fileNames[] = {
+const char *const FlushXObj::fileNames[] = {
 	"FlushEvents",
 	"FlushXObj",
 	"Johnny",
@@ -75,7 +75,7 @@ const char *FlushXObj::fileNames[] = {
 	nullptr
 };
 
-static MethodProto xlibMethods[] = {
+static const MethodProto xlibMethods[] = {
 	{ "new",				FlushXObj::m_new,				 0, 0,	300 },	// D3
 	{ "AddToMask",			FlushXObj::m_addToMask,			 2, 2,	400 },	// D4
 	{ "ClearMask",			FlushXObj::m_clearMask,			 0, 0,	400 },	// D4

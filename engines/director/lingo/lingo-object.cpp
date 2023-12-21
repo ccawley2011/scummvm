@@ -104,7 +104,7 @@
 
 namespace Director {
 
-static struct PredefinedProto {
+static const struct PredefinedProto {
 	const char *name;
 	void (*func)(int);
 	int minArgs;	// -1 -- arglist
@@ -132,7 +132,7 @@ static struct PredefinedProto {
 	{ nullptr, nullptr, 0, 0, 0, 0 }
 };
 
-static MethodProto windowMethods[] = {
+static const MethodProto windowMethods[] = {
 	// window / stage
 	{ "close",					LM::m_close,				 0, 0,	400 },			// D4
 	{ "forget",					LM::m_forget,				 0, 0,	400 },			// D4
@@ -143,7 +143,7 @@ static MethodProto windowMethods[] = {
 };
 
 void Lingo::initMethods() {
-	for (PredefinedProto *mtd = predefinedMethods; mtd->name; mtd++) {
+	for (const PredefinedProto *mtd = predefinedMethods; mtd->name; mtd++) {
 		if (mtd->version > _vm->getVersion())
 			continue;
 
@@ -164,8 +164,8 @@ void Lingo::cleanupMethods() {
 	Window::cleanupMethods();
 }
 
-static struct XLibProto {
-	const char **names;
+static const struct XLibProto {
+	const char *const *names;
 	XLibFunc opener;
 	XLibFunc closer;
 	int type;
@@ -247,7 +247,7 @@ static struct XLibProto {
 };
 
 void Lingo::initXLibs() {
-	for (XLibProto *lib = xlibs; lib->names; lib++) {
+	for (const XLibProto *lib = xlibs; lib->names; lib++) {
 		if (lib->version > _vm->getVersion())
 			continue;
 

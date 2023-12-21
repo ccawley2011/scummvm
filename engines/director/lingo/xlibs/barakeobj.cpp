@@ -43,13 +43,13 @@
 
 namespace Director {
 
-const char *BarakeObj::xlibName = "BarakeObj";
-const char *BarakeObj::fileNames[] = {
+const char *const BarakeObj::xlibName = "BarakeObj";
+const char *const BarakeObj::fileNames[] = {
 	"BarakeObj",
 	0
 };
 
-static MethodProto xlibMethods[] = {
+static const MethodProto xlibMethods[] = {
 	{ "new",			BarakeObj::m_new,		0,	0,	400 },	// D4
 	{ "Clear",			BarakeObj::m_clear,		0,	0,	400 },	// D4
 	{ "Gpal",			BarakeObj::m_gpal,		3,	3,	400 },	// D4

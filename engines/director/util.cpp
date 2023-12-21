@@ -36,7 +36,7 @@
 
 namespace Director {
 
-static struct MacKeyCodeMapping {
+static const struct MacKeyCodeMapping {
 	Common::KeyCode scummvm;
 	int mac;
 } MackeyCodeMappings[] = {
@@ -164,7 +164,7 @@ static struct MacKeyCodeMapping {
 	{ Common::KEYCODE_INVALID,		0 }
 };
 
-static struct WinKeyCodeMapping {
+static const struct WinKeyCodeMapping {
 	Common::KeyCode scummvm;
 	int win;
 } WinkeyCodeMappings[] = {
@@ -277,10 +277,10 @@ static struct WinKeyCodeMapping {
 
 void DirectorEngine::loadKeyCodes() {
 	if (g_director->getPlatform() == Common::kPlatformWindows) {
-		for (WinKeyCodeMapping *k = WinkeyCodeMappings; k->scummvm != Common::KEYCODE_INVALID; k++)
+		for (const WinKeyCodeMapping *k = WinkeyCodeMappings; k->scummvm != Common::KEYCODE_INVALID; k++)
 			_KeyCodes[k->scummvm] = k->win;
 	} else {
-		for (MacKeyCodeMapping *k = MackeyCodeMappings; k->scummvm != Common::KEYCODE_INVALID; k++)
+		for (const MacKeyCodeMapping *k = MackeyCodeMappings; k->scummvm != Common::KEYCODE_INVALID; k++)
 			_KeyCodes[k->scummvm] = k->mac;
 	}
 }
@@ -417,7 +417,7 @@ Common::String CastMemberID::asString() const {
 }
 
 int recLevel = 0;
-const char *tabs[] = {	"",
+static const char *const tabs[] = {	"",
 						"  ",
 						"    ",
 						"      ",

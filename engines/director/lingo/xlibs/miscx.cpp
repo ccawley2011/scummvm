@@ -69,14 +69,14 @@
 
 namespace Director {
 
-const char *MiscX::xlibName = "Misc_X";
-const char *MiscX::fileNames[] = {
+const char *const MiscX::xlibName = "Misc_X";
+const char *const MiscX::fileNames[] = {
 	"MISC_X",
 	"sharCOPY", // TD loads this up using openXLib("@:sharCOPY.DLL")
 	0
 };
 
-static MethodProto xlibMethods[] = {
+static const MethodProto xlibMethods[] = {
 	{ "new",					MiscX::m_new,			0,	0,	400 },	// D4
 	{ "BootName",				MiscX::m_bootName,		0,	0,	400 },	// D4
 	{ "InsureFolder",			MiscX::m_insureFolder,	1,	1,	400 },	// D4

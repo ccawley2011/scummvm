@@ -39,13 +39,13 @@
 
 namespace Director {
 
-const char *VolumeList::xlibName = "VolumeList";
-const char *VolumeList::fileNames[] = {
+const char *const VolumeList::xlibName = "VolumeList";
+const char *const VolumeList::fileNames[] = {
 	"VolumeList",
 	0
 };
 
-static BuiltinProto builtins[] = {
+static const BuiltinProto builtins[] = {
 	{ "VolumeList", VolumeList::m_volumelist, 0, 0, 300, HBLTIN },
 	{ nullptr, nullptr, 0, 0, 0, VOIDSYM }
 };

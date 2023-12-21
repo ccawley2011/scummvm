@@ -83,14 +83,14 @@
 
 namespace Director {
 
-const char *SpaceMgr::xlibName = "SpaceMgr";
-const char *SpaceMgr::fileNames[] = {
+const char *const SpaceMgr::xlibName = "SpaceMgr";
+const char *const SpaceMgr::fileNames[] = {
 	"SpaceMgr",
 	"SPACEMGR",
 	nullptr
 };
 
-static MethodProto xlibMethods[] = {
+static const MethodProto xlibMethods[] = {
 	{ "new",					SpaceMgr::m_new,					0, 0,	400 },	// D4
 	{ "dispose",				SpaceMgr::m_dispose,				1, 1,	400 },	// D4
 	{ "lastError",				SpaceMgr::m_lastError,				0, 0,	400 },	// D4

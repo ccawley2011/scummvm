@@ -36,14 +36,14 @@
 
 namespace Director {
 
-const char *Quicktime::xlibName = "quicktime";
-const char *Quicktime::fileNames[] = {
+const char *const Quicktime::xlibName = "quicktime";
+const char *const Quicktime::fileNames[] = {
     "quicktime",
     "QuickTime",
     nullptr
 };
 
-static MethodProto xlibMethods[] = {
+static const MethodProto xlibMethods[] = {
     { "playStage",       Quicktime::m_playStage,      3, 3,  300 },
     // Defined in the xobj itself but never used
     // { "mPlaySmall",      Quicktime::m_playSmall,      3, 3,  300 },

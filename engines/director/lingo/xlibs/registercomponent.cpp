@@ -32,13 +32,13 @@
 
 namespace Director {
 
-const char *RegisterComponent::xlibName = "RegisterComponent";
-const char *RegisterComponent::fileNames[] = {
+const char *const RegisterComponent::xlibName = "RegisterComponent";
+const char *const RegisterComponent::fileNames[] = {
 	"RegisterComponent",
 	nullptr
 };
 
-static BuiltinProto builtins[] = {
+static const BuiltinProto builtins[] = {
 	{ "RegisterComponent",	RegisterComponent::b_RegisterComponent, 1, 2, 400, FBLTIN },
 	{ nullptr, nullptr, 0, 0, 0, VOIDSYM }
 };

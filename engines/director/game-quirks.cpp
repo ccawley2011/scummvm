@@ -174,7 +174,7 @@ struct Quirk {
 	const char *target;
 	Common::Platform platform;
 	void (*quirk)();
-} quirks[] = {
+} const quirks[] = {
 	// Eastern Mind sets the score to play back at a high frame rate,
 	// however the developers were using slow hardware, so some
 	// animations play back much faster than intended.

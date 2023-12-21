@@ -40,15 +40,15 @@
 
 namespace Director {
 
-const char *MoveMouseXObj::xlibName = "MoveMouse";
-const char *MoveMouseXObj::fileNames[] = {
+const char *const MoveMouseXObj::xlibName = "MoveMouse";
+const char *const MoveMouseXObj::fileNames[] = {
 	"MoveMouse",
 	"MoveMouse.XObj",
 	"MOVEWIN",
 	nullptr
 };
 
-static MethodProto xlibMethods[] = {
+static const MethodProto xlibMethods[] = {
 	{ "new",					MoveMouseXObj::m_new,			 0, 0,	400 },	// D4
 	{ "setMouseLoc",			MoveMouseXObj::m_setMouseLoc,	 2, 2,	400 },	// D4
 	{ nullptr, nullptr, 0, 0, 0 }

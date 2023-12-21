@@ -101,14 +101,14 @@
 
 namespace Director {
 
-const char *FileIO::xlibName = "FileIO";
-const char *FileIO::fileNames[] = {
+const char *const FileIO::xlibName = "FileIO";
+const char *const FileIO::fileNames[] = {
 	"FileIO",
 	"shFILEIO", // TD loads this up using openXLib("@:shFILEIO.DLL")
 	nullptr
 };
 
-static MethodProto xlibMethods[] = {
+static const MethodProto xlibMethods[] = {
 	{ "delete",					FileIO::m_delete,			 0, 0,	200 },	// D2
 	{ "error",					FileIO::m_error,			 1, 1,	200 },	// D2
 	{ "fileName",				FileIO::m_fileName,			 0, 0,	200 },	// D2

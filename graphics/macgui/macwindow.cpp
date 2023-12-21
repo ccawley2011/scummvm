@@ -318,7 +318,7 @@ bool MacWindow::isTitleVisible() {
 }
 
 void MacWindow::drawPattern() {
-	byte *pat = _wm->getPatterns()[_pattern - 1];
+	const byte *pat = _wm->getPatterns()[_pattern - 1];
 	for (int y = 0; y < _composeSurface->h; y++) {
 		for (int x = 0; x < _composeSurface->w; x++) {
 			if (_wm->_pixelformat.bytesPerPixel == 1) {

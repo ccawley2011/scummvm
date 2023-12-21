@@ -42,13 +42,13 @@
 
 namespace Director {
 
-const char *UnitTest::xlibName = "UnitTest";
-const char *UnitTest::fileNames[] = {
+const char *const UnitTest::xlibName = "UnitTest";
+const char *const UnitTest::fileNames[] = {
 	"UnitTest",
 	0
 };
 
-static BuiltinProto builtins[] = {
+static const BuiltinProto builtins[] = {
 	{ "UTScreenshot", UnitTest::m_UTScreenshot, 0, 1, 400, HBLTIN },
 	{ nullptr, nullptr, 0, 0, 0, VOIDSYM }
 };

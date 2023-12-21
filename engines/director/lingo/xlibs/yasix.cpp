@@ -38,13 +38,13 @@
 
 namespace Director {
 
-const char *Yasix::xlibName = "YASIX";
-const char *Yasix::fileNames[] = {
+const char *const Yasix::xlibName = "YASIX";
+const char *const Yasix::fileNames[] = {
 	"YASIX",
 	0
 };
 
-static BuiltinProto builtins[] = {
+static const BuiltinProto builtins[] = {
 	{ "YASIX", Yasix::m_yasix, 0, 0, 300, HBLTIN },
 	{ nullptr, nullptr, 0, 0, 0, VOIDSYM }
 };

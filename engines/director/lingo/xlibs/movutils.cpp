@@ -100,20 +100,20 @@
 
 namespace Director {
 
-const char *MovUtilsXObj::xlibNames[] = {
+const char *const MovUtilsXObj::xlibNames[] = {
 	"movutils",
 	"MovieUtilities",
 	nullptr
 };
 
-const char *MovUtilsXObj::fileNames[] = {
+const char *const MovUtilsXObj::fileNames[] = {
 	"MOVUTILS",
 	"MovieUtilities",
 	"MovieUtilities.XObj",
 	nullptr
 };
 
-static MethodProto xlibMethods[] = {
+static const MethodProto xlibMethods[] = {
 	{ "new",			MovUtilsXObj::m_new,			0,	0,	400 },	// D4
 	{ "GetWindowsPath",	MovUtilsXObj::m_getWindowsPath,	0,	0,	400 },	// D4
 	{ "getSystemPath",	MovUtilsXObj::m_getSystemPath,	0,	0,	400 },	// D4

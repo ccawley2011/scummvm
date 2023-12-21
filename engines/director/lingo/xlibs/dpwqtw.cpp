@@ -45,13 +45,13 @@
 namespace Director {
 
 // The name is different from the obj filename.
-const char *DPwQTw::xlibName = "dpwqtw";
-const char *DPwQTw::fileNames[] = {
+const char *const DPwQTw::xlibName = "dpwqtw";
+const char *const DPwQTw::fileNames[] = {
 	"dpwqtw",
 	nullptr
 };
 
-static MethodProto xlibMethods[] = {
+static const MethodProto xlibMethods[] = {
 	{ "new",		DPwQTw::m_new,			 0, 1,	400 },	// D4
 	{ "startup",	DPwQTw::m_startup,		 0, 0,	400 },	// D4
 	{ "quit",		DPwQTw::m_quit,			 0, 0,	400 },	// D4

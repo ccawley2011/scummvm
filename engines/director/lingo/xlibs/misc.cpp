@@ -37,13 +37,13 @@
 
 namespace Director {
 
-const char *Misc::xlibName = "misc";
-const char *Misc::fileNames[] = {
+const char *const Misc::xlibName = "misc";
+const char *const Misc::fileNames[] = {
     "misc",
     nullptr
 };
 
-static MethodProto xlibMethods[] = {
+static const MethodProto xlibMethods[] = {
     { "getProfileString",    Misc::m_getProfileString,   3, 3,  400 },
     { "isFilePresent",       Misc::m_isFilePresent,      1, 1,  400 },
     { nullptr, nullptr, 0, 0, 0 }

@@ -52,14 +52,14 @@ XIIIIIIIIS mPlay, filesOffset, startTime, duration, interruptable, h, v, hideCur
 
 namespace Director {
 
-const char *QTCatMoviePlayerXObj::xlibName = "qtcatmovieplayerxobj";
-const char *QTCatMoviePlayerXObj::fileNames[] = {
+const char *const QTCatMoviePlayerXObj::xlibName = "qtcatmovieplayerxobj";
+const char *const QTCatMoviePlayerXObj::fileNames[] = {
 	"CATPLAYR",					// Jewels of the Oracle - Win
 	"QTCatMoviePlayer.XObj",	// Jewels of the Oracle - Mac
 	nullptr
 };
 
-static MethodProto xlibMethods[] = {
+static const MethodProto xlibMethods[] = {
 	{ "new",				QTCatMoviePlayerXObj::m_new,		 1, 1,	400 },
 	{ "dispose",			QTCatMoviePlayerXObj::m_dispose,	 0, 0,	400 },
 	{ "play",				QTCatMoviePlayerXObj::m_play,		 9, 9,	400 },

@@ -46,13 +46,13 @@
 namespace Director {
 
 // The name is different from the obj filename.
-const char *DPwAVI::xlibName = "dpwavi";
-const char *DPwAVI::fileNames[] = {
+const char *const DPwAVI::xlibName = "dpwavi";
+const char *const DPwAVI::fileNames[] = {
 	"dpwavi",
 	nullptr
 };
 
-static MethodProto xlibMethods[] = {
+static const MethodProto xlibMethods[] = {
 	{ "new",		DPwAVI::m_new,			 0, 1,	400 },	// D4
 	{ "startup",	DPwAVI::m_startup,		 0, 0,	400 },	// D4
 	{ "quit",		DPwAVI::m_quit,			 0, 0,	400 },	// D4

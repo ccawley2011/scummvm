@@ -56,13 +56,13 @@
 
 namespace Director {
 
-const char *MoovXObj::xlibName = "moovxobj";
-const char *MoovXObj::fileNames[] = {
+const char *const MoovXObj::xlibName = "moovxobj";
+const char *const MoovXObj::fileNames[] = {
 	"moovxobj",
 	nullptr
 };
 
-static MethodProto xlibMethods[] = {
+static const MethodProto xlibMethods[] = {
 	{ "new",					MoovXObj::m_new,			    0,	0,	300 },	// D3
 	{ "Dispose",				MoovXObj::m_dispose,		    0,	0,	300 },	// D3
 	{ "Name",				    MoovXObj::m_name,		        0,	0,	300 },	// D4

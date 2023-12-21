@@ -45,13 +45,13 @@ SSSS   mWinInfo, file, section, entry      --Returns Windows information item
 
 namespace Director {
 
-const char *WinInfoXObj::xlibName = "wininfo";
-const char *WinInfoXObj::fileNames[] = {
+const char *const WinInfoXObj::xlibName = "wininfo";
+const char *const WinInfoXObj::fileNames[] = {
 	"wininfo",
 	nullptr
 };
 
-static MethodProto xlibMethods[] = {
+static const MethodProto xlibMethods[] = {
 	{ "new",				WinInfoXObj::m_new,		 0, 0,	400 },
 	{ "dispose",				WinInfoXObj::m_dispose,		 0, 0,	400 },
 	{ "name",				WinInfoXObj::m_name,		 0, 0,	400 },

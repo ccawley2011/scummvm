@@ -39,13 +39,13 @@
 
 namespace Director {
 
-const char *QTMovie::xlibName = "QTMovie";
-const char *QTMovie::fileNames[] = {
+const char *const QTMovie::xlibName = "QTMovie";
+const char *const QTMovie::fileNames[] = {
 	"QTMovie",
 	nullptr
 };
 
-static BuiltinProto builtins[] = {
+static const BuiltinProto builtins[] = {
 	{ "QTMovie", QTMovie::m_qtmovie, 3, 6, 300, HBLTIN },
 	{ nullptr, nullptr, 0, 0, 0, VOIDSYM }
 };
