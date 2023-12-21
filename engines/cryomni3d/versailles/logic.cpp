@@ -32,7 +32,7 @@
 namespace CryOmni3D {
 namespace Versailles {
 
-static const char *kImagesObjects[] = {
+static const char *const kImagesObjects[] = {
 	"PAMP.gif",   //  0:  96
 	"PAPT_2.gif", //  1:  98
 	"PAML.gif",   //  2: 101
@@ -243,7 +243,7 @@ void CryOmni3DEngine_Versailles::obj_142() {
 }
 
 void CryOmni3DEngine_Versailles::obj_142hk(Graphics::ManagedSurface &surface) {
-	const Common::Point markers[] = {
+	static const Common::Point markers[] = {
 		Common::Point(135, 403), // 14
 		Common::Point(136, 321), // 15
 		Common::Point(225, 109),
@@ -299,7 +299,7 @@ void CryOmni3DEngine_Versailles::obj_142hk(Graphics::ManagedSurface &surface) {
 }
 
 // This array contains images for all paintings it must be kept in sync with _paintingsTitles
-static const char *kImagesPaintings[] = {
+static const char *const kImagesPaintings[] = {
 	"10E_1.GIF",      //  0: 41201
 	nullptr,          //  1: 41202
 	"10E_3.GIF",      //  2: 41203
@@ -1296,7 +1296,7 @@ void CryOmni3DEngine_Versailles::drawSafeDigits(Graphics::ManagedSurface &surfac
 	}
 }
 
-const char *CryOmni3DEngine_Versailles::kSafeDates[] = { "1643", "1668", "1674" };
+const char *const CryOmni3DEngine_Versailles::kSafeDates[] = { "1643", "1668", "1674" };
 bool CryOmni3DEngine_Versailles::checkSafeDigits(unsigned char (&safeDigits)[kSafeDigitsCount]) {
 	uint dateChecked;
 	for (dateChecked = 0; dateChecked < ARRAYSIZE(kSafeDates); dateChecked++) {

@@ -32,7 +32,7 @@
 namespace CryOmni3D {
 namespace Versailles {
 
-const char *CryOmni3DEngine_Versailles::kMusicFiles[8][8] = {
+const char *const CryOmni3DEngine_Versailles::kMusicFiles[8][8] = {
 	{ "1amb", }, // Level 1
 	{ "2amb", "2amb2", "2amb1" }, // Level 2
 	{ "3amb", "3amb1", "3amb2" }, // Level 3

@@ -433,7 +433,7 @@ private:
 	const char *_musicCurrentFile;
 	Audio::SoundHandle _musicHandle;
 	float _musicVolumeFactor;
-	static const char *kMusicFiles[8][8];
+	static const char *const kMusicFiles[8][8];
 
 	Versailles_Documentation _docManager;
 
@@ -516,7 +516,7 @@ private:
 	static const uint kSafeDigitsCount = 12;
 	static const uint16 kSafeDigitsX[];
 	static const uint16 kSafeDigitsY[];
-	static const char *kSafeDates[];
+	static const char *const kSafeDates[];
 	bool handleSafe(ZonFixedImage *fimg);
 	void drawSafeDigits(Graphics::ManagedSurface &surface, const Graphics::Surface(&bmpDigits)[10],
 	                    const unsigned char (&safeDigits)[kSafeDigitsCount]);
