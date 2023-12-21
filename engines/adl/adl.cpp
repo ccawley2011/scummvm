@@ -1577,7 +1577,7 @@ Common::String AdlEngine::msgStr(uint i) const {
 }
 
 Common::String AdlEngine::dirStr(Direction dir) const {
-	static const char *dirs[] = { "NORTH", "SOUTH", "EAST", "WEST", "UP", "DOWN" };
+	static const char *const dirs[] = { "NORTH", "SOUTH", "EAST", "WEST", "UP", "DOWN" };
 	return dirs[dir];
 }
 
