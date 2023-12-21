@@ -24,7 +24,7 @@
 
 namespace DreamWeb {
 
-static void (DreamWebEngine::*reelCallbacks[57])(ReelRoutine &) = {
+static void (DreamWebEngine::*const reelCallbacks[57])(ReelRoutine &) = {
 	&DreamWebEngine::gamer, &DreamWebEngine::sparkyDrip,
 	&DreamWebEngine::eden, &DreamWebEngine::edenInBath,
 	&DreamWebEngine::sparky, &DreamWebEngine::smokeBloke,
