@@ -471,9 +471,9 @@ public:
 	byte _skillIndex;
 	uint16 _attributes; /* Bits 15-10: Duration, Bits 9-4: Type, Bits 3-0: Kind */
 
-	uint16 getKind() { return _attributes & 0xF; } // @ M67_SPELL_KIND
-	uint16 getType() { return (_attributes >> 4) & 0x3F; } // @ M68_SPELL_TYPE
-	uint16 getDuration() { return (_attributes >> 10) & 0x3F; } // @ M69_SPELL_DURATION
+	uint16 getKind() const { return _attributes & 0xF; } // @ M67_SPELL_KIND
+	uint16 getType() const { return (_attributes >> 4) & 0x3F; } // @ M68_SPELL_TYPE
+	uint16 getDuration() const { return (_attributes >> 10) & 0x3F; } // @ M69_SPELL_DURATION
 }; // @ SPELL
 
 class ChampionMan {

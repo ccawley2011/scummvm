@@ -45,7 +45,7 @@ void DungeonMan::mapCoordsAfterRelMovement(Direction dir, int16 stepsForward, in
 }
 
 void DungeonMan::setupConstants() {
-	ObjectInfoIndex objectInfo[180] = { // @ G0237_as_Graphic559_ObjectInfo
+	static const ObjectInfoIndex objectInfo[180] = { // @ G0237_as_Graphic559_ObjectInfo
 		/* { Type, ObjectAspectIndex, ActionSetIndex, AllowedSlots } */
 		ObjectInfoIndex(30,  1,  0, 0x0500),   /* COMPASS        Pouch/Chest */
 		ObjectInfoIndex(144,  0,  0, 0x0200),  /* COMPASS        Hands */
@@ -228,7 +228,7 @@ void DungeonMan::setupConstants() {
 		ObjectInfoIndex(197, 74,  0, 0x0000),  /* SOLID KEY */
 		ObjectInfoIndex(198, 41,  0, 0x0400)   /* SQUARE KEY     Chest */
 	};
-	ArmourInfo armourInfo[58] = { // G0239_as_Graphic559_ArmourInfo
+	static const ArmourInfo armourInfo[58] = { // G0239_as_Graphic559_ArmourInfo
 		/* { Weight, Defense, Attributes, Unreferenced } */
 		ArmourInfo(3,   5, 0x01),   /* CAPE */
 		ArmourInfo(4,  10, 0x01),   /* CLOAK OF NIGHT */
@@ -290,7 +290,7 @@ void DungeonMan::setupConstants() {
 		ArmourInfo(2,   3, 0x03)    /* HALTER */
 	};
 
-	WeaponInfo weaponInfo[46] = { // @ G0238_as_Graphic559_WeaponInfo
+	static const WeaponInfo weaponInfo[46] = { // @ G0238_as_Graphic559_WeaponInfo
 		/* { Weight, Class, Strength, KineticEnergy, Attributes } */
 		WeaponInfo(1, 130,   2,   0, 0x2000),  /* EYE OF TIME */
 		WeaponInfo(1, 131,   2,   0, 0x2000),  /* STORMRING */
@@ -340,7 +340,7 @@ void DungeonMan::setupConstants() {
 		WeaponInfo(36, 255, 100,  50, 0x20FF)  /* THE FIRESTAFF */
 	};
 
-	CreatureInfo creatureInfo[k27_CreatureTypeCount] = { // @ G0243_as_Graphic559_CreatureInfo
+	static const CreatureInfo creatureInfo[k27_CreatureTypeCount] = { // @ G0243_as_Graphic559_CreatureInfo
 	/* { CreatureAspectIndex, AttackSoundOrdinal, Attributes, GraphicInfo,
 		MovementTicks, AttackTicks, Defense, BaseHealth, Attack, PoisonAttack,
 		Dexterity, Ranges, Properties, Resistances, AnimationTicks, WoundProbabilities, AttackType } */
@@ -373,7 +373,7 @@ void DungeonMan::setupConstants() {
 		{26,  0, 0x38AA, 0x0000,  12, 22, 255, 180, 210,   0, 130, 0x6369, 0xFF37, 0x0FBF, 0x0564, 0xFB52, 5}
 	};
 	// this is the number of uint16s the data has to be stored, not the length of the data in dungeon.dat!
-	byte thingDataWordCount[16] = { // @ G0235_auc_Graphic559_ThingDataByteCount
+	static const byte thingDataWordCount[16] = { // @ G0235_auc_Graphic559_ThingDataByteCount
 		2,   /* Door */
 		3,   /* Teleporter */
 		2,   /* Text String */
@@ -1047,7 +1047,7 @@ Thing DungeonMan::getNextThing(Thing thing) {
 }
 
 void DungeonMan::decodeText(char *destString, size_t maxSize, Thing thing, TextType type) {
-	static char messageAndScrollEscReplacementStrings[32][8] = { // @ G0255_aac_Graphic559_MessageAndScrollEscapeReplacementStrings
+	static const char messageAndScrollEscReplacementStrings[32][8] = { // @ G0255_aac_Graphic559_MessageAndScrollEscapeReplacementStrings
 		{'x',   0,   0,   0, 0, 0, 0, 0}, /* Atari ST Version 1.0 1987-12-08 1987-12-11 1.1 1.2EN 1.2GE: { '?',  0,  0,  0, 0, 0, 0, 0 }, */
 		{'y',   0,   0,   0, 0, 0, 0, 0}, /* Atari ST Version 1.0 1987-12-08 1987-12-11 1.1 1.2EN 1.2GE: { '!',  0,  0,  0, 0, 0, 0, 0 }, */
 		{'T', 'H', 'E', ' ', 0, 0, 0, 0},
@@ -1082,7 +1082,7 @@ void DungeonMan::decodeText(char *destString, size_t maxSize, Thing thing, TextT
 		{0,     0,   0,   0, 0, 0, 0, 0}
 	};
 
-	static char escReplacementCharacters[32][2] = { // @ G0256_aac_Graphic559_EscapeReplacementCharacters
+	static const char escReplacementCharacters[32][2] = { // @ G0256_aac_Graphic559_EscapeReplacementCharacters
 		{'a', 0}, {'b', 0}, {'c', 0}, {'d', 0},
 		{'e', 0}, {'f', 0}, {'g', 0}, {'h', 0},
 		{'i', 0}, {'j', 0}, {'k', 0}, {'l', 0},
@@ -1093,7 +1093,7 @@ void DungeonMan::decodeText(char *destString, size_t maxSize, Thing thing, TextT
 		{'4', 0}, {'5', 0}, {'6', 0}, {'7', 0}
 	};
 
-	static char inscriptionEscReplacementStrings[32][8] = { // @ G0257_aac_Graphic559_InscriptionEscapeReplacementStrings
+	static const char inscriptionEscReplacementStrings[32][8] = { // @ G0257_aac_Graphic559_InscriptionEscapeReplacementStrings
 		{28,  0,  0,  0, 0, 0, 0, 0}, /* Atari ST Version 1.0 1987-12-08 1987-12-11 1.1 1.2EN 1.2GE: { 0,  0,  0,  0, 0, 0, 0, 0 }, */
 		{29,  0,  0,  0, 0, 0, 0, 0}, /* Atari ST Version 1.0 1987-12-08 1987-12-11 1.1 1.2EN 1.2GE: { 0,  0,  0,  0, 0, 0, 0, 0 }, */
 		{19,  7,  4, 26, 0, 0, 0, 0},
@@ -1144,7 +1144,7 @@ void DungeonMan::decodeText(char *destString, size_t maxSize, Thing thing, TextT
 		int16 escChar = 0;
 		uint16 *codeWord = _dungeonTextData + textString.getWordOffset();
 		uint16 code = 0, codes = 0;
-		char *escReplString = nullptr;
+		const char *escReplString = nullptr;
 		char *endDestString = destString + maxSize;
 		for (; destString < endDestString; ) {
 			if (!codeCounter) {

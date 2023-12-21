@@ -94,7 +94,7 @@ uint16 GroupMan::getGroupCells(Group *group, int16 mapIndex) {
 }
 
 uint16 GroupMan::getGroupDirections(Group *group, int16 mapIndex) {
-	static byte groupDirections[4] = {0x00, 0x55, 0xAA, 0xFF}; // @ G0258_auc_Graphic559_GroupDirections
+	static const byte groupDirections[4] = {0x00, 0x55, 0xAA, 0xFF}; // @ G0258_auc_Graphic559_GroupDirections
 
 	if (mapIndex == _vm->_dungeonMan->_partyMapIndex)
 		return _activeGroups[group->getActiveGroupIndex()]._directions;
@@ -172,20 +172,20 @@ void GroupMan::dropGroupPossessions(int16 mapX, int16 mapY, Thing groupThing, So
 }
 
 void GroupMan::dropCreatureFixedPossessions(CreatureType creatureType, int16 mapX, int16 mapY, uint16 cell, SoundMode soundMode) {
-	static uint16 fixedPossessionCreature12Skeleton[3] = { // @ G0245_aui_Graphic559_FixedPossessionsCreature12Skeleton
+	static const uint16 fixedPossessionCreature12Skeleton[3] = { // @ G0245_aui_Graphic559_FixedPossessionsCreature12Skeleton
 		kDMObjectInfoIndexFirstWeapon + kDMWeaponFalchion,
 		kDMObjectInfoIndexFirstArmour + kDMArmourWoodenShield,
 		0}
 	;
-	static uint16 fixedPossessionCreature9StoneGolem[2] = { // @ G0246_aui_Graphic559_FixedPossessionsCreature09StoneGolem
+	static const uint16 fixedPossessionCreature9StoneGolem[2] = { // @ G0246_aui_Graphic559_FixedPossessionsCreature09StoneGolem
 		kDMObjectInfoIndexFirstWeapon + kDMWeaponStoneClub,
 		0
 	};
-	static uint16 fixedPossessionCreatur16TrolinAntman[2] = { // @ G0247_aui_Graphic559_FixedPossessionsCreature16Trolin_Antman
+	static const uint16 fixedPossessionCreatur16TrolinAntman[2] = { // @ G0247_aui_Graphic559_FixedPossessionsCreature16Trolin_Antman
 		kDMObjectInfoIndexFirstWeapon + kDMWeaponClub,
 		0
 	};
-	static uint16 fixedPossessionCreature18AnimatedArmourDethKnight[7] = { // @ G0248_aui_Graphic559_FixedPossessionsCreature18AnimatedArmour_DethKnight
+	static const uint16 fixedPossessionCreature18AnimatedArmourDethKnight[7] = { // @ G0248_aui_Graphic559_FixedPossessionsCreature18AnimatedArmour_DethKnight
 		kDMObjectInfoIndexFirstArmour + kDMArmourFootPlate,
 		kDMObjectInfoIndexFirstArmour + kDMArmourLegPlate,
 		kDMObjectInfoIndexFirstArmour + kDMArmourTorsoPlate,
@@ -194,30 +194,30 @@ void GroupMan::dropCreatureFixedPossessions(CreatureType creatureType, int16 map
 		kDMObjectInfoIndexFirstWeapon + kDMWeaponSword,
 		0
 	};
-	static uint16 fixedPossessionCreature7rockRockPile[5] = { // @ G0249_aui_Graphic559_FixedPossessionsCreature07Rock_RockPile
+	static const uint16 fixedPossessionCreature7rockRockPile[5] = { // @ G0249_aui_Graphic559_FixedPossessionsCreature07Rock_RockPile
 		kDMObjectInfoIndexFirstJunk + kDMJunkTypeBoulder,
 		(kDMObjectInfoIndexFirstJunk + kDMJunkTypeBoulder) | kDMMaskRandomDrop,
 		(kDMObjectInfoIndexFirstWeapon + kDMWeaponRock) | kDMMaskRandomDrop,
 		(kDMObjectInfoIndexFirstWeapon + kDMWeaponRock) | kDMMaskRandomDrop,
 		0
 	};
-	static uint16 fixedPossessionCreature4PainRatHellHound[3] = { // @ G0250_aui_Graphic559_FixedPossessionsCreature04PainRat_Hellhound
+	static const uint16 fixedPossessionCreature4PainRatHellHound[3] = { // @ G0250_aui_Graphic559_FixedPossessionsCreature04PainRat_Hellhound
 		kDMObjectInfoIndexFirstJunk + kDMJunkTypeDrumstickShank,
 		(kDMObjectInfoIndexFirstJunk + kDMJunkTypeDrumstickShank) | kDMMaskRandomDrop,
 		0
 	};
-	static uint16 fixedPossessionCreature6screamer[3] = { // @ G0251_aui_Graphic559_FixedPossessionsCreature06Screamer
+	static const uint16 fixedPossessionCreature6screamer[3] = { // @ G0251_aui_Graphic559_FixedPossessionsCreature06Screamer
 		kDMObjectInfoIndexFirstJunk + kDMJunkTypeScreamerSlice,
 		(kDMObjectInfoIndexFirstJunk + kDMJunkTypeScreamerSlice) | kDMMaskRandomDrop,
 		0
 	};
-	static uint16 fixedPossessionCreature15MagnetaWormWorm[4] = { // @ G0252_aui_Graphic559_FixedPossessionsCreature15MagentaWorm_Worm
+	static const uint16 fixedPossessionCreature15MagnetaWormWorm[4] = { // @ G0252_aui_Graphic559_FixedPossessionsCreature15MagentaWorm_Worm
 		kDMObjectInfoIndexFirstJunk + kDMJunkTypeWormRound,
 		(kDMObjectInfoIndexFirstJunk + kDMJunkTypeWormRound) | kDMMaskRandomDrop,
 		(kDMObjectInfoIndexFirstJunk + kDMJunkTypeWormRound) | kDMMaskRandomDrop,
 		0
 	};
-	static uint16 fixedPossessionCreature24RedDragon[11] = { // @ G0253_aui_Graphic559_FixedPossessionsCreature24RedDragon
+	static const uint16 fixedPossessionCreature24RedDragon[11] = { // @ G0253_aui_Graphic559_FixedPossessionsCreature24RedDragon
 		kDMObjectInfoIndexFirstJunk + kDMJunkTypeDragonSteak,
 		kDMObjectInfoIndexFirstJunk + kDMJunkTypeDragonSteak,
 		kDMObjectInfoIndexFirstJunk + kDMJunkTypeDragonSteak,
@@ -233,7 +233,7 @@ void GroupMan::dropCreatureFixedPossessions(CreatureType creatureType, int16 map
 
 	DungeonMan &dungeon = *_vm->_dungeonMan;
 
-	uint16 *fixedPossessions;
+	const uint16 *fixedPossessions;
 	bool cursedPossessions = false;
 	switch (creatureType) {
 	case kDMCreatureTypePainRat:
@@ -1572,7 +1572,7 @@ bool GroupMan::isCreatureAttacking(Group *group, int16 mapX, int16 mapY, uint16 
 }
 
 void GroupMan::setOrderedCellsToAttack(signed char *orderedCellsToAttack, int16 targetMapX, int16 targetMapY, int16 attackerMapX, int16 attackerMapY, uint16 cellSource) {
-	static signed char attackOrder[8][4] = { // @ G0023_aac_Graphic562_OrderedCellsToAttack
+	static const signed char attackOrder[8][4] = { // @ G0023_aac_Graphic562_OrderedCellsToAttack
 		{0, 1, 3, 2},   /* Attack South from position Northwest or Southwest */
 		{1, 0, 2, 3},   /* Attack South from position Northeast or Southeast */
 		{1, 2, 0, 3},   /* Attack West from position Northwest or Northeast */
@@ -1630,7 +1630,7 @@ void GroupMan::stealFromChampion(Group *group, uint16 championIndex) {
 }
 
 int16 GroupMan::getChampionDamage(Group *group, uint16 champIndex) {
-	unsigned char allowedWoundMasks[4] = {32, 16, 8, 4}; // @ G0024_auc_Graphic562_WoundProbabilityIndexToWoundMask
+	static const unsigned char allowedWoundMasks[4] = {32, 16, 8, 4}; // @ G0024_auc_Graphic562_WoundProbabilityIndexToWoundMask
 	ChampionMan &championMan = *_vm->_championMan;
 
 	Champion *curChampion = &championMan._champions[champIndex];

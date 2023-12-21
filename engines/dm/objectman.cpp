@@ -31,8 +31,8 @@
 namespace DM {
 
 void ObjectMan::initConstants() {
-	int16 iconGraphicHeight[7] = {32, 32, 32, 32, 32, 32, 32}; // @ K0077_ai_IconGraphicHeight
-	int16 iconGraphicFirstIndex[7] = { // G0026_ai_Graphic562_IconGraphicFirstIconIndex
+	static const int16 iconGraphicHeight[7] = {32, 32, 32, 32, 32, 32, 32}; // @ K0077_ai_IconGraphicHeight
+	static const int16 iconGraphicFirstIndex[7] = { // G0026_ai_Graphic562_IconGraphicFirstIconIndex
 		0,     /* First icon index in graphic #42 */
 		32,    /* First icon index in graphic #43 */
 		64,    /* First icon index in graphic #44 */
@@ -142,7 +142,7 @@ IconIndice ObjectMan::getObjectType(Thing thing) {
 }
 
 IconIndice ObjectMan::getIconIndex(Thing thing) {
-	static byte chargeCountToTorchType[16] = {0, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3}; // @ G0029_auc_Graphic562_ChargeCountToTorchType
+	static const byte chargeCountToTorchType[16] = {0, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3}; // @ G0029_auc_Graphic562_ChargeCountToTorchType
 
 	int16 iconIndex = getObjectType(thing);
 	if (iconIndex != kDMIconIndiceNone) {

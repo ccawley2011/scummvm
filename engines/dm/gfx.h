@@ -380,12 +380,12 @@ public:
 
 	Box() = default;
 
-	bool isPointInside(Common::Point point) {
+	bool isPointInside(Common::Point point) const {
 		// not using Common::Rect::contains() because we need both boundaries to be included
 		return (_rect.left <= point.x) && (point.x <= _rect.right) && (_rect.top <= point.y) && (point.y <= _rect.bottom);
 	}
 
-	bool isPointInside(int16 x, int16 y) {
+	bool isPointInside(int16 x, int16 y) const {
 		return isPointInside(Common::Point(x, y));
 	}
 
@@ -683,7 +683,7 @@ private:
 	int16 _doorNativeBitmapIndexFrontD2LCR[2]; // @ G0694_ai_DoorNativeBitmapIndex_Front_D2LCR
 	int16 _doorNativeBitmapIndexFrontD1LCR[2]; // @ G0695_ai_DoorNativeBitmapIndex_Front_D1LCR
 
-	uint16 *_paletteFadeFrom; // @ K0017_pui_Palette_FadeFrom
+	const uint16 *_paletteFadeFrom; // @ K0017_pui_Palette_FadeFrom
 	uint16 _paletteFadeTemporary[16]; // @ K0016_aui_Palette_FadeTemporary
 public:
 
@@ -741,12 +741,12 @@ public:
 	void blitToBitmap(byte *srcBitmap, byte *destBitmap, const Box &box, uint16 srcX, uint16 srcY, uint16 srcByteWidth,
 						   uint16 destByteWidth, Color transparent, int16 srcHeight, int16 destHight); // @ F0132_VIDEO_Blit
 	 /* Expects inclusive boundaries in box */
-	void blitBoxFilledWithMaskedBitmap(byte *src, byte *dest, byte *mask, byte *tmp, Box &box, int16 lastUnitIndex,
+	void blitBoxFilledWithMaskedBitmap(byte *src, byte *dest, byte *mask, byte *tmp, const Box &box, int16 lastUnitIndex,
 											int16 firstUnitIndex, int16 destByteWidth, Color transparent,
 											int16 xPos, int16 yPos, int16 destHeight, int16 height2); // @ F0133_VIDEO_BlitBoxFilledWithMaskedBitmap
 		 // this function takes pixel widths
 	void blitToBitmapShrinkWithPalChange(byte *srcBitmap, byte *destBitmap,
-											  int16 srcPixelWidth, int16 srcHight, int16 destPixelWidth, int16 destHeight, byte *palChange); // @ F0129_VIDEO_BlitShrinkWithPaletteChanges
+											  int16 srcPixelWidth, int16 srcHight, int16 destPixelWidth, int16 destHeight, const byte *palChange); // @ F0129_VIDEO_BlitShrinkWithPaletteChanges
 	void flipBitmapHorizontal(byte *bitmap, uint16 byteWidth, uint16 height); // @ F0130_VIDEO_FlipHorizontal
 	void flipBitmapVertical(byte *bitmap, uint16 byteWidth, uint16 height);
 	byte *getExplosionBitmap(uint16 explosionAspIndex, uint16 scale, int16 &returnByteWidth, int16 &returnHeight); // @ F0114_DUNGEONVIEW_GetExplosionBitmap
@@ -754,7 +754,7 @@ public:
 	void fillBitmap(byte *bitmap, Color color, uint16 byteWidth, uint16 height); // @ F0134_VIDEO_FillBitmap
 	void fillScreen(Color color);
 	/* Expects inclusive boundaries in box */
-	void fillScreenBox(Box &box, Color color); // @ D24_FillScreenBox, F0550_VIDEO_FillScreenBox
+	void fillScreenBox(const Box &box, Color color); // @ D24_FillScreenBox, F0550_VIDEO_FillScreenBox
 	/* Expects inclusive boundaries in box */
 	void fillBoxBitmap(byte *destBitmap, Box &box, Color color, int16 byteWidth, int16 height); // @ F0135_VIDEO_FillBox
 	void drawDungeon(Direction dir, int16 posX, int16 posY); // @ F0128_DUNGEONVIEW_Draw_CPSF
@@ -823,8 +823,8 @@ public:
 	void addDerivedBitmap(int16 derivedBitmapIndex); // @ F0493_CACHE_AddDerivedBitmap
 	void releaseBlock(uint16 index); // @ F0480_CACHE_ReleaseBlock
 	uint16 getDarkenedColor(uint16 RGBcolor);
-	void startEndFadeToPalette(uint16 *P0849_pui_Palette); // @ F0436_STARTEND_FadeToPalette
-	void buildPaletteChangeCopperList(uint16 *middleScreen, uint16 *topAndBottom); // @ F0508_AMIGA_BuildPaletteChangeCopperList
+	void startEndFadeToPalette(const uint16 *P0849_pui_Palette); // @ F0436_STARTEND_FadeToPalette
+	void buildPaletteChangeCopperList(const uint16 *middleScreen, const uint16 *topAndBottom); // @ F0508_AMIGA_BuildPaletteChangeCopperList
 	void shadeScreenBox(Box *box, Color color) { warning("STUB METHOD: shadeScreenBox"); } // @ F0136_VIDEO_ShadeScreenBox
 
 private:

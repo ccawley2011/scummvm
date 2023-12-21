@@ -45,7 +45,7 @@
 namespace DM {
 
 void EventManager::initArrays() {
-	KeyboardInput primaryKeyboardInputInterface[7] = { // @ G0458_as_Graphic561_PrimaryKeyboardInput_Interface
+	static const KeyboardInput primaryKeyboardInputInterface[7] = { // @ G0458_as_Graphic561_PrimaryKeyboardInput_Interface
 		/* { Command, Code } */
 		KeyboardInput(kDMCommandToggleInventoryChampion0, Common::KEYCODE_F1, 0), /* F1 (<CSI>1~) Atari ST: Code = 0x3B00 */
 		KeyboardInput(kDMCommandToggleInventoryChampion1, Common::KEYCODE_F2, 0), /* F2 (<CSI>2~) Atari ST: Code = 0x3C00 */
@@ -56,7 +56,7 @@ void EventManager::initArrays() {
 		KeyboardInput(kDMCommandNone, Common::KEYCODE_INVALID, 0)
 	};
 
-	KeyboardInput secondaryKeyboardInputMovement[19] = { // @ G0459_as_Graphic561_SecondaryKeyboardInput_Movement
+	static const KeyboardInput secondaryKeyboardInputMovement[19] = { // @ G0459_as_Graphic561_SecondaryKeyboardInput_Movement
 		/* { Command, Code } */
 		KeyboardInput(kDMCommandTurnLeft, Common::KEYCODE_KP4, 0), /* Numeric pad 4 Atari ST: Code = 0x5200 */
 		KeyboardInput(kDMCommandMoveForward, Common::KEYCODE_KP5, 0), /* Numeric pad 5 Atari ST: Code = 0x4800 */
@@ -78,18 +78,18 @@ void EventManager::initArrays() {
 		KeyboardInput(kDMCommandTurnRight, Common::KEYCODE_e, Common::KBD_SHIFT), /* Shift Help (<CSI>?~) */ /*Differs for testing convenience*/
 		KeyboardInput(kDMCommandNone, Common::KEYCODE_INVALID, 0)
 	};
-	KeyboardInput primaryKeyboardInputPartySleeping[3] = { // @ G0460_as_Graphic561_PrimaryKeyboardInput_PartySleeping
+	static const KeyboardInput primaryKeyboardInputPartySleeping[3] = { // @ G0460_as_Graphic561_PrimaryKeyboardInput_PartySleeping
 		/* { Command, Code } */
 		KeyboardInput(kDMCommandWakeUp, Common::KEYCODE_RETURN, 0), /* Return */
 		KeyboardInput(kDMCommandFreezeGame, Common::KEYCODE_ESCAPE, 0), /* Esc */
 		KeyboardInput(kDMCommandNone, Common::KEYCODE_INVALID, 0)
 	};
-	KeyboardInput primaryKeyboardInputFrozenGame[2] = { // @ G0461_as_Graphic561_PrimaryKeyboardInput_FrozenGame
+	static const KeyboardInput primaryKeyboardInputFrozenGame[2] = { // @ G0461_as_Graphic561_PrimaryKeyboardInput_FrozenGame
 		/* { Command, Code } */
 		KeyboardInput(kDMCommandUnfreezeGame, Common::KEYCODE_ESCAPE, 0), /* Esc */
 		KeyboardInput(kDMCommandNone, Common::KEYCODE_INVALID, 0)
 	};
-	MouseInput primaryMouseInputEntrance[4] = { // @ G0445_as_Graphic561_PrimaryMouseInput_Entrance[4]
+	static const MouseInput primaryMouseInputEntrance[4] = { // @ G0445_as_Graphic561_PrimaryMouseInput_Entrance[4]
 		/* { Command, Box.X1, Box.X2, Box.Y1, Box.Y2, Button } */
 		MouseInput(kDMCommandEntranceEnterDungeon, 244, 298,  45,  58, kDMMouseButtonLeft),
 		// Strangerke - C201_COMMAND_ENTRANCE_RESUME isn't present in the demo
@@ -97,12 +97,12 @@ void EventManager::initArrays() {
 		MouseInput(kDMCommandEntranceDrawCredits,  248, 293, 187, 199, kDMMouseButtonLeft),
 		MouseInput(kDMCommandNone, 0, 0, 0, 0, kDMMouseButtonNone)
 	};
-	MouseInput primaryMouseInputRestartGame[2] = { // @ G0446_as_Graphic561_PrimaryMouseInput_RestartGame[2]
+	static const MouseInput primaryMouseInputRestartGame[2] = { // @ G0446_as_Graphic561_PrimaryMouseInput_RestartGame[2]
 		/* { Command, Box.X1, Box.X2, Box.Y1, Box.Y2, Button } */
 		MouseInput(kDMCommandRestartGame, 103, 217, 145, 159, kDMMouseButtonLeft),
 		MouseInput(kDMCommandNone, 0, 0, 0, 0, kDMMouseButtonNone)
 	};
-	MouseInput primaryMouseInputInterface[20] = { // @ G0447_as_Graphic561_PrimaryMouseInput_Interface[20]
+	static const MouseInput primaryMouseInputInterface[20] = { // @ G0447_as_Graphic561_PrimaryMouseInput_Interface[20]
 		/* { Command, Box.X1, Box.X2, Box.Y1, Box.Y2, Button } */
 		MouseInput(kDMCommandClickInChampion0StatusBox,       0,  42,   0,  28, kDMMouseButtonLeft),
 		MouseInput(kDMCommandClickInChampion1StatusBox,      69, 111,   0,  28, kDMMouseButtonLeft),
@@ -125,7 +125,7 @@ void EventManager::initArrays() {
 		MouseInput(kDMCommandFreezeGame,                          0,   1, 198, 199, kDMMouseButtonLeft),
 		MouseInput(kDMCommandNone, 0, 0, 0, 0, kDMMouseButtonNone)
 	};
-	MouseInput secondaryMouseInputMovement[9] = { // @ G0448_as_Graphic561_SecondaryMouseInput_Movement[9]
+	static const MouseInput secondaryMouseInputMovement[9] = { // @ G0448_as_Graphic561_SecondaryMouseInput_Movement[9]
 		/* { Command, Box.X1, Box.X2, Box.Y1, Box.Y2, Button } */
 		MouseInput(kDMCommandTurnLeft,             234, 261, 125, 145, kDMMouseButtonLeft),
 		MouseInput(kDMCommandMoveForward,          263, 289, 125, 145, kDMMouseButtonLeft),
@@ -137,7 +137,7 @@ void EventManager::initArrays() {
 		MouseInput(kDMCommandToggleInventoryLeader, 0, 319,  33, 199, kDMMouseButtonRight),
 		MouseInput(kDMCommandNone, 0, 0, 0, 0, kDMMouseButtonNone)
 	};
-	MouseInput secondaryMouseInputChampionInventory[38] = { // @ G0449_as_Graphic561_SecondaryMouseInput_ChampionInventory[38]
+	static const MouseInput secondaryMouseInputChampionInventory[38] = { // @ G0449_as_Graphic561_SecondaryMouseInput_ChampionInventory[38]
 		/* { Command, Box.X1, Box.X2, Box.Y1, Box.Y2, Button } */
 		MouseInput(kDMCommandCloseInventory,                                   0, 319,   0, 199, kDMMouseButtonRight),
 		MouseInput(kDMCommandSaveGame,                                       174, 182,  36,  44, kDMMouseButtonLeft),
@@ -178,19 +178,19 @@ void EventManager::initArrays() {
 		MouseInput(kDMCommandClickInPanel,                                   96, 223,  83, 167, kDMMouseButtonLeft),
 		MouseInput(kDMCommandNone, 0, 0, 0, 0, kDMMouseButtonNone)
 	};
-	MouseInput primaryMouseInputPartySleeping[3] = { // @ G0450_as_Graphic561_PrimaryMouseInput_PartySleeping[3]
+	static const MouseInput primaryMouseInputPartySleeping[3] = { // @ G0450_as_Graphic561_PrimaryMouseInput_PartySleeping[3]
 		/* { Command, Box.X1, Box.X2, Box.Y1, Box.Y2, Button } */
 		MouseInput(kDMCommandWakeUp, 0, 223, 33, 168, kDMMouseButtonLeft),
 		MouseInput(kDMCommandWakeUp, 0, 223, 33, 168, kDMMouseButtonRight),
 		MouseInput(kDMCommandNone, 0, 0, 0, 0, kDMMouseButtonNone)
 	};
-	MouseInput primaryMouseInputFrozenGame[3] = { // @ G0451_as_Graphic561_PrimaryMouseInput_FrozenGame[3]
+	static const MouseInput primaryMouseInputFrozenGame[3] = { // @ G0451_as_Graphic561_PrimaryMouseInput_FrozenGame[3]
 		/* { Command, Box.X1, Box.X2, Box.Y1, Box.Y2, Button } */
 		MouseInput(kDMCommandUnfreezeGame, 0, 319, 0, 199, kDMMouseButtonLeft),
 		MouseInput(kDMCommandUnfreezeGame, 0, 319, 0, 199, kDMMouseButtonRight),
 		MouseInput(kDMCommandNone, 0, 0, 0, 0, kDMMouseButtonNone)
 	};
-	MouseInput mouseInputActionAreaNames[5] = { // @ G0452_as_Graphic561_MouseInput_ActionAreaNames[5]
+	static const MouseInput mouseInputActionAreaNames[5] = { // @ G0452_as_Graphic561_MouseInput_ActionAreaNames[5]
 		/* { Command, Box.X1, Box.X2, Box.Y1, Box.Y2, Button } */
 		MouseInput(kDMCommandClickInActionAreaPass,     285, 318,  77,  83, kDMMouseButtonLeft),
 		MouseInput(kDMCommandClickInActionAreaAction0, 234, 318,  86,  96, kDMMouseButtonLeft),
@@ -198,7 +198,7 @@ void EventManager::initArrays() {
 		MouseInput(kDMCommandClickInActionAreaAction2, 234, 318, 110, 120, kDMMouseButtonLeft),
 		MouseInput(kDMCommandNone, 0, 0, 0, 0, kDMMouseButtonNone)
 	};
-	MouseInput mouseInputActionAreaIcons[5] = { // @ G0453_as_Graphic561_MouseInput_ActionAreaIcons[5]
+	static const MouseInput mouseInputActionAreaIcons[5] = { // @ G0453_as_Graphic561_MouseInput_ActionAreaIcons[5]
 		/* { Command, Box.X1, Box.X2, Box.Y1, Box.Y2, Button } */
 		MouseInput(kDMCommandClickInActionAreaChampion0Action, 233, 252, 86, 120, kDMMouseButtonLeft),
 		MouseInput(kDMCommandClickInActionAreaChampion1Action, 255, 274, 86, 120, kDMMouseButtonLeft),
@@ -206,7 +206,7 @@ void EventManager::initArrays() {
 		MouseInput(kDMCommandClickInActionAreaChampion3Action, 299, 318, 86, 120, kDMMouseButtonLeft),
 		MouseInput(kDMCommandNone, 0, 0, 0, 0, kDMMouseButtonNone)
 	};
-	MouseInput mouseInputSpellArea[9] = { // @ G0454_as_Graphic561_MouseInput_SpellArea[9]
+	static const MouseInput mouseInputSpellArea[9] = { // @ G0454_as_Graphic561_MouseInput_SpellArea[9]
 		/* { Command, Box.X1, Box.X2, Box.Y1, Box.Y2, Button } */
 		MouseInput(kDMCommandClickInSpellAreaSymbol1,      235, 247, 51, 61, kDMMouseButtonLeft),
 		MouseInput(kDMCommandClickInSpellAreaSymbol2,      249, 261, 51, 61, kDMMouseButtonLeft),
@@ -218,7 +218,7 @@ void EventManager::initArrays() {
 		MouseInput(kDMCommandClickInSpellAreaRecantSymbol, 305, 318, 63, 73, kDMMouseButtonLeft),
 		MouseInput(kDMCommandNone, 0, 0, 0, 0, kDMMouseButtonNone)
 	};
-	MouseInput mouseInputChampionNamesHands[13] = { // @ G0455_as_Graphic561_MouseInput_ChampionNamesHands[13]
+	static const MouseInput mouseInputChampionNamesHands[13] = { // @ G0455_as_Graphic561_MouseInput_ChampionNamesHands[13]
 		/* { Command, Box.X1, Box.X2, Box.Y1, Box.Y2, Button } */
 		MouseInput(kDMCommandSetLeaderChampion0,                                    0,  42,  0,  6, kDMMouseButtonLeft),
 		MouseInput(kDMCommandSetLeaderChampion1,                                   69, 111,  0,  6, kDMMouseButtonLeft),
@@ -234,7 +234,7 @@ void EventManager::initArrays() {
 		MouseInput(kDMCommandClickOnSlotBoxChampion3StatusBoxActionHand, 231, 246, 10, 25, kDMMouseButtonLeft),
 		MouseInput(kDMCommandNone, 0, 0, 0, 0, kDMMouseButtonNone)
 	};
-	MouseInput mouseInputPanelChest[9] = { // @ G0456_as_Graphic561_MouseInput_PanelChest[9]
+	static const MouseInput mouseInputPanelChest[9] = { // @ G0456_as_Graphic561_MouseInput_PanelChest[9]
 		/* { Command, Box.X1, Box.X2, Box.Y1, Box.Y2, Button } */
 		MouseInput(kDMCommandClickOnSlotBoxChest1, 117, 132,  92, 107, kDMMouseButtonLeft),
 		MouseInput(kDMCommandClickOnSlotBoxChest2, 106, 121, 109, 124, kDMMouseButtonLeft),
@@ -246,51 +246,51 @@ void EventManager::initArrays() {
 		MouseInput(kDMCommandClickOnSlotBoxChest8, 196, 211, 138, 153, kDMMouseButtonLeft),
 		MouseInput(kDMCommandNone, 0, 0, 0, 0, kDMMouseButtonNone)
 	};
-	MouseInput mouseInputPanelResurrectReincarnateCancel[4] = { // @ G0457_as_Graphic561_MouseInput_PanelResurrectReincarnateCancel[4]
+	static const MouseInput mouseInputPanelResurrectReincarnateCancel[4] = { // @ G0457_as_Graphic561_MouseInput_PanelResurrectReincarnateCancel[4]
 		/* { Command, Box.X1, Box.X2, Box.Y1, Box.Y2, Button } */
 		MouseInput(kDMCommandClickInPanelResurrect,   108, 158,  90, 138, kDMMouseButtonLeft), /* Atari ST: Box = 104, 158,  86, 142 */
 		MouseInput(kDMCommandClickInPanelReincarnate, 161, 211,  90, 138, kDMMouseButtonLeft), /* Atari ST: Box = 163, 217,  86, 142 */
 		MouseInput(kDMCommandClickInPanelCancel,      108, 211, 141, 153, kDMMouseButtonLeft), /* Atari ST: Box = 104, 217, 146, 156 */
 		MouseInput(kDMCommandNone, 0, 0, 0, 0, kDMMouseButtonNone)
 	};
-	MouseInput primaryMouseInputViewportDialog1Choice[2] = { // @ G0471_as_Graphic561_PrimaryMouseInput_ViewportDialog1Choice[2]
+	static const MouseInput primaryMouseInputViewportDialog1Choice[2] = { // @ G0471_as_Graphic561_PrimaryMouseInput_ViewportDialog1Choice[2]
 		MouseInput(kDMCommandClickOnDialogChoice1, 16, 207, 138, 152, kDMMouseButtonLeft), /* Bottom button */
 		MouseInput(kDMCommandNone, 0, 0, 0, 0, kDMMouseButtonNone)
 	};
-	MouseInput primaryMouseInputViewportDialog2Choices[3] = { // @ G0472_as_Graphic561_PrimaryMouseInput_ViewportDialog2Choices[3]
+	static const MouseInput primaryMouseInputViewportDialog2Choices[3] = { // @ G0472_as_Graphic561_PrimaryMouseInput_ViewportDialog2Choices[3]
 		MouseInput(kDMCommandClickOnDialogChoice1, 16, 207, 101, 115, kDMMouseButtonLeft), /* Top button */
 		MouseInput(kDMCommandClickOnDialogChoice2, 16, 207, 138, 152, kDMMouseButtonLeft), /* Bottom button */
 		MouseInput(kDMCommandNone, 0, 0, 0, 0, kDMMouseButtonNone)
 	};
-	MouseInput primaryMouseInputViewportDialog3Choices[4] = { // @ G0473_as_Graphic561_PrimaryMouseInput_ViewportDialog3Choices[4]
+	static const MouseInput primaryMouseInputViewportDialog3Choices[4] = { // @ G0473_as_Graphic561_PrimaryMouseInput_ViewportDialog3Choices[4]
 		MouseInput(kDMCommandClickOnDialogChoice1,  16, 207, 101, 115, kDMMouseButtonLeft), /* Top button */
 		MouseInput(kDMCommandClickOnDialogChoice2,  16, 101, 138, 152, kDMMouseButtonLeft), /* Lower left button */
 		MouseInput(kDMCommandClickOnDialogChoice3, 123, 207, 138, 152, kDMMouseButtonLeft), /* Lower right button */
 		MouseInput(kDMCommandNone, 0, 0, 0, 0, kDMMouseButtonNone)
 	};
-	MouseInput primaryMouseInputViewportDialog4Choices[5] = { // @ G0474_as_Graphic561_PrimaryMouseInput_ViewportDialog4Choices[5]
+	static const MouseInput primaryMouseInputViewportDialog4Choices[5] = { // @ G0474_as_Graphic561_PrimaryMouseInput_ViewportDialog4Choices[5]
 		MouseInput(kDMCommandClickOnDialogChoice1,  16, 101, 101, 115, kDMMouseButtonLeft), /* Top left button */
 		MouseInput(kDMCommandClickOnDialogChoice2, 123, 207, 101, 115, kDMMouseButtonLeft), /* Top right button */
 		MouseInput(kDMCommandClickOnDialogChoice3,  16, 101, 138, 152, kDMMouseButtonLeft), /* Lower left button */
 		MouseInput(kDMCommandClickOnDialogChoice4, 123, 207, 138, 152, kDMMouseButtonLeft), /* Lower right button */
 		MouseInput(kDMCommandNone, 0, 0, 0, 0, kDMMouseButtonNone)
 	};
-	MouseInput primaryMouseInputScreenDialog1Choice[2] = { // @ G0475_as_Graphic561_PrimaryMouseInput_ScreenDialog1Choice[2]
+	static const MouseInput primaryMouseInputScreenDialog1Choice[2] = { // @ G0475_as_Graphic561_PrimaryMouseInput_ScreenDialog1Choice[2]
 		MouseInput(kDMCommandClickOnDialogChoice1, 63, 254, 138, 152, kDMMouseButtonLeft), /* Bottom button */
 		MouseInput(kDMCommandNone, 0, 0, 0, 0, kDMMouseButtonNone)
 	};
-	MouseInput primaryMouseInputScreenDialog2Choices[3] = { // @ G0476_as_Graphic561_PrimaryMouseInput_ScreenDialog2Choices[3]
+	static const MouseInput primaryMouseInputScreenDialog2Choices[3] = { // @ G0476_as_Graphic561_PrimaryMouseInput_ScreenDialog2Choices[3]
 		MouseInput(kDMCommandClickOnDialogChoice1, 63, 254, 101, 115, kDMMouseButtonLeft), /* Top button */
 		MouseInput(kDMCommandClickOnDialogChoice2, 63, 254, 138, 152, kDMMouseButtonLeft), /* Bottom button */
 		MouseInput(kDMCommandNone, 0, 0, 0, 0, kDMMouseButtonNone)
 	};
-	MouseInput primaryMouseInputScreenDialog3Choices[4] = { // @ G0477_as_Graphic561_PrimaryMouseInput_ScreenDialog3Choices[4]
+	static const MouseInput primaryMouseInputScreenDialog3Choices[4] = { // @ G0477_as_Graphic561_PrimaryMouseInput_ScreenDialog3Choices[4]
 		MouseInput(kDMCommandClickOnDialogChoice1,  63, 254, 101, 115, kDMMouseButtonLeft), /* Top button */
 		MouseInput(kDMCommandClickOnDialogChoice2,  63, 148, 138, 152, kDMMouseButtonLeft), /* Lower left button */
 		MouseInput(kDMCommandClickOnDialogChoice3, 170, 254, 138, 152, kDMMouseButtonLeft), /* Lower right button */
 		MouseInput(kDMCommandNone, 0, 0, 0, 0, kDMMouseButtonNone)
 	};
-	MouseInput primaryMouseInputScreenDialog4Choices[5] = { // @ G0478_as_Graphic561_PrimaryMouseInput_ScreenDialog4Choices[5]
+	static const MouseInput primaryMouseInputScreenDialog4Choices[5] = { // @ G0478_as_Graphic561_PrimaryMouseInput_ScreenDialog4Choices[5]
 		MouseInput(kDMCommandClickOnDialogChoice1,  63, 148, 101, 115, kDMMouseButtonLeft), /* Top left button */
 		MouseInput(kDMCommandClickOnDialogChoice2, 170, 254, 101, 115, kDMMouseButtonLeft), /* Top right button */
 		MouseInput(kDMCommandClickOnDialogChoice3,  63, 148, 138, 152, kDMMouseButtonLeft), /* Lower left button */
@@ -298,7 +298,7 @@ void EventManager::initArrays() {
 		MouseInput(kDMCommandNone, 0, 0, 0, 0, kDMMouseButtonNone)
 	};
 
-	MouseInput *primaryMouseInputDialogSets[2][4] = { // @ G0480_aaps_PrimaryMouseInput_DialogSets
+	static const MouseInput *const primaryMouseInputDialogSets[2][4] = { // @ G0480_aaps_PrimaryMouseInput_DialogSets
 		{
 			_primaryMouseInputViewportDialog1Choice,
 			_primaryMouseInputViewportDialog2Choices,
@@ -404,7 +404,7 @@ EventManager::~EventManager() {
 }
 
 void EventManager::initMouse() {
-	static uint16 gK150_PalMousePointer[16] = {0x000, 0x666, 0x888, 0x620, 0x0CC, 0x840, 0x080, 0x0C0, 0xF00, 0xFA0, 0xC86, 0xFF0, 0x000, 0xAAA, 0x00F, 0xFFF}; // @ K0150_aui_Palette_MousePointer
+	static const uint16 gK150_PalMousePointer[16] = {0x000, 0x666, 0x888, 0x620, 0x0CC, 0x840, 0x080, 0x0C0, 0xF00, 0xFA0, 0xC86, 0xFF0, 0x000, 0xAAA, 0x00F, 0xFFF}; // @ K0150_aui_Palette_MousePointer
 
 	if (!_mousePointerOriginalColorsObject)
 		_mousePointerOriginalColorsObject = new byte[32 * 18];
@@ -441,12 +441,12 @@ void EventManager::setMousePointerToNormal(int16 mousePointer) {
 }
 
 void EventManager::setPointerToObject(byte *bitmap) {
-	static byte palChangesMousepointerOjbectIconShadow[16] = {120, 120, 120, 120, 120, 120, 120, 120,
+	static const byte palChangesMousepointerOjbectIconShadow[16] = {120, 120, 120, 120, 120, 120, 120, 120,
 		120, 120, 120, 120, 0, 120, 120, 120}; // @ K0027_auc_PaletteChanges_MousePointerObjectIconShadow
-	static byte palChangesMousePointerIcon[16] = {120, 10, 20, 30, 40, 50, 60, 70, 80, 90,
+	static const byte palChangesMousePointerIcon[16] = {120, 10, 20, 30, 40, 50, 60, 70, 80, 90,
 		100, 110, 0, 130, 140, 150}; // @ G0044_auc_Graphic562_PaletteChanges_MousePointerIcon
-	static Box boxMousePointerObjectShadow(2, 17, 2, 17); // @ G0619_s_Box_MousePointer_ObjectShadow
-	static Box boxMousePointerObject(0, 15, 0, 15); // @ G0620_s_Box_MousePointer_Object
+	static const Box boxMousePointerObjectShadow(2, 17, 2, 17); // @ G0619_s_Box_MousePointer_ObjectShadow
+	static const Box boxMousePointerObject(0, 15, 0, 15); // @ G0620_s_Box_MousePointer_Object
 
 	DisplayMan &displMan = *_vm->_displayMan;
 
@@ -481,7 +481,7 @@ void EventManager::mouseDropChampionIcon() {
 }
 
 void EventManager::buildpointerScreenArea(int16 mousePosX, int16 mousePosY) {
-	static unsigned char bitmapArrowPointer[288] = { // @ G0042_auc_Graphic562_Bitmap_ArrowPointer
+	static const unsigned char bitmapArrowPointer[288] = { // @ G0042_auc_Graphic562_Bitmap_ArrowPointer
 		0x00, 0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x00, 0x60, 0x00, 0x00, 0x00, 0x70, 0x00, 0x00, 0x00,
 		0x78, 0x00, 0x00, 0x00, 0x7C, 0x00, 0x00, 0x00, 0x7E, 0x00, 0x00, 0x00, 0x7F, 0x00, 0x00, 0x00,
 		0x7F, 0x80, 0x00, 0x00, 0x7C, 0x00, 0x00, 0x00, 0x6C, 0x00, 0x00, 0x00, 0x46, 0x00, 0x00, 0x00,
@@ -501,7 +501,7 @@ void EventManager::buildpointerScreenArea(int16 mousePosX, int16 mousePosY) {
 		0xFE, 0x00, 0x00, 0x00, 0xEF, 0x00, 0x00, 0x00, 0xCF, 0x00, 0x00, 0x00, 0x07, 0x80, 0x00, 0x00,
 		0x07, 0x80, 0x00, 0x00, 0x03, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 	};
-	static unsigned char bitmapHanPointer[288] = { // @ G0043_auc_Graphic562_Bitmap_HandPointer
+	static const unsigned char bitmapHanPointer[288] = { // @ G0043_auc_Graphic562_Bitmap_HandPointer
 		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -700,7 +700,7 @@ void EventManager::processClick(Common::Point mousePos, MouseButton button) {
 	_isCommandQueueLocked = false;
 }
 
-CommandType EventManager::getCommandTypeFromMouseInput(MouseInput *input, Common::Point mousePos, MouseButton button) {
+CommandType EventManager::getCommandTypeFromMouseInput(const MouseInput *input, Common::Point mousePos, MouseButton button) {
 	if (!input)
 		return kDMCommandNone;
 
@@ -716,7 +716,7 @@ CommandType EventManager::getCommandTypeFromMouseInput(MouseInput *input, Common
 void EventManager::processCommandQueue() {
 	static KeyboardInput *primaryKeyboardInputBackup;
 	static KeyboardInput *secondaryKeyboardInputBackup;
-	static MouseInput *primaryMouseInputBackup;
+	static const MouseInput *primaryMouseInputBackup;
 	static MouseInput *secondaryMouseInputBackup;
 
 	DisplayMan &displMan = *_vm->_displayMan;
@@ -950,7 +950,7 @@ void EventManager::commandTurnParty(CommandType cmdType) {
 }
 
 void EventManager::commandMoveParty(CommandType cmdType) {
-	static Box boxMovementArrows[4] = { // @ G0463_as_Graphic561_Box_MovementArrows
+	static const Box boxMovementArrows[4] = { // @ G0463_as_Graphic561_Box_MovementArrows
 		/* { X1, X2, Y1, Y2 } */
 		Box(263, 289, 125, 145),   /* Forward */
 		Box(291, 318, 147, 167),   /* Right */
@@ -958,14 +958,14 @@ void EventManager::commandMoveParty(CommandType cmdType) {
 		Box(234, 261, 147, 167)    /* Left */
 	};
 
-	static int16 movementArrowToStepForwardCount[4] = { // @ G0465_ai_Graphic561_MovementArrowToStepForwardCount
+	static const int16 movementArrowToStepForwardCount[4] = { // @ G0465_ai_Graphic561_MovementArrowToStepForwardCount
 		1,   /* Forward */
 		0,   /* Right */
 		-1,  /* Backward */
 		0    /* Left */
 	};
 
-	static int16 movementArrowToSepRightCount[4] = { // @ G0466_ai_Graphic561_MovementArrowToStepRightCount
+	static const int16 movementArrowToSepRightCount[4] = { // @ G0466_ai_Graphic561_MovementArrowToStepRightCount
 		0,    /* Forward */
 		1,    /* Right */
 		0,    /* Backward */
@@ -979,7 +979,7 @@ void EventManager::commandMoveParty(CommandType cmdType) {
 		championsPtr++;
 	}
 	uint16 movementArrowIdx = cmdType - kDMCommandMoveForward;
-	Box *highlightBox = &boxMovementArrows[movementArrowIdx];
+	const Box *highlightBox = &boxMovementArrows[movementArrowIdx];
 	commandHighlightBoxEnable(highlightBox->_rect.left, highlightBox->_rect.right, highlightBox->_rect.top, highlightBox->_rect.bottom);
 	int16 partyMapX = _vm->_dungeonMan->_partyMapX;
 	int16 partyMapY = _vm->_dungeonMan->_partyMapY;
@@ -1097,11 +1097,12 @@ bool EventManager::isLeaderHandObjThrown(int16 posX, int16 posY) {
 	return objectThrownFl;
 }
 
-void EventManager::setMousePointerFromSpriteData(byte *mouseSprite) {
+void EventManager::setMousePointerFromSpriteData(const byte *mouseSprite) {
 	byte bitmap[16 * 18];
+	byte *pixel = bitmap;
 	memset(bitmap, 0, sizeof(bitmap));
 	for (int16 imgPart = 1; imgPart < 3; ++imgPart) {
-		for (byte *line = mouseSprite + 72 * imgPart, *pixel = bitmap;
+		for (const byte *line = mouseSprite + 72 * imgPart;
 			 line < mouseSprite + 72 * (imgPart + 1);
 			 line += 4) {
 
@@ -1159,7 +1160,7 @@ void EventManager::commandProcessType80ClickInDungeonViewTouchFrontWall() {
 }
 
 void EventManager::commandProcessType80ClickInDungeonView(int16 posX, int16 posY) {
-	Box boxObjectPiles[4] = { // @ G0462_as_Graphic561_Box_ObjectPiles
+	static const Box boxObjectPiles[4] = { // @ G0462_as_Graphic561_Box_ObjectPiles
 		/* { X1, X2, Y1, Y2 } */
 		Box(24, 111, 148, 168),   /* Front left */
 		Box(112, 199, 148, 168),  /* Front right */
@@ -1473,9 +1474,9 @@ void EventManager::commandProcessTypes12to27_clickInChampionStatusBox(uint16 cha
 }
 
 void EventManager::mouseProcessCommands125To128_clickOnChampionIcon(uint16 champIconIndex) {
-	static Box championIconShadowBox = Box(2, 20, 2, 15);
-	static Box championIconBox = Box(0, 18, 0, 13);
-	static byte mousePointerIconShadowBox[16] = {0, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 0, 120, 120, 120};
+	static const Box championIconShadowBox = Box(2, 20, 2, 15);
+	static const Box championIconBox = Box(0, 18, 0, 13);
+	static const byte mousePointerIconShadowBox[16] = {0, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 0, 120, 120, 120};
 
 	DisplayMan &displMan = *_vm->_displayMan;
 
@@ -1578,7 +1579,7 @@ void EventManager::commandProcessType100_clickInSpellArea(uint16 posX, uint16 po
 }
 
 void EventManager::commandProcessTypes101To108_clickInSpellSymbolsArea(CommandType cmdType) {
-	static Box spellSymbolsAndDelete[7] = {
+	static const Box spellSymbolsAndDelete[7] = {
 		/* { X1, X2, Y1, Y2 } */
 		Box(235, 247, 51, 61),   /* Symbol 1 */
 		Box(249, 261, 51, 61),   /* Symbol 2 */
@@ -1599,7 +1600,7 @@ void EventManager::commandProcessTypes101To108_clickInSpellSymbolsArea(CommandTy
 	}
 
 	uint16 symbolIndex = cmdType - kDMCommandClickInSpellAreaSymbol1;
-	Box *highlightBox = &spellSymbolsAndDelete[symbolIndex];
+	const Box *highlightBox = &spellSymbolsAndDelete[symbolIndex];
 	commandHighlightBoxEnable(highlightBox->_rect.left, highlightBox->_rect.right, highlightBox->_rect.top, highlightBox->_rect.bottom);
 	_vm->delay(1);
 	highlightBoxDisable();

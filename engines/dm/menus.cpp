@@ -42,7 +42,7 @@
 namespace DM {
 
 void MenuMan::initConstants() {
-	static unsigned char actionSkillIndex[44] = { // @ G0496_auc_Graphic560_ActionSkillIndex
+	static const unsigned char actionSkillIndex[44] = { // @ G0496_auc_Graphic560_ActionSkillIndex
 		0,  /* N */
 		7,  /* BLOCK */
 		6,  /* CHOP */
@@ -88,7 +88,7 @@ void MenuMan::initConstants() {
 		10, /* THROW */
 		3   /* FUSE */
 	};
-	static unsigned char actionDisabledTicks[44] = {
+	static const unsigned char actionDisabledTicks[44] = {
 		0,  /* N */
 		6,  /* BLOCK */
 		8,  /* CHOP */
@@ -183,7 +183,7 @@ void MenuMan::clearActingChampion() {
 }
 
 void MenuMan::drawActionIcon(ChampionIndex championIndex) {
-	static byte palChangesActionAreaObjectIcon[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 0}; // @ G0498_auc_Graphic560_PaletteChanges_ActionAreaObjectIcon
+	static const byte palChangesActionAreaObjectIcon[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 0}; // @ G0498_auc_Graphic560_PaletteChanges_ActionAreaObjectIcon
 
 	if (!_actionAreaContainsIcons)
 		return;
@@ -334,7 +334,7 @@ void MenuMan::drawActionArea() {
 }
 
 const char *MenuMan::getActionName(ChampionAction actionIndex) {
-	const char *championActionNames[44] = { // @ G0490_ac_Graphic560_ActionNames
+	static const char *const championActionNames[44] = { // @ G0490_ac_Graphic560_ActionNames
 		"N", "BLOCK", "CHOP", "X", "BLOW HORN", "FLIP", "PUNCH",
 		"KICK", "WAR CRY", "STAB", "CLIMB DOWN", "FREEZE LIFE",
 		"HIT", "SWING", "STAB", "THRUST", "JAB", "PARRY", "HACK",
@@ -542,7 +542,7 @@ int16 MenuMan::getChampionSpellCastResult(uint16 champIndex) {
 	if (!curChampion->_currHealth)
 		return kDMSpellCastFailure;
 
-	Spell *curSpell = getSpellFromSymbols((unsigned char *)curChampion->_symbols);
+	const Spell *curSpell = getSpellFromSymbols((unsigned char *)curChampion->_symbols);
 	if (!curSpell) {
 		menusPrintSpellFailureMessage(curChampion, kDMSpellCastSuccess, 0);
 		return kDMSpellCastFailure;
@@ -702,8 +702,8 @@ int16 MenuMan::getChampionSpellCastResult(uint16 champIndex) {
 	return kDMSpellCastSuccess;
 }
 
-Spell *MenuMan::getSpellFromSymbols(byte *symbols) {
-	static Spell SpellsArray[25] = {
+const Spell *MenuMan::getSpellFromSymbols(byte *symbols) {
+	static const Spell SpellsArray[25] = {
 		/* { Symbols, BaseRequiredSkillLevel, SkillIndex, Attributes } */
 		Spell(0x00666F00, 2, 15, 0x7843),
 		Spell(0x00667073, 1, 18, 0x4863),
@@ -738,7 +738,7 @@ Spell *MenuMan::getSpellFromSymbols(byte *symbols) {
 		do {
 			curSymbols |= (long)*symbols++ << bitShiftCount;
 		} while (*symbols && ((bitShiftCount -= 8) >= 0));
-		Spell *curSpell = SpellsArray;
+		const Spell *curSpell = SpellsArray;
 		int16 spellIndex = 25;
 		while (spellIndex--) {
 			if (curSpell->_symbols & 0xFF000000) { /* If byte 1 of spell is not 0 then the spell includes the power symbol */
@@ -755,19 +755,19 @@ Spell *MenuMan::getSpellFromSymbols(byte *symbols) {
 }
 
 void MenuMan::menusPrintSpellFailureMessage(Champion *champ, uint16 failureType, uint16 skillIndex) {
-	Common::String messagesEN[4] = {
+	static const char *const messagesEN[4] = {
 		" NEEDS MORE PRACTICE WITH THIS ",
 		" SPELL.",
 		" MUMBLES A MEANINGLESS SPELL.",
 		" NEEDS AN EMPTY FLASK IN HAND FOR POTION."
 	};
-	Common::String messagesDE[4] = {
+	static const char *const messagesDE[4] = {
 		" BRAUCHT MEHR UEBUNG MIT DIESEM ",
 		" ZAUBERSPRUCH.",
 		" MURMELT EINEN SINNLOSEN ZAUBERSPRUCH.",
 		" MUSS FUER DEN TRANK EINE LEERE FLASCHE BEREITHALTEN."
 	};
-	Common::String messagesFR[5] = {
+	static const char *const messagesFR[5] = {
 		" DOIT PRATIQUER DAVANTAGE SON ",
 		"ENVOUTEMENT.",
 		" MARMONNE UNE CONJURATION IMCOMPREHENSIBLE.",
@@ -781,7 +781,7 @@ void MenuMan::menusPrintSpellFailureMessage(Champion *champ, uint16 failureType,
 	_vm->_textMan->printLineFeed();
 	_vm->_textMan->printMessage(kDMColorCyan, champ->_name);
 
-	Common::String *messages;
+	const char *const *messages;
 	switch (_vm->getGameLanguage()) { // localized
 	case Common::DE_DEU:
 		messages = messagesDE;
@@ -797,7 +797,7 @@ void MenuMan::menusPrintSpellFailureMessage(Champion *champ, uint16 failureType,
 	Common::String message;
 	switch (failureType) {
 	case kDMFailureNeedsMorePractice:
-		_vm->_textMan->printMessage(kDMColorCyan, messages[0].c_str());
+		_vm->_textMan->printMessage(kDMColorCyan, messages[0]);
 		_vm->_textMan->printMessage(kDMColorCyan, _vm->_championMan->_baseSkillName[skillIndex]);
 		if (_vm->getGameLanguage() != Common::FR_FRA || skillIndex == kDMSkillWizard)
 			message = messages[1];
@@ -907,13 +907,13 @@ void MenuMan::drawChampionSymbols(Champion *champ) {
 }
 
 void MenuMan::addChampionSymbol(int16 symbolIndex) {
-	static byte symbolBaseManaCost[4][6] = {
+	static const byte symbolBaseManaCost[4][6] = {
 		{1, 2, 3, 4, 5, 6},   /* Power 1 */
 		{2, 3, 4, 5, 6, 7},   /* Power 2 */
 		{4, 5, 6, 7, 7, 9},   /* Power 3 */
 		{2, 2, 3, 4, 6, 7}    /* Power 4 */
 	};
-	static byte symbolManaCostMultiplier[6] = {8, 12, 16, 20, 24, 28};
+	static const byte symbolManaCostMultiplier[6] = {8, 12, 16, 20, 24, 28};
 
 	ChampionMan &championMan = *_vm->_championMan;
 	Champion *casterChampion = &championMan._champions[championMan._magicCasterChampionIndex];
@@ -980,7 +980,7 @@ bool MenuMan::didClickTriggerAction(int16 actionListIndex) {
 }
 
 bool MenuMan::isActionPerformed(uint16 champIndex, int16 actionIndex) {
-	static unsigned char actionStaminaArray[44] = {
+	static const unsigned char actionStaminaArray[44] = {
 		0,  /* N */
 		4,  /* BLOCK */
 		10, /* CHOP */
@@ -1026,7 +1026,7 @@ bool MenuMan::isActionPerformed(uint16 champIndex, int16 actionIndex) {
 		0,  /* THROW */
 		2   /* FUSE */
 	};
-	static unsigned char actionExperienceGainArray[44] = {
+	static const unsigned char actionExperienceGainArray[44] = {
 		0,  /* N */
 		8,  /* BLOCK */
 		10, /* CHOP */
@@ -1207,10 +1207,10 @@ bool MenuMan::isActionPerformed(uint16 champIndex, int16 actionIndex) {
 		}
 		break;
 	case kDMActionFlip: {
-		const char *messagesEN[2] = {"IT COMES UP HEADS.", "IT COMES UP TAILS."};
-		const char *messagesDE[2] = {"DIE KOPFSEITE IST OBEN.", "DIE ZAHL IST OBEN."};
-		const char *messagesFR[2] = {"C'EST FACE.", "C'EST PILE."};
-		const char **message;
+		const char *const messagesEN[2] = {"IT COMES UP HEADS.", "IT COMES UP TAILS."};
+		const char *const messagesDE[2] = {"DIE KOPFSEITE IST OBEN.", "DIE ZAHL IST OBEN."};
+		const char *const messagesFR[2] = {"C'EST FACE.", "C'EST PILE."};
+		const char *const *message;
 		switch (_vm->getGameLanguage()) { // localized
 		default:
 		case Common::EN_ANY:
@@ -1421,7 +1421,7 @@ void MenuMan::decrementCharges(Champion *champ) {
 }
 
 bool MenuMan::isMeleeActionPerformed(int16 champIndex, Champion *champ, int16 actionIndex, int16 targetMapX, int16 targetMapY, int16 skillIndex) {
-	static unsigned char actionDamageFactorArray[44] = {
+	static const unsigned char actionDamageFactorArray[44] = {
 		0,  /* N */
 		15, /* BLOCK */
 		48, /* CHOP */
@@ -1467,7 +1467,7 @@ bool MenuMan::isMeleeActionPerformed(int16 champIndex, Champion *champ, int16 ac
 		0,  /* THROW */
 		0   /* FUSE */
 	};
-	static unsigned char actionHitProbabilityArray[44] = {
+	static const unsigned char actionHitProbabilityArray[44] = {
 		0,  /* N */
 		22, /* BLOCK */
 		48, /* CHOP */
@@ -1645,7 +1645,7 @@ void MenuMan::printMessageAfterReplacements(const char *str) {
 }
 
 void MenuMan::processCommands116To119_setActingChampion(uint16 champIndex) {
-	static ActionSet actionSets[44] = {
+	static const ActionSet actionSets[44] = {
 		/* { ActionIndices[0], ActionIndices[1], ActionIndices[2], ActionProperties[0], ActionProperties[1], Useless } */
 		ActionSet(255, 255, 255, 0x00, 0x00),
 		ActionSet(27,  43,  35, 0x00, 0x00),
@@ -1711,7 +1711,7 @@ void MenuMan::processCommands116To119_setActingChampion(uint16 champIndex) {
 			return;
 	}
 
-	ActionSet *actionSet = &actionSets[actionSetIndex];
+	const ActionSet *actionSet = &actionSets[actionSetIndex];
 	championMan._actingChampionOrdinal = _vm->indexToOrdinal(champIndex);
 	setActionList(actionSet);
 	_actionAreaContainsIcons = false;
@@ -1721,7 +1721,7 @@ void MenuMan::processCommands116To119_setActingChampion(uint16 champIndex) {
 	drawActionArea();
 }
 
-void MenuMan::setActionList(ActionSet *actionSet) {
+void MenuMan::setActionList(const ActionSet *actionSet) {
 	ChampionMan &championMan = *_vm->_championMan;
 
 	_actionList._actionIndices[0] = (ChampionAction)actionSet->_actionIndices[0];
@@ -1774,14 +1774,14 @@ void MenuMan::drawActionDamage(int16 damage) {
 	_vm->_displayMan->_useByteBoxCoordinates = false;
 	_vm->_displayMan->fillScreenBox(_boxActionArea, kDMColorBlack);
 	if (damage < 0) {
-		static const char *messagesEN[2] = {"CAN'T REACH", "NEED AMMO"};
-		static const char *messagesDE[2] = {"ZU WEIT WEG", "MEHR MUNITION"};
-		static const char *messagesFR[2] = {"TROP LOIN", "SANS MUNITION"};
-		static int16 posEN[2] = {242, 248};
-		static int16 posDE[2] = {242, 236};
-		static int16 posFR[2] = {248, 236};
-		const char **message;
-		int16 *pos;
+		static const char *const messagesEN[2] = {"CAN'T REACH", "NEED AMMO"};
+		static const char *const messagesDE[2] = {"ZU WEIT WEG", "MEHR MUNITION"};
+		static const char *const messagesFR[2] = {"TROP LOIN", "SANS MUNITION"};
+		static const int16 posEN[2] = {242, 248};
+		static const int16 posDE[2] = {242, 236};
+		static const int16 posFR[2] = {248, 236};
+		const char *const *message;
+		const int16 *pos;
 		switch (_vm->getGameLanguage()) { // localized
 		case Common::DE_DEU:
 			message = messagesDE;

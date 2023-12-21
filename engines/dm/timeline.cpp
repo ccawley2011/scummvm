@@ -40,7 +40,7 @@
 namespace DM {
 
 void Timeline::initConstants() {
-	static signed char actionDefense[44] = { // @ G0495_ac_Graphic560_ActionDefense
+	static const signed char actionDefense[44] = { // @ G0495_ac_Graphic560_ActionDefense
 		0,   /* N */
 		36,  /* BLOCK */
 		0,   /* CHOP */

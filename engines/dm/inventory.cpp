@@ -43,13 +43,13 @@
 namespace DM {
 
 void InventoryMan::initConstants() {
-	static const char* skillLevelNamesEN[15] = {"NEOPHYTE", "NOVICE", "APPRENTICE", "JOURNEYMAN", "CRAFTSMAN",
+	static const char *const skillLevelNamesEN[15] = {"NEOPHYTE", "NOVICE", "APPRENTICE", "JOURNEYMAN", "CRAFTSMAN",
 		"ARTISAN", "ADEPT", "EXPERT", "` MASTER", "a MASTER","b MASTER", "c MASTER", "d MASTER", "e MASTER", "ARCHMASTER"};
-	static const char* skillLevelNamesDE[15] = {"ANFAENGER", "NEULING", "LEHRLING", "ARBEITER", "GESELLE", "HANDWERKR", "FACHMANN",
+	static const char *const skillLevelNamesDE[15] = {"ANFAENGER", "NEULING", "LEHRLING", "ARBEITER", "GESELLE", "HANDWERKR", "FACHMANN",
 		"EXPERTE", "` MEISTER", "a MEISTER", "b MEISTER", "c MEISTER", "d MEISTER", "e MEISTER", "ERZMEISTR"};
-	static const char* skillLevelNamesFR[15] = {"NEOPHYTE", "NOVICE", "APPRENTI", "COMPAGNON", "ARTISAN", "PATRON",
+	static const char *const skillLevelNamesFR[15] = {"NEOPHYTE", "NOVICE", "APPRENTI", "COMPAGNON", "ARTISAN", "PATRON",
 		"ADEPTE", "EXPERT", "MAITRE '", "MAITRE a", "MAITRE b", "MAITRE c", "MAITRE d", "MAITRE e", "SUR-MAITRE"};
-	const char **translatedSkillLevel;
+	const char *const *translatedSkillLevel;
 	switch (_vm->getGameLanguage()) { // localized
 	default:
 	case Common::EN_ANY:
@@ -402,7 +402,7 @@ void InventoryMan::drawIconToViewport(IconIndice iconIndex, int16 xPos, int16 yP
 	_vm->_displayMan->blitToViewport(iconBitmap, boxIcon, k8_byteWidth, kDMColorNoTransparency, 16);
 }
 
-void InventoryMan::buildObjectAttributeString(int16 potentialAttribMask, int16 actualAttribMask, const char **attribStrings, char *destString, const char *prefixString, const char *suffixString) {
+void InventoryMan::buildObjectAttributeString(int16 potentialAttribMask, int16 actualAttribMask, const char *const *attribStrings, char *destString, const char *prefixString, const char *suffixString) {
 	uint16 identicalBitCount = 0;
 	int16 attribMask = 1;
 	for (uint16 stringIndex = 0; stringIndex < 16; stringIndex++, attribMask <<= 1) {
@@ -580,9 +580,9 @@ void InventoryMan::drawPanelObject(Thing thingToDraw, bool pressingEye) {
 		case kDMThingTypeJunk: {
 			if ((iconIndex >= kDMIconIndiceJunkWater) && (iconIndex <= kDMIconIndiceJunkWaterSkin)) {
 				potentialAttribMask = 0;
-				const char *descStringEN[4] = {"(EMPTY)", "(ALMOST EMPTY)", "(ALMOST FULL)", "(FULL)"};
-				const char *descStringDE[4] = {"(LEER)", "(FAST LEER)", "(FAST VOLL)", "(VOLL)"};
-				const char *descStringFR[4] = {"(VIDE)", "(PRESQUE VIDE)", "(PRESQUE PLEINE)", "(PLEINE)"};
+				const char *const descStringEN[4] = {"(EMPTY)", "(ALMOST EMPTY)", "(ALMOST FULL)", "(FULL)"};
+				const char *const descStringDE[4] = {"(LEER)", "(FAST LEER)", "(FAST VOLL)", "(VOLL)"};
+				const char *const descStringFR[4] = {"(VIDE)", "(PRESQUE VIDE)", "(PRESQUE PLEINE)", "(PLEINE)"};
 
 				Junk *junk = (Junk *)rawThingPtr;
 				switch (_vm->getGameLanguage()) { // localized
@@ -599,9 +599,9 @@ void InventoryMan::drawPanelObject(Thing thingToDraw, bool pressingEye) {
 
 				drawPanelObjectDescriptionString(descString.c_str());
 			} else if ((iconIndex >= kDMIconIndiceJunkCompassNorth) && (iconIndex <= kDMIconIndiceJunkCompassWest)) {
-				const static char *directionNameEN[4] = {"NORTH", "EAST", "SOUTH", "WEST"};
-				const static char *directionNameDE[4] = {"NORDEN", "OSTEN", "SUEDEN", "WESTEN"};
-				const static char *directionNameFR[4] = {"AU NORD", "A L'EST", "AU SUD", "A L'OUEST"};
+				const static char *const directionNameEN[4] = {"NORTH", "EAST", "SOUTH", "WEST"};
+				const static char *const directionNameDE[4] = {"NORDEN", "OSTEN", "SUEDEN", "WESTEN"};
+				const static char *const directionNameFR[4] = {"AU NORD", "A L'EST", "AU SUD", "A L'OUEST"};
 
 				potentialAttribMask = 0;
 
@@ -633,10 +633,10 @@ void InventoryMan::drawPanelObject(Thing thingToDraw, bool pressingEye) {
 		} // end of switch
 
 		if (potentialAttribMask) {
-			static const char *attribStringEN[4] = {"CONSUMABLE", "POISONED", "BROKEN", "CURSED"};
-			static const char *attribStringDE[4] = {"ESSBAR", "VERGIFTET", "DEFEKT", "VERFLUCHT"};
-			static const char *attribStringFR[4] = {"COMESTIBLE", "EMPOISONNE", "BRISE", "MAUDIT"};
-			const char **attribString = nullptr;
+			static const char *const attribStringEN[4] = {"CONSUMABLE", "POISONED", "BROKEN", "CURSED"};
+			static const char *const attribStringDE[4] = {"ESSBAR", "VERGIFTET", "DEFEKT", "VERFLUCHT"};
+			static const char *const attribStringFR[4] = {"COMESTIBLE", "EMPOISONNE", "BRISE", "MAUDIT"};
+			const char *const *attribString = nullptr;
 
 			switch (_vm->getGameLanguage()) { // localized
 			case Common::DE_DEU:
@@ -794,13 +794,13 @@ void InventoryMan::decreaseTorchesLightPower() {
 }
 
 void InventoryMan::drawChampionSkillsAndStatistics() {
-	static const char *statisticNamesEN[7] = {"L", "STRENGTH", "DEXTERITY", "WISDOM", "VITALITY", "ANTI-MAGIC", "ANTI-FIRE"};
-	static const char *statisticNamesDE[7] = {"L", "STAERKE", "FLINKHEIT", "WEISHEIT", "VITALITAET", "ANTI-MAGIE", "ANTI-FEUER"};
-	static const char *statisticNamesFR[7] = {"L", "FORCE", "DEXTERITE", "SAGESSE", "VITALITE", "ANTI-MAGIE", "ANTI-FEU"};
+	static const char *const statisticNamesEN[7] = {"L", "STRENGTH", "DEXTERITY", "WISDOM", "VITALITY", "ANTI-MAGIC", "ANTI-FIRE"};
+	static const char *const statisticNamesDE[7] = {"L", "STAERKE", "FLINKHEIT", "WEISHEIT", "VITALITAET", "ANTI-MAGIE", "ANTI-FEUER"};
+	static const char *const statisticNamesFR[7] = {"L", "FORCE", "DEXTERITE", "SAGESSE", "VITALITE", "ANTI-MAGIE", "ANTI-FEU"};
 
 	DisplayMan &display = *_vm->_displayMan;
 	ChampionMan &championMan = *_vm->_championMan;
-	const char **statisticNames;
+	const char *const *statisticNames;
 
 	switch (_vm->getGameLanguage()) { // localized
 	case Common::DE_DEU:
@@ -881,7 +881,7 @@ void InventoryMan::drawStopPressingEye() {
 }
 
 void InventoryMan::clickOnMouth() {
-	static int16 foodAmounts[8] = {
+	static const int16 foodAmounts[8] = {
 		500,    /* Apple */
 		600,    /* Corn */
 		650,    /* Bread */
