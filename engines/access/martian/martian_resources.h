@@ -45,7 +45,7 @@ extern const byte ICON_PALETTE[];
 
 extern const int RMOUSE[10][2];
 
-extern byte HELP[];
+extern const byte HELP[];
 extern const char *const ASK_TBL[];
 extern const char *const TRAVDATA[];
 
