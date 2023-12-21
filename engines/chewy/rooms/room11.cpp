@@ -30,12 +30,12 @@
 namespace Chewy {
 namespace Rooms {
 
-AniBlock ABLOCK17[2] = {
+static const AniBlock ABLOCK17[2] = {
 	{ 8, 1, ANI_FRONT, ANI_WAIT, 0 },
 	{ 9, 255, ANI_FRONT, ANI_GO, 0 },
 };
 
-AniBlock ABLOCK18[2] = {
+static const AniBlock ABLOCK18[2] = {
 	{ 7, 1, ANI_FRONT, ANI_WAIT, 0 },
 	{ 7, 1, ANI_BACK, ANI_WAIT, 0 },
 };

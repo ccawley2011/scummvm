@@ -38,7 +38,7 @@ Timer::Timer(int16 max_t, TimerBlk *t) {
 Timer::~Timer() {
 }
 
-float timer_freq[6] = {
+static const float timer_freq[6] = {
 	0.0182f,
 	0.182f,
 	1.82f,

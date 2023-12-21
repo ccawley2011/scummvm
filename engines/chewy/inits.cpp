@@ -231,7 +231,7 @@ void show_intro() {
 	}
 }
 
-static const char *CUTSCENES = "cutscenes";
+static const char *const CUTSCENES = "cutscenes";
 static const int MAX_CUTSCENES = 35;
 
 void register_cutscene(int cutsceneNum) {
