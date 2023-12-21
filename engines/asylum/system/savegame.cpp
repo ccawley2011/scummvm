@@ -46,7 +46,7 @@ namespace Asylum {
 
 #define SAVEGAME_QUICKSLOT 24
 
-static const char *savegame_version = "v1.01 FINAL";
+static const char *const savegame_version = "v1.01 FINAL";
 
 Savegame::Savegame(AsylumEngine *engine) : _vm(engine), _index(0) {
 	memset(&_moviesViewed, 0, sizeof(_moviesViewed));
