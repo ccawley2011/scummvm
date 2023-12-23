@@ -79,7 +79,7 @@ static const ScreenShakeEffect kShakerEffect5 = {
 	ARRAYSIZE(kShakerPoints5), 2, kShakerPoints5
 };
 
-static const ScreenShakeEffect *kShakerEffects[] = {
+static const ScreenShakeEffect *const kShakerEffects[] = {
 	&kShakerEffect0,
 	&kShakerEffect1,
 	&kShakerEffect2,
