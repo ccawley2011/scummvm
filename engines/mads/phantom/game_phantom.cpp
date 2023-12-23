@@ -34,7 +34,7 @@ namespace MADS {
 
 namespace Phantom {
 
-	Catacombs _easyCatacombs[32] = {
+	static const Catacombs _easyCatacombs[32] = {
 		{ 401, { -1,  1,  2,  6 }, { 2, 3, 0, 1 }, MAZE_EVENT_BRICK },
 		{ 404, { 10, 11,  3,  0 }, { 2, 3, 0, 1 }, MAZE_EVENT_PUDDLE },
 		{ 404, {  0,  3,  4, -2 }, { 2, 3, 0, 1 }, MAZE_EVENT_BLOCK },
@@ -69,7 +69,7 @@ namespace Phantom {
 		{ 408, { -5, -1, -4, -1 }, { 2, 3, 0, 1 }, MAZE_EVENT_WEB | MAZE_EVENT_BRICK }
 	};
 
-	Catacombs _hardCatacombs[62] = {
+	static const Catacombs _hardCatacombs[62] = {
 		{ 401, { -1,  1,  2,  6 }, { 2, 3, 0, 1 }, MAZE_EVENT_BRICK },
 		{ 404, { 10, 11,  3,  0 }, { 2, 3, 0, 1 }, MAZE_EVENT_PUDDLE },
 		{ 404, {  0,  3,  4, -2 }, { 2, 3, 0, 1 }, MAZE_EVENT_BLOCK },
