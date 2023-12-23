@@ -122,7 +122,7 @@ LuaBase::~LuaBase() {
 }
 
 // Entries in the system table
-static struct {
+static const struct {
 	const char *name;
 	int key;
 } system_defaults[] = {
@@ -239,7 +239,7 @@ void LuaBase::forceDemo() {
 	lua_setglobal("DEMO");
 }
 
-struct luaL_reg baseOpcodes[] = {
+const struct luaL_reg baseOpcodes[] = {
 	{ "  concatfallback", LUA_OPCODE(LuaBase, concatFallback) },
 	{ "  typeoverride", LUA_OPCODE(LuaBase, typeOverride) },
 	{ "  dfltcamera", LUA_OPCODE(LuaBase, dummyHandler) },

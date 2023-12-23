@@ -68,7 +68,7 @@ lua_Object luaL_nonnullarg(int32 numArg) {
 
 luaL_libList *list_of_libs = nullptr;
 
-void luaL_addlibtolist(luaL_reg *l, int32 n) {
+void luaL_addlibtolist(const luaL_reg *l, int32 n) {
 	luaL_libList *list = (luaL_libList *)luaM_malloc(sizeof(luaL_libList));
 	list->list = l;
 	list->number = n;
@@ -86,7 +86,7 @@ void lua_removelibslists() {
 	list_of_libs = nullptr;
 }
 
-void luaL_openlib(luaL_reg *l, int32 n) {
+void luaL_openlib(const luaL_reg *l, int32 n) {
 	int32 i;
 	lua_open();  // make sure lua is already open
 	for (i = 0; i < n; i++)

@@ -25,7 +25,8 @@
 
 namespace Grim {
 
-ImuseTable grimStateMusicTable[] = {
+extern const ImuseTable grimStateMusicTable[];
+const ImuseTable grimStateMusicTable[] = {
 	{0, 1000,   0, 0, 60, 127,   0, ""},
 	{0, 1999,   0, 0, 60, 127,   0, ""},
 	{3, 1001,   0, 0, 60, 127,   0, "1001 - Manny's Office.IMC" },
@@ -210,7 +211,8 @@ ImuseTable grimStateMusicTable[] = {
 	{0,   -1,   0, 0,  0,   0,   0, ""}
 };
 
-ImuseTable grimSeqMusicTable[] = {
+extern const ImuseTable grimSeqMusicTable[];
+const ImuseTable grimSeqMusicTable[] = {
 	{0, 2000,   0, 0, 20, 127,   0, ""},
 	{2, 2001,   0, 0, 20, 127,   0, "2001 - Climb Rope.IMC"},
 	{2, 2010,   0, 0, 20, 127,   0, "2010 - Glottis OK.IMC"},
@@ -255,7 +257,8 @@ ImuseTable grimSeqMusicTable[] = {
 	{0,   -1,   0, 0,  0,   0,   0, ""}
 };
 
-ImuseTable grimDemoStateMusicTable[] = {
+extern const ImuseTable grimDemoStateMusicTable[];
+const ImuseTable grimDemoStateMusicTable[] = {
 	{0, 0,      0, 0, 60, 127,   0, ""},
 	{0, 1000,   0, 0, 60, 127,   0, ""},
 	{3, 1001,   0, 0, 60, 127,   0, "MO - Manny's Office.IMC"},
@@ -281,7 +284,8 @@ ImuseTable grimDemoStateMusicTable[] = {
 	{0,   -1,   0, 0,  0,   0,   0, ""}
 };
 
-ImuseTable grimDemoSeqMusicTable[] = {
+extern const ImuseTable grimDemoSeqMusicTable[];
+const ImuseTable grimDemoSeqMusicTable[] = {
 	{0, 2000,   0, 0, 60, 127,   0, ""},
 	{3, 2100,   0, 0, 60, 127,   0, "Rope Climb.IMC"},
 	{0,   -1,   0, 0,  0,   0,   0, ""}

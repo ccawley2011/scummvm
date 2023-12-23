@@ -399,13 +399,13 @@ static void errorfb() {
 	lua_printstack();
 }
 
-static struct luaL_reg iolib[] = {
+static const struct luaL_reg iolib[] = {
 	{ "date",        io_date },
 	{ "exit",        io_exit },
 	{ "print_stack", errorfb }
 };
 
-static struct luaL_reg iolibtag[] = {
+static const struct luaL_reg iolibtag[] = {
 	{ "readfrom",    io_readfrom },
 	{ "writeto",     io_writeto },
 	{ "appendto",    io_appendto },

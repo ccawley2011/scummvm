@@ -56,7 +56,7 @@ struct PlainMusicEntry {
 	const char * filename;
 };
 
-static PlainMusicEntry emiPS2MusicTable[126] = {
+static const PlainMusicEntry emiPS2MusicTable[126] = {
 	{ 0, "", "" },
 	{ 1, "state", "1115.scx" },
 	{ 2, "state", "1170.scx" },

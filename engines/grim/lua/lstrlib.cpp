@@ -482,7 +482,7 @@ static void str_format() {
 	closeandpush();  // push the result
 }
 
-static struct luaL_reg strlib[] = {
+static const struct luaL_reg strlib[] = {
 	{"strlen", str_len},
 	{"strsub", str_sub},
 	{"strlower", str_lower},

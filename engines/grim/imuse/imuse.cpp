@@ -37,10 +37,10 @@ namespace Grim {
 Imuse *g_imuse = nullptr;
 
 extern uint16 imuseDestTable[];
-extern ImuseTable grimStateMusicTable[];
-extern ImuseTable grimSeqMusicTable[];
-extern ImuseTable grimDemoStateMusicTable[];
-extern ImuseTable grimDemoSeqMusicTable[];
+extern const ImuseTable grimStateMusicTable[];
+extern const ImuseTable grimSeqMusicTable[];
+extern const ImuseTable grimDemoStateMusicTable[];
+extern const ImuseTable grimDemoSeqMusicTable[];
 
 void Imuse::timerHandler(void *refCon) {
 	Imuse *imuse = (Imuse *)refCon;

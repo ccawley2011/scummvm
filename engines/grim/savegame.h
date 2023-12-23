@@ -41,14 +41,14 @@ public:
 	 * If a savegame has a different major version than SAVEGAME_MAJOR_VERSION
 	 * it cannot be loaded.
 	 */
-	static uint SAVEGAME_MAJOR_VERSION;
+	static const uint SAVEGAME_MAJOR_VERSION;
 	/**
 	 * Minor savegame version.
 	 * A savegame with a different minor version than SAVEGAME_MINOR_VERSION and
 	 * the same major version than SAVEGAME_MAJOR_VERSION is compatible with
 	 * the current loading code.
 	 */
-	static uint SAVEGAME_MINOR_VERSION;
+	static const uint SAVEGAME_MINOR_VERSION;
 
 	bool isCompatible() const;
 

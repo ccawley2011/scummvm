@@ -50,8 +50,8 @@ private:
 		kSpanish
 	};
 	kLang _lang;
-	static const char *kLanguages1[7];
-	static const char *kLanguages2[7];
+	static const char *const kLanguages1[7];
+	static const char *const kLanguages2[7];
 };
 
 } // end of namespace Grim

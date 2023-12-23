@@ -13,7 +13,7 @@
 
 namespace Grim {
 
-const char *luaO_typenames[] = { // ORDER LUA_T
+const char *const luaO_typenames[] = { // ORDER LUA_T
 	"userdata", "number", "string", "table", "function", "function", "task",
 	"nil", "function", "mark", "mark", "mark", "line", nullptr
 };
@@ -22,7 +22,7 @@ TObject luaO_nilobject = { LUA_T_NIL, { nullptr } };
 
 
 // hash dimensions values
-static int32 dimensions[] = {
+static const int32 dimensions[] = {
 	5, 11, 23, 47, 97, 197, 397, 797, 1597, 3203, 6421,
 	12853, 25717, 51437, 102811, 205619, 411233, 822433,
 	1644817, 3289613, 6579211, 13158023, MAX_INT
@@ -67,7 +67,7 @@ int32 luaO_equalObj(TObject *t1, TObject *t2) {
 	}
 }
 
-int luaO_findstring(const char *name, const char *list[]) {
+int luaO_findstring(const char *name, const char *const list[]) {
 	for (int i = 0; list[i]; i++)
 		if (strcmp(list[i], name) == 0)
 			return i;

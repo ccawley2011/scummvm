@@ -41,7 +41,7 @@ enum ImuseParam {
 	IM_SOUND_PAN = 0x700
 };
 
-static float ImToMixer = 2.f;
+static const float ImToMixer = 2.f;
 
 void Lua_V1::ImStartSound() {
 	lua_Object nameObj = lua_getparam(1);

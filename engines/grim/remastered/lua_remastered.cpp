@@ -612,7 +612,7 @@ STUB_FUNC(Lua_Remastered::GetCrossSaveStatus)
 STUB_FUNC(Lua_Remastered::GetFloorWalkPos)
 STUB_FUNC(Lua_Remastered::CursorMovieEnabled)
 
-struct luaL_reg remasteredMainOpcodes[] = {
+const struct luaL_reg remasteredMainOpcodes[] = {
 	{ "GetPlatform", LUA_OPCODE(Lua_Remastered, GetPlatform) },
 	{ "GetLanguage", LUA_OPCODE(Lua_Remastered, GetLanguage) },
 	{ "PreloadCursors", LUA_OPCODE(Lua_Remastered, PreloadCursors) },

@@ -32,30 +32,30 @@ namespace Grim {
 
 // Grim retail
 
-const char *gfupd101[] = {
+const char *const gfupd101[] = {
 	"bc57c4db2ab814f3bb115ec5702b62f4"
 };
-const char *year4mus[] = {
+const char *const year4mus[] = {
 	"939e041887c1b14f99ad951ac8e3cb25", //english unpatched
 	"aae53e089eeb9707cc96afece1f58f15"  //Russian(7Wolf)
 };
-const char *year3mus[] = {
+const char *const year3mus[] = {
 	"df556a8fc151f6f48bb68a8cef855e7d", //english unpatched
 	"904a45827a2d4b6d6fe2887394870eeb"  //Russian(7Wolf)
 };
-const char *year2mus[] = {
+const char *const year2mus[] = {
 	"775376fccf0415258be6b33e7e6e4985", //english unpatched
 	"e6efd96ffce984686214d440995f27c7"  //Russian(7Wolf)
 };
-const char *year1mus[] = {
+const char *const year1mus[] = {
 	"c555c95b0f7557617da364091589d6ea", //english unpatched
 	"aed795553d93abac7bd869eeeaba74b4"  //Russian(7Wolf)
 };
-const char *year0mus[] = {
+const char *const year0mus[] = {
 	"fea10f11abe3ac32d53e4798f80d5ba0", //english unpatched
 	"f4b7aaaaaec4654ea140ebee43564d42"  //Russian(7Wolf)
 };
-const char *vox0004[] = {
+const char *const vox0004[] = {
 	"ae53a36f77eb0d42a28653b28c345439", //english unpatched
 	"57915d4dd3aa5aa44817477b7bd41ce6", //italian unpatched
 	"bae246c5335c1d139b97a48277ee8841", //german unpatched
@@ -65,7 +65,7 @@ const char *vox0004[] = {
 	"ba585dc54e34f9d9b4d732eac623d955", //Russian(7Wolf)
 	"b75a63cfc3197c52b0219745d489e43e"  //russian(Fargus)
 };
-const char *vox0003[] = {
+const char *const vox0003[] = {
 	"7c88ad7c949a516793b584299f33ed23", //english unpatched
 	"f900cb063fbd0ef2a0516e9a00291d13", //italian unpatched
 	"5bda9a36181c1fea368491b842c11efe", //german unpatched
@@ -75,7 +75,7 @@ const char *vox0003[] = {
 	"02e87ba1d4d3a5fc0389265e34a5ad19", //Russian(7Wolf)
 	"a7b93ecdb346aabbfe709180e408cc40"  //russian(Fargus)
 };
-const char *vox0002[] = {
+const char *const vox0002[] = {
 	"70419878e32377d9d2906fbcb2cb59b5", //english unpatched
 	"616e4147c39268b650ce112bf79ea3a1", //italian unpatched
 	"5ea9fde04f3315a51fe1fe9c5bdb9d0d", //german unpatched
@@ -85,7 +85,7 @@ const char *vox0002[] = {
 	"e61f5732eabbf0ca607c5a9e332d3e81", //Russian(7Wolf)
 	"4bdc2af3d3886e063536cf3e2b4ae36e"  //russian(Fargus)
 };
-const char *vox0001[] = {
+const char *const vox0001[] = {
 	"40beb2e0a6572dc89fddb21f282bc237", //english pre-patched
 	"6a32f8079d2d98d1c10ec8364765fd4b", //english unpatched
 	"a0455d5d883ed46f0bda5030e4b5654c", //italian unpatched
@@ -96,7 +96,7 @@ const char *vox0001[] = {
 	"87163a9690043f162a925f4fbd651aea", //Russian(7Wolf)
 	"ba44c77d55b9a3531abcf7ddd37c93fe"  //russian(Fargus)
 };
-const char *vox0000[] = {
+const char *const vox0000[] = {
 	"c7900f32d48d7e265629bd355a21c795", //english pre-patched
 	"67627f2d9314f9c0ae55dd2099fc052f", //english unpatched
 	"c9e1a755f280b3ebff58578c4e5f1e52", //italian unpatched
@@ -107,7 +107,7 @@ const char *vox0000[] = {
 	"49ddc33e24bb3821e0b6041befd1f987", //Russian(7Wolf)
 	"a77aa6341052504e15f1eeff9aafa1a2"  //russian(Fargus)
 };
-const char *movie04[] = {
+const char *const movie04[] = {
 	"605d6f2cc4d21fbe702d8e637b5bcfa1", //english unpatched
 	"7c8d7e0f4beaca3910658290e8b14cf8", //italian unpatched
 	"f1b8c1de4f82099ab080f9cbe2b02da6", //german unpatched
@@ -117,7 +117,7 @@ const char *movie04[] = {
 	"ccc6588e155e0e9855a569dcdf74f4f9",  //Russian(7Wolf)
 	"e89c626a504cc88e20517bfe3a0c5bf6"  //russian(Fargus)
 };
-const char *movie03[] = {
+const char *const movie03[] = {
 	"113a768e7206016df72f9d2f5c1851b7", //english unpatched
 	"0fdb7dda9ebc049eac386d29bface366", //italian unpatched
 	"d2aae2e27616f78016a71818e528acda", //german unpatched
@@ -127,7 +127,7 @@ const char *movie03[] = {
 	"7231a253da9baf142665031bc4c32937",  //Russian(7Wolf)
 	"6a4dd82ddc1c8184fee0b0a271db8b5c"  //russian(Fargus)
 };
-const char *movie02[] = {
+const char *const movie02[] = {
 	"24a8704a331a03097d195f3597fe21e1", //english unpatched
 	"129dad4e40987e91c5549c819d0dad1d", //italian unpatched
 	"a4d5c108a167afb0674e26790edf65e6", //german unpatched
@@ -137,7 +137,7 @@ const char *movie02[] = {
 	"6ee18bed78f8a44daa02751e3c46422e", //Russian(7Wolf)
 	"b2f09995ffe578f86159a7137e9abee4"  //russian(Fargus)
 };
-const char *movie01[] = {
+const char *const movie01[] = {
 	"548a19a0a4d4ccb8660966d646210820", //english unpatched
 	"9fd30d0289f9b4d5c09e821a0a478db5", //italian unpatched
 	"500bc51ce211d528f6c7170f479c9525", //german unpatched
@@ -147,35 +147,35 @@ const char *movie01[] = {
 	"0fe6fa2db45633839529e4d2024cd6ac", //Russian(7Wolf)
 	"b87663e09a750fa7e2af3b5e4a797526"  //russian(Fargus)
 };
-const char *movie00[] = {
+const char *const movie00[] = {
 	"0c6b8e4fa74024c4afdf7758f8d8b1a0", //english unpatched
 	"b2b9824ca1abc11d85d983710c18016c"  //Russian(7Wolf)
 };
-const char *data005[] = {
+const char *const data005[] = {
 	"84738c0783093b1e515eb98918d2a405" //Chinese unpatched
 };
-const char *data004[] = {
+const char *const data004[] = {
 	"2cdb79d3606965a9a0a3378507488dd7" //english unpatched
 };
-const char *data003[] = {
+const char *const data003[] = {
 	"76dcfc2c21f3412415674c65611fb76d", //english unpatched
 	"7f76c20f1d77db287473ffef10b8b309" //german unpatched
 };
-const char *data002[] = {
+const char *const data002[] = {
 	"d236403c0d860961963db0134380001f", //english unpatched
 	"ac12be5dcf632b57150c3b0a987a085c"  //Russian(7Wolf)
 };
-const char *data001[] = {
+const char *const data001[] = {
 	"84cf3072586fe2840ae16774adb6f5cb" //english unpatched
 };
-const char *data000[] = {
+const char *const data000[] = {
 	"2069b8bf113119910df8219e787e7e94", //english pre-patched
 	"08e2505a6a7fd90d3920131b1297c60f", //english unpatched
 	"7c9886667636aa77fe1ab9bada257595", //Chinese unpatched
 	"57cd60851d144c3a0b4115441e3ddba9", //Russian(7Wolf)
 	"589cf4fc8c582003557aa8b8a16f4f61"  //russian(Fargus)
 };
-const char *credits[] = {
+const char *const credits[] = {
 	"6dcecad8f01657184f8576aab8fb3f00", //english unpatched
 	"1827307248d55c07642342c9213a4723", //italian unpatched
 	"2e6319c2ec5772ced5dc9f8b41eb5de7", //german unpatched
@@ -185,7 +185,7 @@ const char *credits[] = {
 	"6589646e7a61eff352b2e1d1c08963eb", //Chinese unpatched
 	"77d41d301c84caf2c5de33a036c1e9ed"  //Russian(7Wolf)
 };
-const char *local[] = {
+const char *const local[] = {
 	"6142624ce13ea3c9079aa80918010c4a", //italian unpatched
 	"27c961c16f9eaf0260781883150e5611", //german unpatched
 	"c9dd41f66883959de27f80bbe457f30d", //french unpatched
@@ -196,49 +196,49 @@ const char *local[] = {
 
 // Grim demo
 
-const char *gfdemo01[] = {
+const char *const gfdemo01[] = {
 	"25d831d57a93eb3ab8edbb07b7b63943"
 };
-const char *gdemo001[] = {
+const char *const gdemo001[] = {
 	"aa44d6c01a1b03d4607901933635d385"
 };
-const char *gfdemo01ger[] = {
+const char *const gfdemo01ger[] = {
 	"fd728f040557118b7ca436f8205029e5"
 };
-const char *gfdemo01fra[] = {
+const char *const gfdemo01fra[] = {
 	"fd728f040557118b7ca436f8205029e5" // Same as german
 };
-const char *gfdemo01ita[] = {
+const char *const gfdemo01ita[] = {
 	"fd728f040557118b7ca436f8205029e5" // Same as german
 };
-const char *gfdemo01spa[] = {
+const char *const gfdemo01spa[] = {
 	"fd728f040557118b7ca436f8205029e5" // Same as german
 };
-const char *grimdemo[] = {
+const char *const grimdemo[] = {
 	"3ba28e7e36a49b5fd01ba98e3c772fe8"
 };
-const char *sound001[] = {
+const char *const sound001[] = {
 	"c91a7d405d15fb198a9cb31f89637026"
 };
-const char *voice001[] = {
+const char *const voice001[] = {
 	"f24a45079394fee296a0f7fad07c7fad"
 };
-const char *voice001ger[] = {
+const char *const voice001ger[] = {
 	"d1d68735ae10148ecccb6b5000a4db96"
 };
-const char *voice001fra[] = {
+const char *const voice001fra[] = {
 	"43f56fca727e117b724051c740202c26"
 };
-const char *voice001ita[] = {
+const char *const voice001ita[] = {
 	"412bd831ec42d226fa173e0f55cb47cd"
 };
-const char *voice001spa[] = {
+const char *const voice001spa[] = {
 	"00cb825deca33b96719bc157a5427c40"
 };
 
 // EMI retail PC version
 
-const char *emi_artAll[] = {
+const char *const emi_artAll[] = {
 	"8c7db9dab564854f2c4bab0571104780", // english patched
 	"7c1da307c5c3eb1ba65b7c1a2e6b5bce", // german patched
 	"f2ec4854639cd25792dd3e88fb08a1e6", // spanish patched
@@ -246,7 +246,7 @@ const char *emi_artAll[] = {
 	"b9838ab13a672a42b1fbc8893b94ca26", // italian patched
 	"52111c719bcccacd4b4b8548007edd9c" 	// Russian version
 };
-const char *emi_artJam[] = {
+const char *const emi_artJam[] = {
 	"e5ff286dbf7b23d1ad41dd8defe48291", // english patched
 	"f0bcfa22f77d12e25920148d405a9615", // german patched
 	"86ceeb03620d316f2dba86f68e40bebb", // spanish patched
@@ -254,42 +254,42 @@ const char *emi_artJam[] = {
 	"70a6fe11cc2de45f7b0650c8ea749156", // italian patched
 	"10cb2cf22497d0007263116db68692a6", // Mac version
 };
-const char *emi_artLuc[] = {
+const char *const emi_artLuc[] = {
 	"1fcaef5755e6f6c3c30c89536022bd72", // english patched
 	"0f6bcf8997ddd3cbdf161132103f769d", // german patched
 	"cc956c2b6e99329bb970c9c18ed63b80", // spanish patched
 	"1d388d0c12f99ba9af540f1b8b98e34b", // french patched
 	"24216ef38709dc0be3771755bd274b79", // italian patched
 };
-const char *emi_artMel[] = {
+const char *const emi_artMel[] = {
 	"66144e92a0742fdc9cc6c4f892c53e84", // english patched
 	"ed1d2548374339775110bf5826db9f6d", // german patched
 	"9b49161e7bb4db1dd3cb66d33940c22f", // spanish patched
 	"33f3dc6eaf6ec50a9dbad3858dc00876", // french patched
 	"640559d6854c3aa5b63bfad1a9afd60e", // italian patched
 };
-const char *emi_artMon[] = {
+const char *const emi_artMon[] = {
 	"3510567bda8a4e8c5aee4c3b3bb1f98e", // english patched
 	"5ff8b38e44fe1d3aeeb277f35f932d7b", // german patched
 	"1d69547c39a9a85bfb1bf50c503f479d", // spanish patched
 	"408a55615fef4282b9996aa0df8373e3", // french patched
 	"a27c1a33652473d7caf26c069520a765", // italian patched
 };
-const char *emi_lip[] = {
+const char *const emi_lip[] = {
 	"57eceeae6b82028243ede6c97c334c57", // english patched
 	"0ad24338f33f8ed9b4ab21e43f99aff0", // german patched
 	"c0e9f1197338440b005431d2b365d287", // spanish patched
 	"53973abc64a8ecaf963ba7e2dc6f7b42", // french patched
 	"9b64f65a9473d11e34055137c4d978d1", // italian patched
 };
-const char *emi_local[] = {
+const char *const emi_local[] = {
 	"c3b694d941c05264e8c37dc2be75ca1c", // english patched
 	"6bd6582e9ab602c1f86c8593563cc9e5"	// Russian version
 };
-const char *emi_patch[] = {
+const char *const emi_patch[] = {
 	"067100a100b3ca9283b796480aa39b52", // english patched
 };
-const char *emi_update[] = {
+const char *const emi_update[] = {
 	"7c7dbd2349d49e382a2dea40bed448e0", // english
 	"dc1376baf7c8be28854a6fa620ad2278", // german
 	"12c5db7d07d198d1506ab8b141dd594d", // spanish
@@ -297,38 +297,38 @@ const char *emi_update[] = {
 	"943ad57c2873b5eb9928e6b04a5b48d4", // italian
 	"6d2516abcdce4266ad3ae873040258ab", // portuguese
 };
-const char *emi_sfx[] = {
+const char *const emi_sfx[] = {
 	"a5d2ded26255518b82030466c2368168", // english patched
 };
-const char *emi_voiceAll[] = {
+const char *const emi_voiceAll[] = {
 	"18d3996c7de4d460b4cd4ee5897a90ae", // english patched
 	"e65a13f2906899ab6eca2cce3c4cb514", // german patched
 	"073ecbe5f23d17536dce591174bac593", // spanish patched
 	"86126ac852312452ee79558a5e76d7fd", // french patched
 	"9b6b4748e872712c267d65778a3ed2da", // italian patched
 };
-const char *emi_voiceJam[] = {
+const char *const emi_voiceJam[] = {
 	"2318a4680a89b93f1f71b09e66c65c86", // english patched
 	"3df7d4964fe33f22be67920b21d65710", // german patched
 	"173b1b949a84746d51d51ccbf7e9856e", // spanish patched
 	"89947e7e6064356ebfde10b644f3d612", // french patched
 	"a50b0d5d7f3aecd8629bd5e8c0647bcc", // italian patched
 };
-const char *emi_voiceLuc[] = {
+const char *const emi_voiceLuc[] = {
 	"d5e4842e421bdb891e6cbf88741e9119", // english patched
 	"60d96bb92042729037b37c0056f93267", // german patched
 	"2e0279b8753129f6ce167cc0823a4865", // spanish patched
 	"ab9fe90e177cd03af1e34059117cc995", // french patched
 	"c6ed446d4448de214dbdcbb6cbcca41b", // italian patched
 };
-const char *emi_voiceMel[] = {
+const char *const emi_voiceMel[] = {
 	"b8b19fc4a9438f51a99f7cf3cad9c419", // english patched
 	"0511a19405b763e2dd9ab5b0637757ee", // german patched
 	"15154f16af25c55d7b797174032abe8a", // spanish patched
 	"3e678cef88037ebd6c52988744401c03", // french patched
 	"d1af7a4f0a2bed25c43d3fd197b6df3b", // italian patched
 };
-const char *emi_voiceMon[] = {
+const char *const emi_voiceMon[] = {
 	"9327a6bea951b28bac31bdb52007dc41", // english patched
 	"e3046478916f0000a657f9ebf498e120", // german patched
 	"eda144022632cafc45c3174abc774468", // spanish patched
@@ -338,73 +338,73 @@ const char *emi_voiceMon[] = {
 
 // EMI retail PS2 version
 
-const char *emiPS2_artAll[] = {
+const char *const emiPS2_artAll[] = {
 	"7bed6dd54ea6509b708e93017c14df8d", // english
 };
-const char *emiPS2_artJam[] = {
+const char *const emiPS2_artJam[] = {
 	"199c713bbfc22ae941502ffd60ea794d", // english
 };
-const char *emiPS2_artLuc[] = {
+const char *const emiPS2_artLuc[] = {
 	"7add9758294c2118621e900940e66838", // english
 };
-const char *emiPS2_artMel[] = {
+const char *const emiPS2_artMel[] = {
 	"514f1a684022831c178a18d13a16b6ad", // english PAL?
 	"c4f51395440049942fae39bf6155e82c", // english NTSC
 };
-const char *emiPS2_artMon[] = {
+const char *const emiPS2_artMon[] = {
 	"db945bd9d5fa990447bbabf6a1e00e5b", // english
 };
-const char *emiPS2_lip[] = {
+const char *const emiPS2_lip[] = {
 	"57eceeae6b82028243ede6c97c334c57", // english
 };
-const char *emiPS2_local[] = {
+const char *const emiPS2_local[] = {
 	"da26ad3a739f2fa341988901ce8dfa49", // english
 };
 /*
-const char *emiPS2_music1[] = {
+const char *const emiPS2_music1[] = {
 	"a44753d9aaed016e6c7b398b55c97d3d", // english
 };
-const char *emiPS2_music2[] = {
+const char *const emiPS2_music2[] = {
 	"204cb3d451e4bf71ae5432ab33ca3a49", // english
 };
 */
-const char *emiPS2_sfx[] = {
+const char *const emiPS2_sfx[] = {
 	"877e90e1329182caaf27d2ce4d3c9c42", // english
 };
-const char *emiPS2_voiceAll[] = {
+const char *const emiPS2_voiceAll[] = {
 	"194a1e545a348df0fe488012bc703338", // english
 };
-const char *emiPS2_voiceJam[] = {
+const char *const emiPS2_voiceJam[] = {
 	"686b45178a4b2fdb5bee2097739feea9", // english
 };
-const char *emiPS2_voiceLuc[] = {
+const char *const emiPS2_voiceLuc[] = {
 	"c5e8e0ce9986385b6c1f31b68768be47", // english
 };
-const char *emiPS2_voiceMel[] = {
+const char *const emiPS2_voiceMel[] = {
 	"54663fc82520f1f02d7f3d9b29894540", // english
 };
-const char *emiPS2_voiceMon[] = {
+const char *const emiPS2_voiceMon[] = {
 	"b4a938b9c116e9370e992c8edfb00c35", // english
 };
 
 // EMI demo (CD demo does not include i9n.lab)
 
-const char *emid_i9n[] = {
+const char *const emid_i9n[] = {
 	"d913504ec3a2fe52ee02a20a154a2b17", // english patched
 	"1cd0547b7cb26082274624b146dab3f1", // french
 	"0e011c72372acc4baeac259b46ae30f4", // german
 	"25523ee7687096382cbd3f3b6d30b84c", // spanish
 };
-const char *emid_lip[] = {
+const char *const emid_lip[] = {
 	"0a145aa7acc1a68a738c7a6f27d23283", // english patched
 };
-const char *emid_MagDemo[] = {
+const char *const emid_MagDemo[] = {
 	"0a7f0e72d3fab641f0d7b0efbaa15cdc", // english patched
 };
-const char *emid_tile[] = {
+const char *const emid_tile[] = {
 	"23fdff61743c5621963ca04e8ca43000", // english patched
 };
-const char *emid_voice[] = {
+const char *const emid_voice[] = {
 	"7f9867d48b5e0af5cb3fbd8d79741f5d", // english patched
 };
 
@@ -412,7 +412,7 @@ const char *emid_voice[] = {
 // particular dump.
 
 // EMI Macintosh
-const char *emi_installer[] = {
+const char *const emi_installer[] = {
 	"93a639e3221405862dc46e9706216c00", // German (EFMI Installer)
 	"a42f8aa079a6d23c285fceba191e67a4", // English (Monkey Island 4 Installer)
 };

@@ -38,9 +38,9 @@ private:
 	static void init();
 
 	struct MD5Sum {
-		MD5Sum(const char *fn, const char **s, int n) : filename(fn), sums(s), numSums(n) {}
+		MD5Sum(const char *fn, const char *const *s, int n) : filename(fn), sums(s), numSums(n) {}
 		const char *filename;
-		const char **sums;
+		const char *const *sums;
 		int numSums;
 	};
 	static bool checkMD5(const MD5Sum &sums, const char *md5);

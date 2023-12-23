@@ -27,8 +27,8 @@
 
 namespace Grim {
 
-const char *LangFilter::kLanguages1[7] = { "@@_", "US_", "FR_", "GE_", "IT_", "PT_", "SP_" };
-const char *LangFilter::kLanguages2[7] = { "Common/", "Eng/", "Fra/", "Deu/", "Ita/", "Brz/", "Esp/" };
+const char *const LangFilter::kLanguages1[7] = { "@@_", "US_", "FR_", "GE_", "IT_", "PT_", "SP_" };
+const char *const LangFilter::kLanguages2[7] = { "Common/", "Eng/", "Fra/", "Deu/", "Ita/", "Brz/", "Esp/" };
 
 LangFilter::LangFilter(Common::Archive *arc, Common::Language lang) : _arc(arc) {
 	if (!_arc)

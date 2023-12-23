@@ -471,7 +471,7 @@ static void testC() {
 /*
 ** Internal functions
 */
-static struct luaL_reg int_funcs[] = {
+static const struct luaL_reg int_funcs[] = {
 #ifdef LUA_COMPAT2_5
 	{ "setfallback", luaT_setfallback },
 #endif
