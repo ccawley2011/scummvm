@@ -30,7 +30,7 @@ namespace Mohawk {
 // The Riven variable system is complex. The scripts of each stack give a number, but the number has to be matched
 // to a variable name defined in NAME resource 4.
 
-static const char *variableNames[] = {
+static const char *const variableNames[] = {
 	// aspit
 	"aAtrusBook",
 	"aAtrusPage",

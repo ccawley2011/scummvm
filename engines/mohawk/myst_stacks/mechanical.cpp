@@ -610,7 +610,7 @@ void Mechanical::elevatorGoMiddle_run() {
 				_vm->_gfx->copyImageToBackBuffer(6327, Common::Rect(544, 333));
 				_vm->wait(500);
 				_vm->_sound->playEffect(9120);
-				static uint16 moviePos[2] = { 3540, 5380 };
+				static const uint16 moviePos[2] = { 3540, 5380 };
 				o_elevatorWindowMovie(0, ArgumentsArray(moviePos, ARRAYSIZE(moviePos)));
 				_vm->_gfx->copyBackBufferToScreen(Common::Rect(544, 333));
 				_vm->_sound->playEffect(10120);

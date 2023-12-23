@@ -2967,7 +2967,7 @@ void Myst::clockLeverMove(bool leftLever) {
 void Myst::clockGearForwardOneStep(uint16 gear) {
 	static const uint16 startTime[] = { 0, 324, 618 };
 	static const uint16 endTime[] = { 324, 618, 950 };
-	static const char *videos[] = { "cl1wg1", "cl1wg2", "cl1wg3" };
+	static const char *const videos[] = { "cl1wg1", "cl1wg2", "cl1wg3" };
 	static const uint16 x[] = { 224, 224, 224 };
 	static const uint16 y[] = { 49, 82, 109 };
 
@@ -3011,7 +3011,7 @@ void Myst::clockGears_run() {
 }
 
 void Myst::o_clockLeverEndMove(uint16 var, const ArgumentsArray &args) {
-	static const char *videos[] = { "cl1wg1", "cl1wg2", "cl1wg3", "cl1wlfch" };
+	static const char *const videos[] = { "cl1wg1", "cl1wg2", "cl1wg3", "cl1wlfch" };
 
 	_vm->_cursor->hideCursor();
 	_clockLeverPulled = false;
@@ -3081,7 +3081,7 @@ void Myst::o_clockResetLeverMove(uint16 var, const ArgumentsArray &args) {
 }
 
 void Myst::clockReset() {
-	static const char *videos[] = { "cl1wg1", "cl1wg2", "cl1wg3", "cl1wlfch" };
+	static const char *const videos[] = { "cl1wg1", "cl1wg2", "cl1wg3", "cl1wlfch" };
 
 	_vm->_cursor->hideCursor();
 
@@ -3140,7 +3140,7 @@ void Myst::clockResetWeight() {
 
 void Myst::clockResetGear(uint16 gear) {
 	static const uint16 time[] = { 324, 618, 950 };
-	static const char *videos[] = { "cl1wg1", "cl1wg2", "cl1wg3" };
+	static const char *const videos[] = { "cl1wg1", "cl1wg2", "cl1wg3" };
 	static const uint16 x[] = { 224, 224, 224 };
 	static const uint16 y[] = { 49, 82, 109 };
 
@@ -3466,7 +3466,7 @@ void Myst::o_gulls1_init(uint16 var, const ArgumentsArray &args) {
 }
 
 void Myst::gullsFly1_run() {
-	static const char* gulls[] = { "birds1", "birds2", "birds3" };
+	static const char *const gulls[] = { "birds1", "birds2", "birds3" };
 	uint32 time = _vm->getTotalPlayTime();
 
 	if (time > _gullsNextTime) {
@@ -3611,7 +3611,7 @@ void Myst::o_gulls2_init(uint16 var, const ArgumentsArray &args) {
 }
 
 void Myst::gullsFly2_run() {
-	static const char* gulls[] = { "birds1", "birds2", "birds3" };
+	static const char *const gulls[] = { "birds1", "birds2", "birds3" };
 	uint32 time = _vm->getTotalPlayTime();
 
 	if (time > _gullsNextTime) {
@@ -3776,7 +3776,7 @@ void Myst::o_gulls3_init(uint16 var, const ArgumentsArray &args) {
 }
 
 void Myst::gullsFly3_run() {
-	static const char* gulls[] = { "birds1", "birds2", "birds3" };
+	static const char *const gulls[] = { "birds1", "birds2", "birds3" };
 	uint32 time = _vm->getTotalPlayTime();
 
 	if (time > _gullsNextTime) {

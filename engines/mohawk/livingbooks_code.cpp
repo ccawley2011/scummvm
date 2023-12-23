@@ -877,7 +877,7 @@ struct CodeCommandInfo {
 };
 
 #define NUM_GENERAL_COMMANDS 129
-CodeCommandInfo generalCommandInfo[NUM_GENERAL_COMMANDS] = {
+const CodeCommandInfo generalCommandInfo[NUM_GENERAL_COMMANDS] = {
 	{ "eval", &LBCode::cmdEval },
 	{ "random", &LBCode::cmdRandom },
 	{ "stringLen", &LBCode::cmdStringLen },
@@ -1022,7 +1022,7 @@ void LBCode::runGeneralCommand() {
 	if (commandType == 0 || commandType > NUM_GENERAL_COMMANDS)
 		error("bad command type 0x%02x in runGeneralCommand", commandType);
 
-	CodeCommandInfo &info = generalCommandInfo[commandType - 1];
+	const CodeCommandInfo &info = generalCommandInfo[commandType - 1];
 	debugN("%s", info.name);
 	Common::Array<LBValue> params = readParams();
 
@@ -1469,7 +1469,7 @@ void LBCode::cmdKey(const Common::Array<LBValue> &params) {
 }
 
 #define NUM_ITEM_COMMANDS 34
-CodeCommandInfo itemCommandInfo[NUM_ITEM_COMMANDS] = {
+const CodeCommandInfo itemCommandInfo[NUM_ITEM_COMMANDS] = {
 	{ "clone", &LBCode::itemClone },
 	{ "destroy", nullptr },
 	{ "dragBeginFrom", nullptr },
@@ -1514,7 +1514,7 @@ void LBCode::runItemCommand() {
 	if (commandType == 0 || commandType > NUM_ITEM_COMMANDS)
 		error("bad command type 0x%02x in runItemCommand", commandType);
 
-	CodeCommandInfo &info = itemCommandInfo[commandType - 1];
+	const CodeCommandInfo &info = itemCommandInfo[commandType - 1];
 	debugN("%s", info.name);
 	Common::Array<LBValue> params = readParams();
 
@@ -1717,7 +1717,7 @@ bool LBCode::parseCodeSymbol(Common::String name, uint &pos, Common::Array<byte>
 	// first, check whether the name matches a known function
 	for (uint i = 0; i < 2; i++) {
 		byte cmdToken;
-		CodeCommandInfo *cmdInfo = nullptr;
+		const CodeCommandInfo *cmdInfo = nullptr;
 		uint cmdCount = 0;
 
 		switch (i) {

@@ -196,7 +196,7 @@ static const int kSmallMarbleWidth = 4;
 static const int kSmallMarbleHeight = 2;
 //static const int kLargeMarbleSize = 8;
 static const int kMarbleHotspotSize = 13;
-static const char *s_marbleNames[] = { "tred", "torange", "tyellow", "tgreen", "tblue", "tviolet" };
+static const char *const s_marbleNames[] = { "tred", "torange", "tyellow", "tgreen", "tblue", "tviolet" };
 
 // Marble Puzzle helper functions
 // The y portion takes the upper 16 bits, while the x portion takes the lower 16 bits

@@ -101,7 +101,7 @@ public:
 	RivenHotspot *getHotspotByName(const Common::String &name, bool optional = false) const;
 
 	/** Find an enabled hotspot with a name matching one of the arguments */
-	RivenHotspot *findEnabledHotspotByName(const char **names) const;
+	RivenHotspot *findEnabledHotspotByName(const char *const *names) const;
 
 	/** Get the hotspot with the specified BLST id */
 	RivenHotspot *getHotspotByBlstId(const uint16 blstId) const;

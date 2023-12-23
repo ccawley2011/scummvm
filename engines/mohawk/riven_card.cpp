@@ -1176,22 +1176,22 @@ RivenScriptPtr RivenCard::onKeyAction(RivenAction keyAction) {
 		return RivenScriptPtr(new RivenScript());
 	}
 
-	static const char *forwardNames[] = {
+	static const char *const forwardNames[] = {
 			"forward", "forward1", "forward2", "forward3",
 			"opendoor", "openhatch", "opentrap", "opengate", "opengrate",
 			"open", "door", "drop", "go", "enterprison", "exit",
 			"forwardleft", "forwardright", nullptr
 	};
 
-	static const char *forwardLeftNames [] = { "forwardleft",              nullptr };
-	static const char *forwardRightNames[] = { "forwardright",             nullptr };
-	static const char *leftNames        [] = { "left",  "afl", "prevpage", nullptr };
-	static const char *rightNames       [] = { "right", "afr", "nextpage", nullptr };
-	static const char *backNames        [] = { "back",                     nullptr };
-	static const char *upNames          [] = { "up",                       nullptr };
-	static const char *downNames        [] = { "down",                     nullptr };
+	static const char *const forwardLeftNames [] = { "forwardleft",              nullptr };
+	static const char *const forwardRightNames[] = { "forwardright",             nullptr };
+	static const char *const leftNames        [] = { "left",  "afl", "prevpage", nullptr };
+	static const char *const rightNames       [] = { "right", "afr", "nextpage", nullptr };
+	static const char *const backNames        [] = { "back",                     nullptr };
+	static const char *const upNames          [] = { "up",                       nullptr };
+	static const char *const downNames        [] = { "down",                     nullptr };
 
-	const char **hotspotNames = nullptr;
+	const char *const *hotspotNames = nullptr;
 	switch (keyAction) {
 		case kRivenActionMoveForward:
 			hotspotNames = forwardNames;
@@ -1243,7 +1243,7 @@ RivenScriptPtr RivenCard::onKeyAction(RivenAction keyAction) {
 	return clickScript;
 }
 
-RivenHotspot *RivenCard::findEnabledHotspotByName(const char **names) const {
+RivenHotspot *RivenCard::findEnabledHotspotByName(const char *const *names) const {
 	for (uint i = 0; names[i] != nullptr; i++) {
 		RivenHotspot *hotspot = getHotspotByName(names[i], true);
 		if (hotspot && hotspot->isEnabled()) {

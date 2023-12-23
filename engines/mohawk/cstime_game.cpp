@@ -215,7 +215,7 @@ uint16 CSTimeChar::getChrBaseId() {
 }
 
 uint CSTimeChar::getScriptCount() {
-	static uint bases[4] = { 0, 10, 13, 21 };
+	static const uint bases[4] = { 0, 10, 13, 21 };
 	assert(_unknown1 < 4);
 	return bases[_unknown1] + _ambients.size() + _unknown3;
 }
@@ -272,7 +272,7 @@ void CSTimeChar::installAmbientAnim(uint id, uint32 flags) {
 }
 
 uint16 CSTimeChar::getChrTypeScriptBase() {
-	static uint bases[4] = { 0, 10, 13, 21 };
+	static const uint bases[4] = { 0, 10, 13, 21 };
 	assert(_unknown1 < 4);
 	return bases[_unknown1] + getChrBaseId();
 }
