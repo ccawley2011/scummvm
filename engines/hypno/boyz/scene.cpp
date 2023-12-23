@@ -25,7 +25,7 @@
 
 namespace Hypno {
 
-const char *sceneVariablesBoyz[] = {
+const char *const sceneVariablesBoyz[] = {
 	"GS_NONE",
 	"GS_SCTEXT",
 	"GS_AMBIENT",
