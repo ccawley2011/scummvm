@@ -31,7 +31,7 @@
 #include "engines/nancy/util.h"
 #include "engines/nancy/iff.h"
 
-static char treePrefix[] = "_tree_";
+static const char treePrefix[] = "_tree_";
 
 namespace Nancy {
 
