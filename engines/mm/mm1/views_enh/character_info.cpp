@@ -71,7 +71,7 @@ CharacterInfo::CharacterInfo() : PartyView("CharacterInfo") {
 	_bounds = Common::Rect(0, 0, 320, 146);
 	_statInfo.setReduced(true);
 
-	static const char *FIELDS[CHAR_ICONS_COUNT] = {
+	static const char *const FIELDS[CHAR_ICONS_COUNT] = {
 		"might", "intelligence", "personality",
 		"endurance", "speed",
 		"accuracy", "luck", "age", "level", "ac",

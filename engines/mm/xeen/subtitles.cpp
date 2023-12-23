@@ -28,7 +28,7 @@
 namespace MM {
 namespace Xeen {
 
-static const char *SUBTITLE_LINE = "\f35\x3""c\v190\t000%s";
+static const char *const SUBTITLE_LINE = "\f35\x3""c\v190\t000%s";
 
 Subtitles::Subtitles() : _lineNum(-1), _boxSprites(nullptr), _lineEnd(0), _lineSize(0) {
 }

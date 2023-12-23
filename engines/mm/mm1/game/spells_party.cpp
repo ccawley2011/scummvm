@@ -36,7 +36,7 @@ namespace Game {
 
 Character *SpellsParty::_destChar;
 
-SpellsParty::SpellFn SpellsParty::SPELLS[SPELLS_COUNT] = {
+const SpellsParty::SpellFn SpellsParty::SPELLS[SPELLS_COUNT] = {
 	// Cleric spells
 	cleric11_awaken,
 	cleric12_bless,

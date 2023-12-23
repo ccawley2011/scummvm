@@ -109,7 +109,7 @@ static const uint16 TILE_AREA3[] = {
 	0xB0B, 0x10D, 0x517, 0x0B18, 0x11A, 0x50A
 };
 
-static const uint16 *TILE_AREAS[3] = { TILE_AREA1, TILE_AREA2, TILE_AREA3 };
+static const uint16 *const TILE_AREAS[3] = { TILE_AREA1, TILE_AREA2, TILE_AREA3 };
 static const byte TILE_OFFSET[3] = { 1,  7, 15 };
 
 #define RESOURCE_TILES_COUNT 12
@@ -120,7 +120,7 @@ static const uint16 TILE_HEIGHTS[RESOURCE_TILES_COUNT] = {
 	128, 96, 64, 32, 128, 96, 64, 32, 96, 64, 32, 16
 };
 
-static byte TILE_COLORS[18] = {
+static const byte TILE_COLORS[18] = {
 	0xe6, 0xe6, 0xe6, 0x72, 0x72, 0x72, 0x62, 0x62, 0x62,
 	0x62, 0x62, 0xe1, 0x53, 0x53, 0xff, 0x43, 0x43, 0x63
 };

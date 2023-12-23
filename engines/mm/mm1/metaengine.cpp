@@ -158,7 +158,7 @@ static const KeysRecord NORMAL_RECORDS[] = {
 	{ nullptr, nullptr, nullptr }
 };
 
-static const KeysRecord *MODE_RECORDS[6] = {
+static const KeysRecord *const MODE_RECORDS[6] = {
 	MENU_RECORDS,
 	MINIMAL_RECORDS,
 	PARTY_MENU_RECORDS,

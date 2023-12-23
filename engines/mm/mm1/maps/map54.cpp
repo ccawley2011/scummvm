@@ -32,7 +32,7 @@ namespace Maps {
 #define PERF_TOTAL 1293
 #define VAL2 1296
 
-static byte FLAGS[5] = { 1, 2, 4, 8, 0x10 };
+static const byte FLAGS[5] = { 1, 2, 4, 8, 0x10 };
 
 void Map54::special() {
 	// Scan for special actions on the map cell

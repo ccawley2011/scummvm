@@ -173,7 +173,7 @@ private:
 	static SpellResult wizard74_powerShield();
 	static SpellResult wizard75_prismaticLight();
 
-	static SpellFn SPELLS[SPELLS_COUNT];
+	static const SpellFn SPELLS[SPELLS_COUNT];
 public:
 	/**
 	 * Casts a spell

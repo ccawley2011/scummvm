@@ -29,7 +29,7 @@
 namespace MM {
 namespace MM1 {
 
-static byte DEFAULT_PORTRAITS[6] = { 0, 11, 9, 7, 4, 3 };
+static const byte DEFAULT_PORTRAITS[6] = { 0, 11, 9, 7, 4, 3 };
 
 void Roster::synchronize(Common::Serializer &s, bool isLoadingDefaults) {
 	for (int i = 0; i < ROSTER_COUNT; ++i)

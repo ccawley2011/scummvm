@@ -27,25 +27,25 @@ namespace MM {
 namespace MM1 {
 namespace Views {
 
-static byte ARR1[] = { 8, 6, 4, 2 };
-static byte ARR2[] = { 6, 4, 2, 1 };
-static byte ARR3[] = { 4, 5, 3, 2 };
-static byte ARR4[] = { 4, 9, 6, 2 };
-static byte ARR5[] = { 4, 5, 3, 2 };
-static byte ARR6[] = { 22, 12, 6, 2 };
-static byte ARR7[] = { 0, 8, 18, 24 };
-static byte ARR8[] = { 0, 0, 12, 24 };
-static byte ARR9[] = { 52, 42, 36, 32 };
-static byte ARR10[] = { 52, 42, 36, 32 };
-static byte ARR11[] = { 8, 18, 24, 28 };
-static byte ARR12[] = { 8, 10, 6, 4 };
-static byte ARR13[] = { 44, 24, 12, 4 };
-static byte ARR14[] = { 0, 0, 0, 0 };
-static byte ARR15[] = { 36, 4, 0, 0 };
-static byte ARR16[] = { 36, 14, 6, 0 };
-static uint16 ARR17[] = { 0, 1, 2, 3 };
-static uint16 ARR18[] = { 4, 5, 6, 7 };
-static uint16 ARR19[] = { 8, 9, 10, 11 };
+static const byte ARR1[] = { 8, 6, 4, 2 };
+static const byte ARR2[] = { 6, 4, 2, 1 };
+static const byte ARR3[] = { 4, 5, 3, 2 };
+static const byte ARR4[] = { 4, 9, 6, 2 };
+static const byte ARR5[] = { 4, 5, 3, 2 };
+static const byte ARR6[] = { 22, 12, 6, 2 };
+static const byte ARR7[] = { 0, 8, 18, 24 };
+static const byte ARR8[] = { 0, 0, 12, 24 };
+static const byte ARR9[] = { 52, 42, 36, 32 };
+static const byte ARR10[] = { 52, 42, 36, 32 };
+static const byte ARR11[] = { 8, 18, 24, 28 };
+static const byte ARR12[] = { 8, 10, 6, 4 };
+static const byte ARR13[] = { 44, 24, 12, 4 };
+static const byte ARR14[] = { 0, 0, 0, 0 };
+static const byte ARR15[] = { 36, 4, 0, 0 };
+static const byte ARR16[] = { 36, 14, 6, 0 };
+static const uint16 ARR17[] = { 0, 1, 2, 3 };
+static const uint16 ARR18[] = { 4, 5, 6, 7 };
+static const uint16 ARR19[] = { 8, 9, 10, 11 };
 
 GameView::GameView(UIElement *owner) : Game::ViewBase(owner) {
 	Common::fill(&_drawFlags[0], &_drawFlags[10], 0);
