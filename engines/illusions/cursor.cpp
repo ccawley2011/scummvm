@@ -50,7 +50,7 @@ void Cursor::place(Control *control, uint32 sequenceId) {
 }
 
 void Cursor::setActorIndex(int actorIndex, int a, int b) {
-	static int kCursorMap[13][2][2] = {
+	static const int kCursorMap[13][2][2] = {
 		{{ 1,  2}, { 0,  0}},
 		{{ 3,  4}, { 0,  0}},
 		{{ 5,  6}, {13, 14}},

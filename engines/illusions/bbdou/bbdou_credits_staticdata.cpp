@@ -23,7 +23,7 @@
 
 namespace Illusions {
 
-const char *kCreditsText[] = {
+const char *const kCreditsText[] = {
 	"@center",
 	"@normal",
 	"Directed by",
