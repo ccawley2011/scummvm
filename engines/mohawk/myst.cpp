@@ -169,7 +169,7 @@ void MohawkEngine_Myst::cachePreload(uint32 tag, uint16 id) {
 	debugC(kDebugCache, "cachePreload: Could not find a \'%s\' resource with ID %04x", tag2str(tag), id);
 }
 
-static const char *mystFiles[] = {
+static const char *const mystFiles[] = {
 	"channel",
 	"credits",
 	"demo",

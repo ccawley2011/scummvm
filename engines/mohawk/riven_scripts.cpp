@@ -241,7 +241,7 @@ RivenScript &RivenScript::operator+=(const RivenScript &other) {
 }
 
 const char *RivenScript::getTypeName(uint16 type) {
-	static const char *names[] = {
+	static const char *const names[] = {
 		"MouseDown",
 		"MouseDrag",
 		"MouseUp",

@@ -129,7 +129,7 @@ public:
 private:
 	// Datafiles
 	MohawkArchive *_extrasFile; // We need a separate handle for the extra data
-	const char **listExpectedDatafiles() const;
+	const char *const *listExpectedDatafiles() const;
 	void loadLanguageDatafile(char prefix, uint16 stackId);
 	bool checkDatafiles();
 

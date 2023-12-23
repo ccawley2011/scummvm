@@ -403,7 +403,7 @@ void MohawkEngine_Riven::changeToStack(uint16 stackId) {
 	}
 
 	// Load files that start with the prefix
-	const char **datafiles = listExpectedDatafiles();
+	const char *const *datafiles = listExpectedDatafiles();
 	for (int i = 0; datafiles[i] != nullptr; i++) {
 		if (datafiles[i][0] == prefix) {
 			MohawkArchive *mhk = new MohawkArchive();
@@ -437,11 +437,11 @@ void MohawkEngine_Riven::reloadCurrentCard() {
 	changeToCard(cardId);
 }
 
-const char **MohawkEngine_Riven::listExpectedDatafiles() const {
+const char *const *MohawkEngine_Riven::listExpectedDatafiles() const {
 	// The files are in reverse order because of the way the 1.02 patch works.
 	// The only "Data3" file is j_Data3.mhk from that patch. Patch files have higher
 	// priorities over the regular files and are therefore loaded and checked first.
-	static const char *datafilesDVD[] = {
+	static const char *const datafilesDVD[] = {
 			"a_Data.mhk",                  "a_Sounds.mhk",
 			"b_Data.mhk",                  "b_Sounds.mhk",
 			"g_Data.mhk",                  "g_Sounds.mhk",
@@ -453,7 +453,7 @@ const char **MohawkEngine_Riven::listExpectedDatafiles() const {
 			nullptr
 	};
 
-	static const char *datafilesCD[] = {
+	static const char *const datafilesCD[] = {
 			"a_Data.mhk",                                "a_Sounds.mhk",
 			"b_Data1.mhk", "b_Data.mhk",                 "b_Sounds.mhk",
 			"g_Data.mhk",                                "g_Sounds.mhk",
@@ -465,14 +465,14 @@ const char **MohawkEngine_Riven::listExpectedDatafiles() const {
 			nullptr
 	};
 
-	static const char *datafilesDemo[] = {
+	static const char *const datafilesDemo[] = {
 			"a_Data.mhk", "a_Sounds.mhk",
 			"j_Data.mhk", "j_Sounds.mhk",
 			"t_Data.mhk", "t_Sounds.mhk",
 			nullptr
 	};
 
-	const char **datafiles;
+	const char *const *datafiles;
 	if (isGameVariant(GF_DEMO)) {
 		datafiles = datafilesDemo;
 	} else if (isGameVariant(GF_DVD)) {
@@ -486,7 +486,7 @@ const char **MohawkEngine_Riven::listExpectedDatafiles() const {
 bool MohawkEngine_Riven::checkDatafiles() {
 	Common::String missingFiles;
 
-	const char **datafiles = listExpectedDatafiles();
+	const char *const *datafiles = listExpectedDatafiles();
 	for (int i = 0; datafiles[i] != nullptr; i++) {
 		if (!SearchMan.hasFile(datafiles[i])) {
 			if (strcmp(datafiles[i], "j_Data3.mhk") == 0

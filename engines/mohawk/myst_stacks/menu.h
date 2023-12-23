@@ -85,7 +85,7 @@ private:
 	void replaceButtonSubImageWithText(const Common::U32String &text, const Graphics::TextAlign &align, MystAreaImageSwitch *area,
 	                                   uint16 subimageIndex, const Common::Rect &backgroundRect, int16 deltaY,
 	                                   uint8 r, uint8 g, uint8 b) const;
-	const char **getButtonCaptions() const;
+	const char *const *getButtonCaptions() const;
 	void resetButtons();
 
 	PauseToken _pauseToken;

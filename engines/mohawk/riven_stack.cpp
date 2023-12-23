@@ -512,7 +512,7 @@ void RivenNameList::registerName(uint16 nameId, const Common::String &name) {
 }
 
 namespace RivenStacks {
-static const char *names[] = {
+static const char *const names[] = {
 		"<unknown>",
 		"ospit",
 		"pspit",

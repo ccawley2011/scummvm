@@ -107,7 +107,7 @@ bool MystConsole::Cmd_Var(int argc, const char **argv) {
 	return true;
 }
 
-static const char *mystStackNames[12] = {
+static const char *const mystStackNames[12] = {
 	"Channelwood",
 	"Credits",
 	"Demo",

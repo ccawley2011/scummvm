@@ -132,7 +132,7 @@ void Menu::o_menuInit(uint16 var, const ArgumentsArray &args) {
 		{ 1, 0, Graphics::kTextAlignLeft  }
 	};
 
-	const char **buttonCaptions = getButtonCaptions();
+	const char *const *buttonCaptions = getButtonCaptions();
 
 	for (uint i = 0; i < ARRAYSIZE(buttons); i++) {
 		MystAreaImageSwitch *image  = _vm->getCard()->getResource<MystAreaImageSwitch>(2 * i + 0);
@@ -144,8 +144,8 @@ void Menu::o_menuInit(uint16 var, const ArgumentsArray &args) {
 	}
 }
 
-const char **Menu::getButtonCaptions() const {
-	static const char *buttonCaptionsEnglish[] = {
+const char *const *Menu::getButtonCaptions() const {
+	static const char *const buttonCaptionsEnglish[] = {
 		"NEW GAME",
 		"LOAD GAME",
 		"SAVE GAME",
@@ -154,7 +154,7 @@ const char **Menu::getButtonCaptions() const {
 		"OPTIONS"
 	};
 
-	static const char *buttonCaptionsFrench[] = {
+	static const char *const buttonCaptionsFrench[] = {
 		"NOUVEAU",
 		"CHARGER",
 		"SAUVER",
@@ -163,7 +163,7 @@ const char **Menu::getButtonCaptions() const {
 		"OPTIONS"
 	};
 
-	static const char *buttonCaptionsGerman[] = {
+	static const char *const buttonCaptionsGerman[] = {
 		"NEUES SPIEL",
 		"SPIEL LADEN",
 		"SPIEL SPEICHERN",
@@ -172,7 +172,7 @@ const char **Menu::getButtonCaptions() const {
 		"OPTIONEN"
 	};
 
-	static const char *buttonCaptionsSpanish[] = {
+	static const char *const buttonCaptionsSpanish[] = {
 		"JUEGO NUEVO",
 		"CARGAR JUEGO",
 		"GUARDAR JUEGO",
@@ -181,7 +181,7 @@ const char **Menu::getButtonCaptions() const {
 		"OPCIONES"
 	};
 
-	static const char *buttonCaptionsPolish[] = {
+	static const char *const buttonCaptionsPolish[] = {
 		"NOWA GRA",
 		"ZAŁADUJ GRĘ",
 		"ZAPISZ GRĘ",
