@@ -29,7 +29,7 @@
 
 namespace LastExpress {
 
-uint16 brigthnessData[4] = { 0, 0x7BDE, 0x739C, 0x6318 };
+const uint16 brigthnessData[4] = { 0, 0x7BDE, 0x739C, 0x6318 };
 
 Cursor::Cursor() : _current(kCursorMAX) {
 	memset(&_cursors, 0, sizeof(_cursors));
