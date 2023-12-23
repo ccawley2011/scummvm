@@ -76,7 +76,7 @@ Layer 2:
 
 */
 
-ShanghaiModifier::TileCoordinate ShanghaiModifier::_tileCoordinates[ShanghaiModifier::kNumTiles] = {
+const ShanghaiModifier::TileCoordinate ShanghaiModifier::_tileCoordinates[ShanghaiModifier::kNumTiles] = {
 	{0, 0, 0},
 	{2, 0, 0},
 	{4, 0, 0},

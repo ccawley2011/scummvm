@@ -90,7 +90,7 @@ private:
 	Event _resetTileSetWhen;
 	VarReference _tileSetRef;
 
-	static TileCoordinate _tileCoordinates[kNumTiles];
+	static const TileCoordinate _tileCoordinates[kNumTiles];
 	int8 _tileAtCoordinate[kBoardSizeX][kBoardSizeY][kBoardSizeZ];
 };
 

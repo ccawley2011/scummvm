@@ -490,7 +490,7 @@ struct ObsidianAutoSaveTrigger {
 	const char *varTrueLatch;   // If set, only save when this variable was set to
 };
 
-static ObsidianAutoSaveTrigger kObsidianAutoSaveTriggers[] = {
+static const ObsidianAutoSaveTrigger kObsidianAutoSaveTriggers[] = {
 	// Arrive at campsite
 	{
 		"103.2L",
