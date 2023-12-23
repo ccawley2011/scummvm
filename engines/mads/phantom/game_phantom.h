@@ -96,7 +96,7 @@ private:
 	void stopWalker();
 	void stopWalkerBasic();
 
-	Catacombs *_catacombs;
+	const Catacombs *_catacombs;
 	int _catacombSize;
 
 protected:
