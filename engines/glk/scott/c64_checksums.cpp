@@ -69,7 +69,7 @@ struct C64Rec {
 	int _imgOffset;
 };
 
-static C64Rec g_C64Registry[] = {
+static const C64Rec g_C64Registry[] = {
 	{ BATON_C64,		0x2ab00, 0xc3fc, TYPE_D64, 0, nullptr, nullptr, 0, 0, 0, 0, 0 },		// Mysterious Adventures C64 dsk 1
 	{ TIME_MACHINE_C64,	0x2ab00, 0xc3fc, TYPE_D64, 0, nullptr, nullptr, 0, 0, 0, 0, 0 },
 	{ ARROW1_C64,		0x2ab00, 0xc3fc, TYPE_D64, 0, nullptr, nullptr, 0, 0, 0, 0, 0 },

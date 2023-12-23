@@ -40,7 +40,7 @@ void scnCaution(UnpStr *unp);
 void scnActionPacker(UnpStr *unp);
 void scnExomizer(UnpStr *unp);
 
-Scnptr g_scanFunc[] = {
+static const Scnptr g_scanFunc[] = {
 	scnECA,
 	scnExpert,
 	scnCruel,

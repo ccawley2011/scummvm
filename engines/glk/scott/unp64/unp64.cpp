@@ -357,7 +357,7 @@ int unp64(byte *compressed, size_t length, byte *destinationBuffer, size_t *fina
 			/* intros */
 			if ((r->_pc == 0xffe4) || (r->_pc == 0xf13e)) {
 				static int flipspe4 = -1;
-				static unsigned char fpressedchars[] = {0x20, 0, 0x4e, 0, 3, 0, 0x5f, 0, 0x11, 00, 0x0d, 0, 0x31, 0};
+				static const unsigned char fpressedchars[] = {0x20, 0, 0x4e, 0, 3, 0, 0x5f, 0, 0x11, 00, 0x0d, 0, 0x31, 0};
 				flipspe4++;
 
 				if (flipspe4 > ARRAYSIZE(fpressedchars))

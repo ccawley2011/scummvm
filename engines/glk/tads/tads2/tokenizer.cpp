@@ -31,11 +31,11 @@ namespace TADS2 {
 
 
 /* special temporary buffers for <<expr>> macro expansion */
-static char tokmac1[]  = ",say((";
-static char tokmac1s[] = "(say((";
-static char tokmac2[]  = "),nil),\"";
-static char tokmac3[]  = "),nil))";
-static char tokmac4[]  = ")";
+static const char tokmac1[]  = ",say((";
+static const char tokmac1s[] = "(say((";
+static const char tokmac2[]  = "),nil),\"";
+static const char tokmac3[]  = "),nil))";
+static const char tokmac4[]  = ")";
 
 /* forward definition of static functions */
 static int tokdfhsh(const char *sym, int len);

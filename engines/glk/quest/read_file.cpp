@@ -432,7 +432,7 @@ Common::WriteStream &operator<<(Common::WriteStream &o, const GeasFile &gf) {
 	return o;
 }
 
-const char *compilation_tokens[256] = {
+const char *const compilation_tokens[256] = {
 	"", "game", "procedure", "room", "object", "character", "text", "selection",
 	"define", "end", "", "asl-version", "game", "version", "author", "copyright",
 	"info", "start", "possitems", "startitems", "prefix", "look", "out", "gender",

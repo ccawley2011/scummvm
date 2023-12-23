@@ -70,7 +70,7 @@ namespace JACL {
 
 #define SUBMIT_CHAR(p, c) ((p)->entry_buf[entry_pos++] = (c))
 
-static const char *csv_errors[] = {"success",
+static const char *const csv_errors[] = {"success",
 							 "error parsing data while strict checking enabled",
 							 "memory exhausted while increasing buffer size",
 							 "data size too large",

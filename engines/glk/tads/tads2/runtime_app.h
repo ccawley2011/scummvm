@@ -37,11 +37,11 @@ struct runcxdef;
  */
 #define  TADS_RUNTIME_VERSION   "2.5.17"
 
-extern char G_tads_oem_app_name[];
-extern char G_tads_oem_display_mode[];
-extern char G_tads_oem_dbg_name[];
-extern char G_tads_oem_author[];
-extern int G_tads_oem_copyright_prefix;
+extern const char G_tads_oem_app_name[];
+extern const char G_tads_oem_display_mode[];
+extern const char G_tads_oem_dbg_name[];
+extern const char G_tads_oem_author[];
+extern const int G_tads_oem_copyright_prefix;
 
 
 /*

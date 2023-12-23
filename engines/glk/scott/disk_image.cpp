@@ -60,7 +60,7 @@ struct DosError {
 	const char *_string;      /* description */
 };
 
-DosError g_dosError[] = {
+static const DosError g_dosError[] = {
 	/* non-errors */
 	{0x01, 0, "ok"},
 	/* errors */
@@ -456,7 +456,7 @@ int getTsDosErr(DiskImage *di, TrackSector ts) {
 
 int diGetTsErr(DiskImage *di, TrackSector ts) {
 	int errnum;
-	DosError *err = g_dosError;
+	const DosError *err = g_dosError;
 
 	errnum = getTsDosErr(di, ts);
 	while (err->_number >= 0) {

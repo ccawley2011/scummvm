@@ -223,7 +223,7 @@ class VM : public GlkInterface, public Game {
 	};
 private:
 	// Execution fields
-	static OpcodeMethod _METHODS[0x34];
+	static const OpcodeMethod _METHODS[0x34];
 	int _pc;
 	ExecutionResult _status;
 	FixedStack _stack;

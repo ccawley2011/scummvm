@@ -87,7 +87,7 @@ void cmap_init_default(void)
 static int cmap_load_internal(char *filename)
 {
 	osfildef *fp;
-	static char sig1[] = CMAP_SIG_S100;
+	static const char sig1[] = CMAP_SIG_S100;
 	char buf[256];
 	uchar lenbuf[2];
 	size_t len;

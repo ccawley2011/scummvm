@@ -327,7 +327,7 @@ bool GlkInterface::os_picture_data(int picture, uint *height, uint *width) {
 }
 
 void GlkInterface::start_sample(int number, int volume, int repeats, zword eos) {
-	static zbyte LURKING_REPEATS[] = {
+	static const zbyte LURKING_REPEATS[] = {
 		0x00, 0x00, 0x00, 0x01, 0xff,
 		0x00, 0x01, 0x01, 0x01, 0x01,
 		0xff, 0x01, 0x01, 0xff, 0x00,

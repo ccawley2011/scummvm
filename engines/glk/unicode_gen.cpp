@@ -28,7 +28,7 @@
 
 namespace Glk {
 
-gli_case_block_t unigen_case_block_0x0[256] = {
+const gli_case_block_t unigen_case_block_0x0[256] = {
 	{ 0x0, 0x0 },
 	{ 0x1, 0x1 },
 	{ 0x2, 0x2 },
@@ -287,7 +287,7 @@ gli_case_block_t unigen_case_block_0x0[256] = {
 	{ 0x178, 0xff },  /* lower */
 };
 
-gli_case_block_t unigen_case_block_0x1[256] = {
+const gli_case_block_t unigen_case_block_0x1[256] = {
 	{ 0x100, 0x101 },  /* upper */
 	{ 0x100, 0x101 },  /* lower */
 	{ 0x102, 0x103 },  /* upper */
@@ -546,7 +546,7 @@ gli_case_block_t unigen_case_block_0x1[256] = {
 	{ 0x1fe, 0x1ff },  /* lower */
 };
 
-gli_case_block_t unigen_case_block_0x2[256] = {
+const gli_case_block_t unigen_case_block_0x2[256] = {
 	{ 0x200, 0x201 },  /* upper */
 	{ 0x200, 0x201 },  /* lower */
 	{ 0x202, 0x203 },  /* upper */
@@ -805,7 +805,7 @@ gli_case_block_t unigen_case_block_0x2[256] = {
 	{ 0x2ff, 0x2ff },
 };
 
-gli_case_block_t unigen_case_block_0x3[256] = {
+const gli_case_block_t unigen_case_block_0x3[256] = {
 	{ 0x300, 0x300 },
 	{ 0x301, 0x301 },
 	{ 0x302, 0x302 },
@@ -1064,7 +1064,7 @@ gli_case_block_t unigen_case_block_0x3[256] = {
 	{ 0x3ff, 0x3ff },
 };
 
-gli_case_block_t unigen_case_block_0x4[256] = {
+const gli_case_block_t unigen_case_block_0x4[256] = {
 	{ 0x400, 0x450 },  /* upper */
 	{ 0x401, 0x451 },  /* upper */
 	{ 0x402, 0x452 },  /* upper */
@@ -1323,7 +1323,7 @@ gli_case_block_t unigen_case_block_0x4[256] = {
 	{ 0x4ff, 0x4ff },
 };
 
-gli_case_block_t unigen_case_block_0x5[256] = {
+const gli_case_block_t unigen_case_block_0x5[256] = {
 	{ 0x500, 0x501 },  /* upper */
 	{ 0x500, 0x501 },  /* lower */
 	{ 0x502, 0x503 },  /* upper */
@@ -1582,7 +1582,7 @@ gli_case_block_t unigen_case_block_0x5[256] = {
 	{ 0x5ff, 0x5ff },
 };
 
-gli_case_block_t unigen_case_block_0x1e[256] = {
+const gli_case_block_t unigen_case_block_0x1e[256] = {
 	{ 0x1e00, 0x1e01 },  /* upper */
 	{ 0x1e00, 0x1e01 },  /* lower */
 	{ 0x1e02, 0x1e03 },  /* upper */
@@ -1841,7 +1841,7 @@ gli_case_block_t unigen_case_block_0x1e[256] = {
 	{ 0x1eff, 0x1eff },
 };
 
-gli_case_block_t unigen_case_block_0x1f[256] = {
+const gli_case_block_t unigen_case_block_0x1f[256] = {
 	{ 0x1f08, 0x1f00 },  /* lower */
 	{ 0x1f09, 0x1f01 },  /* lower */
 	{ 0x1f0a, 0x1f02 },  /* lower */
@@ -2100,7 +2100,7 @@ gli_case_block_t unigen_case_block_0x1f[256] = {
 	{ 0x1fff, 0x1fff },
 };
 
-gli_case_block_t unigen_case_block_0x21[256] = {
+const gli_case_block_t unigen_case_block_0x21[256] = {
 	{ 0x2100, 0x2100 },
 	{ 0x2101, 0x2101 },
 	{ 0x2102, 0x2102 },
@@ -2359,7 +2359,7 @@ gli_case_block_t unigen_case_block_0x21[256] = {
 	{ 0x21ff, 0x21ff },
 };
 
-gli_case_block_t unigen_case_block_0x24[256] = {
+const gli_case_block_t unigen_case_block_0x24[256] = {
 	{ 0x2400, 0x2400 },
 	{ 0x2401, 0x2401 },
 	{ 0x2402, 0x2402 },
@@ -2618,7 +2618,7 @@ gli_case_block_t unigen_case_block_0x24[256] = {
 	{ 0x24ff, 0x24ff },
 };
 
-gli_case_block_t unigen_case_block_0xfb[256] = {
+const gli_case_block_t unigen_case_block_0xfb[256] = {
 	{ 0xFFFFFFFF, 0xFFFFFFFF },
 	{ 0xFFFFFFFF, 0xFFFFFFFF },
 	{ 0xFFFFFFFF, 0xFFFFFFFF },
@@ -2877,7 +2877,7 @@ gli_case_block_t unigen_case_block_0xfb[256] = {
 	{ 0xfbff, 0xfbff },
 };
 
-gli_case_block_t unigen_case_block_0xff[256] = {
+const gli_case_block_t unigen_case_block_0xff[256] = {
 	{ 0xff00, 0xff00 },
 	{ 0xff01, 0xff01 },
 	{ 0xff02, 0xff02 },
@@ -3136,7 +3136,7 @@ gli_case_block_t unigen_case_block_0xff[256] = {
 	{ 0xffff, 0xffff },
 };
 
-gli_case_block_t unigen_case_block_0x104[256] = {
+const gli_case_block_t unigen_case_block_0x104[256] = {
 	{ 0x10400, 0x10428 },  /* upper */
 	{ 0x10401, 0x10429 },  /* upper */
 	{ 0x10402, 0x1042a },  /* upper */
@@ -3395,7 +3395,7 @@ gli_case_block_t unigen_case_block_0x104[256] = {
 	{ 0x104ff, 0x104ff },
 };
 
-uint unigen_special_array[] = {
+const uint unigen_special_array[] = {
 	2, 0x53, 0x53,  /* 0xdf upcase */
 	1, 0xdf,  /* 0xdf downcase */
 	2, 0x53, 0x73,  /* 0xdf titlecase */
@@ -3743,121 +3743,121 @@ uint unigen_special_array[] = {
 	2, 0x544, 0x56d,  /* 0xfb17 titlecase */
 };
 
-gli_case_special_t unigen_special_0xdf = { 0, 3, 5 };
-gli_case_special_t unigen_special_0x130 = { 8, 10, 13 };
-gli_case_special_t unigen_special_0x149 = { 15, 18, 20 };
-gli_case_special_t unigen_special_0x1c4 = { 23, 25, 27 };
-gli_case_special_t unigen_special_0x1c5 = { 29, 31, 33 };
-gli_case_special_t unigen_special_0x1c6 = { 35, 37, 39 };
-gli_case_special_t unigen_special_0x1c7 = { 41, 43, 45 };
-gli_case_special_t unigen_special_0x1c8 = { 47, 49, 51 };
-gli_case_special_t unigen_special_0x1c9 = { 53, 55, 57 };
-gli_case_special_t unigen_special_0x1ca = { 59, 61, 63 };
-gli_case_special_t unigen_special_0x1cb = { 65, 67, 69 };
-gli_case_special_t unigen_special_0x1cc = { 71, 73, 75 };
-gli_case_special_t unigen_special_0x1f0 = { 77, 80, 82 };
-gli_case_special_t unigen_special_0x1f1 = { 85, 87, 89 };
-gli_case_special_t unigen_special_0x1f2 = { 91, 93, 95 };
-gli_case_special_t unigen_special_0x1f3 = { 97, 99, 101 };
-gli_case_special_t unigen_special_0x390 = { 103, 107, 109 };
-gli_case_special_t unigen_special_0x3b0 = { 113, 117, 119 };
-gli_case_special_t unigen_special_0x587 = { 123, 126, 128 };
-gli_case_special_t unigen_special_0x1e96 = { 131, 134, 136 };
-gli_case_special_t unigen_special_0x1e97 = { 139, 142, 144 };
-gli_case_special_t unigen_special_0x1e98 = { 147, 150, 152 };
-gli_case_special_t unigen_special_0x1e99 = { 155, 158, 160 };
-gli_case_special_t unigen_special_0x1e9a = { 163, 166, 168 };
-gli_case_special_t unigen_special_0x1f50 = { 171, 174, 176 };
-gli_case_special_t unigen_special_0x1f52 = { 179, 183, 185 };
-gli_case_special_t unigen_special_0x1f54 = { 189, 193, 195 };
-gli_case_special_t unigen_special_0x1f56 = { 199, 203, 205 };
-gli_case_special_t unigen_special_0x1f80 = { 209, 212, 214 };
-gli_case_special_t unigen_special_0x1f81 = { 216, 219, 221 };
-gli_case_special_t unigen_special_0x1f82 = { 223, 226, 228 };
-gli_case_special_t unigen_special_0x1f83 = { 230, 233, 235 };
-gli_case_special_t unigen_special_0x1f84 = { 237, 240, 242 };
-gli_case_special_t unigen_special_0x1f85 = { 244, 247, 249 };
-gli_case_special_t unigen_special_0x1f86 = { 251, 254, 256 };
-gli_case_special_t unigen_special_0x1f87 = { 258, 261, 263 };
-gli_case_special_t unigen_special_0x1f88 = { 265, 268, 270 };
-gli_case_special_t unigen_special_0x1f89 = { 272, 275, 277 };
-gli_case_special_t unigen_special_0x1f8a = { 279, 282, 284 };
-gli_case_special_t unigen_special_0x1f8b = { 286, 289, 291 };
-gli_case_special_t unigen_special_0x1f8c = { 293, 296, 298 };
-gli_case_special_t unigen_special_0x1f8d = { 300, 303, 305 };
-gli_case_special_t unigen_special_0x1f8e = { 307, 310, 312 };
-gli_case_special_t unigen_special_0x1f8f = { 314, 317, 319 };
-gli_case_special_t unigen_special_0x1f90 = { 321, 324, 326 };
-gli_case_special_t unigen_special_0x1f91 = { 328, 331, 333 };
-gli_case_special_t unigen_special_0x1f92 = { 335, 338, 340 };
-gli_case_special_t unigen_special_0x1f93 = { 342, 345, 347 };
-gli_case_special_t unigen_special_0x1f94 = { 349, 352, 354 };
-gli_case_special_t unigen_special_0x1f95 = { 356, 359, 361 };
-gli_case_special_t unigen_special_0x1f96 = { 363, 366, 368 };
-gli_case_special_t unigen_special_0x1f97 = { 370, 373, 375 };
-gli_case_special_t unigen_special_0x1f98 = { 377, 380, 382 };
-gli_case_special_t unigen_special_0x1f99 = { 384, 387, 389 };
-gli_case_special_t unigen_special_0x1f9a = { 391, 394, 396 };
-gli_case_special_t unigen_special_0x1f9b = { 398, 401, 403 };
-gli_case_special_t unigen_special_0x1f9c = { 405, 408, 410 };
-gli_case_special_t unigen_special_0x1f9d = { 412, 415, 417 };
-gli_case_special_t unigen_special_0x1f9e = { 419, 422, 424 };
-gli_case_special_t unigen_special_0x1f9f = { 426, 429, 431 };
-gli_case_special_t unigen_special_0x1fa0 = { 433, 436, 438 };
-gli_case_special_t unigen_special_0x1fa1 = { 440, 443, 445 };
-gli_case_special_t unigen_special_0x1fa2 = { 447, 450, 452 };
-gli_case_special_t unigen_special_0x1fa3 = { 454, 457, 459 };
-gli_case_special_t unigen_special_0x1fa4 = { 461, 464, 466 };
-gli_case_special_t unigen_special_0x1fa5 = { 468, 471, 473 };
-gli_case_special_t unigen_special_0x1fa6 = { 475, 478, 480 };
-gli_case_special_t unigen_special_0x1fa7 = { 482, 485, 487 };
-gli_case_special_t unigen_special_0x1fa8 = { 489, 492, 494 };
-gli_case_special_t unigen_special_0x1fa9 = { 496, 499, 501 };
-gli_case_special_t unigen_special_0x1faa = { 503, 506, 508 };
-gli_case_special_t unigen_special_0x1fab = { 510, 513, 515 };
-gli_case_special_t unigen_special_0x1fac = { 517, 520, 522 };
-gli_case_special_t unigen_special_0x1fad = { 524, 527, 529 };
-gli_case_special_t unigen_special_0x1fae = { 531, 534, 536 };
-gli_case_special_t unigen_special_0x1faf = { 538, 541, 543 };
-gli_case_special_t unigen_special_0x1fb2 = { 545, 548, 550 };
-gli_case_special_t unigen_special_0x1fb3 = { 553, 556, 558 };
-gli_case_special_t unigen_special_0x1fb4 = { 560, 563, 565 };
-gli_case_special_t unigen_special_0x1fb6 = { 568, 571, 573 };
-gli_case_special_t unigen_special_0x1fb7 = { 576, 580, 582 };
-gli_case_special_t unigen_special_0x1fbc = { 586, 589, 591 };
-gli_case_special_t unigen_special_0x1fc2 = { 593, 596, 598 };
-gli_case_special_t unigen_special_0x1fc3 = { 601, 604, 606 };
-gli_case_special_t unigen_special_0x1fc4 = { 608, 611, 613 };
-gli_case_special_t unigen_special_0x1fc6 = { 616, 619, 621 };
-gli_case_special_t unigen_special_0x1fc7 = { 624, 628, 630 };
-gli_case_special_t unigen_special_0x1fcc = { 634, 637, 639 };
-gli_case_special_t unigen_special_0x1fd2 = { 641, 645, 647 };
-gli_case_special_t unigen_special_0x1fd3 = { 651, 655, 657 };
-gli_case_special_t unigen_special_0x1fd6 = { 661, 664, 666 };
-gli_case_special_t unigen_special_0x1fd7 = { 669, 673, 675 };
-gli_case_special_t unigen_special_0x1fe2 = { 679, 683, 685 };
-gli_case_special_t unigen_special_0x1fe3 = { 689, 693, 695 };
-gli_case_special_t unigen_special_0x1fe4 = { 699, 702, 704 };
-gli_case_special_t unigen_special_0x1fe6 = { 707, 710, 712 };
-gli_case_special_t unigen_special_0x1fe7 = { 715, 719, 721 };
-gli_case_special_t unigen_special_0x1ff2 = { 725, 728, 730 };
-gli_case_special_t unigen_special_0x1ff3 = { 733, 736, 738 };
-gli_case_special_t unigen_special_0x1ff4 = { 740, 743, 745 };
-gli_case_special_t unigen_special_0x1ff6 = { 748, 751, 753 };
-gli_case_special_t unigen_special_0x1ff7 = { 756, 760, 762 };
-gli_case_special_t unigen_special_0x1ffc = { 766, 769, 771 };
-gli_case_special_t unigen_special_0xfb00 = { 773, 776, 778 };
-gli_case_special_t unigen_special_0xfb01 = { 781, 784, 786 };
-gli_case_special_t unigen_special_0xfb02 = { 789, 792, 794 };
-gli_case_special_t unigen_special_0xfb03 = { 797, 801, 803 };
-gli_case_special_t unigen_special_0xfb04 = { 807, 811, 813 };
-gli_case_special_t unigen_special_0xfb05 = { 817, 820, 822 };
-gli_case_special_t unigen_special_0xfb06 = { 825, 828, 830 };
-gli_case_special_t unigen_special_0xfb13 = { 833, 836, 838 };
-gli_case_special_t unigen_special_0xfb14 = { 841, 844, 846 };
-gli_case_special_t unigen_special_0xfb15 = { 849, 852, 854 };
-gli_case_special_t unigen_special_0xfb16 = { 857, 860, 862 };
-gli_case_special_t unigen_special_0xfb17 = { 865, 868, 870 };
+const gli_case_special_t unigen_special_0xdf = { 0, 3, 5 };
+const gli_case_special_t unigen_special_0x130 = { 8, 10, 13 };
+const gli_case_special_t unigen_special_0x149 = { 15, 18, 20 };
+const gli_case_special_t unigen_special_0x1c4 = { 23, 25, 27 };
+const gli_case_special_t unigen_special_0x1c5 = { 29, 31, 33 };
+const gli_case_special_t unigen_special_0x1c6 = { 35, 37, 39 };
+const gli_case_special_t unigen_special_0x1c7 = { 41, 43, 45 };
+const gli_case_special_t unigen_special_0x1c8 = { 47, 49, 51 };
+const gli_case_special_t unigen_special_0x1c9 = { 53, 55, 57 };
+const gli_case_special_t unigen_special_0x1ca = { 59, 61, 63 };
+const gli_case_special_t unigen_special_0x1cb = { 65, 67, 69 };
+const gli_case_special_t unigen_special_0x1cc = { 71, 73, 75 };
+const gli_case_special_t unigen_special_0x1f0 = { 77, 80, 82 };
+const gli_case_special_t unigen_special_0x1f1 = { 85, 87, 89 };
+const gli_case_special_t unigen_special_0x1f2 = { 91, 93, 95 };
+const gli_case_special_t unigen_special_0x1f3 = { 97, 99, 101 };
+const gli_case_special_t unigen_special_0x390 = { 103, 107, 109 };
+const gli_case_special_t unigen_special_0x3b0 = { 113, 117, 119 };
+const gli_case_special_t unigen_special_0x587 = { 123, 126, 128 };
+const gli_case_special_t unigen_special_0x1e96 = { 131, 134, 136 };
+const gli_case_special_t unigen_special_0x1e97 = { 139, 142, 144 };
+const gli_case_special_t unigen_special_0x1e98 = { 147, 150, 152 };
+const gli_case_special_t unigen_special_0x1e99 = { 155, 158, 160 };
+const gli_case_special_t unigen_special_0x1e9a = { 163, 166, 168 };
+const gli_case_special_t unigen_special_0x1f50 = { 171, 174, 176 };
+const gli_case_special_t unigen_special_0x1f52 = { 179, 183, 185 };
+const gli_case_special_t unigen_special_0x1f54 = { 189, 193, 195 };
+const gli_case_special_t unigen_special_0x1f56 = { 199, 203, 205 };
+const gli_case_special_t unigen_special_0x1f80 = { 209, 212, 214 };
+const gli_case_special_t unigen_special_0x1f81 = { 216, 219, 221 };
+const gli_case_special_t unigen_special_0x1f82 = { 223, 226, 228 };
+const gli_case_special_t unigen_special_0x1f83 = { 230, 233, 235 };
+const gli_case_special_t unigen_special_0x1f84 = { 237, 240, 242 };
+const gli_case_special_t unigen_special_0x1f85 = { 244, 247, 249 };
+const gli_case_special_t unigen_special_0x1f86 = { 251, 254, 256 };
+const gli_case_special_t unigen_special_0x1f87 = { 258, 261, 263 };
+const gli_case_special_t unigen_special_0x1f88 = { 265, 268, 270 };
+const gli_case_special_t unigen_special_0x1f89 = { 272, 275, 277 };
+const gli_case_special_t unigen_special_0x1f8a = { 279, 282, 284 };
+const gli_case_special_t unigen_special_0x1f8b = { 286, 289, 291 };
+const gli_case_special_t unigen_special_0x1f8c = { 293, 296, 298 };
+const gli_case_special_t unigen_special_0x1f8d = { 300, 303, 305 };
+const gli_case_special_t unigen_special_0x1f8e = { 307, 310, 312 };
+const gli_case_special_t unigen_special_0x1f8f = { 314, 317, 319 };
+const gli_case_special_t unigen_special_0x1f90 = { 321, 324, 326 };
+const gli_case_special_t unigen_special_0x1f91 = { 328, 331, 333 };
+const gli_case_special_t unigen_special_0x1f92 = { 335, 338, 340 };
+const gli_case_special_t unigen_special_0x1f93 = { 342, 345, 347 };
+const gli_case_special_t unigen_special_0x1f94 = { 349, 352, 354 };
+const gli_case_special_t unigen_special_0x1f95 = { 356, 359, 361 };
+const gli_case_special_t unigen_special_0x1f96 = { 363, 366, 368 };
+const gli_case_special_t unigen_special_0x1f97 = { 370, 373, 375 };
+const gli_case_special_t unigen_special_0x1f98 = { 377, 380, 382 };
+const gli_case_special_t unigen_special_0x1f99 = { 384, 387, 389 };
+const gli_case_special_t unigen_special_0x1f9a = { 391, 394, 396 };
+const gli_case_special_t unigen_special_0x1f9b = { 398, 401, 403 };
+const gli_case_special_t unigen_special_0x1f9c = { 405, 408, 410 };
+const gli_case_special_t unigen_special_0x1f9d = { 412, 415, 417 };
+const gli_case_special_t unigen_special_0x1f9e = { 419, 422, 424 };
+const gli_case_special_t unigen_special_0x1f9f = { 426, 429, 431 };
+const gli_case_special_t unigen_special_0x1fa0 = { 433, 436, 438 };
+const gli_case_special_t unigen_special_0x1fa1 = { 440, 443, 445 };
+const gli_case_special_t unigen_special_0x1fa2 = { 447, 450, 452 };
+const gli_case_special_t unigen_special_0x1fa3 = { 454, 457, 459 };
+const gli_case_special_t unigen_special_0x1fa4 = { 461, 464, 466 };
+const gli_case_special_t unigen_special_0x1fa5 = { 468, 471, 473 };
+const gli_case_special_t unigen_special_0x1fa6 = { 475, 478, 480 };
+const gli_case_special_t unigen_special_0x1fa7 = { 482, 485, 487 };
+const gli_case_special_t unigen_special_0x1fa8 = { 489, 492, 494 };
+const gli_case_special_t unigen_special_0x1fa9 = { 496, 499, 501 };
+const gli_case_special_t unigen_special_0x1faa = { 503, 506, 508 };
+const gli_case_special_t unigen_special_0x1fab = { 510, 513, 515 };
+const gli_case_special_t unigen_special_0x1fac = { 517, 520, 522 };
+const gli_case_special_t unigen_special_0x1fad = { 524, 527, 529 };
+const gli_case_special_t unigen_special_0x1fae = { 531, 534, 536 };
+const gli_case_special_t unigen_special_0x1faf = { 538, 541, 543 };
+const gli_case_special_t unigen_special_0x1fb2 = { 545, 548, 550 };
+const gli_case_special_t unigen_special_0x1fb3 = { 553, 556, 558 };
+const gli_case_special_t unigen_special_0x1fb4 = { 560, 563, 565 };
+const gli_case_special_t unigen_special_0x1fb6 = { 568, 571, 573 };
+const gli_case_special_t unigen_special_0x1fb7 = { 576, 580, 582 };
+const gli_case_special_t unigen_special_0x1fbc = { 586, 589, 591 };
+const gli_case_special_t unigen_special_0x1fc2 = { 593, 596, 598 };
+const gli_case_special_t unigen_special_0x1fc3 = { 601, 604, 606 };
+const gli_case_special_t unigen_special_0x1fc4 = { 608, 611, 613 };
+const gli_case_special_t unigen_special_0x1fc6 = { 616, 619, 621 };
+const gli_case_special_t unigen_special_0x1fc7 = { 624, 628, 630 };
+const gli_case_special_t unigen_special_0x1fcc = { 634, 637, 639 };
+const gli_case_special_t unigen_special_0x1fd2 = { 641, 645, 647 };
+const gli_case_special_t unigen_special_0x1fd3 = { 651, 655, 657 };
+const gli_case_special_t unigen_special_0x1fd6 = { 661, 664, 666 };
+const gli_case_special_t unigen_special_0x1fd7 = { 669, 673, 675 };
+const gli_case_special_t unigen_special_0x1fe2 = { 679, 683, 685 };
+const gli_case_special_t unigen_special_0x1fe3 = { 689, 693, 695 };
+const gli_case_special_t unigen_special_0x1fe4 = { 699, 702, 704 };
+const gli_case_special_t unigen_special_0x1fe6 = { 707, 710, 712 };
+const gli_case_special_t unigen_special_0x1fe7 = { 715, 719, 721 };
+const gli_case_special_t unigen_special_0x1ff2 = { 725, 728, 730 };
+const gli_case_special_t unigen_special_0x1ff3 = { 733, 736, 738 };
+const gli_case_special_t unigen_special_0x1ff4 = { 740, 743, 745 };
+const gli_case_special_t unigen_special_0x1ff6 = { 748, 751, 753 };
+const gli_case_special_t unigen_special_0x1ff7 = { 756, 760, 762 };
+const gli_case_special_t unigen_special_0x1ffc = { 766, 769, 771 };
+const gli_case_special_t unigen_special_0xfb00 = { 773, 776, 778 };
+const gli_case_special_t unigen_special_0xfb01 = { 781, 784, 786 };
+const gli_case_special_t unigen_special_0xfb02 = { 789, 792, 794 };
+const gli_case_special_t unigen_special_0xfb03 = { 797, 801, 803 };
+const gli_case_special_t unigen_special_0xfb04 = { 807, 811, 813 };
+const gli_case_special_t unigen_special_0xfb05 = { 817, 820, 822 };
+const gli_case_special_t unigen_special_0xfb06 = { 825, 828, 830 };
+const gli_case_special_t unigen_special_0xfb13 = { 833, 836, 838 };
+const gli_case_special_t unigen_special_0xfb14 = { 841, 844, 846 };
+const gli_case_special_t unigen_special_0xfb15 = { 849, 852, 854 };
+const gli_case_special_t unigen_special_0xfb16 = { 857, 860, 862 };
+const gli_case_special_t unigen_special_0xfb17 = { 865, 868, 870 };
 
 #define RETURN_COMBINING_CLASS(ch)  \
 	switch ((uint)(ch) >> 8) {  \
@@ -7180,7 +7180,7 @@ gli_case_special_t unigen_special_0xfb17 = { 865, 868, 870 };
 	}  \
 	return 0;
 
-uint unigen_decomp_data[3247] = {
+const uint unigen_decomp_data[3247] = {
 	0x41, 0x300, 0x41, 0x301, 0x41, 0x302, 0x41, 0x303,
 	0x41, 0x308, 0x41, 0x30a, 0x43, 0x327, 0x45, 0x300,
 	0x45, 0x301, 0x45, 0x302, 0x45, 0x308, 0x49, 0x300,
@@ -7589,7 +7589,7 @@ uint unigen_decomp_data[3247] = {
 	0x9ef9, 0x9efe, 0x9f05, 0x9f0f, 0x9f16, 0x9f3b, 0x2a600,
 };
 
-gli_decomp_block_t unigen_decomp_block_0x0[256] = {
+static const gli_decomp_block_t unigen_decomp_block_0x0[256] = {
 	{ 0, 0 },
 	{ 0, 0 },
 	{ 0, 0 },
@@ -7848,7 +7848,7 @@ gli_decomp_block_t unigen_decomp_block_0x0[256] = {
 	{ 2, 104 },
 };
 
-gli_decomp_block_t unigen_decomp_block_0x1[256] = {
+static const gli_decomp_block_t unigen_decomp_block_0x1[256] = {
 	{ 2, 106 },
 	{ 2, 108 },
 	{ 2, 110 },
@@ -8107,7 +8107,7 @@ gli_decomp_block_t unigen_decomp_block_0x1[256] = {
 	{ 2, 430 },
 };
 
-gli_decomp_block_t unigen_decomp_block_0x2[256] = {
+static const gli_decomp_block_t unigen_decomp_block_0x2[256] = {
 	{ 2, 432 },
 	{ 2, 434 },
 	{ 2, 436 },
@@ -8366,7 +8366,7 @@ gli_decomp_block_t unigen_decomp_block_0x2[256] = {
 	{ 0, 0 },
 };
 
-gli_decomp_block_t unigen_decomp_block_0x3[256] = {
+static const gli_decomp_block_t unigen_decomp_block_0x3[256] = {
 	{ 0, 0 },
 	{ 0, 0 },
 	{ 0, 0 },
@@ -8625,7 +8625,7 @@ gli_decomp_block_t unigen_decomp_block_0x3[256] = {
 	{ 0, 0 },
 };
 
-gli_decomp_block_t unigen_decomp_block_0x4[256] = {
+static const gli_decomp_block_t unigen_decomp_block_0x4[256] = {
 	{ 2, 582 },
 	{ 2, 584 },
 	{ 0, 0 },
@@ -8884,7 +8884,7 @@ gli_decomp_block_t unigen_decomp_block_0x4[256] = {
 	{ 0, 0 },
 };
 
-gli_decomp_block_t unigen_decomp_block_0x1e[256] = {
+static const gli_decomp_block_t unigen_decomp_block_0x1e[256] = {
 	{ 2, 828 },
 	{ 2, 830 },
 	{ 2, 832 },
@@ -9143,7 +9143,7 @@ gli_decomp_block_t unigen_decomp_block_0x1e[256] = {
 	{ 0, 0 },
 };
 
-gli_decomp_block_t unigen_decomp_block_0x1f[256] = {
+static const gli_decomp_block_t unigen_decomp_block_0x1f[256] = {
 	{ 2, 1410 },
 	{ 2, 1412 },
 	{ 3, 1414 },
@@ -9402,7 +9402,7 @@ gli_decomp_block_t unigen_decomp_block_0x1f[256] = {
 	{ 0, 0 },
 };
 
-gli_decomp_block_t unigen_decomp_block_0x22[256] = {
+static const gli_decomp_block_t unigen_decomp_block_0x22[256] = {
 	{ 0, 0 },
 	{ 0, 0 },
 	{ 0, 0 },
@@ -9661,7 +9661,7 @@ gli_decomp_block_t unigen_decomp_block_0x22[256] = {
 	{ 0, 0 },
 };
 
-gli_decomp_block_t unigen_decomp_block_0x30[256] = {
+static const gli_decomp_block_t unigen_decomp_block_0x30[256] = {
 	{ 0, 0 },
 	{ 0, 0 },
 	{ 0, 0 },
@@ -9920,7 +9920,7 @@ gli_decomp_block_t unigen_decomp_block_0x30[256] = {
 	{ 0, 0 },
 };
 
-gli_decomp_block_t unigen_decomp_block_0xf9[256] = {
+static const gli_decomp_block_t unigen_decomp_block_0xf9[256] = {
 	{ 1, 2251 },
 	{ 1, 2252 },
 	{ 1, 2253 },
@@ -10179,7 +10179,7 @@ gli_decomp_block_t unigen_decomp_block_0xf9[256] = {
 	{ 1, 2506 },
 };
 
-gli_decomp_block_t unigen_decomp_block_0xfa[256] = {
+static const gli_decomp_block_t unigen_decomp_block_0xfa[256] = {
 	{ 1, 2507 },
 	{ 1, 2508 },
 	{ 1, 2509 },
@@ -10438,7 +10438,7 @@ gli_decomp_block_t unigen_decomp_block_0xfa[256] = {
 	{ 0, 0 },
 };
 
-gli_decomp_block_t unigen_decomp_block_0xfb[256] = {
+static const gli_decomp_block_t unigen_decomp_block_0xfb[256] = {
 	{ 0, 0 },
 	{ 0, 0 },
 	{ 0, 0 },
@@ -10697,7 +10697,7 @@ gli_decomp_block_t unigen_decomp_block_0xfb[256] = {
 	{ 0, 0 },
 };
 
-gli_decomp_block_t unigen_decomp_block_0x2f8[256] = {
+static const gli_decomp_block_t unigen_decomp_block_0x2f8[256] = {
 	{ 1, 2705 },
 	{ 1, 2706 },
 	{ 1, 2707 },
@@ -10956,7 +10956,7 @@ gli_decomp_block_t unigen_decomp_block_0x2f8[256] = {
 	{ 1, 2960 },
 };
 
-gli_decomp_block_t unigen_decomp_block_0x2f9[256] = {
+static const gli_decomp_block_t unigen_decomp_block_0x2f9[256] = {
 	{ 1, 2961 },
 	{ 1, 2962 },
 	{ 1, 2963 },
@@ -11215,7 +11215,7 @@ gli_decomp_block_t unigen_decomp_block_0x2f9[256] = {
 	{ 1, 3216 },
 };
 
-gli_decomp_block_t unigen_decomp_block_0x2fa[256] = {
+static const gli_decomp_block_t unigen_decomp_block_0x2fa[256] = {
 	{ 1, 3217 },
 	{ 1, 3218 },
 	{ 1, 3219 },

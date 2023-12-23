@@ -74,18 +74,18 @@ typedef void op_f(CpuCtx *r, int mode, InstArg *arg);
 typedef int mode_f(CpuCtx *r, InstArg *arg);
 
 struct OpInfo {
-	op_f *_f;
+	const op_f *_f;
 	const char *_fmt;
 };
 
 struct ModeInfo {
-	mode_f *_f;
+	const mode_f *_f;
 	const char *_fmt;
 };
 
 struct InstInfo {
-	OpInfo *_op;
-	ModeInfo *_mode;
+	const OpInfo *_op;
+	const ModeInfo *_mode;
 	uint8_t _cycles;
 };
 
@@ -203,19 +203,19 @@ static int mode_imp(CpuCtx *r, InstArg *arg) {
 	return MODE_IMPLIED;
 }
 
-static ModeInfo mode_imm_o	= { &mode_imm,	"#$%02x" };
-static ModeInfo mode_zp_o	= { &mode_zp,	"$%02x" };
-static ModeInfo mode_zpx_o	= { &mode_zpx,	"$%02x,x" };
-static ModeInfo mode_zpy_o	= { &mode_zpy,	"$%02x,y" };
-static ModeInfo mode_abs_o	= { &mode_abs,	"$%04x" };
-static ModeInfo mode_absx_o = { &mode_absx,	"$%04x,x" };
-static ModeInfo mode_absy_o = { &mode_absy,	"$%04x,y" };
-static ModeInfo mode_ind_o	= { &mode_ind,	"($%04x)" };
-static ModeInfo mode_indx_o = { &mode_indx,	"($%02x,x)" };
-static ModeInfo mode_indy_o = { &mode_indy,	"($%02x),y" };
-static ModeInfo mode_rel_o	= { &mode_rel,	"$%02x" };
-static ModeInfo mode_acc_o	= { &mode_acc,	"a" };
-static ModeInfo mode_imp_o	= { &mode_imp,	nullptr };
+static const ModeInfo mode_imm_o  = { &mode_imm,	"#$%02x" };
+static const ModeInfo mode_zp_o   = { &mode_zp,		"$%02x" };
+static const ModeInfo mode_zpx_o  = { &mode_zpx,	"$%02x,x" };
+static const ModeInfo mode_zpy_o  = { &mode_zpy,	"$%02x,y" };
+static const ModeInfo mode_abs_o  = { &mode_abs,	"$%04x" };
+static const ModeInfo mode_absx_o = { &mode_absx,	"$%04x,x" };
+static const ModeInfo mode_absy_o = { &mode_absy,	"$%04x,y" };
+static const ModeInfo mode_ind_o  = { &mode_ind,	"($%04x)" };
+static const ModeInfo mode_indx_o = { &mode_indx,	"($%02x,x)" };
+static const ModeInfo mode_indy_o = { &mode_indy,	"($%02x),y" };
+static const ModeInfo mode_rel_o  = { &mode_rel,	"$%02x" };
+static const ModeInfo mode_acc_o  = { &mode_acc,	"a" };
+static const ModeInfo mode_imp_o  = { &mode_imp,	nullptr };
 
 static void updateFlagsNz(CpuCtx *r, uint8_t value) {
 	r->_flags &= ~(FLAG_Z | FLAG_N);
@@ -772,83 +772,83 @@ static void op_lxa(CpuCtx *r, int mode, InstArg *arg) {
 	r->_x = r->_a;
 }
 
-static OpInfo op_adc_o = {&op_adc, "adc"};
-static OpInfo op_anc_o = {&op_anc, "anc"};
-static OpInfo op_and_o = {&op_and, "and"};
-static OpInfo op_ane_o = {&op_ane, "ane"};
-static OpInfo op_asl_o = {&op_asl, "asl"};
-static OpInfo op_asr_o = {&op_asr, "asr"};
-static OpInfo op_bcc_o = {&op_bcc, "bcc"};
-static OpInfo op_bcs_o = {&op_bcs, "bcs"};
-static OpInfo op_beq_o = {&op_beq, "beq"};
-static OpInfo op_bit_o = {&op_bit, "bit"};
-static OpInfo op_bmi_o = {&op_bmi, "bmi"};
-static OpInfo op_bne_o = {&op_bne, "bne"};
-static OpInfo op_bpl_o = {&op_bpl, "bpl"};
-static OpInfo op_brk_o = {&op_brk, "brk"};
-static OpInfo op_bvc_o = {&op_bvc, "bvc"};
-static OpInfo op_bvs_o = {&op_bvs, "bvs"};
-static OpInfo op_clc_o = {&op_clc, "clc"};
+static const OpInfo op_adc_o = {&op_adc, "adc"};
+static const OpInfo op_anc_o = {&op_anc, "anc"};
+static const OpInfo op_and_o = {&op_and, "and"};
+static const OpInfo op_ane_o = {&op_ane, "ane"};
+static const OpInfo op_asl_o = {&op_asl, "asl"};
+static const OpInfo op_asr_o = {&op_asr, "asr"};
+static const OpInfo op_bcc_o = {&op_bcc, "bcc"};
+static const OpInfo op_bcs_o = {&op_bcs, "bcs"};
+static const OpInfo op_beq_o = {&op_beq, "beq"};
+static const OpInfo op_bit_o = {&op_bit, "bit"};
+static const OpInfo op_bmi_o = {&op_bmi, "bmi"};
+static const OpInfo op_bne_o = {&op_bne, "bne"};
+static const OpInfo op_bpl_o = {&op_bpl, "bpl"};
+static const OpInfo op_brk_o = {&op_brk, "brk"};
+static const OpInfo op_bvc_o = {&op_bvc, "bvc"};
+static const OpInfo op_bvs_o = {&op_bvs, "bvs"};
+static const OpInfo op_clc_o = {&op_clc, "clc"};
 
-static OpInfo op_cld_o = {&op_cld, "cld"};
-static OpInfo op_cli_o = {&op_cli, "cli"};
-static OpInfo op_clv_o = {&op_clv, "clv"};
-static OpInfo op_cmp_o = {&op_cmp, "cmp"};
-static OpInfo op_cpx_o = {&op_cpx, "cpx"};
-static OpInfo op_cpy_o = {&op_cpy, "cpy"};
-static OpInfo op_dcp_o = {&op_dcp, "dcp"};
-static OpInfo op_dec_o = {&op_dec, "dec"};
-static OpInfo op_dex_o = {&op_dex, "dex"};
-static OpInfo op_dey_o = {&op_dey, "dey"};
-static OpInfo op_eor_o = {&op_eor, "eor"};
-static OpInfo op_inc_o = {&op_inc, "inc"};
-static OpInfo op_isb_o = {&op_isb, "isb"};
-static OpInfo op_inx_o = {&op_inx, "inx"};
-static OpInfo op_iny_o = {&op_iny, "iny"};
-static OpInfo op_jmp_o = {&op_jmp, "jmp"};
+static const OpInfo op_cld_o = {&op_cld, "cld"};
+static const OpInfo op_cli_o = {&op_cli, "cli"};
+static const OpInfo op_clv_o = {&op_clv, "clv"};
+static const OpInfo op_cmp_o = {&op_cmp, "cmp"};
+static const OpInfo op_cpx_o = {&op_cpx, "cpx"};
+static const OpInfo op_cpy_o = {&op_cpy, "cpy"};
+static const OpInfo op_dcp_o = {&op_dcp, "dcp"};
+static const OpInfo op_dec_o = {&op_dec, "dec"};
+static const OpInfo op_dex_o = {&op_dex, "dex"};
+static const OpInfo op_dey_o = {&op_dey, "dey"};
+static const OpInfo op_eor_o = {&op_eor, "eor"};
+static const OpInfo op_inc_o = {&op_inc, "inc"};
+static const OpInfo op_isb_o = {&op_isb, "isb"};
+static const OpInfo op_inx_o = {&op_inx, "inx"};
+static const OpInfo op_iny_o = {&op_iny, "iny"};
+static const OpInfo op_jmp_o = {&op_jmp, "jmp"};
 
-static OpInfo op_jsr_o = {&op_jsr, "jsr"};
-static OpInfo op_lda_o = {&op_lda, "lda"};
-static OpInfo op_ldx_o = {&op_ldx, "ldx"};
-static OpInfo op_ldy_o = {&op_ldy, "ldy"};
-static OpInfo op_lsr_o = {&op_lsr, "lsr"};
-static OpInfo op_nop_o = {&op_nop, "nop"};
-static OpInfo op_ora_o = {&op_ora, "ora"};
-static OpInfo op_pha_o = {&op_pha, "pha"};
-static OpInfo op_php_o = {&op_php, "php"};
-static OpInfo op_pla_o = {&op_pla, "pla"};
-static OpInfo op_plp_o = {&op_plp, "plp"};
-static OpInfo op_rol_o = {&op_rol, "rol"};
-static OpInfo op_rla_o = {&op_rla, "rla"};
-static OpInfo op_ror_o = {&op_ror, "ror"};
-static OpInfo op_rti_o = {&op_rti, "rti"};
-static OpInfo op_rra_o = {&op_rra, "rra"};
+static const OpInfo op_jsr_o = {&op_jsr, "jsr"};
+static const OpInfo op_lda_o = {&op_lda, "lda"};
+static const OpInfo op_ldx_o = {&op_ldx, "ldx"};
+static const OpInfo op_ldy_o = {&op_ldy, "ldy"};
+static const OpInfo op_lsr_o = {&op_lsr, "lsr"};
+static const OpInfo op_nop_o = {&op_nop, "nop"};
+static const OpInfo op_ora_o = {&op_ora, "ora"};
+static const OpInfo op_pha_o = {&op_pha, "pha"};
+static const OpInfo op_php_o = {&op_php, "php"};
+static const OpInfo op_pla_o = {&op_pla, "pla"};
+static const OpInfo op_plp_o = {&op_plp, "plp"};
+static const OpInfo op_rol_o = {&op_rol, "rol"};
+static const OpInfo op_rla_o = {&op_rla, "rla"};
+static const OpInfo op_ror_o = {&op_ror, "ror"};
+static const OpInfo op_rti_o = {&op_rti, "rti"};
+static const OpInfo op_rra_o = {&op_rra, "rra"};
 
-static OpInfo op_rts_o = {&op_rts, "rts"};
-static OpInfo op_sbc_o = {&op_sbc, "sbc"};
-static OpInfo op_sbx_o = {&op_sbx, "sbx"};
-static OpInfo op_sec_o = {&op_sec, "sec"};
-static OpInfo op_sed_o = {&op_sed, "sed"};
-static OpInfo op_sei_o = {&op_sei, "sei"};
-static OpInfo op_slo_o = {&op_slo, "slo"};
-static OpInfo op_sta_o = {&op_sta, "sta"};
-static OpInfo op_stx_o = {&op_stx, "stx"};
-static OpInfo op_sty_o = {&op_sty, "sty"};
-static OpInfo op_lax_o = {&op_lax, "lax"};
-static OpInfo op_lae_o = {&op_lae, "lae"};
-static OpInfo op_lxa_o = {&op_lxa, "lxa"};
-static OpInfo op_tax_o = {&op_tax, "tax"};
-static OpInfo op_sax_o = {&op_sax, "sax"};
-static OpInfo op_sre_o = {&op_sre, "sre"};
-static OpInfo op_tay_o = {&op_tay, "tay"};
-static OpInfo op_tsx_o = {&op_tsx, "tsx"};
-static OpInfo op_txa_o = {&op_txa, "txa"};
-static OpInfo op_txs_o = {&op_txs, "txs"};
-static OpInfo op_tya_o = {&op_tya, "tya"};
+static const OpInfo op_rts_o = {&op_rts, "rts"};
+static const OpInfo op_sbc_o = {&op_sbc, "sbc"};
+static const OpInfo op_sbx_o = {&op_sbx, "sbx"};
+static const OpInfo op_sec_o = {&op_sec, "sec"};
+static const OpInfo op_sed_o = {&op_sed, "sed"};
+static const OpInfo op_sei_o = {&op_sei, "sei"};
+static const OpInfo op_slo_o = {&op_slo, "slo"};
+static const OpInfo op_sta_o = {&op_sta, "sta"};
+static const OpInfo op_stx_o = {&op_stx, "stx"};
+static const OpInfo op_sty_o = {&op_sty, "sty"};
+static const OpInfo op_lax_o = {&op_lax, "lax"};
+static const OpInfo op_lae_o = {&op_lae, "lae"};
+static const OpInfo op_lxa_o = {&op_lxa, "lxa"};
+static const OpInfo op_tax_o = {&op_tax, "tax"};
+static const OpInfo op_sax_o = {&op_sax, "sax"};
+static const OpInfo op_sre_o = {&op_sre, "sre"};
+static const OpInfo op_tay_o = {&op_tay, "tay"};
+static const OpInfo op_tsx_o = {&op_tsx, "tsx"};
+static const OpInfo op_txa_o = {&op_txa, "txa"};
+static const OpInfo op_txs_o = {&op_txs, "txs"};
+static const OpInfo op_tya_o = {&op_tya, "tya"};
 
 #define NULL_OP { nullptr, nullptr, 0 }
 
-static InstInfo g_ops[256] = {
+static const InstInfo g_ops[256] = {
 	/* 0x00 */
 	{ &op_brk_o, &mode_imp_o,	7 },
 	{ &op_ora_o, &mode_indx_o,	6 },
@@ -1135,7 +1135,7 @@ int flipspace(void) {
 int nextInst(CpuCtx* r) {
 	InstArg arg[1];
 	int opCode = r->_mem[r->_pc];
-	InstInfo *info = g_ops + opCode;
+	const InstInfo *info = g_ops + opCode;
 	int mode, WriteToIO = 0;
 	int bt = 0, br;
 	if (info->_op == nullptr) {

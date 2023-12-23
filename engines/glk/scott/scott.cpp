@@ -79,7 +79,7 @@ void Scott::runGame() {
 		_G(_sys)[i] = g_sysDict[i];
 	}
 
-	const char **dictpointer;
+	const char *const *dictpointer;
 
 	if (_G(_options) & YOUARE)
 		dictpointer = g_sysDict;

@@ -54,7 +54,7 @@ struct DictionaryKey {
 	const char *_signature;
 };
 
-DictionaryKey g_dictKeys[] = {
+static const DictionaryKey g_dictKeys[] = {
 	{FOUR_LETTER_UNCOMPRESSED, "AUTO\0GO\0"},
 	{THREE_LETTER_UNCOMPRESSED, "AUT\0GO\0"},
 	{FIVE_LETTER_UNCOMPRESSED, "AUTO\0\0GO"},

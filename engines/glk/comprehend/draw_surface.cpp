@@ -163,7 +163,7 @@ const uint32 Surface::COLOR_TABLE_1[256] = {
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 };
 
-const uint32 *Surface::COLOR_TABLES[2] = {
+const uint32 *const Surface::COLOR_TABLES[2] = {
 	DEFAULT_COLOR_TABLE,
 	COLOR_TABLE_1,
 };

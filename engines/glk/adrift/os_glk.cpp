@@ -2004,12 +2004,11 @@ struct gsc_command_t {
 	void (* const handler)(const char *argument);   /* Subcommand handler. */
 	const int takes_argument;                       /* Argument flag. */
 };
-typedef gsc_command_t *gsc_commandref_t;
 
 static void gsc_command_summary(const char *argument);
 static void gsc_command_help(const char *argument);
 
-static gsc_command_t GSC_COMMAND_TABLE[] = {
+static const gsc_command_t GSC_COMMAND_TABLE[] = {
 	{"summary",        gsc_command_summary,        FALSE},
 	{"script",         gsc_command_script,         TRUE},
 	{"inputlog",       gsc_command_inputlog,       TRUE},
@@ -2029,7 +2028,7 @@ static gsc_command_t GSC_COMMAND_TABLE[] = {
  * Report all current Glk settings.
  */
 static void gsc_command_summary(const char *argument) {
-	gsc_commandref_t entry;
+	const gsc_command_t *entry;
 	assert(argument);
 
 	/*
@@ -2053,13 +2052,13 @@ static void gsc_command_summary(const char *argument) {
  * Document the available Glk commands.
  */
 static void gsc_command_help(const char *command) {
-	gsc_commandref_t entry, matched;
+	const gsc_command_t *entry, *matched;
 	assert(command);
 
 	if (strlen(command) == 0) {
 		gsc_normal_string("Glk commands are");
 		for (entry = GSC_COMMAND_TABLE; entry->command; entry++) {
-			gsc_commandref_t next;
+			const gsc_command_t *next;
 
 			next = entry + 1;
 			gsc_normal_string(next->command ? " " : " and ");
@@ -2222,7 +2221,7 @@ static int gsc_command_escape(const char *string) {
 	 * as "help".
 	 */
 	if (strlen(command) > 0) {
-		gsc_commandref_t entry, matched;
+		const gsc_command_t *entry, *matched;
 		int matches;
 
 		/*

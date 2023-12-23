@@ -34,8 +34,8 @@ namespace Quest {
 
 class GeasInterface;
 
-static const char *dir_names[] = {"north", "south", "east", "west", "northeast", "northwest", "southeast", "southwest", "up", "down", "out"};
-static const char *short_dir_names[] = {"n", "s", "e", "w", "ne", "nw", "se", "sw", "u", "d", "out"};
+static const char *const dir_names[] = {"north", "south", "east", "west", "northeast", "northwest", "southeast", "southwest", "up", "down", "out"};
+static const char *const short_dir_names[] = {"n", "s", "e", "w", "ne", "nw", "se", "sw", "u", "d", "out"};
 
 const ObjectRecord *get_obj_record(const Common::Array<ObjectRecord> &v, const String &name) {
 	for (uint i = 0; i < v.size(); i ++)

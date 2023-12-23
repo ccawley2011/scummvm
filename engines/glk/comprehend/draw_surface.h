@@ -79,7 +79,7 @@ private:
 	static const uint32 PEN_COLORS[8];
 	static const uint32 DEFAULT_COLOR_TABLE[256];
 	static const uint32 COLOR_TABLE_1[256];
-	static const uint32 *COLOR_TABLES[2];
+	static const uint32 *const COLOR_TABLES[2];
 
 public:
 	const uint32 *_colorTable;
