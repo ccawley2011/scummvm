@@ -38,7 +38,7 @@ ScriptInterpreter::ScriptInterpreter(MadeEngine *vm) : _vm(vm) {
 #else
 #define COMMAND(x, sig) { &ScriptInterpreter::x, #x}
 #endif
-	static CommandEntry commandProcs[] = {
+	static const CommandEntry commandProcs[] = {
 		/* 01 */
 		COMMAND(cmd_branchTrue, "W"),
 		COMMAND(cmd_branchFalse, "W"),
