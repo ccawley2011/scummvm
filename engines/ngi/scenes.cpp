@@ -477,14 +477,14 @@ Vars::Vars() {
 	selector = nullptr;
 }
 
-static int scenes[] = {
+static const int scenes[] = {
 	SC_1,  SC_2,  SC_3,  SC_4,  SC_5,  SC_6,  SC_7,  SC_8,  SC_9,  SC_10,
 	SC_11, SC_12, SC_13, SC_14, SC_15, SC_16, SC_17, SC_18, SC_19, SC_20,
 	SC_21, SC_22, SC_23, SC_24, SC_25, SC_26, SC_27, SC_28, SC_29, SC_30,
 	SC_31, SC_32, SC_33, SC_34, SC_35, SC_36, SC_37, SC_38, SC_FINAL1, SC_DBGMENU
 };
 
-static int scenesD[] = {
+static const int scenesD[] = {
 	PIC_SCD_1,  PIC_SCD_2,  PIC_SCD_3,  PIC_SCD_4,  PIC_SCD_5,  PIC_SCD_6,  PIC_SCD_7,  PIC_SCD_8,  PIC_SCD_9,  PIC_SCD_10,
 	PIC_SCD_11, PIC_SCD_12, PIC_SCD_13, PIC_SCD_14, PIC_SCD_15, PIC_SCD_16, PIC_SCD_17, PIC_SCD_18, PIC_SCD_19, PIC_SCD_20,
 	PIC_SCD_21, PIC_SCD_22, PIC_SCD_23, PIC_SCD_24, PIC_SCD_25, PIC_SCD_26, PIC_SCD_27, PIC_SCD_28, PIC_SCD_29, PIC_SCD_30,

@@ -123,7 +123,7 @@ void NGIEngine::setCursor(int id) {
 		_inputController->setCursor(id);
 }
 
-const char *input_cheats[] = {
+const char *const input_cheats[] = {
 	"HELP",
 	"STUFF",
 	"FASTER",
