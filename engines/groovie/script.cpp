@@ -2538,7 +2538,7 @@ void Script::o2_preview_loadgame() {
 	}
 }
 
-Script::OpcodeFunc Script::_opcodesT7G[NUM_OPCODES] = {
+const Script::OpcodeFunc Script::_opcodesT7G[NUM_OPCODES] = {
 	&Script::o_nop, // 0x00
 	&Script::o_nop,
 	&Script::o_playsong,
@@ -2635,7 +2635,7 @@ Script::OpcodeFunc Script::_opcodesT7G[NUM_OPCODES] = {
 	&Script::o_invalid
 };
 
-Script::OpcodeFunc Script::_opcodesV2[NUM_OPCODES] = {
+const Script::OpcodeFunc Script::_opcodesV2[NUM_OPCODES] = {
 	&Script::o_invalid, // 0x00
 	&Script::o_nop,
 	&Script::o2_playsong,

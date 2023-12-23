@@ -303,7 +303,7 @@ struct Slope {
 	int x, y;
 };
 // the order of these is important because we return the bitMask
-Slope slopes[] = {{1, 0},
+static const Slope slopes[] = {{1, 0},
 				  {1, 1},
 				  {0, 1},
 				  {-1, 1},
@@ -415,7 +415,7 @@ void PenteGame::revertCapture(byte x, byte y, byte bitMask) {
 		if ((bitMask >> i & 1) == 0)
 			continue;
 
-		Slope &slope = slopes[7 - i];
+		const Slope &slope = slopes[7 - i];
 		updateScore(x + slope.x * 2, y + slope.y * 2, isPlayer);
 		updateScore(x + slope.x, y + slope.y, isPlayer);
 	}
