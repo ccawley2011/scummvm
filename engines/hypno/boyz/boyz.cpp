@@ -91,7 +91,7 @@ BoyzEngine::~BoyzEngine() {
 	free(_crosshairsPalette);
 }
 
-static const char *selectBoyz = "\
+static const char *const selectBoyz = "\
 MENU preload\\slct_boy.smk\n\
 HOTS /BBOX= 19  3   66  199\n\
 SOND tollop1.raw 22K\n\
@@ -109,7 +109,7 @@ HOTS /BBOX= 262 172 312 194\n\
 SOND pstlfire.raw\n\
 END\n";
 
-static const char *selectC3 = "\
+static const char *const selectC3 = "\
 MENU preload\\slct_c3.smk\n\
 HOTS /BBOX= 143 78 286 138\n\
 SOND tollopz2.raw 22K\n\
@@ -123,7 +123,7 @@ HOTS /BBOX= 190 4 292 76\n\
 SOND tollamb1.raw  22K\n\
 END\n";
 
-static const char *selectHo = "\
+static const char *const selectHo = "\
 MENU preload\\slct_ho.smk\n\
 HOTS /BBOX= 19  18  85  199\n\
 SOND tien1bb.raw 22K\n\
@@ -137,7 +137,7 @@ HOTS /BBOX= 250 32  301 199\n\
 SOND van2.raw 22K\n\
 END\n";
 
-static const char *selectC5 = "\
+static const char *const selectC5 = "\
 MENU preload\\slct_c5.smk\n\
 HOTS /BBOX= 212 108 306 192\n\
 SOND tolvexp1.raw 22K\n\
@@ -151,7 +151,7 @@ HOTS /BBOX= 8 105 96 194\n\
 SOND tolbwhr1.raw 22K\n\
 END\n";
 
-static const char *fterr = "\
+static const char *const fterr = "\
 MENU preload\\fterr%d.smk\n\
 HOTS /BBOX=  13 151 68 164\n\
 HOTS /BBOX=  19  48 146  59\n\

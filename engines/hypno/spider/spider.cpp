@@ -28,7 +28,7 @@
 
 namespace Hypno {
 
-extern const char *sceneVariables[];
+extern const char *const sceneVariables[];
 
 SpiderEngine::SpiderEngine(OSystem *syst, const ADGameDescription *gd)
   : HypnoEngine(syst, gd),

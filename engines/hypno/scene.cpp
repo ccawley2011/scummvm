@@ -28,7 +28,7 @@ namespace Hypno {
 
 extern int parse_mis(const char *);
 
-const char *sceneVariables[] = {
+const char *const sceneVariables[] = {
 	"GS_NONE",
 	"GS_SCTEXT",
 	"GS_AMBIENT",

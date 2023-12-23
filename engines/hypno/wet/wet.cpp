@@ -30,7 +30,7 @@
 
 namespace Hypno {
 
-static const char *failedDetectionError = \
+static const char *const failedDetectionError = \
   "Failed to load any files from missions.lib.\
    Please review https://wiki.scummvm.org/index.php?title=Wetlands\
    and re-add the game.";
