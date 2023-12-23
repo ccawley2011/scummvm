@@ -960,19 +960,19 @@ void bifask(bifcxdef *ctx, int argc)
 	}
 	else
 	{
-		static const char *save_strs[] =
+		static const char *const save_strs[] =
 		{
 			"save",
 			"write",
 			nullptr
 		};
-		static const char *game_strs[] =
+		static const char *const game_strs[] =
 		{
 			"restore",
 			"game",
 			nullptr
 		};
-		const char **sp;
+		const char *const *sp;
 
 		/*
 		 *   No prompt type or file type were specified.  Try to infer the
@@ -1972,7 +1972,7 @@ void bifsct(bifcxdef *bifctx, int argc)
  *   Portable keystroke mappings.  We map the extended key codes to these
  *   strings, so that the TADS code can access arrow keys and the like.
  */
-static const char *ext_key_names[] =
+static const char *const ext_key_names[] =
 {
 	"[up]",                                                   /* CMD_UP - 1 */
 	"[down]",                                               /* CMD_DOWN - 2 */

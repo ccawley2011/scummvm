@@ -111,10 +111,9 @@ struct sc_commands_s {
 	sc_bool(*const handler)(sc_gameref_t game);
 };
 typedef sc_commands_s sc_commands_t;
-typedef sc_commands_t *sc_commandsref_t;
 
 /* Movement commands for the four point compass. */
-static sc_commands_t MOVE_COMMANDS_4[] = {
+static const sc_commands_t MOVE_COMMANDS_4[] = {
 	{"{go {to {the}}} [north/n]", lib_cmd_go_north},
 	{"{go {to {the}}} [east/e]", lib_cmd_go_east},
 	{"{go {to {the}}} [south/s]", lib_cmd_go_south},
@@ -127,7 +126,7 @@ static sc_commands_t MOVE_COMMANDS_4[] = {
 };
 
 /* Movement commands for the eight point compass. */
-static sc_commands_t MOVE_COMMANDS_8[] = {
+static const sc_commands_t MOVE_COMMANDS_8[] = {
 	{"{go {to {the}}} [north/n]", lib_cmd_go_north},
 	{"{go {to {the}}} [east/e]", lib_cmd_go_east},
 	{"{go {to {the}}} [south/s]", lib_cmd_go_south},
@@ -144,7 +143,7 @@ static sc_commands_t MOVE_COMMANDS_8[] = {
 };
 
 /* "Priority" library commands, may take precedence over the game. */
-static sc_commands_t PRIORITY_COMMANDS[] = {
+static const sc_commands_t PRIORITY_COMMANDS[] = {
 
 	/* Acquisition of and disposal of inventory. */
 	{
@@ -201,7 +200,7 @@ static sc_commands_t PRIORITY_COMMANDS[] = {
 };
 
 /* Standard library commands, other than movement and priority above. */
-static sc_commands_t STANDARD_COMMANDS[] = {
+static const sc_commands_t STANDARD_COMMANDS[] = {
 
 	/* Inventory, and general investigation of surroundings. */
 	{"[inventory/inv/i]", lib_cmd_inventory},
@@ -488,7 +487,7 @@ static sc_commands_t STANDARD_COMMANDS[] = {
  * object acquisition take precedence over game commands.
  */
 static sc_bool run_priority_commands(sc_gameref_t game, const sc_char *string) {
-	sc_commandsref_t command;
+	const sc_commands_t *command;
 
 	for (command = PRIORITY_COMMANDS; command->command; command++) {
 		if (uip_match(command->command, string, game)) {
@@ -505,7 +504,7 @@ static sc_bool run_standard_commands(sc_gameref_t game, const sc_char *string) {
 	const sc_prop_setref_t bundle = gs_get_bundle(game);
 	sc_vartype_t vt_key[2];
 	sc_bool eightpointcompass;
-	sc_commandsref_t command;
+	const sc_commands_t *command;
 
 	/* Select the appropriate movement commands. */
 	vt_key[0].string = "Globals";

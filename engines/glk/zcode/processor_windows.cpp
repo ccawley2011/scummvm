@@ -24,7 +24,7 @@
 namespace Glk {
 namespace ZCode {
 
-static struct {
+static const struct {
 	Story story_id;
 	int pic;
 	int pic1;

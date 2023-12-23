@@ -1222,7 +1222,7 @@ static Parameter *disambiguateMMY(CONTEXT, Parameter allCandidates[], Parameter 
 	return nullptr;
 }
 
-static DisambiguationHandlerTable disambiguationHandlerTable = {
+static const DisambiguationHandlerTable disambiguationHandlerTable = {
 	{
 		// Present == 0
 		{
@@ -1271,7 +1271,7 @@ static DisambiguationHandlerTable disambiguationHandlerTable = {
 };
 
 /*----------------------------------------------------------------------*/
-static void disambiguateCandidates(CONTEXT, Parameter *allCandidates, bool omnipotent, bool (*reachable)(int), DisambiguationHandlerTable handler) {
+static void disambiguateCandidates(CONTEXT, Parameter *allCandidates, bool omnipotent, bool (*reachable)(int), const DisambiguationHandlerTable handler) {
 	static Parameter *presentCandidates = nullptr;
 	int present;
 	int distant;

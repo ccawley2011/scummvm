@@ -34,13 +34,14 @@
 #include "common/str.h"
 #include "common/str-array.h"
 #include "glk/scott/definitions.h"
+#include "glk/scott/game_info.h"
 
 namespace Glk {
 namespace Scott {
 
 /* This is supposed to be the original ScottFree system
  messages in second person, as far as possible */
-const char *g_sysDict[] = {
+const char *const g_sysDict[] = {
 	"North",
 	"South",
 	"East",
@@ -116,7 +117,7 @@ const char *g_sysDict[] = {
 
 /* These are supposed to be the original ScottFree system
  messages in first person, as far as possible */
-const char *g_sysDictIAm[] = {
+const char *const g_sysDictIAm[] = {
 	"North",
 	"South",
 	"East",
@@ -169,7 +170,7 @@ const char *g_sysDictIAm[] = {
 
 /* These are supposed to be the original TI-99/4A system
  messages in first person, as far as possible */
-const char *g_sysDictTI994A[] = {
+const char *const g_sysDictTI994A[] = {
 	"North",
 	"South",
 	"East",
@@ -223,7 +224,7 @@ const char *g_sysDictTI994A[] = {
 	nullptr,
 };
 
-const char *g_sysDictZX[] = {
+const char *const g_sysDictZX[] = {
 	"NORTH",
 	"SOUTH",
 	"EAST",

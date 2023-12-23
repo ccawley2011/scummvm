@@ -84,7 +84,7 @@ const gms_gamma_t Magnetic::GMS_GAMMA_TABLE[38] = {
 	{ nullptr, { 0,   0,   0,   0,   0,   0,   0,   0 }, false }
 };
 
-static gms_abbreviation_t GMS_ABBREVIATIONS[] = {
+static const gms_abbreviation_t GMS_ABBREVIATIONS[] = {
 	{'c', "close"},    {'g', "again"},  {'i', "inventory"},
 	{'k', "attack"},   {'l', "look"},   {'p', "open"},
 	{'q', "quit"},     {'r', "drop"},   {'t', "take"},
@@ -3435,7 +3435,7 @@ int Magnetic::gms_command_undo_special(const char *string_) {
 void Magnetic::gms_expand_abbreviations(char *buffer_, int size) {
 	char *command, abbreviation;
 	const char *expansion;
-	gms_abbreviationref_t entry;
+	const gms_abbreviation_t *entry;
 	assert(buffer_);
 
 	/* Ignore anything that isn't a single letter command. */

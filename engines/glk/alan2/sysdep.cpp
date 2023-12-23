@@ -44,14 +44,14 @@ void fprintf(Common::WriteStream *ws, const char *fmt, ...) {
    move to Unicode).
  */
 
-static char spcChrs[] = {
+static const char spcChrs[] = {
 	'\x0A', /* linefeed */
 	'\x20', /* space */
 	'\xA0', /* non-breaking space */
 	'\x00'
 };
 
-static char lowChrs[] = {
+static const char lowChrs[] = {
 	'\x61', /* a */  '\x62', /* b */  '\x63', /* c */  '\x64', /* d */
 	'\x65', /* e */  '\x66', /* f */  '\x67', /* g */  '\x68', /* h */
 	'\x69', /* i */  '\x6A', /* j */  '\x6B', /* k */  '\x6C', /* l */
@@ -81,7 +81,7 @@ static char lowChrs[] = {
    Are they really considered LC?
  */
 
-static char uppChrs[] = {
+static const char uppChrs[] = {
 	'\x41', /* A */  '\x42', /* B */  '\x43', /* C */  '\x44', /* D */
 	'\x45', /* E */  '\x46', /* F */  '\x47', /* G */  '\x48', /* H */
 	'\x49', /* I */  '\x4A', /* J */  '\x4B', /* K */  '\x4C', /* L */
@@ -156,13 +156,13 @@ char *strupp(char str[]) {      /* INOUT - Native string to convert */
 /* The following work on ISO characters */
 
 int isLowerCase(int c) {        /* IN - ISO character to test */
-	static char lowChars[] = "abcdefghijklmnopqrstuvwxyz\340\341\342\343\344\345\346\347\351\352\353\354\355\356\357\360\361\362\363\364\365\366\370\371\372\373\374\375\376\377";
+	static const char lowChars[] = "abcdefghijklmnopqrstuvwxyz\340\341\342\343\344\345\346\347\351\352\353\354\355\356\357\360\361\362\363\364\365\366\370\371\372\373\374\375\376\377";
 	return (c != '\0' && strchr(lowChars, c) != nullptr);
 }
 
 
 int isUpperCase(int c) {        /* IN - ISO character to test */
-	static char upperChars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ\300\301\302\303\304\305\306\307\310\311\312\313\314\315\316\317\320\321\322\323\324\325\326\327\330\331\332\333\334\335\336\337";
+	static const char upperChars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ\300\301\302\303\304\305\306\307\310\311\312\313\314\315\316\317\320\321\322\323\324\325\326\327\330\331\332\333\334\335\336\337";
 	return (c != '\0' && strchr(upperChars, c) != nullptr);
 }
 
@@ -212,7 +212,7 @@ char *stringUpper(char str[]) { /* INOUT - ISO string to convert */
 void toIso(char copy[], /* OUT - Mapped  string */
 		   char original[], /* IN - string to convert */
 		   int charset) {   /* IN - the current character set */
-	static unsigned char macMap[256]
+	static const unsigned char macMap[256]
 	= {
 		0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0A, 0x0E, 0x0F,
 		0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F,
@@ -232,7 +232,7 @@ void toIso(char copy[], /* OUT - Mapped  string */
 		0x90, 0x91, 0x92, 0x93, 0x94, 0x95, 0x96, 0x97, 0x98, 0x99, 0x9A, 0x9B, 0x9C, 0x9D, 0x9E, 0x9F
 	};
 
-	static unsigned char dosMap[256]
+	static const unsigned char dosMap[256]
 	= {
 		0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0A, 0x0E, 0x0F,
 		0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F,

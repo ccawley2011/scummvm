@@ -28,7 +28,7 @@ namespace AdvSys {
 
 #define TRUE -1
 
-OpcodeMethod VM::_METHODS[0x34] = {
+const OpcodeMethod VM::_METHODS[0x34] = {
 	&VM::opBRT,
 	&VM::opBRF,
 	&VM::opBR,

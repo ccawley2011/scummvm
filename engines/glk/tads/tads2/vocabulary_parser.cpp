@@ -31,14 +31,14 @@ namespace TADS {
 namespace TADS2 {
 
 
-static const char *type_names[] =
+static const char *const type_names[] =
 {
 	"article", "adj", "noun", "prep", "verb", "special", "plural",
 	"unknown"
 };
 
 /* array of flag values for words by part of speech */
-static int voctype[] =
+static const int voctype[] =
 { 0, 0, VOCT_VERB, VOCT_NOUN, VOCT_ADJ, VOCT_PREP, VOCT_ARTICLE };
 
 /* ------------------------------------------------------------------------ */
@@ -3739,7 +3739,7 @@ void voc_parse_dict_lookup(voccxdef *ctx)
 					int flag;
 					int prop;
 				};
-				static struct typemap_t typemap[] =
+				static const struct typemap_t typemap[] =
 				{
 					{ VOCT_ARTICLE, PRP_ARTICLE },
 					{ VOCT_ADJ,     PRP_ADJ },
@@ -3748,7 +3748,7 @@ void voc_parse_dict_lookup(voccxdef *ctx)
 					{ VOCT_VERB,    PRP_VERB },
 					{ VOCT_PLURAL,  PRP_PLURAL }
 				};
-				struct typemap_t *mapp;
+				const struct typemap_t *mapp;
 
 				/* get the type */
 				curtyp = (int)osrp4(typp+1);
@@ -5256,7 +5256,7 @@ int vocdisambig(voccxdef *ctx, vocoldef *outlist, vocoldef *inlist,
 	int       old_unknown, old_lastunk;
 	int       err;
 	int       still_ambig;
-	static char one_name[] = "ones";
+	static const char one_name[] = "ones";
 
 	voc_enter(ctx, &save_sp);
 
@@ -5327,7 +5327,7 @@ int vocdisambig(voccxdef *ctx, vocoldef *outlist, vocoldef *inlist,
 		{
 			int i;
 			int thempos = outpos;
-			static char them_name[] = "them";
+			static const char them_name[] = "them";
 
 			for (i = 0 ; i < ctx->voccxthc ; ++i)
 			{
@@ -5375,7 +5375,7 @@ int vocdisambig(voccxdef *ctx, vocoldef *outlist, vocoldef *inlist,
 			int       allpos = outpos;
 			int       k;
 			uint      len;
-			static    char all_name[] = "all";
+			static    const char all_name[] = "all";
 			vocoldef *exclist;
 			vocoldef *exclist2;
 
@@ -6777,9 +6777,9 @@ int vocdisambig(voccxdef *ctx, vocoldef *outlist, vocoldef *inlist,
 				if (vocspec(diswordlist[0], VOCW_ALL)
 					|| vocspec(diswordlist[0], VOCW_BOTH))
 				{
-					char *nam;
-					static char all_name[] = "all";
-					static char both_name[] = "both";
+					const char *nam;
+					static const char all_name[] = "all";
+					static const char both_name[] = "both";
 
 					if (vocspec(diswordlist[0], VOCW_ALL))
 						nam = all_name;

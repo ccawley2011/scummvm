@@ -24,7 +24,7 @@
 namespace Glk {
 namespace Alan2 {
 
-Product alan = {
+const Product alan = {
 	"Alan",
 	"Adventure Language System",
 	"Alan 2.8(6)",

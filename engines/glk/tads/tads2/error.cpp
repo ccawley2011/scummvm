@@ -89,7 +89,7 @@ int errfmt(char *outbuf, int outbufl, const char *fmt, int argc, const erradef *
 			case 't':
 				{
 					int i;
-					static struct
+					static const struct
 					{
 						int   tokid;
 						const char *toknam;

@@ -84,14 +84,14 @@ int             write_fd;
 char *url_encode(char *str);
 char to_hex(char code);
 
-const char *location_attributes[] = {
+const char *const location_attributes[] = {
 	"VISITED ", "DARK ", "ON_WATER ", "UNDER_WATER ", "WITHOUT_AIR ", "OUTDOORS ",
 	"MID_AIR ", "TIGHT_ROPE ", "POLLUTED ", "SOLVED ", "MID_WATER ", "DARKNESS ",
 	"MAPPED ", "KNOWN ",
 	nullptr
 };
 
-const char *object_attributes[] = {
+const char *const object_attributes[] = {
 	"CLOSED ", "LOCKED ", "DEAD ", "IGNITABLE ", "WORN ", "CONCEALING ",
 	"LUMINOUS ", "WEARABLE ", "CLOSABLE ", "LOCKABLE ", "ANIMATE ", "LIQUID ",
 	"CONTAINER ", "SURFACE ", "PLURAL ", "FLAMMABLE ", "BURNING ", "LOCATION ",
@@ -100,13 +100,13 @@ const char *object_attributes[] = {
 	"NOT_IMPORTANT ", nullptr
 };
 
-const char *object_elements[] = {
+const char *const object_elements[] = {
 	"parent", "capacity", "mass", "bearing", "velocity", "next", "previous",
 	"child", "index", "status", "state", "counter", "points", "class", "x", "y",
 	nullptr
 };
 
-const char *location_elements[] = {
+const char *const location_elements[] = {
 	"north", "south", "east", "west", "northeast", "northwest", "southeast",
 	"southwest", "up", "down", "in", "out", "points", "class", "x", "y",
 	nullptr
@@ -3429,7 +3429,7 @@ int select_next() {
 
 /* Converts an integer value to its hex character*/
 char to_hex(char code) {
-	static char hex[] = "0123456789abcdef";
+	static const char hex[] = "0123456789abcdef";
 	return hex[code & 15];
 }
 

@@ -72,8 +72,8 @@ uint bufferChangeCase(uint32 *buf, uint len, uint numchars, BufferChangeCase des
 		int target;
 		int isfirst;
 		uint res;
-		uint *special;
-		uint *ptr;
+		const uint *special;
+		const uint *ptr;
 		uint speccount;
 		uint32 ch = buf[ix];
 
@@ -84,7 +84,7 @@ uint bufferChangeCase(uint32 *buf, uint len, uint numchars, BufferChangeCase des
 		if (target == CASE_IDENT) {
 			res = ch;
 		} else {
-			gli_case_block_t *block;
+			const gli_case_block_t *block;
 
 			GET_CASE_BLOCK(ch, &block);
 			if (!block)

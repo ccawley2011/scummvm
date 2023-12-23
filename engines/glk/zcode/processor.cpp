@@ -31,7 +31,7 @@ zword save_undo() { return 0; }
 zword restore_undo() { return 0; }
 
 
-Opcode Processor::var_opcodes[64] = {
+const Opcode Processor::var_opcodes[64] = {
 	&Processor::__illegal__,
 	&Processor::z_je,
 	&Processor::z_jl,
@@ -98,7 +98,7 @@ Opcode Processor::var_opcodes[64] = {
 	&Processor::z_check_arg_count
 };
 
-Opcode Processor::ext_opcodes[64] = {
+const Opcode Processor::ext_opcodes[64] = {
 	&Processor::z_save,
 	&Processor::z_restore,
 	&Processor::z_log_shift,

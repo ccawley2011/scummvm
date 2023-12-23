@@ -19,15 +19,17 @@
  *
  */
 
+#include "engines/glk/tads/tads2/runtime_app.h"
+
 namespace Glk {
 namespace TADS {
 namespace TADS2 {
 
-char G_tads_oem_app_name[] = "GlkTADS";
-char G_tads_oem_display_mode[] = "text-only";
-char G_tads_oem_dbg_name[] = "tdb";
-char G_tads_oem_author[] = "Maintained by ScummVM\n";
-int G_tads_oem_copyright_prefix = true;
+const char G_tads_oem_app_name[] = "GlkTADS";
+const char G_tads_oem_display_mode[] = "text-only";
+const char G_tads_oem_dbg_name[] = "tdb";
+const char G_tads_oem_author[] = "Maintained by ScummVM\n";
+const int G_tads_oem_copyright_prefix = true;
 
 } // End of namespace TADS2
 } // End of namespace TADS

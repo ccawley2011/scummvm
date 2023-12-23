@@ -39,10 +39,10 @@
 namespace Glk {
 namespace Scott {
 
-extern const char *g_sysDict[];
-extern const char *g_sysDictIAm[];
-extern const char *g_sysDictZX[];
-extern const char *g_sysDictTI994A[];
+extern const char *const g_sysDict[];
+extern const char *const g_sysDictIAm[];
+extern const char *const g_sysDictZX[];
+extern const char *const g_sysDictTI994A[];
 
 } // End of namespace Scott
 } // End of namespace Glk

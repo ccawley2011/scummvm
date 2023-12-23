@@ -53,8 +53,8 @@ class Processor : public GlkInterface, public virtual Mem {
 	friend class Quetzal;
 private:
 	static const char *const ERR_MESSAGES[ERR_NUM_ERRORS];
-	static Opcode var_opcodes[64];
-	static Opcode ext_opcodes[64];
+	static const Opcode var_opcodes[64];
+	static const Opcode ext_opcodes[64];
 	Common::Array<Opcode> op0_opcodes;
 	Common::Array<Opcode> op1_opcodes;
 
@@ -73,7 +73,7 @@ private:
 	zword _frameCount;
 
 	// Text related fields
-	static zchar ZSCII_TO_LATIN1[];
+	static const zchar ZSCII_TO_LATIN1[];
 	zchar *_decoded, *_encoded;
 	int _resolution;
 	int _errorCount[ERR_NUM_ERRORS];

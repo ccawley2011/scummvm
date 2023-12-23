@@ -820,8 +820,8 @@ static LibspectrumError readV1Block(const uint8_t *buffer, int is_compressed, ui
 }
 
 /* The signature used to designate the .slt extensions */
-static uint8_t slt_signature[] = "\0\0\0SLT";
-static size_t slt_signature_length = 6;
+static const uint8_t slt_signature[] = "\0\0\0SLT";
+static const size_t slt_signature_length = 6;
 
 static LibspectrumError readV2Block(const uint8_t *buffer, uint8_t **block, size_t *length, int *page, const uint8_t **next_block, const uint8_t *end) {
 	size_t length2;
