@@ -1312,7 +1312,7 @@ static const ItemDesc copyProtectElements[] = {
 	{Common::UNK_LANG, 0, 0, 0, 0, 0, 0}
 };
 
-int pageNumbers[20] = {
+const int pageNumbers[20] = {
 	4, 10, 16, 22, 5, 11, 17, 23, 6, 12, 18, 7, 13, 19, 8, 14, 20, 9, 15, 21};
 
 CopyProtectionDialog::CopyProtectionDialog() {

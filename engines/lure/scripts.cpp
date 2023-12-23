@@ -40,7 +40,7 @@ static const uint16 dealloc_list_2[] = {0x2729, 0x272A, 0x272B, 0x272C, 0x272E, 
 static const uint16 dealloc_list_3[] = {0x3EF, 0x3E9, 0x3EB, 0x3EC, 0x3ED, 0x3EE, 0x3F0, 0x3F1,
 	0x420, 0x429, 0x436, 0x2715, 0x2716, 0x2717, 0x2718, 0x2719, 0x271A, 0x271E,
 	0x271F, 0x2720, 0x2721, 0x2722, 0x2725, 0x2726, 0};
-static const uint16 *hotspot_dealloc_set[4] = {&dealloc_list_1[0], &dealloc_list_2[0],
+static const uint16 *const hotspot_dealloc_set[4] = {&dealloc_list_1[0], &dealloc_list_2[0],
 	&dealloc_list_3[1], &dealloc_list_3[0]};
 
 // Details used for co-ordination of sounds during the endgame sequence
@@ -854,14 +854,14 @@ static const SequenceMethodRecord scriptMethods[] = {
 	{66, Script::checkSound},
 	{0xff, nullptr}};
 
-static const char *scriptOpcodes[] = {
+static const char *const scriptOpcodes[] = {
 	"ABORT", "ADD", "SUBTRACT", "MULTIPLY", "DIVIDE", "EQUALS", "NOT_EQUALS",
 		"LT", "GT", "LTE", "GTE", "AND", "OR", "LOGICAL_AND", "LOGICAL_OR",
 		"GET_FIELD", "SET_FIELD", "PUSH", "SUBROUTINE", "EXEC", "END",
 		"COND_JUMP", "JUMP", "ABORT2", "ABORT3", "RANDOM"
 };
 
-static const char *scriptMethodNames[67] = {
+static const char *const scriptMethodNames[67] = {
 	"ACTIVATE HOTSPOT", "SET HOTSPOT SCRIPT", "ADD SOUND 2", "SET HOTSPOT FLAG MASK",
 	"CLEAR SEQUENCE DELAY LIST", "DEACTIVATE HOTSPOT SET", "DEACTIVATE HOTSPOT",
 	"RESET PATHFINDER",	"ADD DELAYED SCRIPT", "KILL SOUND",
