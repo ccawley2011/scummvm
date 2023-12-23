@@ -168,9 +168,9 @@ private:
 
 	// Opcodes
 	typedef void (Script::*OpcodeFunc)();
-	OpcodeFunc *_opcodes;
-	static OpcodeFunc _opcodesT7G[];
-	static OpcodeFunc _opcodesV2[];
+	const OpcodeFunc *_opcodes;
+	static const OpcodeFunc _opcodesT7G[];
+	static const OpcodeFunc _opcodesV2[];
 
 	void o_invalid();
 

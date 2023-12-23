@@ -39,7 +39,7 @@
 namespace Groovie {
 
 // This a list of files for background music. This list is hardcoded in the TLC player.
-const char *kTlcMusicFiles[] = {
+const char *const kTlcMusicFiles[] = {
 	"ep01epm",  "ep01tatm", "amb_hs",   "amb_mr",   "amb_kr",
 	"amb_mo",   "music_rc", "amb_ds",   "amb_ds3",  "amb_jr",
 	"amb_mr4",  "amb_jr4",  "amb_jr2",  "amb_kr2",  "amb_mr2",
