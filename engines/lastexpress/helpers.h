@@ -88,9 +88,9 @@
 //////////////////////////////////////////////////////////////////////////
 // Output
 //////////////////////////////////////////////////////////////////////////
-extern const char *g_actionNames[];
-extern const char *g_directionNames[];
-extern const char *g_entityNames[];
+extern const char *const g_actionNames[];
+extern const char *const g_directionNames[];
+extern const char *const g_entityNames[];
 
 #define ACTION_NAME(action) (action > 18 ? Common::String::format("%d", action).c_str() : g_actionNames[action])
 #define DIRECTION_NAME(direction) (direction >= 6 ? "INVALID" : g_directionNames[direction])

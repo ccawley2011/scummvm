@@ -33,11 +33,11 @@
 
 namespace LastExpress {
 
-const char *archiveDemoPath = "demo.hpf";
-const char *archiveHDPath = "hd.hpf";
-const char *archiveCD1Path = "cd1.hpf";
-const char *archiveCD2Path = "cd2.hpf";
-const char *archiveCD3Path = "cd3.hpf";
+const char *const archiveDemoPath = "demo.hpf";
+const char *const archiveHDPath = "hd.hpf";
+const char *const archiveCD1Path = "cd1.hpf";
+const char *const archiveCD2Path = "cd2.hpf";
+const char *const archiveCD3Path = "cd3.hpf";
 
 ResourceManager::ResourceManager(bool isDemo) : _isDemo(isDemo) {
 }
