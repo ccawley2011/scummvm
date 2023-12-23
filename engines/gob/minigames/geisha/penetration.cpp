@@ -275,7 +275,7 @@ enum String {
 	kStringCount
 };
 
-static const char *kStrings[kLanguageCount][kStringCount] = {
+static const char *const kStrings[kLanguageCount][kStringCount] = {
 	{ // French
 		"3EME SOUS-SOL",
 		"2EME SOUS-SOL",
@@ -776,7 +776,7 @@ void Penetration::drawFloorText() {
 	if (!font)
 		return;
 
-	const char **strings = kStrings[getLanguage()];
+	const char *const *strings = kStrings[getLanguage()];
 
 	const char *floorString = nullptr;
 	if      (_floor == 0)
@@ -819,7 +819,7 @@ void Penetration::drawEndText() {
 
 	Surface &surface = *_vm->_draw->_backSurface;
 
-	const char **strings = kStrings[getLanguage()];
+	const char *const *strings = kStrings[getLanguage()];
 
 	font->drawString(strings[kStringLevel0]     , 11, 21, kColorExitText, kColorBlack, 1, surface);
 	font->drawString(strings[kStringPenetration], 11, 42, kColorExitText, kColorBlack, 1, surface);

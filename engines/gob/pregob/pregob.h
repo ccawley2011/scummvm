@@ -69,8 +69,8 @@ public:
 protected:
 	typedef Common::Array<ANIObject *> ANIList;
 
-	static const char  kLanguageSuffixShort[5];
-	static const char *kLanguageSuffixLong [5];
+	static const char        kLanguageSuffixShort[5];
+	static const char *const kLanguageSuffixLong [5];
 
 
 	GobEngine *_vm;

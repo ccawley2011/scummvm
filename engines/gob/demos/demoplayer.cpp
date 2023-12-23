@@ -40,7 +40,7 @@
 
 namespace Gob {
 
-DemoPlayer::Script DemoPlayer::_scripts[] = {
+const DemoPlayer::Script DemoPlayer::_scripts[] = {
 	{kScriptSourceFile, "demo.scn"},
 	{kScriptSourceFile, "wdemo.s24"},
 	{kScriptSourceFile, "play123.scn"},
@@ -89,7 +89,7 @@ bool DemoPlayer::play(uint32 index) {
 	if (index >= ARRAYSIZE(_scripts))
 		return false;
 
-	Script &script = _scripts[index];
+	const Script &script = _scripts[index];
 
 	debugC(1, kDebugDemo, "Playing demoIndex %d: %d", index, script.source);
 

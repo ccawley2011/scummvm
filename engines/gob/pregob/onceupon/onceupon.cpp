@@ -48,7 +48,7 @@ static const uint kLanguageCount = 5;
 
 static const uint kCopyProtectionHelpStringCount = 3;
 
-static const char *kCopyProtectionHelpStrings[Gob::OnceUpon::OnceUpon::kLanguageCount][kCopyProtectionHelpStringCount] = {
+static const char *const kCopyProtectionHelpStrings[Gob::OnceUpon::OnceUpon::kLanguageCount][kCopyProtectionHelpStringCount] = {
 	{ // French
 		"Consulte le livret des animaux, rep\212re la",
 		"page correspondant \205 la couleur de l\'\202cran",
@@ -76,7 +76,7 @@ static const char *kCopyProtectionHelpStrings[Gob::OnceUpon::OnceUpon::kLanguage
 	}
 };
 
-static const char *kCopyProtectionWrongStrings[Gob::OnceUpon::OnceUpon::kLanguageCount] = {
+static const char *const kCopyProtectionWrongStrings[Gob::OnceUpon::OnceUpon::kLanguageCount] = {
 	"Tu t\'es tromp\202, dommage...", // French
 	"Schade, du hast dich geirrt."  , // German
 	"You are wrong, what a pity!"   , // English
@@ -139,7 +139,7 @@ const OnceUpon::MenuButton OnceUpon::kLanguageButtons[] = {
 	{true, 234, 138, 284, 173, 265, 55, 315, 90, 234, 138, 2}
 };
 
-const char *OnceUpon::kSound[kSoundCount] = {
+const char *const OnceUpon::kSound[kSoundCount] = {
 	"diamant.snd", // kSoundClick
 	"cigogne.snd", // kSoundStork
 	"saute.snd"    // kSoundJump

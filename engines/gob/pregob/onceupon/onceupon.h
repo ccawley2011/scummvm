@@ -186,7 +186,7 @@ private:
 	static const MenuButton kCharGenNameEntry[];
 
 	/** All general game sounds we know about. */
-	static const char *kSound[kSoundCount];
+	static const char *const kSound[kSoundCount];
 
 
 	static const AnimProperties kClownAnimations[];

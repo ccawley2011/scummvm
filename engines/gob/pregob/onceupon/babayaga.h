@@ -51,7 +51,7 @@ private:
 	/** Definition of the buttons that make up the animals in the animal names screen. */
 	static const MenuButton kAnimalButtons[];
 	/** File prefixes for the name of each animal. */
-	static const char *kAnimalNames[];
+	static const char *const kAnimalNames[];
 
 	// Parameters for the stork section.
 	static const MenuButton kStorkHouses[];

@@ -45,8 +45,8 @@
 
 namespace Gob {
 
-const char  PreGob::kLanguageSuffixShort[5] = { 't',  'g',  'a',  'e',  'i'};
-const char *PreGob::kLanguageSuffixLong [5] = {"fr", "al", "an", "it", "es"};
+const char        PreGob::kLanguageSuffixShort[5] = { 't',  'g',  'a',  'e',  'i'};
+const char *const PreGob::kLanguageSuffixLong [5] = {"fr", "al", "an", "it", "es"};
 
 
 PreGob::PreGob(GobEngine *vm) : _vm(vm), _fadedOut(false) {

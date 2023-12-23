@@ -963,7 +963,7 @@ void Draw_v2::spriteOperation(int16 operation) {
  * These are, of course, way harder to fix.
  */
 
-static const char *kLittleRedStrings[][2] = {
+static const char *const kLittleRedStrings[][2] = {
 	{"die Heule"          , "die Eule"},
 	{"das Schmetterling"  , "der Schmetterling"},
 	{"die Vespe"          , "die Wespe"},

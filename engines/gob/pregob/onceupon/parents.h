@@ -65,7 +65,7 @@ private:
 		kSoundCount
 	};
 
-	static const char *kSound[kSoundCount];
+	static const char *const kSound[kSoundCount];
 
 
 	uint8 _house;

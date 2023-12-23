@@ -207,7 +207,7 @@ int16 Util::toCP850(uint16 latin1) {
 }
 
 int16 Util::translateKey(const Common::KeyState &key) {
-	static struct keyS {
+	static const struct keyS {
 		int16 from;
 		int16 to;
 	} keys[] = {

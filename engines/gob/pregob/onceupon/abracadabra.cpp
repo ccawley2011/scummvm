@@ -70,7 +70,7 @@ const OnceUpon::MenuButton Abracadabra::kAnimalButtons[] = {
 	{false, 243, 123, 295, 155, 243, 123, 295, 155, 136, 25, 9}
 };
 
-const char *Abracadabra::kAnimalNames[] = {
+const char *const Abracadabra::kAnimalNames[] = {
 	"loup",
 	"drag",
 	"arai",

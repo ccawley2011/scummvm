@@ -76,7 +76,7 @@ private:
 		const char *script;
 	};
 
-	static Script _scripts[];
+	static const Script _scripts[];
 };
 
 } // End of namespace Gob

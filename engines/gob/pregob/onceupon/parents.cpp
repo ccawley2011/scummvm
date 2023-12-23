@@ -43,7 +43,7 @@ namespace Gob {
 
 namespace OnceUpon {
 
-const char *Parents::kSound[kSoundCount] = {
+const char *const Parents::kSound[kSoundCount] = {
 	"rire.snd", // kSoundCackle
 	"tonn.snd"  // kSoundThunder
 };

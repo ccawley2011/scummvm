@@ -70,7 +70,7 @@ const OnceUpon::MenuButton BabaYaga::kAnimalButtons[] = {
 	{false, 245, 123, 293, 155, 245, 123, 293, 155, 136, 25, 9}
 };
 
-const char *BabaYaga::kAnimalNames[] = {
+const char *const BabaYaga::kAnimalNames[] = {
 	"vaut",
 	"drag",
 	"arai",

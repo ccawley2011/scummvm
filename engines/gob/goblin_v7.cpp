@@ -339,8 +339,8 @@ void Goblin_v7::setGoblinState(Mult::Mult_Object *obj, int16 animState) {
  * -----------------------------------------------------
  */
 
-static int8 deltaXFromDirection[10] = {0, -1, 0, 1, 1, 1, 0, -1, -1, 0};
-static int8 deltaYFromDirection[10] = {0, -1, -1, -1, 0, 1, 1, 1, 0, 0};
+static const int8 deltaXFromDirection[10] = {0, -1, 0, 1, 1, 1, 0, -1, -1, 0};
+static const int8 deltaYFromDirection[10] = {0, -1, -1, -1, 0, 1, 1, 1, 0, 0};
 
 static bool positionWalkable(Map *map, int8 x, int8 y) {
 	return !map->getPass(x, y, map->getMapWidth());
