@@ -29,18 +29,18 @@
 
 namespace Hadesch {
 
-static const char *kDamagedWall = "t1010ob0";
-static const char *kBricksImage = "g0120oB0";
-static const char *kHephaestusHighlight = "t2330ba0";
-static const char *kHeraHighlight = "t2300ba0";
-static const char *kOdysseusIdle = "t2150ba0";
-static const char *kOdysseusWithMessage = "t2140bb0";
-static const char *kOdysseusFateOfGreece = "t2150bb0";
-static const char *kPrisoner = "t2130ba0";
-static const char *kKeyAndDecreeImage = "g0150ob0";
-static const char *kKeyAndDecreePopup = "t2010of0";
-static const char *kMenelausImage = "t2070ba0";
-static const char *kHelenImage = "t1230ba0";
+static const char *const kDamagedWall = "t1010ob0";
+static const char *const kBricksImage = "g0120oB0";
+static const char *const kHephaestusHighlight = "t2330ba0";
+static const char *const kHeraHighlight = "t2300ba0";
+static const char *const kOdysseusIdle = "t2150ba0";
+static const char *const kOdysseusWithMessage = "t2140bb0";
+static const char *const kOdysseusFateOfGreece = "t2150bb0";
+static const char *const kPrisoner = "t2130ba0";
+static const char *const kKeyAndDecreeImage = "g0150ob0";
+static const char *const kKeyAndDecreePopup = "t2010of0";
+static const char *const kMenelausImage = "t2070ba0";
+static const char *const kHelenImage = "t1230ba0";
 
 // TODO: fill this
 static const TranscribedSound trClickTranscript[] = {

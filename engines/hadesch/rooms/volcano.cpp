@@ -26,7 +26,7 @@
 
 namespace Hadesch {
 
-static const char * eyeOfFateVolcanoToStyx[] = {
+static const char *const eyeOfFateVolcanoToStyx[] = {
 	"eye of fates too good to be true",
 	"eye of fates never ever",
 	"eye of fates this place again"

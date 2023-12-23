@@ -264,7 +264,7 @@ Common::ErrorCode HadeschEngine::loadCursors() {
 	return Common::kUnsupportedGameidError;
 }
 
-static const char *roomCheats[] = {
+static const char *const roomCheats[] = {
 	"",
 	"in",
 	"mo",
@@ -292,7 +292,7 @@ static const char *roomCheats[] = {
 	"op"
 };
 
-static const char *itemCheats[] = {
+static const char *const itemCheats[] = {
 	"",
 	"",
 	"straw",

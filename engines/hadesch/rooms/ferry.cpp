@@ -308,13 +308,13 @@ static const TranscribedSound charonNextLevel[] = {
 	{"V9280wC0", _hs("You have mastered ferryman's folly")}
 };
 
-static const char *charonAnims[] = {
+static const char *const charonAnims[] = {
 	"V9140BA0",
 	"V9140BB0",
 	"V9140BC0"
 };
 
-static TranscribedSound yuckSounds[] = {
+static const TranscribedSound yuckSounds[] = {
 	{ "V9290nA0", _hs("Eww!") },
 	{ "V9290nB0", _hs("Yuck!") },
 	{ "V9290nC0", _hs("Gross!") },
@@ -332,7 +332,7 @@ struct CharonIdleVideoInfo {
 	}
 };
 
-static CharonIdleVideoInfo charonIdleVideos[] = {
+static const CharonIdleVideoInfo charonIdleVideos[] = {
 	{"V9140BD0", 418, 40},
 	{"V9140BE0", 370, 64}
 };

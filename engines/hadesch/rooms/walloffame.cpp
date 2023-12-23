@@ -26,89 +26,89 @@
 
 namespace Hadesch {
 
-static const char *kBackground = "background";
-static const char *kHotspots = "HallTrph.hot";
-static const char *kArgo = "argo";
+static const char *const kBackground = "background";
+static const char *const kHotspots = "HallTrph.hot";
+static const char *const kArgo = "argo";
 
-static const char *kZeusYooHoo = "zeus yoo-hoo";
-static const char *kZeusYellsPhil = "zeus yells phil";
-static const char *kZeusVacationIsOver = "zeus vacation's over";
-static const char *kZeusFineChoiceHero = "zeus fine choice hero";
-static const char *kZeusShaftOfLightLeft = "zeus shaft of light left";
+static const char *const kZeusYooHoo = "zeus yoo-hoo";
+static const char *const kZeusYellsPhil = "zeus yells phil";
+static const char *const kZeusVacationIsOver = "zeus vacation's over";
+static const char *const kZeusFineChoiceHero = "zeus fine choice hero";
+static const char *const kZeusShaftOfLightLeft = "zeus shaft of light left";
 
-static const char *kRope = "rope";
-static const char *kHerculesLintel = "hercules lintel";
+static const char *const kRope = "rope";
+static const char *const kHerculesLintel = "hercules lintel";
 
-static const char *kApplicationHotspots = "applicat.hot";
-static const char *kApplication = "application";
-static const char *kApplicationHeroine = "application heroine";
-static const char *kApplicationHeroineHotzone = "heroine";
-static const char *kApplicationHero = "application hero";
-static const char *kApplicationHeroHotzone = "hero";
-static const char *kApplicationEnterButton = "application enter button";
-static const char *kApplicationEnterHotzone = "enter";
-static const char *kApplicationBurntHole = "application burnt hole";
-static const char *kApplicationText = "application text";
-static const char *kApplicationHeroineText = "application heroine text";
-static const char *kApplicationHeroText = "application hero text";
-static const char *kApplicationNameText = "application name text";
-static const char *kApplicationUnfurls = "application unfurls";
-static const char *kApplicationUnfurlsSound = "application unfurls sound";
-static const char *kApplicationRollsUpHeroine = "application rolls up heroine";
-static const char *kApplicationRollsUpHero = "application rolls up hero";
-static const char *kApplicationChooseHeroSound = "application choose hero sound";
-static const char *kApplicationChooseHeroineSound = "application choose heroine sound";
+static const char *const kApplicationHotspots = "applicat.hot";
+static const char *const kApplication = "application";
+static const char *const kApplicationHeroine = "application heroine";
+static const char *const kApplicationHeroineHotzone = "heroine";
+static const char *const kApplicationHero = "application hero";
+static const char *const kApplicationHeroHotzone = "hero";
+static const char *const kApplicationEnterButton = "application enter button";
+static const char *const kApplicationEnterHotzone = "enter";
+static const char *const kApplicationBurntHole = "application burnt hole";
+static const char *const kApplicationText = "application text";
+static const char *const kApplicationHeroineText = "application heroine text";
+static const char *const kApplicationHeroText = "application hero text";
+static const char *const kApplicationNameText = "application name text";
+static const char *const kApplicationUnfurls = "application unfurls";
+static const char *const kApplicationUnfurlsSound = "application unfurls sound";
+static const char *const kApplicationRollsUpHeroine = "application rolls up heroine";
+static const char *const kApplicationRollsUpHero = "application rolls up hero";
+static const char *const kApplicationChooseHeroSound = "application choose hero sound";
+static const char *const kApplicationChooseHeroineSound = "application choose heroine sound";
 
-static const char *kHadesBurstsIn = "hades bursts in";
-static const char *kHadesNoMoreHeroes = "hades no more heroes got it";
-static const char *kHadesNoMoreHeroines = "hades no more heroines got it";
+static const char *const kHadesBurstsIn = "hades bursts in";
+static const char *const kHadesNoMoreHeroes = "hades no more heroes got it";
+static const char *const kHadesNoMoreHeroines = "hades no more heroines got it";
 
 #define kPhilWalksCenterToLeft "phil walks center to left"
 #define kPhilSighsLeft "phil sighs left"
 
 #define kPhilSnores "phil snores"
-static const char *kPhilSnoresSound = "phil snores sound";
+static const char *const kPhilSnoresSound = "phil snores sound";
 #define kPhilRollsOver "phil rolls over"
 #define kPhilJumpsOffPillow "phil jumps off pillow"
-static const char *kPhilOfCourseIdo = "phil of course i do";
-static const char *kPhilWhatAHothead = "phil what a hothead";
-static const char *kPhilTimeToGetStarted = "phil time to get started";
-static const char *kPhilTreasuresOfHercules = "phil treasures of hercules";
-static const char *kPhilBasicInformation = "phil basic information";
-static const char *kPhilFlakyPlaster = "phil flaky plaster";
-static const char *kPhilGettinStarted = "phil gettin started";
-static const char *kPhilToolsOfTrade = "phil tools of the trade";
-static const char *kPhilHeroBelt = "phil hero belt";
-static const char *kPhilHeroBeltBuckle = "phil left belt buckle";
-static const char *kPhilClickAnItem = "phil click an item";
-static const char *kPhilHeroPowers = "phil hero powers";
-static const char *kPhilRightNotches = "phil right notches";
-static const char *kPhilEyeOfFates = "phil eye of fates";
-static const char *kPhilBadNews = "phil bad news";
-static const char *kPhilFirstQuest = "phil first quest";
+static const char *const kPhilOfCourseIdo = "phil of course i do";
+static const char *const kPhilWhatAHothead = "phil what a hothead";
+static const char *const kPhilTimeToGetStarted = "phil time to get started";
+static const char *const kPhilTreasuresOfHercules = "phil treasures of hercules";
+static const char *const kPhilBasicInformation = "phil basic information";
+static const char *const kPhilFlakyPlaster = "phil flaky plaster";
+static const char *const kPhilGettinStarted = "phil gettin started";
+static const char *const kPhilToolsOfTrade = "phil tools of the trade";
+static const char *const kPhilHeroBelt = "phil hero belt";
+static const char *const kPhilHeroBeltBuckle = "phil left belt buckle";
+static const char *const kPhilClickAnItem = "phil click an item";
+static const char *const kPhilHeroPowers = "phil hero powers";
+static const char *const kPhilRightNotches = "phil right notches";
+static const char *const kPhilEyeOfFates = "phil eye of fates";
+static const char *const kPhilBadNews = "phil bad news";
+static const char *const kPhilFirstQuest = "phil first quest";
 #define kPhilTakesScroll "phil takes scroll"
 #define kPhilDropsScroll "phil drops scroll"
-static const char *kPhilDaedalusNeedsHelp = "phil daedalus needs help";
-static const char *kPhilOffToCrete = "phil off to crete";
-static const char *kPhilArgo = "phil argo";
+static const char *const kPhilDaedalusNeedsHelp = "phil daedalus needs help";
+static const char *const kPhilOffToCrete = "phil off to crete";
+static const char *const kPhilArgo = "phil argo";
 #define kPhilTapsFootLeft "phil taps foot left"
 
 #define kPhilYapsWithoutSound "phil yaps without sound"
 
-static const char *kMugshot = "mug shot";
-static const char *kMugshotSound = "mug shot sound";
-static const char *kPanicAndPainSting = "pain and panic sting";
+static const char *const kMugshot = "mug shot";
+static const char *const kMugshotSound = "mug shot sound";
+static const char *const kPanicAndPainSting = "pain and panic sting";
 
 #define kHeroStatue "hero statue"
 #define kHeroineStatue "heroine statue"
-static const char *kScroll = "scroll";
-static const char *kScrollSound = "scroll sound";
+static const char *const kScroll = "scroll";
+static const char *const kScrollSound = "scroll sound";
 
-static const char *kHeroBelt = "hero belt";
-static const char *kHeroBeltUpSound = "hero belt up sound";
-static const char *kHeroBeltDownSound = "hero belt down sound";
+static const char *const kHeroBelt = "hero belt";
+static const char *const kHeroBeltUpSound = "hero belt up sound";
+static const char *const kHeroBeltDownSound = "hero belt down sound";
 
-static const char *herculesRoomElements[] = {
+static const char *const herculesRoomElements[] = {
 	"mares",
 	"cattle",
 	"girdle",
@@ -124,7 +124,7 @@ static const char *herculesRoomElements[] = {
 	"hercules",
 };
 
-static const char *allPhils[] = {
+static const char *const allPhils[] = {
 	"phil walks left to center",
 	kPhilWalksCenterToLeft,
 	"phil faces backward left",
@@ -142,13 +142,13 @@ static const char *allPhils[] = {
 	"phil scans left"
 };
 
-static const char *powerLevelNames[] = {
+static const char *const powerLevelNames[] = {
 	"thunderbolt",
 	"trojan horse",
 	"owl"
 };
 
-static const char *zeusComments[] = {
+static const char *const zeusComments[] = {
 	"minotaur",
 	"medusa",
 	"trojan armor",

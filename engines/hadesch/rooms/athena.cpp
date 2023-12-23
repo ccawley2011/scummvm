@@ -25,8 +25,8 @@
 #include "hadesch/ambient.h"
 
 namespace Hadesch {
-static const char *kAthenaAnim = "c8060ba0";
-static const char *kLights = "c8110bb0";
+static const char *const kAthenaAnim = "c8060ba0";
+static const char *const kLights = "c8110bb0";
 
 // Keep in order
 enum {

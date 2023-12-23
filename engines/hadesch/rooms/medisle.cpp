@@ -29,23 +29,23 @@
 
 namespace Hadesch {
 
-static const char *kStoneAnim = "g0110ob0";
-static const char *kStoneHotzone = "stone";
-static const char *snakes[] = {
+static const char *const kStoneAnim = "g0110ob0";
+static const char *const kStoneHotzone = "stone";
+static const char *const snakes[] = {
 	"m1220bb0",
 	"m1210bb0",
 	"m1190bb0",
 	"m1180bb0"
 };
 
-static const char *greenSnakes[] = {
+static const char *const greenSnakes[] = {
 	"m1160bd0",
 	"m1160bc0",
 	"m1160bb0",
 	"m1160ba0"
 };
 
-static const char *itemImages[] = {
+static const char *const itemImages[] = {
 	"m1010bb0",
 	"m1010bc0",
 	"m1010ba0",
@@ -53,7 +53,7 @@ static const char *itemImages[] = {
 	"m1010be0"
 };
 
-static const char *itemImagesGlow[] = {
+static const char *const itemImagesGlow[] = {
 	"m1010bb1",
 	"m1010bc1",
 	"m1010ba1",
@@ -61,7 +61,7 @@ static const char *itemImagesGlow[] = {
 	"m1010be1"
 };
 
-static const char *itemSounds[] = {
+static const char *const itemSounds[] = {
 	"m1190ea0",
 	"m1180ec0",
 	"m1220ea0",
@@ -77,7 +77,7 @@ static const TranscribedSound itemClickSounds[] = {
 	{"m1150nc0", _hs("Putting on the winged sandals will allow you to fly above and move quickly") }
 };
 
-static const char *perseusItemAnims[] = {
+static const char *const perseusItemAnims[] = {
 	"m1190ba0",
 	"m1180ba0",
 	"m1220ba0",
@@ -140,13 +140,13 @@ static const StatuePiece statuePieces[] = {
 
 };
 
-static const char *fatesHotzoneNames[kNumFates] = {
+static const char *const fatesHotzoneNames[kNumFates] = {
 	"Lachesis",
 	"Atropos",
 	"Clotho"
 };
 
-static const char *itemNames[] = {
+static const char *const itemNames[] = {
 	"shield",
 	"sword",
 	"bag",

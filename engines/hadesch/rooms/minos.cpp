@@ -26,10 +26,10 @@
 
 namespace Hadesch {
 
-static const char *kBacchusHighlight = "AnimBacchusStatue";
-static const char *kGuardLooking = "AnimGuardLooking";
-static const char *kAnimMinosEating = "AnimMinosEating";
-static const char *kStatues = "AnimStatueZeroPose";
+static const char *const kBacchusHighlight = "AnimBacchusStatue";
+static const char *const kGuardLooking = "AnimGuardLooking";
+static const char *const kAnimMinosEating = "AnimMinosEating";
+static const char *const kStatues = "AnimStatueZeroPose";
 
 enum {
 	kMinosBackToIdleEvent = 14003,
@@ -135,7 +135,7 @@ public:
 		}
 
 		if (name == "Table") {
-			static const char *sounds[4] = {
+			static const char *const sounds[4] = {
 				"R3160eA0",
 				"R3160eB0",
 				"R3160eC0",
