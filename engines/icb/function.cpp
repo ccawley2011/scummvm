@@ -1457,7 +1457,7 @@ mcodeFunctionReturnCodes _game_session::fn_is_armed(int32 &result, int32 *) {
 	return IR_CONT;
 }
 
-extern _player_stat player_stat_table[__TOTAL_WEAPONS];
+extern const  _player_stat player_stat_table[__TOTAL_WEAPONS];
 mcodeFunctionReturnCodes _game_session::fn_set_pose(int32 &, int32 *params) {
 	// change/set the weapon type
 	// set instantly - i.e. init the _vox_image
@@ -1539,7 +1539,7 @@ mcodeFunctionReturnCodes _game_session::fn_cancel_override_pose(int32 &, int32 *
 	return IR_CONT;
 }
 
-extern _player_stat player_stat_table[__TOTAL_WEAPONS];
+extern const _player_stat player_stat_table[__TOTAL_WEAPONS];
 
 mcodeFunctionReturnCodes _game_session::fn_set_player_pose(int32 &, int32 *params) {
 	// change/set the weapon type

@@ -87,9 +87,9 @@ extern _vox_image *g_vox_images[MAX_voxel_list];
 #define MAX_SESSIONS (29 * 2)
 #define MAX_MISSIONS (NUMBER_OF_MISSIONS * 2)
 
-extern const char *g_sessions[MAX_SESSIONS];
-extern const char *g_mission_startup_names[MAX_MISSIONS];
-extern const char *g_mission_names[NUMBER_OF_MISSIONS];
+extern const char *const g_sessions[MAX_SESSIONS];
+extern const char *const g_mission_startup_names[MAX_MISSIONS];
+extern const char *const g_mission_names[NUMBER_OF_MISSIONS];
 
 extern const char *g_m01;
 extern const char *g_m02;

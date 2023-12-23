@@ -99,7 +99,7 @@ public:
 	void Clear_surface(uint32 s_id) { Fill_surface(s_id, 0x00000000); }
 	void Fill_surface(uint32 s_id, uint32 rgb_value);
 	void Blit_fillfx(uint32 surface_id, LRECT *rect, uint32 col);
-	void Blit_surface_to_surface(uint32 from_id, uint32 to_id, LRECT *rect_from, LRECT *rect_to, uint32 nFlags = 0);
+	void Blit_surface_to_surface(uint32 from_id, uint32 to_id, const LRECT *rect_from, const LRECT *rect_to, uint32 nFlags = 0);
 	void Set_transparent_colour_key(uint32 nSurfaceID, uint32 nKey);
 	bool8 &HasMMX() { return m_hasMMX; }
 	void RecordFrame(const char *path);

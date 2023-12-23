@@ -46,7 +46,8 @@ void _game_session::Draw_health_bar() {
 	static int32 barEnd;
 	static int32 barTarget;
 	static int32 healthStep = 0;
-	static _rgb healthColours[MAX_HEALTH + 1] = {{254, 0, 0, 0},   //  0
+	static const _rgb healthColours[MAX_HEALTH + 1] = {
+	                                             {254, 0, 0, 0},   //  0
 	                                             {254, 0, 0, 0},   //  1
 	                                             {254, 0, 0, 0},   //  2
 	                                             {254, 64, 0, 0},  //  3

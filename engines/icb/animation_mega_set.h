@@ -136,7 +136,7 @@ typedef struct {
 	__mega_set_names ref;
 } _an_anim_entry;
 
-extern _an_anim_entry master_anim_name_table[__TOTAL_ANIMS];
+extern const _an_anim_entry master_anim_name_table[__TOTAL_ANIMS];
 
 } // End of namespace ICB
 

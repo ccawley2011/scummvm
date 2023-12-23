@@ -5664,7 +5664,7 @@ uint32 OptionsManager::CalculateStringWidth(const char *str) {
 }
 
 void OptionsManager::DisplayText(uint8 *ad, uint32 pitch, const char *str, int32 x, int32 y, uint32 col, bool8 centredHorizontally, bool8 boxed) {
-	static char errorText[] = "MISSING TEXT !";
+	static const char errorText[] = "MISSING TEXT !";
 
 	if (!str)
 		str = errorText;
@@ -5817,19 +5817,19 @@ void DoSomeMagicStuff() {
 }
 
 // Magic input sequences
-uint8 magic_unlockmovies[13] = {Common::KEYCODE_t, Common::KEYCODE_e, Common::KEYCODE_s, Common::KEYCODE_t, Common::KEYCODE_b, Common::KEYCODE_r, Common::KEYCODE_e,
+const uint8 magic_unlockmovies[13] = {Common::KEYCODE_t, Common::KEYCODE_e, Common::KEYCODE_s, Common::KEYCODE_t, Common::KEYCODE_b, Common::KEYCODE_r, Common::KEYCODE_e,
 								Common::KEYCODE_a, Common::KEYCODE_k, Common::KEYCODE_d, Common::KEYCODE_o, Common::KEYCODE_w, Common::KEYCODE_n};
 
-uint8 magic_fastmovies[6] = {Common::KEYCODE_s, Common::KEYCODE_p, Common::KEYCODE_e, Common::KEYCODE_e, Common::KEYCODE_d, Common::KEYCODE_y};
+const uint8 magic_fastmovies[6] = {Common::KEYCODE_s, Common::KEYCODE_p, Common::KEYCODE_e, Common::KEYCODE_e, Common::KEYCODE_d, Common::KEYCODE_y};
 
-uint8 magic_slideshowextras[12] = {Common::KEYCODE_h, Common::KEYCODE_o, Common::KEYCODE_l, Common::KEYCODE_i, Common::KEYCODE_d, Common::KEYCODE_a,
+const uint8 magic_slideshowextras[12] = {Common::KEYCODE_h, Common::KEYCODE_o, Common::KEYCODE_l, Common::KEYCODE_i, Common::KEYCODE_d, Common::KEYCODE_a,
 								   Common::KEYCODE_y, Common::KEYCODE_s, Common::KEYCODE_n, Common::KEYCODE_a, Common::KEYCODE_p, Common::KEYCODE_s};
 
-uint8 magic_avcontrol[7] = {Common::KEYCODE_r, Common::KEYCODE_a, Common::KEYCODE_b, Common::KEYCODE_v, Common::KEYCODE_i, Common::KEYCODE_e, Common::KEYCODE_w};
+const uint8 magic_avcontrol[7] = {Common::KEYCODE_r, Common::KEYCODE_a, Common::KEYCODE_b, Common::KEYCODE_v, Common::KEYCODE_i, Common::KEYCODE_e, Common::KEYCODE_w};
 
-uint8 magic_completeme[6] = {Common::KEYCODE_c, Common::KEYCODE_a, Common::KEYCODE_5, Common::KEYCODE_2, Common::KEYCODE_4, Common::KEYCODE_8};
+const uint8 magic_completeme[6] = {Common::KEYCODE_c, Common::KEYCODE_a, Common::KEYCODE_5, Common::KEYCODE_2, Common::KEYCODE_4, Common::KEYCODE_8};
 
-uint8 magic_videocontrol[7] = {Common::KEYCODE_a, Common::KEYCODE_p, Common::KEYCODE_r, Common::KEYCODE_i, Common::KEYCODE_c, Common::KEYCODE_o, Common::KEYCODE_t};
+const uint8 magic_videocontrol[7] = {Common::KEYCODE_a, Common::KEYCODE_p, Common::KEYCODE_r, Common::KEYCODE_i, Common::KEYCODE_c, Common::KEYCODE_o, Common::KEYCODE_t};
 
 uint32 magico = 0;
 

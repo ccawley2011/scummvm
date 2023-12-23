@@ -33,12 +33,12 @@ namespace ICB {
 // So version string is 18 bytes long :
 // Version String =  <8 byte header,5 character version, \0, INT32 time>
 #define HEAD_LEN 8
-uint8 version_string[HEAD_LEN + 10] = {1, 255, 37, 22, 45, 128, 34, 67};
+const uint8 version_string[HEAD_LEN + 10] = {1, 255, 37, 22, 45, 128, 34, 67};
 
-uint8 unencoded_name[HEAD_LEN + 48] = {9,   11,  73,  18,  120, 209, 211, 237, 'R', 'e', 'v', 'o', 'l', 'u', 't', 'i',
+const uint8 unencoded_name[HEAD_LEN + 48] = {9,   11,  73,  18,  120, 209, 211, 237, 'R', 'e', 'v', 'o', 'l', 'u', 't', 'i',
 									   'o', 'n', ' ', 'S', 'o', 'f', 't', 'w', 'a', 'r', 'e', ' ', 'L', 't', 'd', 0};
 
-uint8 encoded_name[HEAD_LEN + 48] = {24,  52,  90,  122, 223, 165, 33,  199, 179, 209, 225, 157, 222, 238, 219, 209, 143, 224, 133, 190, 232, 209, 162, 177, 198, 228, 202, 146,
+const uint8 encoded_name[HEAD_LEN + 48] = {24,  52,  90,  122, 223, 165, 33,  199, 179, 209, 225, 157, 222, 238, 219, 209, 143, 224, 133, 190, 232, 209, 162, 177, 198, 228, 202, 146,
 									 180, 232, 214, 65,  65,  65,  116, 104, 116, 114, 107, 104, 32,  49,  64,  35,  123, 125, 61,  45,  41,  40,  163, 36,  49,  123, 125, 10};
 
 } // End of namespace ICB

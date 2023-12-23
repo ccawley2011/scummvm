@@ -377,7 +377,7 @@ static void copyRectToSurface(Graphics::Surface *dstSurface, Graphics::Surface *
 	                  srcSurface->pitch, dstSurface->pitch, subRect.width(), subRect.height(), colorKeyEnable, colorKey);
 }
 
-void _surface_manager::Blit_surface_to_surface(uint32 from_id, uint32 to_id, LRECT *pSrcRect, LRECT *pDestRect, uint32 dwFlags) {
+void _surface_manager::Blit_surface_to_surface(uint32 from_id, uint32 to_id, const LRECT *pSrcRect, const LRECT *pDestRect, uint32 dwFlags) {
 	Common::Rect srcRect, dstRect;
 	if (pSrcRect) {
 		if ((pSrcRect->right - pSrcRect->left) < 1)

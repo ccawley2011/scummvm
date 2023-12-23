@@ -46,7 +46,7 @@
 namespace ICB {
 
 // this is the master animation declaration table.
-_an_anim_entry master_anim_name_table[__TOTAL_ANIMS] = {
+const _an_anim_entry master_anim_name_table[__TOTAL_ANIMS] = {
 	{"walk", __WALK},
 	{"walk_to_stand", __WALK_TO_STAND},
 	{"walk_to_other_stand_(left_leg)", __WALK_TO_OTHER_STAND_LEFT_LEG},
@@ -137,11 +137,12 @@ _an_anim_entry master_anim_name_table[__TOTAL_ANIMS] = {
 };
 
 // these names must be in same order as __weapon
-char weapon_text[__TOTAL_WEAPONS][MAX_WEAPON_NAME_LENGTH] = {"unarmed", "gun", "crouched", "crouched_gun"};
+const char weapon_text[__TOTAL_WEAPONS][MAX_WEAPON_NAME_LENGTH] = {"unarmed", "gun", "crouched", "crouched_gun"};
 
 bool8 armed_state_table[__TOTAL_WEAPONS] = {FALSE8, TRUE8, FALSE8, TRUE8};
 
-_player_stat player_stat_table[__TOTAL_WEAPONS] = {STOOD, NEW_AIM, CROUCHING, CROUCH_AIM};
+extern const _player_stat player_stat_table[__TOTAL_WEAPONS];
+const _player_stat player_stat_table[__TOTAL_WEAPONS] = {STOOD, NEW_AIM, CROUCHING, CROUCH_AIM};
 
 bool8 crouch_state_table[__TOTAL_WEAPONS] = {FALSE8, FALSE8, TRUE8, TRUE8};
 

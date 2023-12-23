@@ -49,8 +49,8 @@ namespace ICB {
 bool gRegainedFocus = false;
 bool gotTheFocus = false;
 
-char g_characters[] = "characters\\";
-char gamelanguage[ENGINE_STRING_LEN] = "english";
+const char g_characters[] = "characters\\";
+const char gamelanguage[ENGINE_STRING_LEN] = "english";
 bool8 camera_hack;
 uint32 BACKGROUND_BUFFER_SIZE;
 uint32 ANIMATION_BUFFER_SIZE;
