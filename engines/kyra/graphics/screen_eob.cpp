@@ -174,7 +174,7 @@ bool Screen_EoB::init() {
 
 		_useShapeShading = (_bytesPerPixel != 2 && !_isAmiga && !_isSegaCD && !_use16ColorMode && _renderMode != Common::kRenderCGA && _renderMode != Common::kRenderEGA) || _useHiResEGADithering;
 
-		static const char *cpsExt[] = { "CPS", "EGA", "SHP", "BIN" };
+		static const char *const cpsExt[] = { "CPS", "EGA", "SHP", "BIN" };
 		int ci = 0;
 		if (_vm->game() == GI_EOB1) {
 			if (_vm->gameFlags().platform == Common::kPlatformPC98) {

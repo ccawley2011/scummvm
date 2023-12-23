@@ -1188,7 +1188,7 @@ void EoBCoreEngine::recalcArmorClass(int index) {
 	int acm = getDexterityArmorClassModifier(c->dexterityCur);
 	c->armorClass = 10 + acm;
 
-	static uint8 slot[] = { 17, 0, 1, 18 };
+	static const uint8 slot[] = { 17, 0, 1, 18 };
 	for (int i = 0; i < 4; i++) {
 		int itm = c->inventory[slot[i]];
 		if (!itm)

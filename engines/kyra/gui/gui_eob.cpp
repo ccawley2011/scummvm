@@ -3123,7 +3123,7 @@ uint16 GUI_EoB::checkClickableCharactersSelection() {
 	if (_vm->_flags.platform != Common::kPlatformFMTowns)
 		return 0;
 
-	static uint16 kanaSelXCrds[] = { 224, 272, 186 };
+	static const uint16 kanaSelXCrds[] = { 224, 272, 186 };
 	Common::Point mousePos = _vm->getMousePos();
 	int highlight = -1;
 	_csjis[0] = _csjis[2] = 0;
@@ -3216,7 +3216,7 @@ void GUI_EoB::printClickableCharacters(int page) {
 	for (int i = 0; i < 4; i++)
 		_screen->printShadedText(_vm->_textInputCharacterLines[page * 4 + i], 152, (i << 4) + 112, _vm->guiSettings()->colors.guiColorWhite, 0, _vm->guiSettings()->colors.guiColorBlack);
 
-	static uint16 kanaSelCrds[] = { 224, 272, 186 };
+	static const uint16 kanaSelCrds[] = { 224, 272, 186 };
 	for (int i = 0; i < 3; i++)
 		_screen->printShadedText(_vm->_textInputSelectStrings[i], kanaSelCrds[i], 176, _vm->guiSettings()->colors.guiColorWhite, 0, _vm->guiSettings()->colors.guiColorBlack);
 }

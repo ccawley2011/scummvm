@@ -1027,7 +1027,7 @@ void EoBCoreEngine::spellCallback_start_iceStorm() {
 
 bool EoBCoreEngine::spellCallback_end_iceStorm(void *obj) {
 	EoBFlyingObject *fo = (EoBFlyingObject *)obj;
-	static int8 blockAdv[] = { -32, 32, 1, -1 };
+	static const int8 blockAdv[] = { -32, 32, 1, -1 };
 	bool res = magicObjectDamageHit(fo, 1, 6, 0, getMageLevel(fo->attackerId));
 	if (res) {
 		for (int i = 0; i < 4; i++) {

@@ -669,7 +669,7 @@ bool SegaAudioChannel_FM::setupTone() {
 		uint8 note = *_dataPtr++ & 0x0F;
 
 		if (note) {
-			static uint8 frqreg[] = { 0xAD, 0xA9, 0xAE, 0xAA, 0xAC, 0xA8 };
+			static const uint8 frqreg[] = { 0xAD, 0xA9, 0xAE, 0xAA, 0xAC, 0xA8 };
 			uint16 f = _freqTable[_octave * 12 + note + _transpose];
 			if (!_lock) {
 				_sga->writeReg(_part, frqreg[(_cfreqReg - 1) << 1], f >> 8);

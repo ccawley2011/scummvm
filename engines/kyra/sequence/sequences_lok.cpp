@@ -255,7 +255,7 @@ bool KyraEngine_LoK::seq_introStory() {
 	int searchStart = (_flags.isTalkie && _flags.platform == Common::kPlatformMacintosh && _flags.lang != Common::EN_ANY) ? (_flags.lang == Common::FR_FRA ? 2 : 3) : 0;
 
 	bool success = false;
-	static const char *pattern[] = { "", "_ENG", "_FRE", "_GER", "_SPA", "_ITA", "_HEB", "_HAN" };
+	static const char *const pattern[] = { "", "_ENG", "_FRE", "_GER", "_SPA", "_ITA", "_HEB", "_HAN" };
 	for (int i = searchStart; i < ARRAYSIZE(pattern) && !success; ++i) {
 		Common::String tryFile = Common::String::format("TEXT%s.CPS", pattern[i]);
 		if ((success = _res->exists(tryFile.c_str())))

@@ -1404,8 +1404,8 @@ void EoBPC98FinalePlayer::king() {
 	_screen->convertPage(5, 2, 0);
 	_shapes[1] = _screen->encodeShape(8, 0, 8, 64);
 
-	static uint8 xOff[] = { 0, 48, 96, 152 };
-	static uint8 maxW[] = { 48, 48, 56, 48 };
+	static const uint8 xOff[] = { 0, 48, 96, 152 };
+	static const uint8 maxW[] = { 48, 48, 56, 48 };
 
 	uint32 nextScreenUpdate = _vm->_system->getMillis();
 
@@ -1813,7 +1813,7 @@ void EoBAmigaFinalePlayer::start() {
 }
 
 void EoBAmigaFinalePlayer::entry() {
-	static uint8 textMode[] = { 1, 1, 0, 1, 1, 0 };
+	static const uint8 textMode[] = { 1, 1, 0, 1, 1, 0 };
 	if (_vm->shouldQuit() || _vm->skipFlag())
 		return;
 
