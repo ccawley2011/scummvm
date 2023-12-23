@@ -98,7 +98,7 @@ bool AI::cacheEntGfx(AIEntity *e, bool initFlag) {
 		// Load Gfx for corresponding Entity
 		if (aiEntList[i].type == e->type) {
 			int j = 0;
-			AIStateDef *list = aiEntList[i].stateDef;
+			const AIStateDef *list = aiEntList[i].stateDef;
 
 			while (list[j].state != STATE_ENDSTATES) {
 

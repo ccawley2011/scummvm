@@ -523,7 +523,7 @@ bool AI::autoActive(int x, int y) {
 	return false;
 }
 
-CallbackDef allCallbacks[] = {
+static const CallbackDef allCallbacks[] = {
 	{NO_FUNCTION, nullptr},
 	{AI_BARREL_EXPLOSION_END, callbackAiBarrelExplosionEnd},
 	{CALLBACK_DOOR_OPEN_CLOSE, callbackDoorOpenClose},

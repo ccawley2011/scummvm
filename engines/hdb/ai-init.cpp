@@ -35,11 +35,11 @@ namespace HDB {
 	which graphics to load for them.
 */
 
-AIStateDef none[] = {
+const AIStateDef none[] = {
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef guy[] = {
+const AIStateDef guy[] = {
 	{ STATE_BLINK,          GROUP_ENT_GUY_BLINK },
 	{ STATE_STANDDOWN,      GROUP_ENT_GUY_STANDDOWN },
 	{ STATE_STANDUP,        GROUP_ENT_GUY_STANDUP },
@@ -75,16 +75,16 @@ AIStateDef guy[] = {
 	{ STATE_ENDSTATES,      "" }      // end of list indicator
 };
 
-AIStateDef gemAttack[] = {
+const AIStateDef gemAttack[] = {
 	{ STATE_MOVEDOWN,  GROUP_ENT_GEM_WHITE_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef slugAttack[] = {
+const AIStateDef slugAttack[] = {
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef dolly[] = {
+const AIStateDef dolly[] = {
 	{ STATE_MOVEDOWN,       GROUP_ENT_DOLLY_WALKDOWN },
 	{ STATE_MOVEUP,         GROUP_ENT_DOLLY_WALKUP },
 	{ STATE_MOVELEFT,       GROUP_ENT_DOLLY_WALKLEFT },
@@ -98,7 +98,7 @@ AIStateDef dolly[] = {
 	{ STATE_ENDSTATES,      "" }
 };
 
-AIStateDef sergeant[] = {
+const AIStateDef sergeant[] = {
 	{ STATE_STANDDOWN,  GROUP_ENT_SERGEANT_STANDDOWN },
 	{ STATE_STANDUP,    GROUP_ENT_SERGEANT_STANDUP },
 	{ STATE_STANDLEFT,  GROUP_ENT_SERGEANT_STANDLEFT },
@@ -111,7 +111,7 @@ AIStateDef sergeant[] = {
 	{ STATE_ENDSTATES,  "" }
 };
 
-AIStateDef spacedude[] = {
+const AIStateDef spacedude[] = {
 	{ STATE_MOVEDOWN,  GROUP_ENT_SPACEDUDE_WALKDOWN },
 	{ STATE_MOVEUP,    GROUP_ENT_SPACEDUDE_WALKUP },
 	{ STATE_MOVELEFT,  GROUP_ENT_SPACEDUDE_WALKLEFT },
@@ -119,7 +119,7 @@ AIStateDef spacedude[] = {
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef chicken[] = {
+const AIStateDef chicken[] = {
 	{ STATE_STANDDOWN,  GROUP_ENT_CHICKEN_STANDDOWN },
 	{ STATE_STANDUP,    GROUP_ENT_CHICKEN_STANDUP },
 	{ STATE_STANDLEFT,  GROUP_ENT_CHICKEN_STANDLEFT },
@@ -131,12 +131,12 @@ AIStateDef chicken[] = {
 	{ STATE_ENDSTATES,  "" }
 };
 
-AIStateDef vortexian[] = {
+const AIStateDef vortexian[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_VORTEXIAN_STANDDOWN },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef maintBot[] = {
+const AIStateDef maintBot[] = {
 	{ STATE_STANDDOWN,  GROUP_ENT_MAINTBOT_STANDDOWN },
 	{ STATE_STANDUP,    GROUP_ENT_MAINTBOT_STANDUP },
 	{ STATE_STANDLEFT,  GROUP_ENT_MAINTBOT_STANDLEFT },
@@ -152,7 +152,7 @@ AIStateDef maintBot[] = {
 	{ STATE_ENDSTATES,  "" }
 };
 
-AIStateDef scientist[] = {
+const AIStateDef scientist[] = {
 	{ STATE_BLINK,      GROUP_ENT_SCIENTIST_BLINK },
 	{ STATE_STANDDOWN,  GROUP_ENT_SCIENTIST_STANDDOWN },
 	{ STATE_STANDUP,    GROUP_ENT_SCIENTIST_STANDUP },
@@ -165,7 +165,7 @@ AIStateDef scientist[] = {
 	{ STATE_ENDSTATES,  "" }
 };
 
-AIStateDef worker[] = {
+const AIStateDef worker[] = {
 	{ STATE_BLINK,      GROUP_ENT_WORKER_BLINK },
 	{ STATE_STANDDOWN,  GROUP_ENT_WORKER_STANDDOWN },
 	{ STATE_STANDUP,    GROUP_ENT_WORKER_STANDUP },
@@ -178,12 +178,12 @@ AIStateDef worker[] = {
 	{ STATE_ENDSTATES,  "" }
 };
 
-AIStateDef deadWorker[] = {
+const AIStateDef deadWorker[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_DEAD_WORKER_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef accountant[] = {
+const AIStateDef accountant[] = {
 	{ STATE_STANDDOWN,  GROUP_ENT_ACCOUNTANT_STANDDOWN },
 	{ STATE_STANDUP,    GROUP_ENT_ACCOUNTANT_STANDUP },
 	{ STATE_STANDLEFT,  GROUP_ENT_ACCOUNTANT_STANDLEFT },
@@ -193,7 +193,7 @@ AIStateDef accountant[] = {
 
 // Enemies
 
-AIStateDef pushBot[] = {
+const AIStateDef pushBot[] = {
 	{ STATE_MOVEDOWN,  GROUP_ENT_PUSHBOT_WALKDOWN },
 	{ STATE_MOVEUP,    GROUP_ENT_PUSHBOT_WALKUP },
 	{ STATE_MOVELEFT,  GROUP_ENT_PUSHBOT_WALKLEFT },
@@ -201,7 +201,7 @@ AIStateDef pushBot[] = {
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef rightBot[] = {
+const AIStateDef rightBot[] = {
 	{ STATE_MOVEDOWN,  GROUP_ENT_RIGHTBOT_WALKDOWN },
 	{ STATE_MOVEUP,    GROUP_ENT_RIGHTBOT_WALKUP },
 	{ STATE_MOVELEFT,  GROUP_ENT_RIGHTBOT_WALKLEFT },
@@ -209,7 +209,7 @@ AIStateDef rightBot[] = {
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef omniBot[] = {
+const AIStateDef omniBot[] = {
 	{ STATE_MOVEDOWN,  GROUP_ENT_OMNIBOT_WALKDOWN },
 	{ STATE_MOVEUP,    GROUP_ENT_OMNIBOT_WALKUP },
 	{ STATE_MOVELEFT,  GROUP_ENT_OMNIBOT_WALKLEFT },
@@ -217,7 +217,7 @@ AIStateDef omniBot[] = {
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef laser[] = {
+const AIStateDef laser[] = {
 	{ STATE_STANDRIGHT, GROUP_ENT_LASER_RIGHT },
 	{ STATE_STANDLEFT,  GROUP_ENT_LASER_LEFT },
 	{ STATE_STANDUP,    GROUP_ENT_LASER_UP },
@@ -225,7 +225,7 @@ AIStateDef laser[] = {
 	{ STATE_ENDSTATES,  "" }
 };
 
-AIStateDef diverter[] = {
+const AIStateDef diverter[] = {
 	{ STATE_DIVERTER_BL, GROUP_ENT_DEFLECTORBL_SIT },
 	{ STATE_DIVERTER_BR, GROUP_ENT_DEFLECTORBR_SIT },
 	{ STATE_DIVERTER_TL, GROUP_ENT_DEFLECTORTL_SIT },
@@ -233,7 +233,7 @@ AIStateDef diverter[] = {
 	{ STATE_ENDSTATES,   "" }
 };
 
-AIStateDef turnBot[] = {
+const AIStateDef turnBot[] = {
 	{ STATE_MOVEDOWN,  GROUP_ENT_TURNBOT_WALKDOWN },
 	{ STATE_MOVEUP,    GROUP_ENT_TURNBOT_WALKUP },
 	{ STATE_MOVELEFT,  GROUP_ENT_TURNBOT_WALKLEFT },
@@ -241,7 +241,7 @@ AIStateDef turnBot[] = {
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef deadEye[] = {
+const AIStateDef deadEye[] = {
 	{ STATE_MOVEDOWN,  GROUP_ENT_DEADEYE_WALKDOWN },
 	{ STATE_MOVEUP,    GROUP_ENT_DEADEYE_WALKUP },
 	{ STATE_MOVELEFT,  GROUP_ENT_DEADEYE_WALKLEFT },
@@ -249,7 +249,7 @@ AIStateDef deadEye[] = {
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef meerkat[] = {
+const AIStateDef meerkat[] = {
 	{ STATE_MEER_MOVE,      GROUP_ENT_MEERKAT_DIRTMOVE },
 	{ STATE_MEER_APPEAR,    GROUP_ENT_MEERKAT_APPEAR },
 	{ STATE_MEER_BITE,      GROUP_ENT_MEERKAT_BITE },
@@ -258,7 +258,7 @@ AIStateDef meerkat[] = {
 	{ STATE_ENDSTATES,      "" }
 };
 
-AIStateDef goodFairy[] = {
+const AIStateDef goodFairy[] = {
 	{ STATE_MOVEDOWN,  GROUP_ENT_GOODFAIRY_WALKDOWN },
 	{ STATE_MOVEUP,    GROUP_ENT_GOODFAIRY_WALKUP },
 	{ STATE_MOVELEFT,  GROUP_ENT_GOODFAIRY_WALKLEFT },
@@ -266,7 +266,7 @@ AIStateDef goodFairy[] = {
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef badFairy[] = {
+const AIStateDef badFairy[] = {
 	{ STATE_MOVEDOWN,  GROUP_ENT_BADFAIRY_WALKDOWN },
 	{ STATE_MOVEUP,    GROUP_ENT_BADFAIRY_WALKUP },
 	{ STATE_MOVELEFT,  GROUP_ENT_BADFAIRY_WALKLEFT },
@@ -274,12 +274,12 @@ AIStateDef badFairy[] = {
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef gatePuddle[] = {
+const AIStateDef gatePuddle[] = {
 	{ STATE_MOVEDOWN,  GROUP_ENT_GATEPUDDLE_STANDDOWN },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef icePuff[] = {
+const AIStateDef icePuff[] = {
 	{ STATE_ICEP_PEEK,       GROUP_ENT_ICEPUFF_PEEK },
 	{ STATE_ICEP_APPEAR,     GROUP_ENT_ICEPUFF_APPEAR },
 	{ STATE_ICEP_THROWDOWN,  GROUP_ENT_ICEPUFF_THROWDOWN },
@@ -289,7 +289,7 @@ AIStateDef icePuff[] = {
 	{ STATE_ENDSTATES,       "" }
 };
 
-AIStateDef buzzfly[] = {
+const AIStateDef buzzfly[] = {
 	{ STATE_MOVEDOWN,  GROUP_ENT_BUZZFLY_WALKDOWN },
 	{ STATE_MOVEUP,    GROUP_ENT_BUZZFLY_WALKUP },
 	{ STATE_MOVELEFT,  GROUP_ENT_BUZZFLY_WALKLEFT },
@@ -297,7 +297,7 @@ AIStateDef buzzfly[] = {
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef fatFrog[] = {
+const AIStateDef fatFrog[] = {
 	{ STATE_STANDDOWN,  GROUP_ENT_FATFROG_STANDDOWN },
 	{ STATE_STANDLEFT,  GROUP_ENT_FATFROG_STANDLEFT },
 	{ STATE_STANDRIGHT, GROUP_ENT_FATFROG_STANDRIGHT },
@@ -307,18 +307,18 @@ AIStateDef fatFrog[] = {
 	{ STATE_ENDSTATES,  "" }
 };
 
-AIStateDef dragon[] = {
+const AIStateDef dragon[] = {
 	{ STATE_ENDSTATES, "" }
 };
 
 // These are in the demo
 
-AIStateDef omniBotMissile[] = {
+const AIStateDef omniBotMissile[] = {
 	{ STATE_MOVEDOWN,  GROUP_ENT_OMNIBOT_MISSILE },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef fourFirer[] = {
+const AIStateDef fourFirer[] = {
 	{ STATE_STANDDOWN,  GROUP_ENT_FOUR_LASER_DOWN },
 	{ STATE_STANDUP,    GROUP_ENT_FOUR_LASER_UP },
 	{ STATE_STANDLEFT,  GROUP_ENT_FOUR_LASER_LEFT },
@@ -326,7 +326,7 @@ AIStateDef fourFirer[] = {
 	{ STATE_ENDSTATES,  "" }
 };
 
-AIStateDef railRider[] = {
+const AIStateDef railRider[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_RAILRIDER_STANDDOWN },
 	{ STATE_STANDUP,   GROUP_ENT_RAILRIDER_STANDUP },
 	{ STATE_MOVEDOWN,  GROUP_ENT_RAILRIDER_WALKDOWN },
@@ -336,7 +336,7 @@ AIStateDef railRider[] = {
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef shockBot[] = {
+const AIStateDef shockBot[] = {
 	{ STATE_MOVEDOWN,  GROUP_ENT_SHOCKBOT_WALK },
 	{ STATE_SHOCKING,  GROUP_SHOCK_SPARK_SIT },
 	{ STATE_ENDSTATES, "" }
@@ -344,247 +344,247 @@ AIStateDef shockBot[] = {
 
 // Pushables
 
-AIStateDef crate[] = {
+const AIStateDef crate[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_CRATE_SIT },
 	{ STATE_FLOATING,  GROUP_ENT_CRATE_FLOAT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef barrelLight[] = {
+const AIStateDef barrelLight[] = {
 	{ STATE_FLOATING,  GROUP_ENT_BARREL_LIGHT_FLOAT },
 	{ STATE_MELTED,    GROUP_ENT_BARREL_LIGHT_MELT },
 	{ STATE_STANDDOWN, GROUP_ENT_BARREL_LIGHT_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef barrelHeavy[] = {
+const AIStateDef barrelHeavy[] = {
 	{ STATE_FLOATING,  GROUP_ENT_BARREL_HEAVY_FLOAT },
 	{ STATE_MELTED,    GROUP_ENT_BARREL_HEAVY_MELT },
 	{ STATE_STANDDOWN, GROUP_ENT_BARREL_HEAVY_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef barrelExplode[] = {
+const AIStateDef barrelExplode[] = {
 	{ STATE_EXPLODING, GROUP_EXPLOSION_BOOM_SIT },
 	{ STATE_STANDDOWN, GROUP_ENT_BARREL_EXPLODE_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef frogStatue[] = {
+const AIStateDef frogStatue[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_FROGSTATUE_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
 // Weapons
 
-AIStateDef club[] = {
+const AIStateDef club[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_CLUB_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef roboStunner[] = {
+const AIStateDef roboStunner[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_ROBOSTUNNER_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef slugSlinger[] = {
+const AIStateDef slugSlinger[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_SLUGSLINGER_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
 // Items
 
-AIStateDef itemChicken[] = {
+const AIStateDef itemChicken[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_CHICKEN_STANDDOWN },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef envelopeWhite[] = {
+const AIStateDef envelopeWhite[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_ENVELOPE_WHITE_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef envelopeBlue[] = {
+const AIStateDef envelopeBlue[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_ENVELOPE_BLUE_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef envelopeRed[] = {
+const AIStateDef envelopeRed[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_ENVELOPE_RED_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef transceiver[] = {
+const AIStateDef transceiver[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_TRANSCEIVER_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef cell[] = {
+const AIStateDef cell[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_CELL_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef gooCup[] = {
+const AIStateDef gooCup[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_GOO_CUP_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef gemWhite[] = {
+const AIStateDef gemWhite[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_GEM_WHITE_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef cabKey[] = {
+const AIStateDef cabKey[] = {
 	{ STATE_STANDDOWN, "ent_cabkey_sit" },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef envelopeGreen[] = {
+const AIStateDef envelopeGreen[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_ENVELOPE_GREEN_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef teaCup[] = {
+const AIStateDef teaCup[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_TEACUP_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef cookie[] = {
+const AIStateDef cookie[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_COOKIE_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef burger[] = {
+const AIStateDef burger[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_BURGER_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef pda[] = {
+const AIStateDef pda[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_PDA_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef book[] = {
+const AIStateDef book[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_BOOK_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef clipboard[] = {
+const AIStateDef clipboard[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_CLIPBOARD_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef note[] = {
+const AIStateDef note[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_NOTE_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef keycardWhite[] = {
+const AIStateDef keycardWhite[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_KEYCARD_WHITE_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef keycardBlue[] = {
+const AIStateDef keycardBlue[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_KEYCARD_BLUE_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef keycardRed[] = {
+const AIStateDef keycardRed[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_KEYCARD_RED_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef keycardGreen[] = {
+const AIStateDef keycardGreen[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_KEYCARD_GREEN_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef keycardPurple[] = {
+const AIStateDef keycardPurple[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_KEYCARD_PURPLE_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef keycardBlack[] = {
+const AIStateDef keycardBlack[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_KEYCARD_BLACK_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef magicEgg[] = {
+const AIStateDef magicEgg[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_MAGIC_EGG_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef iceBlock[] = {
+const AIStateDef iceBlock[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_ICE_BLOCK_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef gemBlue[] = {
+const AIStateDef gemBlue[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_GEM_BLUE_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef gemRed[] = {
+const AIStateDef gemRed[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_GEM_RED_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef gemGreen[] = {
+const AIStateDef gemGreen[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_GEM_GREEN_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef dollyTool1[] = {
+const AIStateDef dollyTool1[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_DOLLY_TOOL1_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef dollyTool2[] = {
+const AIStateDef dollyTool2[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_DOLLY_TOOL2_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef dollyTool3[] = {
+const AIStateDef dollyTool3[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_DOLLY_TOOL3_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef dollyTool4[] = {
+const AIStateDef dollyTool4[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_DOLLY_TOOL4_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef seed[] = {
+const AIStateDef seed[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_SEED_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef soda[] = {
+const AIStateDef soda[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_SODA_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef router[] = {
+const AIStateDef router[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_ROUTER_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef slicer[] = {
+const AIStateDef slicer[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_SLICER_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef package[] = {
+const AIStateDef package[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_PACKAGE_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIStateDef monkeystone[] = {
+const AIStateDef monkeystone[] = {
 	{ STATE_STANDDOWN, GROUP_ENT_MONKEYSTONE_SIT },
 	{ STATE_ENDSTATES, "" }
 };
 
-AIEntTypeInfo aiEntList[] = {
+const AIEntTypeInfo aiEntList[] = {
 	// AI.H enum name		lua name				list of gfx for states	name of init function
 	//--------------------------------------------------------------------------------------------
 	{ AI_NONE,				"AI_NONE",				&none[0],				aiNoneInit,				nullptr  },
@@ -677,7 +677,7 @@ AIEntTypeInfo aiEntList[] = {
 	{ END_AI_TYPES,			nullptr,					nullptr,					nullptr,					nullptr }
 };
 
-static struct {
+static const struct {
 	FuncPtr function;
 	const char *funcName;
 } aiFuncList[] = {
@@ -2029,7 +2029,7 @@ void AI::initAnimInfo() {
 		g_hdb->_gfx->getTile(_kcHolderBlackOn);
 }
 
-const char *AITypeStr[] = {
+const char *const AITypeStr[] = {
 	"AI_NONE",
 	"AI_GUY",
 	"AI_DOLLY",
@@ -2188,7 +2188,7 @@ const char *AIType2Str(AIType v) {
 	return AITypeStr[v];
 }
 
-const char *AIStateStr[] = {
+const char *const AIStateStr[] = {
 	"STATE_NONE",
 	"STATE_STANDDOWN",
 	"STATE_STANDUP",

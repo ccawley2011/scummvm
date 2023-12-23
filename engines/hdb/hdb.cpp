@@ -866,7 +866,7 @@ void HDBGame::drawLoadingScreen() {
 
 struct MapName {
 	const char *fName, *printName;
-} static mapNames[] = {
+} static const mapNames[] = {
 	{	"MAP00",			"HDS Colby Jack" },
 	{	"MAP01",			"Servandrones, Inc." },
 	{	"MAP02",			"Pushbot Storage" },
