@@ -47,7 +47,7 @@ namespace Griffon {
 #define SY 25
 
 void GriffonEngine::title(int mode) {
-	const char *optionTitles[4] = {
+	static const char *const optionTitles[4] = {
 		"new game/save/load",
 		"options",
 		"quit game",
@@ -245,7 +245,7 @@ static Common::String formatPercent(int val) {
 	return Common::String::format("%d percent", val - val % 10);
 }
 
-static void speakMenuItem(int mapTitles, int mapValues, const char *mapTitleText[], const char *mapValueText[]) {
+static void speakMenuItem(int mapTitles, int mapValues, const char *const mapTitleText[], const char *const mapValueText[]) {
 	Common::TextToSpeechManager *ttsMan = g_system->getTextToSpeechManager();
 	if (ttsMan != nullptr && ConfMan.getBool("tts_enabled")) {
 		Common::TextToSpeechManager::Action valueAction = Common::TextToSpeechManager::INTERRUPT;
@@ -259,7 +259,7 @@ static void speakMenuItem(int mapTitles, int mapValues, const char *mapTitleText
 }
 
 void GriffonEngine::configMenu() {
-	static const char *optionTitles[25] = {
+	static const char *const optionTitles[25] = {
 		"", "",
 		"", "", "", "",
 		"", "", "",
@@ -622,7 +622,7 @@ void GriffonEngine::renderSaveStates() {
 }
 
 void GriffonEngine::saveLoadNew() {
-	const char *optionTitles[4] = {
+	static const char *const optionTitles[4] = {
 		"new game", "", "load", "return",
 	};
 

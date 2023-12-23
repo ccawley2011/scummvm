@@ -54,7 +54,7 @@ namespace Griffon {
 		return; \
 	}
 
-const char *story[48] = {
+static const char *const story[48] = {
 	"The Griffon Legend",
 	"http://syn9.thehideoutgames.com/",
 	"",
@@ -105,7 +105,7 @@ const char *story[48] = {
 	"with that honor as well."
 };
 
-const char *story2[27] = {
+static const char *const story2[27] = {
 	"After the fall of Margrave Gradius,",
 	"All the dragons, struck with panic,",
 	"evacuated the city immediately.",
@@ -135,7 +135,7 @@ const char *story2[27] = {
 	"and I am free to die as I please."
 };
 
-int textToSpeech(int nextparagraph, const char *storyVariable[], int arraysize) {
+int textToSpeech(int nextparagraph, const char *const storyVariable[], int arraysize) {
 	Common::TextToSpeechManager *ttsMan = g_system->getTextToSpeechManager();
 	if (ttsMan != nullptr && ConfMan.getBool("tts_enabled") && storyVariable[nextparagraph][0] != 0) {
 		Common::String paragraph;
