@@ -51,7 +51,7 @@ static const int kDisabledCursors[] = {
 	NOPLAT_CURSOR
 };
 
-static const char *kCursorNames[] = {
+static const char *const kCursorNames[] = {
 	"LOOK_CURSOR",
 	"GRAB_CURSOR",
 	"TALK_CURSOR",
@@ -80,7 +80,7 @@ static const int kCursorSpriteIds[30] = {
 	0x017, 0x01D, 0x01E, 0x01F, 0x76A, 0x76B
 };
 
-static const char *kSceneNames[] = {
+static const char *const kSceneNames[] = {
 	"open", "pigpn", "truck", "creek", "mafrm", "frbrn", "inbrn", "crash",
 	"porch", "barbk", "kitch", "bar", "juke", "wash", "john", "jkbox",
 	"brawl", "stret", "frtoy", "intoy", "frgro", "park", "cash", "ingro",
