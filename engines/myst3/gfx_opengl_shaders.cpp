@@ -125,7 +125,7 @@ void ShaderRenderer::init() {
 
 	glEnable(GL_DEPTH_TEST);
 
-	static const char* attributes[] = { "position", "texcoord", nullptr };
+	static const char *const attributes[] = { "position", "texcoord", nullptr };
 	_boxShader = OpenGL::Shader::fromFiles("myst3_box", attributes);
 	_boxVBO = OpenGL::Shader::createBuffer(GL_ARRAY_BUFFER, sizeof(boxVertices), boxVertices);
 	_boxShader->enableVertexAttribute("position", _boxVBO, 2, GL_FLOAT, GL_TRUE, 2 * sizeof(float), 0);
