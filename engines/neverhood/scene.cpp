@@ -552,8 +552,8 @@ void Scene::clearHitRects() {
 	_hitRects = nullptr;
 }
 
-HitRect *Scene::findHitRectAtPos(int16 x, int16 y) {
-	static HitRect kDefaultHitRect = {NRect(), 0x5000};
+const HitRect *Scene::findHitRectAtPos(int16 x, int16 y) {
+	static const HitRect kDefaultHitRect = {NRect(), 0x5000};
 	if (_hitRects)
 		for (HitRectList::iterator it = _hitRects->begin(); it != _hitRects->end(); it++)
 			if ((*it).rect.contains(x, y))

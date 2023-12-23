@@ -703,12 +703,12 @@ void Klaymen::suSneaking() {
 	_deltaX = 0;
 
 	if (_destX != _x) {
-		HitRect *hitRectPrev = _parentScene->findHitRectAtPos(_x, _y);
+		const HitRect *hitRectPrev = _parentScene->findHitRectAtPos(_x, _y);
 		_x += xdiff;
 		if (_pathPoints) {
 			walkAlongPathPoints();
 		} else {
-			HitRect *hitRectNext = _parentScene->findHitRectAtPos(_x, _y);
+			const HitRect *hitRectNext = _parentScene->findHitRectAtPos(_x, _y);
 			if (hitRectNext->type == 0x5002) {
 				_y = MAX<int16>(hitRectNext->rect.y1, hitRectNext->rect.y2 - (hitRectNext->rect.x2 - _x) / 2);
 			} else if (hitRectNext->type == 0x5003) {
@@ -890,12 +890,12 @@ void Klaymen::suWalkingTestExit() {
 		(_actionStatus == 3 && xdiff < 150 && _currFrameIndex >= 6)) {
 		sendMessage(this, NM_SCENE_LEAVE, 0);
 	} else {
-		HitRect *hitRectPrev = _parentScene->findHitRectAtPos(_x, _y);
+		const HitRect *hitRectPrev = _parentScene->findHitRectAtPos(_x, _y);
 		_x += xdelta;
 		if (_pathPoints) {
 			walkAlongPathPoints();
 		} else {
-			HitRect *hitRectNext = _parentScene->findHitRectAtPos(_x, _y);
+			const HitRect *hitRectNext = _parentScene->findHitRectAtPos(_x, _y);
 			if (hitRectNext->type == 0x5002) {
 				_y = MAX<int16>(hitRectNext->rect.y1, hitRectNext->rect.y2 - (hitRectNext->rect.x2 - _x) / 2);
 			} else if (hitRectNext->type == 0x5003) {
@@ -1388,12 +1388,12 @@ void Klaymen::suLargeStep() {
 	_deltaX = 0;
 
 	if (_x != _destX) {
-		HitRect *hitRectPrev = _parentScene->findHitRectAtPos(_x, _y);
+		const HitRect *hitRectPrev = _parentScene->findHitRectAtPos(_x, _y);
 		_x += xdiff;
 		if (_pathPoints) {
 			walkAlongPathPoints();
 		} else {
-			HitRect *hitRectNext = _parentScene->findHitRectAtPos(_x, _y);
+			const HitRect *hitRectNext = _parentScene->findHitRectAtPos(_x, _y);
 			if (hitRectNext->type == 0x5002) {
 				_y = MAX<int16>(hitRectNext->rect.y1, hitRectNext->rect.y2 - (hitRectNext->rect.x2 - _x) / 2);
 			} else if (hitRectNext->type == 0x5003) {
@@ -2523,7 +2523,7 @@ uint32 Klaymen::hmStandIdleSpecial(int messageNum, const MessageParam &param, En
 
 void Klaymen::suFallDown() {
 	AnimatedSprite::updateDeltaXY();
-	HitRect *hitRect = _parentScene->findHitRectAtPos(_x, _y + 10);
+	const HitRect *hitRect = _parentScene->findHitRectAtPos(_x, _y + 10);
 	if (hitRect->type == 0x5001) {
 		_y = hitRect->rect.y1;
 		updateBounds();
@@ -2590,7 +2590,7 @@ void Klaymen::stFallTouchdown() {
 
 void Klaymen::suFallSkipJump() {
 	updateDeltaXY();
-	HitRect *hitRect = _parentScene->findHitRectAtPos(_x, _y + 10);
+	const HitRect *hitRect = _parentScene->findHitRectAtPos(_x, _y + 10);
 	if (hitRect->type == 0x5001) {
 		_y = hitRect->rect.y1;
 		updateBounds();

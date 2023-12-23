@@ -310,7 +310,7 @@ static const uint32 kAsScene1307KeyResourceList3[] = {
 	0x11A80030, 0x178812B1, 0x1488121C
 };
 
-static const uint32 *kAsScene1307KeyResourceLists[] = {
+static const uint32 *const kAsScene1307KeyResourceLists[] = {
 	kAsScene1307KeyResourceList1,
 	kAsScene1307KeyResourceList2,
 	kAsScene1307KeyResourceList3

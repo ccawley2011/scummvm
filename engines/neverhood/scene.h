@@ -69,7 +69,7 @@ public:
 	SmackerPlayer *addSmackerPlayer(SmackerPlayer *smackerPlayer);
 	void update();
 	void leaveScene(uint32 result);
-	HitRect *findHitRectAtPos(int16 x, int16 y);
+	const HitRect *findHitRectAtPos(int16 x, int16 y);
 	void addCollisionSprite(Sprite *sprite);
 	void removeCollisionSprite(Sprite *sprite);
 	void checkCollision(Sprite *sprite, uint16 flags, int messageNum, uint32 messageParam);
