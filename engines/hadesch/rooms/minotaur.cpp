@@ -25,13 +25,13 @@
 #include "hadesch/ambient.h"
 
 namespace Hadesch {
-static const char *kHighlightImage = "r6010ol0";
-static const char *kMaterialsImage = "r6010ok0";
-static const char *kMaterialsMoveImage = "r6020ba0";
-static const char *kMinotaurImage = "r6040ba0";
-static const char *kDigits = "0123456789";
+static const char *const kHighlightImage = "r6010ol0";
+static const char *const kMaterialsImage = "r6010ok0";
+static const char *const kMaterialsMoveImage = "r6020ba0";
+static const char *const kMinotaurImage = "r6040ba0";
+static const char *const kDigits = "0123456789";
 static const int numSquares = 25;
-static const char *minotaurStates[] = {
+static const char *const minotaurStates[] = {
 	"",
 	"",
 	"",
@@ -71,7 +71,7 @@ enum Position {
 	kRight = 3
 };
 
-static const char *dirnames[] = {
+static const char *const dirnames[] = {
 	"down",
 	"left",
 	"up",
@@ -82,7 +82,7 @@ enum {
 	kRerenderLabyrinth = 1017001
 };
 
-static const char *daedalusSoundSMK[] = {
+static const char *const daedalusSoundSMK[] = {
 	"R6100nA0",
 	"R6100wA0",
 	"R6100nB0",

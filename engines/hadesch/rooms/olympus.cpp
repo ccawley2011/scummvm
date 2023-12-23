@@ -24,9 +24,9 @@
 #include "hadesch/video.h"
 
 namespace Hadesch {
-static const char *kNewButton = "newbutton";
-static const char *kRestoreButton = "restorebutton";
-static const char *kQuitButton = "quitbutton";
+static const char *const kNewButton = "newbutton";
+static const char *const kRestoreButton = "restorebutton";
+static const char *const kQuitButton = "quitbutton";
 
 enum {
 	kBackgroundZ = 10000,

@@ -32,7 +32,7 @@ enum {
 	kTyphoonZ = 500
 };
 
-static const char *kZeusLight = "V7100BJ0";
+static const char *const kZeusLight = "V7100BJ0";
 static const int kLightningCutoff = kVideoWidth / 2;
 
 TranscribedSound revitalisedSound() {

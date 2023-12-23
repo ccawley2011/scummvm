@@ -25,14 +25,14 @@
 #include "hadesch/ambient.h"
 
 namespace Hadesch {
-static const char *kApolloHighlight = "c7400ba0";
-static const char *kArtemisHighlight = "c7410ba0";
-static const char *kDemeterHighlight = "c7420ba0";
-static const char *kStrawCartFull = "c7100ba0";
-static const char *kStrawCartEmpty = "c7100bb0";
-static const char *kStrawCartHotzone = "Straw Cart";
+static const char *const kApolloHighlight = "c7400ba0";
+static const char *const kArtemisHighlight = "c7410ba0";
+static const char *const kDemeterHighlight = "c7420ba0";
+static const char *const kStrawCartFull = "c7100ba0";
+static const char *const kStrawCartEmpty = "c7100bb0";
+static const char *const kStrawCartHotzone = "Straw Cart";
 
-static const char *questHovelNames[] = {
+static const char *const questHovelNames[] = {
 	"",
 	"HovelsCrete",
 	"HovelsTroy",

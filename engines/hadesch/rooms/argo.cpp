@@ -25,8 +25,8 @@
 
 namespace Hadesch {
 
-static const char *kIslandNames = "islandnames";
-static const char *kMastHeadAnim = "mastheadanim";
+static const char *const kIslandNames = "islandnames";
+static const char *const kMastHeadAnim = "mastheadanim";
 
 enum {
 	kSkyZ = 10200,

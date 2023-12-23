@@ -55,7 +55,7 @@ static const struct {
 	{"ok", "ok"}
 };
 
-static const char *saveDescs[] = {
+static const char *const saveDescs[] = {
 	"",
 	"%s in intro scene",
 	"%s on mount olympus",

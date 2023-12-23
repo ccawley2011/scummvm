@@ -26,9 +26,9 @@
 
 namespace Hadesch {
 
-static const char *kQuestionBackground = "OverlayAnim";
-static const char *kHadesEyes = "HadesEyesAnim";
-static const char *kCounter = "CounterAnim";
+static const char *const kQuestionBackground = "OverlayAnim";
+static const char *const kHadesEyes = "HadesEyesAnim";
+static const char *const kCounter = "CounterAnim";
 
 enum {
 	kBackgroundZ = 10000,
@@ -44,7 +44,7 @@ enum {
 	kCounterAnimZ = 549
 };
 
-static const char *questNames[] = {
+static const char *const questNames[] = {
 	"None",
 	"Crete",
 	"Troy",
@@ -53,7 +53,7 @@ static const char *questNames[] = {
 	"EndGame"
 };
 
-static const char *statueNames[] = {
+static const char *const statueNames[] = {
 	"Bacchus",
 	"Hermes",
 	"Zeus",
@@ -68,7 +68,7 @@ static const char *statueNames[] = {
 	"Hephaestus",
 };
 
-static const char *hadesIntroVideos[] = {
+static const char *const hadesIntroVideos[] = {
 	"H0020bA0",
 	"H0020bG0",
 	"H0020bH0",

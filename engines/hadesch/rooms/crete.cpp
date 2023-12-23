@@ -26,43 +26,43 @@
 
 namespace Hadesch {
 
-static const char *kTalusImage = "r1100bb0";
-static const char *kTalusImageWithShip = "r1100bc0";
-static const char *kTalusMovie = "r1100ba0";
-static const char *kTalusHotzone = "Talus";
-static const char *kTavernImage = "r2190ba0";
-static const char *kTavernHotzone = "Tavern";
-static const char *kPoseidonHighlight = "r1230ba0";
-static const char *kZeusHighlight = "r1240ba0";
-static const char *kHermesHighlight = "r2320ba0";
-static const char *kHornless1 = "g0170ob0";
-static const char *kHornless2 = "g0170oe0";
-static const char *kHornless3 = "g0170oh0";
-static const char *kHornless4 = "g0170ok0";
-static const char *kHorned = "g1800ob0";
-static const char *kHornedHotzone = "HornedStatue";
-static const char *kHornless1Hotzone = "HornlessStatue1";
-static const char *kHornless2Hotzone = "HornlessStatue2";
-static const char *kHornless3Hotzone = "HornlessStatue3";
-static const char *kHornless4Hotzone = "HornlessStatue4";
-static const char *kMerchantAnim = "r2130ba0";
-static const char *kOneManBandAnim = "r2040ba1";
-static const char *kOneManBandHotZone = "OneManBand";
-static const char *kAtlantisOpening = "r1210bb0";
-static const char *kAtlantisLargeDisk = "r1210be0";
-static const char *kAtlantisMediumDisk = "r1210bf0";
-static const char *kAtlantisSmallDisk = "r1210bg0";
-static const char *kAtlantisDiskBackground = "r1210os0";
+static const char *const kTalusImage = "r1100bb0";
+static const char *const kTalusImageWithShip = "r1100bc0";
+static const char *const kTalusMovie = "r1100ba0";
+static const char *const kTalusHotzone = "Talus";
+static const char *const kTavernImage = "r2190ba0";
+static const char *const kTavernHotzone = "Tavern";
+static const char *const kPoseidonHighlight = "r1230ba0";
+static const char *const kZeusHighlight = "r1240ba0";
+static const char *const kHermesHighlight = "r2320ba0";
+static const char *const kHornless1 = "g0170ob0";
+static const char *const kHornless2 = "g0170oe0";
+static const char *const kHornless3 = "g0170oh0";
+static const char *const kHornless4 = "g0170ok0";
+static const char *const kHorned = "g1800ob0";
+static const char *const kHornedHotzone = "HornedStatue";
+static const char *const kHornless1Hotzone = "HornlessStatue1";
+static const char *const kHornless2Hotzone = "HornlessStatue2";
+static const char *const kHornless3Hotzone = "HornlessStatue3";
+static const char *const kHornless4Hotzone = "HornlessStatue4";
+static const char *const kMerchantAnim = "r2130ba0";
+static const char *const kOneManBandAnim = "r2040ba1";
+static const char *const kOneManBandHotZone = "OneManBand";
+static const char *const kAtlantisOpening = "r1210bb0";
+static const char *const kAtlantisLargeDisk = "r1210be0";
+static const char *const kAtlantisMediumDisk = "r1210bf0";
+static const char *const kAtlantisSmallDisk = "r1210bg0";
+static const char *const kAtlantisDiskBackground = "r1210os0";
 
 static const int vaseSol[] = {2, 3, 2, 3};
-static const char *vaseSound[] = {
+static const char *const vaseSound[] = {
 	"r1220ec0",
 	"r1220ed0",
 	"r1220ee0",
 	"r1220ef0"
 };
 
-static const char *vaseSegment[] = {
+static const char *const vaseSegment[] = {
 	"r1220bc0",
 	"r1220bd0",
 	"r1220be0",

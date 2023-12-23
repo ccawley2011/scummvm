@@ -26,8 +26,8 @@
 #include "hadesch/rooms/monster.h"
 
 namespace Hadesch {
-static const char *kCyclopsShootingEyeOpen = "v7180bh0";
-static const char *kCyclopsShootingEyeClosed = "v7180bh1";
+static const char *const kCyclopsShootingEyeOpen = "v7180bh0";
+static const char *const kCyclopsShootingEyeClosed = "v7180bh1";
 
 enum {
 	kCyclopsZ = 500

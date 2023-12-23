@@ -26,31 +26,31 @@
 
 namespace Hadesch {
 
-static const char *caTxtNames[] = {
+static const char *const caTxtNames[] = {
 	"CaLeft.txt",
 	"CaCenter.txt",
 	"CaRight.txt"
 };
 
-static const char *skullHotzones[] = {
+static const char *const skullHotzones[] = {
 	"LSkull",
 	"CSkull",
 	"RSkull"
 };
 
-static const char *torchHotzones[] = {
+static const char *const torchHotzones[] = {
 	"LTorch",
 	"CTorch",
 	"RTorch"
 };
 
-static const char *signNames[] = {
+static const char *const signNames[] = {
 	"SignToHelen",
 	"SignToGuards",
 	"SignToPainPanic"
 };
 
-static const char *musicNames[] = {
+static const char *const musicNames[] = {
 	"MusicHelen",
 	"MusicGuard",
 	"MusicPainPanic"

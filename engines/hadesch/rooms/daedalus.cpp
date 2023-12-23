@@ -29,10 +29,10 @@
 
 namespace Hadesch {
 
-static const char *kDaedalusStillFrame = "daedalus still frame";
-static const char *kDaedalusAmbient = "daedalus ambient";
-static const char *kModelPiece = "model piece";
-static const char *kLabyrinthWorkers = "labyrinth workers";
+static const char *const kDaedalusStillFrame = "daedalus still frame";
+static const char *const kDaedalusAmbient = "daedalus ambient";
+static const char *const kModelPiece = "model piece";
+static const char *const kLabyrinthWorkers = "labyrinth workers";
 
 enum {
 	kDaedalusTick = 13901,
