@@ -926,7 +926,7 @@ void MusicChannelFM::parse() {
 	SoundChannelNonSSG::parse();
 }
 void MusicChannelFM::noteOn(uint8 note) {
-	static uint16 freqTableFM[12] = {
+	static const uint16 freqTableFM[12] = {
 		0x026a, 0x028f, 0x02b6, 0x02df, 0x030b, 0x0339, 0x036a, 0x039e, 0x03d5, 0x0410, 0x044e, 0x048f
 	};
 
@@ -1040,7 +1040,7 @@ void MusicChannelFM::sendVolume(uint8 volume) {
 }
 
 void MusicChannelFM::sendTrmVolume(uint8 volume) {
-	static uint8 cflg[4] = { 1, 4, 2, 8 };
+	static const uint8 cflg[4] = { 1, 4, 2, 8 };
 	uint8 reg = 0x40 + _regOffset;
 	for (int i = 0; i < 4; ++i) {
 		if (_trmCarrier & cflg[i]) {
@@ -1225,7 +1225,7 @@ void MusicChannelSSG::noteOff() {
 }
 
 void MusicChannelSSG::noteOn(uint8 note) {
-	static uint16 freqTableSSG[12] = {
+	static const uint16 freqTableSSG[12] = {
 		0x0EE8, 0x0E12, 0x0D48, 0x0C89, 0x0BD5, 0x0B2B, 0x0A8A, 0x09F3, 0x0964, 0x08DD, 0x085E, 0x07E6
 	};
 
@@ -1453,7 +1453,7 @@ void MusicChannelEXT::keyOff() {
 }
 
 void MusicChannelEXT::noteOn(uint8 note) {
-	static uint16 freqTableEXT[12] = {
+	static const uint16 freqTableEXT[12] = {
 		0x4A82, 0x4EE4, 0x5389, 0x5875, 0x5DAC, 0x6332, 0x690C, 0x6F3F, 0x75D1, 0x7C76, 0x8426, 0x8BF5
 	};
 
