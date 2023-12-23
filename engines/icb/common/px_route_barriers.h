@@ -88,7 +88,7 @@ enum eBarrierLogicValue { NO_IMPACT = 0, BLOCKS, ALLOWS, MAYBE, SPECIAL };
 
 // This is the truth table that states what kind of ray passes through what
 // type of barrier.
-static enum eBarrierLogicValue barrierLogicTable[BARRIER_TYPE_CARDINALITY][RAY_TYPE_CARDINALITY] = {
+static const enum eBarrierLogicValue barrierLogicTable[BARRIER_TYPE_CARDINALITY][RAY_TYPE_CARDINALITY] = {
 	{BLOCKS, BLOCKS, BLOCKS}, {BLOCKS, ALLOWS, SPECIAL}, {BLOCKS, ALLOWS, BLOCKS}, {BLOCKS, BLOCKS, ALLOWS}, {BLOCKS, ALLOWS, MAYBE},
 	{BLOCKS, ALLOWS, ALLOWS}, {BLOCKS, ALLOWS, ALLOWS},  {BLOCKS, ALLOWS, ALLOWS}, {BLOCKS, ALLOWS, ALLOWS}};
 

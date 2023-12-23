@@ -56,7 +56,7 @@ extern char *pZ;
 LRECT full_rect; // used for blting from safe to working buffer, etc
 
 //-----------  Bookyakasha Rydem and Sparkles !!!!!
-uint32 sparkle_bmp[6 * 32 * 32] = {
+const uint32 sparkle_bmp[6 * 32 * 32] = {
 	0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
 	0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
 	0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
@@ -1357,7 +1357,7 @@ void _set::InitWeather(int32 type, int32 particleQty, int32 lightning, int32 win
 
 void _set::DrawSparkles() {
 	static uint8 step = 0;
-	static uint32 animation[] = {1024 * 0, 1024 * 1, 1024 * 2, 1024 * 3, 1024 * 4, 1024 * 5, 1024 * 2, 1024 * 3, 1024 * 4, 1024 * 5, 1024 * 1, 1024 * 0};
+	static const uint32 animation[] = {1024 * 0, 1024 * 1, 1024 * 2, 1024 * 3, 1024 * 4, 1024 * 5, 1024 * 2, 1024 * 3, 1024 * 4, 1024 * 5, 1024 * 1, 1024 * 0};
 
 	step++;
 	if (step > 32)
@@ -1395,7 +1395,7 @@ void _set::DrawSparkles() {
 
 				uint32 offset = ((pitch >> 2) * (225 - (int32)screen.y)) + (int32)screen.x + 305;
 
-				uint32 *colours = &sparkle_bmp[animation[step]];
+				const uint32 *colours = &sparkle_bmp[animation[step]];
 
 				uint32 *sPtr = pPixels + offset;
 

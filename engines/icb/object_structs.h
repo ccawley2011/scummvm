@@ -65,7 +65,7 @@ enum __object_type { __NO_TYPE_SET = 0, __BUTTON_OPERATED_DOOR, __RECHARGE_POINT
 
 #define MAX_WEAPON_NAME_LENGTH 16
 
-extern char weapon_text[__TOTAL_WEAPONS][MAX_WEAPON_NAME_LENGTH];
+extern const char weapon_text[__TOTAL_WEAPONS][MAX_WEAPON_NAME_LENGTH];
 extern bool8 armed_state_table[__TOTAL_WEAPONS];
 extern bool8 crouch_state_table[__TOTAL_WEAPONS];
 

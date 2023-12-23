@@ -116,7 +116,7 @@ const char *g_m09 = "m09_escape_island_base";
 const char *g_m10 = "m10_submarine";
 
 // The collection of possible missions including the session to start for each mission
-const char *g_mission_startup_names[MAX_MISSIONS] = {
+const char *const g_mission_startup_names[MAX_MISSIONS] = {
 	"m01_investigate_mine", "office_building",
 	"m02_security_hq", "basement",
 	"m03_land_train", "car_5",
@@ -130,7 +130,7 @@ const char *g_mission_startup_names[MAX_MISSIONS] = {
 	"test_mission", "test_session"
 };
 
-const char *g_mission_names[NUMBER_OF_MISSIONS] = {
+const char *const g_mission_names[NUMBER_OF_MISSIONS] = {
 	"m01_investigate_mine",
 	"m02_security_hq",
 	"m03_land_train",
@@ -144,7 +144,7 @@ const char *g_mission_names[NUMBER_OF_MISSIONS] = {
 	"test_mission"
 };
 
-const char *g_sessions[MAX_SESSIONS] = {"m01_investigate_mine",     "mine",
+const char *const g_sessions[MAX_SESSIONS] = {"m01_investigate_mine",     "mine",
 										"m01_investigate_mine",     "mineworkings",
 										"m01_investigate_mine",     "office_building",
 										"m02_security_hq",          "basement",

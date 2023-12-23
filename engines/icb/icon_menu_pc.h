@@ -48,8 +48,8 @@ namespace ICB {
 #define ICON_ADDING_Y 420
 
 // These define the sizes of some commonly used rectangles.
-extern LRECT ICON_BITMAP_RECT;
-extern LRECT ICON_ADDING_RECT;
+extern const LRECT ICON_BITMAP_RECT;
+extern const LRECT ICON_ADDING_RECT;
 
 } // End of namespace ICB
 

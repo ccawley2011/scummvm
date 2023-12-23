@@ -42,7 +42,7 @@ void Terminate_ap(); // call this to end the game and return to windows
 
 // variables
 extern int32 gameCycle; // for head-up display
-extern char gamelanguage[];
+extern const char gamelanguage[];
 extern bool8 camera_hack;
 extern uint32 font_cluster_hash; // Res_open will compute the hash value and store it
 extern uint32 sys_font_hash;     // Res_open will compute the hash value and store it
@@ -56,7 +56,7 @@ extern bool gRegainedFocus; // Set when we regain the focus.  Cleared by the gra
 #include "engines/icb/common/px_string.h"
 
 namespace ICB {
-extern char g_characters[];
+extern const char g_characters[];
 
 #define REMORA_GRAPHICS_PATH "remora\\pc\\"
 #define FONT_PATH "fonts\\pc\\%s"

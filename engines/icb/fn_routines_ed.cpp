@@ -405,7 +405,7 @@ STUB_MCODE_FUNCTION(fn_close_map)
 STUB_MCODE_FUNCTION(fn_preload_remote_custom_anim)
 
 
-mcodeFunctionReturnCodes (*McodeTableED[NO_API_ROUTINES_ELDORADO])(int32 &,int32 *) =
+mcodeFunctionReturnCodes (*const McodeTableED[NO_API_ROUTINES_ELDORADO])(int32 &,int32 *) =
 {	fn_set_weapon,
 	fn_set_custom_button_operated_door,
 	fn_set_cad_lock_status,

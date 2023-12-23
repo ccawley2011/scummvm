@@ -474,7 +474,7 @@ void _game_session::Awaken_doors() {
 		}
 }
 
-__mega_set_names player_startup_anims[] = {__STAND, __STAND_TO_WALK, __WALK, __WALK_TO_STAND, __TURN_ON_THE_SPOT_CLOCKWISE};
+const __mega_set_names player_startup_anims[] = {__STAND, __STAND_TO_WALK, __WALK, __WALK_TO_STAND, __TURN_ON_THE_SPOT_CLOCKWISE};
 #define NUMBER_player_startup_anims 5
 
 void _game_session::Init_objects() {

@@ -56,7 +56,7 @@ void MakeDirectoryTree(MISSION_ID mission);
 MovieManager *g_while_u_wait_SequenceManager;
 
 // Colours used by progress display
-uint32 g_progressColourMap[7] = {
+const uint32 g_progressColourMap[7] = {
 	0x3C3C3C, // OFF  60  60  60
 	0xFEFEFE, //  |   254 254 254
 	0xCAD5E4, //  |   202 213 228

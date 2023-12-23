@@ -161,7 +161,7 @@ void Fill_rect(int32 x, int32 y, int32 x2, int32 y2, uint32 pen, int32 /*z*/) {
 	surface_manager->Blit_fillfx(working_buffer_id, &blank, pen);
 }
 
-void General_draw_line_24_32(int16 x0, int16 y0, int16 x1, int16 y1, _rgb *colour, uint8 *myScreenBuffer, uint32 pitch, int32 surface_width, int32 surface_height) {
+void General_draw_line_24_32(int16 x0, int16 y0, int16 x1, int16 y1, const _rgb *colour, uint8 *myScreenBuffer, uint32 pitch, int32 surface_width, int32 surface_height) {
 	// Uses Bressnham's incremental algorithm!
 	// we pass a colour
 	// we pass the surface base
