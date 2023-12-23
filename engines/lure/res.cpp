@@ -542,7 +542,7 @@ void Resources::setTalkingCharacter(uint16 id) {
 		addHotspot(hotspot);
 	}
 }
-uint16 englishLoadOffsets[] = {0x3afe, 0x41BD, 0x7167, 0x7172, 0x8617, 0x88ac, 0};
+const uint16 englishLoadOffsets[] = {0x3afe, 0x41BD, 0x7167, 0x7172, 0x8617, 0x88ac, 0};
 
 Hotspot *Resources::activateHotspot(uint16 hotspotId) {
 	Resources &resources = Resources::getReference();

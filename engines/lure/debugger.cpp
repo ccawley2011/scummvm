@@ -379,7 +379,7 @@ bool Debugger::cmd_hotspot(int argc, const char **argv) {
 	return true;
 }
 
-const char *directionList[5] = {"UP", "DOWN", "LEFT", "RIGHT", "NONE"};
+const char *const directionList[5] = {"UP", "DOWN", "LEFT", "RIGHT", "NONE"};
 
 bool Debugger::cmd_room(int argc, const char **argv) {
 	Resources &res = Resources::getReference();

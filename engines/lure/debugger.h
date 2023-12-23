@@ -46,7 +46,7 @@ private:
 	bool cmd_script(int argc, const char **argv);
 };
 
-extern const char *directionList[5];
+extern const char *const directionList[5];
 
 } // End of namespace Lure
 
