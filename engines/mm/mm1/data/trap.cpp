@@ -25,7 +25,7 @@
 namespace MM {
 namespace MM1 {
 
-int8 TrapData::RESISTANCE_INDEXES[11] = {
+const int8 TrapData::RESISTANCE_INDEXES[11] = {
 	-1, -1, -1, -1, -1, -1,
 	1,		// Fire
 	3,		// Electricity
@@ -33,16 +33,16 @@ int8 TrapData::RESISTANCE_INDEXES[11] = {
 	2,		// Cold
 	0		// Magic
 };
-byte TrapData::CONDITIONS1[11] = {
+const byte TrapData::CONDITIONS1[11] = {
 	16, 32, 16, 16, 2, 1, 2, 32, 2, 2, 2
 };
-byte TrapData::CONDITIONS2[11] = {
+const byte TrapData::CONDITIONS2[11] = {
 	16, 16, 16, 32, 2, 16, 64, 64, 2, 32, 32
 };
-byte TrapData::CONDITIONS3[11] = {
+const byte TrapData::CONDITIONS3[11] = {
 	64, 64, 64, 64, 64, 192, 192, 192, 255, 64, 224
 };
-byte TrapData::DAMAGE_TYPE[7] = {
+const byte TrapData::DAMAGE_TYPE[7] = {
 	3, 0, 2, 5, 4, 1, 6
 };
 

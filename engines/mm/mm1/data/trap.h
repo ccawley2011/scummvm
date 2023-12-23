@@ -36,11 +36,11 @@ private:
 	void damageChar(uint partyIndex);
 
 protected:
-	static int8 RESISTANCE_INDEXES[11];
-	static byte CONDITIONS1[11];
-	static byte CONDITIONS2[11];
-	static byte CONDITIONS3[11];
-	static byte DAMAGE_TYPE[7];
+	static const int8 RESISTANCE_INDEXES[11];
+	static const byte CONDITIONS1[11];
+	static const byte CONDITIONS2[11];
+	static const byte CONDITIONS3[11];
+	static const byte DAMAGE_TYPE[7];
 
 	int _trapType = 0;
 	int _hpInitial = 0;
