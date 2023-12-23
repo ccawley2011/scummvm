@@ -223,8 +223,8 @@ public:
 	 * @param first The number of the first color register to write.
 	 * @param numReg The number of registers to write.
 	 */
-	void writeColorRegs(byte *buf, uint16 first, uint16 numReg);
-	void setPalette(void *newPal, uint16 numColors);
+	void writeColorRegs(const byte *buf, uint16 first, uint16 numReg);
+	void setPalette(const void *newPal, uint16 numColors);
 
 	/**
 	 * Overlays a region on the screen using the desired pen color.
@@ -265,7 +265,7 @@ public:
 	int _screenWidth;
 	int _screenHeight;
 	byte *_displayBuffer;
-	uint16 *_fadePalette;
+	const uint16 *_fadePalette;
 };
 
 } // End of namespace Lab

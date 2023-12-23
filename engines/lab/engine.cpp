@@ -94,7 +94,7 @@ enum AltButtons {
 	kButtonFollowCrumbs
 };
 
-static char initColors[] = { '\x00', '\x00', '\x00', '\x30',
+static const char initColors[] = { '\x00', '\x00', '\x00', '\x30',
 							 '\x30', '\x30', '\x10', '\x10',
 							 '\x10', '\x14', '\x14', '\x14',
 							 '\x20', '\x20', '\x20', '\x24',

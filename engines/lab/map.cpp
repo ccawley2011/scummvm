@@ -526,7 +526,7 @@ void LabEngine::processMap(uint16 curRoom) {
 }
 
 void LabEngine::doMap() {
-	static uint16 amigaMapPalette[] = {
+	static const uint16 amigaMapPalette[] = {
 		0x0BA8, 0x0C11, 0x0A74, 0x0076,
 		0x0A96, 0x0DCB, 0x0CCA, 0x0222,
 		0x0444, 0x0555, 0x0777, 0x0999,

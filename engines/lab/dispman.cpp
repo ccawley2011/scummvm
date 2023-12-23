@@ -444,7 +444,7 @@ void DisplayMan::setAmigaPal(uint16 *pal) {
 	writeColorRegs(vgaPal, 0, 16);
 }
 
-void DisplayMan::writeColorRegs(byte *buf, uint16 first, uint16 numReg) {
+void DisplayMan::writeColorRegs(const byte *buf, uint16 first, uint16 numReg) {
 	assert(first + numReg <= 256);
 	byte tmp[256 * 3];
 
@@ -455,9 +455,9 @@ void DisplayMan::writeColorRegs(byte *buf, uint16 first, uint16 numReg) {
 	memcpy(&(_curVgaPal[first * 3]), buf, numReg * 3);
 }
 
-void DisplayMan::setPalette(void *newPal, uint16 numColors) {
+void DisplayMan::setPalette(const void *newPal, uint16 numColors) {
 	if (memcmp(newPal, _curVgaPal, numColors * 3) != 0)
-		writeColorRegs((byte *)newPal, 0, numColors);
+		writeColorRegs((const byte *)newPal, 0, numColors);
 }
 
 byte *DisplayMan::getCurrentDrawingBuffer() {
