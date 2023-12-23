@@ -560,12 +560,12 @@ struct AIEntity {
 struct AIEntTypeInfo {
 	AIType type;
 	const char *luaName;
-	AIStateDef *stateDef;
+	const AIStateDef *stateDef;
 	FuncPtr initFunc;
 	FuncPtr initFunc2;
 };
 
-extern AIEntTypeInfo aiEntList[];
+extern const AIEntTypeInfo aiEntList[];
 
 struct AIEntLevel2 {
 	uint16 x;

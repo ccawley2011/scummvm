@@ -36,7 +36,7 @@
 
 namespace HDB {
 
-struct ScriptPatch {
+static const struct ScriptPatch {
 	const char *scriptName;
 	const char *search;
 	const char *replace;
@@ -1439,7 +1439,7 @@ static int dofile(lua_State *L) {
 	Lua Initialization Code
 */
 
-struct VarInit {
+static const struct VarInit {
 	const char *realName;
 	const char *luaName;
 } luaGlobalStrings[] = {
@@ -1568,7 +1568,7 @@ struct VarInit {
 };
 
 // For AI States, to be implemented
-struct NumberInit {
+static const struct NumberInit {
 	int value;
 	const char *luaName;
 } luaGlobalValues[] = {
@@ -1650,7 +1650,7 @@ struct NumberInit {
 	{ STATE_NONE, nullptr }
 };
 
-struct FuncInit {
+static const struct FuncInit {
 	const char *luaName;
 	int (*function) (lua_State *L);
 } luaFuncs[] = {
@@ -2067,7 +2067,7 @@ void LuaScript::stripComments(char *chunk) {
 }
 
 void LuaScript::addPatches(Common::String &chunk, const char *scriptName) {
-	ScriptPatch *patch = scriptPatches;
+	const ScriptPatch *patch = scriptPatches;
 	int applied = 0;
 
 	while (patch->scriptName) {

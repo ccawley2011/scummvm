@@ -29,7 +29,7 @@
 
 namespace HDB {
 
-static const char *cineTypeStr[] = {
+static const char *const cineTypeStr[] = {
 	"C_NO_COMMAND",
 	"C_STOPCINE",
 	"C_LOCKPLAYER",
