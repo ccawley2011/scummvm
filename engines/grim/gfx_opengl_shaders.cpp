@@ -73,7 +73,7 @@ static T nextHigher2(T k) {
 	return k + 1;
 }
 
-static float textured_quad[] = {
+static const float textured_quad[] = {
 //	X   , Y   , S   , T
 	0.0f, 0.0f, 0.0f, 0.0f,
 	1.0f, 0.0f, 1.0f, 0.0f,
@@ -81,7 +81,7 @@ static float textured_quad[] = {
 	0.0f, 1.0f, 0.0f, 1.0f,
 };
 
-static float textured_quad_centered[] = {
+static const float textured_quad_centered[] = {
 //	 X   ,  Y   , Z   , S   , T
 	-0.5f, -0.5f, 0.0f, 0.0f, 1.0f,
 	-0.5f, +0.5f, 0.0f, 0.0f, 0.0f,
@@ -89,7 +89,7 @@ static float textured_quad_centered[] = {
 	+0.5f, -0.5f, 0.0f, 1.0f, 1.0f,
 };
 
-static float zero_texVerts[] = { 0.0, 0.0 };
+static const float zero_texVerts[] = { 0.0, 0.0 };
 
 struct GrimVertex {
 	GrimVertex(const float *verts, const float *texVerts, const float *normals) {
@@ -371,18 +371,18 @@ GLuint GfxOpenGLS::nextPrimitive() {
 void GfxOpenGLS::setupShaders() {
 	bool isEMI = g_grim->getGameType() == GType_MONKEY4;
 
-	static const char* commonAttributes[] = {"position", "texcoord", nullptr};
+	static const char *const commonAttributes[] = {"position", "texcoord", nullptr};
 	_backgroundProgram = OpenGL::Shader::fromFiles(isEMI ? "emi_background" : "grim_background", commonAttributes);
 	_smushProgram = OpenGL::Shader::fromFiles("grim_smush", commonAttributes);
 	_textProgram = OpenGL::Shader::fromFiles("grim_text", commonAttributes);
 	_emergProgram = OpenGL::Shader::fromFiles("grim_emerg", commonAttributes);
 
-	static const char* actorAttributes[] = {"position", "texcoord", "color", "normal", nullptr};
+	static const char *const actorAttributes[] = {"position", "texcoord", "color", "normal", nullptr};
 	_actorProgram = OpenGL::Shader::fromFiles(isEMI ? "emi_actor" : "grim_actor", actorAttributes);
 	_actorLightsProgram = OpenGL::Shader::fromFiles(isEMI ? "emi_actorlights" : "grim_actorlights", actorAttributes);
 	_spriteProgram = OpenGL::Shader::fromFiles(isEMI ? "emi_sprite" : "grim_actor", actorAttributes);
 
-	static const char* primAttributes[] = { "position", nullptr };
+	static const char *const primAttributes[] = { "position", nullptr };
 	_shadowPlaneProgram = OpenGL::Shader::fromFiles("grim_shadowplane", primAttributes);
 	_primitiveProgram = OpenGL::Shader::fromFiles("grim_primitive", primAttributes);
 

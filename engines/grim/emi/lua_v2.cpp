@@ -799,7 +799,7 @@ void Lua_V2::SetResidualVMPreference()  {
 	}
 }
 
-struct luaL_reg monkeyMainOpcodes[] = {
+const struct luaL_reg monkeyMainOpcodes[] = {
 	// Monkey specific LUA_OPCODEs:
 	{ "ScreenshotForSavegame", LUA_OPCODE(Lua_V2, ScreenshotForSavegame) },
 	{ "GetActorWorldPos", LUA_OPCODE(Lua_V2, GetActorWorldPos) },

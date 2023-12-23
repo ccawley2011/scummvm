@@ -100,7 +100,7 @@ static void saveObjectValue(TObject *object, SaveGame *savedState) {
 	}
 }
 
-static int32 opcodeSizeTable[] = {
+static const int32 opcodeSizeTable[] = {
 	1, 2, 1, 2, 1, 1, 1, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 3, 2, 1,
 	1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 3,
 	1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1,

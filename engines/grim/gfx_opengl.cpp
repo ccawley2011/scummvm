@@ -52,14 +52,14 @@ GfxBase *CreateGfxOpenGL() {
 
 #ifdef GL_ARB_fragment_program
 // Simple ARB fragment program that writes the value from a texture to the Z-buffer.
-static char fragSrc[] =
+static const char fragSrc[] =
 	"!!ARBfp1.0\n\
 	TEMP d;\n\
 	TEX d, fragment.texcoord[0], texture[0], 2D;\n\
 	MOV result.depth, d.r;\n\
 	END\n";
 
-static char dimFragSrc[] =
+static const char dimFragSrc[] =
 	"!!ARBfp1.0\n\
 	PARAM level = program.local[0];\n\
 	TEMP color;\n\

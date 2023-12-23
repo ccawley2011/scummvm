@@ -25,7 +25,7 @@ int32 lua_debug = 0;
 
 #define next(LS)         (LS->current = zgetc(LS->lex_z))
 
-static struct {
+static const struct {
 	const char *name;
 	int token;
 } reserved [] = {
@@ -79,7 +79,7 @@ static void skipspace(LexState *LS) {
 }
 
 static int32 checkcond(char *buff) {
-	static const char *opts[] = { "nil", "1", nullptr };
+	static const char *const opts[] = { "nil", "1", nullptr };
 	int32 i = luaO_findstring(buff, opts);
 	if (i >= 0)
 		return i;
@@ -119,7 +119,7 @@ static void ifskip (LexState *LS) {
 }
 
 static void inclinenumber (LexState *LS) {
-	static const char *pragmas [] =
+	static const char *const pragmas [] =
 	{ "debug", "nodebug", "endinput", "end", "ifnot", "if", "else", nullptr };
 	next(LS);  // skip '\n'
 	++LS->linenumber;

@@ -24,7 +24,7 @@
 
 namespace Grim {
 
-char lua_ident[] = "$Lua: " LUA_VERSION " " LUA_COPYRIGHT " $\n"
+const char lua_ident[] = "$Lua: " LUA_VERSION " " LUA_COPYRIGHT " $\n"
 "$Autores:  " LUA_AUTHORS " $";
 
 TObject *luaA_Address(lua_Object o) {

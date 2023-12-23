@@ -111,7 +111,7 @@ static void math_randomseed() {
 	srand((unsigned int)luaL_check_number(1));
 }
 
-static struct luaL_reg mathlib[] = {
+static const struct luaL_reg mathlib[] = {
 	{ "abs",        math_abs},
 	{ "sin",        math_sin},
 	{ "cos",        math_cos},
@@ -131,7 +131,7 @@ static struct luaL_reg mathlib[] = {
 	{ "randomseed", math_randomseed}
 };
 
-static luaL_reg powFunc[] = {
+static const  luaL_reg powFunc[] = {
 	{ "math_pow",   math_pow }
 };
 

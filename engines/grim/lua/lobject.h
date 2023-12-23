@@ -138,12 +138,12 @@ typedef struct Hash {
 	int32 htag;
 } Hash;
 
-extern const char *luaO_typenames[];
+extern const char *const luaO_typenames[];
 extern TObject luaO_nilobject;
 
 int32 luaO_equalObj(TObject *t1, TObject *t2);
 int32 luaO_redimension(int32 oldsize);
-int luaO_findstring(const char *name, const char *list[]);
+int luaO_findstring(const char *name, const char *const list[]);
 void luaO_insertlist(GCnode *root, GCnode *node);
 
 #define luaO_memup(d, s, n)     memmove(d, s, n)

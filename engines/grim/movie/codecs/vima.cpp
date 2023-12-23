@@ -24,7 +24,7 @@
 
 namespace Grim {
 
-static int16 imcTable1[] = {
+static const int16 imcTable1[] = {
 	  7,     8,     9,    10,    11,    12,    13,    14,    16,    17,
 	 19,    21,    23,    25,    28,    31,    34,    37,    41,    45,
 	 50,    55,    60,    66,    73,    80,    88,    97,   107,   118,
@@ -36,7 +36,7 @@ static int16 imcTable1[] = {
 	15289, 16818, 18500, 20350, 22385, 24623, 27086, 29794, 32767
 };
 
-static int8 imcTable2[] = {
+static const int8 imcTable2[] = {
 	4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
 	4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
 	4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5,
@@ -44,27 +44,27 @@ static int8 imcTable2[] = {
 	6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7
 };
 
-static int8 imcOtherTable1[] = {
+static const int8 imcOtherTable1[] = {
 	-1, 4, -1, 4
 };
 
-static int8 imcOtherTable2[] = {
+static const int8 imcOtherTable2[] = {
 	-1, -1, 2, 6, -1, -1, 2, 6
 };
 
-static int8 imcOtherTable3[] = {
+static const int8 imcOtherTable3[] = {
 	-1, -1, -1, -1, 1, 2, 4, 6,
 	-1, -1, -1, -1, 1, 2, 4, 6
 };
 
-static int8 imcOtherTable4[] = {
+static const int8 imcOtherTable4[] = {
 	-1, -1, -1, -1, -1, -1, -1, -1,
 	1, 1, 1, 2, 2, 4, 5, 6,
 	-1, -1, -1, -1, -1, -1, -1, -1,
 	1, 1, 1, 2, 2, 4, 5, 6
 };
 
-static int8 imcOtherTable5[] = {
+static const int8 imcOtherTable5[] = {
 	-1, -1, -1, -1, -1, -1, -1, -1,
 	-1, -1, -1, -1, -1, -1, -1, -1,
 	 1, 1, 1, 1, 1, 2, 2, 2,
@@ -75,7 +75,7 @@ static int8 imcOtherTable5[] = {
 	 2, 4, 4, 4, 5, 5, 6, 6
 };
 
-static int8 imcOtherTable6[] = {
+static const int8 imcOtherTable6[] = {
 	-1, -1, -1, -1, -1, -1, -1, -1,
 	-1, -1, -1, -1, -1, -1, -1, -1,
 	-1, -1, -1, -1, -1, -1, -1, -1,
@@ -94,7 +94,7 @@ static int8 imcOtherTable6[] = {
 	 5, 5, 5, 5, 6, 6, 6, 6
 };
 
-static int8 *offsets[] = {
+static const int8 *const offsets[] = {
 	imcOtherTable1, imcOtherTable2, imcOtherTable3,
 	imcOtherTable4, imcOtherTable5, imcOtherTable6
 };

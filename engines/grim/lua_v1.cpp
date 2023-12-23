@@ -802,7 +802,7 @@ STUB_FUNC(Lua_V1::GetMemoryUsage)
 STUB_FUNC(Lua_V1::GetFontDimensions)
 STUB_FUNC(Lua_V1::PurgeText)
 
-struct luaL_reg grimMainOpcodes[] = {
+const struct luaL_reg grimMainOpcodes[] = {
 	{ "EngineDisplay", LUA_OPCODE(Lua_V1, EngineDisplay) },
 	{ "CheckForFile", LUA_OPCODE(Lua_V1, CheckForFile) },
 	{ "Load", LUA_OPCODE(Lua_V1, Load) },
@@ -1012,7 +1012,7 @@ struct luaL_reg grimMainOpcodes[] = {
 	{ "dofile", LUA_OPCODE(Lua_V1, new_dofile) },
 };
 
-static struct luaL_reg grimTextOpcodes[] = {
+static const struct luaL_reg grimTextOpcodes[] = {
 	{ "IsMessageGoing", LUA_OPCODE(Lua_V1, IsMessageGoing) },
 	{ "SetSayLineDefaults", LUA_OPCODE(Lua_V1, SetSayLineDefaults) },
 	{ "SetActorTalkColor", LUA_OPCODE(Lua_V1, SetActorTalkColor) },
@@ -1037,7 +1037,7 @@ static struct luaL_reg grimTextOpcodes[] = {
 	{ "SetOffscreenTextPos", LUA_OPCODE(Lua_V1, SetOffscreenTextPos) }
 };
 
-struct luaL_reg grimPrimitivesOpcodes[] = {
+const struct luaL_reg grimPrimitivesOpcodes[] = {
 	{ "DrawLine", LUA_OPCODE(Lua_V1, DrawLine) },
 	{ "DrawPolygon", LUA_OPCODE(Lua_V1, DrawPolygon) },
 	{ "DrawRectangle", LUA_OPCODE(Lua_V1, DrawRectangle) },
@@ -1046,7 +1046,7 @@ struct luaL_reg grimPrimitivesOpcodes[] = {
 	{ "PurgePrimitiveQueue", LUA_OPCODE(Lua_V1, PurgePrimitiveQueue) }
 };
 
-struct luaL_reg grimHardwareOpcodes[] = {
+const struct luaL_reg grimHardwareOpcodes[] = {
 	{ "Is3DHardwareEnabled", LUA_OPCODE(Lua_V1, Is3DHardwareEnabled) },
 	{ "GetVideoDevices", LUA_OPCODE(Lua_V1, GetVideoDevices) },
 	{ "SetVideoDevices", LUA_OPCODE(Lua_V1, SetVideoDevices) },

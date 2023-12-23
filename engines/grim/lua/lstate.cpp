@@ -59,7 +59,7 @@ int globalTaskSerialId = 0;
 
 void stderrorim();
 
-static luaL_reg stdErrorRimFunc[] = {
+static const luaL_reg stdErrorRimFunc[] = {
 	{ "stderrorim", stderrorim }
 };
 

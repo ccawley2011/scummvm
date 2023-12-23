@@ -17,13 +17,13 @@
 
 namespace Grim {
 
-const char *luaT_eventname[] = {  // ORDER IM
+const char *const luaT_eventname[] = {  // ORDER IM
 	"gettable", "settable", "index", "getglobal", "setglobal", "add",
 	"sub", "mul", "div", "pow", "unm", "lt", "le", "gt", "ge",
 	"concat", "gc", "function", nullptr
 };
 
-static int32 luaI_checkevent(const char *name, const char *list[]) {
+static int32 luaI_checkevent(const char *name, const char *const list[]) {
 	int32 e = luaO_findstring(name, list);
 	if (e < 0)
 		luaL_verror("`%.50s' is not a valid event name", name);
@@ -33,7 +33,7 @@ static int32 luaI_checkevent(const char *name, const char *list[]) {
 /* events in LUA_T_NIL are all allowed, since this is used as a
  *  'placeholder' for "default" fallbacks
  */
-static char validevents[NUM_TAGS][IM_N] = { // ORDER LUA_T, ORDER IM
+static const char validevents[NUM_TAGS][IM_N] = { // ORDER LUA_T, ORDER IM
 	{1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},  // LUA_T_USERDATA
 	{1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},  // LUA_T_NUMBER
 	{1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},  // LUA_T_STRING
@@ -177,14 +177,14 @@ static void fillvalids(IMS e, TObject *func) {
 			*luaT_getim(t, e) = *func;
 }
 
-static luaL_reg tmFB[] = {
+static const luaL_reg tmFB[] = {
 	{"  typeFB", typeFB},
 	{"  errorFB", errorFB},
 	{"  nilFB", nilFB}
 };
 
 void luaT_setfallback() {
-	static const char *oldnames [] = { "error", "getglobal", "arith", "order", nullptr };
+	static const char *const oldnames [] = { "error", "getglobal", "arith", "order", nullptr };
 	TObject oldfunc;
 	lua_CFunction replace;
 	if (!tmFBAdded) {
