@@ -20,12 +20,14 @@
  */
 
 #include "noot/noot.h"
+#include "noot/book.h"
 #include "noot/console.h"
 
 #include "common/config-manager.h"
 #include "common/events.h"
 #include "common/system.h"
 
+#include "engines/advancedDetector.h"
 #include "engines/util.h"
 
 #include "graphics/blit.h"
@@ -37,6 +39,7 @@ namespace Noot {
 
 NootEngine::NootEngine(OSystem *syst, const ADGameDescription *gameDesc) : Engine(syst),
 	_gameDescription(gameDesc),
+	_book(nullptr),
 	// _screenRect(0, 0, 1276, 984),
 	_screenRect(0, 0, 1280, 960),
 	_nextRect(1202, 168, 1258, 252),
@@ -47,6 +50,7 @@ NootEngine::NootEngine(OSystem *syst, const ADGameDescription *gameDesc) : Engin
 }
 
 NootEngine::~NootEngine() {
+	delete _book;
 	delete _nextoff;
 	delete _nexton;
 	delete _nextoffMap;
@@ -58,7 +62,12 @@ Common::Error NootEngine::run() {
 	uint height = _screenRect.height() >> 1;
 	initGraphics(width, height);
 
-	setDebugger(new Console());
+	setDebugger(new Console(this));
+
+	Common::Path bookPath(_gameDescription->filesDescriptions[0].fileName);
+	_book = new Book();
+	if (!_book->open(bookPath))
+		return Common::Error(Common::kNoGameDataFoundError, bookPath.toString());
 
 	_palette.setPalette(Image::riscos_palettes[3], 256);
 	g_system->getPaletteManager()->setPalette(Image::riscos_palettes[3], 0, 256);

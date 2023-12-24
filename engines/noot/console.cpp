@@ -20,18 +20,38 @@
  */
 
 #include "noot/console.h"
+#include "noot/noot.h"
+#include "noot/book.h"
 
 namespace Noot {
 
-Console::Console() : GUI::Debugger() {
-	registerCmd("test",   WRAP_METHOD(Console, Cmd_test));
+Console::Console(NootEngine *engine) : GUI::Debugger(), _engine(engine) {
+	registerCmd("about",  WRAP_METHOD(Console, Cmd_about));
 }
 
 Console::~Console() {
 }
 
-bool Console::Cmd_test(int argc, const char **argv) {
-	debugPrintf("Test\n");
+bool Console::Cmd_about(int argc, const char **argv) {
+	const Book *book = _engine->getBook();
+	if (!book) {
+		debugPrintf("No book is currently loaded\n");
+		return true;
+	}
+
+	const Book::BookHeader *header = book->getHeader();
+	debugPrintf("Offset of first chunk: 0x%x\n", header->start);
+	debugPrintf("Unknown: %d\n", header->unknown1);
+	debugPrintf("Document type: %d (%s)\n", header->doctype, header->getTypeStr());
+	debugPrintf("Unknown: %d\n", header->unknown2);
+	debugPrintf("Created using: %s\n", Common::String(header->desc, 48).c_str());
+	debugPrintf("Offset of index chunk: 0x%x\n", header->index);
+	debugPrintf("Unknown: %d\n", header->unknown3);
+	debugPrintf("Mode: %d\n", header->mode);
+	debugPrintf("X div: %d\n", header->xdiv);
+	debugPrintf("Y div: %d\n", header->ydiv);
+	debugPrintf("Number of palette entries: %d\n", header->colours);
+
 	return true;
 }
 

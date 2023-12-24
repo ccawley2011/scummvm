@@ -37,10 +37,13 @@ class ROSpriteDecoder;
 }
 
 namespace Noot {
+class Book;
 
 class NootEngine : public Engine {
 private:
 	const ADGameDescription *_gameDescription;
+
+	Book *_book;
 
 	Graphics::PaletteLookup _palette;
 	Common::Rect _screenRect;
@@ -63,6 +66,10 @@ public:
 
 	bool hasFeature(EngineFeature f) const override {
 		return (f == kSupportsReturnToLauncher);
+	}
+
+	const Book *getBook() const {
+		return _book;
 	}
 };
 

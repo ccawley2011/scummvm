@@ -19,24 +19,68 @@
  *
  */
 
-#ifndef NOOT_CONSOLE_H
-#define NOOT_CONSOLE_H
+#ifndef NOOT_BOOK_H
+#define NOOT_BOOK_H
 
-#include "gui/debugger.h"
+#include "common/scummsys.h"
+
+namespace Common {
+class Path;
+class SeekableReadStream;
+}
 
 namespace Noot {
-class NootEngine;
 
-class Console : public GUI::Debugger {
-private:
-	bool Cmd_about(int argc, const char **argv);
-
-	NootEngine *_engine;
+class Book {
 public:
-	Console(NootEngine *engine);
-	~Console() override;
+	Book();
+	~Book() { close(); }
+
+	bool open(const Common::Path &filename);
+	void close();
+
+	struct BookHeader {
+		uint32 magic;
+		uint32 start;
+		uint32 unknown1;
+		int32 doctype;
+		uint32 unknown2;
+		char desc[48];
+		uint32 index;
+		uint32 unknown3;
+		uint32 mode;
+		uint32 xdiv;
+		uint32 ydiv;
+		uint32 colours;
+		uint8 *palette;
+
+		const char *getTypeStr() const;
+	};
+
+	const BookHeader *getHeader() const {
+		return &_header;
+	}
+
+	struct ScriptIndex {
+		uint32 id;
+		uint32 offset;
+	};
+
+	const ScriptIndex *getScriptIndex(uint32 &count) const {
+		count = _indexCount;
+		return _index;
+	}
+
+private:
+	bool readHeader();
+	bool readIndex(uint32 size);
+
+	Common::SeekableReadStream *_stream;
+	BookHeader _header;
+	ScriptIndex *_index;
+	uint32 _indexCount;
 };
 
 } // End of namespace Noot
 
-#endif // NOOT_CONSOLE_H
+#endif // NOOT_BOOK_H

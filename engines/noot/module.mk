@@ -2,6 +2,7 @@ MODULE := engines/noot
 
 MODULE_OBJS = \
 	noot.o \
+	book.o \
 	console.o \
 	metaengine.o
 
