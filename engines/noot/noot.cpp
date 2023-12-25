@@ -51,7 +51,8 @@ NootEngine::NootEngine(OSystem *syst, const ADGameDescription *gameDesc) : Engin
 	_nextoff(nullptr),
 	_nexton(nullptr),
 	_nextoffMap(nullptr),
-	_nextonMap(nullptr) {
+	_nextonMap(nullptr),
+	_debugRects(false) {
 }
 
 NootEngine::~NootEngine() {
@@ -136,6 +137,13 @@ void NootEngine::pollAnimation() {
 
 		copyToScreen(frame, nullptr, _animationMap, _animationRect,
 		             _animation->getXEigFactor(), _animation->getYEigFactor());
+
+		if (_debugRects) {
+			Common::Rect dirtyRect(_animation->getDirtyRect());
+			dirtyRect.translate(_animationRect.left, _animationRect.top);
+			drawRect(_animationRect);
+			drawRect(dirtyRect);
+		}
 	}
 }
 
@@ -201,6 +209,20 @@ void NootEngine::copyToScreen(const Graphics::Surface *surf, const Graphics::Sur
 			}
 		}
 
+		g_system->unlockScreen();
+	}
+}
+
+void NootEngine::drawRect(const Common::Rect &dstRect) {
+	uint left = dstRect.left >> 1;
+	uint right = dstRect.right >> 1;
+	uint top = (_screenRect.height() - dstRect.bottom) >> 1;
+	uint bottom = (_screenRect.height() - dstRect.top) >> 1;
+	Common::Rect rect(left, top, right, bottom);
+
+	Graphics::Surface *screen = g_system->lockScreen();
+	if (screen) {
+		screen->frameRect(rect, 0);
 		g_system->unlockScreen();
 	}
 }

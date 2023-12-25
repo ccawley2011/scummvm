@@ -57,12 +57,15 @@ private:
 	uint32 *_nextoffMap, *_nextonMap;
 	Common::Rect _nextRect;
 
+	bool _debugRects;
+
 	void pollAnimation();
 
 	Common::Error loadSprites(const Common::Path &filename);
 
 	void copyToScreen(const Image::ROSpriteDecoder &decoder, const uint32 *map, const Common::Rect &dstRect);
 	void copyToScreen(const Graphics::Surface *surf, const Graphics::Surface *mask, const uint32 *map, const Common::Rect &dstRect, uint xeig, uint yeig);
+	void drawRect(const Common::Rect &dstRect);
 
 protected:
 	// Engine APIs

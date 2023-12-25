@@ -61,6 +61,15 @@ uint Animation::getYEigFactor() const {
 	return 0;
 }
 
+Common::Rect Animation::getDirtyRect() const {
+	const Track *track = getTrack(0);
+
+	if (track)
+		return ((const AnimationTrack *)track)->getDirtyRect();
+
+	return Common::Rect();
+}
+
 Animation::AnimationTrack::AnimationTrack() :
 	_fileStream(nullptr),
 	_spriteMem(nullptr),
@@ -150,12 +159,14 @@ const Graphics::Surface *Animation::AnimationTrack::decodeNextFrame() {
 }
 
 bool Animation::AnimationTrack::readNextFrame(Common::SeekableReadStream *stream) {
-	uint32 size = stream->readUint32LE();
+	uint32 size   = stream->readUint32LE();
 	uint32 method = stream->readUint32LE();
-	/* uint32 unknown1 = */ stream->readUint32LE();
-	/* uint32 unknown2 = */ stream->readUint32LE();
-	/* uint32 unknown3 = */ stream->readUint32LE();
-	/* uint32 unknown4 = */ stream->readUint32LE();
+	uint32 left   = stream->readUint32LE();
+	uint32 bottom = stream->readUint32LE();
+	uint32 right  = stream->readUint32LE();
+	uint32 top    = stream->readUint32LE();
+
+	_dirtyRect = Common::Rect(left, bottom, right, top);
 
 	uint32 compressedSize = size - 24;
 	byte *compressedData = new byte[compressedSize];

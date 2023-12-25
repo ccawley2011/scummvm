@@ -24,6 +24,8 @@
 
 #include "video/video_decoder.h"
 
+#include "common/rect.h"
+
 namespace Image {
 class ROSpriteDecoder;
 }
@@ -39,6 +41,7 @@ public:
 
 	uint getXEigFactor() const;
 	uint getYEigFactor() const;
+	Common::Rect getDirtyRect() const;
 
 protected:
 	class AnimationTrack : public VideoTrack {
@@ -57,6 +60,7 @@ protected:
 		Graphics::PixelFormat getPixelFormat() const override;
 		uint getXEigFactor() const;
 		uint getYEigFactor() const;
+		Common::Rect getDirtyRect() const { return _dirtyRect; }
 
 		int getCurFrame() const override { return _curFrame; }
 		int getFrameCount() const override { return _frameCount; }
@@ -77,6 +81,8 @@ protected:
 
 		byte _palette[256 * 3];
 		mutable bool _dirtyPalette;
+
+		Common::Rect _dirtyRect;
 
 		uint32 _frameCount;
 		uint32 *_frameDelays;
