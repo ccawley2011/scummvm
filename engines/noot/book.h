@@ -39,7 +39,7 @@ public:
 	bool open(const Common::Path &filename);
 	void close();
 
-	enum ResourceType {
+	enum ResourceType : uint {
 		kResourceAnimation = 1,
 		kResourceMusic,
 		kResourceScript,

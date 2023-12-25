@@ -71,7 +71,7 @@ uint32 DecompressorLZW::decode(const byte *in, uint32 insize, byte *out, uint32 
 	uint16 dictsize = FIRST_CODE;
 	uint16 prev = CLEAR_CODE;
 	uint32 size = 0;
-	int nbit;
+	int nbit = SET_BITS + 1;
 
 	while (prev != END_CODE) {
 		if (prev == CLEAR_CODE) {
