@@ -23,6 +23,12 @@
 
 static const PlainGameDescriptor nootGames[] = {
 	{ "granny", "Granny's Garden" },
+	{ "dweek", "Dweek" },
+	{ "dweep", "Dweep" },
+	{ "farm", "The Farm" },
+	{ "howitworks", "It Works Like This..." },
+	{ "playroom", "The Playroom" },
+	{ "power", "Power" },
 	{ "noot", "NootBook" },
 	{ 0, 0 }
 };
