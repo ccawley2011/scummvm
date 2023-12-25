@@ -26,7 +26,8 @@
 namespace Noot {
 
 Console::Console(NootEngine *engine) : GUI::Debugger(), _engine(engine) {
-	registerCmd("about",  WRAP_METHOD(Console, Cmd_about));
+	registerCmd("about",    WRAP_METHOD(Console, Cmd_about));
+	registerCmd("playAnim", WRAP_METHOD(Console, Cmd_playAnim));
 }
 
 Console::~Console() {
@@ -53,6 +54,20 @@ bool Console::Cmd_about(int argc, const char **argv) {
 	debugPrintf("Number of palette entries: %d\n", header->colours);
 
 	return true;
+}
+
+bool Console::Cmd_playAnim(int argc, const char **argv) {
+	if (argc != 2) {
+		debugPrintf("Syntax: playAnim <num>\n");
+		return true;
+	}
+
+	if (!_engine->loadAnimation(atoi(argv[1]))) {
+		debugPrintf("Unable to load animation %d\n", atoi(argv[1]));
+		return true;
+	}
+
+	return false;
 }
 
 } // End of namespace Noot

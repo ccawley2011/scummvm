@@ -37,6 +37,7 @@ class ROSpriteDecoder;
 }
 
 namespace Noot {
+class Animation;
 class Book;
 
 class NootEngine : public Engine {
@@ -48,13 +49,20 @@ private:
 	Graphics::PaletteLookup _palette;
 	Common::Rect _screenRect;
 
+	Animation *_animation;
+	uint32 *_animationMap;
+	Common::Rect _animationRect;
+
 	Image::ROSpriteDecoder *_nextoff, *_nexton;
 	uint32 *_nextoffMap, *_nextonMap;
 	Common::Rect _nextRect;
 
+	void pollAnimation();
+
 	Common::Error loadSprites(const Common::Path &filename);
 
 	void copyToScreen(const Image::ROSpriteDecoder &decoder, const uint32 *map, const Common::Rect &dstRect);
+	void copyToScreen(const Graphics::Surface *surf, const Graphics::Surface *mask, const uint32 *map, const Common::Rect &dstRect, uint xeig, uint yeig);
 
 protected:
 	// Engine APIs
@@ -71,6 +79,8 @@ public:
 	const Book *getBook() const {
 		return _book;
 	}
+
+	bool loadAnimation(uint32 pos);
 };
 
 } // End of namespace Noot

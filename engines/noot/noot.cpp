@@ -20,11 +20,13 @@
  */
 
 #include "noot/noot.h"
+#include "noot/animation.h"
 #include "noot/book.h"
 #include "noot/console.h"
 
 #include "common/config-manager.h"
 #include "common/events.h"
+#include "common/stream.h"
 #include "common/system.h"
 
 #include "engines/advancedDetector.h"
@@ -42,7 +44,10 @@ NootEngine::NootEngine(OSystem *syst, const ADGameDescription *gameDesc) : Engin
 	_book(nullptr),
 	// _screenRect(0, 0, 1276, 984),
 	_screenRect(0, 0, 1280, 960),
-	_nextRect(1202, 168, 1258, 252),
+	_animation(nullptr),
+	_animationMap(nullptr),
+	_animationRect(172, 276, 1104, 936),
+	_nextRect(1202, 84, 1258, 168),
 	_nextoff(nullptr),
 	_nexton(nullptr),
 	_nextoffMap(nullptr),
@@ -50,6 +55,8 @@ NootEngine::NootEngine(OSystem *syst, const ADGameDescription *gameDesc) : Engin
 }
 
 NootEngine::~NootEngine() {
+	delete _animation;
+	delete[] _animationMap;
 	delete _book;
 	delete _nextoff;
 	delete _nexton;
@@ -80,19 +87,56 @@ Common::Error NootEngine::run() {
 	if (_nextoff)
 		copyToScreen(*_nextoff, _nextoffMap, _nextRect);
 
-	g_system->updateScreen();
+	loadAnimation(1);
 
 	// Simple event handling loop
 	Common::Event e;
 	while (!shouldQuit()) {
 		while (g_system->getEventManager()->pollEvent(e)) {
 		}
+		pollAnimation();
+		g_system->updateScreen();
+
 		// Delay for a bit. All events loops should have a delay
 		// to prevent the system being unduly loaded
 		g_system->delayMillis(10);
 	}
 
 	return Common::kNoError;
+}
+
+bool NootEngine::loadAnimation(uint32 pos) {
+	Common::SeekableReadStream *stream = _book->loadResource(Book::kResourceAnimation, pos);
+	if (!stream)
+		return false;
+
+	Animation *anim = new Animation();
+	if (!anim->loadStream(stream)) {
+		delete stream;
+		return false;
+	}
+
+	delete _animation;
+	_animation = anim;
+	_animation->start();
+
+	return true;
+}
+
+void NootEngine::pollAnimation() {
+	if (!_animation || !_animation->needsUpdate())
+		return;
+
+	const Graphics::Surface *frame = _animation->decodeNextFrame();
+	if (frame) {
+		if (_animation->hasDirtyPalette()) {
+			delete[] _animationMap;
+			_animationMap = _palette.createMap(_animation->getPalette(), 256);
+		}
+
+		copyToScreen(frame, nullptr, _animationMap, _animationRect,
+		             _animation->getXEigFactor(), _animation->getYEigFactor());
+	}
 }
 
 Common::Error NootEngine::loadSprites(const Common::Path &filename) {
@@ -116,9 +160,12 @@ void NootEngine::copyToScreen(const Image::ROSpriteDecoder &decoder, const uint3
 	const Graphics::Surface *mask = decoder.getMask();
 	uint xeig = decoder.getXEigFactor();
 	uint yeig = decoder.getYEigFactor();
+	copyToScreen(surf, mask, map, dstRect, xeig, yeig);
+}
 
+void NootEngine::copyToScreen(const Graphics::Surface *surf, const Graphics::Surface *mask, const uint32 *map, const Common::Rect &dstRect, uint xeig, uint yeig) {
 	Common::Rect rect(surf->w << xeig, surf->h << yeig);
-	Common::Point pos(dstRect.left, dstRect.top);
+	Common::Point pos(dstRect.left, dstRect.bottom);
 
 	if (!Common::Rect::getBlitRect(pos, rect, _screenRect))
 		return;
@@ -131,7 +178,7 @@ void NootEngine::copyToScreen(const Image::ROSpriteDecoder &decoder, const uint3
 		byte *dstPtr = (byte *)screen->getBasePtr(pos.x >> 1, pos.y >> 1);
 		uint srcPitch = surf->pitch;
 		uint dstPitch = screen->pitch;
-		uint w = rect.width() >> 1, h = rect.height() >> 1;
+		uint w = surf->w, h = surf->h;
 
 		if (mask) {
 			const byte *maskPtr = (const byte *)mask->getBasePtr(rect.left >> 1, rect.top >> 1);

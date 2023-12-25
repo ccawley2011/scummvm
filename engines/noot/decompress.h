@@ -19,25 +19,16 @@
  *
  */
 
-#ifndef NOOT_CONSOLE_H
-#define NOOT_CONSOLE_H
+#ifndef NOOT_DECOMPRESS_H
+#define NOOT_DECOMPRESS_H
 
-#include "gui/debugger.h"
+#include "common/scummsys.h"
 
 namespace Noot {
-class NootEngine;
 
-class Console : public GUI::Debugger {
-private:
-	bool Cmd_about(int argc, const char **argv);
-	bool Cmd_playAnim(int argc, const char **argv);
-
-	NootEngine *_engine;
-public:
-	Console(NootEngine *engine);
-	~Console() override;
-};
+bool decompressLZW(const byte *in, uint32 insize, byte *&out, uint32 &outsize);
+bool decompressRLEXOR(const byte *in, uint32 insize, byte *out, uint32 outsize);
 
 } // End of namespace Noot
 
-#endif // NOOT_CONSOLE_H
+#endif // NOOT_DECOMPRESS_H

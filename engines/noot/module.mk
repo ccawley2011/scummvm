@@ -2,8 +2,10 @@ MODULE := engines/noot
 
 MODULE_OBJS = \
 	noot.o \
+	animation.o \
 	book.o \
 	console.o \
+	decompress.o \
 	metaengine.o
 
 # This module can be built as a plugin

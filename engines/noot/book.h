@@ -39,6 +39,18 @@ public:
 	bool open(const Common::Path &filename);
 	void close();
 
+	enum ResourceType {
+		kResourceAnimation = 1,
+		kResourceMusic,
+		kResourceScript,
+		kResourceIndex,
+
+		kResourceMax
+	};
+
+	void rewind();
+	Common::SeekableReadStream *loadResource(ResourceType resType, uint32 pos);
+
 	struct BookHeader {
 		uint32 magic;
 		uint32 start;
@@ -79,6 +91,7 @@ private:
 	BookHeader _header;
 	ScriptIndex *_index;
 	uint32 _indexCount;
+	uint _positions[kResourceMax];
 };
 
 } // End of namespace Noot

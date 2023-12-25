@@ -31,6 +31,7 @@ Book::Book() :
 	_index(nullptr),
 	_indexCount(0) {
 	memset(&_header, 0, sizeof(_header));
+	memset(_positions, 0, sizeof(_positions));
 }
 
 bool Book::open(const Common::Path &filename) {
@@ -50,10 +51,10 @@ bool Book::open(const Common::Path &filename) {
 
 	uint32 type = _stream->readUint32LE();
 	uint32 size = _stream->readUint32LE();
-	if (type == 4)
+	if (type == kResourceIndex)
 		readIndex(size);
 
-	_stream->seek(_header.start);
+	rewind();
 
 	return true;
 }
@@ -68,6 +69,39 @@ void Book::close() {
 
 	delete _stream;
 	_stream = nullptr;
+}
+
+void Book::rewind() {
+	_stream->seek(_header.start);
+	memset(_positions, 0, sizeof(_positions));
+}
+
+Common::SeekableReadStream *Book::loadResource(ResourceType resType, uint32 pos) {
+	assert(resType > 0 && resType < kResourceMax);
+
+	if (_positions[resType] >= pos)
+		rewind();
+
+	while (!_stream->eos() && !_stream->err()) {
+		uint32 type = _stream->readUint32LE();
+		uint32 size = _stream->readUint32LE();
+
+		if (_stream->eos() || _stream->err()) {
+			break;
+		} else if (type < kResourceMax) {
+			_positions[type] += 1;
+
+			if (type == resType && _positions[type] == pos) {
+				return _stream->readStream(size - 8);
+			} else {
+				_stream->skip(size - 8);
+			}
+		} else {
+			_stream->skip(size - 8);
+		}
+	}
+
+	return nullptr;
 }
 
 bool Book::readHeader() {
