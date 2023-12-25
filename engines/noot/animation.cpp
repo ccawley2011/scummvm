@@ -75,9 +75,11 @@ Animation::AnimationTrack::AnimationTrack() :
 	_spriteMem(nullptr),
 	_spriteMemSize(0),
 	_frameDelays(nullptr),
+	_frameOffsets(nullptr),
 	_initialFrame(true),
-	_curFrame(-1),
-	_nextFrameStartTime(0) {
+	_curFrame(0),
+	_nextFrameStartTime(0),
+	_reversed(false) {
 	_spriteDecoder = new Image::ROSpriteDecoder();
 }
 
@@ -86,10 +88,11 @@ Animation::AnimationTrack::~AnimationTrack() {
 	delete _fileStream;
 	delete[] _spriteMem;
 	delete[] _frameDelays;
+	delete[] _frameOffsets;
 }
 
 bool Animation::AnimationTrack::loadStream(Common::SeekableReadStream *stream) {
-	/* uint32 unknown1 = */ stream->readUint32LE();
+	_flags      = stream->readUint32LE();
 	_frameCount = stream->readUint32LE();
 	/* uint32 unknown2 = */ stream->readUint32LE();
 	/* uint32 unknown3 = */ stream->readUint32LE();
@@ -97,6 +100,14 @@ bool Animation::AnimationTrack::loadStream(Common::SeekableReadStream *stream) {
 	for (uint32 i = 0; i < _frameCount; i++)
 		_frameDelays[i] = stream->readUint32LE() * 10;
 
+	_frameOffsets = new int64[_frameCount];
+	for (uint32 i = 0; i < _frameCount; i++) {
+		_frameOffsets[i] = stream->pos();
+		if (i != _frameCount - 1)
+			stream->seek(_frameOffsets[i] + stream->readUint32LE());
+	}
+
+	stream->seek(_frameOffsets[0]);
 	if (!readNextFrame(stream))
 		return false;
 	_initialFrame = true;
@@ -109,13 +120,15 @@ bool Animation::AnimationTrack::loadStream(Common::SeekableReadStream *stream) {
 }
 
 bool Animation::AnimationTrack::endOfTrack() const {
-	return _curFrame >= getFrameCount() - 1;
+	if (_frameCount == 1 && _curFrame == 1)
+		return true;
+	return false;
 }
 
 bool Animation::AnimationTrack::rewind() {
-	_fileStream->seek(16 + (_frameCount * 4));
+	_fileStream->seek(_frameOffsets[0]);
 
-	_curFrame = -1;
+	_curFrame = 0;
 	_nextFrameStartTime = 0;
 	return true;
 }
@@ -146,14 +159,32 @@ uint Animation::AnimationTrack::getYEigFactor() const {
 const Graphics::Surface *Animation::AnimationTrack::decodeNextFrame() {
 	/* The first frame was already decoded during loadStrean() */
 	if (!_initialFrame) {
+		_fileStream->seek(_frameOffsets[_curFrame]);
 		if (!readNextFrame(_fileStream))
 			warning("Failed to read next frame");
 	} else {
 		_initialFrame = false;
 	}
 
-	_nextFrameStartTime += _frameDelays[_curFrame];
-	_curFrame++;
+
+	if (!_reversed) {
+		_nextFrameStartTime += _frameDelays[_curFrame];
+
+		if (_curFrame >= _frameCount - 1)
+			if (_flags & kFlagYoyo)
+				_reversed = true;
+			else
+				_curFrame = 1;
+		else
+			_curFrame++;
+	} else {
+		_nextFrameStartTime += _frameDelays[_curFrame - 1];
+
+		if (_curFrame <= 1)
+			_reversed = false;
+		else
+			_curFrame--;
+	}
 
 	return _spriteDecoder->getSurface();
 }

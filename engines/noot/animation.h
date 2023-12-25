@@ -70,23 +70,32 @@ protected:
 		bool hasDirtyPalette() const override { return _dirtyPalette; }
 
 	protected:
+		enum {
+			kFlagYoyo = (1 << 0),
+			kFlagUnknown1 = (1 << 1),
+			kFlagUnknown2 = (1 << 2)
+		};
+
 		Common::SeekableReadStream *_fileStream;
 
 		Image::ROSpriteDecoder *_spriteDecoder;
 		byte *_spriteMem;
 		uint32 _spriteMemSize;
 
-		int _curFrame;
+		uint _curFrame;
 		bool _initialFrame;
+		int64 *_frameOffsets;
 
 		byte _palette[256 * 3];
 		mutable bool _dirtyPalette;
 
 		Common::Rect _dirtyRect;
 
+		uint32 _flags;
 		uint32 _frameCount;
 		uint32 *_frameDelays;
 		uint32 _nextFrameStartTime;
+		bool _reversed;
 
 		bool readNextFrame(Common::SeekableReadStream *stream);
 	};
