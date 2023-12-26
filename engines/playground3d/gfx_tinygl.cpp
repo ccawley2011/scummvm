@@ -288,7 +288,7 @@ void TinyGLRenderer::dimRegionInOut(float fade) {
 }
 
 void TinyGLRenderer::drawInViewport() {
-	static TGLfloat box2Vertices[] = {
+	static const TGLfloat box2Vertices[] = {
 		//  X      Y
 		-0.1f,  0.1f,
 		 0.1f,  0.1f,
