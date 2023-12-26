@@ -34,7 +34,7 @@
 
 namespace Hopkins {
 
-const char *SAVEGAME_STR = "HOPKINS";
+const char *const SAVEGAME_STR = "HOPKINS";
 #define SAVEGAME_STR_SIZE 13
 
 SaveLoadManager::SaveLoadManager(HopkinsEngine *vm) {
