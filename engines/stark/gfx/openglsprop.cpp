@@ -39,7 +39,7 @@ OpenGLSPropRenderer::OpenGLSPropRenderer(Driver *gfx) :
 		_gfx(gfx),
 		_faceVBO(0),
 		_modelIsDirty(true) {
-	static const char* attributes[] = { "position", "normal", "texcoord", nullptr };
+	static const char *const attributes[] = { "position", "normal", "texcoord", nullptr };
 	_shader = OpenGL::Shader::fromFiles("stark_prop", attributes);
 }
 
