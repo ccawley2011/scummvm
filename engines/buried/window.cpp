@@ -29,8 +29,8 @@
 
 namespace Buried {
 
-const Window *kWindowPosTop = (const Window *)nullptr;
-const Window *kWindowPosTopMost = (const Window *)-1;
+const Window *const kWindowPosTop = (const Window *)nullptr;
+const Window *const kWindowPosTopMost = (const Window *)-1;
 
 Window::Window(BuriedEngine *vm, Window *parent, bool visible) : _vm(vm), _parent(parent), _visible(visible) {
 	_enabled = true;
