@@ -718,7 +718,7 @@ DeathMenu::DeathMenu(const DeathReason deathReason) : GameMenu(kDeathMenuID), _d
 		prefix += "Death Screens/";
 		imageName = prefix;
 
-		static const char *fileNames[] = {
+		static const char *const fileNames[] = {
 			"dAunmade", "dAbombed", "dAshot", "dAassass", "dAnuked",
 			"dTunmade", "dTshot", "dPfall", "dPdino", "dPstuck",
 			"dNchoke", "dNcaught", "dNcaught", "dNsub", "dNrobot1",
