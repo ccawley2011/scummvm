@@ -38,7 +38,7 @@ enum {
 	kSPEECH_BORK_DESTROYED = 12
 };
 
-const char *Room508::SAID[][4] = {
+const char *const Room508::SAID[][4] = {
 	{ "WILBUR'S ROOM",      nullptr,   "500w001", nullptr   },
 	{ "BORK",               "508w003", "500w002", "500w002" },
 	{ "CHRISTMAS LIGHTS  ", "508w004", nullptr,   "508w007" },
@@ -739,7 +739,7 @@ void Room508::parser() {
 }
 
 void Room508::loadSeries() {
-	static const char *NAMES[8] = {
+	static const char *const NAMES[8] = {
 		"508bk01", "508bk01s", "508bk02", "508bk02s", "508bk03",
 		"508bk03s", "508bk04", "508bk04s"
 	};

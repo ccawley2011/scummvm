@@ -30,7 +30,7 @@ namespace Rooms {
 
 class Room402 : public Section4Room {
 private:
-	static const char *SAID[][4];
+	static const char *const SAID[][4];
 	static const seriesStreamBreak SERIES1[];
 	static const seriesStreamBreak SERIES2[];
 	static const seriesPlayBreak PLAY1[];

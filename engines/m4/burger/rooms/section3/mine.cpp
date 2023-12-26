@@ -28,7 +28,7 @@ namespace Rooms {
 
 #define MINE_END 39
 
-const char *Mine::SAID[][4] = {
+const char *const Mine::SAID[][4] = {
 	{ "TUNNEL",  "311w007", "311w007z", nullptr    },
 	{ "DEBRIS",  nullptr,   "311w010",  "311w011"  },
 	{ "GROUND",  "311w012", "311w007z", "311w007z" },

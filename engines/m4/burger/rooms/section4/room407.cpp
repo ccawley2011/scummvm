@@ -33,7 +33,7 @@ enum {
 	kCHANGE_VIPE_ANIMATION = 9
 };
 
-const char *Room407::SAID[][4] = {
+const char *const Room407::SAID[][4] = {
 	{ "TOUR BUS",     "407w001", "407w002", "407w003" },
 	{ "ROXY",         nullptr,   "400w001", "400w001" },
 	{ "DRUMZ",        "407w007", "400w001", "400w001" },
@@ -627,7 +627,7 @@ void Room407::parser() {
 }
 
 void Room407::loadSeries() {
-	static const char *NAMES[16] = {
+	static const char *const NAMES[16] = {
 		"407dz01", "407dz01s", "407dz02", "407dz02s", "407dz05",
 		"407dz05s", "407dz06", "407dz06s", "407rx04",
 		"407vp03", "407vp03s", "407vp05", "407vp05s", "407rx06",

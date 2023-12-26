@@ -32,7 +32,7 @@ enum {
 	kCHANGE_BURL_ANIMATION = 9
 };
 
-static const char *SAID1[][4] = {
+static const char *const SAID1[][4] = {
 	{ "ISLAND",    nullptr,   "999w011", "999w011" },
 	{ "ROCK",      "144W004", "999w011", "999w011" },
 	{ "SHACK",     "144W005", "999w011", nullptr   },
@@ -45,7 +45,7 @@ static const char *SAID1[][4] = {
 	{ nullptr, nullptr, nullptr, nullptr }
 };
 
-static const char *SAID2[][4] = {
+static const char *const SAID2[][4] = {
 	{ "ISLAND",     "139W001", "139W002", "139W002" },
 	{ "ROCK",       nullptr,   "139W002", "139W002" },
 	{ "SHACK",      "139W005", "139W002", nullptr   },

@@ -45,7 +45,7 @@ const seriesStreamBreak Room506::SERIES1[] = {
 	STREAM_BREAK_END
 };
 
-const char *Room506::SAID[][4] = {
+const char *const Room506::SAID[][4] = {
 	{ "HALLWAY",        nullptr,   "500w001", nullptr   },
 	{ "WINDOW",         "500w003", "500w001", nullptr   },
 	{ "ROOF",           "500w003", "500w001", nullptr   },

@@ -27,7 +27,7 @@ namespace Burger {
 namespace Rooms {
 
 
-const char *Room304::SAID[][4] = {
+const char *const Room304::SAID[][4] = {
 	{ "DOOR",        "304w002", "300w002", nullptr   },
 	{ "BED",         "304w007", "300w003", "304w008" },
 	{ "PICTURE",     "304w009", "304w010", "300w005" },

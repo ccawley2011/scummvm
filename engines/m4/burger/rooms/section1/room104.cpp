@@ -33,7 +33,7 @@ enum {
 	kCHANGE_STOLIE_ANIMATION = 3
 };
 
-static const char *SAID1[][4] = {
+static const char *const SAID1[][4] = {
 	{ "TOWN HALL",   "104W001", "104W002", "104w002" },
 	{ "DOORS",       "104W003", "104W002", nullptr },
 	{ "STOLIE",      "104W004", "104W002", "104W002" },
@@ -92,7 +92,7 @@ void Room104::init() {
 		break;
 	}
 
-	static const char *NAMES[14] = {
+	static const char *const NAMES[14] = {
 		"104W101",  "104W100A", "104W100B", "104W100C", "104W100D",
 		"104W100E", "104W100F", "104W100G", "104s100a", "104s100b",
 		"104s100c", "104s100d", "104s100e", "104s101"

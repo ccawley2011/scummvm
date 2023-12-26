@@ -23,7 +23,7 @@
 
 namespace M4 {
 
-const char *myRegLabels[IDX_COUNT] = {
+const char *const myRegLabels[IDX_COUNT] = {
 	"timer",							//0
 	"tag",								//1
 	"layer",							//2
@@ -66,7 +66,7 @@ const char *myRegLabels[IDX_COUNT] = {
 	"mach_id"							//32
 };
 
-const char *myGlobLabels[GLOB_COUNT] = {
+const char *const myGlobLabels[GLOB_COUNT] = {
 	"***SYSTEM - TIME",
 	"***SYSTEM - WATCHDOG",
 	"min_y",
@@ -108,7 +108,7 @@ const char *myGlobLabels[GLOB_COUNT] = {
 	"g_temp32",
 };
 
-const char *tagLabels[TAG_COUNT] = {
+const char *const tagLabels[TAG_COUNT] = {
 	"tag_none",
 	"tag_targs",
 	"tag_bez",

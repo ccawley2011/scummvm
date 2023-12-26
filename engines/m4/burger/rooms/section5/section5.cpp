@@ -29,7 +29,7 @@ namespace M4 {
 namespace Burger {
 namespace Rooms {
 
-const char *Section5::PARSER[] = {
+const char *const Section5::PARSER[] = {
 	"GIZMO",
 	"LOOK AT",
 	"500w006",

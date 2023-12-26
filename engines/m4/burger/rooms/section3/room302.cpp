@@ -26,7 +26,7 @@ namespace M4 {
 namespace Burger {
 namespace Rooms {
 
-const char *Room302::SAID[][4] = {
+const char *const Room302::SAID[][4] = {
 	{ "DOOR",           nullptr,   "300w001", nullptr   },
 	{ "STORM CELLAR",   nullptr,   "300w002", nullptr   },
 	{ "BACK YARD",      "302w002", "302w002", nullptr   },
@@ -171,7 +171,7 @@ void Room302::init() {
 	setupDigi();
 
 	if (!_G(flags)[kTrufflesInMine]) {
-		static const char *NAMES[12] = {
+		static const char *const NAMES[12] = {
 			"302t001a", "302t001b", "302t001c", "302t001d", "302t001e",
 			"302t001f", "302t001g", "302t001h", "302t002", "302t003",
 			"302t004", "302t005"

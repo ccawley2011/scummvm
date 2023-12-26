@@ -42,7 +42,7 @@ class Section4 : public Rooms::Section {
 		int _newRoom2;
 	};
 private:
-	static const char *PARSER[];
+	static const char *const PARSER[];
 	static const TeleportEntry TELEPORTS[];
 
 private:

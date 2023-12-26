@@ -806,7 +806,7 @@ static RenderResult r_9() {
 	}
 }
 
-static RenderResult(*dispatches[])() = {
+static RenderResult(*const dispatches[])() = {
 	r_0, r_1, r_2, r_3, r_4, r_5, r_6, r_7
 };
 
@@ -852,7 +852,7 @@ typedef struct {
 	const char *name;
 } FuncName;
 
-FuncName fn[] = {
+const FuncName fn[] = {
 	{ r_0, "r_0" },
 	{ r_0_5, "r_0_5" },
 	{ r_1, "r_1" },

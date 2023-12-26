@@ -85,7 +85,7 @@ static const seriesPlayBreak PLAY_BREAKS6[] = {
 	{ -1, -1, nullptr,   0,   0, -1,    0, 0, 0, 0 }
 };
 
-static const char *SAID1[][4] = {
+static const char *const SAID1[][4] = {
 	{ "WILBUR", "999w010", "999w011", "999w011" },
 	{ "BROKEN MOUSE TRAP", "405W016", nullptr, "400W001" },
 	{ "CARROT JUICE", "300w043", nullptr, nullptr },
@@ -98,7 +98,7 @@ static const char *SAID1[][4] = {
 	{ nullptr, nullptr, nullptr, nullptr }
 };
 
-static const char *GLOBAL_PARSER_LIST[] = {
+static const char *const GLOBAL_PARSER_LIST[] = {
 	"DEED", "LOOK AT", "999w101", "WILBUR", "400w001",
 		nullptr, "999w102", PARSER_ITEM_END,
 	"JAWZ O' LIFE", "LOOK AT", "999w103", "WILBUR", "400w001",

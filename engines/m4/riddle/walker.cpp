@@ -43,7 +43,7 @@ namespace Riddle {
 #define SHADOW_WILBUR          0
 #define SHADOW_FLUMIX          1
 
-static const char *WILBUR_SERIES[8] = {
+static const char *const WILBUR_SERIES[8] = {
 	"WILBUR01", "WILBUR02", "WILBUR03", "WILBUR04", "WILBUR05",
 	"WILBUR07", "WILBUR08", "WILBUR09"
 };
@@ -51,7 +51,7 @@ static const int16 WILBUR_SERIES_DIRS[] = {
 	0, 1, 2, 3, 4, 5, 6, 7, -1
 };
 
-static const char *WILBUR_SHADOWS[5] = {
+static const char *const WILBUR_SHADOWS[5] = {
 	"WILBUR01_SHADOW", "WILBUR02_SHADOW", "WILBUR03_SHADOW",
 	"WILBUR04_SHADOW", "WILBUR05_SHADOW"
 };

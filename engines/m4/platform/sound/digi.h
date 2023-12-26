@@ -75,7 +75,7 @@ public:
 	 */
 	bool preload(const Common::String &name, int roomNum = -1);
 
-	void preload_sounds(const char **names);
+	void preload_sounds(const char *const *names);
 	void unload_sounds();
 	void unload(const Common::String &name);
 	void task();

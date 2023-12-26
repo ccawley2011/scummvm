@@ -87,7 +87,7 @@ public:
 	 * Use nullptr in place of a lookline, takeline, or useline if you don't want to this function
 	 * to handle it
 	 */
-	bool wilbur_said(const char *list[][4]);
+	bool wilbur_said(const char *const list[][4]);
 
 	void wilbur_speech_random(const char *name1, const char *name2, int trigger = -1) {
 		speech_random(2, trigger, name1, name2);
@@ -115,7 +115,7 @@ public:
 		speech_random(7, trigger, name1, name2, name3, name4, name5, name6, name7);
 	}
 
-	bool wilbur_parser(const char **list);
+	bool wilbur_parser(const char *const *list);
 
 	bool wilbur_match(const WilburMatch *list);
 

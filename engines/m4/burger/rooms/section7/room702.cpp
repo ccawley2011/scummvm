@@ -31,7 +31,7 @@ enum {
 	kCHANGE_FLUMIX_ANIMATION = 5
 };
 
-static const char *SAID[][4] = {
+static const char *const SAID[][4] = {
 	{ "DOOR",          nullptr,    "702W002", nullptr   },
 	{ "FLUMIX",        "702w001z", "702W002", "702W002" },
 	{ "ABDUCT-O-TRON", "702W006",  nullptr,   "702W007" },

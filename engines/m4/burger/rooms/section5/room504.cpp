@@ -27,7 +27,7 @@ namespace M4 {
 namespace Burger {
 namespace Rooms {
 
-const char *Room504::SAID[][4] = {
+const char *const Room504::SAID[][4] = {
 	{ "STAIRS",         "504w002", "500w001", nullptr   },
 	{ "BORK",           "504w007", "500w002", "500w002" },
 	{ "BORK GUTS",      "504w009", "504w010", "504w010" },
@@ -369,7 +369,7 @@ void Room504::daemon() {
 		break;
 
 	case 6: {
-		static const char *NAMES[5] = {
+		static const char *const NAMES[5] = {
 			"504SPRK1", "504SPRK2", "504SPRK3", "504SPRK4", "504SPRK5" };
 		_sparkName = NAMES[imath_ranged_rand(0, 4)];
 		_state5 = imath_ranged_rand(1, 6);

@@ -29,7 +29,7 @@ namespace M4 {
 namespace Burger {
 namespace Rooms {
 
-static const char *SAID[][4] = {
+static const char *const SAID[][4] = {
 	{ "WILBUR'S ROOM",     nullptr,   "175w001", nullptr   },
 	{ "BATHROOM",          nullptr,   "175w001", nullptr   },
 	{ "AUNT POLLY'S ROOM", "175w002", "175w001", "175w003" },

@@ -27,7 +27,7 @@ namespace M4 {
 namespace Burger {
 namespace Rooms {
 
-const char *Room505::SAID[][4] = {
+const char *const Room505::SAID[][4] = {
 	{ "WILBUR'S ROOM", nullptr,   "500w001", nullptr   },
 	{ "BATHROOM",      nullptr,   "500w001", nullptr   },
 	{ "AUNT POLLY'S ROOM", nullptr, "500w001", nullptr },

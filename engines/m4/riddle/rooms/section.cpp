@@ -75,7 +75,7 @@ void Section::global_room_init() {
 		case 603:
 		case 604:
 		case 612: {
-			static const char *NAMES[] = {
+			static const char *const NAMES[] = {
 				"fs_wood1", "fs_wood2", "fs_wood3", "fs_wood4", "fs_wood5", nullptr
 			};
 			_G(digi).preload_sounds(NAMES);
@@ -89,7 +89,7 @@ void Section::global_room_init() {
 		case 302:
 		case 303:
 		case 305: {
-			static const char *NAMES[] = {
+			static const char *const NAMES[] = {
 				"fs_dirt1", "fs_dirt2", "fs_dirt3", "fs_dirt4", "fs_dirt5", nullptr
 			};
 			_G(digi).preload_sounds(NAMES);
@@ -106,7 +106,7 @@ void Section::global_room_init() {
 		case 317:
 		case 318:
 		case 319: {
-			static const char *NAMES[] = {
+			static const char *const NAMES[] = {
 				"fs_mine1", "fs_mine2", "fs_mine3", "fs_mine4", "fs_mine5", nullptr
 			};
 			_G(digi).preload_sounds(NAMES);
@@ -114,7 +114,7 @@ void Section::global_room_init() {
 		}
 
 		default: {
-			static const char *NAMES[] = {
+			static const char *const NAMES[] = {
 				"fs_hard1", "fs_hard2", "fs_hard3", "fs_hard4", "fs_hard5", nullptr
 			};
 			_G(digi).preload_sounds(NAMES);

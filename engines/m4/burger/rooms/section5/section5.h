@@ -62,7 +62,7 @@ private:
 	void takeGizmo(RGB8 *pal);
 
 public:
-	static const char *PARSER[];
+	static const char *const PARSER[];
 	static const seriesPlayBreak PLAY1[];
 	static machine *_bork;
 	static const char *_digiName;

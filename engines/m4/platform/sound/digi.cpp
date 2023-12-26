@@ -35,7 +35,7 @@ Digi::~Digi() {
 	unload_sounds();
 }
 
-void Digi::preload_sounds(const char **names) {
+void Digi::preload_sounds(const char *const *names) {
 	if (!_sounds.empty())
 		unload_sounds();
 

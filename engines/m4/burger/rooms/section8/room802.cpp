@@ -558,7 +558,7 @@ void Room802::loadSeries() {
 	digi_preload_play_breaks(PLAY2);
 	digi_preload_play_breaks(PLAY6);
 
-	static const char *NAMES[12] = {
+	static const char *const NAMES[12] = {
 		"802BFX02", "802BFX03", "802BF01", "802BF01S", "802BF02", "802BF02S",
 		"802BF03", "802BF03S", "802BW01", "802BW02", "802BW03", "802BW04"
 	};

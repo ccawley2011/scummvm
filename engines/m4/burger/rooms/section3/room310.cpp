@@ -31,7 +31,7 @@ enum {
 	kCHANGE_TRUFFLES_ANIMATION = 3
 };
 
-const char *Room310::SAID[][4] = {
+const char *const Room310::SAID[][4] = {
 	{ "TUNNEL",   "310w002", "310w003",  nullptr   },
 	{ "PROBE",    "310w004",  nullptr,   nullptr   },
 	{ "TRUFFLES", nullptr,    "310w011", "310w012" },

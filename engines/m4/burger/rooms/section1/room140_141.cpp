@@ -34,7 +34,7 @@ enum {
 	kCHANGE_WILBUR_ANIMATION = 8
 };
 
-static const char *SAID[][4] = {
+static const char *const SAID[][4] = {
 	{ "TRUFFLES", "141W002", "141W003", "141W003" },
 	{ "ISLAND",   "141W004", "141W003", "141W003" },
 	{ "CABIN",    "141W005", "141W003", "141W006" },
@@ -1040,7 +1040,7 @@ void Room140_141::playRandom() {
 }
 
 void Room140_141::loadSeries() {
-	static const char *NAMES[34] = {
+	static const char *const NAMES[34] = {
 		"140pe02", "140pe02s", "140pe03", "140pe03s", "140pe04",
 		"140pe04s", "140pe06", "140pe06s", "140pe07", "140pe07s",
 		"140pe08", "140pe08s", "140pe09", "140pe09s", "140pe11",

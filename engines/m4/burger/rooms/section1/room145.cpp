@@ -37,7 +37,7 @@ enum {
 	kSPEAK_TO_DRUMZ = 10
 };
 
-const char *Room145::SAID[][4] = {
+const char *const Room145::SAID[][4] = {
 	{ "TOUR BUS",      "145w001", "145w002", "145w003" },
 	{ "INSTRUMENTS",   "145w005", "145w006", "145w006" },
 	{ "AMPLIFIER ",    "145w009", nullptr,   "145w012" },
@@ -786,7 +786,7 @@ void Room145::parser() {
 }
 
 void Room145::loadDrum() {
-	static const char *NAMES[12] = {
+	static const char *const NAMES[12] = {
 		"145dz01", "145dz02", "145dz03", "145dz04", "145dz05",
 		"145dz06", "145dz01s", "145dz02s", "145dz03s", "145dz04s",
 		"145dz05s", "145dz06s"
@@ -799,7 +799,7 @@ void Room145::loadDrum() {
 }
 
 void Room145::loadRx() {
-	static const char *NAMES[8] = {
+	static const char *const NAMES[8] = {
 		"145rx01", "145rx02", "145rx04", "145rx06",
 		 "145rx01s", "145rx02s", "145rx04s", "145rx06s"
 	};
@@ -975,7 +975,7 @@ void Room145::resetRoxy() {
 
 void Room145::playRandomDigi1() {
 	_state2 = 1;
-	static const char *NAMES[4] = { "145v907", "145v908", "145v909", "145v910" };
+	static const char *const NAMES[4] = { "145v907", "145v908", "145v909", "145v910" };
 
 	_digiName1 = NAMES[imath_ranged_rand(0, 3)];
 	digi_preload(_digiName1);
@@ -984,7 +984,7 @@ void Room145::playRandomDigi1() {
 
 void Room145::playRandomDigi2() {
 	_state2 = 1;
-	static const char *NAMES[13] = {
+	static const char *const NAMES[13] = {
 		"145r907", "145r908", "145r909", "145r910", "145r911",
 		"145r912", "145r913", "145r914", "145r915", "145r916",
 		"145r917", "145r918", "145r919"

@@ -100,7 +100,7 @@ static const seriesPlayBreak PLAY_BREAKS4[] = {
 	PLAY_BREAK_END
 };
 
-static const char *SAID1[][4] = {
+static const char *const SAID1[][4] = {
 	{ "BARBERSHOP", nullptr, "101W003", "101W003" },
 	{ "DOOR", "101W006", nullptr, nullptr },
 	{ "FIRE ESCAPE", "101W004", nullptr, nullptr },
