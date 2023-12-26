@@ -458,7 +458,7 @@ void ImageFile3DO::loadAnimationFile(Common::SeekableReadStream &stream) {
 	}
 }
 
-static byte imagefile3DO_cel_bitsPerPixelLookupTable[8] = {
+static const byte imagefile3DO_cel_bitsPerPixelLookupTable[8] = {
 	0, 1, 2, 4, 6, 8, 16, 0
 };
 
@@ -804,7 +804,7 @@ void ImageFile3DO::load3DOCelRoomData(Common::SeekableReadStream &stream) {
 	warning("ccbPPMP0 = %d, ccbPPMP1 = %d", ccbPPMP0, ccbPPMP1);
 }
 
-static uint16 imagefile3DO_cel_bitsMask[17] = {
+static const uint16 imagefile3DO_cel_bitsMask[17] = {
 	0,
 	0x0001, 0x0003, 0x0007, 0x000F, 0x001F, 0x003F, 0x007F, 0x00FF,
 	0x01FF, 0x03FF, 0x07FF, 0x0FFF, 0x1FFF, 0x3FFF, 0x7FFF, 0xFFFF

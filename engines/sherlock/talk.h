@@ -170,7 +170,7 @@ private:
 	void stripVoiceCommands();
 protected:
 	SherlockEngine *_vm;
-	OpcodeMethod *_opcodeTable;
+	const OpcodeMethod *_opcodeTable;
 	Common::Stack<SequenceEntry> _savedSequences;
 	Common::Stack<ScriptStackEntry> _scriptStack;
 	Common::Array<TalkHistoryEntry> _talkHistory;

@@ -28,7 +28,7 @@ namespace Sherlock {
 namespace Scalpel {
 namespace TsAGE {
 
-static uint16 bitMasks[4] = {0x1ff, 0x3ff, 0x7ff, 0xfff};
+static const uint16 bitMasks[4] = {0x1ff, 0x3ff, 0x7ff, 0xfff};
 
 uint16 BitReader::readToken() {
 	assert((numBits >= 9) && (numBits <= 12));

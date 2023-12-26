@@ -108,7 +108,7 @@ const byte SCALPEL_OPCODES[] = {
 /*----------------------------------------------------------------*/
 
 ScalpelTalk::ScalpelTalk(SherlockEngine *vm) : Talk(vm) {
-	static OpcodeMethod OPCODE_METHODS[] = {
+	static const OpcodeMethod OPCODE_METHODS[] = {
 		(OpcodeMethod)&ScalpelTalk::cmdSwitchSpeaker,
 		(OpcodeMethod)&ScalpelTalk::cmdRunCAnimation,
 		(OpcodeMethod)&ScalpelTalk::cmdAssignPortraitLocation,
