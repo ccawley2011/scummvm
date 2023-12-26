@@ -63,7 +63,7 @@ private:
 	Common::Array<Common::String> _allResourceNames;
 
 private:
-	static uint32 _cp1250ToUTF32[128];
+	static const uint32 _cp1250ToUTF32[128];
 	Common::String convertString(const Common::String &s);
 };
 

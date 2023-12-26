@@ -34,7 +34,7 @@
 
 namespace Sludge {
 
-const char *typeName[] = { "undefined", "number", "user function", "string",
+const char *const typeName[] = { "undefined", "number", "user function", "string",
 		"built-in function", "file", "stack", "object type", "animation",
 		"costume", "fast array" };
 

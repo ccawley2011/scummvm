@@ -90,7 +90,7 @@ uint ResourceManager::openFileFromNum(int num) {
 	return _bigDataFile->readUint32LE();
 }
 
-uint32 ResourceManager::_cp1250ToUTF32[128] = {
+const uint32 ResourceManager::_cp1250ToUTF32[128] = {
 	/* 0x80 */
 	0x20ac, 0xfffd, 0x201a, 0xfffd, 0x201e, 0x2026, 0x2020, 0x2021,
 	0xfffd, 0x2030, 0x0160, 0x2039, 0x015a, 0x0164, 0x017d, 0x0179,

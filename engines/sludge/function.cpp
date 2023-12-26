@@ -41,7 +41,7 @@ LoadedFunction *allRunningFunctions = NULL;
 VariableStack *noStack = NULL;
 Variable *globalVars = NULL;
 
-const char *sludgeText[] = { "?????", "RETURN", "BRANCH", "BR_ZERO",
+const char *const sludgeText[] = { "?????", "RETURN", "BRANCH", "BR_ZERO",
 		"SET_GLOBAL", "SET_LOCAL", "LOAD_GLOBAL", "LOAD_LOCAL", "PLUS", "MINUS",
 		"MULT", "DIVIDE", "AND", "OR", "EQUALS", "NOT_EQ", "MODULUS",
 		"LOAD_VALUE", "LOAD_BUILT", "LOAD_FUNC", "CALLIT", "LOAD_STRING",
