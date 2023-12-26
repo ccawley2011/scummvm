@@ -29,7 +29,7 @@ namespace Sky {
 
 #define	GRID_FILE_START	60000
 
-int8 Grid::_gridConvertTable[] = {
+const int8 Grid::_gridConvertTable[] = {
 	0,	//0
 	1,	//1
 	2,	//2

@@ -242,7 +242,7 @@ namespace Sky {
 #define CD_105	60098
 
 
-uint16 Intro::_mainIntroSeq[] = {
+const uint16 Intro::_mainIntroSeq[] = {
 	DELAY,       3000, // keep virgin screen up
 	FADEDOWN,
 	SHOWSCREEN, 60112, // revo screen + palette
@@ -256,7 +256,7 @@ uint16 Intro::_mainIntroSeq[] = {
 	SEQEND
 };
 
-uint16 Intro::_cdIntroSeq[] = {
+const uint16 Intro::_cdIntroSeq[] = {
 	/* black screen */
 	PLAYVOICE,	CDV_00,	// Foster: "The old man was trying to tell the future. Looking for pictures in the campfire..."
 	LOADBG,		59499,	// Fire crackle
@@ -573,7 +573,7 @@ uint16 Intro::_cdIntroSeq[] = {
 	SEQEND
 };
 
-uint16 Intro::_floppyIntroSeq[] = {
+const uint16 Intro::_floppyIntroSeq[] = {
 	// This one could be fullscreen, but that causes animation glitches.
 	SHOWSCREEN,   60081,
 	FADEUP,       60080,
@@ -674,7 +674,7 @@ bool Intro::doIntro(bool floppyIntro) {
 	if (floppyIntro)
 		_skyMusic->startMusic(1);
 
-	uint16 *seqData = _mainIntroSeq;
+	const uint16 *seqData = _mainIntroSeq;
 	while (*seqData != SEQEND) {
 		if (!nextPart(seqData))
 			return false;
@@ -691,7 +691,7 @@ bool Intro::doIntro(bool floppyIntro) {
 	return true;
 }
 
-bool Intro::nextPart(uint16 *&data) {
+bool Intro::nextPart(const uint16 *&data) {
 	uint8 *vData = NULL;
 	Audio::RewindableAudioStream *stream = 0;
 
@@ -836,7 +836,7 @@ bool Intro::floppyScrollFlirt() {
 	return doContinue;
 }
 
-bool Intro::commandFlirt(uint16 *&data) {
+bool Intro::commandFlirt(const uint16 *&data) {
 	_skyScreen->startSequence(*data++);
 
 	while ((*data != COMMANDEND) || _skyScreen->sequenceRunning()) {

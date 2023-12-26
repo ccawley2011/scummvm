@@ -40,9 +40,9 @@ public:
 	~Intro();
 	bool doIntro(bool floppyIntro);
 private:
-	static uint16 _mainIntroSeq[];
-	static uint16 _floppyIntroSeq[];
-	static uint16 _cdIntroSeq[];
+	static const uint16 _mainIntroSeq[];
+	static const uint16 _floppyIntroSeq[];
+	static const uint16 _cdIntroSeq[];
 
 	Disk *_skyDisk;
 	Screen *_skyScreen;
@@ -60,9 +60,9 @@ private:
 	int32 _relDelay;
 
 	bool escDelay(uint32 msecs);
-	bool nextPart(uint16 *&data);
+	bool nextPart(const uint16 *&data);
 	bool floppyScrollFlirt();
-	bool commandFlirt(uint16 *&data);
+	bool commandFlirt(const uint16 *&data);
 	void showTextBuf();
 	void restoreScreen();
 };

@@ -38,7 +38,7 @@ namespace Sky {
 #define NO_MAIN_OBJECTS	24
 #define NO_LINC_OBJECTS	21
 
-uint32 Mouse::_mouseMainObjects[24] = {
+const uint32 Mouse::_mouseMainObjects[24] = {
 	65,
 	9,
 	66,
@@ -65,7 +65,7 @@ uint32 Mouse::_mouseMainObjects[24] = {
 	38
 };
 
-uint32 Mouse::_mouseLincObjects[21] = {
+const uint32 Mouse::_mouseLincObjects[21] = {
 	24625,
 	24649,
 	24827,

@@ -71,7 +71,7 @@ namespace Sky {
 
 void *SkyEngine::_itemList[300];
 SystemVars *SkyEngine::_systemVars = nullptr;
-const char *SkyEngine::shortcutsKeymapId = "sky-shortcuts";
+const char *const SkyEngine::shortcutsKeymapId = "sky-shortcuts";
 
 SkyEngine::SkyEngine(OSystem *syst)
 	: Engine(syst), _fastMode(0), _debugger(0), _big5Font(nullptr) {
