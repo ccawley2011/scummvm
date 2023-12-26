@@ -34,7 +34,7 @@ enum {
 	kSOMEONE_TOOK_KEYS = 4
 };
 
-static const char *SAID[][4] = {
+static const char *const SAID[][4] = {
 	{ "PATROL CAR",       "137W002", "137W003", "137W004" },
 	{ "TRUNK",            nullptr,   "137W008", "137W008" },
 	{ "JAWZ O' LIFE",     "137W010", nullptr,   nullptr   },

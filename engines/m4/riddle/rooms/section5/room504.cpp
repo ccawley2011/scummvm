@@ -31,9 +31,9 @@ namespace Riddle {
 namespace Rooms {
 
 static const int16 NORMAL_DIRS[] = { 200, -1 };
-static const char *NORMAL_NAMES[] = { "menendez walker 3" };
+static const char *const NORMAL_NAMES[] = { "menendez walker 3" };
 static const int16 SHADOW_DIRS[] = { 210, -1 };
-static const char *SHADOW_NAMES[] = { "menendez walker shadow 3" };
+static const char *const SHADOW_NAMES[] = { "menendez walker shadow 3" };
 
 
 void Room504::init() {
@@ -3447,7 +3447,7 @@ void Room504::setMiscItems() {
 }
 
 void Room504::disableVinesRope() {
-	static const char *HOTSPOTS[] = {
+	static const char *const HOTSPOTS[] = {
 		"ROPE ", "GREEN VINE ", "BROWN VINE ", "VINES ",
 		"ROPE  ", "GREEN VINE  ", "BROWN VINE  "
 		"VINES  ", "ROPE COIL ", "GREEN VINE COIL ",
@@ -3460,7 +3460,7 @@ void Room504::disableVinesRope() {
 		"BROWN VINE COIL    ", "COIL OF VINES    ",
 		nullptr
 	};
-	for (const char **hs = HOTSPOTS; *hs; ++hs)
+	for (const char *const *hs = HOTSPOTS; *hs; ++hs)
 		hotspot_set_active(*hs, false);
 
 	deleteHotspot("ROPE   ");

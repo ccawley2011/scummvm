@@ -34,7 +34,7 @@ enum {
 	kCHANGE_ELGUS_ANIMATION = 1
 };
 
-static const char *SAID[][4] = {
+static const char *const SAID[][4] = {
 	{ "TOWN RECORDS",     nullptr,   nullptr,   nullptr   },
 	{ "MAYOR'S OFFICE",   "105W002", nullptr,   nullptr   },
 	{ "COMPLAINTS DEPT.", "105W003", nullptr,   nullptr   },
@@ -1696,7 +1696,7 @@ void Room105::mayorsDoor() {
 }
 
 void Room105::loadAssets1() {
-	static const char *NAMES[12] = {
+	static const char *const NAMES[12] = {
 		"105mg02", "105mg02s", "105mg03", "105mg03s", "105mg04", "105mg04s",
 		"105mg05", "105mg05s", "105mg06", "105mg06s", "105mg07", "105mg07s"
 	};
@@ -1706,7 +1706,7 @@ void Room105::loadAssets1() {
 }
 
 void Room105::loadAssets2() {
-	static const char *NAMES[4] = {
+	static const char *const NAMES[4] = {
 		"105mg10", "105mg11", "105mg12", "105mg13"
 	};
 
@@ -1715,7 +1715,7 @@ void Room105::loadAssets2() {
 }
 
 void Room105::loadAssets3() {
-	static const char *NAMES[12] = {
+	static const char *const NAMES[12] = {
 		"105eg02", "105eg02s", "105eg04", "105eg04s", "105eg05", "105eg05s",
 		"105eg06", "105eg06s", "105eg07", "105eg07s", "105eg09", "105eg09s"
 	};
@@ -1728,7 +1728,7 @@ void Room105::loadAssets3() {
 }
 
 void Room105::loadAssets4() {
-	static const char *NAMES[5] = {
+	static const char *const NAMES[5] = {
 		"105ag02", "105ag03", "105ag05", "105ag06", "105ag07"
 	};
 

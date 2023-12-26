@@ -482,7 +482,7 @@ void Room605::parser() {
 	} else if (lookFlag && player_said("glyphs")) {
 		digi_play("605r35", 1);
 	} else if (lookFlag && player_said("SAMANTHA")) {
-		static const char *DIGI[4] = { "605r05", "605r06", "605r07", "605r08" };
+		static const char *const DIGI[4] = { "605r05", "605r06", "605r07", "605r08" };
 		digi_play(DIGI[imath_ranged_rand(0, 3)], 1);
 	} else if (lookFlag && player_said("topknot")) {
 		if (_G(flags)[V203] == 2) {

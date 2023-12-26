@@ -254,7 +254,7 @@ void Room407::init() {
 			setHotspots();
 		}
 	} else {
-		static const char *HOTSPOTS[] = {
+		static const char *const HOTSPOTS[] = {
 			"GARDEN HOSE", "RUBBER PLUG", "SURGICAL TUBE",
 			"PUMP GRIPS", "PUMP GRIPS ", "JAR/CORK ",
 			"JAR/GRIPS ", "JAR/RUBBER PLUG ", "PUMP ROD ",

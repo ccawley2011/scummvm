@@ -38,14 +38,14 @@ void Room615::init() {
 	_val2 = 0;
 	_val3 = 90;
 
-	static const char *DIGI[] = {
+	static const char *const DIGI[] = {
 		"615r01", "615t01", "615r02", "615r02a",
 		"615t02", "615t03", "615r03", "615t04",
 		"615r04", "615t05", "615r05", "615t06",
 		"615r06", "615r08", "615r12", "615r13",
 		"615t10", "615t10a", "615r15", nullptr
 	};
-	for (static const char **name = DIGI; *name; ++name)
+	for (const char *const *name = DIGI; *name; ++name)
 		digi_preload(*name);
 
 	_ripTalking = series_load("615 RIP TALKING");

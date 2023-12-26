@@ -37,15 +37,15 @@ const int16 RIPLEY_SHADOWS_DIRS[6] = {
 	10, 11, 12, 13, 14, -1
 };
 
-static const char *RIPLEY_SERIES[5] = {
+static const char *const RIPLEY_SERIES[5] = {
 	"test1", "test2", "test3", "test4", "test5"
 };
 
-static const char *RIPLEY_SHADOWS[5] = {
+static const char *const RIPLEY_SHADOWS[5] = {
 	"ripsh1", "ripsh2", "ripsh3", "ripsh4", "ripsh5"
 };
 
-static const char *SAFARI_SERIES[5] = {
+static const char *const SAFARI_SERIES[5] = {
 	"rip safari walker position 1",
 	"rip safari walker position 2",
 	"rip safari walker position 3",
@@ -56,7 +56,7 @@ static const int16 SAFARI_SERIES_DIRS[] = {
 	0, 1, 2, 3, 4, -4
 };
 
-static const char *SAFARI_SHADOWS[5] = {
+static const char *const SAFARI_SHADOWS[5] = {
 	"safari shadow 1", "safari shadow 2", "safari shadow 3",
 	"safari shadow 4", "safari shadow 5"
 };

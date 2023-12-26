@@ -54,7 +54,7 @@ const Section6Room::GerbilPoint Room603::GERBIL[] = {
 	{ 392, 195 }, { 293, 196 }, { 461, 233 }, { 392, 195 }
 };
 
-static const char *SAID[][4] = {
+static const char *const SAID[][4] = {
 	{ "WATER DISH", nullptr,   "603w004", "603w005" },
 	{ "WATER",      "603w006", nullptr,   nullptr   },
 	{ "CARROT",     "603w008", "603w009", "603w010" },

@@ -80,7 +80,7 @@ struct Rectangle {
 
 class Mine : public Section3Room {
 private:
-	static const char *SAID[][4];
+	static const char *const SAID[][4];
 	static const int16 MINE_SCENE_NUMBERS[];
 	static const MineRoom MINE_INFO[];
 

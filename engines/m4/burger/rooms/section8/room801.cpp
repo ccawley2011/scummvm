@@ -660,7 +660,7 @@ void Room801::loadSeries1() {
 }
 
 void Room801::loadSeries2() {
-	static const char *NAMES[16] = {
+	static const char *const NAMES[16] = {
 		"804FX01", "804FX02", "804FX03", "804FX04", "804Wi01", "804Wi02",
 		"804Wi03", "804Wi04", "804Wi05", "804FL01", "804ZL01", "804FL01",
 		"804FLT01", "804ZLT01", "804FLX01", "804ZFX01"

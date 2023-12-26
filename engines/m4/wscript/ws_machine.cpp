@@ -610,7 +610,7 @@ static bool op_RESUME_SEQ(machine *m, int32 *pcOffset) {
 }
 
 
-bool (*immOpTable[])(machine *m, int32 *pcOffset) = {
+bool (*const immOpTable[])(machine *m, int32 *pcOffset) = {
 	nullptr,					//0		***END
 	&op_DO_NOTHING,				//1
 	&op_GOTO,					//2
@@ -629,7 +629,7 @@ bool (*immOpTable[])(machine *m, int32 *pcOffset) = {
 	&op_CLEAR_REGS				//15
 };
 
-void (*condOpTable[])(machine *m, int32 *pcOffset) = {
+void (*const condOpTable[])(machine *m, int32 *pcOffset) = {
 	&op_AFTER,					//0
 	&op_ON_END_SEQ,				//1
 	&op_ON_MSG,					//2

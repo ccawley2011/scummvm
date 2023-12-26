@@ -33,7 +33,7 @@ enum {
 	kCHANGE_DOG_ANIMATION = 12
 };
 
-const char *Room406::SAID[][4] = {
+const char *const Room406::SAID[][4] = {
 	{ "PEGLEG",         "406w003", "406w005", "406w005" },
 	{ "PEGLEG ",        "406w003", "406w005", "406w005" },
 	{ "PEGLEG  ",       "406w004", "406w005", "406w005" },

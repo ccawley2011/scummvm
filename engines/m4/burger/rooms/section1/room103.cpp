@@ -36,7 +36,7 @@ enum {
 	kCHANGE_HARRY_ANIMATION = 20
 };
 
-static const char *SAID[][4] = {
+static const char *const SAID[][4] = {
 	{ "SATELLITE DISH", "103W001", "103W002", nullptr   },
 	{ "FIRE ESCAPE",    "103W005", "103W006", nullptr   },
 	{ "SCARECROW",      "103W008", "103W009", "103W009" },
@@ -201,7 +201,7 @@ void Room103::daemon() {
 
 	case 2:
 		if (++_val0 >= 5) {
-			static const char *NAMES[7] = {
+			static const char *const NAMES[7] = {
 				"103h002a", "103h002b", "103h002c", "103h002d",
 				"103h002e", "103h002f",  "103h002g"
 			};

@@ -44,7 +44,7 @@ void Room604::init() {
 		_val5 = 0;
 	}
 
-	static const char *DIGI[14] = {
+	static const char *const DIGI[14] = {
 		"GASPOUR", "610s01", "610_s02", "610_s02a",
 		"610_s03", "610_s03a", "610_s03b", "610k07",
 		"610k08", "610k09", "610k10", "610k11",

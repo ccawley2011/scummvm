@@ -35,7 +35,7 @@ enum {
 	kWILBUR_ARRESTED2 = 5
 };
 
-static const char *SAID[][4] = {
+static const char *const SAID[][4] = {
 	{ "GARBAGE CANS",   "106w002", "106w003",  nullptr    },
 	{ "POLICE STATION", "106w004", "106w004z", "106w004z" },
 	{ "JAIL CELL",      "106w005", "106w004z", "106w004z" },

@@ -27,12 +27,12 @@ namespace Riddle {
 namespace Rooms {
 
 const int16 S4_NORMAL_DIRS[] = { 200, 201, -1 };
-const char *S4_NORMAL_NAMES[] = {
+const char *const S4_NORMAL_NAMES[] = {
 	"wolf walker pos1",
 	"wolf walker pos3"
 };
 const int16 S4_SHADOW_DIRS[] = { 210, 211, -1 };
-const char *S4_SHADOW_NAMES[] = {
+const char *const S4_SHADOW_NAMES[] = {
 	 "wolf shadow pos1",
 	"wolf shadow pos3"
 };

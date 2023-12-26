@@ -32,7 +32,7 @@ namespace M4 {
 
 #define VERIFY_INTIALIZED(s) if (!_GWS(cruncherInitialized)) error_show(FL, 'WSCI', "%s failed.", s);
 
-static int32 dataFormats[] = { 0, 5, 8, 12, 16 };
+static const int32 dataFormats[] = { 0, 5, 8, 12, 16 };
 
 static const frac16 sinCosTable[320] = {
 	(frac16)0,		(frac16)1608,	(frac16)3215,	(frac16)4821,
@@ -117,10 +117,10 @@ static const frac16 sinCosTable[320] = {
 	(frac16)65220,	(frac16)65358,	(frac16)65457,	(frac16)65516
 };
 
-static const frac16 *sinTable = &(sinCosTable[0]);
-static const frac16 *cosTable = &(sinCosTable[64]);
+static const frac16 *const sinTable = &(sinCosTable[0]);
+static const frac16 *const cosTable = &(sinCosTable[64]);
 
-int32 *ws_GetDataFormats() {
+const int32 *ws_GetDataFormats() {
 	return &dataFormats[0];
 }
 
@@ -1302,7 +1302,7 @@ static void op_CLOSE_STREAM_SS(Anim8 *myAnim8) {
 }
 
 
-void (*pCodeJmpTable[])(Anim8 *myAnim8) = {
+void (*const pCodeJmpTable[])(Anim8 *myAnim8) = {
 	&op_END,					//0
 	&op_CLEAR,					//1
 	&op_SET,					//2

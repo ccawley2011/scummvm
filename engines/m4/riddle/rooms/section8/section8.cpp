@@ -27,7 +27,7 @@ namespace Riddle {
 namespace Rooms {
 
 const int16 S8_SHADOW_DIRS1[] = { 230, 231, 232, 233, 234, -1 };
-const char *S8_SHADOW_NAMES1[] = {
+const char *const S8_SHADOW_NAMES1[] = {
 	"mctsh1",
 	"mctsh2",
 	"mctsh3",
@@ -36,7 +36,7 @@ const char *S8_SHADOW_NAMES1[] = {
 };
 
 const int16 S8_SHADOW_DIRS2[] = {220, 221, 222, 223, 224, -1};
-const char *S8_SHADOW_NAMES2[] = {
+const char *const S8_SHADOW_NAMES2[] = {
 	"mei chen trek walk pos1",
 	"mei chen trek walk pos2",
 	"mei chen trek walk pos3",

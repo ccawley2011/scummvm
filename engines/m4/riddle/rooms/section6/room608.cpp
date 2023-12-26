@@ -30,9 +30,9 @@ namespace Riddle {
 namespace Rooms {
 
 static const int16 NORMAL_DIRS1[] = { 220, 221, -1 };
-static const char *NORMAL_NAMES1[] = { "oldwk1", "oldwk3" };
+static const char *const NORMAL_NAMES1[] = { "oldwk1", "oldwk3" };
 static const int16 SHADOW_DIRS1[] = { 230, 231, -1 };
-static const char *SHADOW_NAMES1[] = { "tt walker shadow 1", "oldwk3s" };
+static const char *const SHADOW_NAMES1[] = { "tt walker shadow 1", "oldwk3s" };
 
 
 void Room608::init() {

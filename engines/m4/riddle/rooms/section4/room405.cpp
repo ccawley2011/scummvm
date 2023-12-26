@@ -29,13 +29,13 @@ namespace Riddle {
 namespace Rooms {
 
 static const int16 NORMAL_DIRS[] = { 220, 221, -1 };
-static const char *NORMAL_NAMES[] = {
+static const char *const NORMAL_NAMES[] = {
 	"baron walker pos1",
 	"baron walker pos7"
 };
 
 static const int16 SHADOW_DIRS[] = { 230, 231, -1 };
-static const char *SHADOW_NAMES[] = {
+static const char *const SHADOW_NAMES[] = {
 	"baron walker shadow pos1",
 	"baron walker shadow pos7"
 };

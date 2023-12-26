@@ -1425,7 +1425,7 @@ void Room102::setupLaz() {
 }
 
 const char *Room102::getDigi1(int num) const {
-	static const char *NAMES[34] = {
+	static const char *const NAMES[34] = {
 		"102h0323", "102h032b", "102h032c", "102h032d",
 		"102h032e", "102h032f", "102h032g", "102h032h",
 		"102h032i", "102h032j", "102h032k", "102h032l",
@@ -1440,7 +1440,7 @@ const char *Room102::getDigi1(int num) const {
 }
 
 const char *Room102::getDigi2(int num) const {
-	static const char *NAMES[35] = {
+	static const char *const NAMES[35] = {
 		"102_011", "102_004", "102_024", "102_006", "102_008",
 		"102_009", "102_013", "102_005", "102_014", "102_023",
 		"102_020", "102_011", "102_015", "102_006", "102_007",

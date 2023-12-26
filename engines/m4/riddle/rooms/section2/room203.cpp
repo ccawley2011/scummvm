@@ -32,23 +32,23 @@ namespace Riddle {
 namespace Rooms {
 
 const int16 OFFICIAL_NORMAL_DIRS[] = { 200, 201, 202, -1 };
-const char *OFFICIAL_NORMAL_NAMES[] = {
+const char *const OFFICIAL_NORMAL_NAMES[] = {
 	"official walk pos11", "official walk pos9", "official walk pos7"
 };
 const int16 OFFICIAL_SHADOW_DIRS[] = { 210, 211, 212, -1 };
-const char *OFFICIAL_SHADOW_NAMES[] = {
+const char *const OFFICIAL_SHADOW_NAMES[] = {
 	"203of09s", "203of04s", "203of12s"
 };
 
 const int16 SNORMAL1_DIRS[] = { 200, -1 };
-const char *SNORMAL1_NAMES[] = { "203s01" };
+const char *const SNORMAL1_NAMES[] = { "203s01" };
 const int16 SSHADOW1_DIRS[] = { 210, -1 };
-const char *SSHADOW1_NAMES[] = { "203ssh01" };
+const char *const SSHADOW1_NAMES[] = { "203ssh01" };
 
 const int16 SNORMAL2_DIRS[] = { 240, -1 };
-const char *SNORMAL2_NAMES[] = { "203s02" };
+const char *const SNORMAL2_NAMES[] = { "203s02" };
 const int16 SSHADOW2_DIRS[] = { 250, -1 };
-const char *SSHADOW2_NAMES[] = { "203ssh02" };
+const char *const SSHADOW2_NAMES[] = { "203ssh02" };
 
 
 void Room203::init() {

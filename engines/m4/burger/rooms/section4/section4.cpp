@@ -26,7 +26,7 @@ namespace M4 {
 namespace Burger {
 namespace Rooms {
 
-const char *Section4::PARSER[] = {
+const char *const Section4::PARSER[] = {
 	"DEED",
 	"TAKE",
 	nullptr,

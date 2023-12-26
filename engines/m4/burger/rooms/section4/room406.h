@@ -31,7 +31,7 @@ namespace Rooms {
 
 class Room406 : public Section4Room {
 private:
-	static const char *SAID[][4];
+	static const char *const SAID[][4];
 	static const WilburMatch MATCH[];
 	static const seriesStreamBreak SERIES1[];
 	static const seriesPlayBreak PLAY1[];

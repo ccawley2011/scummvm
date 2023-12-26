@@ -26,7 +26,7 @@ namespace M4 {
 namespace Burger {
 namespace Rooms {
 
-const char *Room404::SAID[][4] = {
+const char *const Room404::SAID[][4] = {
 	{ "QUARTER ",     "404w001", nullptr,   "404w002" },
 	{ "IMPOUND YARD", nullptr,   "400w001", nullptr   },
 	{ "TOILET",       "404w003", "400w001", "404w004" },

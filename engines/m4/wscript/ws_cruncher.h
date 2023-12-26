@@ -102,7 +102,7 @@ struct WSCruncher_Globals {
 	int32 _pcOffsetOld = 0;
 };
 
-int32 *ws_GetDataFormats();
+const int32 *ws_GetDataFormats();
 bool ws_InitCruncher();
 void ws_KillCruncher();
 

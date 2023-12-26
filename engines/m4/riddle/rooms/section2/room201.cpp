@@ -28,7 +28,7 @@ namespace M4 {
 namespace Riddle {
 namespace Rooms {
 
-static const char *LOOK[][2] = {
+static const char *const LOOK[][2] = {
 	{ "VASE",          "201r08" },
 	{ "POSTCARD RACK", "201r09" },
 	{ "POSTER",        "201r10" },
@@ -44,7 +44,7 @@ static const char *LOOK[][2] = {
 	{ nullptr, nullptr }
 };
 
-static const char *TAKE[][2] = {
+static const char *const TAKE[][2] = {
 	{ "POSTCARD RACK", "201r19" },
 	{ "MAGAZINES",     "201r20" },
 	{ "VASE",          "201r41" },
@@ -52,7 +52,7 @@ static const char *TAKE[][2] = {
 	{ nullptr, nullptr }
 };
 
-static const char *USE[][2] = {
+static const char *const USE[][2] = {
 	{ "MONEY WITH AGENT", "201r43" },
 	{ "SOFA",             "201r44" },
 	{ "CHAIR",            "201r44" },

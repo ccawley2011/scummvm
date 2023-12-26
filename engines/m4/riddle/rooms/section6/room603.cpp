@@ -29,17 +29,17 @@ namespace Riddle {
 namespace Rooms {
 
 static const int16 NORMAL_DIRS1[] = { 200, -1 };
-static const char *NORMAL_NAMES1[] = { "shen guo walker 3" };
+static const char *const NORMAL_NAMES1[] = { "shen guo walker 3" };
 static const int16 SHADOW_DIRS1[] = { 210, -1 };
-static const char *SHADOW_NAMES1[] = { "shen guo shadow 3" };
+static const char *const SHADOW_NAMES1[] = { "shen guo shadow 3" };
 
 static const int16 NORMAL_DIRS2[] = { 220, -1 };
-static const char *NORMAL_NAMES2[] = { "kuang walker 2" };
+static const char *const NORMAL_NAMES2[] = { "kuang walker 2" };
 static const int16 SHADOW_DIRS2[] = { 230, -1 };
-static const char *SHADOW_NAMES2[] = { "kuangs shadow 2" };
+static const char *const SHADOW_NAMES2[] = { "kuangs shadow 2" };
 
 
-static const char *SAID[][2] = {
+static const char *const SAID[][2] = {
 	{ "shed",          "603r03" },
 	{ "wire",          "603r04" },
 	{ "power line",    "603r05" },

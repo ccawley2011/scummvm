@@ -43,7 +43,7 @@ namespace Burger {
 #define SHADOW_PLAYER          0
 #define SHADOW_ALT          1
 
-static const char *WILBUR_SERIES[8] = {
+static const char *const WILBUR_SERIES[8] = {
 	"WILBUR01", "WILBUR02", "WILBUR03", "WILBUR04", "WILBUR05",
 	"WILBUR07", "WILBUR08", "WILBUR09"
 };
@@ -51,7 +51,7 @@ static const int16 WILBUR_SERIES_DIRS[] = {
 	0, 1, 2, 3, 4, 5, 6, 7, -1
 };
 
-static const char *WILBUR_SHADOWS[5] = {
+static const char *const WILBUR_SHADOWS[5] = {
 	"WILBUR01_SHADOW", "WILBUR02_SHADOW", "WILBUR03_SHADOW",
 	"WILBUR04_SHADOW", "WILBUR05_SHADOW"
 };
@@ -239,7 +239,7 @@ void Walker::wilbur_say() {
 	_G(kernel).trigger_mode = oldMode;
 }
 
-bool Walker::wilbur_said(const char *list[][4]) {
+bool Walker::wilbur_said(const char *const list[][4]) {
 	if (!list)
 		return false;
 
@@ -359,8 +359,8 @@ void Walker::speech_random(int count, int trigger,
 	wilbur_speech(names[imath_ranged_rand(1, count) - 1], trigger);
 }
 
-bool Walker::wilbur_parser(const char **list) {
-	for (const char **curr = list; *curr; ++curr) {
+bool Walker::wilbur_parser(const char *const *list) {
+	for (const char *const *curr = list; *curr; ++curr) {
 		if (player_said(*curr)) {
 			// Found section for the item
 			bool useDefault = true;

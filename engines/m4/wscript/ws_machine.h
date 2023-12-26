@@ -190,7 +190,7 @@ struct WSMachine_Globals {
 	int32 _oldTime = 0;
 	bool _enginesPaused = false;
 
-	int32 *_dataFormats = nullptr;
+	const int32 *_dataFormats = nullptr;
 	uint32 _machineIDCount = 0;
 	machine *_firstMachine = nullptr;
 

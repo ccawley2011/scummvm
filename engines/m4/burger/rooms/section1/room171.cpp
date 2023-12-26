@@ -32,7 +32,7 @@ enum {
 	kCHANGE_POLLY_ANIMATION = 5
 };
 
-static const char *SAID[][4] = {
+static const char *const SAID[][4] = {
 	{ "AUNT POLLY", "171w001", "171w002", "171w002" },
 	{ "FRONT DOOR", "171w003", "171w002", nullptr   },
 	{ "KITCHEN",    nullptr,   "171w002", nullptr   },

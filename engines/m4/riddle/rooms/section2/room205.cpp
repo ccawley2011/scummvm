@@ -33,14 +33,14 @@ namespace Rooms {
 
 
 static const int16 WALKER_DIRS[] = {200, 201, -1};
-static const char *WALKER_NAMES[] = {"kuang walker 10", "kuang walker 6"};
+static const char *const WALKER_NAMES[] = {"kuang walker 10", "kuang walker 6"};
 static const int16 SHADOW_DIRS[] = {210, 211, -1};
-static const char *SHADOW_NAMES[] = {"kuangs shadow 10", "kuangs shadow 6"};
+static const char *const SHADOW_NAMES[] = {"kuangs shadow 10", "kuangs shadow 6"};
 
 static const int16 WALKER_DIRS2[] = {240, -1};
-static const char *WALKER_NAMES2[] = {"shen guo walker 12"};
+static const char *const WALKER_NAMES2[] = {"shen guo walker 12"};
 static const int16 SHADOW_DIRS2[] = {250, -1};
-static const char *SHADOW_NAMES2[] = {"shen guo shadow 12"};
+static const char *const SHADOW_NAMES2[] = {"shen guo shadow 12"};
 
 void Room205::preload() {
 	LoadWSAssets("OTHER SCRIPT", _G(master_palette));

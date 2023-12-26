@@ -33,7 +33,7 @@ enum {
 	kCHANGE_VERA_ANIMATION = 17
 };
 
-const char *Room405::SAID[][4] = {
+const char *const Room405::SAID[][4] = {
 	{ "VIPE",          nullptr,   "400W001", "400W001" },
 	{ "GUITAR",        "405w003", nullptr,   nullptr   },
 	{ "RECORDS",       "405w004", nullptr,   nullptr   },

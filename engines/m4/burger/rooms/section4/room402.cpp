@@ -32,7 +32,7 @@ enum {
 	kCHANGE_ELMO_ANIMATION = 3
 };
 
-const char *Room402::SAID[][4] = {
+const char *const Room402::SAID[][4] = {
 	{ "bench",       "402w006", nullptr,   "402w007" },
 	{ "force field", "400w005", nullptr,   "400w001" },
 	{ "sidewalk",    nullptr,   nullptr,   nullptr   },
@@ -224,7 +224,7 @@ void Room402::init() {
 		}
 	} else {
 		_G(flags)[kDisableFootsteps] = 1;
-		static const char *NAMES[11] = {
+		static const char *const NAMES[11] = {
 			"402p903a", "402p903b", "402p903c", "402p903d", "402p903e", "402p903f",
 			"402s010f", "402s010g", "402s010h", "402s010a", "402s010d"
 		};
@@ -1212,7 +1212,7 @@ void Room402::playDigiName() {
 }
 
 void Room402::playRandom1() {
-	static const char *NAMES[5] = {
+	static const char *const NAMES[5] = {
 		"402s010f", "402s010g", "402s010h", "402s010a", "402s010d"
 	};
 

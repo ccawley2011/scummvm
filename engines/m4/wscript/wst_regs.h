@@ -87,9 +87,9 @@ enum {
 
 #define GLOB_COUNT 39
 
-extern const char *myRegLabels[];
-extern const char *myGlobLabels[];
-extern const char *tagLabels[];
+extern const char *const myRegLabels[];
+extern const char *const myGlobLabels[];
+extern const char *const tagLabels[];
 
 } // End of namespace M4
 

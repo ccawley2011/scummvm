@@ -492,12 +492,12 @@ void Room610::parser() {
 	} else if (_G(kernel).trigger == 555) {
 		midi_stop();
 
-		static const char *DIGI[] = {
+		static const char *const DIGI[] = {
 			"610_s02", "610_s02a", "610_s03", "610_s03a",
 			"610_s03b", "610k07", "610k08", "610k09",
 			"610k10", "610k11", "610k12", "610k13", nullptr
 		};
-		for (const char **name = DIGI; *name; ++name)
+		for (const char *const *name = DIGI; *name; ++name)
 			digi_unload(*name);
 
 		adv_kill_digi_between_rooms(false);

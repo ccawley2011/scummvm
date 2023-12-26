@@ -35,7 +35,7 @@ Digi::~Digi() {
 	unload_sounds();
 }
 
-void Digi::loadFootstepSounds(const char **names) {
+void Digi::loadFootstepSounds(const char *const *names) {
 	if (!_sounds.empty())
 		unload_sounds();
 

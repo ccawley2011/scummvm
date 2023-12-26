@@ -27,16 +27,16 @@ namespace M4 {
 namespace Riddle {
 namespace Rooms {
 
-static const char *BLOCK_NAMES[8] = {
+static const char *const BLOCK_NAMES[8] = {
 	nullptr, "507 BLOCK ONE", "507 BLOCK TWO", "507 BLOCK THREE",
 	"507 BLOCK FOUR", "507 BLOCK FIVE", "507 BLOCK SIX",
 	"507 BLOCK SEVEN"
 };
-static const char *BLOCK_DIGI[8] = {
+static const char *const BLOCK_DIGI[8] = {
 	nullptr, "507_s03", "507_s03a", "507_s03b", "507_s03c",
 	"507_s03d", "507_s0e", "507_s0f"
 };
-int BLOCK_CORRECT[8] = {
+const int BLOCK_CORRECT[8] = {
 	-1, 12, 4, 12, 8, 0, 8, 4
 };
 

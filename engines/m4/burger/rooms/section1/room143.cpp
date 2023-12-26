@@ -34,7 +34,7 @@ enum {
 	kCHANGE_BURL_ANIMATION = 45
 };
 
-const char *Room143::SAID[][4] = {
+const char *const Room143::SAID[][4] = {
 	{ "VERA",          "143W001", "999w011", "999w011" },
 	{ "BURL",          nullptr,   "999w011", "999w011" },
 	{ "SWINGING DOOR", "143w006", "999w011", nullptr   },

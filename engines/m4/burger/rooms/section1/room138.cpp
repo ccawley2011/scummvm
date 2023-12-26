@@ -34,7 +34,7 @@ enum {
 	kCHANGE_WILBUR_ANIMATION = 3
 };
 
-static const char *SAID[][4] = {
+static const char *const SAID[][4] = {
 	{ "DONUTS",          "138W002", "138W003", "138W003" },
 	{ "IGNITION SWITCH", "138W006", "138W007", "138W006" },
 	{ "HORN",            "138W008", "138W007", nullptr   },
@@ -94,7 +94,7 @@ void Room138::init() {
 	_series3 = -1;
 	_flag1 = false;
 
-	static const char *NAMES[12] = {
+	static const char *const NAMES[12] = {
 		"138_004", "137_012", "137_013", "137_020", "137_021",
 		"137_022", "137_023", "137_024", "137_025", "137_026",
 		"137_027", "137_028"
@@ -690,7 +690,7 @@ void Room138::freeAssets() {
 		_assetsFreed = true;
 		digi_stop(2);
 
-		static const char *NAMES[11] = {
+		static const char *const NAMES[11] = {
 			"137_020", "137_021", "137_022", "137_023", "137_024",
 			"137_025", "137_026", "137_027", "137_028", "137_012",
 			"137_013"

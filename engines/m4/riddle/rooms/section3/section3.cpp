@@ -27,26 +27,26 @@ namespace Riddle {
 namespace Rooms {
 
 const int16 S3_NORMAL_DIRS[] = { 200, 201, 202, -1 };
-const char *S3_NORMAL_NAMES[] = {
+const char *const S3_NORMAL_NAMES[] = {
 	"Feng Li walk pos3",
 	"Feng Li walk pos4",
 	"Feng Li walk pos5"
 };
 const int16 S3_SHADOW_DIRS[] = { 210, 211, 212, -1 };
-const char *S3_SHADOW_NAMES[] = {
+const char *const S3_SHADOW_NAMES[] = {
 	"candleman shadow3",
 	"candleman shadow4",
 	"candleman shadow5"
 };
 
 const int16 S3_NORMAL_DIRS2[] = { 220, 221, 222, -1 };
-const char *S3_NORMAL_NAMES2[] = {
+const char *const S3_NORMAL_NAMES2[] = {
 	"mei chen ny walker pos3",
 	"mei chen ny walker pos4",
 	"mei chen ny walker pos5"
 };
 const int16 S3_SHADOW_DIRS2[] = { 230, 231, 232, -1 };
-const char *S3_SHADOW_NAMES2[] = {
+const char *const S3_SHADOW_NAMES2[] = {
 	"candleman shadow3",
 	"candleman shadow4",
 	"candleman shadow5"

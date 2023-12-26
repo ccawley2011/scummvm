@@ -28,7 +28,7 @@ namespace M4 {
 namespace Burger {
 namespace Rooms {
 
-const char *Room503::SAID[][4] = {
+const char *const Room503::SAID[][4] = {
 	{ "PARLOUR",        nullptr,   "500w001", nullptr   },
 	{ "BASEMENT",       nullptr,   "500w001", nullptr   },
 	{ "BORK",           "503w004", "500w002", "500w002" },
@@ -989,7 +989,7 @@ void Room503::parser() {
 }
 
 void Room503::loadSeries1() {
-	static const char *NAMES[] = {
+	static const char *const NAMES[] = {
 		"503bk01", "503bk01s", "503bk02", "503bk02s", "503bk17",
 		"503bk17s", "503bk06", "503bk06s", "503bk07", "503bk07s",
 		"503bk06", "503bk06s", "503bk09", "503bk09s", "503bk10",

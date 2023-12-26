@@ -78,7 +78,7 @@ public:
 	 * A room can designate one or more sounds to be randomly played when
 	 * the player walks around
 	 */
-	void loadFootstepSounds(const char **names);
+	void loadFootstepSounds(const char *const *names);
 
 	void unload_sounds();
 	void unload(const Common::String &name);

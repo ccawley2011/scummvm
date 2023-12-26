@@ -44,9 +44,9 @@ namespace Riddle {
 namespace Rooms {
 
 extern const int16 S4_NORMAL_DIRS[];
-extern const char *S4_NORMAL_NAMES[];
+extern const char *const S4_NORMAL_NAMES[];
 extern const int16 S4_SHADOW_DIRS[];
-extern const char *S4_SHADOW_NAMES[];
+extern const char *const S4_SHADOW_NAMES[];
 
 
 class Section4 : public Section {

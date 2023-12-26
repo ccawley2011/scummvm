@@ -35,8 +35,8 @@ const int16 ROOM204_NORMAL_DIRS[] = {
 	200, -1, -1};
 const int16 ROOM204_SHADOW_DIRS[6] = {
 	210, -1, -1};
-static const char *ROOM204_NORMAL_NAMES[5] = { "priest walker" };
-static const char *ROOM204_SHADOW_NAMES[5] = { "kuangs shadow 2" };
+static const char *const ROOM204_NORMAL_NAMES[5] = { "priest walker" };
+static const char *const ROOM204_SHADOW_NAMES[5] = { "kuangs shadow 2" };
 
 
 void Room204::preload() {

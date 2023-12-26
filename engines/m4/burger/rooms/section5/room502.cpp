@@ -49,7 +49,7 @@ const Section5Room::BorkPoint Room502::BORK_TABLE[] = {
 	{ 328, 113 }, { 346, 103 }, { 353, 80 }, { 354, 58 }, { 364, 53 }
 };
 
-static const char *SAID[][4] = {
+static const char *const SAID[][4] = {
 	{ "FRONT DOOR",      "502w003", "500w001", "502w057" },
 	{ "KITCHEN",         nullptr,   "500w001", nullptr   },
 	{ "STAIRS",          "502w007", "500w001", nullptr   },
@@ -890,7 +890,7 @@ void Room502::parser() {
 	_G(player).command_ready = false;
 }
 void Room502::loadSeries1() {
-	static const char *NAMES[6] = {
+	static const char *const NAMES[6] = {
 		"500_008", "500_009", "500_010", "500_011", "500_012", "500_013"
 	};
 	for (int i = 0; i < 6; ++i)
@@ -899,7 +899,7 @@ void Room502::loadSeries1() {
 }
 
 void Room502::loadSeries2() {
-	static const char *NAMES[15] = {
+	static const char *const NAMES[15] = {
 		"502bk01", "502bk01s", "502bk02", "502bk02s", "502bk03",
 		"502bk03s", "502bk04", "502bk04s", "502bk05", "502bk06",
 		"502bk06s", "502bk07", "502bk07s", "502bk08", "502bk08s"

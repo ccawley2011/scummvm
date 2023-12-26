@@ -51,7 +51,7 @@ const Room602::GerbilPoint Room602::GERBIL[] = {
 	{ 176, 237 }, { 426, 231 }, { 316, 217 }, { 176, 237 }, { 426, 231 }, { 316, 217 }
 };
 
-static const char *SAID[][4] = {
+static const char *const SAID[][4] = {
 	{ "KIBBLE TRAY",    "602w006", "602w007", "602w008" },
 	{ "KIBBLE ",        "602w009", nullptr,   nullptr   },
 	{ "EXERCISE WHEEL", nullptr,   "602w014", nullptr   },
@@ -881,7 +881,7 @@ void Room602::daemon() {
 					ws_hide_walker();
 				}
 
-				static const char *NAMES[14] = {
+				static const char *const NAMES[14] = {
 					"602_004", "602_005", "602_006", "602w015", "602w017a",
 					"602w017b", "602w017c", "602w017d", "602w017e", "602w017f",
 					"602w016a", "602w016b", "602w016c", "602w016d"
@@ -959,7 +959,7 @@ void Room602::daemon() {
 			digi_unload_stream_breaks(SERIES1);
 			digi_unload_stream_breaks(SERIES2);
 			{
-				static const char *NAMES[10] = {
+				static const char *const NAMES[10] = {
 					"602w017a", "602w017b", "602w017c", "602w017d", "602w017e", "602w017f",
 					"602w016a", "602w016b", "602w016c", "602w016d"
 				};

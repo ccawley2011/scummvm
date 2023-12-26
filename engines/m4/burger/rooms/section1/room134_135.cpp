@@ -31,7 +31,7 @@ enum {
 	kCHANGE_ODIE_ANIMATION = 32
 };
 
-static const char *SAID1[][4] = {
+static const char *const SAID1[][4] = {
 	{ "OLD BRIDGE",       "134W001", "134W002", "134W002" },
 	{ "NEW BRIDGE",       "134W003", "134W002", "134W002" },
 	{ "WATER",            "134W004", "134W002", "134W005" },
@@ -41,7 +41,7 @@ static const char *SAID1[][4] = {
 	{ nullptr, nullptr, nullptr, nullptr }
 };
 
-static const char *SAID2[][4] = {
+static const char *const SAID2[][4] = {
 	{ "ODIE",             "135W001", "135W002", "135W002" },
 	{ "OLD BRIDGE",       "135W005", "135W002", "135W002" },
 	{ "NEW BRIDGE",       "135W006", "135W002", "135W002" },
@@ -1003,7 +1003,7 @@ void Room134_135::conv03() {
 }
 
 void Room134_135::loadOdie() {
-	static const char *NAMES[30] = {
+	static const char *const NAMES[30] = {
 		"135od05", "135od05s", "135od06", "135od06s", "135od04",
 		"135od04s", "135od08", "135od08s", "135od09", "135od09s",
 		"135od10", "135od10s", "135od11", "135od11s", "135od12",
