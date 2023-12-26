@@ -1144,7 +1144,7 @@ void LilliputScript::decodePackedText(char *buf) {
 	debugC(2, kDebugScript, "decodePackedText(buf)");
 
 	// All the languages use the English dictionary
-	static const char *nounsArrayPtr = "I am |You are |you are |hou art |in the |"
+	static const char *const nounsArrayPtr = "I am |You are |you are |hou art |in the |"
 		"is the |is a |in a |To the |to the |by |going |here |The|the|and |"
 		"some |build|not |way|I |a |an |from |of |him|her|by |his |ing |tion|"
 		"have |you|I've |can't |up |to |he |she |down |what|What|with|are |"
