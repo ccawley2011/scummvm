@@ -37,7 +37,7 @@
 
 namespace Sky {
 
-uint8 Screen::_top16Colors[16*3] = {
+const uint8 Screen::_top16Colors[16*3] = {
 	0, 0, 0,
 	38, 38, 38,
 	63, 63, 63,

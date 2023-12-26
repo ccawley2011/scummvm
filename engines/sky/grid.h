@@ -56,7 +56,7 @@ private:
 	bool getGridValues(Compact *cpt, uint8 *resGrid, uint32 *resBitNum, uint32 *resWidth);
 	bool getGridValues(uint32 x, uint32 y, uint32 width, Compact *cpt, uint8 *resGrid, uint32 *resBitNum, uint32 *resWidth);
 
-	static int8 _gridConvertTable[];
+	static const int8 _gridConvertTable[];
 	uint8 *_gameGrids[TOT_NO_GRIDS];
 	Disk *_skyDisk;
 	SkyCompact *_skyCompact;

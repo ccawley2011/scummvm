@@ -57,7 +57,7 @@ struct Sfx {
 
 #include "common/pack-end.h"	// END STRUCT PACKING
 
-uint16 Sound::_speechConvertTable[8] = {
+const uint16 Sound::_speechConvertTable[8] = {
 	0,									//;Text numbers to file numbers
 	600,								//; 553 lines in section 0
 	600+500,							//; 488 lines in section 1

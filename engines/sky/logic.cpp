@@ -471,7 +471,7 @@ void Logic::cursor() {
 	_skyText->logicCursor(_compact, _skyMouse->giveMouseX(), _skyMouse->giveMouseY());
 }
 
-static uint16 clickTable[46] = {
+static const uint16 clickTable[46] = {
 	ID_FOSTER,
 	ID_JOEY,
 	ID_JOBS,
@@ -994,7 +994,7 @@ static const uint32 forwardList1b[] = {
 	DEATH_SCRIPT
 };
 
-static uint32 forwardList1b288[] = {
+static const uint32 forwardList1b288[] = {
 	JOBS_SPEECH,
 	JOBS_S4,
 	JOBS_ALARMED,

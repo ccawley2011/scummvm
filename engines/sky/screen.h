@@ -97,7 +97,7 @@ private:
 	OSystem *_system;
 	Disk *_skyDisk;
 	SkyCompact *_skyCompact;
-	static uint8 _top16Colors[16 * 3];
+	static const uint8 _top16Colors[16 * 3];
 	uint8 _palette[VGA_COLORS * 3];
 	uint32 _currentPalette;
 	uint8 _seqGrid[20 * 12];

@@ -78,8 +78,8 @@ protected:
 	byte *_miceData;	//address of mouse sprites
 	byte *_objectMouseData;	//address of object mouse sprites
 
-	static uint32 _mouseMainObjects[24];
-	static uint32 _mouseLincObjects[21];
+	static const uint32 _mouseMainObjects[24];
+	static const uint32 _mouseLincObjects[21];
 
 	OSystem *_system;
 	Disk *_skyDisk;

@@ -110,7 +110,7 @@ public:
 	static void *fetchItem(uint32 num);
 	static void *_itemList[300];
 	static SystemVars *_systemVars;
-	static const char *shortcutsKeymapId;
+	static const char *const shortcutsKeymapId;
 	uint32 _chineseTraditionalOffsets[8];
 	char *_chineseTraditionalBlock;
 	Graphics::Big5Font *_big5Font;
