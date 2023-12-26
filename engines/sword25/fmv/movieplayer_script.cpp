@@ -129,9 +129,9 @@ int getTime(lua_State *L) {
 	return 1;
 }
 
-const char *LIBRARY_NAME = "Movieplayer";
+static const char *const LIBRARY_NAME = "Movieplayer";
 
-const luaL_reg LIBRARY_FUNCTIONS[] = {
+static const luaL_reg LIBRARY_FUNCTIONS[] = {
 	{ "LoadMovie", loadMovie },
 	{ "UnloadMovie", unloadMovie },
 	{ "Play", play },

@@ -44,14 +44,14 @@
 
 namespace Sword25 {
 
-//static const char *SAVEGAME_EXTENSION = ".b25s";
-static const char *SAVEGAME_DIRECTORY = "saves";
-static const char *FILE_MARKER = "BS25SAVEGAME";
-static const uint  SLOT_COUNT = 18;
-static const uint  FILE_COPY_BUFFER_SIZE = 1024 * 10;
-static const char *VERSIONIDOLD = "SCUMMVM1";
-static const char *VERSIONID = "SCUMMVM2";
-static const int   VERSIONNUM = 3;
+//static const char *const SAVEGAME_EXTENSION = ".b25s";
+static const char *const SAVEGAME_DIRECTORY = "saves";
+static const char *const FILE_MARKER = "BS25SAVEGAME";
+static const uint        SLOT_COUNT = 18;
+static const uint        FILE_COPY_BUFFER_SIZE = 1024 * 10;
+static const char *const VERSIONIDOLD = "SCUMMVM1";
+static const char *const VERSIONID = "SCUMMVM2";
+static const int         VERSIONNUM = 3;
 
 #define MAX_SAVEGAME_SIZE 100
 

@@ -33,8 +33,8 @@
 #include "sword25/script/luascript.h"
 
 namespace {
-const char *METATABLES_TABLE_NAME = "__METATABLES";
-const char *PERMANENTS_TABLE_NAME = "Permanents";
+static const char *const METATABLES_TABLE_NAME = "__METATABLES";
+static const char *const PERMANENTS_TABLE_NAME = "Permanents";
 
 bool registerPermanent(lua_State *L, const Common::String &name) {
 	// A C function has to be on the stack

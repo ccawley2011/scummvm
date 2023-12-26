@@ -134,7 +134,7 @@ static int getUsedMemory(lua_State *L) {
 	return 1;
 }
 
-static const char *KERNEL_LIBRARY_NAME = "Kernel";
+static const char *const KERNEL_LIBRARY_NAME = "Kernel";
 
 static const luaL_reg KERNEL_FUNCTIONS[] = {
 	{"DisconnectService", dummyFuncError},
@@ -279,7 +279,7 @@ static int closeWanted(lua_State *L) {
 	return 1;
 }
 
-static const char *WINDOW_LIBRARY_NAME = "Window";
+static const char *const WINDOW_LIBRARY_NAME = "Window";
 
 static const luaL_reg WINDOW_FUNCTIONS[] = {
 	{"IsVisible", isVisible},
@@ -380,7 +380,7 @@ static int dumpLockedResources(lua_State *L) {
 	return 0;
 }
 
-static const char *RESOURCE_LIBRARY_NAME = "Resource";
+static const char *const RESOURCE_LIBRARY_NAME = "Resource";
 
 static const luaL_reg RESOURCE_FUNCTIONS[] = {
 	{"PrecacheResource", precacheResource},
@@ -442,7 +442,7 @@ static int saveGame(lua_State *L) {
 	return 1;
 }
 
-static const char *PERSISTENCE_LIBRARY_NAME = "Persistence";
+static const char *const PERSISTENCE_LIBRARY_NAME = "Persistence";
 
 static const luaL_reg PERSISTENCE_FUNCTIONS[] = {
 	{"ReloadSlots", reloadSlots},

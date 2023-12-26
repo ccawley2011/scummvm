@@ -178,12 +178,12 @@ bool LuaScriptEngine::executeString(const Common::String &code) {
 namespace {
 
 void removeForbiddenFunctions(lua_State *L) {
-	static const char *FORBIDDEN_FUNCTIONS[] = {
+	static const char *const FORBIDDEN_FUNCTIONS[] = {
 		"dofile",
 		0
 	};
 
-	const char **iterator = FORBIDDEN_FUNCTIONS;
+	const char *const *iterator = FORBIDDEN_FUNCTIONS;
 	while (*iterator) {
 		lua_pushnil(L);
 		lua_setfield(L, LUA_GLOBALSINDEX, *iterator);
@@ -240,10 +240,10 @@ void LuaScriptEngine::setCommandLine(const Common::StringArray &commandLineParam
 }
 
 namespace {
-const char *PERMANENTS_TABLE_NAME = "Permanents";
+const char *const PERMANENTS_TABLE_NAME = "Permanents";
 
 // This array contains the name of global Lua objects that should not be persisted
-const char *STANDARD_PERMANENTS[] = {
+const char *const STANDARD_PERMANENTS[] = {
 	"string",
 	"xpcall",
 	"package",
@@ -408,7 +408,7 @@ bool LuaScriptEngine::persist(OutputPersistenceBlock &writer) {
 
 namespace {
 
-void clearGlobalTable(lua_State *L, const char **exceptions) {
+void clearGlobalTable(lua_State *L, const char *const *exceptions) {
 	// Iterate over all elements of the global table
 	lua_pushvalue(L, LUA_GLOBALSINDEX);
 	lua_pushnil(L);
@@ -423,7 +423,7 @@ void clearGlobalTable(lua_State *L, const char **exceptions) {
 		bool setElementToNil = true;
 		if (lua_isstring(L, -1)) {
 			const char *indexString = lua_tostring(L, -1);
-			const char **exceptionsWalker = exceptions;
+			const char *const *exceptionsWalker = exceptions;
 			while (*exceptionsWalker) {
 				if (strcmp(indexString, *exceptionsWalker) == 0)
 					setElementToNil = false;
@@ -462,7 +462,7 @@ bool LuaScriptEngine::unpersist(InputPersistenceBlock &reader) {
 
 	// __METATABLES is not immediately removed becausen the Metatables are needed
 	// for the finalisers of objects.
-	static const char *clearExceptionsFirstPass[] = {
+	static const char *const clearExceptionsFirstPass[] = {
 		"_G",
 		"__METATABLES",
 		0
@@ -470,7 +470,7 @@ bool LuaScriptEngine::unpersist(InputPersistenceBlock &reader) {
 	clearGlobalTable(_state, clearExceptionsFirstPass);
 
 	// In the second pass, the Metatables are removed
-	static const char *clearExceptionsSecondPass[] = {
+	static const char *const clearExceptionsSecondPass[] = {
 		"_G",
 		0
 	};

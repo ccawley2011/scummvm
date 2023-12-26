@@ -241,7 +241,7 @@ static int newWalkRegion(lua_State *L) {
 	return 1;
 }
 
-static const char *GEO_LIBRARY_NAME = "Geo";
+static const char *const GEO_LIBRARY_NAME = "Geo";
 
 static const luaL_reg GEO_FUNCTIONS[] = {
 	{"NewRegion", newRegion},
