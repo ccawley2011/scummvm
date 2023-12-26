@@ -122,8 +122,8 @@ private:
 
 // A subset of the special insert after Window handles
 // (Values declared in window.cpp)
-extern const Window *kWindowPosTop;
-extern const Window *kWindowPosTopMost;
+extern const Window *const kWindowPosTop;
+extern const Window *const kWindowPosTopMost;
 
 } // End of namespace Buried
 

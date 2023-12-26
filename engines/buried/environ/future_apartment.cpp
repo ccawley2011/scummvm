@@ -517,7 +517,7 @@ int KitchenUnitShopNet::onCharacter(Window *viewWindow, const Common::KeyState &
 		}
 
 		// Add the character to the code string
-		static const char *dashString = " - ";
+		static const char *const dashString = " - ";
 
 		switch (_shopNetCode.size()) {
 		case 0:
