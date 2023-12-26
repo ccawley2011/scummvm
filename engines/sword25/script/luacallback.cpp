@@ -36,7 +36,7 @@
 #include "common/lua/lua.h"
 #include "common/lua/lauxlib.h"
 
-const char *CALLBACKTABLE_NAME = "__CALLBACKS";
+static const char *const CALLBACKTABLE_NAME = "__CALLBACKS";
 
 namespace Sword25 {
 

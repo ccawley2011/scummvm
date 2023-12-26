@@ -312,7 +312,7 @@ static int getSoundPanning(lua_State *L) {
 	return 1;
 }
 
-static const char *SFX_LIBRARY_NAME = "Sfx";
+static const char *const SFX_LIBRARY_NAME = "Sfx";
 
 static const luaL_reg SFX_FUNCTIONS[] = {
 	{"Init", init},

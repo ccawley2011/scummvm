@@ -75,7 +75,7 @@ static ActionCallback *actionCallbackPtr = 0;	// FIXME: should be turned into Gr
 #define TEXT_CLASS_NAME "Gfx.Text"
 #define ANIMATION_CLASS_NAME "Gfx.Animation"
 #define ANIMATION_TEMPLATE_CLASS_NAME "Gfx.AnimationTemplate"
-static const char *GFX_LIBRARY_NAME = "Gfx";
+static const char *const GFX_LIBRARY_NAME = "Gfx";
 
 static void newUintUserData(lua_State *L, uint value) {
 	void *userData = lua_newuserdata(L, sizeof(value));

@@ -141,7 +141,7 @@ static int dummyFuncError(lua_State *L) {
 	return 1;
 }
 
-static const char *PACKAGE_LIBRARY_NAME = "Package";
+static const char *const PACKAGE_LIBRARY_NAME = "Package";
 
 static const luaL_reg PACKAGE_FUNCTIONS[] = {
 	{"LoadPackage", loadPackage},
