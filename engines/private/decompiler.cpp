@@ -24,7 +24,7 @@
 
 namespace Private {
 
-const char *kHeader = "Precompiled Game Matrix";
+const char *const kHeader = "Precompiled Game Matrix";
 const uint kHeaderSize = 23;
 
 const byte kCodeString = 0x01;
@@ -34,7 +34,7 @@ const byte kCodeRect = 0x2e;
 const byte kCodeRects = 0x4f;
 const byte kCodeShortId = 0x50;
 
-const static char *kCodeTable[] = {"",                   //
+const static char *const kCodeTable[] = {"",                   //
 								   "",                   // 0x01  (string)
 								   "",                   // 0x02  (short literal)
 								   " {\n",               // 0x03
