@@ -1157,7 +1157,7 @@ Common::Error ScummEngine::init() {
 		// characters like that.
 
 		if (_game.id == GID_INDY3) {
-			static const char *indyFileNames[] = {
+			static const char *const indyFileNames[] = {
 				"Indy\xAA",
 				"Indy\x99",
 				"Indy\xE2\x84\xA2",
@@ -1183,7 +1183,7 @@ Common::Error ScummEngine::init() {
 			}
 
 		} else if (_game.id == GID_LOOM) {
-			static const char *loomFileNames[] = {
+			static const char *const loomFileNames[] = {
 				"Loom\xAA",
 				"Loom\x99",
 				"Loom\xE2\x84\xA2",
@@ -1211,7 +1211,7 @@ Common::Error ScummEngine::init() {
 			// filename, because some tools (e.g. hfsutils) may
 			// turn the space into an underscore.
 
-			static const char *monkeyIslandFileNames[] = {
+			static const char *const monkeyIslandFileNames[] = {
 			        "Monkey Island",
 			        "Monkey_Island"
 			};

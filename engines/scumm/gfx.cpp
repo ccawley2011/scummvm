@@ -817,7 +817,7 @@ const byte *ScummEngine::postProcessDOSGraphics(VirtScreen *vs, int &pitch, int 
 		0x00, 0x80, 0xAA, 0xDD, 0x00, 0x99, 0x66, 0xF7, 0x44, 0xAA, 0xDD, 0x77, 0xFF, 0xBB, 0xBB, 0xFF
 	};
 
-	static const byte *mainColMap[] = { nullptr, nullptr, v2MainColMap, v3MainColMap, v4MainColMap };
+	static const byte *const mainColMap[] = { nullptr, nullptr, v2MainColMap, v3MainColMap, v4MainColMap };
 
 	byte tmpTxtColMap[16];
 	for (uint8 i = 0; i < ARRAYSIZE(tmpTxtColMap); ++i)

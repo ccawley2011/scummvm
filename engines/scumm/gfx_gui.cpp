@@ -1690,7 +1690,7 @@ void ScummEngine::setUpDraftsInventory() {
 	}
 }
 
-static const char *loomDraftsNames[7][18] = {
+static const char *const loomDraftsNames[7][18] = {
 	// ENGLISH
 	{
 		"Drafts",
@@ -1813,7 +1813,7 @@ void ScummEngine::drawDraftsInventory() {
 		namesWidth, notesWidth;
 
 	char notesBuf[6];
-	const char **names;
+	const char *const *names;
 	const char *notes = "cdefgabC";
 
 	int yConstant = _virtscr[kMainVirtScreen].topline + (_virtscr[kMainVirtScreen].h / 2);

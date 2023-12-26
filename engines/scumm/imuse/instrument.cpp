@@ -25,7 +25,7 @@
 
 namespace Scumm {
 
-static struct {
+static const struct {
 	const char *name;
 	byte program;
 }
