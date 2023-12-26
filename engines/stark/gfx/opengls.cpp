@@ -79,23 +79,23 @@ OpenGLSDriver::~OpenGLSDriver() {
 void OpenGLSDriver::init() {
 	computeScreenViewport();
 
-	static const char* attributes[] = { "position", "texcoord", nullptr };
+	static const char *const attributes[] = { "position", "texcoord", nullptr };
 	_surfaceShader = OpenGL::Shader::fromFiles("stark_surface", attributes);
 	_surfaceVBO = OpenGL::Shader::createBuffer(GL_ARRAY_BUFFER, sizeof(surfaceVertices), surfaceVertices);
 	_surfaceShader->enableVertexAttribute("position", _surfaceVBO, 2, GL_FLOAT, GL_TRUE, 2 * sizeof(float), 0);
 	_surfaceShader->enableVertexAttribute("texcoord", _surfaceVBO, 2, GL_FLOAT, GL_TRUE, 2 * sizeof(float), 0);
 
-	static const char* fillAttributes[] = { "position", nullptr };
+	static const char *const fillAttributes[] = { "position", nullptr };
 	_surfaceFillShader = OpenGL::Shader::fromFiles("stark_surface_fill", fillAttributes);
 	_surfaceFillShader->enableVertexAttribute("position", _surfaceVBO, 2, GL_FLOAT, GL_TRUE, 2 * sizeof(float), 0);
 
-	static const char* actorAttributes[] = { "position1", "position2", "bone1", "bone2", "boneWeight", "normal", "texcoord", nullptr };
+	static const char *const actorAttributes[] = { "position1", "position2", "bone1", "bone2", "boneWeight", "normal", "texcoord", nullptr };
 	_actorShader = OpenGL::Shader::fromFiles("stark_actor", actorAttributes);
 
-	static const char* shadowAttributes[] = { "position1", "position2", "bone1", "bone2", "boneWeight", nullptr };
+	static const char *const shadowAttributes[] = { "position1", "position2", "bone1", "bone2", "boneWeight", nullptr };
 	_shadowShader = OpenGL::Shader::fromFiles("stark_shadow", shadowAttributes);
 
-	static const char* fadeAttributes[] = { "position", nullptr };
+	static const char *const fadeAttributes[] = { "position", nullptr };
 	_fadeShader = OpenGL::Shader::fromFiles("stark_fade", fadeAttributes);
 	_fadeVBO = OpenGL::Shader::createBuffer(GL_ARRAY_BUFFER, sizeof(fadeVertices), fadeVertices);
 	_fadeShader->enableVertexAttribute("position", _fadeVBO, 2, GL_FLOAT, GL_TRUE, 2 * sizeof(float), 0);
