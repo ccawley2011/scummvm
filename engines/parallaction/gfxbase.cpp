@@ -236,7 +236,7 @@ void Gfx::drawText(Font *font, Graphics::Surface *surf, uint16 x, uint16 y, cons
 	font->drawString(surf, x, y, text);
 }
 
-void Gfx::unpackBlt(const Common::Rect& r, byte *data, uint size, Graphics::Surface *surf, uint16 z, uint scale, byte transparentColor) {
+void Gfx::unpackBlt(const Common::Rect& r, const byte *data, uint size, Graphics::Surface *surf, uint16 z, uint scale, byte transparentColor) {
 	byte *d = _unpackedBitmap;
 	uint pixelsLeftInLine = r.width();
 
@@ -264,7 +264,7 @@ void Gfx::unpackBlt(const Common::Rect& r, byte *data, uint size, Graphics::Surf
 	blt(r, _unpackedBitmap, surf, z, scale, transparentColor);
 }
 
-void Gfx::bltMaskScale(const Common::Rect& r, byte *data, Graphics::Surface *surf, uint16 z, uint scale, byte transparentColor) {
+void Gfx::bltMaskScale(const Common::Rect& r, const byte *data, Graphics::Surface *surf, uint16 z, uint scale, byte transparentColor) {
 	if (scale == 100) {
 		// use optimized path
 		bltMaskNoScale(r, data, surf, z, transparentColor);
@@ -303,7 +303,7 @@ void Gfx::bltMaskScale(const Common::Rect& r, byte *data, Graphics::Surface *sur
 	dp.x = dstRect.left;
 	dp.y = dstRect.top;
 
-	byte *s = data + srcRect.left + srcRect.top * width;
+	const byte *s = data + srcRect.left + srcRect.top * width;
 	byte *d = (byte *)surf->getBasePtr(dp.x, dp.y);
 
 	uint line = 0, col = 0;
@@ -355,7 +355,7 @@ void Gfx::bltMaskScale(const Common::Rect& r, byte *data, Graphics::Surface *sur
 
 }
 
-void Gfx::bltMaskNoScale(const Common::Rect& r, byte *data, Graphics::Surface *surf, uint16 z, byte transparentColor) {
+void Gfx::bltMaskNoScale(const Common::Rect& r, const byte *data, Graphics::Surface *surf, uint16 z, byte transparentColor) {
 	if (!_backgroundInfo->hasMask() || (z == LAYER_FOREGROUND)) {
 		// use optimized path
 		bltNoMaskNoScale(r, data, surf, transparentColor);
@@ -375,7 +375,7 @@ void Gfx::bltMaskNoScale(const Common::Rect& r, byte *data, Graphics::Surface *s
 
 	q.translate(-r.left, -r.top);
 
-	byte *s = data + q.left + q.top * r.width();
+	const byte *s = data + q.left + q.top * r.width();
 	byte *d = (byte *)surf->getBasePtr(dp.x, dp.y);
 
 	uint sPitch = r.width() - q.width();
@@ -403,7 +403,7 @@ void Gfx::bltMaskNoScale(const Common::Rect& r, byte *data, Graphics::Surface *s
 
 }
 
-void Gfx::bltNoMaskNoScale(const Common::Rect& r, byte *data, Graphics::Surface *surf, byte transparentColor) {
+void Gfx::bltNoMaskNoScale(const Common::Rect& r, const byte *data, Graphics::Surface *surf, byte transparentColor) {
 	Common::Point dp;
 	Common::Rect q(r);
 
@@ -417,7 +417,7 @@ void Gfx::bltNoMaskNoScale(const Common::Rect& r, byte *data, Graphics::Surface 
 
 	q.translate(-r.left, -r.top);
 
-	byte *s = data + q.left + q.top * r.width();
+	const byte *s = data + q.left + q.top * r.width();
 	byte *d = (byte *)surf->getBasePtr(dp.x, dp.y);
 
 	uint sPitch = r.width() - q.width();
@@ -437,7 +437,7 @@ void Gfx::bltNoMaskNoScale(const Common::Rect& r, byte *data, Graphics::Surface 
 	}
 }
 
-void Gfx::blt(const Common::Rect& r, byte *data, Graphics::Surface *surf, uint16 z, uint scale, byte transparentColor) {
+void Gfx::blt(const Common::Rect& r, const byte *data, Graphics::Surface *surf, uint16 z, uint scale, byte transparentColor) {
 	bltMaskScale(r, data, surf, z, scale, transparentColor);
 }
 

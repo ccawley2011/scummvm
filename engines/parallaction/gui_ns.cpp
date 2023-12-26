@@ -213,8 +213,8 @@ class SelectGameInputState_NS : public MenuInputState {
 
 	Parallaction *_vm;
 
-	static const char *newGameMsg[4];
-	static const char *loadGameMsg[4];
+	static const char *const newGameMsg[4];
+	static const char *const loadGameMsg[4];
 
 public:
 	SelectGameInputState_NS(Parallaction *vm, MenuInputHelper *helper) : MenuInputState("selectgame", helper), _vm(vm) {
@@ -277,14 +277,14 @@ public:
 
 };
 
-const char *SelectGameInputState_NS::newGameMsg[4] = {
+const char *const SelectGameInputState_NS::newGameMsg[4] = {
 	"NUOVO GIOCO",
 	"NEUF JEU",
 	"NEW GAME",
 	"NEUES SPIEL"
 };
 
-const char *SelectGameInputState_NS::loadGameMsg[4] = {
+const char *const SelectGameInputState_NS::loadGameMsg[4] = {
 	"GIOCO SALVATO",
 	"JEU SAUVE'",
 	"SAVED GAME",
@@ -318,7 +318,7 @@ class NewGameInputState_NS : public MenuInputState {
 	Parallaction_ns *_vm;
 
 	GfxObj *_labels[4];
-	static const char *introMsg3[4];
+	static const char *const introMsg3[4];
 
 public:
 	NewGameInputState_NS(Parallaction_ns *vm, MenuInputHelper *helper) : MenuInputState("newgame", helper), _vm(vm) {
@@ -380,7 +380,7 @@ public:
 	}
 };
 
-const char *NewGameInputState_NS::introMsg3[4] = {
+const char *const NewGameInputState_NS::introMsg3[4] = {
 	"PRESS LEFT MOUSE BUTTON",
 	"TO SEE INTRO",
 	"PRESS RIGHT MOUSE BUTTON",
@@ -462,12 +462,12 @@ class SelectCharacterInputState_NS : public MenuInputState {
 
 	uint	_state;
 
-	static const char *introMsg1[4];
-	static const char *introMsg2[4];
+	static const char *const introMsg1[4];
+	static const char *const introMsg2[4];
 
 	static const uint16 _amigaKeys[3][PASSWORD_LEN];
 	static const uint16 _pcKeys[3][PASSWORD_LEN];
-	static const char *_charStartLocation[3];
+	static const char *const _charStartLocation[3];
 
 
 public:
@@ -644,14 +644,14 @@ public:
 	}
 };
 
-const char *SelectCharacterInputState_NS::introMsg1[4] = {
+const char *const SelectCharacterInputState_NS::introMsg1[4] = {
 	"INSERISCI IL CODICE",
 	"ENTREZ CODE",
 	"ENTER CODE",
 	"GIB DEN KODE EIN"
 };
 
-const char *SelectCharacterInputState_NS::introMsg2[4] = {
+const char *const SelectCharacterInputState_NS::introMsg2[4] = {
 	"CODICE ERRATO",
 	"CODE ERRONE",
 	"WRONG CODE",
@@ -670,7 +670,7 @@ const uint16 SelectCharacterInputState_NS::_pcKeys[][PASSWORD_LEN] = {
 	{ 1, 7 ,7, 2, 2, 6 }		// dough
 };
 
-const char *SelectCharacterInputState_NS::_charStartLocation[] = {
+const char *const SelectCharacterInputState_NS::_charStartLocation[] = {
 	"test.dino",
 	"test.donna",
 	"test.dough"
@@ -817,15 +817,15 @@ class EndPartInputState_NS : public MenuInputState {
 	bool _allPartsComplete;
 
 	// part completion messages
-	static const char *endMsg0[4];
-	static const char *endMsg1[4];
-	static const char *endMsg2[4];
-	static const char *endMsg3[4];
+	static const char *const endMsg0[4];
+	static const char *const endMsg1[4];
+	static const char *const endMsg2[4];
+	static const char *const endMsg3[4];
 	// game completion messages
-	static const char *endMsg4[4];
-	static const char *endMsg5[4];
-	static const char *endMsg6[4];
-	static const char *endMsg7[4];
+	static const char *const endMsg4[4];
+	static const char *const endMsg5[4];
+	static const char *const endMsg6[4];
+	static const char *const endMsg7[4];
 
 	GfxObj *_labels[4];
 
@@ -899,15 +899,15 @@ public:
 };
 
 // part completion messages
-const char *EndPartInputState_NS::endMsg0[] = {"COMPLIMENTI!", "BRAVO!", "CONGRATULATIONS!", "PRIMA!"};
-const char *EndPartInputState_NS::endMsg1[] = {"HAI FINITO QUESTA PARTE", "TU AS COMPLETE' CETTE AVENTURE", "YOU HAVE COMPLETED THIS PART", "DU HAST EIN ABENTEUER ERFOLGREICH"};
-const char *EndPartInputState_NS::endMsg2[] = {"ORA COMPLETA IL RESTO ", "AVEC SUCCES.",  "NOW GO ON WITH THE REST OF", "ZU ENDE GEFUHRT"};
-const char *EndPartInputState_NS::endMsg3[] = {"DELL' AVVENTURA",  "CONTINUE AVEC LES AUTRES", "THIS ADVENTURE", "MACH' MIT DEN ANDEREN WEITER"};
+const char *const EndPartInputState_NS::endMsg0[] = {"COMPLIMENTI!", "BRAVO!", "CONGRATULATIONS!", "PRIMA!"};
+const char *const EndPartInputState_NS::endMsg1[] = {"HAI FINITO QUESTA PARTE", "TU AS COMPLETE' CETTE AVENTURE", "YOU HAVE COMPLETED THIS PART", "DU HAST EIN ABENTEUER ERFOLGREICH"};
+const char *const EndPartInputState_NS::endMsg2[] = {"ORA COMPLETA IL RESTO ", "AVEC SUCCES.",  "NOW GO ON WITH THE REST OF", "ZU ENDE GEFUHRT"};
+const char *const EndPartInputState_NS::endMsg3[] = {"DELL' AVVENTURA",  "CONTINUE AVEC LES AUTRES", "THIS ADVENTURE", "MACH' MIT DEN ANDEREN WEITER"};
 // game completion messages
-const char *EndPartInputState_NS::endMsg4[] = {"COMPLIMENTI!", "BRAVO!", "CONGRATULATIONS!", "PRIMA!"};
-const char *EndPartInputState_NS::endMsg5[] = {"HAI FINITO LE TRE PARTI", "TU AS COMPLETE' LES TROIS PARTIES", "YOU HAVE COMPLETED THE THREE PARTS", "DU HAST DREI ABENTEURE ERFOLGREICH"};
-const char *EndPartInputState_NS::endMsg6[] = {"DELL' AVVENTURA", "DE L'AVENTURE", "OF THIS ADVENTURE", "ZU ENDE GEFUHRT"};
-const char *EndPartInputState_NS::endMsg7[] = {"ED ORA IL GRAN FINALE ", "ET MAINTENANT LE GRAND FINAL", "NOW THE GREAT FINAL", "UND YETZT DER GROSSE SCHLUSS!"};
+const char *const EndPartInputState_NS::endMsg4[] = {"COMPLIMENTI!", "BRAVO!", "CONGRATULATIONS!", "PRIMA!"};
+const char *const EndPartInputState_NS::endMsg5[] = {"HAI FINITO LE TRE PARTI", "TU AS COMPLETE' LES TROIS PARTIES", "YOU HAVE COMPLETED THE THREE PARTS", "DU HAST DREI ABENTEURE ERFOLGREICH"};
+const char *const EndPartInputState_NS::endMsg6[] = {"DELL' AVVENTURA", "DE L'AVENTURE", "OF THIS ADVENTURE", "ZU ENDE GEFUHRT"};
+const char *const EndPartInputState_NS::endMsg7[] = {"ED ORA IL GRAN FINALE ", "ET MAINTENANT LE GRAND FINAL", "NOW THE GREAT FINAL", "UND YETZT DER GROSSE SCHLUSS!"};
 
 void Parallaction_ns::startGui() {
 	_menuHelper = new MenuInputHelper;

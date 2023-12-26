@@ -34,7 +34,7 @@
 namespace Parallaction {
 
 
-const char *Parallaction_br::_partNames[] = {
+const char *const Parallaction_br::_partNames[] = {
 	"PART0",
 	"PART1",
 	"PART2",

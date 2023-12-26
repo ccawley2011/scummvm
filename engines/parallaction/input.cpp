@@ -52,7 +52,7 @@ MouseComboProperties	_mouseComboProps_NS = {
 	32	// combo (arrow + icon) height
 };
 */
-MouseComboProperties	_mouseComboProps_BR = {
+const MouseComboProperties	_mouseComboProps_BR = {
 	8,	// combo x offset (the icon from the inventory will be rendered from here)
 	8,	// combo y offset (ditto)
 	68,	// combo (arrow + icon) width

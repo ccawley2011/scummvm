@@ -212,7 +212,7 @@ public:
 #define BALLOON_TAIL_HEIGHT	10
 
 
-byte _resBalloonTail[2][BALLOON_TAIL_WIDTH*BALLOON_TAIL_HEIGHT] = {
+const byte _resBalloonTail[2][BALLOON_TAIL_WIDTH*BALLOON_TAIL_HEIGHT] = {
 	{
 	  0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x02, 0x02,
 	  0x02, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x02, 0x02,
@@ -242,7 +242,7 @@ byte _resBalloonTail[2][BALLOON_TAIL_WIDTH*BALLOON_TAIL_HEIGHT] = {
 class BalloonManager_ns : public BalloonManager {
 
 	Parallaction_ns *_vm;
-	static int16 _dialogueBalloonX[5];
+	static const int16 _dialogueBalloonX[5];
 
 	byte _textColors[3];
 
@@ -273,7 +273,7 @@ public:
 	int hitTestDialogueBalloon(int x, int y) override;
 };
 
-int16 BalloonManager_ns::_dialogueBalloonX[5] = { 80, 120, 150, 150, 150 };
+const int16 BalloonManager_ns::_dialogueBalloonX[5] = { 80, 120, 150, 150, 150 };
 
 BalloonManager_ns::BalloonManager_ns(Parallaction_ns *vm, Font *font) : _vm(vm), _numBalloons(0), _sw(vm, font), _se(font) {
 	_textColors[kSelectedColor] = 0;

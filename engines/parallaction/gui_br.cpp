@@ -152,15 +152,15 @@ class MainMenuInputState_BR : public MenuInputState {
 	#define NUM_MENULINES	7
 	GfxObj *_lines[NUM_MENULINES];
 
-	static const char *_menuStringsAmiga[NUM_MENULINES];
-	static const char *_menuStringsPC[NUM_MENULINES];
+	static const char *const _menuStringsAmiga[NUM_MENULINES];
+	static const char *const _menuStringsPC[NUM_MENULINES];
 	static const MenuOptions _optionsAmiga[NUM_MENULINES];
 	static const MenuOptions _optionsPC[NUM_MENULINES];
 
-	const char **_menuStrings;
+	const char *const *_menuStrings;
 	const MenuOptions *_options;
 
-	static LocationPart _firstLocation[];
+	static const LocationPart _firstLocation[];
 
 	int _availItems;
 	int _selection;
@@ -273,7 +273,7 @@ public:
 
 };
 
-LocationPart MainMenuInputState_BR::_firstLocation[] = {
+const LocationPart MainMenuInputState_BR::_firstLocation[] = {
 	{ 0, "intro" },
 	{ 1, "museo" },
 	{ 2, "start" },
@@ -282,7 +282,7 @@ LocationPart MainMenuInputState_BR::_firstLocation[] = {
 };
 
 
-const char *MainMenuInputState_BR::_menuStringsAmiga[NUM_MENULINES] = {
+const char *const MainMenuInputState_BR::_menuStringsAmiga[NUM_MENULINES] = {
 	"See the introduction",
 	"Load a Saved Game",
 	"Exit to WorkBench",
@@ -302,7 +302,7 @@ const MainMenuInputState_BR::MenuOptions MainMenuInputState_BR::_optionsAmiga[NU
 	kMenuPart4
 };
 
-const char *MainMenuInputState_BR::_menuStringsPC[NUM_MENULINES] = {
+const char *const MainMenuInputState_BR::_menuStringsPC[NUM_MENULINES] = {
 	"SEE INTRO",
 	"NEW GAME",
 	"SAVED GAME",

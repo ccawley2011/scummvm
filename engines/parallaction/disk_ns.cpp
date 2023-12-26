@@ -229,7 +229,7 @@ void Disk_ns::setLanguage(uint16 language) {
 		_sset.remove(_language);
 	}
 
-	static const char *languages[] = { "it", "fr", "en", "ge" };
+	static const char *const languages[] = { "it", "fr", "en", "ge" };
 	_language = languages[language];
 
 	if (_sset.hasArchive(_language)) {

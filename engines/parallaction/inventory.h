@@ -63,7 +63,7 @@ protected:
 	int				_maxItems;
 
 public:
-	Inventory(int maxItems, InventoryItem *verbs);
+	Inventory(int maxItems, const InventoryItem *verbs);
 	virtual ~Inventory();
 
 	ItemPosition addItem(ItemName name, uint32 value);
@@ -83,7 +83,7 @@ public:
 
 class InventoryRenderer {
 	Parallaction	*_vm;
-	InventoryProperties *_props;
+	const InventoryProperties *_props;
 
 	Inventory		*_inv;
 	Common::Point	_pos;
@@ -97,7 +97,7 @@ protected:
 	void refresh();
 
 public:
-	InventoryRenderer(Parallaction *vm, InventoryProperties *props);
+	InventoryRenderer(Parallaction *vm, const InventoryProperties *props);
 	virtual ~InventoryRenderer();
 
 	void setInventory(Inventory *inventory);

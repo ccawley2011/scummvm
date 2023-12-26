@@ -88,7 +88,7 @@ byte Input::_resMouseArrow_BR_Amiga[512] = {
 /*
 	This palette snippet is used for animations in Big Red Adventure.
 */
-byte braAmigaFramesDefaultPalette[48] = {
+extern const byte braAmigaFramesDefaultPalette[48] = {
 	0x00, 0x00, 0x00, 0x14, 0x14, 0x14, 0xFF, 0xE0, 0xCF, 0x7F, 0x7F, 0x7F, 0xD9, 0x9C, 0x84, 0x00,
 	0x9E, 0xF0, 0x91, 0xCC, 0x36, 0xFF, 0x6A, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xDC, 0x11, 0xB0, 0xEE,
 	0xF0, 0xFF, 0x17, 0x3D, 0x18, 0xAC, 0x3A, 0xB0, 0x00, 0x00, 0x7D, 0x00, 0x00, 0xFF, 0xA8, 0xFF,
@@ -133,15 +133,15 @@ const char *callableNamesRes_br[] = {
 	"password"
 };
 
-const char *g_dinoName = "dino";
-const char *g_donnaName = "donna";
-const char *g_doughName = "dough";
-const char *g_drkiName = "drki";
+const char *const g_dinoName = "dino";
+const char *const g_donnaName = "donna";
+const char *const g_doughName = "dough";
+const char *const g_drkiName = "drki";
 
-const char *g_minidinoName = "minidino";
-const char *g_minidonnaName = "minidonna";
-const char *g_minidoughName = "minidough";
-const char *g_minidrkiName = "minidrki";
+const char *const g_minidinoName = "minidino";
+const char *const g_minidonnaName = "minidonna";
+const char *const g_minidoughName = "minidough";
+const char *const g_minidrkiName = "minidrki";
 
 #define CALLABLE_NS(x) &Parallaction_ns::x
 

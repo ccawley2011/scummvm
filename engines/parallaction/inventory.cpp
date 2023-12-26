@@ -41,7 +41,7 @@ namespace Parallaction {
 #define INVENTORY_HEIGHT			(INVENTORY_LINES*INVENTORYITEM_HEIGHT)
 */
 
-InventoryItem _verbs_NS[] = {
+const InventoryItem _verbs_NS[] = {
 	{ 1, kZoneDoor },
 	{ 3, kZoneExamine },
 	{ 2, kZoneGet },
@@ -49,7 +49,7 @@ InventoryItem _verbs_NS[] = {
 	{ 0, 0 }
 };
 
-InventoryItem _verbs_BR[] = {
+const InventoryItem _verbs_BR[] = {
 	{ 1, kZoneBox },
 	{ 2, kZoneGet },
 	{ 3, kZoneExamine },
@@ -57,7 +57,7 @@ InventoryItem _verbs_BR[] = {
 	{ 0, 0 }
 };
 
-InventoryProperties	_invProps_NS = {
+const InventoryProperties	_invProps_NS = {
 	32,		// INVENTORYITEM_PITCH
 	24,		// INVENTORYITEM_WIDTH
 	24,		// INVENTORYITEM_HEIGHT
@@ -68,7 +68,7 @@ InventoryProperties	_invProps_NS = {
 	6 * 24		// INVENTORY_HEIGHT = (INVENTORY_LINES*INVENTORYITEM_HEIGHT)
 };
 
-InventoryProperties	_invProps_BR = {
+const InventoryProperties	_invProps_BR = {
 	51,		// INVENTORYITEM_PITCH
 	51,		// INVENTORYITEM_WIDTH
 	51,		// INVENTORYITEM_HEIGHT
@@ -152,7 +152,7 @@ Inventory *Parallaction_br::findInventory(const char *name) {
 	return nullptr;
 }
 
-InventoryRenderer::InventoryRenderer(Parallaction *vm, InventoryProperties *props) : _vm(vm), _props(props) {
+InventoryRenderer::InventoryRenderer(Parallaction *vm, const InventoryProperties *props) : _vm(vm), _props(props) {
 	_surf.create(_props->_width, _props->_height, Graphics::PixelFormat::createFormatCLUT8());
 }
 
@@ -256,7 +256,7 @@ void InventoryRenderer::getItemRect(ItemPosition pos, Common::Rect &r) {
 
 }
 
-Inventory::Inventory(int maxItems, InventoryItem *verbs) : _numItems(0), _maxItems(maxItems) {
+Inventory::Inventory(int maxItems, const InventoryItem *verbs) : _numItems(0), _maxItems(maxItems) {
 	_items = (InventoryItem *)calloc(_maxItems, sizeof(InventoryItem));
 
 	int i = 0;

@@ -29,7 +29,7 @@
 
 namespace Parallaction {
 
-extern byte braAmigaFramesDefaultPalette[];
+extern const byte braAmigaFramesDefaultPalette[];
 
 struct Sprite {
 	uint16	size;
