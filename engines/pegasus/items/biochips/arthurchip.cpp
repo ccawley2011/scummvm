@@ -32,7 +32,7 @@ DECLARE_SINGLETON(Pegasus::ArthurManager);
 
 namespace Pegasus {
 
-static const char *kArthurWisdomMovies[] = {
+static const char *const kArthurWisdomMovies[] = {
 	"Images/AI/Globals/XGLOBA01",
 	"Images/AI/Globals/XGLOBA03",
 	"Images/AI/Globals/XGLOBA06",
