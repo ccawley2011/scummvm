@@ -31,7 +31,7 @@
 
 namespace Prince {
 
-const char *MusicPlayer::_musTable[] = {
+const char *const MusicPlayer::_musTable[] = {
 	"",
 	"Battlfld.mid",
 	"Cave.mid",

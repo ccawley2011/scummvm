@@ -1958,7 +1958,7 @@ void Interpreter::O_BREAK_POINT() {
 	error("O_BREAK_POINT");
 }
 
-Interpreter::OpcodeFunc Interpreter::_opcodes[kNumOpcodes] = {
+const Interpreter::OpcodeFunc Interpreter::_opcodes[kNumOpcodes] = {
 	&Interpreter::O_WAITFOREVER,
 	&Interpreter::O_BLACKPALETTE,
 	&Interpreter::O_SETUPPALETTE,
