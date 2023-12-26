@@ -36,7 +36,7 @@ namespace Sludge {
 
 MovieStates movieIsPlaying = kMovieNothing;
 int movieIsEnding = 0;
-float movieAspect = 1.6F;
+const float movieAspect = 1.6F;
 
 int playMovie(int fileNumber) {
 	uint fsize;
