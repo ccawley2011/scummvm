@@ -428,7 +428,7 @@ void GameManager1::telomat(int nr) {
 	dial1[2] = kStringTelomat3;
 	dial1[3] = kStringDialogSeparator;
 
-	static byte rows1[3] = {1, 2, 1};
+	static const byte rows1[3] = {1, 2, 1};
 
 	int dial2[4];
 	dial2[0] = kStringTelomat4;
@@ -436,7 +436,7 @@ void GameManager1::telomat(int nr) {
 	dial2[2] = kStringTelomat6;
 	dial2[3] = kStringDialogSeparator;
 
-	static byte rows2[4] = {1, 1, 1, 1};
+	static const byte rows2[4] = {1, 1, 1, 1};
 
 	_guiEnabled = false;
 	_vm->renderBox(0, 0, 320, 200, kColorBlack);
@@ -647,10 +647,10 @@ void GameManager1::busted(int i) {
 }
 
 void GameManager1::novaScroll() {
-	static byte planet_f[6] = {0xeb,0xec,0xf0,0xed,0xf1,0xf2};
-	static byte nova_f[13] = {0xea,0xe9,0xf5,0xf3,0xf7,0xf4,0xf6,
+	static const byte planet_f[6] = {0xeb,0xec,0xf0,0xed,0xf1,0xf2};
+	static const byte nova_f[13] = {0xea,0xe9,0xf5,0xf3,0xf7,0xf4,0xf6,
 		0xf9,0xfb,0xfc,0xfd,0xfe,0xfa};
-	static byte rgb[65][3] = {
+	static const byte rgb[65][3] = {
 		{ 5, 0, 0},{10, 0, 0},{15, 0, 0},{20, 0, 0},{25, 0, 0},
 		{30, 0, 0},{35, 0, 0},{40, 0, 0},{45, 0, 0},{50, 0, 0},
 		{55, 0, 0},{60, 0, 0},{63,10, 5},{63,20,10},{63,30,15},
