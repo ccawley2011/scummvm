@@ -448,8 +448,8 @@ public:
 	void freeCharacterObjects();
 	void freeLocationObjects();
 	void showGfxObj(GfxObj* obj, bool visible);
-	void blt(const Common::Rect& r, byte *data, Graphics::Surface *surf, uint16 z, uint scale, byte transparentColor);
-	void unpackBlt(const Common::Rect& r, byte *data, uint size, Graphics::Surface *surf, uint16 z, uint scale, byte transparentColor);
+	void blt(const Common::Rect& r, const byte *data, Graphics::Surface *surf, uint16 z, uint scale, byte transparentColor);
+	void unpackBlt(const Common::Rect& r, const byte *data, uint size, Graphics::Surface *surf, uint16 z, uint scale, byte transparentColor);
 
 	// labels
 	void showFloatingLabel(GfxObj *label);
@@ -485,8 +485,8 @@ public:
 	void applyHalfbriteEffect_NS(Graphics::Surface &surf);
 	void setHalfbriteMode(bool enable);
 	void setProjectorPos(int x, int y);
-	void setProjectorProgram(int16 *data);
-	int16 *_nextProjectorPos;
+	void setProjectorProgram(const int16 *data);
+	const int16 *_nextProjectorPos;
 
 	// start programmatic relative scroll
 	void initiateScroll(int deltaX, int deltaY);
@@ -560,9 +560,9 @@ protected:
 	void copyRect(const Common::Rect &r, Graphics::Surface &src, Graphics::Surface &dst);
 	void drawText(Font *font, Graphics::Surface* surf, uint16 x, uint16 y, const char *text, byte color);
 	void drawGfxObject(GfxObj *obj, Graphics::Surface &surf);
-	void bltMaskScale(const Common::Rect& r, byte *data, Graphics::Surface *surf, uint16 z, uint scale, byte transparentColor);
-	void bltMaskNoScale(const Common::Rect& r, byte *data, Graphics::Surface *surf, uint16 z, byte transparentColor);
-	void bltNoMaskNoScale(const Common::Rect& r, byte *data, Graphics::Surface *surf, byte transparentColor);
+	void bltMaskScale(const Common::Rect& r, const byte *data, Graphics::Surface *surf, uint16 z, uint scale, byte transparentColor);
+	void bltMaskNoScale(const Common::Rect& r, const byte *data, Graphics::Surface *surf, uint16 z, byte transparentColor);
+	void bltNoMaskNoScale(const Common::Rect& r, const byte *data, Graphics::Surface *surf, byte transparentColor);
 };
 
 

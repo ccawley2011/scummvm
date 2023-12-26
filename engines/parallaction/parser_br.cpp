@@ -835,7 +835,7 @@ void LocationParser_br::parseNoneData(ZonePtr z) {
 
 
 typedef void (LocationParser_br::*ZoneTypeParser)(ZonePtr);
-static ZoneTypeParser parsers[] = {
+static const ZoneTypeParser parsers[] = {
 	nullptr,	// no type
 	&LocationParser_br::parseExamineData,
 	&LocationParser_br::parseDoorData,

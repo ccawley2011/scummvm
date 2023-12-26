@@ -41,7 +41,7 @@ namespace Parallaction {
 */
 
 
-static uint16 _rightHandPositions[684] = {
+static const uint16 _rightHandPositions[684] = {
 	0x0064, 0x0046, 0x006c, 0x0046, 0x0074, 0x0046, 0x007c, 0x0046,
 	0x0084, 0x0046, 0x008c, 0x0046, 0x0094, 0x0046, 0x009c, 0x0046,
 	0x00a4, 0x0046, 0x00ac, 0x0046, 0x00b4, 0x0046, 0x00bc, 0x0046,
@@ -553,7 +553,7 @@ void Parallaction_ns::_c_shade(void *parm) {
 
 }
 
-int16 projectorProgram[] = {
+const int16 projectorProgram[] = {
 	0, 50, 1, 50, 2, 49, 3, 49, 4, 48, 5, 48, 6, 47, 7, 47, 8, 46, 9, 46, 10, 45, 11, 45,
    12, 44, 13, 44, 14, 43, 15, 43, 16, 42, 17, 42, 18, 41, 19, 41, 20, 40, 21, 40, 22, 39,
    23, 39, 24, 38, 25, 38, 26, 37, 27, 37, 28, 36, 29, 36, 30, 35, 31, 35, 32, 34, 33, 34,

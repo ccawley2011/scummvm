@@ -91,14 +91,14 @@ enum {
 extern uint32		g_engineFlags;
 extern char			g_saveData1[];
 extern uint32		g_globalFlags;
-extern const char	*g_dinoName;
-extern const char	*g_donnaName;
-extern const char	*g_doughName;
-extern const char	*g_drkiName;
-extern const char	*g_minidinoName;
-extern const char	*g_minidonnaName;
-extern const char	*g_minidoughName;
-extern const char	*g_minidrkiName;
+extern const char *const g_dinoName;
+extern const char *const g_donnaName;
+extern const char *const g_doughName;
+extern const char *const g_drkiName;
+extern const char *const g_minidinoName;
+extern const char *const g_minidonnaName;
+extern const char *const g_minidoughName;
+extern const char *const g_minidrkiName;
 
 
 
@@ -529,7 +529,7 @@ public:
 	void	enableMusic(bool enable);
 
 	const char **_audioCommandsNamesRes;
-	static const char *_partNames[];
+	static const char *const _partNames[];
 	int			_part;
 	int			_nextPart;
 

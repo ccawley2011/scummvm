@@ -39,14 +39,14 @@ struct WalkFrames {
 	int16 frameRepeat[4];
 };
 
-WalkFrames _char20WalkFrames_NS = {
+const WalkFrames _char20WalkFrames_NS = {
 	{  0,  7, 14, 17 },
 	{  1,  8, 15, 18 },
 	{  6,  6,  2,  2 },
 	{  2,  2,  4,  4 }
 };
 
-WalkFrames _char24WalkFrames_NS = {
+const WalkFrames _char24WalkFrames_NS = {
 	{  0,  9, 18, 21 },
 	{  1, 10, 19, 22 },
 	{  8,  8,  2,  2 },
@@ -363,7 +363,7 @@ void PathWalker_NS::walk() {
 
 void PathWalker_NS::updateDirection(const Common::Point& pos, const Common::Point& to) {
 	Common::Point dist(to.x - pos.x, to.y - pos.y);
-	WalkFrames *frames = (_a->getFrameNum() == 20) ? &_char20WalkFrames_NS : &_char24WalkFrames_NS;
+	const WalkFrames *frames = (_a->getFrameNum() == 20) ? &_char20WalkFrames_NS : &_char24WalkFrames_NS;
 
 	_step++;
 

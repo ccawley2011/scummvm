@@ -278,7 +278,7 @@ void Gfx::setProjectorPos(int x, int y) {
 	_hbCirclePos.y = y + _hbCircleRadius;
 }
 
-void Gfx::setProjectorProgram(int16 *data) {
+void Gfx::setProjectorProgram(const int16 *data) {
 	if (_nextProjectorPos == nullptr) {
 		_nextProjectorPos = data;
 	}

@@ -212,7 +212,7 @@ void DosSoundMan_ns::playLocationMusic(const char *location) {
 #define AMIGABEEP_SIZE	16
 #define NUM_REPEATS		60
 
-static int8 res_amigaBeep[AMIGABEEP_SIZE] = {
+static const int8 res_amigaBeep[AMIGABEEP_SIZE] = {
 	0, 20, 40, 60, 80, 60, 40, 20, 0, -20, -40, -60, -80, -60, -40, -20
 };
 

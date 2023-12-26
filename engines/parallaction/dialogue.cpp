@@ -173,7 +173,7 @@ DialogueManager::~DialogueManager() {
 }
 
 void DialogueManager::transitionToState(DialogueState newState) {
-	static const char *dialogueStates[] = {
+	static const char *const dialogueStates[] = {
 		"start",
 		"runquestion",
 		"runanswer",
