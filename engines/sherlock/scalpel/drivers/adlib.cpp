@@ -32,11 +32,11 @@ namespace Sherlock {
 #define SHERLOCK_ADLIB_VOICES_COUNT 9
 #define SHERLOCK_ADLIB_NOTES_COUNT 96
 
-byte operator1Register[SHERLOCK_ADLIB_VOICES_COUNT] = {
+const byte operator1Register[SHERLOCK_ADLIB_VOICES_COUNT] = {
 	0x00, 0x01, 0x02, 0x08, 0x09, 0x0A, 0x10, 0x11, 0x12
 };
 
-byte operator2Register[SHERLOCK_ADLIB_VOICES_COUNT] = {
+const byte operator2Register[SHERLOCK_ADLIB_VOICES_COUNT] = {
 	0x03, 0x04, 0x05, 0x0B, 0x0C, 0x0D, 0x13, 0x14, 0x15
 };
 
@@ -200,7 +200,7 @@ const InstrumentEntry instrumentTable[] = {
 };
 
 // hardcoded, dumped from ADHOM.DRV
-uint16 frequencyLookUpTable[SHERLOCK_ADLIB_NOTES_COUNT] = {
+const uint16 frequencyLookUpTable[SHERLOCK_ADLIB_NOTES_COUNT] = {
 	0x0158, 0x016C, 0x0182, 0x0199, 0x01B1, 0x01CB, 0x01E6, 0x0203, 0x0222, 0x0242,
 	0x0265, 0x0289, 0x0558, 0x056C, 0x0582, 0x0599, 0x05B1, 0x05CB, 0x05E6, 0x0603,
 	0x0622, 0x0642, 0x0665, 0x0689, 0x0958, 0x096C, 0x0982, 0x0999, 0x09B1, 0x09CB,
