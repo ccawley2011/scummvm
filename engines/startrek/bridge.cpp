@@ -39,7 +39,7 @@ struct BridgeActorAndMenu {
 	int16 y;
 };
 
-BridgeActorAndMenu bridgeActorsAndMenus[] = {
+static const BridgeActorAndMenu bridgeActorsAndMenus[] = {
 	{ 0, "bstndki", "command",  60,  100 },	// Kirk
 	{ 1, "bstndsp", "comp",    200,   30 },	// Spock
 	{ 4, "bstndsu", "helm",     60,   70 },	// Sulu
@@ -590,7 +590,7 @@ struct CrewTextsForChapter {
 	int inOrbitTextId;
 };
 
-CrewTextsForChapter crewTexts[] = {
+static const CrewTextsForChapter crewTexts[] = {
 	// -- Chapter 1 ----
 	{ kPlanetPollux,       kBridgeTalkerSpock, 10, 20, 21, 22 },
 	{ kPlanetPollux,       kBridgeTalkerUhura,  9, 16, 19, 19 },
@@ -611,7 +611,7 @@ CrewTextsForChapter crewTexts[] = {
 };
 
 void StarTrekEngine::bridgeCrewAction(int crewId) {
-	CrewTextsForChapter *curCrewTexts = crewTexts;
+	const CrewTextsForChapter *curCrewTexts = crewTexts;
 	int textId = -1;
 	const char *underAttackText = "#BRID\\B_348#Unable to comply, Captain.  We're under attack.";
 	const char *missionNotOverText = "#BRID\\B_338#May I respectfully remind the Captain that we haven't accomplished our mission, Sir.";
