@@ -275,13 +275,13 @@ private:
 	/**
 	 * Default sequence values for pixel dissolve transition bit masks.
 	 */
-	int *_dissolveSequenceSeeds;
+	const int *_dissolveSequenceSeeds;
 
 	/**
 	 * Default values for `PlaneShowStyle::divisions` for the current SCI
 	 * version.
 	 */
-	int16 *_defaultDivisions;
+	const int16 *_defaultDivisions;
 
 	/**
 	 * The list of PlaneShowStyles that are currently active.

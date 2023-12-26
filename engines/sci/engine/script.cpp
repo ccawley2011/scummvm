@@ -32,7 +32,7 @@
 
 namespace Sci {
 
-const char *sciObjectTypeNames[] = {
+const char *const sciObjectTypeNames[] = {
 	"terminator", "object", "code", "synonyms", "said", "strings", "class",
 	"exports", "pointers", "preload text", "local vars"
 };

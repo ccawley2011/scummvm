@@ -39,7 +39,7 @@ namespace Sci {
 // with not enough available memory (e.g. phones), where REDUCE_MEMORY_USAGE
 // is defined
 #ifndef REDUCE_MEMORY_USAGE
-const char *opcodeNames[] = {
+const char *const opcodeNames[] = {
 	   "bnot",       "add",      "sub",      "mul",      "div",
 		"mod",       "shr",      "shl",      "xor",      "and",
 		 "or",       "neg",      "not",      "eq?",      "ne?",
@@ -152,7 +152,7 @@ reg_t disassemble(EngineState *s, reg_t pos, const Object *obj, bool printBWTag,
 	debugN("%-5s", opcodeNames[opcode]);
 #endif
 
-	static const char *defaultSeparator = "\t\t; ";
+	static const char *const defaultSeparator = "\t\t; ";
 	
 	// Provide additional selector name context for push0, push1, push2 opcodes.
 	if (opcode >= op_push0 && opcode <= op_push2) {
