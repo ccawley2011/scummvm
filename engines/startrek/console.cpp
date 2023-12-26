@@ -401,7 +401,7 @@ Common::String Console::EventToString(uint32 action) {
 	return retString;
 }
 
-const char *itemNames[] = {
+static const char *const itemNames[] = {
 	"IPHASERS",
 	"IPHASERK",
 	"IHAND",
