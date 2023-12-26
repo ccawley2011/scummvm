@@ -297,9 +297,9 @@ void PinkEngine::executeMenuCommand(uint id) {
 }
 
 // Australia, Bhutan, China, Britain, Egypt, India
-static const char *pageChangePrefixes[] = { "AUS", "BHU", "CHI", "BRI", "EGY", "IND" };
+static const char *const pageChangePrefixes[] = { "AUS", "BHU", "CHI", "BRI", "EGY", "IND" };
 // Art, Cloth, Food, History, Nature, People, Places, Religion
-static const char *pageChangeSuffixes[] = { "ART", "CLO", "FOO", "HIS", "NAT", "PEO", "PLA", "REL" };
+static const char *const pageChangeSuffixes[] = { "ART", "CLO", "FOO", "HIS", "NAT", "PEO", "PLA", "REL" };
 
 bool PinkEngine::executePageChangeCommand(uint id) {
 	if (id >= kShowAustraliaArt && id <= kShowIndiaReligion) {
