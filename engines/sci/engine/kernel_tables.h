@@ -639,7 +639,7 @@ struct SciKernelMapEntry {
 };
 
 //    name,                        version/platform,         signature,              sub-signatures,  workarounds
-static SciKernelMapEntry s_kernelMap[] = {
+static const SciKernelMapEntry s_kernelMap[] = {
 	{ MAP_CALL(Abs),               SIG_EVERYWHERE,           "i",                     NULL,            kAbs_workarounds },
 	{ MAP_CALL(AddAfter),          SIG_EVERYWHERE,           "lnn",                   NULL,            NULL },
 	{ MAP_CALL(AddMenu),           SIG_EVERYWHERE,           "rr",                    NULL,            NULL },

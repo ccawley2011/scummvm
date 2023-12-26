@@ -623,7 +623,7 @@ void Kernel::mapFunctions(GameFeatures *features) {
 
 		// If the name is known, look it up in s_kernelMap. This table
 		// maps kernel func names to actual function (pointers).
-		SciKernelMapEntry *kernelMap = s_kernelMap;
+		const SciKernelMapEntry *kernelMap = s_kernelMap;
 		bool nameMatch = false;
 		while (kernelMap->name) {
 			if (kernelName == kernelMap->name) {
