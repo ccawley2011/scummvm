@@ -241,7 +241,7 @@ private:
 	void debugInterpreter(const char *s, ...);
 
 	typedef void (Interpreter::*OpcodeFunc)();
-	static OpcodeFunc _opcodes[];
+	static const OpcodeFunc _opcodes[];
 
 	static const uint kGiveLetterScriptFix = 79002;
 	static const uint kSecondBirdAnimationScriptFix = 45658;

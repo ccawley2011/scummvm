@@ -44,7 +44,7 @@ const char optionsTextPL[7][18] = {
 // + special letter values changing
 // Normal value:  196,  214,  220,  223,  228,  246,  252
 // Prince change: 131,  132,  133,  127,  128,  129,  130
-char invOptionsTextDE[5][17] = {
+const char invOptionsTextDE[5][17] = {
 	"Anschauen",
 	"Benutzen",
 	"\x84""ffnen/Sto\x7f""en",
@@ -63,7 +63,7 @@ const char optionsTextDE[7][17] = {
 };
 
 // EN
-const char *invOptionsTextEN[] = {
+const char *const invOptionsTextEN[] = {
 	"Examine",
 	"Use",
 	"Open/Push",
@@ -71,7 +71,7 @@ const char *invOptionsTextEN[] = {
 	"Give"
 };
 
-const char *optionsTextEN[] = {
+const char *const optionsTextEN[] = {
 	"Walk to",
 	"Examine",
 	"Pick up",
@@ -82,7 +82,7 @@ const char *optionsTextEN[] = {
 };
 
 // ES
-const char *invOptionsTextES[] = {
+const char *const invOptionsTextES[] = {
 	"Examinar",
 	"Usar",
 	"Abrir/Empujar",
@@ -90,7 +90,7 @@ const char *invOptionsTextES[] = {
 	"Dar"
 };
 
-const char *optionsTextES[] = {
+const char *const optionsTextES[] = {
 	"Ir hacia",
 	"Examinar",
 	"Coger",
@@ -101,7 +101,7 @@ const char *optionsTextES[] = {
 };
 
 // RU
-const char *invOptionsTextRU[] = {
+const char *const invOptionsTextRU[] = {
 	"Cvjnhtnm",
 	"Bcgjkmp.",
 	"Jnrhsnm/""\x83""bnm ",
@@ -109,7 +109,7 @@ const char *invOptionsTextRU[] = {
 	"Lfnm "
 };
 
-const char *optionsTextRU[] = {
+const char *const optionsTextRU[] = {
 	"Gjljqnb",
 	"Jcvjnhtnm",
 	"Dpznm ",
@@ -120,7 +120,7 @@ const char *optionsTextRU[] = {
 };
 
 // RU localization from "Russian Project"
-const char *invOptionsTextRU2[] = {
+const char *const invOptionsTextRU2[] = {
 	"n""\x91""\x8c""\x8e""\x92""\x90""\x85""\x92""\x9c",
 	"h""\x91""\x8f""\x8e""\x8b""\x9c""\x87"".",
 	"n""\x92""\x8a""\x90""\x9b""\x92""\x9c""/r""\x8e""\x8b""\x8a""\x80""\x92""\x9c",
@@ -128,7 +128,7 @@ const char *invOptionsTextRU2[] = {
 	"d""\x80""\x92""\x9c"
 };
 
-const char *optionsTextRU2[] = {
+const char *const optionsTextRU2[] = {
 	"o""\x8e""\x84""\x8e""\x89""\x92""\x88",
 	"n""\x91""\x8c""\x8e""\x92""\x90""\x85""\x92""\x9c",
 	"b""\x87""\x9f""\x92""\x9c",

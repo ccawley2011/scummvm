@@ -27,7 +27,7 @@ const int heroSetBack[7] = { 0, 0, 10, 0, 6, 0, 0 };
 
 typedef const char *HeroSetAnimNames[26];
 
-static HeroSetAnimNames heroSet5 = {
+static const HeroSetAnimNames heroSet5 = {
 	"SL_DIAB.ANI",
 	"SR_DIAB.ANI",
 	"SU_DIAB.ANI",
@@ -56,7 +56,7 @@ static HeroSetAnimNames heroSet5 = {
 	nullptr
 };
 
-static HeroSetAnimNames heroSet1 = {
+static const HeroSetAnimNames heroSet1 = {
 	"SL_HERO1.ANI",
 	"SR_HERO1.ANI",
 	"SU_HERO1.ANI",
@@ -85,7 +85,7 @@ static HeroSetAnimNames heroSet1 = {
 	"KS_WLOSY.ANI"
 };
 
-static HeroSetAnimNames heroSet2 = {
+static const HeroSetAnimNames heroSet2 = {
 	"SL_HERO2.ANI",
 	"SR_HERO2.ANI",
 	"SU_HERO2.ANI",
@@ -114,7 +114,7 @@ static HeroSetAnimNames heroSet2 = {
 	"KS_WLO_S.ANI"
 };
 
-static HeroSetAnimNames heroSet3 = {
+static const HeroSetAnimNames heroSet3 = {
 	"SL_BEAR.ANI",
 	"SR_BEAR.ANI",
 	"SU_BEAR.ANI",
@@ -143,7 +143,7 @@ static HeroSetAnimNames heroSet3 = {
 	nullptr,
 };
 
-static HeroSetAnimNames shanSet1 = {
+static const HeroSetAnimNames shanSet1 = {
 	"SL_SHAN.ANI",
 	"SR_SHAN.ANI",
 	"SU_SHAN.ANI",
@@ -172,7 +172,7 @@ static HeroSetAnimNames shanSet1 = {
 	"B2_SHAN.ANI",
 };
 
-static HeroSetAnimNames shanSet2 = {
+static const HeroSetAnimNames shanSet2 = {
 	"SL_SHAN2.ANI",
 	"SR_SHAN2.ANI",
 	"SU_SHAN.ANI",
@@ -201,7 +201,7 @@ static HeroSetAnimNames shanSet2 = {
 	"B2_SHAN2.ANI"
 };
 
-static HeroSetAnimNames arivSet1 = {
+static const HeroSetAnimNames arivSet1 = {
 	"SL_ARIV.ANI",
 	"SR_ARIV.ANI",
 	"SU_ARIV.ANI",
@@ -230,7 +230,7 @@ static HeroSetAnimNames arivSet1 = {
 	nullptr
 };
 
-const HeroSetAnimNames *heroSetTable[7] = {
+const HeroSetAnimNames *const heroSetTable[7] = {
 	&heroSet1,
 	&heroSet2,
 	&heroSet3,
