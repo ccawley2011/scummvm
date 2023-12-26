@@ -49,21 +49,21 @@ namespace Draci {
 
 // Data file paths
 
-const char *objectsPath = "OBJEKTY.DFW";
-const char *palettePath = "PALETY.DFW";
-const char *spritesPath = "OBR_AN.DFW";
-const char *overlaysPath = "OBR_MAS.DFW";
-const char *roomsPath = "MIST.DFW";
-const char *animationsPath = "ANIM.DFW";
-const char *iconsPath = "HRA.DFW";
-const char *walkingMapsPath = "MAPY.DFW";
-const char *itemsPath = "IKONY.DFW";
-const char *itemImagesPath = "OBR_IK.DFW";
-const char *initPath = "INIT.DFW";
-const char *stringsPath = "RETEZCE.DFW";
-const char *soundsPath = "CD2.SAM";
-const char *dubbingPath = "CD.SAM";
-const char *musicPathMask = "HUDBA%d.MID";
+const char *const objectsPath = "OBJEKTY.DFW";
+const char *const palettePath = "PALETY.DFW";
+const char *const spritesPath = "OBR_AN.DFW";
+const char *const overlaysPath = "OBR_MAS.DFW";
+const char *const roomsPath = "MIST.DFW";
+const char *const animationsPath = "ANIM.DFW";
+const char *const iconsPath = "HRA.DFW";
+const char *const walkingMapsPath = "MAPY.DFW";
+const char *const itemsPath = "IKONY.DFW";
+const char *const itemImagesPath = "OBR_IK.DFW";
+const char *const initPath = "INIT.DFW";
+const char *const stringsPath = "RETEZCE.DFW";
+const char *const soundsPath = "CD2.SAM";
+const char *const dubbingPath = "CD.SAM";
+const char *const musicPathMask = "HUDBA%d.MID";
 
 const uint kSoundsFrequency = 13000;
 const uint kDubbingFrequency = 22050;
