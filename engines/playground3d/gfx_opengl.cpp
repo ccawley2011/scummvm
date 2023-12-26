@@ -242,7 +242,7 @@ void OpenGLRenderer::dimRegionInOut(float fade) {
 }
 
 void OpenGLRenderer::drawInViewport() {
-	static GLfloat box2Vertices[] = {
+	static const GLfloat box2Vertices[] = {
 		//  X      Y
 		-0.1f,  0.1f,
 		 0.1f,  0.1f,
