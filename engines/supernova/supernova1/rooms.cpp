@@ -1950,9 +1950,9 @@ void ArsanoEntrance::animation() {
 }
 
 bool ArsanoEntrance::interact(Action verb, Object &obj1, Object &obj2) {
-	static byte row1[6] = {1, 1, 1, 1, 1, 0};
-	static byte row2[6] = {1, 1, 1, 1, 1, 0};
-	static byte row3[6] = {1, 1, 0, 0, 0, 0};
+	static const byte row1[6] = {1, 1, 1, 1, 1, 0};
+	static const byte row2[6] = {1, 1, 1, 1, 1, 0};
+	static const byte row3[6] = {1, 1, 0, 0, 0, 0};
 
 	if ((verb == ACTION_TALK) && (obj1._id == PORTER)) {
 		if (_gm->_rooms[AIRLOCK]->getObject(4)->hasProperty(WORN))
@@ -2387,7 +2387,7 @@ void ArsanoRoger::animation() {
 }
 
 bool ArsanoRoger::interact(Action verb, Object &obj1, Object &obj2) {
-	static byte row1[6] = {1, 1, 1, 1, 0, 0};
+	static const byte row1[6] = {1, 1, 1, 1, 0, 0};
 
 	if ((verb == ACTION_TAKE) && (obj1._id == WALLET)) {
 		if (isSectionVisible(3)) {
@@ -2620,10 +2620,10 @@ void ArsanoMeetup2::onEntrance() {
 }
 
 bool ArsanoMeetup2::interact(Action verb, Object &obj1, Object &obj2) {
-	static byte row1[6] = {1, 1, 0, 0, 0, 0};
-	static byte row2[6] = {1, 1, 0, 0, 0, 0};
-	static byte row3[6] = {1, 1, 1, 1, 0, 0};
-	static byte row4[6] = {2, 1, 0, 0, 0, 0};
+	static const byte row1[6] = {1, 1, 0, 0, 0, 0};
+	static const byte row2[6] = {1, 1, 0, 0, 0, 0};
+	static const byte row3[6] = {1, 1, 1, 1, 0, 0};
+	static const byte row4[6] = {2, 1, 0, 0, 0, 0};
 
 	if (((verb == ACTION_WALK) &&
 			((obj1._id == SPACESHIP) || (obj1._id == ROGER_W))) ||

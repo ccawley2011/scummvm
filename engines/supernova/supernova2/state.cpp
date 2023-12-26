@@ -765,7 +765,7 @@ void GameManager2::taxiUnknownDestination() {
 }
 
 void GameManager2::taxiPayment(int price, int destination) {
-	static int answers[] = {
+	static const int answers[] = {
 		kStringPay,
 		kStringLeaveTaxi
 	};
@@ -832,7 +832,7 @@ void GameManager2::taxiPayment(int price, int destination) {
 
 void GameManager2::taxi() {
 	_vm->_allowSaveGame = false;
-	static int dest[] = {
+	static const int dest[] = {
 		kStringAirport,
 		kStringDowntown,
 		kStringCulturePalace,
@@ -1018,7 +1018,7 @@ void GameManager2::pyramidEnd() {
 }
 
 void GameManager2::passageConstruction() {
-	static ConstructionEntry constructionTab[9] = {
+	static const ConstructionEntry constructionTab[9] = {
 		{0, 4, 10, 2, 13},
 		{0, 4, 9,  2, 14},
 		{0, 4, 8,  3,  2},
@@ -1112,7 +1112,7 @@ void GameManager2::passageConstruction() {
 }
 
 byte GameManager2::wall(int s, int z, int direction, int stepsForward, int stepsRight) {
-	static char vertical[2][12][11] = {
+	static const char vertical[2][12][11] = {
 		{
 			{0,0,0,0,0,0,0,0,0,0,0},
 			{0,1,0,0,0,0,0,0,0,0,0},
@@ -1143,7 +1143,7 @@ byte GameManager2::wall(int s, int z, int direction, int stepsForward, int steps
 		}
 	};
 
-	static char horizontal[2][11][12] = {
+	static const char horizontal[2][11][12] = {
 		{
 			{0,1,1,0,0,0,0,0,0,0,0,0},
 			{0,0,1,0,0,0,0,0,0,0,0,0},
@@ -1237,7 +1237,7 @@ bool GameManager2::move(Action verb, Object &obj) {
 }
 
 void GameManager2::compass() {
-	static int dirs[7] = {
+	static const int dirs[7] = {
 		kStringDirection1,
 		kStringDirection2,
 		kStringDirection3,
@@ -1403,7 +1403,7 @@ bool GameManager2::crackDoor(int time) {
 }
 
 void GameManager2::museumDoorInteract(Action verb, Object &obj1, Object &obj2) {
-	static struct {
+	static const struct {
 		int _r1;
 		int _o1;
 		int _r2;
@@ -1454,7 +1454,7 @@ void GameManager2::museumDoorInteract(Action verb, Object &obj1, Object &obj2) {
 }
 
 void GameManager2::securityEntrance() {
-	static struct {
+	static const struct {
 		RoomId _r;
 		int _a1;
 		int _a2;

@@ -111,8 +111,8 @@ public:
 	virtual bool serialize(Common::WriteStream *out);
 	virtual bool deserialize(Common::ReadStream *in, int version);
 
-	static int guiCommands[];
-	static int guiStatusCommands[];
+	static const int guiCommands[];
+	static const int guiStatusCommands[];
 	SupernovaEngine *_vm;
 	Sound *_sound;
 	Common::KeyState _key;
@@ -188,7 +188,7 @@ public:
 	virtual void saveTime();
 	void setAnimationTimer(int ticks);
 	void dead(int messageId);
-	int  dialog(int num, byte rowLength[6], int text[6], int number);
+	int  dialog(int num, const byte rowLength[6], const int text[6], int number);
 	void sentence(int number, bool brightness);
 	void say(int textId);
 	void say(const char *text);

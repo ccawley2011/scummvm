@@ -406,7 +406,7 @@ void Street::onEntrance() {
 }
 
 void Street::animation() {
-	static int ltab[36] = {
+	static const int ltab[36] = {
 		8, 9 + kSectionInvert, 10, 11 + kSectionInvert, 6, 12, 13 + kSectionInvert, 9, 14, 15 + kSectionInvert, 19,
 		16, 17 + kSectionInvert, 9 + kSectionInvert, 18, 19 + kSectionInvert, 6 + kSectionInvert, 20, 21 + kSectionInvert,
 		8 + kSectionInvert, 9, 10 + kSectionInvert, 11, 6, 12 + kSectionInvert, 13, 14 + kSectionInvert, 15, 19,
@@ -672,7 +672,7 @@ Kiosk::Kiosk(SupernovaEngine *vm, GameManager2 *gm) {
 }
 
 void Kiosk::onEntrance() {
-	static int dialEntry[2] = {
+	static const int dialEntry[2] = {
 		kStringGoodEvening,
 		kStringHello
 	};
@@ -706,16 +706,16 @@ void Kiosk::animation() {
 }
 
 bool Kiosk::interact(Action verb, Object &obj1, Object &obj2) {
-	static int dialPrice[2] = {
+	static const int dialPrice[2] = {
 		kStringWillTakeIt,
 		kStringTooExpensive
 	};
-	static int dialSay[3] = {
+	static const int dialSay[3] = {
 		kStringWouldBuy,
 		kStringMeHorstHummel,
 		kStringHaveMusicChip
 	};
-	static int dialSeller[16][3] = {
+	static const int dialSeller[16][3] = {
 		{kStringGreatMask, kStringThreeYears, kNoString},
 		{kStringStrongDrink, kNoString, kNoString},
 		{kStringMusicDevice, kNoString, kNoString},
@@ -835,19 +835,19 @@ void CulturePalace::notEnoughMoney() {
 }
 
 bool CulturePalace::interact(Action verb, Object &obj1, Object &obj2) {
-	static int dial1[4] = {
+	static const int dial1[4] = {
 		kStringHorstHummel,
 		kStringNiceWeather,
 		kStringTellTicket1,
 		kStringTellTicket2
 	};
-	static byte dials1[] = {1, 1, 2};
+	static const byte dials1[] = {1, 1, 2};
 
-	static int dial2[2] = {
+	static const int dial2[2] = {
 		kStringHereIsXa,
 		kStringYouAreCrazy
 	};
-	static int dial3[4] = {
+	static const int dial3[4] = {
 		kString500Xa,
 		kString1000Xa,
 		kString5000Xa,
@@ -972,30 +972,30 @@ void Checkout::animation() {
 }
 
 bool Checkout::interact(Action verb, Object &obj1, Object &obj2) {
-	static int dialCheckout1[3] = {
+	static const int dialCheckout1[3] = {
 		kStringCheckout1,
 		kStringCheckout2,
 		kStringCheckout3
 	};
-	static int dialCheckout2[2] = {
+	static const int dialCheckout2[2] = {
 		kStringYes2,
 		kStringNo2
 	};
-	static int dialStage1[3] = {
+	static const int dialStage1[3] = {
 		kStringCheckout4,
 		kStringCheckout5,
 		kStringCheckout6
 	};
-	static int dialStage2[2] = {
+	static const int dialStage2[2] = {
 		kStringCheckout7,
 		kStringCheckout8
 	};
-	static int dialStage3[3] = {
+	static const int dialStage3[3] = {
 		kStringCheckout9,
 		kStringCheckout10,
 		kStringCheckout11
 	};
-	static int dialStage4[3] = {
+	static const int dialStage4[3] = {
 		kStringCheckout12,
 		kStringCheckout13
 	};
@@ -1565,14 +1565,14 @@ void Elevator2::animation() {
 }
 
 bool Elevator2::interact(Action verb, Object &obj1, Object &obj2) {
-	static int dialLuke1[4] = {
+	static const int dialLuke1[4] = {
 		kStringElevator2,
 		kStringElevator3,
 		kStringElevator4,
 		kStringElevator5
 	};
-	static byte dialsLuke1[3] = {2,1,1};
-	static int dialBoss1[2] = {
+	static const byte dialsLuke1[3] = {2,1,1};
+	static const int dialBoss1[2] = {
 		kStringElevator6,
 		kStringElevator7
 	};
@@ -1721,14 +1721,14 @@ bool Elevator2::interact(Action verb, Object &obj1, Object &obj2) {
 }
 
 void Elevator2::jobDescription() {
-	static int dialBoss2[5] = {
+	static const int dialBoss2[5] = {
 		kStringElevator8,
 		kStringElevator9,
 		kStringElevator10a,
 		kStringElevator10b,
 		kStringNo2
 	};
-	byte dialsBoss2[4] = {1,1,2,1};
+	static const byte dialsBoss2[4] = {1,1,2,1};
 
 	_gm->reply(kStringElevator29, 1, 1 + kSectionInvert);
 	_gm->reply(kStringElevator30, 1, 1 + kSectionInvert);

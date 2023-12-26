@@ -140,12 +140,12 @@ void GuiElement::setHighlight(bool isHighlighted_) {
 	}
 }
 
-int GameManager::guiCommands[] = {
+const int GameManager::guiCommands[] = {
 	kStringCommandGo, kStringCommandLook, kStringCommandTake, kStringCommandOpen, kStringCommandClose,
 	kStringCommandPress, kStringCommandPull, kStringCommandUse, kStringCommandTalk, kStringCommandGive
 };
 
-int GameManager::guiStatusCommands[] = {
+const int GameManager::guiStatusCommands[] = {
 	kStringStatusCommandGo, kStringStatusCommandLook, kStringStatusCommandTake, kStringStatusCommandOpen, kStringStatusCommandClose,
 	kStringStatusCommandPress, kStringStatusCommandPull, kStringStatusCommandUse, kStringStatusCommandTalk, kStringStatusCommandGive
 };
@@ -668,7 +668,7 @@ void GameManager::reply(const char *text, int aus1, int aus2) {
 		_vm->removeMessage();
 }
 
-int GameManager::dialog(int num, byte rowLength[6], int text[6], int number) {
+int GameManager::dialog(int num, const byte rowLength[6], const int text[6], int number) {
 	_vm->_allowLoadGame = false;
 	_guiEnabled = false;
 
