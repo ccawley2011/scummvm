@@ -32,10 +32,6 @@ namespace Graphics {
 struct Surface;
 }
 
-namespace Image {
-class ROSpriteDecoder;
-}
-
 namespace Noot {
 class Animation;
 class Book;
@@ -48,12 +44,13 @@ private:
 
 	Graphics::PaletteLookup _palette;
 	Common::Rect _screenRect;
+	uint _xeig, _yeig;
 
 	Animation *_animation;
 	uint32 *_animationMap;
 	Common::Rect _animationRect;
 
-	Image::ROSpriteDecoder *_nextoff, *_nexton;
+	Graphics::Surface *_nextoff, *_nexton, *_nextoffMask, *_nextonMask;
 	uint32 *_nextoffMap, *_nextonMap;
 	Common::Rect _nextRect;
 
@@ -63,8 +60,8 @@ private:
 
 	Common::Error loadSprites(const Common::Path &filename);
 
-	void copyToScreen(const Image::ROSpriteDecoder &decoder, const uint32 *map, const Common::Rect &dstRect);
-	void copyToScreen(const Graphics::Surface *surf, const Graphics::Surface *mask, const uint32 *map, const Common::Rect &dstRect, uint xeig, uint yeig);
+	Graphics::Surface *scaleSurface(const Graphics::Surface *surf, uint xeig, uint yeig) const;
+	void copyToScreen(const Graphics::Surface *surf, const Graphics::Surface *mask, const uint32 *map, const Common::Rect &dstRect);
 	void drawRect(const Common::Rect &dstRect);
 
 protected:

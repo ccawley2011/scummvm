@@ -52,22 +52,41 @@ NootEngine::NootEngine(OSystem *syst, const ADGameDescription *gameDesc) : Engin
 	_nexton(nullptr),
 	_nextoffMap(nullptr),
 	_nextonMap(nullptr),
-	_debugRects(false) {
+	_debugRects(true),
+	_xeig(1),
+	_yeig(1) {
 }
 
 NootEngine::~NootEngine() {
+	if (_nextoff) {
+		_nextoff->free();
+		delete _nextoff;
+	}
+	if (_nexton) {
+		_nexton->free();
+		delete _nexton;
+	}
+
+	if (_nextoffMask) {
+		_nextoffMask->free();
+		delete _nextoffMask;
+	}
+
+	if (_nextonMask) {
+		_nextonMask->free();
+		delete _nextonMask;
+	}
+
 	delete _animation;
 	delete[] _animationMap;
 	delete _book;
-	delete _nextoff;
-	delete _nexton;
-	delete _nextoffMap;
-	delete _nextonMap;
+	delete[] _nextoffMap;
+	delete[] _nextonMap;
 }
 
 Common::Error NootEngine::run() {
-	uint width = _screenRect.width() >> 1;
-	uint height = _screenRect.height() >> 1;
+	uint width = _screenRect.width() >> _xeig;
+	uint height = _screenRect.height() >> _yeig;
 	initGraphics(width, height);
 
 	setDebugger(new Console(this));
@@ -86,7 +105,8 @@ Common::Error NootEngine::run() {
 		return err;
 
 	if (_nextoff)
-		copyToScreen(*_nextoff, _nextoffMap, _nextRect);
+		copyToScreen(_nextoff, _nextoffMask, _nextoffMap, _nextRect);
+	drawRect(_nextRect);
 
 	loadAnimation(1);
 
@@ -135,8 +155,14 @@ void NootEngine::pollAnimation() {
 			_animationMap = _palette.createMap(_animation->getPalette(), 256);
 		}
 
-		copyToScreen(frame, nullptr, _animationMap, _animationRect,
-		             _animation->getXEigFactor(), _animation->getYEigFactor());
+		if (_xeig == _animation->getXEigFactor() && _yeig == _animation->getYEigFactor()) {
+			copyToScreen(frame, nullptr, _animationMap, _animationRect);
+		} else {
+			Graphics::Surface *scaled = scaleSurface(frame, _animation->getXEigFactor(), _animation->getYEigFactor());
+			copyToScreen(scaled, nullptr, _animationMap, _animationRect);
+			scaled->free();
+			delete scaled;
+		}
 
 		if (_debugRects) {
 			Common::Rect dirtyRect(_animation->getDirtyRect());
@@ -148,31 +174,42 @@ void NootEngine::pollAnimation() {
 }
 
 Common::Error NootEngine::loadSprites(const Common::Path &filename) {
+	Image::ROSpriteDecoder *decoder;
 	Image::ROSpriteArea spriteArea;
+
 	if (!spriteArea.open(filename))
 		return Common::Error(Common::kNoGameDataFoundError, filename.toString());
 
-	_nextoff = spriteArea.createDecoderForMember("nextoff");
-	if (_nextoff)
-		_nextoffMap = _palette.createMap(_nextoff->getPalette(), _nextoff->getPaletteColorCount());
+	decoder = spriteArea.createDecoderForMember("nextoff");
+	if (decoder) {
+		_nextoff = scaleSurface(decoder->getSurface(), decoder->getXEigFactor(), decoder->getYEigFactor());
+		_nextoffMask = scaleSurface(decoder->getMask(), decoder->getXEigFactor(), decoder->getYEigFactor());
+		_nextoffMap = _palette.createMap(decoder->getPalette(), decoder->getPaletteColorCount());
+		delete decoder;
+	}
 
-	_nexton = spriteArea.createDecoderForMember("nexton");
-	if (_nexton)
-		_nextonMap = _palette.createMap(_nexton->getPalette(), _nexton->getPaletteColorCount());
+	decoder = spriteArea.createDecoderForMember("nexton");
+	if (decoder) {
+		_nexton = scaleSurface(decoder->getSurface(), decoder->getXEigFactor(), decoder->getYEigFactor());
+		_nextonMask = scaleSurface(decoder->getMask(), decoder->getXEigFactor(), decoder->getYEigFactor());
+		_nextonMap = _palette.createMap(decoder->getPalette(), decoder->getPaletteColorCount());
+		delete decoder;
+	}
 
 	return Common::kNoError;
 }
 
-void NootEngine::copyToScreen(const Image::ROSpriteDecoder &decoder, const uint32 *map, const Common::Rect &dstRect) {
-	const Graphics::Surface *surf = decoder.getSurface();
-	const Graphics::Surface *mask = decoder.getMask();
-	uint xeig = decoder.getXEigFactor();
-	uint yeig = decoder.getYEigFactor();
-	copyToScreen(surf, mask, map, dstRect, xeig, yeig);
+Graphics::Surface *NootEngine::scaleSurface(const Graphics::Surface *surf, uint xeig, uint yeig) const {
+	if (!surf)
+		return nullptr;
+
+	uint newWidth = (surf->w << xeig) >> _xeig;
+	uint newHeight = (surf->h << yeig) >> _yeig;
+	return surf->scale(newWidth, newHeight);
 }
 
-void NootEngine::copyToScreen(const Graphics::Surface *surf, const Graphics::Surface *mask, const uint32 *map, const Common::Rect &dstRect, uint xeig, uint yeig) {
-	Common::Rect rect(surf->w << xeig, surf->h << yeig);
+void NootEngine::copyToScreen(const Graphics::Surface *surf, const Graphics::Surface *mask, const uint32 *map, const Common::Rect &dstRect) {
+	Common::Rect rect(surf->w << _xeig, surf->h << _yeig);
 	Common::Point pos(dstRect.left, dstRect.bottom);
 
 	if (!Common::Rect::getBlitRect(pos, rect, _screenRect))
@@ -182,14 +219,14 @@ void NootEngine::copyToScreen(const Graphics::Surface *surf, const Graphics::Sur
 
 	Graphics::Surface *screen = g_system->lockScreen();
 	if (screen) {
-		const byte *srcPtr = (const byte *)surf->getBasePtr(rect.left >> 1, rect.top >> 1);
-		byte *dstPtr = (byte *)screen->getBasePtr(pos.x >> 1, pos.y >> 1);
+		const byte *srcPtr = (const byte *)surf->getBasePtr(rect.left >> _xeig, rect.top >> _yeig);
+		byte *dstPtr = (byte *)screen->getBasePtr(pos.x >> _xeig, pos.y >> _yeig);
 		uint srcPitch = surf->pitch;
 		uint dstPitch = screen->pitch;
 		uint w = surf->w, h = surf->h;
 
 		if (mask) {
-			const byte *maskPtr = (const byte *)mask->getBasePtr(rect.left >> 1, rect.top >> 1);
+			const byte *maskPtr = (const byte *)mask->getBasePtr(rect.left >> _xeig, rect.top >> _yeig);
 			uint maskPitch = mask->pitch;
 
 			if (map) {
@@ -214,10 +251,10 @@ void NootEngine::copyToScreen(const Graphics::Surface *surf, const Graphics::Sur
 }
 
 void NootEngine::drawRect(const Common::Rect &dstRect) {
-	uint left = dstRect.left >> 1;
-	uint right = dstRect.right >> 1;
-	uint top = (_screenRect.height() - dstRect.bottom) >> 1;
-	uint bottom = (_screenRect.height() - dstRect.top) >> 1;
+	uint left = dstRect.left >> _xeig;
+	uint right = dstRect.right >> _xeig;
+	uint top = (_screenRect.height() - dstRect.bottom) >> _yeig;
+	uint bottom = (_screenRect.height() - dstRect.top) >> _yeig;
 	Common::Rect rect(left, top, right, bottom);
 
 	Graphics::Surface *screen = g_system->lockScreen();
