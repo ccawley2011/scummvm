@@ -33,7 +33,9 @@
 #include "engines/util.h"
 
 #include "graphics/blit.h"
+#include "graphics/font.h"
 #include "graphics/surface.h"
+#include "graphics/fonts/ttf.h"
 
 #include "image/rosprite.h"
 
@@ -47,6 +49,9 @@ NootEngine::NootEngine(OSystem *syst, const ADGameDescription *gameDesc) : Engin
 	_animation(nullptr),
 	_animationMap(nullptr),
 	_animationRect(172, 276, 1104, 936),
+	_textRect(8, 18, 1262, 244),
+	_textRect1(8, 18, 1202, 244),
+	_font(nullptr),
 	_nextRect(1202, 84, 1258, 168),
 	_nextoff(nullptr),
 	_nexton(nullptr),
@@ -80,6 +85,7 @@ NootEngine::~NootEngine() {
 	delete _animation;
 	delete[] _animationMap;
 	delete _book;
+	delete _font;
 	delete[] _nextoffMap;
 	delete[] _nextonMap;
 }
@@ -100,13 +106,20 @@ Common::Error NootEngine::run() {
 	g_system->getPaletteManager()->setPalette(Image::riscos_palettes[3], 0, 256);
 	g_system->fillScreen(_palette.findBestColor(0xDD, 0xDD, 0xDD));
 
+
 	Common::Error err = loadSprites("Sprites");
+	if (err.getCode() != Common::kNoError)
+		return err;
+
+	err = loadFont("LiberationSerif-Regular.ttf", 20);
 	if (err.getCode() != Common::kNoError)
 		return err;
 
 	if (_nextoff)
 		copyToScreen(_nextoff, _nextoffMask, _nextoffMap, _nextRect);
 	drawRect(_nextRect);
+	drawRect(_textRect);
+	drawText("This is an example string", _textRect1);
 
 	loadAnimation(1);
 
@@ -171,6 +184,14 @@ void NootEngine::pollAnimation() {
 			drawRect(dirtyRect);
 		}
 	}
+}
+
+Common::Error NootEngine::loadFont(const Common::String &name, int size) {
+	_font = loadTTFFontFromArchive(name, size, Graphics::kTTFSizeModeCharacter, 180 >> _xeig, 180 >> _yeig, Graphics::kTTFRenderModeMonochrome);
+	if (_font)
+		return Common::kNoError;
+
+	return Common::Error(Common::kNoGameDataFoundError, name);
 }
 
 Common::Error NootEngine::loadSprites(const Common::Path &filename) {
@@ -260,6 +281,28 @@ void NootEngine::drawRect(const Common::Rect &dstRect) {
 	Graphics::Surface *screen = g_system->lockScreen();
 	if (screen) {
 		screen->frameRect(rect, 0);
+		g_system->unlockScreen();
+	}
+}
+
+void NootEngine::drawText(const Common::String &str, const Common::Rect &dstRect) {
+	uint left = dstRect.left >> _xeig;
+	uint right = dstRect.right >> _xeig;
+	uint top = (_screenRect.height() - dstRect.bottom) >> _yeig;
+	uint bottom = (_screenRect.height() - dstRect.top) >> _yeig;
+
+	Graphics::Surface *screen = g_system->lockScreen();
+	if (screen) {
+		Common::Array<Common::String> lines;
+		_font->wordWrapText(str, right - left, lines);
+
+		top += ((bottom - top) - (lines.size() * _font->getFontHeight())) / 2;
+
+		for (uint i = 0; i < lines.size(); i++) {
+			_font->drawString(screen, lines[i], left, top, right - left, 0, Graphics::kTextAlignCenter);
+			top += _font->getFontHeight();
+		}
+
 		g_system->unlockScreen();
 	}
 }

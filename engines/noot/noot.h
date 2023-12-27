@@ -29,6 +29,7 @@
 struct ADGameDescription;
 
 namespace Graphics {
+class Font;
 struct Surface;
 }
 
@@ -50,6 +51,9 @@ private:
 	uint32 *_animationMap;
 	Common::Rect _animationRect;
 
+	Common::Rect _textRect, _textRect1;
+	Graphics::Font *_font;
+
 	Graphics::Surface *_nextoff, *_nexton, *_nextoffMask, *_nextonMask;
 	uint32 *_nextoffMap, *_nextonMap;
 	Common::Rect _nextRect;
@@ -58,11 +62,13 @@ private:
 
 	void pollAnimation();
 
+	Common::Error loadFont(const Common::String &name, int size);
 	Common::Error loadSprites(const Common::Path &filename);
 
 	Graphics::Surface *scaleSurface(const Graphics::Surface *surf, uint xeig, uint yeig) const;
 	void copyToScreen(const Graphics::Surface *surf, const Graphics::Surface *mask, const uint32 *map, const Common::Rect &dstRect);
 	void drawRect(const Common::Rect &dstRect);
+	void drawText(const Common::String &str, const Common::Rect &dstRect);
 
 protected:
 	// Engine APIs
