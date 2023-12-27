@@ -70,6 +70,8 @@ private:
 	Common::Error loadFont(const Common::String &name, int size);
 	Common::Error loadSprites(const Common::Path &filename);
 
+	Common::Point convertMouse(const Common::Point &mouse) const;
+
 protected:
 	// Engine APIs
 	Common::Error run() override;

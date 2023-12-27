@@ -27,10 +27,19 @@
 
 namespace Noot {
 
+void Widget::handleMouseMotion(const Common::Point &mouse) {
+	if (_area.contains(mouse) && !_area.contains(_lastMouse))
+		handleMouseEnter(mouse);
+	else if (!_area.contains(mouse) && _area.contains(_lastMouse))
+		handleMouseLeave(mouse);
+	_lastMouse = mouse;
+}
+
+
 ButtonWidget::ButtonWidget(NootEngine *engine, const Common::Rect &area,
                            const Common::Path &off, const Common::Path &on) :
 	Widget(engine, area),
-	_off(off), _on(on),
+	_off(off), _on(on), _hover(false),
 	_offSurf(nullptr), _offMask(nullptr),
 	_onSurf(nullptr), _onMask(nullptr),
 	_offMap(nullptr), _onMap(nullptr) {
@@ -97,10 +106,26 @@ void ButtonWidget::free() {
 }
 
 void ButtonWidget::render() {
-	assert(_offSurf);
-	if (_offSurf)
-		_engine->copyToScreen(_offSurf, _offMask, _offMap, _area);
+	if (_hover) {
+		if (_onSurf)
+			_engine->copyToScreen(_onSurf, _onMask, _onMap, _area);
+	} else {
+		if (_offSurf)
+			_engine->copyToScreen(_offSurf, _offMask, _offMap, _area);
+	}
 	_engine->drawRect(_area);
+
+	_isDirty = false;
+}
+
+void ButtonWidget::handleMouseEnter(const Common::Point &mouse) {
+	_hover = true;
+	invalidate();
+}
+
+void ButtonWidget::handleMouseLeave(const Common::Point &mouse) {
+	_hover = false;
+	invalidate();
 }
 
 } // End of namespace Noot

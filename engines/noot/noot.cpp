@@ -94,7 +94,6 @@ Common::Error NootEngine::run() {
 		return err;
 
 	_nextButton = new ButtonWidget(this, _nextRect, "nextoff", "nexton");
-	_nextButton->render();
 
 	drawRect(_textRect);
 	drawText("This is an example string", _textRect1);
@@ -105,8 +104,17 @@ Common::Error NootEngine::run() {
 	Common::Event e;
 	while (!shouldQuit()) {
 		while (g_system->getEventManager()->pollEvent(e)) {
+			switch (e.type) {
+			case Common::EVENT_MOUSEMOVE:
+				_nextButton->handleMouseMotion(convertMouse(e.mouse));
+				break;
+			default:
+				break;
+			}
 		}
 		pollAnimation();
+		if (_nextButton->isDirty())
+			_nextButton->render();
 		g_system->updateScreen();
 
 		// Delay for a bit. All events loops should have a delay
@@ -270,6 +278,10 @@ void NootEngine::drawText(const Common::String &str, const Common::Rect &dstRect
 
 		g_system->unlockScreen();
 	}
+}
+
+Common::Point NootEngine::convertMouse(const Common::Point &mouse) const {
+	return Common::Point(mouse.x << _xeig, _screenRect.height() - (mouse.y << _yeig));
 }
 
 } // End of namespace Noot

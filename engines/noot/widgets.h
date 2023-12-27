@@ -31,20 +31,31 @@ class Widget {
 protected:
 	NootEngine *_engine;
 	Common::Rect _area;
+	Common::Point _lastMouse;
+
+	bool _isDirty;
 
 public:
-	Widget(NootEngine *engine, const Common::Rect &area) : _engine(engine), _area(area) {}
+	Widget(NootEngine *engine, const Common::Rect &area) : _engine(engine), _area(area), _isDirty(true) {}
 	virtual ~Widget() {}
 
 	virtual void load() = 0;
 	virtual void free() = 0;
 
+	void invalidate() { _isDirty = true; }
+	bool isDirty() const { return _isDirty; }
 	virtual void render() = 0;
+
+	void handleMouseMotion(const Common::Point &mouse);
+	virtual void handleMouseEnter(const Common::Point &mouse) {}
+	virtual void handleMouseLeave(const Common::Point &mouse) {}
 };
 
 class ButtonWidget : public Widget {
 private:
 	Common::Path _off, _on;
+
+	bool _hover;
 
 	Graphics::Surface *_offSurf, *_offMask;
 	Graphics::Surface *_onSurf, *_onMask;
@@ -58,6 +69,9 @@ public:
 	void load() override;
 	void free() override;
 	void render() override;
+
+	void handleMouseEnter(const Common::Point &mouse) override;
+	void handleMouseLeave(const Common::Point &mouse) override;
 };
 
 } // End of namespace Noot
