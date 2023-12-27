@@ -6,6 +6,7 @@ MODULE_OBJS = \
 	book.o \
 	console.o \
 	decompress.o \
+	dialogs.o \
 	metaengine.o \
 	widgets.o
 

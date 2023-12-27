@@ -21,10 +21,19 @@
 
 #include "engines/advancedDetector.h"
 #include "noot/noot.h"
+#include "noot/dialogs.h"
 
 class NootMetaEngine : public AdvancedMetaEngine {
 	const char *getName() const override {
 		return "noot";
+	}
+
+	void registerDefaultSettings(const Common::String &target) const {
+		return Noot::NootOptionsWidget::registerDefaultSettings(target);
+	}
+
+	GUI::OptionsContainerWidget *buildEngineOptionsWidget(GUI::GuiObject *boss, const Common::String &name, const Common::String &target) const {
+		return new Noot::NootOptionsWidget(boss, name, target);
 	}
 
 	Common::Error createInstance(OSystem *syst, Engine **engine, const ADGameDescription *desc) const override;

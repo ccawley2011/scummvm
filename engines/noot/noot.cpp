@@ -23,6 +23,7 @@
 #include "noot/animation.h"
 #include "noot/book.h"
 #include "noot/console.h"
+#include "noot/dialogs.h"
 #include "noot/widgets.h"
 
 #include "common/config-manager.h"
@@ -53,6 +54,7 @@ NootEngine::NootEngine(OSystem *syst, const ADGameDescription *gameDesc) : Engin
 	_textRect(8, 18, 1262, 244),
 	_textRect1(8, 18, 1202, 244),
 	_font(nullptr),
+	_nextButton(nullptr),
 	_nextRect(1202, 84, 1258, 168),
 	_debugRects(true),
 	_xeig(1),
@@ -69,9 +71,7 @@ NootEngine::~NootEngine() {
 }
 
 Common::Error NootEngine::run() {
-	uint width = _screenRect.width() >> _xeig;
-	uint height = _screenRect.height() >> _yeig;
-	initGraphics(width, height);
+	setScreenMode();
 
 	setDebugger(new Console(this));
 
@@ -79,11 +79,6 @@ Common::Error NootEngine::run() {
 	_book = new Book();
 	if (!_book->open(bookPath))
 		return Common::Error(Common::kNoGameDataFoundError, bookPath.toString());
-
-	_palette.setPalette(Image::riscos_palettes[3], 256);
-	g_system->getPaletteManager()->setPalette(Image::riscos_palettes[3], 0, 256);
-	g_system->fillScreen(_palette.findBestColor(0xDD, 0xDD, 0xDD));
-
 
 	Common::Error err = loadSprites("Sprites");
 	if (err.getCode() != Common::kNoError)
@@ -123,6 +118,35 @@ Common::Error NootEngine::run() {
 	}
 
 	return Common::kNoError;
+}
+
+void NootEngine::applyGameSettings() {
+	setScreenMode();
+
+	if (_nextButton)
+		_nextButton->load();
+
+	loadFont("LiberationSerif-Regular.ttf", 20);
+
+	drawRect(_textRect);
+	drawText("This is an example string", _textRect1);
+}
+
+void NootEngine::setScreenMode() {
+	Graphics::PixelFormat format = Graphics::PixelFormat::createFormatCLUT8();
+	Graphics::ModeWithFormatList modes = {
+		Graphics::ModeWithFormat(_screenRect.width() >> 0, _screenRect.height() >> 0, format),
+		Graphics::ModeWithFormat(_screenRect.width() >> 1, _screenRect.height() >> 1, format),
+		Graphics::ModeWithFormat(_screenRect.width() >> 1, _screenRect.height() >> 2, format),
+		Graphics::ModeWithFormat(_screenRect.width() >> 2, _screenRect.height() >> 2, format),
+	};
+	int mode = initGraphicsAny(modes, ConfMan.getInt("resolution"));
+	_xeig = NootOptionsWidget::resolutions[mode].xeig;
+	_yeig = NootOptionsWidget::resolutions[mode].yeig;
+
+	_palette.setPalette(Image::riscos_palettes[3], 256);
+	g_system->getPaletteManager()->setPalette(Image::riscos_palettes[3], 0, 256);
+	g_system->fillScreen(_palette.findBestColor(0xDD, 0xDD, 0xDD));
 }
 
 bool NootEngine::loadAnimation(uint32 pos) {
@@ -173,6 +197,8 @@ void NootEngine::pollAnimation() {
 }
 
 Common::Error NootEngine::loadFont(const Common::String &name, int size) {
+	if (_font)
+		delete _font;
 	_font = loadTTFFontFromArchive(name, size, Graphics::kTTFSizeModeCharacter, 180 >> _xeig, 180 >> _yeig, Graphics::kTTFRenderModeMonochrome);
 	if (_font)
 		return Common::kNoError;

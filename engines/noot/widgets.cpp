@@ -72,6 +72,8 @@ void ButtonWidget::load() {
 		_onMap = _engine->createMap(decoder->getPalette(), decoder->getPaletteColorCount());
 		delete decoder;
 	}
+
+	invalidate();
 }
 
 void ButtonWidget::free() {

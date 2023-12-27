@@ -65,6 +65,8 @@ private:
 
 	bool _debugRects;
 
+	void setScreenMode();
+
 	void pollAnimation();
 
 	Common::Error loadFont(const Common::String &name, int size);
@@ -81,8 +83,10 @@ public:
 	~NootEngine() override;
 
 	bool hasFeature(EngineFeature f) const override {
-		return (f == kSupportsReturnToLauncher);
+		return (f == kSupportsReturnToLauncher || f == kSupportsChangingOptionsDuringRuntime);
 	}
+
+	void applyGameSettings() override;
 
 	const Book *getBook() const {
 		return _book;
