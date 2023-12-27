@@ -6,7 +6,8 @@ MODULE_OBJS = \
 	book.o \
 	console.o \
 	decompress.o \
-	metaengine.o
+	metaengine.o \
+	widgets.o
 
 # This module can be built as a plugin
 ifeq ($(ENABLE_NOOT), DYNAMIC_PLUGIN)

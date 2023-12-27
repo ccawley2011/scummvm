@@ -23,6 +23,7 @@
 #include "noot/animation.h"
 #include "noot/book.h"
 #include "noot/console.h"
+#include "noot/widgets.h"
 
 #include "common/config-manager.h"
 #include "common/events.h"
@@ -53,41 +54,18 @@ NootEngine::NootEngine(OSystem *syst, const ADGameDescription *gameDesc) : Engin
 	_textRect1(8, 18, 1202, 244),
 	_font(nullptr),
 	_nextRect(1202, 84, 1258, 168),
-	_nextoff(nullptr),
-	_nexton(nullptr),
-	_nextoffMap(nullptr),
-	_nextonMap(nullptr),
 	_debugRects(true),
 	_xeig(1),
 	_yeig(1) {
 }
 
 NootEngine::~NootEngine() {
-	if (_nextoff) {
-		_nextoff->free();
-		delete _nextoff;
-	}
-	if (_nexton) {
-		_nexton->free();
-		delete _nexton;
-	}
-
-	if (_nextoffMask) {
-		_nextoffMask->free();
-		delete _nextoffMask;
-	}
-
-	if (_nextonMask) {
-		_nextonMask->free();
-		delete _nextonMask;
-	}
-
+	delete _nextButton;
 	delete _animation;
 	delete[] _animationMap;
 	delete _book;
 	delete _font;
-	delete[] _nextoffMap;
-	delete[] _nextonMap;
+	delete _spriteArea;
 }
 
 Common::Error NootEngine::run() {
@@ -115,9 +93,9 @@ Common::Error NootEngine::run() {
 	if (err.getCode() != Common::kNoError)
 		return err;
 
-	if (_nextoff)
-		copyToScreen(_nextoff, _nextoffMask, _nextoffMap, _nextRect);
-	drawRect(_nextRect);
+	_nextButton = new ButtonWidget(this, _nextRect, "nextoff", "nexton");
+	_nextButton->render();
+
 	drawRect(_textRect);
 	drawText("This is an example string", _textRect1);
 
@@ -195,27 +173,10 @@ Common::Error NootEngine::loadFont(const Common::String &name, int size) {
 }
 
 Common::Error NootEngine::loadSprites(const Common::Path &filename) {
-	Image::ROSpriteDecoder *decoder;
-	Image::ROSpriteArea spriteArea;
+	_spriteArea = new Image::ROSpriteArea();
 
-	if (!spriteArea.open(filename))
+	if (!_spriteArea->open(filename))
 		return Common::Error(Common::kNoGameDataFoundError, filename.toString());
-
-	decoder = spriteArea.createDecoderForMember("nextoff");
-	if (decoder) {
-		_nextoff = scaleSurface(decoder->getSurface(), decoder->getXEigFactor(), decoder->getYEigFactor());
-		_nextoffMask = scaleSurface(decoder->getMask(), decoder->getXEigFactor(), decoder->getYEigFactor());
-		_nextoffMap = _palette.createMap(decoder->getPalette(), decoder->getPaletteColorCount());
-		delete decoder;
-	}
-
-	decoder = spriteArea.createDecoderForMember("nexton");
-	if (decoder) {
-		_nexton = scaleSurface(decoder->getSurface(), decoder->getXEigFactor(), decoder->getYEigFactor());
-		_nextonMask = scaleSurface(decoder->getMask(), decoder->getXEigFactor(), decoder->getYEigFactor());
-		_nextonMap = _palette.createMap(decoder->getPalette(), decoder->getPaletteColorCount());
-		delete decoder;
-	}
 
 	return Common::kNoError;
 }
@@ -227,6 +188,10 @@ Graphics::Surface *NootEngine::scaleSurface(const Graphics::Surface *surf, uint 
 	uint newWidth = (surf->w << xeig) >> _xeig;
 	uint newHeight = (surf->h << yeig) >> _yeig;
 	return surf->scale(newWidth, newHeight);
+}
+
+uint32 *NootEngine::createMap(const byte *srcPalette, uint len) {
+	return _palette.createMap(srcPalette, len);
 }
 
 void NootEngine::copyToScreen(const Graphics::Surface *surf, const Graphics::Surface *mask, const uint32 *map, const Common::Rect &dstRect) {

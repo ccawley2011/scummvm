@@ -33,9 +33,14 @@ class Font;
 struct Surface;
 }
 
+namespace Image {
+class ROSpriteArea;
+}
+
 namespace Noot {
 class Animation;
 class Book;
+class Widget;
 
 class NootEngine : public Engine {
 private:
@@ -43,6 +48,7 @@ private:
 
 	Book *_book;
 
+	Image::ROSpriteArea *_spriteArea;
 	Graphics::PaletteLookup _palette;
 	Common::Rect _screenRect;
 	uint _xeig, _yeig;
@@ -54,8 +60,7 @@ private:
 	Common::Rect _textRect, _textRect1;
 	Graphics::Font *_font;
 
-	Graphics::Surface *_nextoff, *_nexton, *_nextoffMask, *_nextonMask;
-	uint32 *_nextoffMap, *_nextonMap;
+	Widget *_nextButton;
 	Common::Rect _nextRect;
 
 	bool _debugRects;
@@ -64,11 +69,6 @@ private:
 
 	Common::Error loadFont(const Common::String &name, int size);
 	Common::Error loadSprites(const Common::Path &filename);
-
-	Graphics::Surface *scaleSurface(const Graphics::Surface *surf, uint xeig, uint yeig) const;
-	void copyToScreen(const Graphics::Surface *surf, const Graphics::Surface *mask, const uint32 *map, const Common::Rect &dstRect);
-	void drawRect(const Common::Rect &dstRect);
-	void drawText(const Common::String &str, const Common::Rect &dstRect);
 
 protected:
 	// Engine APIs
@@ -86,7 +86,17 @@ public:
 		return _book;
 	}
 
+	const Image::ROSpriteArea *getSpriteArea() const {
+		return _spriteArea;
+	}
+
 	bool loadAnimation(uint32 pos);
+
+	Graphics::Surface *scaleSurface(const Graphics::Surface *surf, uint xeig, uint yeig) const;
+	uint32 *createMap(const byte *srcPalette, uint len);
+	void copyToScreen(const Graphics::Surface *surf, const Graphics::Surface *mask, const uint32 *map, const Common::Rect &dstRect);
+	void drawRect(const Common::Rect &dstRect);
+	void drawText(const Common::String &str, const Common::Rect &dstRect);
 };
 
 } // End of namespace Noot
