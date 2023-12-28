@@ -101,10 +101,20 @@ bool Animation::AnimationTrack::loadStream(Common::SeekableReadStream *stream) {
 		_frameDelays[i] = stream->readUint32LE() * 10;
 
 	_frameOffsets = new int64[_frameCount];
+	_dirtyRects = new Common::Rect[_frameCount]();
+
 	for (uint32 i = 0; i < _frameCount; i++) {
 		_frameOffsets[i] = stream->pos();
+		uint32 size   = stream->readUint32LE();
+		/* uint32 method = */ stream->readUint32LE();
+		uint32 left   = stream->readUint32LE();
+		uint32 bottom = stream->readUint32LE();
+		uint32 right  = stream->readUint32LE();
+		uint32 top    = stream->readUint32LE();
+		_dirtyRects[i] = Common::Rect(left, bottom, right, top);
+
 		if (i != _frameCount - 1)
-			stream->seek(_frameOffsets[i] + stream->readUint32LE());
+			stream->seek(_frameOffsets[i] + size);
 	}
 
 	stream->seek(_frameOffsets[0]);
@@ -168,6 +178,7 @@ const Graphics::Surface *Animation::AnimationTrack::decodeNextFrame() {
 
 
 	if (!_reversed) {
+		_dirtyRect = _dirtyRects[_curFrame];
 		_nextFrameStartTime += _frameDelays[_curFrame];
 
 		if (_curFrame >= _frameCount - 1)
@@ -178,6 +189,7 @@ const Graphics::Surface *Animation::AnimationTrack::decodeNextFrame() {
 		else
 			_curFrame++;
 	} else {
+		_dirtyRect = _dirtyRects[_curFrame - 1];
 		_nextFrameStartTime += _frameDelays[_curFrame - 1];
 
 		if (_curFrame <= 1)
@@ -192,12 +204,10 @@ const Graphics::Surface *Animation::AnimationTrack::decodeNextFrame() {
 bool Animation::AnimationTrack::readNextFrame(Common::SeekableReadStream *stream) {
 	uint32 size   = stream->readUint32LE();
 	uint32 method = stream->readUint32LE();
-	uint32 left   = stream->readUint32LE();
-	uint32 bottom = stream->readUint32LE();
-	uint32 right  = stream->readUint32LE();
-	uint32 top    = stream->readUint32LE();
-
-	_dirtyRect = Common::Rect(left, bottom, right, top);
+	/* uint32 left   = */ stream->readUint32LE();
+	/* uint32 bottom = */ stream->readUint32LE();
+	/* uint32 right  = */ stream->readUint32LE();
+	/* uint32 top    = */ stream->readUint32LE();
 
 	uint32 compressedSize = size - 24;
 	byte *compressedData = new byte[compressedSize];

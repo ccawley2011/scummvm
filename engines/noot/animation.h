@@ -90,6 +90,7 @@ protected:
 		mutable bool _dirtyPalette;
 
 		Common::Rect _dirtyRect;
+		Common::Rect *_dirtyRects;
 
 		uint32 _flags;
 		uint32 _frameCount;
