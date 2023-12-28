@@ -121,6 +121,29 @@ public:
 	void render() override;
 };
 
+class TextWidget : public Widget {
+private:
+	struct Line {
+		Common::String text;
+		int x, y;
+		uint w;
+	};
+
+	Common::Array<Line> _lines;
+	Common::String _text;
+	uint32 _textColour;
+
+public:
+	TextWidget(NootEngine *engine, const Common::Rect &area,
+                     const Common::String &text);
+	~TextWidget() override;
+
+	void load() override;
+	void free() override;
+
+	void render() override;
+};
+
 } // End of namespace Noot
 
 #endif // NOOT_WIDGETS_H

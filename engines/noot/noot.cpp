@@ -49,6 +49,7 @@ NootEngine::NootEngine(OSystem *syst, const ADGameDescription *gameDesc) : Engin
 	_screenRect(0, 0, 1280, 960),
 	_animation(nullptr),
 	_animationRect(172, 276, 1104, 936),
+	_text(nullptr),
 	_textRect(8, 18, 1262, 244),
 	_textRect1(8, 18, 1202, 244),
 	_font(nullptr),
@@ -63,6 +64,7 @@ NootEngine::NootEngine(OSystem *syst, const ADGameDescription *gameDesc) : Engin
 NootEngine::~NootEngine() {
 	delete _input;
 	delete _nextButton;
+	delete _text;
 	delete _animation;
 	delete _book;
 	delete _font;
@@ -92,9 +94,9 @@ Common::Error NootEngine::run() {
 	_animation = new AnimationWidget(this, _animationRect);
 	_nextButton = new ButtonWidget(this, _nextRect, "nextoff", "nexton");
 	_input = new InputWidget(this, _inputRect, 3);
+	_text = new TextWidget(this, _textRect1, "This is an example string");
 
 	drawRect(_textRect);
-	drawText("This is an example string", _textRect1);
 
 	loadAnimation(1);
 
@@ -120,6 +122,8 @@ Common::Error NootEngine::run() {
 		}
 		if (_animation->isDirty())
 			_animation->render();
+		if (_text->isDirty())
+			_text->render();
 		if (_nextButton->isDirty())
 			_nextButton->render();
 		if (_input->isDirty())
@@ -139,15 +143,17 @@ void NootEngine::applyGameSettings() {
 
 	loadFont("LiberationSerif-Regular.ttf", 20);
 
+	fillScreen(_textRect, _palette.findBestColor(0xDD, 0xDD, 0xDD));
+	drawRect(_textRect);
+
 	if (_animation)
 		_animation->load();
+	if (_text)
+		_text->load();
 	if (_nextButton)
 		_nextButton->load();
 	if (_input)
 		_input->load();
-
-	drawRect(_textRect);
-	drawText("This is an example string", _textRect1);
 }
 
 void NootEngine::setScreenMode() {
@@ -295,30 +301,41 @@ void NootEngine::drawRect(const Common::Rect &dstRect) {
 	}
 }
 
-void NootEngine::drawText(const Common::String &str, const Common::Rect &dstRect) {
+Common::Point NootEngine::convertMouse(const Common::Point &mouse) const {
+	return Common::Point(mouse.x << _xeig, _screenRect.height() - (mouse.y << _yeig));
+}
+
+Graphics::Surface *NootEngine::lockScreen(const Common::Rect &dstRect) {
 	uint left = dstRect.left >> _xeig;
 	uint right = dstRect.right >> _xeig;
 	uint top = (_screenRect.height() - dstRect.bottom) >> _yeig;
 	uint bottom = (_screenRect.height() - dstRect.top) >> _yeig;
+	Common::Rect rect(left, top, right, bottom);
 
 	Graphics::Surface *screen = g_system->lockScreen();
-	if (screen) {
-		Common::Array<Common::String> lines;
-		_font->wordWrapText(str, right - left, lines);
+	if (!screen)
+		return nullptr;
 
-		top += ((bottom - top) - (lines.size() * _font->getFontHeight())) / 2;
 
-		for (uint i = 0; i < lines.size(); i++) {
-			_font->drawString(screen, lines[i], left, top, right - left, 0, Graphics::kTextAlignCenter);
-			top += _font->getFontHeight();
-		}
-
-		g_system->unlockScreen();
-	}
+	Graphics::Surface *subArea = new Graphics::Surface();
+	subArea->init(rect.width(), rect.height(), screen->pitch,
+	              screen->getBasePtr(rect.left, rect.top), screen->format);
+	return subArea;
 }
 
-Common::Point NootEngine::convertMouse(const Common::Point &mouse) const {
-	return Common::Point(mouse.x << _xeig, _screenRect.height() - (mouse.y << _yeig));
+void NootEngine::unlockScreen(Graphics::Surface *screen) {
+	g_system->unlockScreen();
+	delete screen;
+}
+
+void NootEngine::fillScreen(const Common::Rect &dstRect, uint32 colour) {
+	uint left = dstRect.left >> _xeig;
+	uint right = dstRect.right >> _xeig;
+	uint top = (_screenRect.height() - dstRect.bottom) >> _yeig;
+	uint bottom = (_screenRect.height() - dstRect.top) >> _yeig;
+	Common::Rect rect(left, top, right, bottom);
+
+	g_system->fillScreen(rect, colour);
 }
 
 } // End of namespace Noot

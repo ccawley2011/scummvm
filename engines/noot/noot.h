@@ -56,6 +56,7 @@ private:
 	AnimationWidget *_animation;
 	Common::Rect _animationRect;
 
+	Widget *_text;
 	Common::Rect _textRect, _textRect1;
 	Graphics::Font *_font;
 
@@ -123,7 +124,10 @@ public:
 	uint32 *createMap(const byte *srcPalette, uint len);
 	void copyToScreen(const Graphics::Surface *surf, const Graphics::Surface *mask, const uint32 *map, const Common::Rect &dstRect);
 	void drawRect(const Common::Rect &dstRect);
-	void drawText(const Common::String &str, const Common::Rect &dstRect);
+
+	Graphics::Surface *lockScreen(const Common::Rect &dstRect);
+	void unlockScreen(Graphics::Surface *screen);
+	void fillScreen(const Common::Rect &dstRect, uint32 colour);
 };
 
 } // End of namespace Noot

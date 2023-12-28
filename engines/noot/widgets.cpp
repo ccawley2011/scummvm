@@ -290,4 +290,57 @@ void AnimationWidget::render() {
 	}
 }
 
+
+TextWidget::TextWidget(NootEngine *engine, const Common::Rect &area, const Common::String &text) :
+	Widget(engine, area), _text(text) {
+	load();
+}
+
+TextWidget::~TextWidget() {
+	free();
+}
+
+void TextWidget::load() {
+	free();
+
+	uint w = _area.width() >> _engine->getXEigFactor();
+	uint h = _area.height() >> _engine->getYEigFactor();
+
+	Common::Array<Common::String> lines;
+	const Graphics::Font *font = _engine->getFont();
+	font->wordWrapText(_text, w, lines);
+
+	int y = (h - (font->getFontHeight() * lines.size())) / 2;
+
+	for (uint i = 0; i < lines.size(); i++) {
+		Line line;
+		line.text = lines[i];
+		line.w = font->getStringWidth(line.text);
+		line.x = (w - line.w) / 2;
+		line.y = y;
+		_lines.push_back(line);
+
+		y += font->getFontHeight();
+	}
+
+	_textColour = _engine->findBestColor(0, 0, 0);
+}
+
+void TextWidget::free() {
+	_lines.clear();
+}
+
+void TextWidget::render() {
+	Graphics::Surface *screen = _engine->lockScreen(_area);
+	if (screen) {
+		const Graphics::Font *font = _engine->getFont();
+
+		for (uint i = 0; i < _lines.size(); i++) {
+			font->drawString(screen, _lines[i].text, _lines[i].x, _lines[i].y, _lines[i].w, _textColour);
+		}
+
+		_engine->unlockScreen(screen);
+	}
+}
+
 } // End of namespace Noot
