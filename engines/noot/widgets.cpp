@@ -280,8 +280,10 @@ void AnimationWidget::render() {
 		if (_engine->getDebugRects()) {
 			Common::Rect dirtyRect(_animation->getDirtyRect());
 			dirtyRect.translate(_area.left, _area.top);
+			dirtyRect.clip(_area);
 			_engine->drawRect(_area);
-			_engine->drawRect(dirtyRect);
+			if (!dirtyRect.isEmpty())
+				_engine->drawRect(dirtyRect);
 		}
 	}
 }

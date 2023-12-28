@@ -107,11 +107,12 @@ bool Animation::AnimationTrack::loadStream(Common::SeekableReadStream *stream) {
 		_frameOffsets[i] = stream->pos();
 		uint32 size   = stream->readUint32LE();
 		/* uint32 method = */ stream->readUint32LE();
-		uint32 left   = stream->readUint32LE();
-		uint32 bottom = stream->readUint32LE();
-		uint32 right  = stream->readUint32LE();
-		uint32 top    = stream->readUint32LE();
-		_dirtyRects[i] = Common::Rect(left, bottom, right, top);
+		int32 left    = stream->readSint32LE();
+		int32 bottom  = stream->readSint32LE();
+		int32 right   = stream->readSint32LE();
+		int32 top     = stream->readSint32LE();
+		// Animation 22 in Farm has reversed left and right coordinates.
+		_dirtyRects[i] = Common::Rect(MIN(left, right), bottom, MAX(left, right), top);
 
 		if (i != _frameCount - 1)
 			stream->seek(_frameOffsets[i] + size);
@@ -207,10 +208,10 @@ const Graphics::Surface *Animation::AnimationTrack::decodeNextFrame() {
 bool Animation::AnimationTrack::readNextFrame(Common::SeekableReadStream *stream) {
 	uint32 size   = stream->readUint32LE();
 	uint32 method = stream->readUint32LE();
-	/* uint32 left   = */ stream->readUint32LE();
-	/* uint32 bottom = */ stream->readUint32LE();
-	/* uint32 right  = */ stream->readUint32LE();
-	/* uint32 top    = */ stream->readUint32LE();
+	/* int32 left    = */ stream->readSint32LE();
+	/* int32 bottom  = */ stream->readSint32LE();
+	/* int32 right   = */ stream->readSint32LE();
+	/* int32 top     = */ stream->readSint32LE();
 
 	uint32 compressedSize = size - 24;
 	byte *compressedData = new byte[compressedSize];
