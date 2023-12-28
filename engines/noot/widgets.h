@@ -67,6 +67,7 @@ private:
 	Graphics::Surface *_offSurf, *_offMask;
 	Graphics::Surface *_onSurf, *_onMask;
 	uint32 *_offMap, *_onMap;
+	uint32 _fgColour;
 
 public:
 	ButtonWidget(NootEngine *engine, const Common::Rect &area,
@@ -107,6 +108,7 @@ private:
 	const Graphics::Surface *_frame;
 	uint32 *_map;
 	bool _dirtyPalette;
+	uint32 _fgColour;
 
 public:
 	AnimationWidget(NootEngine *engine, const Common::Rect &area);

@@ -96,7 +96,7 @@ Common::Error NootEngine::run() {
 	_input = new InputWidget(this, _inputRect, 3);
 	_text = new TextWidget(this, _textRect1, "This is an example string");
 
-	drawRect(_textRect);
+	drawRect(_textRect, _fgColour);
 
 	loadAnimation(1);
 
@@ -143,8 +143,8 @@ void NootEngine::applyGameSettings() {
 
 	loadFont("LiberationSerif-Regular.ttf", 20);
 
-	fillScreen(_textRect, _palette.findBestColor(0xDD, 0xDD, 0xDD));
-	drawRect(_textRect);
+	fillRect(_textRect, _bgColour);
+	drawRect(_textRect, _fgColour);
 
 	if (_animation)
 		_animation->load();
@@ -170,7 +170,10 @@ void NootEngine::setScreenMode() {
 
 	_palette.setPalette(Image::riscos_palettes[3], 256);
 	g_system->getPaletteManager()->setPalette(Image::riscos_palettes[3], 0, 256);
-	g_system->fillScreen(_palette.findBestColor(0xDD, 0xDD, 0xDD));
+
+	_bgColour = findBestColor(0xDD, 0xDD, 0xDD);
+	_fgColour = findBestColor(0,    0,    0);
+	g_system->fillScreen(_bgColour);
 }
 
 void NootEngine::setDebugRects(bool debugRects) {
@@ -178,6 +181,8 @@ void NootEngine::setDebugRects(bool debugRects) {
 
 	if (_animation)
 		_animation->invalidate();
+	if (_text)
+		_text->invalidate();
 	if (_nextButton)
 		_nextButton->invalidate();
 	if (_input)
@@ -245,62 +250,6 @@ uint32 *NootEngine::createMap(const byte *srcPalette, uint len) {
 	return _palette.createMap(srcPalette, len);
 }
 
-void NootEngine::copyToScreen(const Graphics::Surface *surf, const Graphics::Surface *mask, const uint32 *map, const Common::Rect &dstRect) {
-	Common::Rect rect(surf->w << _xeig, surf->h << _yeig);
-	Common::Point pos(dstRect.left, dstRect.bottom);
-
-	if (!Common::Rect::getBlitRect(pos, rect, _screenRect))
-		return;
-
-	pos.y = _screenRect.height() - pos.y;
-
-	Graphics::Surface *screen = g_system->lockScreen();
-	if (screen) {
-		const byte *srcPtr = (const byte *)surf->getBasePtr(rect.left >> _xeig, rect.top >> _yeig);
-		byte *dstPtr = (byte *)screen->getBasePtr(pos.x >> _xeig, pos.y >> _yeig);
-		uint srcPitch = surf->pitch;
-		uint dstPitch = screen->pitch;
-		uint w = surf->w, h = surf->h;
-
-		if (mask) {
-			const byte *maskPtr = (const byte *)mask->getBasePtr(rect.left >> _xeig, rect.top >> _yeig);
-			uint maskPitch = mask->pitch;
-
-			if (map) {
-				Graphics::crossMaskBlitMap(dstPtr, srcPtr, maskPtr, dstPitch, srcPitch, maskPitch,
-					w, h, screen->format.bytesPerPixel, map);
-			} else {
-				Graphics::maskBlit(dstPtr, srcPtr, maskPtr, dstPitch, srcPitch, maskPitch,
-					w, h, screen->format.bytesPerPixel);
-			}
-		} else {
-			if (map) {
-				Graphics::crossBlitMap(dstPtr, srcPtr, dstPitch, srcPitch,
-					w, h, screen->format.bytesPerPixel, map);
-			} else {
-				Graphics::copyBlit(dstPtr, srcPtr, dstPitch, srcPitch,
-					w, h, screen->format.bytesPerPixel);
-			}
-		}
-
-		g_system->unlockScreen();
-	}
-}
-
-void NootEngine::drawRect(const Common::Rect &dstRect) {
-	uint left = dstRect.left >> _xeig;
-	uint right = dstRect.right >> _xeig;
-	uint top = (_screenRect.height() - dstRect.bottom) >> _yeig;
-	uint bottom = (_screenRect.height() - dstRect.top) >> _yeig;
-	Common::Rect rect(left, top, right, bottom);
-
-	Graphics::Surface *screen = g_system->lockScreen();
-	if (screen) {
-		screen->frameRect(rect, 0);
-		g_system->unlockScreen();
-	}
-}
-
 Common::Point NootEngine::convertMouse(const Common::Point &mouse) const {
 	return Common::Point(mouse.x << _xeig, _screenRect.height() - (mouse.y << _yeig));
 }
@@ -328,7 +277,99 @@ void NootEngine::unlockScreen(Graphics::Surface *screen) {
 	delete screen;
 }
 
-void NootEngine::fillScreen(const Common::Rect &dstRect, uint32 colour) {
+void NootEngine::copyRectToScreen(const Graphics::Surface *surf, const Common::Rect &dstRect) {
+	if (!surf)
+		return;
+
+	uint left = dstRect.left >> _xeig;
+	uint right = dstRect.right >> _xeig;
+	uint top = (_screenRect.height() - dstRect.bottom) >> _yeig;
+	uint bottom = (_screenRect.height() - dstRect.top) >> _yeig;
+	Common::Rect rect(left, top, right, bottom);
+
+	if (surf->w == rect.width() && surf->h == rect.height()) {
+		g_system->copyRectToScreen(surf->getPixels(), surf->pitch,
+		                           rect.left, rect.top, rect.width(), rect.height());
+	} else {
+		Graphics::Surface *screen = lockScreen(dstRect);
+		if (screen) {
+			const byte *srcPtr = (const byte *)surf->getPixels();
+			byte *dstPtr = (byte *)screen->getPixels();
+
+			Graphics::scaleBlit(dstPtr, srcPtr, screen->pitch, surf->pitch,
+				screen->w, screen->h, surf->w, surf->h, screen->format);
+
+			unlockScreen(screen);
+		}
+	}
+}
+
+void NootEngine::copyRectToScreen(const Graphics::Surface *surf, const Common::Rect &dstRect, const uint32 *map, const Graphics::Surface *mask) {
+	if (!surf)
+		return;
+
+	if (!map && !mask) {
+		copyRectToScreen(surf, dstRect);
+		return;
+	}
+
+	uint left = dstRect.left >> _xeig;
+	uint right = dstRect.right >> _xeig;
+	uint top = (_screenRect.height() - dstRect.bottom) >> _yeig;
+	uint bottom = (_screenRect.height() - dstRect.top) >> _yeig;
+	Common::Rect rect(left, top, right, bottom);
+
+	Graphics::Surface *scaledSurf = nullptr, *scaledMask = nullptr;;
+	if (surf->w != rect.width() || surf->h != rect.height()) {
+		surf = scaledSurf = surf->scale(rect.width(), rect.height());
+		if (mask)
+			mask = scaledMask = surf->scale(rect.width(), rect.height());
+	}
+
+	Graphics::Surface *screen = lockScreen(dstRect);
+	if (screen) {
+		const byte *srcPtr = (const byte *)surf->getPixels();
+		byte *dstPtr = (byte *)screen->getPixels();
+		uint srcPitch = surf->pitch;
+		uint dstPitch = screen->pitch;
+		uint w = surf->w, h = surf->h;
+
+		if (mask) {
+			const byte *maskPtr = (const byte *)mask->getPixels();
+			uint maskPitch = mask->pitch;
+
+			if (map) {
+				Graphics::crossMaskBlitMap(dstPtr, srcPtr, maskPtr, dstPitch, srcPitch, maskPitch,
+					w, h, screen->format.bytesPerPixel, map);
+			} else {
+				Graphics::maskBlit(dstPtr, srcPtr, maskPtr, dstPitch, srcPitch, maskPitch,
+					w, h, screen->format.bytesPerPixel);
+			}
+		} else {
+			if (map) {
+				Graphics::crossBlitMap(dstPtr, srcPtr, dstPitch, srcPitch,
+					w, h, screen->format.bytesPerPixel, map);
+			} else {
+				Graphics::copyBlit(dstPtr, srcPtr, dstPitch, srcPitch,
+					w, h, screen->format.bytesPerPixel);
+			}
+		}
+
+		unlockScreen(screen);
+	}
+
+	if (scaledSurf) {
+		scaledSurf->free();
+		delete scaledSurf;
+	}
+
+	if (scaledMask) {
+		scaledMask->free();
+		delete scaledMask;
+	}
+}
+
+void NootEngine::fillRect(const Common::Rect &dstRect, uint32 colour) {
 	uint left = dstRect.left >> _xeig;
 	uint right = dstRect.right >> _xeig;
 	uint top = (_screenRect.height() - dstRect.bottom) >> _yeig;
@@ -336,6 +377,14 @@ void NootEngine::fillScreen(const Common::Rect &dstRect, uint32 colour) {
 	Common::Rect rect(left, top, right, bottom);
 
 	g_system->fillScreen(rect, colour);
+}
+
+void NootEngine::drawRect(const Common::Rect &dstRect, uint32 colour) {
+	Graphics::Surface *screen = lockScreen(dstRect);
+	if (screen) {
+		screen->frameRect(Common::Rect(screen->w, screen->h), colour);
+		unlockScreen(screen);
+	}
 }
 
 } // End of namespace Noot

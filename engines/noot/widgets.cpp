@@ -79,6 +79,8 @@ void ButtonWidget::load() {
 		delete decoder;
 	}
 
+	_fgColour = _engine->findBestColor(0, 0, 0);
+
 	invalidate();
 }
 
@@ -116,14 +118,14 @@ void ButtonWidget::free() {
 void ButtonWidget::render() {
 	if (_hover) {
 		if (_onSurf)
-			_engine->copyToScreen(_onSurf, _onMask, _onMap, _area);
+			_engine->copyRectToScreen(_onSurf, _area, _onMap, _onMask);
 	} else {
 		if (_offSurf)
-			_engine->copyToScreen(_offSurf, _offMask, _offMap, _area);
+			_engine->copyRectToScreen(_offSurf, _area, _offMap, _offMask);
 	}
 
 	if (_engine->getDebugRects())
-		_engine->drawRect(_area);
+		_engine->drawRect(_area, _fgColour);
 
 	_isDirty = false;
 }
@@ -173,7 +175,7 @@ void InputWidget::free() {
 
 void InputWidget::render() {
 	if (_surface)
-		_engine->copyToScreen(_surface, nullptr, nullptr, _area);
+		_engine->copyRectToScreen(_surface, _area);
 	_isDirty = false;
 }
 
@@ -244,6 +246,8 @@ bool AnimationWidget::loadStream(Common::SeekableReadStream *stream) {
 void AnimationWidget::load() {
 	free();
 
+	_fgColour = _engine->findBestColor(0, 0, 0);
+
 	_dirtyPalette = true;
 
 	invalidate();
@@ -269,25 +273,19 @@ void AnimationWidget::render() {
 			_dirtyPalette = false;
 		}
 
-		if (_engine->getXEigFactor() == _animation->getXEigFactor() &&
-		    _engine->getYEigFactor() == _animation->getYEigFactor()) {
-			_engine->copyToScreen(_frame, nullptr, _map, _area);
-		} else {
-			Graphics::Surface *scaled = _engine->scaleSurface(_frame, _animation->getXEigFactor(), _animation->getYEigFactor());
-			_engine->copyToScreen(scaled, nullptr, _map, _area);
-			scaled->free();
-			delete scaled;
-		}
+		_engine->copyRectToScreen(_frame, _area, _map);
 
 		if (_engine->getDebugRects()) {
 			Common::Rect dirtyRect(_animation->getDirtyRect());
 			dirtyRect.translate(_area.left, _area.top);
 			dirtyRect.clip(_area);
-			_engine->drawRect(_area);
+			_engine->drawRect(_area, _fgColour);
 			if (!dirtyRect.isEmpty())
-				_engine->drawRect(dirtyRect);
+				_engine->drawRect(dirtyRect, _fgColour);
 		}
 	}
+
+	_isDirty = false;
 }
 
 
@@ -324,6 +322,8 @@ void TextWidget::load() {
 	}
 
 	_textColour = _engine->findBestColor(0, 0, 0);
+
+	invalidate();
 }
 
 void TextWidget::free() {
@@ -341,6 +341,8 @@ void TextWidget::render() {
 
 		_engine->unlockScreen(screen);
 	}
+
+	_isDirty = false;
 }
 
 } // End of namespace Noot
