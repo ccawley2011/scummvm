@@ -72,14 +72,14 @@ NootEngine::~NootEngine() {
 }
 
 Common::Error NootEngine::run() {
-	setScreenMode();
-
 	setDebugger(new Console(this));
 
 	Common::Path bookPath(_gameDescription->filesDescriptions[0].fileName);
 	_book = new Book();
 	if (!_book->open(bookPath))
 		return Common::Error(Common::kNoGameDataFoundError, bookPath.toString());
+
+	setScreenMode();
 
 	Common::Error err = loadSprites("Sprites");
 	if (err.getCode() != Common::kNoError)
@@ -178,8 +178,12 @@ void NootEngine::setScreenMode() {
 	_xeig = NootOptionsWidget::resolutions[mode].xeig;
 	_yeig = NootOptionsWidget::resolutions[mode].yeig;
 
-	_palette.setPalette(Image::riscos_palettes[3], 256);
-	g_system->getPaletteManager()->setPalette(Image::riscos_palettes[3], 0, 256);
+
+	const Book::BookHeader *header = _book->getHeader();
+
+	uint32 log2bpp = Image::riscos_mode_vars[header->mode][2];
+	_palette.setPalette(Image::riscos_palettes[log2bpp], 1 << (1 << log2bpp));
+	g_system->getPaletteManager()->setPalette(Image::riscos_palettes[log2bpp], 0, 1 << (1 << log2bpp));
 
 	_bgColour = findBestColor(0xDD, 0xDD, 0xDD);
 	_fgColour = findBestColor(0,    0,    0);

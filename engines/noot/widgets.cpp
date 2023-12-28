@@ -269,7 +269,7 @@ void AnimationWidget::render() {
 	if (_frame) {
 		if (_animation->hasDirtyPalette() || _dirtyPalette) {
 			delete[] _map;
-			_map = _engine->createMap(_animation->getPalette(), 256);
+			_map = _engine->createMap(_animation->getPalette(), _animation->getPaletteColorCount());
 			_dirtyPalette = false;
 		}
 

@@ -70,6 +70,15 @@ Common::Rect Animation::getDirtyRect() const {
 	return Common::Rect();
 }
 
+uint16 Animation::getPaletteColorCount() const {
+	const Track *track = getTrack(0);
+
+	if (track)
+		return ((const AnimationTrack *)track)->getPaletteColorCount();
+
+	return 0;
+}
+
 Animation::AnimationTrack::AnimationTrack() :
 	_fileStream(nullptr),
 	_spriteMem(nullptr),
@@ -165,6 +174,10 @@ uint Animation::AnimationTrack::getXEigFactor() const {
 
 uint Animation::AnimationTrack::getYEigFactor() const {
 	return _spriteDecoder->getYEigFactor();
+}
+
+uint16 Animation::AnimationTrack::getPaletteColorCount() const {
+	return _spriteDecoder->getPaletteColorCount();
 }
 
 const Graphics::Surface *Animation::AnimationTrack::decodeNextFrame() {

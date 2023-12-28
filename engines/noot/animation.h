@@ -42,6 +42,7 @@ public:
 	uint getXEigFactor() const;
 	uint getYEigFactor() const;
 	Common::Rect getDirtyRect() const;
+	uint16 getPaletteColorCount() const;
 
 protected:
 	class AnimationTrack : public VideoTrack {
@@ -67,6 +68,7 @@ protected:
 		uint32 getNextFrameStartTime() const override { return _nextFrameStartTime; }
 		const Graphics::Surface *decodeNextFrame() override;
 		const byte *getPalette() const override { _dirtyPalette = false; return _palette; }
+		uint16 getPaletteColorCount() const;
 		bool hasDirtyPalette() const override { return _dirtyPalette; }
 
 	protected:
