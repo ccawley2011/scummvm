@@ -63,6 +63,9 @@ private:
 	Widget *_nextButton;
 	Common::Rect _nextRect;
 
+	Widget *_input;
+	Common::Rect _inputRect;
+
 	bool _debugRects;
 
 	void setScreenMode();
@@ -71,6 +74,8 @@ private:
 
 	Common::Error loadFont(const Common::String &name, int size);
 	Common::Error loadSprites(const Common::Path &filename);
+
+	void reflowText(uint maxChars);
 
 	Common::Point convertMouse(const Common::Point &mouse) const;
 
@@ -96,9 +101,22 @@ public:
 		return _spriteArea;
 	}
 
+	const Graphics::Font *getFont() const {
+		return _font;
+	}
+
+	uint getXEigFactor() const {
+		return _xeig;
+	}
+
+	uint getYEigFactor() const {
+		return _yeig;
+	}
+
 	bool loadAnimation(uint32 pos);
 
 	Graphics::Surface *scaleSurface(const Graphics::Surface *surf, uint xeig, uint yeig) const;
+	uint32 findBestColor(byte r, byte g, byte b);
 	uint32 *createMap(const byte *srcPalette, uint len);
 	void copyToScreen(const Graphics::Surface *surf, const Graphics::Surface *mask, const uint32 *map, const Common::Rect &dstRect);
 	void drawRect(const Common::Rect &dstRect);

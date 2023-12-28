@@ -24,6 +24,10 @@
 
 #include "common/rect.h"
 
+namespace Common {
+struct KeyState;
+}
+
 namespace Noot {
 class NootEngine;
 
@@ -49,6 +53,8 @@ public:
 	void handleMouseMotion(const Common::Point &mouse);
 	virtual void handleMouseEnter(const Common::Point &mouse) {}
 	virtual void handleMouseLeave(const Common::Point &mouse) {}
+	virtual void handleKeyDown(const Common::KeyState &kbd) {}
+	virtual void handleKeyUp(const Common::KeyState &kbd) {}
 };
 
 class ButtonWidget : public Widget {
@@ -72,6 +78,26 @@ public:
 
 	void handleMouseEnter(const Common::Point &mouse) override;
 	void handleMouseLeave(const Common::Point &mouse) override;
+};
+
+class InputWidget : public Widget {
+private:
+	Common::String _text;
+	Graphics::Surface *_surface;
+	uint32 _fgColour, _bgColour, _caretColour;
+	uint _maxChars;
+
+	void redraw();
+
+public:
+	InputWidget(NootEngine *engine, const Common::Rect &area, uint maxChars);
+	~InputWidget() override;
+
+	void load() override;
+	void free() override;
+	void render() override;
+
+	void handleKeyDown(const Common::KeyState &kbd) override;
 };
 
 } // End of namespace Noot

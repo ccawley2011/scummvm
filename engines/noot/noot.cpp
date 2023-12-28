@@ -56,12 +56,14 @@ NootEngine::NootEngine(OSystem *syst, const ADGameDescription *gameDesc) : Engin
 	_font(nullptr),
 	_nextButton(nullptr),
 	_nextRect(1202, 84, 1258, 168),
+	_input(nullptr),
 	_debugRects(true),
 	_xeig(1),
 	_yeig(1) {
 }
 
 NootEngine::~NootEngine() {
+	delete _input;
 	delete _nextButton;
 	delete _animation;
 	delete[] _animationMap;
@@ -88,7 +90,10 @@ Common::Error NootEngine::run() {
 	if (err.getCode() != Common::kNoError)
 		return err;
 
+	reflowText(3);
+
 	_nextButton = new ButtonWidget(this, _nextRect, "nextoff", "nexton");
+	_input = new InputWidget(this, _inputRect, 3);
 
 	drawRect(_textRect);
 	drawText("This is an example string", _textRect1);
@@ -103,6 +108,14 @@ Common::Error NootEngine::run() {
 			case Common::EVENT_MOUSEMOVE:
 				_nextButton->handleMouseMotion(convertMouse(e.mouse));
 				break;
+			case Common::EVENT_KEYDOWN:
+				if (_input)
+					_input->handleKeyDown(e.kbd);
+				break;
+			case Common::EVENT_KEYUP:
+				if (_input)
+					_input->handleKeyUp(e.kbd);
+				break;
 			default:
 				break;
 			}
@@ -110,6 +123,8 @@ Common::Error NootEngine::run() {
 		pollAnimation();
 		if (_nextButton->isDirty())
 			_nextButton->render();
+		if (_input->isDirty())
+			_input->render();
 		g_system->updateScreen();
 
 		// Delay for a bit. All events loops should have a delay
@@ -123,10 +138,12 @@ Common::Error NootEngine::run() {
 void NootEngine::applyGameSettings() {
 	setScreenMode();
 
+	loadFont("LiberationSerif-Regular.ttf", 20);
+
 	if (_nextButton)
 		_nextButton->load();
-
-	loadFont("LiberationSerif-Regular.ttf", 20);
+	if (_input)
+		_input->load();
 
 	drawRect(_textRect);
 	drawText("This is an example string", _textRect1);
@@ -215,6 +232,18 @@ Common::Error NootEngine::loadSprites(const Common::Path &filename) {
 	return Common::kNoError;
 }
 
+void NootEngine::reflowText(uint maxChars) {
+	uint w = _font->getMaxCharWidth() << _xeig;
+	uint h = _font->getFontHeight() << _yeig;
+
+	_inputRect = Common::Rect(0, 0, w * maxChars, h + 12);
+
+	if (_input) {
+		delete _input;
+		_input = new InputWidget(this, _inputRect, maxChars);
+	}
+}
+
 Graphics::Surface *NootEngine::scaleSurface(const Graphics::Surface *surf, uint xeig, uint yeig) const {
 	if (!surf)
 		return nullptr;
@@ -222,6 +251,10 @@ Graphics::Surface *NootEngine::scaleSurface(const Graphics::Surface *surf, uint 
 	uint newWidth = (surf->w << xeig) >> _xeig;
 	uint newHeight = (surf->h << yeig) >> _yeig;
 	return surf->scale(newWidth, newHeight);
+}
+
+uint32 NootEngine::findBestColor(byte r, byte g, byte b) {
+	return _palette.findBestColor(r, g, b);
 }
 
 uint32 *NootEngine::createMap(const byte *srcPalette, uint len) {

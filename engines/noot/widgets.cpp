@@ -22,6 +22,10 @@
 #include "noot/widgets.h"
 #include "noot/noot.h"
 
+#include "common/keyboard.h"
+#include "common/system.h"
+#include "common/util.h"
+#include "graphics/font.h"
 #include "graphics/surface.h"
 #include "image/rosprite.h"
 
@@ -128,6 +132,83 @@ void ButtonWidget::handleMouseEnter(const Common::Point &mouse) {
 void ButtonWidget::handleMouseLeave(const Common::Point &mouse) {
 	_hover = false;
 	invalidate();
+}
+
+
+InputWidget::InputWidget(NootEngine *engine, const Common::Rect &area, uint maxChars) :
+	Widget(engine, area), _maxChars(maxChars), _surface(nullptr) {
+	load();
+}
+
+InputWidget::~InputWidget() {
+	free();
+}
+
+void InputWidget::load() {
+	free();
+
+	_surface = new Graphics::Surface();
+	_surface->create(_area.width() >> _engine->getXEigFactor(),
+	                 _area.height() >> _engine->getYEigFactor(),
+	                 g_system->getScreenFormat());
+
+	_fgColour    = _engine->findBestColor(0,    0,    0);
+	_bgColour    = _engine->findBestColor(0xff, 0xff, 0xff);
+	_caretColour = _engine->findBestColor(0xdd, 0,    0);
+
+	redraw();
+}
+
+void InputWidget::free() {
+	if (_surface) {
+		_surface->free();
+		delete _surface;
+		_surface = nullptr;
+	}
+}
+
+void InputWidget::render() {
+	if (_surface)
+		_engine->copyToScreen(_surface, nullptr, nullptr, _area);
+	_isDirty = false;
+}
+
+void InputWidget::redraw() {
+	_surface->fillRect(Common::Rect(_surface->w, _surface->h), _bgColour);
+
+	const Graphics::Font *font = _engine->getFont();
+
+	uint x = 12 >> _engine->getXEigFactor();
+	uint y = (_surface->h - font->getFontHeight()) / 2;
+
+	if (!_text.empty()) {
+		Common::Rect textPos = font->getBoundingBox(_text, x, y, _surface->w - (x * 2));
+		font->drawString(_surface, _text, x, y, _surface->w - (x * 2), _fgColour);
+		x = textPos.right;
+	}
+
+	_surface->hLine(x - 3, 1, x - 2, _caretColour);
+	_surface->hLine(x + 2, 1, x + 3, _caretColour);
+	_surface->setPixel(x - 1, 2, _caretColour);
+	_surface->setPixel(x + 1, 2, _caretColour);
+	_surface->vLine(x, 3, _surface->h - 3, _caretColour);
+	_surface->setPixel(x - 1, _surface->h - 2, _caretColour);
+	_surface->setPixel(x + 1, _surface->h - 2, _caretColour);
+	_surface->hLine(x - 3, _surface->h - 1, x - 2, _caretColour);
+	_surface->hLine(x + 2, _surface->h - 1, x + 3, _caretColour);
+
+	invalidate();
+}
+
+void InputWidget::handleKeyDown(const Common::KeyState &kbd) {
+	if (kbd.keycode == Common::KEYCODE_BACKSPACE) {
+		_text.deleteLastChar();
+		redraw();
+	} else if (Common::isPrint(kbd.ascii)) {
+		if (_text.size() < _maxChars)
+			_text += kbd.ascii;
+		redraw();
+	}
 }
 
 } // End of namespace Noot
