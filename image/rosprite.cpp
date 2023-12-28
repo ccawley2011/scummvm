@@ -120,9 +120,9 @@ bool ROSpriteDecoder::loadStream(Common::SeekableReadStream &stream) {
 
 			for (uint16 i = 0; i < _paletteColorCount; i++) {
 				stream.read(entry, 8);
-				_palette[i * 3 + 0] = entry[1];
-				_palette[i * 3 + 1] = entry[2];
-				_palette[i * 3 + 2] = entry[3];
+				_palette[i * 3 + 0] = entry[1] | entry[1] >> 4;
+				_palette[i * 3 + 1] = entry[2] | entry[2] >> 4;
+				_palette[i * 3 + 2] = entry[3] | entry[3] >> 4;
 			}
 		} else {
 			memcpy(_palette, riscos_palettes[log2BPP], _paletteColorCount * 3);
