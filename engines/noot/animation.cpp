@@ -181,13 +181,16 @@ const Graphics::Surface *Animation::AnimationTrack::decodeNextFrame() {
 		_dirtyRect = _dirtyRects[_curFrame];
 		_nextFrameStartTime += _frameDelays[_curFrame];
 
-		if (_curFrame >= _frameCount - 1)
-			if (_flags & kFlagYoyo)
+		if (_curFrame >= _frameCount - 1) {
+			// The demo versions of Dweek and Farm contain
+			// yoyo animations with only one frame.
+			if (_flags & kFlagYoyo && _frameCount > 1)
 				_reversed = true;
 			else
 				_curFrame = 1;
-		else
+		} else {
 			_curFrame++;
+		}
 	} else {
 		_dirtyRect = _dirtyRects[_curFrame - 1];
 		_nextFrameStartTime += _frameDelays[_curFrame - 1];
