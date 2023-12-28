@@ -139,21 +139,31 @@ Common::Error NootEngine::run() {
 }
 
 void NootEngine::applyGameSettings() {
-	setScreenMode();
+	bool modeChanged = false;
+	uint mode = ConfMan.getInt("resolution");
+	uint xeig = NootOptionsWidget::resolutions[mode].xeig;
+	uint yeig = NootOptionsWidget::resolutions[mode].yeig;
 
-	loadFont("LiberationSerif-Regular.ttf", 20);
+	if (xeig != _xeig || yeig != _yeig) {
+		setScreenMode();
+		modeChanged = true;
+	}
 
-	fillRect(_textRect, _bgColour);
-	drawRect(_textRect, _fgColour);
+	if (modeChanged) {
+		loadFont("LiberationSerif-Regular.ttf", 20);
 
-	if (_animation)
-		_animation->load();
-	if (_text)
-		_text->load();
-	if (_nextButton)
-		_nextButton->load();
-	if (_input)
-		_input->load();
+		fillRect(_textRect, _bgColour);
+		drawRect(_textRect, _fgColour);
+
+		if (_animation)
+			_animation->load();
+		if (_text)
+			_text->load();
+		if (_nextButton)
+			_nextButton->load();
+		if (_input)
+			_input->load();
+	}
 }
 
 void NootEngine::setScreenMode() {
