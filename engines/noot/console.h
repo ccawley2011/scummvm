@@ -30,6 +30,7 @@ class NootEngine;
 class Console : public GUI::Debugger {
 private:
 	bool Cmd_about(int argc, const char **argv);
+	bool Cmd_debugRects(int argc, const char **argv);
 	bool Cmd_playAnim(int argc, const char **argv);
 
 	NootEngine *_engine;

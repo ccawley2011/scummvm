@@ -55,7 +55,7 @@ NootEngine::NootEngine(OSystem *syst, const ADGameDescription *gameDesc) : Engin
 	_nextButton(nullptr),
 	_nextRect(1202, 84, 1258, 168),
 	_input(nullptr),
-	_debugRects(true),
+	_debugRects(false),
 	_xeig(1),
 	_yeig(1) {
 }
@@ -165,6 +165,17 @@ void NootEngine::setScreenMode() {
 	_palette.setPalette(Image::riscos_palettes[3], 256);
 	g_system->getPaletteManager()->setPalette(Image::riscos_palettes[3], 0, 256);
 	g_system->fillScreen(_palette.findBestColor(0xDD, 0xDD, 0xDD));
+}
+
+void NootEngine::setDebugRects(bool debugRects) {
+	_debugRects = debugRects;
+
+	if (_animation)
+		_animation->invalidate();
+	if (_nextButton)
+		_nextButton->invalidate();
+	if (_input)
+		_input->invalidate();
 }
 
 bool NootEngine::loadAnimation(uint32 pos) {

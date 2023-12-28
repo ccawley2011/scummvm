@@ -114,6 +114,8 @@ public:
 		return _debugRects;
 	}
 
+	void setDebugRects(bool debugRects);
+
 	bool loadAnimation(uint32 pos);
 
 	Graphics::Surface *scaleSurface(const Graphics::Surface *surf, uint xeig, uint yeig) const;

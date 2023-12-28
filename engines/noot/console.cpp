@@ -26,8 +26,9 @@
 namespace Noot {
 
 Console::Console(NootEngine *engine) : GUI::Debugger(), _engine(engine) {
-	registerCmd("about",    WRAP_METHOD(Console, Cmd_about));
-	registerCmd("playAnim", WRAP_METHOD(Console, Cmd_playAnim));
+	registerCmd("about",      WRAP_METHOD(Console, Cmd_about));
+	registerCmd("debugRects", WRAP_METHOD(Console, Cmd_debugRects));
+	registerCmd("playAnim",   WRAP_METHOD(Console, Cmd_playAnim));
 }
 
 Console::~Console() {
@@ -53,6 +54,12 @@ bool Console::Cmd_about(int argc, const char **argv) {
 	debugPrintf("Y div: %d\n", header->ydiv);
 	debugPrintf("Number of palette entries: %d\n", header->colours);
 
+	return true;
+}
+
+bool Console::Cmd_debugRects(int argc, const char **argv) {
+	_engine->setDebugRects(!_engine->getDebugRects());
+	debugPrintf("Debug rects are now %s\n", _engine->getDebugRects() ? "enabled" : "disabled");
 	return true;
 }
 

@@ -121,7 +121,9 @@ void ButtonWidget::render() {
 		if (_offSurf)
 			_engine->copyToScreen(_offSurf, _offMask, _offMap, _area);
 	}
-	_engine->drawRect(_area);
+
+	if (_engine->getDebugRects())
+		_engine->drawRect(_area);
 
 	_isDirty = false;
 }
