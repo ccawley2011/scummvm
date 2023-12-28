@@ -21,8 +21,10 @@
 
 #include "noot/widgets.h"
 #include "noot/noot.h"
+#include "noot/animation.h"
 
 #include "common/keyboard.h"
+#include "common/stream.h"
 #include "common/system.h"
 #include "common/util.h"
 #include "graphics/font.h"
@@ -208,6 +210,79 @@ void InputWidget::handleKeyDown(const Common::KeyState &kbd) {
 		if (_text.size() < _maxChars)
 			_text += kbd.ascii;
 		redraw();
+	}
+}
+
+
+AnimationWidget::AnimationWidget(NootEngine *engine, const Common::Rect &area) :
+	Widget(engine, area), _animation(nullptr), _map(nullptr), _dirtyPalette(true) {
+	load();
+}
+
+AnimationWidget::~AnimationWidget() {
+	free();
+
+	delete _animation;
+}
+
+bool AnimationWidget::loadStream(Common::SeekableReadStream *stream) {
+	Animation *anim = new Animation();
+	if (!anim->loadStream(stream)) {
+		delete anim;
+		return false;
+	}
+
+	delete _animation;
+	_animation = anim;
+	_animation->start();
+
+	return true;
+}
+
+void AnimationWidget::load() {
+	free();
+
+	_dirtyPalette = true;
+
+	invalidate();
+}
+
+void AnimationWidget::free() {
+	delete[] _map;
+	_map = nullptr;
+}
+
+bool AnimationWidget::isDirty() const {
+	return Widget::isDirty() || _animation->needsUpdate();
+}
+
+void AnimationWidget::render() {
+	if (!_frame || _animation->needsUpdate())
+		_frame = _animation->decodeNextFrame();
+
+	if (_frame) {
+		if (_animation->hasDirtyPalette() || _dirtyPalette) {
+			delete[] _map;
+			_map = _engine->createMap(_animation->getPalette(), 256);
+			_dirtyPalette = false;
+		}
+
+		if (_engine->getXEigFactor() == _animation->getXEigFactor() &&
+		    _engine->getYEigFactor() == _animation->getYEigFactor()) {
+			_engine->copyToScreen(_frame, nullptr, _map, _area);
+		} else {
+			Graphics::Surface *scaled = _engine->scaleSurface(_frame, _animation->getXEigFactor(), _animation->getYEigFactor());
+			_engine->copyToScreen(scaled, nullptr, _map, _area);
+			scaled->free();
+			delete scaled;
+		}
+
+		if (_engine->getDebugRects()) {
+			Common::Rect dirtyRect(_animation->getDirtyRect());
+			dirtyRect.translate(_area.left, _area.top);
+			_engine->drawRect(_area);
+			_engine->drawRect(dirtyRect);
+		}
 	}
 }
 

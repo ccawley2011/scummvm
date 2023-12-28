@@ -30,6 +30,7 @@ struct KeyState;
 
 namespace Noot {
 class NootEngine;
+class Animation;
 
 class Widget {
 protected:
@@ -47,7 +48,7 @@ public:
 	virtual void free() = 0;
 
 	void invalidate() { _isDirty = true; }
-	bool isDirty() const { return _isDirty; }
+	virtual bool isDirty() const { return _isDirty; }
 	virtual void render() = 0;
 
 	void handleMouseMotion(const Common::Point &mouse);
@@ -98,6 +99,26 @@ public:
 	void render() override;
 
 	void handleKeyDown(const Common::KeyState &kbd) override;
+};
+
+class AnimationWidget : public Widget {
+private:
+	Animation *_animation;
+	const Graphics::Surface *_frame;
+	uint32 *_map;
+	bool _dirtyPalette;
+
+public:
+	AnimationWidget(NootEngine *engine, const Common::Rect &area);
+	~AnimationWidget() override;
+
+	bool loadStream(Common::SeekableReadStream *stream);
+
+	void load() override;
+	void free() override;
+
+	bool isDirty() const override;
+	void render() override;
 };
 
 } // End of namespace Noot

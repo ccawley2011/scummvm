@@ -20,7 +20,6 @@
  */
 
 #include "noot/noot.h"
-#include "noot/animation.h"
 #include "noot/book.h"
 #include "noot/console.h"
 #include "noot/dialogs.h"
@@ -49,7 +48,6 @@ NootEngine::NootEngine(OSystem *syst, const ADGameDescription *gameDesc) : Engin
 	// _screenRect(0, 0, 1276, 984),
 	_screenRect(0, 0, 1280, 960),
 	_animation(nullptr),
-	_animationMap(nullptr),
 	_animationRect(172, 276, 1104, 936),
 	_textRect(8, 18, 1262, 244),
 	_textRect1(8, 18, 1202, 244),
@@ -66,7 +64,6 @@ NootEngine::~NootEngine() {
 	delete _input;
 	delete _nextButton;
 	delete _animation;
-	delete[] _animationMap;
 	delete _book;
 	delete _font;
 	delete _spriteArea;
@@ -92,6 +89,7 @@ Common::Error NootEngine::run() {
 
 	reflowText(3);
 
+	_animation = new AnimationWidget(this, _animationRect);
 	_nextButton = new ButtonWidget(this, _nextRect, "nextoff", "nexton");
 	_input = new InputWidget(this, _inputRect, 3);
 
@@ -120,7 +118,8 @@ Common::Error NootEngine::run() {
 				break;
 			}
 		}
-		pollAnimation();
+		if (_animation->isDirty())
+			_animation->render();
 		if (_nextButton->isDirty())
 			_nextButton->render();
 		if (_input->isDirty())
@@ -140,6 +139,8 @@ void NootEngine::applyGameSettings() {
 
 	loadFont("LiberationSerif-Regular.ttf", 20);
 
+	if (_animation)
+		_animation->load();
 	if (_nextButton)
 		_nextButton->load();
 	if (_input)
@@ -171,46 +172,12 @@ bool NootEngine::loadAnimation(uint32 pos) {
 	if (!stream)
 		return false;
 
-	Animation *anim = new Animation();
-	if (!anim->loadStream(stream)) {
+	if (!_animation->loadStream(stream)) {
 		delete stream;
 		return false;
 	}
 
-	delete _animation;
-	_animation = anim;
-	_animation->start();
-
 	return true;
-}
-
-void NootEngine::pollAnimation() {
-	if (!_animation || !_animation->needsUpdate())
-		return;
-
-	const Graphics::Surface *frame = _animation->decodeNextFrame();
-	if (frame) {
-		if (_animation->hasDirtyPalette()) {
-			delete[] _animationMap;
-			_animationMap = _palette.createMap(_animation->getPalette(), 256);
-		}
-
-		if (_xeig == _animation->getXEigFactor() && _yeig == _animation->getYEigFactor()) {
-			copyToScreen(frame, nullptr, _animationMap, _animationRect);
-		} else {
-			Graphics::Surface *scaled = scaleSurface(frame, _animation->getXEigFactor(), _animation->getYEigFactor());
-			copyToScreen(scaled, nullptr, _animationMap, _animationRect);
-			scaled->free();
-			delete scaled;
-		}
-
-		if (_debugRects) {
-			Common::Rect dirtyRect(_animation->getDirtyRect());
-			dirtyRect.translate(_animationRect.left, _animationRect.top);
-			drawRect(_animationRect);
-			drawRect(dirtyRect);
-		}
-	}
 }
 
 Common::Error NootEngine::loadFont(const Common::String &name, int size) {

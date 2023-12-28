@@ -38,7 +38,7 @@ class ROSpriteArea;
 }
 
 namespace Noot {
-class Animation;
+class AnimationWidget;
 class Book;
 class Widget;
 
@@ -53,8 +53,7 @@ private:
 	Common::Rect _screenRect;
 	uint _xeig, _yeig;
 
-	Animation *_animation;
-	uint32 *_animationMap;
+	AnimationWidget *_animation;
 	Common::Rect _animationRect;
 
 	Common::Rect _textRect, _textRect1;
@@ -69,8 +68,6 @@ private:
 	bool _debugRects;
 
 	void setScreenMode();
-
-	void pollAnimation();
 
 	Common::Error loadFont(const Common::String &name, int size);
 	Common::Error loadSprites(const Common::Path &filename);
@@ -111,6 +108,10 @@ public:
 
 	uint getYEigFactor() const {
 		return _yeig;
+	}
+
+	bool getDebugRects() const {
+		return _debugRects;
 	}
 
 	bool loadAnimation(uint32 pos);
