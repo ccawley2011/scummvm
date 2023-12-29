@@ -71,6 +71,7 @@ private:
 
 	void setScreenMode();
 
+	void loadCursor();
 	Common::Error loadFont(const Common::String &name, int size);
 	Common::Error loadSprites(const Common::Path &filename);
 

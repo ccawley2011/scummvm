@@ -34,6 +34,7 @@
 #include "engines/util.h"
 
 #include "graphics/blit.h"
+#include "graphics/cursorman.h"
 #include "graphics/font.h"
 #include "graphics/surface.h"
 #include "graphics/fonts/ttf.h"
@@ -41,6 +42,52 @@
 #include "image/rosprite.h"
 
 namespace Noot {
+
+static const byte MOUSECURSOR_RISCOS_HI[] = {
+	1,0,0,0,0,0,0,0,0,0,0,0,
+	1,1,0,0,0,0,0,0,0,0,0,0,
+	1,2,1,0,0,0,0,0,0,0,0,0,
+	1,2,2,1,0,0,0,0,0,0,0,0,
+	1,2,2,2,1,0,0,0,0,0,0,0,
+	1,2,2,2,2,1,0,0,0,0,0,0,
+	1,2,2,2,2,2,1,0,0,0,0,0,
+	1,2,2,2,2,2,2,1,0,0,0,0,
+	1,2,2,2,2,2,2,2,1,0,0,0,
+	1,2,2,2,2,2,2,2,2,1,0,0,
+	1,2,2,2,2,2,2,2,2,2,1,0,
+	1,2,2,2,2,2,1,1,1,1,1,1,
+	1,2,2,2,2,2,2,1,0,0,0,0,
+	1,2,2,1,1,2,2,1,0,0,0,0,
+	1,2,1,0,1,2,2,2,1,0,0,0,
+	1,1,0,0,0,1,2,2,1,0,0,0,
+	1,0,0,0,0,1,2,2,2,1,0,0,
+	0,0,0,0,0,0,1,2,2,1,0,0,
+	0,0,0,0,0,0,1,2,2,2,1,0,
+	0,0,0,0,0,0,0,1,2,2,1,0,
+	0,0,0,0,0,0,0,1,2,2,1,0,
+	0,0,0,0,0,0,0,0,1,1,1,0,
+};
+
+static const byte MOUSECURSOR_RISCOS_LO[] = {
+	1,1,0,0,0,0,0,0,0,0,0,
+	1,2,1,1,0,0,0,0,0,0,0,
+	1,2,2,2,1,1,0,0,0,0,0,
+	1,2,2,2,2,2,1,1,1,0,0,
+	1,2,2,2,2,2,2,2,2,1,1,
+	1,2,2,2,2,2,1,1,1,1,1,
+	1,2,1,1,1,2,2,1,0,0,0,
+	1,1,1,0,0,1,2,2,1,0,0,
+	0,0,0,0,0,0,1,2,2,1,0,
+	0,0,0,0,0,0,0,1,2,2,1,
+	0,0,0,0,0,0,0,0,1,1,1,
+};
+
+static const byte cursorPalette[] = {
+	0x00, 0x00, 0x00,  // Black / Transparent
+	0x00, 0xff, 0xff,  // Cyan
+	0x00, 0x00, 0x99,  // Blue
+	0xff, 0x00, 0x00   // Red
+};
 
 NootEngine::NootEngine(OSystem *syst, const ADGameDescription *gameDesc) : Engine(syst),
 	_gameDescription(gameDesc),
@@ -188,6 +235,8 @@ void NootEngine::setScreenMode() {
 	_bgColour = findBestColor(0xDD, 0xDD, 0xDD);
 	_fgColour = findBestColor(0,    0,    0);
 	g_system->fillScreen(_bgColour);
+
+	loadCursor();
 }
 
 void NootEngine::setDebugRects(bool debugRects) {
@@ -214,6 +263,36 @@ bool NootEngine::loadAnimation(uint32 pos) {
 	}
 
 	return true;
+}
+
+void NootEngine::loadCursor() {
+	if (_xeig == 1 && _yeig == 1) {
+		CursorMan.replaceCursor(MOUSECURSOR_RISCOS_HI, 12, 22, 0, 0, 0);
+	} else if (_xeig == 1 && _yeig == 2) {
+		CursorMan.replaceCursor(MOUSECURSOR_RISCOS_LO, 11, 11, 0, 0, 0);
+	} else {
+		// TODO: Get the backend to handle scaling
+
+		Graphics::Surface cursor;
+		Graphics::Surface *scaledCursor;
+
+		if (_yeig > 1) {
+			cursor.init(11, 11, 11, const_cast<byte *>(MOUSECURSOR_RISCOS_LO),
+			            Graphics::PixelFormat::createFormatCLUT8());
+			scaledCursor = scaleSurface(&cursor, 1, 2);
+		} else {
+			cursor.init(12, 22, 12, const_cast<byte *>(MOUSECURSOR_RISCOS_HI),
+			            Graphics::PixelFormat::createFormatCLUT8());
+			scaledCursor = scaleSurface(&cursor, 1, 1);
+		}
+
+		CursorMan.replaceCursor(*scaledCursor, 0, 0, 0);
+		scaledCursor->free();
+		delete scaledCursor;
+	}
+
+	CursorMan.replaceCursorPalette(cursorPalette, 0, 4);
+	CursorMan.showMouse(true);
 }
 
 Common::Error NootEngine::loadFont(const Common::String &name, int size) {
