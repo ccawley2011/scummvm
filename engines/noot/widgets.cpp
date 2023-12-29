@@ -142,7 +142,7 @@ void ButtonWidget::handleMouseLeave(const Common::Point &mouse) {
 
 
 InputWidget::InputWidget(NootEngine *engine, const Common::Rect &area, uint maxChars) :
-	Widget(engine, area), _maxChars(maxChars), _surface(nullptr) {
+	Widget(engine, area), _maxChars(maxChars), _surface(nullptr), _pos(0) {
 	load();
 }
 
@@ -188,9 +188,8 @@ void InputWidget::redraw() {
 	uint y = (_surface->h - font->getFontHeight()) / 2;
 
 	if (!_text.empty()) {
-		Common::Rect textPos = font->getBoundingBox(_text, x, y, _surface->w - (x * 2));
 		font->drawString(_surface, _text, x, y, _surface->w - (x * 2), _fgColour);
-		x = textPos.right;
+		x += font->getStringWidth(_text.substr(0, _pos));
 	}
 
 	_surface->hLine(x - 3, 1, x - 2, _caretColour);
@@ -208,12 +207,31 @@ void InputWidget::redraw() {
 
 void InputWidget::handleKeyDown(const Common::KeyState &kbd) {
 	if (kbd.keycode == Common::KEYCODE_BACKSPACE) {
-		_text.deleteLastChar();
-		redraw();
+		if (_pos > 0) {
+			_text.deleteChar(--_pos);
+			redraw();
+		}
+	} else if (kbd.keycode == Common::KEYCODE_DELETE) {
+		if (_pos < _text.size()) {
+			_text.deleteChar(_pos);
+			redraw();
+		}
+	} else if (kbd.keycode == Common::KEYCODE_LEFT) {
+		if (_pos > 0) {
+			--_pos;
+			redraw();
+		}
+	} else if (kbd.keycode == Common::KEYCODE_RIGHT) {
+		if (_pos < _text.size()) {
+			++_pos;
+			redraw();
+		}
 	} else if (Common::isPrint(kbd.ascii)) {
-		if (_text.size() < _maxChars)
+		if (_text.size() < _maxChars) {
 			_text += kbd.ascii;
-		redraw();
+			++_pos;
+			redraw();
+		}
 	}
 }
 

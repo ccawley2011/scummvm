@@ -87,7 +87,7 @@ private:
 	Common::String _text;
 	Graphics::Surface *_surface;
 	uint32 _fgColour, _bgColour, _caretColour;
-	uint _maxChars;
+	uint _pos, _maxChars;
 
 	void redraw();
 
