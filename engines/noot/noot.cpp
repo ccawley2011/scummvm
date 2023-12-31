@@ -194,6 +194,11 @@ Common::Error NootEngine::run() {
 	return Common::kNoError;
 }
 
+void NootEngine::pauseEngineIntern(bool pause) {
+	if (_animation)
+		_animation->pauseVideo(pause);
+}
+
 void NootEngine::applyGameSettings() {
 	bool modeChanged = false;
 	uint mode = ConfMan.getInt("resolution");

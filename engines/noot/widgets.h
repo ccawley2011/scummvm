@@ -123,6 +123,7 @@ public:
 	~AnimationWidget() override;
 
 	bool loadStream(Common::SeekableReadStream *stream);
+	void pauseVideo(bool pause);
 
 	void load() override;
 	void free() override;

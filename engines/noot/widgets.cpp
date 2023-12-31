@@ -314,6 +314,11 @@ bool AnimationWidget::loadStream(Common::SeekableReadStream *stream) {
 	return true;
 }
 
+void AnimationWidget::pauseVideo(bool pause) {
+	if (_animation)
+		_animation->pauseVideo(pause);
+}
+
 void AnimationWidget::load() {
 	free();
 

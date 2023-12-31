@@ -93,6 +93,7 @@ public:
 		return (f == kSupportsReturnToLauncher || f == kSupportsChangingOptionsDuringRuntime);
 	}
 
+	void pauseEngineIntern(bool pause) override;
 	void applyGameSettings() override;
 
 	const Book *getBook() const {
