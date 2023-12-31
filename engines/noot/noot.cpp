@@ -105,7 +105,8 @@ NootEngine::NootEngine(OSystem *syst, const ADGameDescription *gameDesc) : Engin
 	_input(nullptr),
 	_debugRects(false),
 	_xeig(1),
-	_yeig(1) {
+	_yeig(1),
+	_state(-1) {
 }
 
 NootEngine::~NootEngine() {
@@ -136,16 +137,11 @@ Common::Error NootEngine::run() {
 	if (err.getCode() != Common::kNoError)
 		return err;
 
-	reflowText(3);
-
 	_animation = new AnimationWidget(this, _animationRect);
-	_nextButton = new ButtonWidget(this, _nextRect, "nextoff", "nexton");
-	_input = new InputWidget(this, _inputRect, 3);
-	_text = new TextWidget(this, _textRect1, "This is an example string");
-
-	drawRect(_textRect, _fgColour);
-
 	loadAnimation(1);
+
+	reflowText(3);
+	sendInput();
 
 	// Simple event handling loop
 	Common::Event e;
@@ -153,13 +149,26 @@ Common::Error NootEngine::run() {
 		while (g_system->getEventManager()->pollEvent(e)) {
 			switch (e.type) {
 			case Common::EVENT_MOUSEMOVE:
-				_nextButton->handleMouseMotion(convertMouse(e.mouse));
+				if (_nextButton)
+					_nextButton->handleMouseMotion(convertMouse(e.mouse));
+				break;
+			case Common::EVENT_LBUTTONDOWN:
+				if (_nextButton)
+					_nextButton->handleMouseDown(convertMouse(e.mouse));
+				break;
+			case Common::EVENT_LBUTTONUP:
+				if (_nextButton)
+					_nextButton->handleMouseUp(convertMouse(e.mouse));
 				break;
 			case Common::EVENT_KEYDOWN:
+				if (_nextButton)
+					_nextButton->handleKeyDown(e.kbd);
 				if (_input)
 					_input->handleKeyDown(e.kbd);
 				break;
 			case Common::EVENT_KEYUP:
+				if (_nextButton)
+					_nextButton->handleKeyUp(e.kbd);
 				if (_input)
 					_input->handleKeyUp(e.kbd);
 				break;
@@ -167,13 +176,13 @@ Common::Error NootEngine::run() {
 				break;
 			}
 		}
-		if (_animation->isDirty())
+		if (_animation && _animation->isDirty())
 			_animation->render();
-		if (_text->isDirty())
+		if (_text && _text->isDirty())
 			_text->render();
-		if (_nextButton->isDirty())
+		if (_nextButton && _nextButton->isDirty())
 			_nextButton->render();
-		if (_input->isDirty())
+		if (_input && _input->isDirty())
 			_input->render();
 		g_system->updateScreen();
 
@@ -250,6 +259,48 @@ void NootEngine::setDebugRects(bool debugRects) {
 		_nextButton->invalidate();
 	if (_input)
 		_input->invalidate();
+}
+
+void NootEngine::newInput(const Common::String &text, bool isInput) {
+	fillRect(_textRect, _bgColour);
+	drawRect(_textRect, _fgColour);
+
+	if (isInput && _nextButton) {
+		delete _nextButton;
+		_nextButton = nullptr;
+	} else if (!isInput && !_nextButton) {
+		_nextButton = new ButtonWidget(this, _nextRect, "nextoff", "nexton");
+	} else if (_nextButton) {
+		_nextButton->invalidate();
+	}
+
+	delete _text;
+	_text = new TextWidget(this, _nextButton ? _textRect1 : _textRect, text);
+
+	delete _input;
+	_input = nullptr;
+
+	if (isInput)
+		_input = new InputWidget(this, _inputRect, 3);
+}
+
+bool NootEngine::sendInput(const Common::String &text) {
+	switch(++_state) {
+	default:
+		_state = 0;
+		// fall through
+	case 0:
+		newInput("This is an example string", false);
+		break;
+	case 1:
+		newInput("Try typing something into the input box", true);
+		break;
+	case 2:
+		newInput("You typed in \"" + text + "\"", false);
+		break;
+	}
+
+	return true;
 }
 
 bool NootEngine::loadAnimation(uint32 pos) {

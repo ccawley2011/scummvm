@@ -67,6 +67,8 @@ private:
 	Widget *_input;
 	Common::Rect _inputRect;
 
+	int _state;
+
 	bool _debugRects;
 
 	void setScreenMode();
@@ -118,6 +120,9 @@ public:
 	}
 
 	void setDebugRects(bool debugRects);
+
+	void newInput(const Common::String &text, bool isInput);
+	bool sendInput(const Common::String &text = Common::String());
 
 	bool loadAnimation(uint32 pos);
 

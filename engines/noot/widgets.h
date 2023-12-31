@@ -54,6 +54,8 @@ public:
 	void handleMouseMotion(const Common::Point &mouse);
 	virtual void handleMouseEnter(const Common::Point &mouse) {}
 	virtual void handleMouseLeave(const Common::Point &mouse) {}
+	virtual void handleMouseDown(const Common::Point &mouse) {}
+	virtual void handleMouseUp(const Common::Point &mouse) {}
 	virtual void handleKeyDown(const Common::KeyState &kbd) {}
 	virtual void handleKeyUp(const Common::KeyState &kbd) {}
 };
@@ -62,7 +64,7 @@ class ButtonWidget : public Widget {
 private:
 	Common::Path _off, _on;
 
-	bool _hover;
+	bool _hover, _held, _keyHeld;
 
 	Graphics::Surface *_offSurf, *_offMask;
 	Graphics::Surface *_onSurf, *_onMask;
@@ -80,6 +82,10 @@ public:
 
 	void handleMouseEnter(const Common::Point &mouse) override;
 	void handleMouseLeave(const Common::Point &mouse) override;
+	void handleMouseDown(const Common::Point &mouse) override;
+	void handleMouseUp(const Common::Point &mouse) override;
+	void handleKeyDown(const Common::KeyState &kbd) override;
+	void handleKeyUp(const Common::KeyState &kbd) override;
 };
 
 class InputWidget : public Widget {
@@ -88,7 +94,9 @@ private:
 	Graphics::Surface *_surface;
 	uint32 _fgColour, _bgColour, _caretColour;
 	uint _pos, _maxChars;
+	bool _needsRedraw;
 
+	inline void requireRedraw() { _needsRedraw = true; invalidate(); }
 	void redraw();
 
 public:

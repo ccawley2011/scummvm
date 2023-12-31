@@ -45,7 +45,8 @@ void Widget::handleMouseMotion(const Common::Point &mouse) {
 ButtonWidget::ButtonWidget(NootEngine *engine, const Common::Rect &area,
                            const Common::Path &off, const Common::Path &on) :
 	Widget(engine, area),
-	_off(off), _on(on), _hover(false),
+	_off(off), _on(on),
+	_hover(false), _held(false), _keyHeld(false),
 	_offSurf(nullptr), _offMask(nullptr),
 	_onSurf(nullptr), _onMask(nullptr),
 	_offMap(nullptr), _onMap(nullptr) {
@@ -116,7 +117,9 @@ void ButtonWidget::free() {
 }
 
 void ButtonWidget::render() {
-	if (_hover) {
+	// if (_hover) matches the original behaviour, but this should
+	// look better with alternate input devices
+	if (_held || _keyHeld /* || _hover */) {
 		if (_onSurf)
 			_engine->copyRectToScreen(_onSurf, _area, _onMap, _onMask);
 	} else {
@@ -140,9 +143,45 @@ void ButtonWidget::handleMouseLeave(const Common::Point &mouse) {
 	invalidate();
 }
 
+void ButtonWidget::handleMouseDown(const Common::Point &mouse) {
+	if (_area.contains(mouse)) {
+		_held = true;
+		invalidate();
+
+		if (_area.contains(mouse) && _engine->sendInput())
+			return;
+	}
+}
+
+void ButtonWidget::handleMouseUp(const Common::Point &mouse) {
+	if (_held) {
+		_held = false;
+		invalidate();
+	}
+}
+
+void ButtonWidget::handleKeyDown(const Common::KeyState &kbd) {
+	if (kbd.keycode == Common::KEYCODE_RETURN || kbd.keycode == Common::KEYCODE_KP_ENTER) {
+		_keyHeld = true;
+		invalidate();
+
+		if (_engine->sendInput())
+			return;
+	}
+}
+
+void ButtonWidget::handleKeyUp(const Common::KeyState &kbd) {
+	if (kbd.keycode == Common::KEYCODE_RETURN || kbd.keycode == Common::KEYCODE_KP_ENTER) {
+		if (_keyHeld) {
+			_keyHeld = false;
+			invalidate();
+		}
+	}
+}
+
 
 InputWidget::InputWidget(NootEngine *engine, const Common::Rect &area, uint maxChars) :
-	Widget(engine, area), _maxChars(maxChars), _surface(nullptr), _pos(0) {
+	Widget(engine, area), _maxChars(maxChars), _surface(nullptr), _pos(0), _needsRedraw(true) {
 	load();
 }
 
@@ -162,7 +201,7 @@ void InputWidget::load() {
 	_bgColour    = _engine->findBestColor(0xff, 0xff, 0xff);
 	_caretColour = _engine->findBestColor(0xdd, 0,    0);
 
-	redraw();
+	requireRedraw();
 }
 
 void InputWidget::free() {
@@ -174,6 +213,11 @@ void InputWidget::free() {
 }
 
 void InputWidget::render() {
+	if (_needsRedraw) {
+		redraw();
+		_needsRedraw = false;
+	}
+
 	if (_surface)
 		_engine->copyRectToScreen(_surface, _area);
 	_isDirty = false;
@@ -201,36 +245,45 @@ void InputWidget::redraw() {
 	_surface->setPixel(x + 1, _surface->h - 2, _caretColour);
 	_surface->hLine(x - 3, _surface->h - 1, x - 2, _caretColour);
 	_surface->hLine(x + 2, _surface->h - 1, x + 3, _caretColour);
-
-	invalidate();
 }
 
 void InputWidget::handleKeyDown(const Common::KeyState &kbd) {
-	if (kbd.keycode == Common::KEYCODE_BACKSPACE) {
+	if (kbd.keycode == Common::KEYCODE_RETURN || kbd.keycode == Common::KEYCODE_KP_ENTER) {
+		Common::String text = _text;
+
+		if (!_text.empty()) {
+			_text.clear();
+			_pos = 0;
+			requireRedraw();
+
+			if (_engine->sendInput(text))
+				return;
+		}
+	} else if (kbd.keycode == Common::KEYCODE_BACKSPACE) {
 		if (_pos > 0) {
 			_text.deleteChar(--_pos);
-			redraw();
+			requireRedraw();
 		}
 	} else if (kbd.keycode == Common::KEYCODE_DELETE) {
 		if (_pos < _text.size()) {
 			_text.deleteChar(_pos);
-			redraw();
+			requireRedraw();
 		}
 	} else if (kbd.keycode == Common::KEYCODE_LEFT) {
 		if (_pos > 0) {
 			--_pos;
-			redraw();
+			requireRedraw();
 		}
 	} else if (kbd.keycode == Common::KEYCODE_RIGHT) {
 		if (_pos < _text.size()) {
 			++_pos;
-			redraw();
+			requireRedraw();
 		}
 	} else if (Common::isPrint(kbd.ascii)) {
 		if (_text.size() < _maxChars) {
 			_text += kbd.ascii;
 			++_pos;
-			redraw();
+			requireRedraw();
 		}
 	}
 }
