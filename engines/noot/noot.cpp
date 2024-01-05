@@ -27,7 +27,6 @@
 
 #include "common/config-manager.h"
 #include "common/events.h"
-#include "common/stream.h"
 #include "common/system.h"
 
 #include "engines/advancedDetector.h"

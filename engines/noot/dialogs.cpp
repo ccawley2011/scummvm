@@ -21,14 +21,9 @@
 
 #include "noot/dialogs.h"
 
-#include "gui/gui-manager.h"
-#include "gui/message.h"
-#include "gui/saveload.h"
 #include "gui/ThemeEval.h"
-#include "gui/widget.h"
 #include "gui/widgets/popup.h"
 
-#include "common/system.h"
 #include "common/translation.h"
 
 namespace Noot {

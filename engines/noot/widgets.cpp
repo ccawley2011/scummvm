@@ -24,7 +24,6 @@
 #include "noot/animation.h"
 
 #include "common/keyboard.h"
-#include "common/stream.h"
 #include "common/system.h"
 #include "common/util.h"
 #include "graphics/font.h"

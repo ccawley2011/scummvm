@@ -22,13 +22,6 @@
 #ifndef NOOT_DIALOGS_H
 #define NOOT_DIALOGS_H
 
-
-#include "common/events.h"
-#include "common/str.h"
-#include "common/ustr.h"
-
-#include "engines/dialogs.h"
-
 #include "gui/dialog.h"
 #include "gui/widget.h"
 
