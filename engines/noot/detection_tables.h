@@ -29,7 +29,7 @@ static const ADGameDescription gameDescriptions[] = {
 		Common::EN_ANY,
 		Common::kPlatformAcorn,
 		ADGF_UNSTABLE|ADGF_DEMO,
-		GUIO1(GUIO_NONE)
+		GUIO1(GUIO_NOMUSIC)
 	},
 
 	/**
@@ -73,7 +73,7 @@ static const ADGameDescription gameDescriptions[] = {
 		Common::EN_ANY,
 		Common::kPlatformAcorn,
 		ADGF_UNSTABLE,
-		GUIO1(GUIO_NONE)
+		GUIO1(GUIO_NOMUSIC)
 	},
 
 	{
@@ -93,7 +93,7 @@ static const ADGameDescription gameDescriptions[] = {
 		Common::EN_ANY,
 		Common::kPlatformAcorn,
 		ADGF_UNSTABLE,
-		GUIO1(GUIO_NONE)
+		GUIO1(GUIO_NOMUSIC)
 	},
 
 	/**
@@ -127,7 +127,7 @@ static const ADGameDescription gameDescriptions[] = {
 		Common::EN_ANY,
 		Common::kPlatformAcorn,
 		ADGF_UNSTABLE|ADGF_DEMO,
-		GUIO1(GUIO_NONE)
+		GUIO1(GUIO_NOMUSIC)
 	},
 
 	{

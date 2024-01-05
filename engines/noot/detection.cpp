@@ -39,6 +39,7 @@ class NootMetaEngineDetection : public AdvancedMetaEngineDetection {
 public:
 	NootMetaEngineDetection() : AdvancedMetaEngineDetection(Noot::gameDescriptions,
 		sizeof(ADGameDescription), nootGames) {
+		_guiOptions = GUIO3(GUIO_NOMIDI, GUIO_NOSPEECH, GUIO_NOSFX);
 	}
 
 	virtual const char *getName() const override {
