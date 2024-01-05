@@ -70,6 +70,15 @@ Common::Rect Animation::getDirtyRect() const {
 	return Common::Rect();
 }
 
+Common::Rect Animation::getLastDirtyRect() const {
+	const Track *track = getTrack(0);
+
+	if (track)
+		return ((const AnimationTrack *)track)->getLastDirtyRect();
+
+	return Common::Rect();
+}
+
 uint16 Animation::getPaletteColorCount() const {
 	const Track *track = getTrack(0);
 
@@ -192,6 +201,7 @@ const Graphics::Surface *Animation::AnimationTrack::decodeNextFrame() {
 
 
 	if (!_reversed) {
+		_lastDirtyRect = _dirtyRect;
 		_dirtyRect = _dirtyRects[_curFrame];
 		_nextFrameStartTime += _frameDelays[_curFrame];
 
@@ -206,6 +216,7 @@ const Graphics::Surface *Animation::AnimationTrack::decodeNextFrame() {
 			_curFrame++;
 		}
 	} else {
+		_lastDirtyRect = _dirtyRect;
 		_dirtyRect = _dirtyRects[_curFrame - 1];
 		_nextFrameStartTime += _frameDelays[_curFrame - 1];
 

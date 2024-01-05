@@ -79,8 +79,6 @@ private:
 
 	void reflowText(uint maxChars);
 
-	Common::Point convertMouse(const Common::Point &mouse) const;
-
 protected:
 	// Engine APIs
 	Common::Error run() override;
@@ -130,6 +128,12 @@ public:
 	Graphics::Surface *scaleSurface(const Graphics::Surface *surf, uint xeig, uint yeig) const;
 	uint32 findBestColor(byte r, byte g, byte b);
 	uint32 *createMap(const byte *srcPalette, uint len);
+
+	Common::Rect convertRectToScreen(const Common::Rect &dstRect) const;
+	Common::Rect convertRectToScreen(const Common::Rect &dstRect, uint height, uint xeig, uint yeig) const;
+	Common::Rect convertScreenToRect(const Common::Rect &dstRect) const;
+	Common::Rect convertScreenToRect(const Common::Rect &dstRect, uint height, uint xeig, uint yeig) const;
+	Common::Point convertMouse(const Common::Point &mouse) const;
 
 	Graphics::Surface *lockScreen(const Common::Rect &dstRect);
 	void unlockScreen(Graphics::Surface *screen);

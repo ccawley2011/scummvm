@@ -311,6 +311,8 @@ bool AnimationWidget::loadStream(Common::SeekableReadStream *stream) {
 	_animation = anim;
 	_animation->start();
 
+	invalidate();
+
 	return true;
 }
 
@@ -349,21 +351,78 @@ void AnimationWidget::render() {
 			_dirtyPalette = false;
 		}
 
-		_engine->copyRectToScreen(_frame, _area, _map);
+		Common::Rect dirtyRect(_animation->getDirtyRect());
+		Common::Rect lastDirtyRect(_animation->getLastDirtyRect());
 
-		if (_engine->getDebugRects()) {
-			Common::Rect dirtyRect(_animation->getDirtyRect());
-			dirtyRect.translate(_area.left, _area.top);
-			dirtyRect.clip(_area);
-			_engine->drawRect(_area, _fgColour);
-			if (!dirtyRect.isEmpty())
-				_engine->drawRect(dirtyRect, _fgColour);
+		if (_isDirty || _engine->getDebugRects()) {
+			_engine->copyRectToScreen(_frame, _area, _map);
+
+			if (_engine->getDebugRects()) {
+				_engine->drawRect(_area, _fgColour);
+
+				if (dirtyRect.intersects(lastDirtyRect)) {
+					Common::Rect screenRect(dirtyRect);
+					screenRect.extend(lastDirtyRect);
+					screenRect.translate(_area.left, _area.top);
+					screenRect.clip(_area);
+					if (!screenRect.isEmpty())
+						_engine->drawRect(screenRect, _fgColour);
+				} else {
+					Common::Rect screenRect(lastDirtyRect);
+					screenRect.translate(_area.left, _area.top);
+					screenRect.clip(_area);
+					if (!screenRect.isEmpty())
+						_engine->drawRect(screenRect, _fgColour);
+
+					screenRect = dirtyRect;
+					screenRect.translate(_area.left, _area.top);
+					screenRect.clip(_area);
+					if (!screenRect.isEmpty())
+						_engine->drawRect(screenRect, _fgColour);
+				}
+			}
+		} else {
+			Common::Rect screenRect(convertRectToScreen(dirtyRect));
+			Common::Rect lastScreenRect(convertRectToScreen(lastDirtyRect));
+
+			if (screenRect.intersects(lastScreenRect)) {
+				screenRect.extend(lastScreenRect);
+			} else {
+				Common::Rect rect(convertScreenToRect(lastScreenRect));
+				rect.translate(_area.left, _area.top);
+				rect.clip(_area);
+				if (!rect.isEmpty()) {
+					Graphics::Surface sub = _frame->getSubArea(lastScreenRect);
+					_engine->copyRectToScreen(&sub, rect, _map);
+				}
+			}
+
+			Common::Rect rect(convertScreenToRect(screenRect));
+			rect.translate(_area.left, _area.top);
+			rect.clip(_area);
+			if (!rect.isEmpty()) {
+				Graphics::Surface sub = _frame->getSubArea(screenRect);
+				_engine->copyRectToScreen(&sub, rect, _map);
+			}
 		}
 	}
 
 	_isDirty = false;
 }
 
+Common::Rect AnimationWidget::convertRectToScreen(const Common::Rect &rect) const {
+	return _engine->convertRectToScreen(rect,
+		_animation->getHeight() << _animation->getYEigFactor(),
+		_animation->getXEigFactor(),
+		_animation->getYEigFactor());
+}
+
+Common::Rect AnimationWidget::convertScreenToRect(const Common::Rect &rect) const {
+	return _engine->convertScreenToRect(rect,
+		_animation->getHeight(),
+		_animation->getXEigFactor(),
+		_animation->getYEigFactor());
+}
 
 TextWidget::TextWidget(NootEngine *engine, const Common::Rect &area, const Common::String &text) :
 	Widget(engine, area), _text(text) {

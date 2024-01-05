@@ -399,16 +399,36 @@ uint32 *NootEngine::createMap(const byte *srcPalette, uint len) {
 	return _palette.createMap(srcPalette, len);
 }
 
+Common::Rect NootEngine::convertRectToScreen(const Common::Rect &dstRect) const {
+	return convertRectToScreen(dstRect, _screenRect.height(), _xeig, _yeig);
+}
+
+Common::Rect NootEngine::convertRectToScreen(const Common::Rect &dstRect, uint height, uint xeig, uint yeig) const {
+	uint left = dstRect.left >> xeig;
+	uint right = dstRect.right >> xeig;
+	uint top = (height - dstRect.bottom) >> yeig;
+	uint bottom = (height - dstRect.top) >> yeig;
+	return Common::Rect(left, top, right, bottom);
+}
+
+Common::Rect NootEngine::convertScreenToRect(const Common::Rect &dstRect) const {
+	return convertScreenToRect(dstRect, _screenRect.height(), _xeig, _yeig);
+}
+
+Common::Rect NootEngine::convertScreenToRect(const Common::Rect &dstRect, uint height, uint xeig, uint yeig) const {
+	uint left = dstRect.left << xeig;
+	uint right = dstRect.right << xeig;
+	uint top = (height - dstRect.bottom) << yeig;
+	uint bottom = (height - dstRect.top) << yeig;
+	return Common::Rect(left, top, right, bottom);
+}
+
 Common::Point NootEngine::convertMouse(const Common::Point &mouse) const {
 	return Common::Point(mouse.x << _xeig, _screenRect.height() - (mouse.y << _yeig));
 }
 
 Graphics::Surface *NootEngine::lockScreen(const Common::Rect &dstRect) {
-	uint left = dstRect.left >> _xeig;
-	uint right = dstRect.right >> _xeig;
-	uint top = (_screenRect.height() - dstRect.bottom) >> _yeig;
-	uint bottom = (_screenRect.height() - dstRect.top) >> _yeig;
-	Common::Rect rect(left, top, right, bottom);
+	Common::Rect rect(convertRectToScreen(dstRect));
 
 	Graphics::Surface *screen = g_system->lockScreen();
 	if (!screen)
@@ -430,11 +450,7 @@ void NootEngine::copyRectToScreen(const Graphics::Surface *surf, const Common::R
 	if (!surf)
 		return;
 
-	uint left = dstRect.left >> _xeig;
-	uint right = dstRect.right >> _xeig;
-	uint top = (_screenRect.height() - dstRect.bottom) >> _yeig;
-	uint bottom = (_screenRect.height() - dstRect.top) >> _yeig;
-	Common::Rect rect(left, top, right, bottom);
+	Common::Rect rect(convertRectToScreen(dstRect));
 
 	if (surf->w == rect.width() && surf->h == rect.height()) {
 		g_system->copyRectToScreen(surf->getPixels(), surf->pitch,
@@ -462,11 +478,7 @@ void NootEngine::copyRectToScreen(const Graphics::Surface *surf, const Common::R
 		return;
 	}
 
-	uint left = dstRect.left >> _xeig;
-	uint right = dstRect.right >> _xeig;
-	uint top = (_screenRect.height() - dstRect.bottom) >> _yeig;
-	uint bottom = (_screenRect.height() - dstRect.top) >> _yeig;
-	Common::Rect rect(left, top, right, bottom);
+	Common::Rect rect(convertRectToScreen(dstRect));
 
 	Graphics::Surface *scaledSurf = nullptr, *scaledMask = nullptr;;
 	if (surf->w != rect.width() || surf->h != rect.height()) {
@@ -519,12 +531,7 @@ void NootEngine::copyRectToScreen(const Graphics::Surface *surf, const Common::R
 }
 
 void NootEngine::fillRect(const Common::Rect &dstRect, uint32 colour) {
-	uint left = dstRect.left >> _xeig;
-	uint right = dstRect.right >> _xeig;
-	uint top = (_screenRect.height() - dstRect.bottom) >> _yeig;
-	uint bottom = (_screenRect.height() - dstRect.top) >> _yeig;
-	Common::Rect rect(left, top, right, bottom);
-
+	Common::Rect rect(convertRectToScreen(dstRect));
 	g_system->fillScreen(rect, colour);
 }
 

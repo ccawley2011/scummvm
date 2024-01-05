@@ -42,6 +42,7 @@ public:
 	uint getXEigFactor() const;
 	uint getYEigFactor() const;
 	Common::Rect getDirtyRect() const;
+	Common::Rect getLastDirtyRect() const;
 	uint16 getPaletteColorCount() const;
 
 protected:
@@ -62,6 +63,7 @@ protected:
 		uint getXEigFactor() const;
 		uint getYEigFactor() const;
 		Common::Rect getDirtyRect() const { return _dirtyRect; }
+		Common::Rect getLastDirtyRect() const { return _lastDirtyRect; }
 
 		int getCurFrame() const override { return _curFrame; }
 		int getFrameCount() const override { return _frameCount; }
@@ -91,7 +93,7 @@ protected:
 		byte _palette[256 * 3];
 		mutable bool _dirtyPalette;
 
-		Common::Rect _dirtyRect;
+		Common::Rect _dirtyRect, _lastDirtyRect;
 		Common::Rect *_dirtyRects;
 
 		uint32 _flags;

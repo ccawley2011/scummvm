@@ -118,6 +118,9 @@ private:
 	bool _dirtyPalette;
 	uint32 _fgColour;
 
+	Common::Rect convertRectToScreen(const Common::Rect &dstRect) const;
+	Common::Rect convertScreenToRect(const Common::Rect &dstRect) const;
+
 public:
 	AnimationWidget(NootEngine *engine, const Common::Rect &area);
 	~AnimationWidget() override;
