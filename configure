@@ -608,7 +608,7 @@ get_system_exe_extension() {
 	kolibrios | kos32)
 		_exeext=".dll"
 		;;
-	mingw* | *os2-emx)
+	mingw* | msdos* | *os2-emx)
 		_exeext=".exe"
 		;;
 	mint)
@@ -1886,7 +1886,7 @@ else
 fi
 
 case $_host in
-arm-*riscos | caanoo | ds | gp2x | gp2xwiz | openpandora | psp | psp2 | switch)
+arm-*riscos | caanoo | ds | gp2x | gp2xwiz | msdos* | openpandora | psp | psp2 | switch)
 	if test "$_debug_build" = auto; then
 		# If you want to debug one of these platforms, use '--disable-optimizations --enable-debug'
 		_debug_build=no
@@ -2352,7 +2352,7 @@ if test "$have_gcc" = yes ; then
 		std_variant=gnu++
 		pedantic=no
 		;;
-	amigaos* | dreamcast | ds | mingw* | mint* | morphos | n64 | ps3 | psp2)
+	amigaos* | dreamcast | ds | mingw* | mint* | morphos | msdos* | n64 | ps3 | psp2)
 		std_variant=gnu++
 		;;
 	openbsd*)
@@ -3274,6 +3274,12 @@ EOF
 		_port_mk="backends/platform/sdl/morphos/morphos.mk"
 		# use SDL2
 		_sdlconfig=sdl2-config
+		;;
+	msdos*)
+		add_line_to_config_mk 'MSDOS = 1'
+		_optimization_level=-O3
+		_backend=null
+		_timidity=no
 		;;
 	msys)
 		echo ERROR: Using the MSYS shell in msys mode is not supported. Please use the MSYS shell in mingw mode instead.
@@ -4608,7 +4614,7 @@ case $_host_os in
 	3ds | android | beos* | bsd* | cygwin* | darwin* | dragonfly* | freebsd* | gnu* | gph-linux | haiku* | hpux* | iphoneos | irix*| k*bsd*-gnu* | linux* | maemo | mint* | netbsd* | openbsd* | serenity* | solaris* | sunos* | switch | uclinux*)
 		_posix=yes
 		;;
-	os2-emx*)
+	msdos* | os2-emx*)
 		_posix=yes	# FIXME: Really???
 		;;
 	emscripten)
@@ -6571,6 +6577,9 @@ if test "$_have_x86" = yes ; then
 				;;
 				mingw* | kolibrios)
 					append_var NASMFLAGS "-f win32"
+				;;
+				msdos*)
+					append_var NASMFLAGS "-f coff"
 				;;
 				os2-emx*)
 					append_var NASMFLAGS "-f aout"

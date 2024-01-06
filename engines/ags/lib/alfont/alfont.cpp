@@ -130,6 +130,16 @@ static FT_Memory ft_memory;
 static FreeType213::AH_Hinter ft_hinter;
 #endif
 
+#ifdef __DJGPP__
+static size_t wcslen(const wchar_t *str) {
+	size_t len = 0;
+	while (str[len])
+		len++;
+
+	return len;
+}
+#endif
+
 const char *alfont_get_name(ALFONT_FONT *f) {
 	if (!f)
 		return "";
