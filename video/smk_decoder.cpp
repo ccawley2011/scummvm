@@ -66,8 +66,13 @@ private:
 	uint16 _treeSize;
 	uint16 _tree[511];
 
-	uint16 _prefixtree[256];
-	byte _prefixlength[256];
+	union Prefix {
+		struct {
+			uint16 tree;
+			byte length;
+		} s;
+		uint32 word;
+	} _prefix[256];
 
 	SmackerBitStream &_bs;
 	bool _empty;
@@ -80,8 +85,7 @@ SmallHuffmanTree::SmallHuffmanTree(SmackerBitStream &bs)
 		return;
 	}
 
-	for (uint16 i = 0; i < 256; ++i)
-		_prefixtree[i] = _prefixlength[i] = 0;
+	memset(_prefix, 0, sizeof(_prefix));
 
 	decodeTree(0, 0);
 
@@ -96,9 +100,9 @@ uint16 SmallHuffmanTree::decodeTree(uint32 prefix, int length) {
 		_tree[_treeSize] = _bs.getBits<8>();
 
 		if (length <= 8) {
+			Prefix val = {{ _treeSize, (byte)length }};
 			for (int i = 0; i < 256; i += (1 << length)) {
-				_prefixtree[prefix | i] = _treeSize;
-				_prefixlength[prefix | i] = length;
+				_prefix[prefix | i].word = val.word;
 			}
 		}
 		++_treeSize;
@@ -109,8 +113,8 @@ uint16 SmallHuffmanTree::decodeTree(uint32 prefix, int length) {
 	uint16 t = _treeSize++;
 
 	if (length == 8) {
-		_prefixtree[prefix] = t;
-		_prefixlength[prefix] = 8;
+		Prefix val = {{ t, 8 }};
+		_prefix[prefix].word = val.word;
 	}
 
 	uint16 r1 = decodeTree(prefix, length + 1);
@@ -130,8 +134,11 @@ uint16 SmallHuffmanTree::getCode(SmackerBitStream &bs) {
 	// This is for convenience when using speed-up techniques reading
 	// more bits than actually available.
 	byte peek = bs.peekBits<8>();
-	uint16 *p = &_tree[_prefixtree[peek]];
-	bs.skip(_prefixlength[peek]);
+
+	Prefix prefix;
+	prefix.word = _prefix[peek].word;
+	uint16 *p = &_tree[prefix.s.tree];
+	bs.skip(prefix.s.length);
 
 	while (*p & SMK_NODE) {
 		if (bs.getBit())
@@ -165,8 +172,13 @@ private:
 	uint32 *_tree;
 	uint32  _last[3];
 
-	uint32 _prefixtree[256];
-	byte _prefixlength[256];
+	union Prefix {
+		struct {
+			uint32 tree : 24;
+			byte length : 8;
+		} s;
+		uint32 word;
+	} _prefix[256];
 
 	/* Used during construction */
 	SmackerBitStream &_bs;
@@ -185,8 +197,7 @@ BigHuffmanTree::BigHuffmanTree(SmackerBitStream &bs, int allocSize)
 		return;
 	}
 
-	for (uint32 i = 0; i < 256; ++i)
-		_prefixtree[i] = _prefixlength[i] = 0;
+	memset(_prefix, 0, sizeof(_prefix));
 
 	_loBytes = new SmallHuffmanTree(_bs);
 	_hiBytes = new SmallHuffmanTree(_bs);
@@ -233,9 +244,9 @@ uint32 BigHuffmanTree::decodeTree(uint32 prefix, int length) {
 		_tree[_treeSize] = v;
 
 		if (length <= 8) {
+			Prefix val = {{ _treeSize, (uint8)length }};
 			for (int i = 0; i < 256; i += (1 << length)) {
-				_prefixtree[prefix | i] = _treeSize;
-				_prefixlength[prefix | i] = length;
+				_prefix[prefix | i].word = val.word;
 			}
 		}
 
@@ -253,8 +264,8 @@ uint32 BigHuffmanTree::decodeTree(uint32 prefix, int length) {
 	uint32 t = _treeSize++;
 
 	if (length == 8) {
-		_prefixtree[prefix] = t;
-		_prefixlength[prefix] = 8;
+		Prefix val = {{ t, 8 }};
+		_prefix[prefix] = val;
 	}
 
 	uint32 r1 = decodeTree(prefix, length + 1);
@@ -270,8 +281,11 @@ uint32 BigHuffmanTree::getCode(SmackerBitStream &bs) {
 	// This is for convenience when using speed-up techniques reading
 	// more bits than actually available.
 	byte peek = bs.peekBits<8>();
-	uint32 *p = &_tree[_prefixtree[peek]];
-	bs.skip(_prefixlength[peek]);
+
+	Prefix prefix;
+	prefix.word = _prefix[peek].word;
+	uint32 *p = &_tree[prefix.s.tree];
+	bs.skip(prefix.s.length);
 
 	while (*p & SMK_NODE) {
 		if (bs.getBit())
