@@ -600,6 +600,9 @@ SmackerDecoder::SmackerVideoTrack::SmackerVideoTrack(uint32 width, uint32 height
 	_dirtyPalette = false;
 	_MMapTree = _MClrTree = _FullTree = _TypeTree = 0;
 	memset(_palette, 0, 3 * 256);
+
+	assert(IS_ALIGNED(_surface->getPixels(), 4));
+	assert(_surface->pitch % 4 == 0);
 }
 
 SmackerDecoder::SmackerVideoTrack::~SmackerVideoTrack() {
@@ -643,12 +646,12 @@ void SmackerDecoder::SmackerVideoTrack::decodeFrame(SmackerBitStream &bs) {
 
 	uint bw = getWidth() / 4;
 	uint bh = getHeight() / doubleY / 4;
-	uint stride = getWidth();
+	uint stride = _surface->pitch;
 	uint block = 0, blocks = bw*bh;
 
 	byte *out;
-	uint type, run, j, mode;
-	uint32 p1, p2, clr, map;
+	uint type, run, mode;
+	uint32 p1, p2, pw, clr, map;
 	byte hi, lo;
 	uint i;
 
@@ -665,12 +668,21 @@ void SmackerDecoder::SmackerVideoTrack::decodeFrame(SmackerBitStream &bs) {
 				hi = clr >> 8;
 				lo = clr & 0xff;
 				for (i = 0; i < 4; i++) {
-					for (j = 0; j < doubleY; j++) {
-						out[0] = (map & 1) ? hi : lo;
-						out[1] = (map & 2) ? hi : lo;
-						out[2] = (map & 4) ? hi : lo;
-						out[3] = (map & 8) ? hi : lo;
+					pw  = ((map & 1) ? hi : lo) << 0;
+					pw |= ((map & 2) ? hi : lo) << 8;
+					pw |= ((map & 4) ? hi : lo) << 16;
+					pw |= ((map & 8) ? hi : lo) << 24;
+					pw  = TO_LE_32(pw);
+
+					switch (doubleY) {
+					case 2:
+						*((uint32 *)out) = pw;
 						out += stride;
+						// fall through
+					default:
+						*((uint32 *)out) = pw;
+						out += stride;
+						break;
 					}
 					map >>= 4;
 				}
@@ -701,30 +713,54 @@ void SmackerDecoder::SmackerVideoTrack::decodeFrame(SmackerBitStream &bs) {
 						for (i = 0; i < 4; ++i) {
 							p1 = _FullTree->getCode(bs);
 							p2 = _FullTree->getCode(bs);
-							for (j = 0; j < doubleY; ++j) {
-								out[2] = p1 & 0xff;
-								out[3] = p1 >> 8;
-								out[0] = p2 & 0xff;
-								out[1] = p2 >> 8;
+							pw = TO_LE_32(p2 | (p1 << 16));
+
+							switch (doubleY) {
+							case 2:
+								*((uint32 *)out) = pw;
 								out += stride;
+								// fall through
+							default:
+								*((uint32 *)out) = pw;
+								out += stride;
+								break;
 							}
 						}
 						break;
 					case 1:
 						p1 = _FullTree->getCode(bs);
-						out[0] = out[1] = p1 & 0xFF;
-						out[2] = out[3] = p1 >> 8;
-						out += stride;
-						out[0] = out[1] = p1 & 0xFF;
-						out[2] = out[3] = p1 >> 8;
-						out += stride;
+						pw = TO_LE_32((p1 << 8) | (p1 & 0xFF) | ((p1 & 0xFF00) << 16));
+						switch (doubleY) {
+						case 2:
+							*((uint32 *)out) = pw;
+							out += stride;
+							*((uint32 *)out) = pw;
+							out += stride;
+							// fall through
+						default:
+							*((uint32 *)out) = pw;
+							out += stride;
+							*((uint32 *)out) = pw;
+							out += stride;
+							break;
+						}
+
 						p2 = _FullTree->getCode(bs);
-						out[0] = out[1] = p2 & 0xFF;
-						out[2] = out[3] = p2 >> 8;
-						out += stride;
-						out[0] = out[1] = p2 & 0xFF;
-						out[2] = out[3] = p2 >> 8;
-						out += stride;
+						pw = TO_LE_32((p2 << 8) | (p2 & 0xFF) | ((p2 & 0xFF00) << 16));
+						switch (doubleY) {
+						case 2:
+							*((uint32 *)out) = pw;
+							out += stride;
+							*((uint32 *)out) = pw;
+							out += stride;
+							// fall through
+						default:
+							*((uint32 *)out) = pw;
+							out += stride;
+							*((uint32 *)out) = pw;
+							out += stride;
+							break;
+						}
 						break;
 					case 2:
 						for (i = 0; i < 2; i++) {
@@ -733,19 +769,21 @@ void SmackerDecoder::SmackerVideoTrack::decodeFrame(SmackerBitStream &bs) {
 							// https://ffmpeg.org/pipermail/ffmpeg-devel/2008-December/044246.html
 							p2 = _FullTree->getCode(bs);
 							p1 = _FullTree->getCode(bs);
-							for (j = 0; j < doubleY; ++j) {
-								out[0] = p1 & 0xff;
-								out[1] = p1 >> 8;
-								out[2] = p2 & 0xff;
-								out[3] = p2 >> 8;
+							pw = TO_LE_32(p1 | (p2 << 16));
+
+							switch (doubleY) {
+							case 2:
+								*((uint32 *)out) = pw;
 								out += stride;
-							}
-							for (j = 0; j < doubleY; ++j) {
-								out[0] = p1 & 0xff;
-								out[1] = p1 >> 8;
-								out[2] = p2 & 0xff;
-								out[3] = p2 >> 8;
+								*((uint32 *)out) = pw;
 								out += stride;
+								// fall through
+							default:
+								*((uint32 *)out) = pw;
+								out += stride;
+								*((uint32 *)out) = pw;
+								out += stride;
+								break;
 							}
 						}
 						break;
@@ -766,9 +804,27 @@ void SmackerDecoder::SmackerVideoTrack::decodeFrame(SmackerBitStream &bs) {
 			while (run-- && block < blocks) {
 				out = (byte *)_surface->getPixels() + (block / bw) * (stride * 4 * doubleY) + (block % bw) * 4;
 				col = mode * 0x01010101;
-				for (i = 0; i < 4 * doubleY; ++i) {
-					out[0] = out[1] = out[2] = out[3] = col;
+				switch (doubleY) {
+				case 2:
+					*((uint32 *)out) = col;
 					out += stride;
+					*((uint32 *)out) = col;
+					out += stride;
+					*((uint32 *)out) = col;
+					out += stride;
+					*((uint32 *)out) = col;
+					out += stride;
+					// fall through
+				default:
+					*((uint32 *)out) = col;
+					out += stride;
+					*((uint32 *)out) = col;
+					out += stride;
+					*((uint32 *)out) = col;
+					out += stride;
+					*((uint32 *)out) = col;
+					out += stride;
+					break;
 				}
 				_dirtyBlocks.set(block);
 				++block;
