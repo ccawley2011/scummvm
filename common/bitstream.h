@@ -88,7 +88,7 @@ private:
 	FORCEINLINE void fillContainer(size_t min) {
 		while (_bitsLeft < min) {
 
-			CONTAINER data;
+			uint32 data;
 			if (_pos + _bitsLeft + valueBits <= _size) {
 				data = readData();
 			} else {
@@ -101,26 +101,33 @@ private:
 			}
 
 			// Move the data value to the right position in the bit container
-			if (MSB2LSB)
-				_bitContainer |= data << ((sizeof(_bitContainer) * 8) - valueBits - _bitsLeft);
-			else
-				_bitContainer |= data << _bitsLeft;
+			if (_bitsLeft + valueBits <= 32) {
+				if (MSB2LSB)
+					_bitContainer |= (CONTAINER)(data << (32 - _bitsLeft)) << ((sizeof(_bitContainer) * 8) - 32);
+				else
+					_bitContainer |= data << _bitsLeft;
+			} else {
+				if (MSB2LSB)
+					_bitContainer |= (CONTAINER)data << ((sizeof(_bitContainer) * 8) - valueBits - _bitsLeft);
+				else
+					_bitContainer |= (CONTAINER)data << _bitsLeft;
+			}
 
 			_bitsLeft += valueBits;
 		}
-}
+	}
 
 	/** Get @p n bits from the bit container. */
-	FORCEINLINE static uint32 getNBits(CONTAINER value, size_t n) {
+	FORCEINLINE uint32 getNBits(size_t n) {
 		if (n == 0)
 			return 0;
 
-		const size_t toShift = (sizeof(value) * 8) - n;
+		const size_t toShift = (sizeof(_bitContainer) * 8) - n;
 
 		if (MSB2LSB)
-			return value >> toShift;
+			return _bitContainer >> toShift;
 		else
-			return (value << toShift) >> toShift;
+			return (_bitContainer << toShift) >> toShift;
 	}
 
 	/** Skip already read bits. */
@@ -128,13 +135,27 @@ private:
 		assert(n <= _bitsLeft);
 
 		// Shift to the next bit
-		if (MSB2LSB)
-			_bitContainer <<= n;
-		else
-			_bitContainer >>= n;
+		if (_bitsLeft <= 32) {
+			if (MSB2LSB)
+				_bitContainer = (_bitContainer & 0xFFFFFFFF00000000) << n;
+			else
+				_bitContainer = (_bitContainer & 0x00000000FFFFFFFF) >> n;
+		} else {
+			if (MSB2LSB)
+				_bitContainer <<= n;
+			else
+				_bitContainer >>= n;
+		}
 
 		_bitsLeft -= n;
 		_pos += n;
+	}
+
+	/** Skip already read bits. */
+	FORCEINLINE void clearBits() {
+		_bitContainer = 0;
+		_pos += _bitsLeft;
+		_bitsLeft = 0;
 	}
 
 public:
@@ -167,7 +188,7 @@ public:
 	uint peekBit() {
 		fillContainer(1);
 
-		return getNBits(_bitContainer, 1);
+		return getNBits(1);
 	}
 
 	/** Read a bit from the bit stream. */
@@ -188,9 +209,8 @@ public:
 	uint32 peekBits() {
 		if (n > 32)
 			error("BitStreamImpl::peekBits(): Too many bits requested to be peeked");
-
 		fillContainer(n);
-		return getNBits(_bitContainer, n);
+		return getNBits(n);
 	}
 
 	/**
@@ -225,7 +245,7 @@ public:
 			error("BitStreamImpl::peekBits(): Too many bits requested to be peeked");
 
 		fillContainer(n);
-		return getNBits(_bitContainer, n);
+		return getNBits(n);
 	}
 
 	/**
@@ -283,13 +303,13 @@ public:
 	void skip(uint32 n) {
 		if (n >= _bitsLeft) {
 			n -= _bitsLeft;
-			skipBits(_bitsLeft);
+			clearBits();
 		}
 
 		while (n > 32) {
 			fillContainer(32);
-			skipBits(32);
-			n -= 32;
+			n -= _bitsLeft;
+			clearBits();
 		}
 
 		fillContainer(n);
@@ -334,8 +354,8 @@ public:
  * It might be possible to avoid this by making this a final subclass of
  * MemoryReadStream, but that is a C++11 feature.
  */
-class BitStreamMemoryStream {
-private:
+class BaseBitStreamMemoryStream {
+protected:
 	const byte * const _ptrOrig;
 	const byte *_ptr;
 	const uint32 _size;
@@ -344,7 +364,7 @@ private:
 	bool _eos;
 /** @overload */
 public:
-	BitStreamMemoryStream(const byte *dataPtr, uint32 dataSize, DisposeAfterUse::Flag disposeMemory = DisposeAfterUse::NO) :
+	BaseBitStreamMemoryStream(const byte *dataPtr, uint32 dataSize, DisposeAfterUse::Flag disposeMemory = DisposeAfterUse::NO) :
 		_ptrOrig(dataPtr),
 		_ptr(dataPtr),
 		_size(dataSize),
@@ -352,7 +372,7 @@ public:
 		_disposeMemory(disposeMemory),
 		_eos(false) {}
 
-	~BitStreamMemoryStream() {
+	~BaseBitStreamMemoryStream() {
 		if (_disposeMemory)
 			free(const_cast<byte *>(_ptrOrig));
 	}
@@ -392,6 +412,17 @@ public:
 		return *_ptr++;
 	}
 
+};
+
+template<bool aligned>
+class TemplateBitStreamMemoryStream final : public BaseBitStreamMemoryStream {
+public:
+	TemplateBitStreamMemoryStream(const byte *dataPtr, uint32 dataSize, DisposeAfterUse::Flag disposeMemory = DisposeAfterUse::NO) :
+		BaseBitStreamMemoryStream(dataPtr, dataSize, disposeMemory) {
+		if (aligned)
+			assert(IS_ALIGNED(dataPtr, 4));
+	}
+
 	uint16 readUint16LE() {
 		if (_pos + 2 > _size) {
 			_eos = true;
@@ -403,7 +434,7 @@ public:
 			}
 		}
 
-		uint16 val = READ_LE_UINT16(_ptr);
+		uint16 val = aligned ? FROM_LE_16(*((const uint16 *)_ptr)) : READ_LE_UINT16(_ptr);
 
 		_pos += 2;
 		_ptr += 2;
@@ -422,7 +453,7 @@ public:
 			}
 		}
 
-		uint16 val = READ_LE_UINT16(_ptr);
+		uint16 val = aligned ? FROM_BE_16(*((const uint16 *)_ptr)) : READ_LE_UINT16(_ptr);
 
 		_pos += 2;
 		_ptr += 2;
@@ -440,7 +471,7 @@ public:
 			return val;
 		}
 
-		uint32 val = READ_LE_UINT32(_ptr);
+		uint32 val = aligned ? FROM_LE_32(*((const uint32 *)_ptr)) : READ_LE_UINT32(_ptr);
 
 		_pos += 4;
 		_ptr += 4;
@@ -458,7 +489,7 @@ public:
 			return val;
 		}
 
-		uint32 val = READ_BE_UINT32(_ptr);
+		uint32 val = aligned ? FROM_BE_32(*((const uint32 *)_ptr)) : READ_BE_UINT32(_ptr);
 
 		_pos += 4;
 		_ptr += 4;
@@ -467,6 +498,9 @@ public:
 	}
 
 };
+
+typedef TemplateBitStreamMemoryStream<false> BitStreamMemoryStream;
+typedef TemplateBitStreamMemoryStream<true> AlignedBitStreamMemoryStream;
 
 /**
  * @name Typedefs for various memory layouts

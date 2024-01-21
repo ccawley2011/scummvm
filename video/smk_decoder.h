@@ -43,10 +43,14 @@ namespace Video {
 
 class BigHuffmanTree;
 
+#ifdef SCUMM_LITTLE_ENDIAN
+typedef Common::BitStreamImpl<Common::AlignedBitStreamMemoryStream, uint64, 32, true, false> SmackerBitStream;
+#else
 // Because the maximum number of bits read from a bitstream is 16, and the data is 8-bit, the container only
 // needs to hold up to 23 bits at any given time. As such, we use a bitstream with a 32-bit container to
 // avoid the overhead of 64-bit maths on systems that don't support it natively.
-typedef Common::BitStreamImpl<Common::BitStreamMemoryStream, uint32, 8, false, false> SmackerBitStream;
+typedef Common::BitStreamImpl<Common::AlignedBitStreamMemoryStream, uint32, 8, false, false> SmackerBitStream;
+#endif
 
 /**
  * Decoder for Smacker v2/v4 videos.
