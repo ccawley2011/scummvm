@@ -43,8 +43,8 @@ struct MADSGameDescription {
 
 	ADGameDescription desc;
 
-	int gameID;
-	uint32 features;
+	uint8 gameID;
+	uint8 features;
 };
 
 #define GAMEOPTION_EASY_MOUSE          GUIO_GAMEOPTIONS1

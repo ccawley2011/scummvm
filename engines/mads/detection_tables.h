@@ -30,7 +30,7 @@ static const MADSGameDescription gameDescriptions[] = {
 			AD_ENTRY2s("mpslabs.001", "4df5c557b52abb5b661cf4befe5ae301", 1315354, "mpslabs.idx", "598ede8e361a60a4e577bbe40f83295b", 5598),
 			Common::EN_ANY,
 			Common::kPlatformDOS,
-			GF_INSTALLER,
+			ADGF_NO_FLAGS,
 #ifdef USE_TTS
 			GUIO7(GUIO_NOSPEECH, GAMEOPTION_EASY_MOUSE, GAMEOPTION_ANIMATED_INVENTORY, GAMEOPTION_ANIMATED_INTERFACE, GAMEOPTION_NAUGHTY_MODE, GAMEOPTION_TTS_NARRATOR, GAMEOPTION_COPY_PROTECTION)
 #else
@@ -38,7 +38,7 @@ static const MADSGameDescription gameDescriptions[] = {
 #endif
 		},
 		GType_RexNebular,
-		0
+		GF_INSTALLER
 	},
 
 	{
@@ -49,7 +49,7 @@ static const MADSGameDescription gameDescriptions[] = {
 			AD_ENTRY2s("mpslabs.001", "4df5c557b52abb5b661cf4befe5ae301", 1315354, "mpslabs.idx", "d74bed6513d0a5d514269750f574a23b", 5598),
 			Common::EN_ANY,
 			Common::kPlatformDOS,
-			GF_INSTALLER,
+			ADGF_NO_FLAGS,
 #ifdef USE_TTS
 			GUIO7(GUIO_NOSPEECH, GAMEOPTION_EASY_MOUSE, GAMEOPTION_ANIMATED_INVENTORY, GAMEOPTION_ANIMATED_INTERFACE, GAMEOPTION_NAUGHTY_MODE, GAMEOPTION_TTS_NARRATOR, GAMEOPTION_COPY_PROTECTION)
 #else
@@ -57,7 +57,7 @@ static const MADSGameDescription gameDescriptions[] = {
 #endif
 		},
 		GType_RexNebular,
-		0
+		GF_INSTALLER
 	},
 
 	{
@@ -68,7 +68,7 @@ static const MADSGameDescription gameDescriptions[] = {
 			AD_ENTRY2s("mpslabs.001", "4df5c557b52abb5b661cf4befe5ae301", 1071642, "mpslabs.idx", "d8fac57aac1c0c41ba3a1554ccc89d21", 5500),
 			Common::EN_ANY,
 			Common::kPlatformDOS,
-			GF_INSTALLER,
+			ADGF_NO_FLAGS,
 #ifdef USE_TTS
 			GUIO7(GUIO_NOSPEECH, GAMEOPTION_EASY_MOUSE, GAMEOPTION_ANIMATED_INVENTORY, GAMEOPTION_ANIMATED_INTERFACE, GAMEOPTION_NAUGHTY_MODE, GAMEOPTION_TTS_NARRATOR, GAMEOPTION_COPY_PROTECTION)
 #else
@@ -76,7 +76,7 @@ static const MADSGameDescription gameDescriptions[] = {
 #endif
 		},
 		GType_RexNebular,
-		0
+		GF_INSTALLER
 	},
 
 	{

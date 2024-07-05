@@ -78,7 +78,7 @@ MADSEngine::~MADSEngine() {
 }
 
 void MADSEngine::initialize() {
-	if (_gameDescription->desc.flags & GF_INSTALLER) {
+	if (_gameDescription->features & GF_INSTALLER) {
 		// Right now used only by Rex Nebular
 		Common::Archive* arch = MpsInstaller::open("MPSLABS");
 		if (arch)
