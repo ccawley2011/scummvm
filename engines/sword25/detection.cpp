@@ -42,7 +42,7 @@ static const char *const directoryGlobs[] = {
 	0
 };
 
-class Sword25MetaEngineDetection : public AdvancedMetaEngineDetection<ADGameDescription> {
+class Sword25MetaEngineDetection : public AdvancedMetaEngineDetection<Sword25::Sword25GameDescription> {
 public:
 	Sword25MetaEngineDetection() : AdvancedMetaEngineDetection(Sword25::gameDescriptions, sword25Game) {
 		_guiOptions = GUIO2(GUIO_NOMIDI, GAMEOPTION_ENGLISH_SPEECH);

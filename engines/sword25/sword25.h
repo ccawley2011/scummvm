@@ -36,8 +36,6 @@ namespace GUI {
 class Debugger;
 }
 
-struct ADGameDescription;
-
 /**
  * This is the namespace of the Sword25 engine.
  *
@@ -83,12 +81,12 @@ protected:
 	void shutdown();
 
 public:
-	Sword25Engine(OSystem *syst, const ADGameDescription *gameDesc);
+	Sword25Engine(OSystem *syst, const Sword25GameDescription *gameDesc);
 	~Sword25Engine() override;
 
-	uint32 getGameFlags() const;
+	uint32 getFeatures() const;
 
-	const ADGameDescription *_gameDescription;
+	const Sword25GameDescription *_gameDescription;
 };
 
 } // End of namespace Sword25

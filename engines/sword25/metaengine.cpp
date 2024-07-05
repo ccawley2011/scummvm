@@ -43,11 +43,11 @@ static const ADExtraGuiOptionsMap optionsList[] = {
 	AD_EXTRA_GUI_OPTIONS_TERMINATOR
 };
 
-uint32 Sword25Engine::getGameFlags() const { return _gameDescription->flags; }
+uint32 Sword25Engine::getFeatures() const { return _gameDescription->features; }
 
 } // End of namespace Sword25
 
-class Sword25MetaEngine : public AdvancedMetaEngine<ADGameDescription> {
+class Sword25MetaEngine : public AdvancedMetaEngine<Sword25::Sword25GameDescription> {
 public:
 	const char *getName() const override {
 		return "sword25";
@@ -57,14 +57,14 @@ public:
 		return Sword25::optionsList;
 	}
 
-	Common::Error createInstance(OSystem *syst, Engine **engine, const ADGameDescription *desc) const override;
+	Common::Error createInstance(OSystem *syst, Engine **engine, const Sword25::Sword25GameDescription *desc) const override;
 	bool hasFeature(MetaEngineFeature f) const override;
 
 	int getMaximumSaveSlot() const override { return Sword25::PersistenceService::getSlotCount(); }
 	SaveStateList listSaves(const char *target) const override;
 };
 
-Common::Error Sword25MetaEngine::createInstance(OSystem *syst, Engine **engine, const ADGameDescription *desc) const {
+Common::Error Sword25MetaEngine::createInstance(OSystem *syst, Engine **engine, const Sword25::Sword25GameDescription *desc) const {
 	*engine = new Sword25::Sword25Engine(syst, desc);
 	return Common::kNoError;
 }

@@ -22,10 +22,20 @@
 #ifndef SWORD25_DETECTION_H
 #define SWORD25_DETECTION_H
 
+#include "engines/advancedDetector.h"
+
 namespace Sword25 {
 
 enum GameFlags {
 	GF_EXTRACTED = 1 << 0
+};
+
+struct Sword25GameDescription {
+	AD_GAME_DESCRIPTION_HELPERS(desc);
+
+	ADGameDescription desc;
+
+	uint8 features;
 };
 
 #define GAMEOPTION_ENGLISH_SPEECH GUIO_GAMEOPTIONS1

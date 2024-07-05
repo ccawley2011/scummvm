@@ -58,7 +58,7 @@ namespace Sword25 {
 
 const char *const DEFAULT_SCRIPT_FILE = "/system/boot.lua";
 
-Sword25Engine::Sword25Engine(OSystem *syst, const ADGameDescription *gameDesc):
+Sword25Engine::Sword25Engine(OSystem *syst, const Sword25GameDescription *gameDesc):
 	Engine(syst),
 	_gameDescription(gameDesc) {
 	// Setup mixer
@@ -102,7 +102,7 @@ Common::Error Sword25Engine::appStart() {
 
 	// Load packages
 	PackageManager *packageManagerPtr = Kernel::getInstance()->getPackage();
-	if (getGameFlags() & GF_EXTRACTED) {
+	if (getFeatures() & GF_EXTRACTED) {
 		Common::Path gameDirectory = ConfMan.getPath("path");
 		packageManagerPtr->setRunWithExtractedFiles(gameDirectory);
 		if (!packageManagerPtr->loadDirectoryAsPackage(gameDirectory, "/"))
