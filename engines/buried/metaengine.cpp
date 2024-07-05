@@ -57,40 +57,40 @@ bool BuriedEngine::hasFeature(EngineFeature f) const {
 
 bool BuriedEngine::isDemo() const {
 	// The trial is a demo for the user's sake, but not internally.
-	return (_gameDescription->flags & ADGF_DEMO) != 0 && !isTrial();
+	return (_gameDescription->features & ADGF_DEMO) != 0 && !isTrial();
 }
 
 bool BuriedEngine::isTrial() const {
-	return (_gameDescription->flags & GF_TRIAL) != 0;
+	return (_gameDescription->features & GF_TRIAL) != 0;
 }
 
 bool BuriedEngine::isTrueColor() const {
-	return (_gameDescription->flags & GF_TRUECOLOR) != 0;
+	return (_gameDescription->features & GF_TRUECOLOR) != 0;
 }
 
 bool BuriedEngine::isWin95() const {
-	return (_gameDescription->flags & GF_WIN95) != 0;
+	return (_gameDescription->features & GF_WIN95) != 0;
 }
 
 bool BuriedEngine::isCompressed() const {
-	return (_gameDescription->flags & GF_COMPRESSED) != 0;
+	return (_gameDescription->features & GF_COMPRESSED) != 0;
 }
 
 Common::Path BuriedEngine::getEXEName() const {
-	return _gameDescription->filesDescriptions[0].fileName;
+	return _gameDescription->desc.filesDescriptions[0].fileName;
 }
 
 Common::Path BuriedEngine::getLibraryName() const {
-	return _gameDescription->filesDescriptions[1].fileName;
+	return _gameDescription->desc.filesDescriptions[1].fileName;
 }
 
 Common::Language BuriedEngine::getLanguage() const {
-	return _gameDescription->language;
+	return _gameDescription->desc.language;
 }
 
 } // End of namespace Buried
 
-class BuriedMetaEngine : public AdvancedMetaEngine<ADGameDescription> {
+class BuriedMetaEngine : public AdvancedMetaEngine<Buried::BuriedGameDescription> {
 public:
 	const char *getName() const override {
 		return "buried";
@@ -101,7 +101,7 @@ public:
 	}
 
 	bool hasFeature(MetaEngineFeature f) const override;
-	Common::Error createInstance(OSystem *syst, Engine **engine, const ADGameDescription *desc) const override;
+	Common::Error createInstance(OSystem *syst, Engine **engine, const Buried::BuriedGameDescription *desc) const override;
 	int getMaximumSaveSlot() const override { return 999; }
 	Common::String getSavegameFile(int saveGameIdx, const char *target) const override {
 		// We set a standard target because saves are compatible among all versions
@@ -115,7 +115,7 @@ bool BuriedMetaEngine::hasFeature(MetaEngineFeature f) const {
 		checkExtendedSaves(f);
 }
 
-Common::Error BuriedMetaEngine::createInstance(OSystem *syst, Engine **engine, const ADGameDescription *desc) const {
+Common::Error BuriedMetaEngine::createInstance(OSystem *syst, Engine **engine, const Buried::BuriedGameDescription *desc) const {
 	*engine = new Buried::BuriedEngine(syst, desc);
 
 	return Common::kNoError;

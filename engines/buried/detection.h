@@ -22,8 +22,22 @@
 #ifndef BURIED_DETECTION_H
 #define BURIED_DETECTION_H
 
+#include "engines/advancedDetector.h"
+
 #define GAMEOPTION_ALLOW_SKIP	GUIO_GAMEOPTIONS1
 #define GUIO_FULL_GAME			GUIO0()
 #define GUIO_GAME_DEMO			GUIO1(GUIO_NOLAUNCHLOAD)
+
+namespace Buried {
+
+struct BuriedGameDescription {
+	AD_GAME_DESCRIPTION_HELPERS(desc);
+
+	ADGameDescription desc;
+
+	uint32 features;
+};
+
+} // End of namespace Buried
 
 #endif

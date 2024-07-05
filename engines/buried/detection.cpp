@@ -48,7 +48,7 @@ static const char *const directoryGlobs[] = {
 } // End of namespace Buried
 
 
-class BuriedMetaEngineDetection : public AdvancedMetaEngineDetection<ADGameDescription> {
+class BuriedMetaEngineDetection : public AdvancedMetaEngineDetection<Buried::BuriedGameDescription> {
 public:
 	BuriedMetaEngineDetection() : AdvancedMetaEngineDetection(
 		Buried::gameDescriptions,

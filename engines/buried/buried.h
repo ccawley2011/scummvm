@@ -33,8 +33,6 @@
 
 class OSystem;
 
-struct ADGameDescription;
-
 namespace Common {
 class SeekableReadStream;
 class Serializer;
@@ -56,6 +54,7 @@ enum {
 };
 
 class BuriedConsole;
+struct BuriedGameDescription;
 struct GlobalFlags;
 class GraphicsManager;
 struct Location;
@@ -69,11 +68,11 @@ protected:
 	Common::Error run() override;
 
 public:
-	BuriedEngine(OSystem *syst, const ADGameDescription *gamedesc);
+	BuriedEngine(OSystem *syst, const BuriedGameDescription *gamedesc);
 	virtual ~BuriedEngine();
 
 	// Detection related functions
-	const ADGameDescription *_gameDescription;
+	const BuriedGameDescription *_gameDescription;
 	bool isDemo() const;
 	bool isTrial() const;
 	bool isTrueColor() const;
