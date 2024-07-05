@@ -47,7 +47,7 @@ static const ADExtraGuiOptionsMap optionsList[] = {
 };
 
 uint32 DrasculaEngine::getFeatures() const {
-	return _gameDescription->desc.flags;
+	return _gameDescription->features;
 }
 
 Common::Language DrasculaEngine::getLanguage() const {
