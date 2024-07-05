@@ -75,11 +75,9 @@ enum Features {
 	kFeaturesTrueColor = 1 << 7,
 	kFeatures16Colors  = 1 << 8,
 	kFeatures640x400   = 1 << 9,
-};
 
-enum AdditionalGameFlags {
-	GF_ENABLE_ADIBOU2_FREE_BANANAS_WORKAROUND = 1 << 0,
-	GF_ENABLE_ADIBOU2_FLOWERS_INFINITE_LOOP_WORKAROUND = 1 << 1,
+	kFeaturesAdibou2FreeBananasWorkaround = 1 << 10,
+	kFeaturesAdibou2FlowersInfiniteLoopWorkaround = 1 << 11
 };
 
 struct GOBGameDescription {

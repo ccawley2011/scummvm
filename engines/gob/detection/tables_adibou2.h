@@ -80,10 +80,10 @@
 				   "BECBF210.CD1",	"bc828c320908a5eaa349956d396bd8e1", 8),
 		FR_FRA,
 		kPlatformWindows,
-		GF_ENABLE_ADIBOU2_FREE_BANANAS_WORKAROUND | GF_ENABLE_ADIBOU2_FLOWERS_INFINITE_LOOP_WORKAROUND,
+		ADGF_NO_FLAGS,
 		GUIO0()
 	},
-	kFeatures640x480,
+	kFeatures640x480 | kFeaturesAdibou2FreeBananasWorkaround | kFeaturesAdibou2FlowersInfiniteLoopWorkaround,
 	0, 0, 0
 },
 {
@@ -94,10 +94,10 @@
 				   "BECBF211.CD1",	"bc828c320908a5eaa349956d396bd8e1", 8),
 		FR_FRA,
 		kPlatformWindows,
-		GF_ENABLE_ADIBOU2_FREE_BANANAS_WORKAROUND | GF_ENABLE_ADIBOU2_FLOWERS_INFINITE_LOOP_WORKAROUND,
+		ADGF_NO_FLAGS,
 		GUIO0()
 	},
-	kFeatures640x480,
+	kFeatures640x480 | kFeaturesAdibou2FreeBananasWorkaround | kFeaturesAdibou2FlowersInfiniteLoopWorkaround,
 	0, 0, 0
 },
 {
@@ -108,10 +108,10 @@
 				   "BECBF212.CD1",	"bc828c320908a5eaa349956d396bd8e1", 8),
 		FR_FRA,
 		kPlatformWindows,
-		GF_ENABLE_ADIBOU2_FREE_BANANAS_WORKAROUND | GF_ENABLE_ADIBOU2_FLOWERS_INFINITE_LOOP_WORKAROUND,
+		ADGF_NO_FLAGS,
 		GUIO0()
 	},
-	kFeatures640x480,
+	kFeatures640x480 | kFeaturesAdibou2FreeBananasWorkaround | kFeaturesAdibou2FlowersInfiniteLoopWorkaround,
 	0, 0, 0
 },
 {
@@ -122,10 +122,10 @@
 				   "BECBF213.CD1",	"bc828c320908a5eaa349956d396bd8e1", 8),
 		FR_FRA,
 		kPlatformWindows,
-		GF_ENABLE_ADIBOU2_FREE_BANANAS_WORKAROUND | GF_ENABLE_ADIBOU2_FLOWERS_INFINITE_LOOP_WORKAROUND,
+		ADGF_NO_FLAGS,
 		GUIO0()
 	},
-	kFeatures640x480,
+	kFeatures640x480 | kFeaturesAdibou2FreeBananasWorkaround | kFeaturesAdibou2FlowersInfiniteLoopWorkaround,
 	0, 0, 0
 },
 {
@@ -181,10 +181,10 @@
 				   "intro.inf", "d8710732c9bfe3ca52d3ce5aefc06089", 48),
 		DE_DEU,
 		kPlatformWindows,
-		GF_ENABLE_ADIBOU2_FLOWERS_INFINITE_LOOP_WORKAROUND,
+		ADGF_NO_FLAGS,
 		GUIO0()
 	},
-	kFeatures640x480,
+	kFeatures640x480 | kFeaturesAdibou2FlowersInfiniteLoopWorkaround,
 	0, 0, 0
 },
 
@@ -227,10 +227,10 @@
 		AD_ENTRY1s("intro.stk", "0b996fcd8929245fecddc4d9169843d0", 956682),
 		ES_ESP,
 		kPlatformWindows,
-		GF_ENABLE_ADIBOU2_FLOWERS_INFINITE_LOOP_WORKAROUND,
+		ADGF_NO_FLAGS,
 		GUIO0()
 	},
-	kFeatures640x480,
+	kFeatures640x480 | kFeaturesAdibou2FlowersInfiniteLoopWorkaround,
 	0, 0, 0
 },
 
@@ -243,10 +243,10 @@
 				   "intro.inf", "9369aa62939f5f7c11b1e02a45038050", 44),
 		EN_GRB,
 		kPlatformWindows,
-		GF_ENABLE_ADIBOU2_FLOWERS_INFINITE_LOOP_WORKAROUND,
+		ADGF_NO_FLAGS,
 		GUIO0()
 	},
-	kFeatures640x480,
+	kFeatures640x480 | kFeaturesAdibou2FlowersInfiniteLoopWorkaround,
 	0, 0, 0
 },
 
