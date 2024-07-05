@@ -238,7 +238,7 @@ private:
 	 */
 	bool runGameEngine();
 public:
-	TwinEEngine(OSystem *system, Common::Language language, uint32 flagsTwineGameType, Common::Platform platform, TwineGameType gameType);
+	TwinEEngine(OSystem *system, Common::Language language, bool isDemo, uint32 flagsTwineGameType, Common::Platform platform, TwineGameType gameType);
 	~TwinEEngine() override;
 
 	Common::Error run() override;
@@ -318,6 +318,7 @@ public:
 	int32 _stepFalling = 0;
 	uint32 _gameFlags;
 	Common::Platform _platform;
+	bool _isDemo;
 	bool _flagRain;
 
 	/** Disable screen recenter */

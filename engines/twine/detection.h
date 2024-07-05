@@ -22,6 +22,8 @@
 #ifndef TWINE_DETECTION_H
 #define TWINE_DETECTION_H
 
+#include "engines/advancedDetector.h"
+
 namespace TwinE {
 
 enum TwineGameType {
@@ -39,6 +41,14 @@ enum TwineFeatureFlags {
 	TF_DOTEMU_ENHANCED = (1 << 4),
 	TF_LBA1_CLASSIC = (1 << 5),
 	TF_MOD = (1 << 6)
+};
+
+struct TwinEGameDescription {
+	AD_GAME_DESCRIPTION_HELPERS(desc);
+
+	ADGameDescription desc;
+
+	uint8 features;
 };
 
 #define GAMEOPTION_WALL_COLLISION GUIO_GAMEOPTIONS1

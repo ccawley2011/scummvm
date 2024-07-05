@@ -141,8 +141,8 @@ void TwineScreen::update() {
 	Super::update();
 }
 
-TwinEEngine::TwinEEngine(OSystem *system, Common::Language language, uint32 flags, Common::Platform platform, TwineGameType gameType)
-	: Engine(system), _gameType(gameType), _gameLang(language), _frontVideoBuffer(this), _gameFlags(flags), _platform(platform), _rnd("twine") {
+TwinEEngine::TwinEEngine(OSystem *system, Common::Language language, bool isDemo, uint32 flags, Common::Platform platform, TwineGameType gameType)
+	: Engine(system), _gameType(gameType), _gameLang(language), _frontVideoBuffer(this), _isDemo(isDemo), _gameFlags(flags), _platform(platform), _rnd("twine") {
 	// Add default file directories
 	const Common::FSNode gameDataDir(ConfMan.getPath("path"));
 	SearchMan.addSubDirectoryMatching(gameDataDir, "fla");

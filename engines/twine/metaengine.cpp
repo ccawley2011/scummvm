@@ -165,7 +165,7 @@ static const ADExtraGuiOptionsMap twineOptionsList[] = {
 	AD_EXTRA_GUI_OPTIONS_TERMINATOR
 };
 
-class TwinEMetaEngine : public AdvancedMetaEngine<ADGameDescription> {
+class TwinEMetaEngine : public AdvancedMetaEngine<TwinE::TwinEGameDescription> {
 public:
 	const char *getName() const override {
 		return "twine";
@@ -179,9 +179,9 @@ public:
 		return 6;
 	}
 
-	Common::Error createInstance(OSystem *syst, Engine **engine, const ADGameDescription *desc) const override {
+	Common::Error createInstance(OSystem *syst, Engine **engine, const TwinE::TwinEGameDescription *desc) const override {
 		TwineGameType gameType = TwineGameType::GType_LBA;
-		const Common::String gameId = desc->gameId;
+		const Common::String gameId = desc->desc.gameId;
 		if (gameId == "lba") {
 			gameType = TwineGameType::GType_LBA;
 		} else if (gameId == "lba2") {
@@ -189,7 +189,7 @@ public:
 		} else if (gameId == "lbashow") {
 			gameType = TwineGameType::GType_LBASHOW;
 		}
-		*engine = new TwinE::TwinEEngine(syst, desc->language, desc->flags, desc->platform, gameType);
+		*engine = new TwinE::TwinEEngine(syst, desc->desc.language, (desc->desc.flags & ADGF_DEMO), desc->features, desc->desc.platform, gameType);
 		return Common::kNoError;
 	}
 
