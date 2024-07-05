@@ -49,7 +49,7 @@
 #include "lab/utils.h"
 
 namespace Lab {
-LabEngine::LabEngine(OSystem *syst, const ADGameDescription *gameDesc)
+LabEngine::LabEngine(OSystem *syst, const LabGameDescription *gameDesc)
  : Engine(syst), _gameDescription(gameDesc), _extraGameFeatures(0) {
 	_lastWaitTOFTicks = 0;
 

@@ -22,11 +22,21 @@
 #ifndef LAB_DETECTION_H
 #define LAB_DETECTION_H
 
+#include "engines/advancedDetector.h"
+
 namespace Lab {
 
 enum GameFeatures {
 	GF_LOWRES = 1 << 0,
 	GF_WINDOWS_TRIAL = 1 << 1
+};
+
+struct LabGameDescription {
+	AD_GAME_DESCRIPTION_HELPERS(desc);
+
+	ADGameDescription desc;
+
+	uint8 features;
 };
 
 } // End of namespace Lab

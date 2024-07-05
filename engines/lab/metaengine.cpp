@@ -33,22 +33,22 @@
 namespace Lab {
 
 Common::Platform LabEngine::getPlatform() const {
-	return _gameDescription->platform;
+	return _gameDescription->desc.platform;
 }
 
 uint32 LabEngine::getFeatures() const {
-	return _gameDescription->flags | _extraGameFeatures;
+	return _gameDescription->features | _extraGameFeatures;
 }
 
 } // End of namespace Lab
 
-class LabMetaEngine : public AdvancedMetaEngine<ADGameDescription> {
+class LabMetaEngine : public AdvancedMetaEngine<Lab::LabGameDescription> {
 public:
 	const char *getName() const override {
 		return "lab";
 	}
 
-	Common::Error createInstance(OSystem *syst, Engine **engine, const ADGameDescription *desc) const override {
+	Common::Error createInstance(OSystem *syst, Engine **engine, const Lab::LabGameDescription *desc) const override {
 		*engine = new Lab::LabEngine(syst, desc);
 		return Common::kNoError;
 	}

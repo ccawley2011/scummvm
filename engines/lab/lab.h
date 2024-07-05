@@ -42,8 +42,6 @@
 #include "lab/labsets.h"
 #include "lab/detection.h"
 
-struct ADGameDescription;
-
 namespace Lab {
 
 struct MapData;
@@ -196,13 +194,13 @@ public:
 	Utils *_utils;
 
 public:
-	LabEngine(OSystem *syst, const ADGameDescription *gameDesc);
+	LabEngine(OSystem *syst, const LabGameDescription *gameDesc);
 	~LabEngine() override;
 
 	Common::Error run() override;
 	void go();
 
-	const ADGameDescription *_gameDescription;
+	const LabGameDescription *_gameDescription;
 	Common::Platform getPlatform() const;
 	uint32 getFeatures() const;
 
