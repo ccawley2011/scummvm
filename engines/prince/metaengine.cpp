@@ -34,7 +34,7 @@ const char *PrinceEngine::getGameId() const {
 }
 
 uint32 PrinceEngine::getFeatures() const {
-	return _gameDescription->desc.flags;
+	return _gameDescription->features;
 }
 
 Common::Language PrinceEngine::getLanguage() const {

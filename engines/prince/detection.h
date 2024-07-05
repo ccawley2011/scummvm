@@ -26,7 +26,7 @@
 
 namespace Prince {
 
-enum PrinceGameType {
+enum PrinceGameType : uint8 {
 	kPrinceDataUNK,
 	kPrinceDataDE,
 	kPrinceDataPL
@@ -44,6 +44,7 @@ struct PrinceGameDescription {
 
 	ADGameDescription desc;
 	PrinceGameType gameType;
+	uint8 features;
 };
 
 } // End of namespace Prince

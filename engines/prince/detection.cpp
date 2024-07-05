@@ -47,7 +47,8 @@ static const PrinceGameDescription gameDescriptions[] = {
 			ADGF_USEEXTRAASTITLE | ADGF_DROPPLATFORM,
 			GUIO1(GUIO_NONE)
 		},
-		kPrinceDataDE
+		kPrinceDataDE,
+		0
 	},
 	{
 		{
@@ -59,7 +60,8 @@ static const PrinceGameDescription gameDescriptions[] = {
 			ADGF_USEEXTRAASTITLE | ADGF_DROPPLATFORM,
 			GUIO1(GUIO_NONE)
 		},
-		kPrinceDataPL
+		kPrinceDataPL,
+		0
 	},
 	{
 		{
@@ -68,10 +70,11 @@ static const PrinceGameDescription gameDescriptions[] = {
 			AD_ENTRY1s("talktxt.dat", "02bb2372f19aca3c65896ed81b2cefb3", 125702),
 			Common::RU_RUS,
 			Common::kPlatformWindows,
-			GF_EXTRACTED | ADGF_DROPPLATFORM,
+			ADGF_DROPPLATFORM,
 			GUIO1(GUIO_NONE)
 		},
-		kPrinceDataDE
+		kPrinceDataDE,
+		GF_EXTRACTED
 	},
 	{
 		{
@@ -80,10 +83,11 @@ static const PrinceGameDescription gameDescriptions[] = {
 			AD_ENTRY1s("databank.ptc", "a67b55730f3d7064921bd2a59e1063a3", 3892982),
 			Common::RU_RUS,
 			Common::kPlatformWindows,
-			GF_NOVOICES | ADGF_DROPPLATFORM,
+			ADGF_DROPPLATFORM,
 			GUIO1(GUIO_NONE)
 		},
-		kPrinceDataDE
+		kPrinceDataDE,
+		GF_NOVOICES
 	},
 	{
 		{
@@ -92,10 +96,11 @@ static const PrinceGameDescription gameDescriptions[] = {
 			AD_ENTRY1s("databank.ptc", "eb702d16e88c8c41f963d449287c8023", 3730152),
 			Common::RU_RUS,
 			Common::kPlatformWindows,
-			GF_RUSPROJEDITION | ADGF_USEEXTRAASTITLE | ADGF_DROPPLATFORM,
+			ADGF_USEEXTRAASTITLE | ADGF_DROPPLATFORM,
 			GUIO1(GUIO_NONE)
 		},
-		kPrinceDataDE
+		kPrinceDataDE,
+		GF_RUSPROJEDITION
 	},
 	{
 		{
@@ -105,10 +110,11 @@ static const PrinceGameDescription gameDescriptions[] = {
 					   "prince_translation.dat", nullptr, AD_NO_SIZE),
 			Common::EN_ANY,
 			Common::kPlatformWindows,
-			GF_TRANSLATED | ADGF_DROPPLATFORM,
+			ADGF_DROPPLATFORM,
 			GUIO1(GUIO_NONE)
 		},
-		kPrinceDataDE
+		kPrinceDataDE,
+		GF_TRANSLATED
 	},
 	{
 		{
@@ -118,10 +124,11 @@ static const PrinceGameDescription gameDescriptions[] = {
 					   "prince_translation.dat", nullptr, AD_NO_SIZE),
 			Common::EN_ANY,
 			Common::kPlatformWindows,
-			GF_TRANSLATED | ADGF_DROPPLATFORM,
+			ADGF_DROPPLATFORM,
 			GUIO1(GUIO_NONE)
 		},
-		kPrinceDataPL
+		kPrinceDataPL,
+		GF_TRANSLATED
 	},
 	{
 		{
@@ -132,10 +139,11 @@ static const PrinceGameDescription gameDescriptions[] = {
 					   "prince_translation.dat", nullptr, AD_NO_SIZE),
 			Common::ES_ESP,
 			Common::kPlatformWindows,
-			GF_TRANSLATED | ADGF_DROPPLATFORM,
+			ADGF_DROPPLATFORM,
 			GUIO1(GUIO_NONE)
 		},
-		kPrinceDataDE
+		kPrinceDataDE,
+		GF_TRANSLATED
 	},
 	{
 		{
@@ -146,12 +154,13 @@ static const PrinceGameDescription gameDescriptions[] = {
 					   "prince_translation.dat", nullptr, AD_NO_SIZE),
 			Common::ES_ESP,
 			Common::kPlatformWindows,
-			GF_TRANSLATED | ADGF_DROPPLATFORM,
+			ADGF_DROPPLATFORM,
 			GUIO1(GUIO_NONE)
 		},
-		kPrinceDataPL
+		kPrinceDataPL,
+		GF_TRANSLATED
 	},
-	{ AD_TABLE_END_MARKER, kPrinceDataUNK }
+	{ AD_TABLE_END_MARKER, kPrinceDataUNK, 0 }
 };
 
 } // End of namespace Prince
