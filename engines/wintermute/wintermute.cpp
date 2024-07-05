@@ -124,11 +124,11 @@ Common::Error WintermuteEngine::run() {
 }
 
 int WintermuteEngine::init() {
-	BaseEngine::createInstance(_targetName, _gameDescription->adDesc.gameId, _gameDescription->adDesc.language, _gameDescription->targetExecutable, _gameDescription->adDesc.flags);
+	BaseEngine::createInstance(_targetName, _gameDescription->adDesc.gameId, _gameDescription->adDesc.language, _gameDescription->targetExecutable, _gameDescription->features);
 	BaseEngine &instance = BaseEngine::instance();
 
 	// check if unknown target is a 2.5D game
-	if (instance.getFlags() & ADGF_AUTOGENTARGET) {
+	if (_gameDescription->adDesc.flags & ADGF_AUTOGENTARGET) {
 		Common::ArchiveMemberList actors3d;
 		if (instance.getFileManager()->listMatchingPackageMembers(actors3d, "*.act3d")) {
 			warning("Unknown 2.5D game detected");

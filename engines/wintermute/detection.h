@@ -26,7 +26,7 @@
 
 namespace Wintermute {
 
-enum WMETargetExecutable {
+enum WMETargetExecutable : uint8 {
 	OLDEST_VERSION,
 	WME_1_0_12, // DEAD:CODE 2003
 	WME_1_0_19, // DEAD:CODE 2003
@@ -133,6 +133,7 @@ struct WMEGameDescription {
 
 	ADGameDescription adDesc;
 	WMETargetExecutable targetExecutable;
+	uint8 features;
 };
 
 #define GAMEOPTION_SHOW_FPS          GUIO_GAMEOPTIONS1
