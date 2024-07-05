@@ -187,7 +187,7 @@ void MainMenu::gotoMenuScreen(int screen) {
 	for (int i = 0; i < 5; ++i) {
 		const MenuButton *btn;
 
-		if (_vm->_gameDescription->language == Common::RU_RUS) {
+		if (_vm->_gameDescription->desc.language == Common::RU_RUS) {
 			btn = &kMenuButtonsRu[screen * 5 + i];
 		} else {
 			btn = &kMenuButtons[screen * 5 + i];

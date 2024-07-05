@@ -76,7 +76,7 @@ bool WalkArea::contains(const Common::Point &pt) const {
 	return Common::Rect(x, y, x + width, y + height).contains(pt);
 }
 
-BbvsEngine::BbvsEngine(OSystem *syst, const ADGameDescription *gd) :
+BbvsEngine::BbvsEngine(OSystem *syst, const BbvsGameDescription *gd) :
 	Engine(syst), _gameDescription(gd) {
 
 	_random = new Common::RandomSource("bbvs");
@@ -120,8 +120,8 @@ BbvsEngine::BbvsEngine(OSystem *syst, const ADGameDescription *gd) :
 #ifdef USE_TRANSLATION
 	_oldGUILanguage	= TransMan.getCurrentLanguage();
 
-	if (gd->flags & GF_GUILANGSWITCH)
-		TransMan.setLanguage(getLanguageLocale(gd->language));
+	if (gd->features & GF_GUILANGSWITCH)
+		TransMan.setLanguage(getLanguageLocale(gd->desc.language));
 #endif
 }
 

@@ -31,58 +31,73 @@ static const PlainGameDescriptor bbvsGames[] = {
 
 namespace Bbvs {
 
-static const ADGameDescription gameDescriptions[] = {
+static const BbvsGameDescription gameDescriptions[] = {
 	{
-		"bbvs",
-		nullptr,
-		AD_ENTRY1s("vspr0001.vnm", "7ffe9b9e7ca322db1d48e86f5130578e", 1166628),
-		Common::EN_ANY,
-		Common::kPlatformWindows,
-		ADGF_DROPPLATFORM,
-		GUIO1(GUIO_NOMIDI)
+		{
+			"bbvs",
+			nullptr,
+			AD_ENTRY1s("vspr0001.vnm", "7ffe9b9e7ca322db1d48e86f5130578e", 1166628),
+			Common::EN_ANY,
+			Common::kPlatformWindows,
+			ADGF_DROPPLATFORM,
+			GUIO1(GUIO_NOMIDI)
+		},
+		0
 	},
 
 	{
-		"bbvs",
-		"Demo",
-		AD_ENTRY1s("vspr0007.vnm", "5db44940fa93fdd5becb5c2a5ded7478", 242376),
-		Common::EN_ANY,
-		Common::kPlatformWindows,
-		ADGF_DEMO | ADGF_DROPPLATFORM,
-		GUIO1(GUIO_NOMIDI)
+		{
+			"bbvs",
+			"Demo",
+			AD_ENTRY1s("vspr0007.vnm", "5db44940fa93fdd5becb5c2a5ded7478", 242376),
+			Common::EN_ANY,
+			Common::kPlatformWindows,
+			ADGF_DEMO | ADGF_DROPPLATFORM,
+			GUIO1(GUIO_NOMIDI)
+		},
+		0
 	},
 
 	{
-		"bbvs",
-		"Loogie Demo",
-		AD_ENTRY1s("BBLOOGIE.000", "607d3bf55ec6458dce484473b1eecb4d", 324416),
-		Common::EN_ANY,
-		Common::kPlatformWindows,
-		GF_LOOGIE_DEMO | ADGF_DEMO | ADGF_DROPPLATFORM,
-		GUIO1(GUIO_NOMIDI)
+		{
+			"bbvs",
+			"Loogie Demo",
+			AD_ENTRY1s("BBLOOGIE.000", "607d3bf55ec6458dce484473b1eecb4d", 324416),
+			Common::EN_ANY,
+			Common::kPlatformWindows,
+			ADGF_DEMO | ADGF_DROPPLATFORM,
+			GUIO1(GUIO_NOMIDI)
+		},
+		GF_LOOGIE_DEMO
 	},
 
 	{
-		"bbvs",
-		"Loogie Demo",
-		AD_ENTRY1s("BBLOOGIE.000", "83921c65bd93be7e35056c31bd37310b", 324764),
-		Common::EN_ANY,
-		Common::kPlatformWindows,
-		GF_LOOGIE_ALT_DEMO | ADGF_DEMO | ADGF_DROPPLATFORM,
-		GUIO1(GUIO_NOMIDI)
+		{
+			"bbvs",
+			"Loogie Demo",
+			AD_ENTRY1s("BBLOOGIE.000", "83921c65bd93be7e35056c31bd37310b", 324764),
+			Common::EN_ANY,
+			Common::kPlatformWindows,
+			ADGF_DEMO | ADGF_DROPPLATFORM,
+			GUIO1(GUIO_NOMIDI)
+		},
+		GF_LOOGIE_ALT_DEMO
 	},
 
 	{
-		"bbvs",
-		nullptr,
-		AD_ENTRY1s("vspr0001.vnm", "91c76b1048f93208cd7b1a05ebccb408", 1176976),
-		Common::RU_RUS,
-		Common::kPlatformWindows,
-		GF_GUILANGSWITCH | ADGF_DROPPLATFORM,
-		GUIO1(GUIO_NOMIDI)
+		{
+			"bbvs",
+			nullptr,
+			AD_ENTRY1s("vspr0001.vnm", "91c76b1048f93208cd7b1a05ebccb408", 1176976),
+			Common::RU_RUS,
+			Common::kPlatformWindows,
+			ADGF_DROPPLATFORM,
+			GUIO1(GUIO_NOMIDI)
+		},
+		GF_GUILANGSWITCH
 	},
 
-	AD_TABLE_END_MARKER
+	{ AD_TABLE_END_MARKER, 0 }
 };
 
 } // End of namespace Bbvs
@@ -92,7 +107,7 @@ static const char * const directoryGlobs[] = {
 	nullptr
 };
 
-class BbvsMetaEngineDetection : public AdvancedMetaEngineDetection<ADGameDescription> {
+class BbvsMetaEngineDetection : public AdvancedMetaEngineDetection<Bbvs::BbvsGameDescription> {
 public:
 	BbvsMetaEngineDetection() : AdvancedMetaEngineDetection(Bbvs::gameDescriptions, bbvsGames) {
 		_maxScanDepth = 3;

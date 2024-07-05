@@ -31,27 +31,27 @@
 namespace Bbvs {
 
 bool BbvsEngine::isDemo() const {
-	return _gameDescription->flags & ADGF_DEMO;
+	return _gameDescription->desc.flags & ADGF_DEMO;
 }
 
 bool BbvsEngine::isLoogieDemo() const {
-	return _gameDescription->flags & GF_LOOGIE_DEMO;
+	return _gameDescription->features & GF_LOOGIE_DEMO;
 }
 
 bool BbvsEngine::isLoogieAltDemo() const {
-	return _gameDescription->flags & GF_LOOGIE_ALT_DEMO;
+	return _gameDescription->features & GF_LOOGIE_ALT_DEMO;
 }
 
 } // End of namespace Bbvs
 
-class BbvsMetaEngine : public AdvancedMetaEngine<ADGameDescription> {
+class BbvsMetaEngine : public AdvancedMetaEngine<Bbvs::BbvsGameDescription> {
 public:
 	const char *getName() const override {
 		return "bbvs";
 	}
 
 	bool hasFeature(MetaEngineFeature f) const override;
-	Common::Error createInstance(OSystem *syst, Engine **engine, const ADGameDescription *desc) const override;
+	Common::Error createInstance(OSystem *syst, Engine **engine, const Bbvs::BbvsGameDescription *desc) const override;
 
 	int getMaximumSaveSlot() const override;
 	SaveStateList listSaves(const char *target) const override;
@@ -128,7 +128,7 @@ SaveStateDescriptor BbvsMetaEngine::querySaveMetaInfos(const char *target, int s
 	return SaveStateDescriptor();
 }
 
-Common::Error BbvsMetaEngine::createInstance(OSystem *syst, Engine **engine, const ADGameDescription *desc) const {
+Common::Error BbvsMetaEngine::createInstance(OSystem *syst, Engine **engine, const Bbvs::BbvsGameDescription *desc) const {
 	*engine = new Bbvs::BbvsEngine(syst, desc);
 	return Common::kNoError;
 }

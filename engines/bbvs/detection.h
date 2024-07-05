@@ -22,12 +22,22 @@
 #ifndef BBVS_DETECTION_H
 #define BBVS_DETECTION_H
 
+#include "engines/advancedDetector.h"
+
 namespace Bbvs {
 
 enum BBVSGameFeatures {
 	GF_GUILANGSWITCH   =    (1 << 0), // If GUI language switch is required for menus
 	GF_LOOGIE_DEMO     =    (1 << 1),
 	GF_LOOGIE_ALT_DEMO =    (1 << 2)
+};
+
+struct BbvsGameDescription {
+	AD_GAME_DESCRIPTION_HELPERS(desc);
+
+	ADGameDescription desc;
+
+	uint8 features;
 };
 
 } // End of namespace Bbvs

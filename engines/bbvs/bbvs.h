@@ -37,8 +37,6 @@
 
 #include "bbvs/detection.h"
 
-struct ADGameDescription;
-
 namespace Bbvs {
 
 class ActionCommands;
@@ -240,13 +238,13 @@ protected:
 	Common::Error run() override;
 	bool hasFeature(EngineFeature f) const override;
 public:
-	BbvsEngine(OSystem *syst, const ADGameDescription *gd);
+	BbvsEngine(OSystem *syst, const BbvsGameDescription *gd);
 	~BbvsEngine() override;
 	void newGame();
 	void continueGameFromQuickSave();
 	void setNewSceneNum(int newSceneNum);
 	const Common::String getTargetName() { return _targetName; }
-	const ADGameDescription *_gameDescription;
+	const BbvsGameDescription *_gameDescription;
 
 	bool isDemo() const;
 	bool isLoogieDemo() const;
