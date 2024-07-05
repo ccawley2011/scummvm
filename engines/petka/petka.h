@@ -45,8 +45,6 @@
  *  - Red Comrades 2: For the Great Justice - Fully playable
  */
 
-struct ADGameDescription;
-
 namespace Common {
 class SeekableReadStream;
 }
@@ -68,6 +66,7 @@ class SoundMgr;
 class QManager;
 class QSystem;
 class VideoSystem;
+struct PetkaGameDescription;
 
 enum {
 	kPetkaDebugGeneral = 1 << 0,
@@ -82,7 +81,7 @@ enum {
 
 class PetkaEngine : public Engine {
 public:
-	PetkaEngine(OSystem *syst, const ADGameDescription *desc);
+	PetkaEngine(OSystem *syst, const PetkaGameDescription *desc);
 	~PetkaEngine() override;
 
 	bool isDemo() const;
@@ -129,7 +128,7 @@ public:
 
 	int getAutosaveSlot() const override { return - 1;}
 
-	const ADGameDescription *const _desc;
+	const PetkaGameDescription *const _desc;
 	Common::ScopedPtr<Common::MemoryReadStream> _thumbnail;
 
 protected:

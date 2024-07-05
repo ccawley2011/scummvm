@@ -24,6 +24,7 @@
 #include "engines/advancedDetector.h"
 
 #include "petka/petka.h"
+#include "petka/detection.h"
 
 static const PlainGameDescriptor petkaGames[] = {
 	{"petka1", "Red Comrades 1: Save the Galaxy"},
@@ -41,7 +42,7 @@ static const DebugChannelDef debugFlagList[] = {
 
 #include "petka/detection_tables.h"
 
-class PetkaMetaEngineDetection : public AdvancedMetaEngineDetection<ADGameDescription> {
+class PetkaMetaEngineDetection : public AdvancedMetaEngineDetection<Petka::PetkaGameDescription> {
 public:
 	PetkaMetaEngineDetection() : AdvancedMetaEngineDetection(Petka::gameDescriptions, petkaGames) {
 		_gameIds = petkaGames;

@@ -38,6 +38,7 @@
 
 #include "video/avi_decoder.h"
 
+#include "petka/detection.h"
 #include "petka/file_mgr.h"
 #include "petka/video.h"
 #include "petka/sound.h"
@@ -52,7 +53,7 @@ namespace Petka {
 
 PetkaEngine *g_vm;
 
-PetkaEngine::PetkaEngine(OSystem *system, const ADGameDescription *desc)
+PetkaEngine::PetkaEngine(OSystem *system, const PetkaGameDescription *desc)
 	: Engine(system), _console(nullptr), _fileMgr(nullptr), _resMgr(nullptr),
 	_qsystem(nullptr), _vsys(nullptr), _desc(desc), _videoDec(nullptr), _rnd("petka") {
 
@@ -76,7 +77,7 @@ Common::Error PetkaEngine::run() {
 	initGraphics(640, 480, &format);
 	syncSoundSettings();
 
-	if (_desc->flags & GF_COMPRESSED) {
+	if (_desc->features & GF_COMPRESSED) {
 		Common::Archive *cabinet = Common::makeInstallShieldArchive("data");
 		if (cabinet)
 			SearchMan.add("data1.cab", cabinet);
@@ -274,11 +275,11 @@ end:
 }
 
 bool PetkaEngine::isDemo() const {
-	return _desc->flags & ADGF_DEMO;
+	return _desc->desc.flags & ADGF_DEMO;
 }
 
 bool PetkaEngine::isPetka2() const {
-	return strcmp(_desc->gameId, "petka2") == 0;
+	return strcmp(_desc->desc.gameId, "petka2") == 0;
 }
 
 SoundMgr *PetkaEngine::soundMgr() const {

@@ -29,6 +29,7 @@
 #include "graphics/thumbnail.h"
 
 #include "petka/petka.h"
+#include "petka/detection.h"
 #include "petka/q_system.h"
 #include "petka/q_manager.h"
 #include "petka/video.h"
@@ -73,7 +74,7 @@ void InterfaceSaveLoad::start(int id) {
 
 	MetaEngine *metaEngine = g_engine->getMetaEngine();
 	for (int i = 0, j = _page * 6; i < 6; ++i, ++j) {
-		SaveStateDescriptor save = metaEngine->querySaveMetaInfos(g_vm->_desc->gameId, j);
+		SaveStateDescriptor save = metaEngine->querySaveMetaInfos(g_vm->_desc->desc.gameId, j);
 
 		auto surface = save.getThumbnail();
 		if (!surface)
