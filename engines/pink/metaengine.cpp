@@ -24,16 +24,17 @@
 #include "engines/advancedDetector.h"
 
 #include "pink/pink.h"
+#include "pink/detection.h"
 
 namespace Pink {
 
 Common::Language PinkEngine::getLanguage() const {
-	return _desc->language;
+	return _desc->desc.language;
 }
 
 } // End of Namespace Pink
 
-class PinkMetaEngine : public AdvancedMetaEngine<ADGameDescription> {
+class PinkMetaEngine : public AdvancedMetaEngine<Pink::PinkGameDescription> {
 public:
 	const char *getName() const override {
 		return "pink";
@@ -46,7 +47,7 @@ public:
 	void removeSaveState(const char *target, int slot) const override;
 	SaveStateDescriptor querySaveMetaInfos(const char *target, int slot) const override;
 
-	Common::Error createInstance(OSystem *syst, Engine **engine, const ADGameDescription *desc) const override;
+	Common::Error createInstance(OSystem *syst, Engine **engine, const Pink::PinkGameDescription *desc) const override;
 };
 
 bool PinkMetaEngine::hasFeature(MetaEngineFeature f) const {
@@ -103,7 +104,7 @@ SaveStateDescriptor PinkMetaEngine::querySaveMetaInfos(const char *target, int s
 	return SaveStateDescriptor();
 }
 
-Common::Error PinkMetaEngine::createInstance(OSystem *syst, Engine **engine, const ADGameDescription *desc) const {
+Common::Error PinkMetaEngine::createInstance(OSystem *syst, Engine **engine, const Pink::PinkGameDescription *desc) const {
 	*engine = new Pink::PinkEngine(syst, desc);
 	return Common::kNoError;
 }

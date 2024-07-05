@@ -24,6 +24,7 @@
 #include "engines/advancedDetector.h"
 
 #include "pink/pink.h"
+#include "pink/detection.h"
 
 static const PlainGameDescriptor pinkGames[] = {
 	{"peril", "The Pink Panther: Passport to Peril"},
@@ -48,7 +49,7 @@ static const DebugChannelDef debugFlagList[] = {
 };
 
 
-class PinkMetaEngineDetection : public AdvancedMetaEngineDetection<ADGameDescription> {
+class PinkMetaEngineDetection : public AdvancedMetaEngineDetection<Pink::PinkGameDescription> {
 public:
 	PinkMetaEngineDetection() : AdvancedMetaEngineDetection(Pink::gameDescriptions, pinkGames) {
 		_gameIds = pinkGames;

@@ -56,8 +56,6 @@
  *      PDA is partially usable(ActionText is not implemented)
  */
 
-struct ADGameDescription;
-
 namespace Common {
 	class PEResources;
 }
@@ -77,6 +75,7 @@ class NamedObject;
 class Module;
 class Page;
 class LeadActor;
+struct PinkGameDescription;
 
 enum {
 	kPinkDebugGeneral = 1 << 0,
@@ -94,7 +93,7 @@ extern Graphics::PaletteLookup *g_paletteLookup;
 
 class PinkEngine : public Engine {
 public:
-	PinkEngine(OSystem *system, const ADGameDescription *desc);
+	PinkEngine(OSystem *system, const PinkGameDescription *desc);
 	~PinkEngine() override;
 
 	Common::Error run() override;
@@ -176,7 +175,7 @@ private:
 	StringMap _variables;
 	PDAMgr _pdaMgr;
 
-	const ADGameDescription *_desc;
+	const PinkGameDescription *_desc;
 	bool _isPeril;
 	bool _isPerilDemo;
 };

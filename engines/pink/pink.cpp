@@ -33,6 +33,7 @@
 #include "graphics/wincursor.h"
 
 #include "pink/pink.h"
+#include "pink/detection.h"
 #include "pink/console.h"
 #include "pink/screen.h"
 #include "pink/objects/module.h"
@@ -42,7 +43,7 @@ namespace Pink {
 
 Graphics::PaletteLookup *g_paletteLookup;
 
-PinkEngine::PinkEngine(OSystem *system, const ADGameDescription *desc)
+PinkEngine::PinkEngine(OSystem *system, const PinkGameDescription *desc)
 	: Engine(system), _rnd("pink"), _exeResources(nullptr),
 	_desc(desc), _bro(nullptr), _menu(nullptr), _actor(nullptr),
 	_module(nullptr), _screen(nullptr), _pdaMgr(this) {
@@ -52,8 +53,8 @@ PinkEngine::PinkEngine(OSystem *system, const ADGameDescription *desc)
 
 	g_paletteLookup = new Graphics::PaletteLookup;
 
-	_isPeril = !strcmp(_desc->gameId, kPeril);
-	_isPerilDemo = _isPeril  && (_desc->flags & ADGF_DEMO);
+	_isPeril = !strcmp(_desc->desc.gameId, kPeril);
+	_isPerilDemo = _isPeril  && (_desc->desc.flags & ADGF_DEMO);
 }
 
 PinkEngine::~PinkEngine() {
@@ -78,7 +79,7 @@ Common::Error PinkEngine::init() {
 	_exeResources = new Common::PEResources();
 	Common::Path fileName = isPeril() ? "pptp.exe" : "hpp.exe";
 
-	if ((_desc->flags & GF_COMPRESSED) && isPeril()) {
+	if ((_desc->features & GF_COMPRESSED) && isPeril()) {
 		fileName = "pptp.ex_";
 
 		Common::Archive *cabinet = Common::makeInstallShieldArchive("data");
