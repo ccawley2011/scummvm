@@ -29,13 +29,12 @@
 #include "engines/stark/gfx/bitmap.h"
 #include "engines/stark/services/services.h"
 
-struct ADGameDescription;
-
 namespace Audio {
 class Mixer;
 }
 
 namespace Stark {
+struct StarkGameDescription;
 
 /**
  * Settings services.
@@ -60,7 +59,7 @@ public:
 		kSaveLoadPage
 	};
 
-	Settings(Audio::Mixer *mixer, const ADGameDescription *gd);
+	Settings(Audio::Mixer *mixer, const StarkGameDescription *gd);
 	~Settings() {}
 
 	/**

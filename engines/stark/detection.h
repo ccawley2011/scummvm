@@ -22,6 +22,8 @@
 #ifndef STARK_DETECTION_H
 #define STARK_DETECTION_H
 
+#include "engines/advancedDetector.h"
+
 namespace Stark {
 
 enum GameFlags {
@@ -31,6 +33,14 @@ enum GameFlags {
 #define GAMEOPTION_ASSETS_MOD        GUIO_GAMEOPTIONS1
 #define GAMEOPTION_LINEAR_FILTERING  GUIO_GAMEOPTIONS2
 #define GAMEOPTION_FONT_ANTIALIASING GUIO_GAMEOPTIONS3
+
+struct StarkGameDescription {
+	AD_GAME_DESCRIPTION_HELPERS(desc);
+
+	ADGameDescription desc;
+
+	uint8 features;
+};
 
 } // End of namespace Stark
 

@@ -27,8 +27,6 @@
 #include "common/str-array.h"
 #include "stark/detection.h"
 
-struct ADGameDescription;
-
 namespace Common {
 class RandomSource;
 }
@@ -61,7 +59,7 @@ class GameMessage;
 
 class StarkEngine : public Engine {
 public:
-	StarkEngine(OSystem *syst, const ADGameDescription *gameDesc);
+	StarkEngine(OSystem *syst, const StarkGameDescription *gameDesc);
 	~StarkEngine() override;
 
 	/** Build a save file name for the specified target and slot */
@@ -73,7 +71,7 @@ public:
 	/** Extract the save slot number from the provided save file name */
 	static int getSaveNameSlot(const char *target, const Common::String &saveName);
 
-	uint32 getGameFlags() const;
+	uint32 getFeatures() const;
 
 protected:
 	// Engine APIs
@@ -96,7 +94,7 @@ private:
 	Graphics::FrameLimiter *_frameLimiter;
 	PauseToken _gamePauseToken;
 
-	const ADGameDescription *_gameDescription;
+	const StarkGameDescription *_gameDescription;
 
 	// Double click handling
 	static const uint _doubleClickDelay = 500; // ms

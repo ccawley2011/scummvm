@@ -19,6 +19,7 @@
  *
  */
 
+#include "engines/stark/detection.h"
 #include "engines/stark/services/settings.h"
 #include "engines/stark/services/services.h"
 #include "engines/stark/services/archiveloader.h"
@@ -32,10 +33,10 @@
 
 namespace Stark {
 
-Settings::Settings(Audio::Mixer *mixer, const ADGameDescription *gd) :
+Settings::Settings(Audio::Mixer *mixer, const StarkGameDescription *gd) :
 		_mixer(mixer),
-		_isDemo(gd->flags & ADGF_DEMO),
-		_language(gd->language) {
+		_isDemo(gd->desc.flags & ADGF_DEMO),
+		_language(gd->desc.language) {
 	// Initialize keys
 	_boolKey[kHighModel] = "enable_high_resolution_models";
 	_boolKey[kSubtitle] = "subtitles";

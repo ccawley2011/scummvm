@@ -68,7 +68,7 @@ static const ADExtraGuiOptionsMap optionsList[] = {
 	AD_EXTRA_GUI_OPTIONS_TERMINATOR
 };
 
-class StarkMetaEngine : public AdvancedMetaEngine<ADGameDescription> {
+class StarkMetaEngine : public AdvancedMetaEngine<StarkGameDescription> {
 public:
 	const char *getName() const override {
 		return "stark";
@@ -156,7 +156,7 @@ public:
 		g_system->getSavefileManager()->removeSavefile(filename);
 	}
 
-	Common::Error createInstance(OSystem *syst, Engine **engine, const ADGameDescription *desc) const override {
+	Common::Error createInstance(OSystem *syst, Engine **engine, const StarkGameDescription *desc) const override {
 		*engine = new StarkEngine(syst, desc);
 		return Common::kNoError;
 	}

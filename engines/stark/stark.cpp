@@ -60,7 +60,7 @@
 
 namespace Stark {
 
-StarkEngine::StarkEngine(OSystem *syst, const ADGameDescription *gameDesc) :
+StarkEngine::StarkEngine(OSystem *syst, const StarkGameDescription *gameDesc) :
 		Engine(syst),
 		_frameLimiter(nullptr),
 		_gameDescription(gameDesc),
@@ -546,6 +546,6 @@ void StarkEngine::onScreenChanged() const {
 	}
 }
 
-uint32 StarkEngine::getGameFlags() const { return _gameDescription->flags; }
+uint32 StarkEngine::getFeatures() const { return _gameDescription->features; }
 
 } // End of namespace Stark
