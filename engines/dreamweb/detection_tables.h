@@ -43,9 +43,10 @@ static const DreamWebGameDescription gameDescriptions[] = {
 			},
 			Common::EN_ANY,
 			Common::kPlatformDOS,
-			GF_INSTALLER,
+			ADGF_NO_FLAGS,
 			GUIO1(GAMEOPTION_COPY_PROTECTION)
 		},
+		GF_INSTALLER
 	},
 
 	// International floppy release
@@ -61,9 +62,10 @@ static const DreamWebGameDescription gameDescriptions[] = {
 			},
 			Common::EN_ANY,
 			Common::kPlatformDOS,
-			0,
+			ADGF_NO_FLAGS,
 			GUIO1(GAMEOPTION_COPY_PROTECTION)
 		},
+		0
 	},
 
 	// International CD release
@@ -78,6 +80,7 @@ static const DreamWebGameDescription gameDescriptions[] = {
 			ADGF_CD,
 			GUIO1(GAMEOPTION_COPY_PROTECTION)
 		},
+		0
 	},
 
 	// UK-V (Early UK) CD Release - From bug #6035
@@ -99,6 +102,7 @@ static const DreamWebGameDescription gameDescriptions[] = {
 			ADGF_CD,
 			GUIO1(GAMEOPTION_COPY_PROTECTION)
 		},
+		0
 	},
 
 	// US CD release
@@ -113,6 +117,7 @@ static const DreamWebGameDescription gameDescriptions[] = {
 			ADGF_CD,
 			GUIO1(GAMEOPTION_COPY_PROTECTION)
 		},
+		0
 	},
 
 	// French CD release
@@ -127,6 +132,7 @@ static const DreamWebGameDescription gameDescriptions[] = {
 			ADGF_CD,
 			GUIO1(GAMEOPTION_COPY_PROTECTION)
 		},
+		0
 	},
 
 	// French CD release
@@ -142,6 +148,7 @@ static const DreamWebGameDescription gameDescriptions[] = {
 			ADGF_CD,
 			GUIO1(GAMEOPTION_COPY_PROTECTION)
 		},
+		0
 	},
 
 	// German floppy release
@@ -153,9 +160,10 @@ static const DreamWebGameDescription gameDescriptions[] = {
 					   "dreamweb.r02", "48e1f42a53402f963ca2d1ed969f4084", 212823),
 			Common::DE_DEU,
 			Common::kPlatformDOS,
-			0,
+			ADGF_NO_FLAGS,
 			GUIO1(GAMEOPTION_COPY_PROTECTION)
 		},
+		0
 	},
 
 	// German CD release
@@ -170,6 +178,7 @@ static const DreamWebGameDescription gameDescriptions[] = {
 			ADGF_CD,
 			GUIO1(GAMEOPTION_COPY_PROTECTION)
 		},
+		0
 	},
 
 	// Spanish floppy release
@@ -181,9 +190,10 @@ static const DreamWebGameDescription gameDescriptions[] = {
 					   "dreamweb.r02", "f97d435ad5da08fb1bcf6ea3dd6e0b9e", 199499),
 			Common::ES_ESP,
 			Common::kPlatformDOS,
-			0,
+			ADGF_NO_FLAGS,
 			GUIO1(GAMEOPTION_COPY_PROTECTION)
 		},
+		0
 	},
 
 	// Spanish CD release
@@ -198,6 +208,7 @@ static const DreamWebGameDescription gameDescriptions[] = {
 			ADGF_CD,
 			GUIO1(GAMEOPTION_COPY_PROTECTION)
 		},
+		0
 	},
 
 	// Spanish CD release
@@ -213,6 +224,7 @@ static const DreamWebGameDescription gameDescriptions[] = {
 			ADGF_CD,
 			GUIO1(GAMEOPTION_COPY_PROTECTION)
 		},
+		0
 	},
 
 	// Italian floppy release
@@ -224,9 +236,10 @@ static const DreamWebGameDescription gameDescriptions[] = {
 					   "dreamweb.r02", "87a026e9f80ed4f94169381f871ee305", 199676),
 			Common::IT_ITA,
 			Common::kPlatformDOS,
-			0,
+			ADGF_NO_FLAGS,
 			GUIO1(GAMEOPTION_COPY_PROTECTION)
 		},
+		0
 	},
 
 	// Italian CD release
@@ -245,6 +258,7 @@ static const DreamWebGameDescription gameDescriptions[] = {
 			ADGF_CD,
 			GUIO1(GAMEOPTION_COPY_PROTECTION)
 		},
+		0
 	},
 
 	// Czech fan-made translation
@@ -264,6 +278,7 @@ static const DreamWebGameDescription gameDescriptions[] = {
 			ADGF_CD,
 			GUIO1(GAMEOPTION_COPY_PROTECTION)
 		},
+		0
 	},
 
 	// Russian fan-made translation
@@ -282,6 +297,7 @@ static const DreamWebGameDescription gameDescriptions[] = {
 			ADGF_CD,
 			GUIO1(GAMEOPTION_COPY_PROTECTION)
 		},
+		0
 	},
 
 	// English floppy demo
@@ -300,6 +316,7 @@ static const DreamWebGameDescription gameDescriptions[] = {
 			ADGF_DEMO,
 			GUIO0()
 		},
+		0
 	},
 
 	// English CD demo
@@ -318,6 +335,7 @@ static const DreamWebGameDescription gameDescriptions[] = {
 			ADGF_CD|ADGF_DEMO,
 			GUIO0()
 		},
+		0
 	},
 
 	// English Amiga demo
@@ -336,9 +354,10 @@ static const DreamWebGameDescription gameDescriptions[] = {
 			ADGF_DEMO,
 			GUIO0()
 		},
+		0
 	},
 
-	{ AD_TABLE_END_MARKER }
+	{ AD_TABLE_END_MARKER, 0 }
 };
 
 } // End of namespace DreamWeb

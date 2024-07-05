@@ -399,7 +399,7 @@ void DreamWebEngine::processEvents(bool processSoundEvents) {
 }
 
 Common::Error DreamWebEngine::run() {
-	if (_gameDescription->desc.flags & GF_INSTALLER) {
+	if (_gameDescription->features & GF_INSTALLER) {
 		Common::Array<Common::SharedPtr<Common::SeekableReadStream>> volumes;
 		for (uint i = 0; _gameDescription->desc.filesDescriptions[i].fileName; i++) {
 			Common::File *dw = new Common::File();
