@@ -119,7 +119,7 @@ DirectorEngine::DirectorEngine(OSystem *syst, const DirectorGameDescription *gam
 		SearchMan.addSubDirectoryMatching(_gameDataDir, directoryGlob, 0, 5);
 	}
 
-	if (debugChannelSet(-1, kDebug32bpp) || (getGameFlags() & GF_32BPP)) {
+	if (debugChannelSet(-1, kDebug32bpp) || (getFeatures() & GF_32BPP)) {
 #ifdef USE_RGB_COLOR
 		_colorDepth = 32;
 #else
@@ -220,14 +220,14 @@ Common::Error DirectorEngine::run() {
 		_wmMode |= Graphics::kWMModeFullscreen | Graphics::kWMModeNoDesktop;
 
 #ifdef USE_RGB_COLOR
-	if (debugChannelSet(-1, kDebug32bpp) || (getGameFlags() & GF_32BPP))
+	if (debugChannelSet(-1, kDebug32bpp) || (getFeatures() & GF_32BPP))
 		_wmMode |= Graphics::kWMMode32bpp;
 #endif
 
-	if (getGameFlags() & GF_DESKTOP)
+	if (getFeatures() & GF_DESKTOP)
 		_wmMode &= ~Graphics::kWMModeNoDesktop;
 
-	if (getGameFlags() & GF_640x480) {
+	if (getFeatures() & GF_640x480) {
 		_wmWidth = 640;
 		_wmHeight = 480;
 	}

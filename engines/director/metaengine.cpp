@@ -41,8 +41,8 @@ Common::Platform DirectorEngine::getPlatform() const {
 	return _gameDescription->desc.platform;
 }
 
-uint32 DirectorEngine::getGameFlags() const {
-	return _gameDescription->desc.flags;
+uint32 DirectorEngine::getFeatures() const {
+	return _gameDescription->features;
 }
 
 uint16 DirectorEngine::getDescriptionVersion() const {

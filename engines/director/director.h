@@ -161,7 +161,7 @@ public:
 	void setVersion(uint16 version);
 	Common::Platform getPlatform() const;
 	Common::Language getLanguage() const;
-	uint32 getGameFlags() const;
+	uint32 getFeatures() const;
 	Common::String getTargetName() { return _targetName; }
 	const char *getExtra();
 	Common::String getRawEXEName() const;

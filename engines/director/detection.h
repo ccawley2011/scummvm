@@ -26,7 +26,7 @@
 
 namespace Director {
 
-enum DirectorGameGID {
+enum DirectorGameGID : uint8 {
 	GID_GENERIC,
 	GID_TEST,
 	GID_TESTALL
@@ -38,6 +38,7 @@ struct DirectorGameDescription {
 	ADGameDescription desc;
 
 	DirectorGameGID gameGID;
+	uint8 features;
 	uint16 version;
 };
 
