@@ -28,7 +28,7 @@
 
 #include "tucker/tucker.h"
 
-class TuckerMetaEngine : public AdvancedMetaEngine<ADGameDescription> {
+class TuckerMetaEngine : public AdvancedMetaEngine<Tucker::TuckerGameDescription> {
 public:
 	const char *getName() const override {
 		return "tucker";
@@ -49,8 +49,8 @@ public:
 		}
 	}
 
-	Common::Error createInstance(OSystem *syst, Engine **engine, const ADGameDescription *desc) const override {
-		*engine = new Tucker::TuckerEngine(syst, desc->language, desc->flags);
+	Common::Error createInstance(OSystem *syst, Engine **engine, const Tucker::TuckerGameDescription *desc) const override {
+		*engine = new Tucker::TuckerEngine(syst, desc->desc.language, desc->features);
 		return Common::kNoError;
 	}
 

@@ -22,6 +22,8 @@
 #ifndef TUCKER_DETECTION_H
 #define TUCKER_DETECTION_H
 
+#include "engines/advancedDetector.h"
+
 namespace Tucker {
 
 enum GameFlag {
@@ -29,6 +31,14 @@ enum GameFlag {
 	kGameFlagEncodedData = 1 << 1,
 	kGameFlagNoSubtitles = 1 << 2,
 	kGameFlagIntroOnly = 1 << 3
+};
+
+struct TuckerGameDescription {
+	AD_GAME_DESCRIPTION_HELPERS(desc);
+
+	ADGameDescription desc;
+
+	uint8 features;
 };
 
 } // End of namespace Tucker
