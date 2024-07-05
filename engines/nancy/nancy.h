@@ -91,7 +91,7 @@ public:
 	void secondChance();
 
 	const char *getCopyrightString() const;
-	uint32 getGameFlags() const;
+	uint32 getGameFeatures() const;
 	const char *getGameId() const;
 	GameType getGameType() const;
 	Common::Language getGameLanguage() const;

@@ -26,7 +26,7 @@
 
 namespace Nancy {
 
-enum GameType {
+enum GameType : uint8 {
 	kGameTypeNone 	 = 0,
 	kGameTypeVampire = 1,
 	kGameTypeNancy1  = 2,
@@ -51,6 +51,7 @@ struct NancyGameDescription {
 
 	ADGameDescription desc;
 	GameType gameType;
+	uint8 features;
 };
 
 enum NancyDebugChannels {

@@ -171,8 +171,8 @@ const char *NancyEngine::getCopyrightString() const {
 	return "Copyright 1989-1997 David P Gray, All Rights Reserved.";
 }
 
-uint32 NancyEngine::getGameFlags() const {
-	return _gameDescription->desc.flags;
+uint32 NancyEngine::getGameFeatures() const {
+	return _gameDescription->features;
 }
 
 const char *NancyEngine::getGameId() const {
@@ -656,7 +656,7 @@ Common::Error NancyEngine::synchronize(Common::Serializer &ser) {
 }
 
 bool NancyEngine::isCompressed() {
-	return getGameFlags() & GF_COMPRESSED;
+	return getGameFeatures() & GF_COMPRESSED;
 }
 
 } // End of namespace Nancy
