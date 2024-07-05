@@ -34,6 +34,7 @@
 #include "graphics/framelimiter.h"
 
 #include "freescape/area.h"
+#include "freescape/detection.h"
 #include "freescape/gfx.h"
 #include "freescape/objects/entrance.h"
 #include "freescape/objects/geometricobject.h"
@@ -107,10 +108,10 @@ private:
 class FreescapeEngine : public Engine {
 
 public:
-	FreescapeEngine(OSystem *syst, const ADGameDescription *gd);
+	FreescapeEngine(OSystem *syst, const FreescapeGameDescription *gd);
 	~FreescapeEngine();
 
-	const ADGameDescription *_gameDescription;
+	const FreescapeGameDescription *_gameDescription;
 	GameStateControl _gameStateControl;
 	bool isDemo() const;
 
@@ -123,12 +124,12 @@ public:
 	bool isEclipse() { return _targetName.hasPrefix("totaleclipse"); } // This will match Total Eclipse 1 and 2.
 	bool isEclipse2() { return _targetName.hasPrefix("totaleclipse2"); }
 	bool isCastle() { return _targetName.hasPrefix("castle"); }
-	bool isAmiga() { return _gameDescription->platform == Common::kPlatformAmiga; }
-	bool isAtariST() { return _gameDescription->platform == Common::kPlatformAtariST; }
-	bool isDOS() { return _gameDescription->platform == Common::kPlatformDOS; }
-	bool isSpectrum() { return _gameDescription->platform == Common::kPlatformZX; }
-	bool isCPC() { return _gameDescription->platform == Common::kPlatformAmstradCPC; }
-	bool isC64() { return _gameDescription->platform == Common::kPlatformC64; }
+	bool isAmiga() { return _gameDescription->desc.platform == Common::kPlatformAmiga; }
+	bool isAtariST() { return _gameDescription->desc.platform == Common::kPlatformAtariST; }
+	bool isDOS() { return _gameDescription->desc.platform == Common::kPlatformDOS; }
+	bool isSpectrum() { return _gameDescription->desc.platform == Common::kPlatformZX; }
+	bool isCPC() { return _gameDescription->desc.platform == Common::kPlatformAmstradCPC; }
+	bool isC64() { return _gameDescription->desc.platform == Common::kPlatformC64; }
 
 	Common::Error run() override;
 

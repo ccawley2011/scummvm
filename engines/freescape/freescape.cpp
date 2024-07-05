@@ -36,7 +36,7 @@ namespace Freescape {
 
 FreescapeEngine *g_freescape;
 
-FreescapeEngine::FreescapeEngine(OSystem *syst, const ADGameDescription *gd)
+FreescapeEngine::FreescapeEngine(OSystem *syst, const FreescapeGameDescription *gd)
 	: Engine(syst), _gameDescription(gd), _gfx(nullptr) {
 	if (!ConfMan.hasKey("render_mode") || ConfMan.get("render_mode").empty())
 		_renderMode = Common::kRenderEGA;
@@ -59,7 +59,7 @@ FreescapeEngine::FreescapeEngine(OSystem *syst, const ADGameDescription *gd)
 		_renderMode = Common::kRenderC64;
 	}
 
-	_variant = gd->flags;
+	_variant = gd->features;
 
 	_language = Common::parseLanguage(ConfMan.get("language"));
 

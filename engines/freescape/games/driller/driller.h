@@ -23,7 +23,7 @@ namespace Freescape {
 
 class DrillerEngine : public FreescapeEngine {
 public:
-	DrillerEngine(OSystem *syst, const ADGameDescription *gd);
+	DrillerEngine(OSystem *syst, const FreescapeGameDescription *gd);
 	~DrillerEngine();
 
 	uint32 _initialJetEnergy;

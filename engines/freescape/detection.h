@@ -22,6 +22,8 @@
 #ifndef FREESCAPE_DETECTION_H
 #define FREESCAPE_DETECTION_H
 
+#include "engines/advancedDetector.h"
+
 // Engine options
 #define GAMEOPTION_PRERECORDED_SOUNDS   GUIO_GAMEOPTIONS1
 #define GAMEOPTION_EXTENDED_TIMER       GUIO_GAMEOPTIONS2
@@ -33,5 +35,17 @@
 
 // Driller options
 #define GAMEOPTION_AUTOMATIC_DRILLING   GUIO_GAMEOPTIONS8
+
+namespace Freescape {
+
+struct FreescapeGameDescription {
+	AD_GAME_DESCRIPTION_HELPERS(desc);
+
+	ADGameDescription desc;
+
+	uint16 features;
+};
+
+} // End of namespace Freescape
 
 #endif

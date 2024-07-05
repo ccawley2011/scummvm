@@ -32,7 +32,7 @@
 
 namespace Freescape {
 
-DarkEngine::DarkEngine(OSystem *syst, const ADGameDescription *gd) : FreescapeEngine(syst, gd) {
+DarkEngine::DarkEngine(OSystem *syst, const FreescapeGameDescription *gd) : FreescapeEngine(syst, gd) {
 	if (isDOS())
 		initDOS();
 	else if (isSpectrum())

@@ -125,7 +125,7 @@ static const ADExtraGuiOptionsMap optionsList[] = {
 	AD_EXTRA_GUI_OPTIONS_TERMINATOR
 };
 
-class FreescapeMetaEngine : public AdvancedMetaEngine<ADGameDescription> {
+class FreescapeMetaEngine : public AdvancedMetaEngine<Freescape::FreescapeGameDescription> {
 public:
 	const char *getName() const override {
 		return "freescape";
@@ -135,19 +135,19 @@ public:
 		return optionsList;
 	}
 
-	Common::Error createInstance(OSystem *syst, Engine **engine, const ADGameDescription *gd) const override;
+	Common::Error createInstance(OSystem *syst, Engine **engine, const Freescape::FreescapeGameDescription *gd) const override;
 	void getSavegameThumbnail(Graphics::Surface &thumb) override;
 	Common::KeymapArray initKeymaps(const char *target) const override;
 };
 
-Common::Error FreescapeMetaEngine::createInstance(OSystem *syst, Engine **engine, const ADGameDescription *gd) const {
-	if (Common::String(gd->gameId) == "driller" || Common::String(gd->gameId) == "spacestationoblivion") {
+Common::Error FreescapeMetaEngine::createInstance(OSystem *syst, Engine **engine, const Freescape::FreescapeGameDescription *gd) const {
+	if (Common::String(gd->desc.gameId) == "driller" || Common::String(gd->desc.gameId) == "spacestationoblivion") {
 		*engine = (Engine *)new Freescape::DrillerEngine(syst, gd);
-	} else if (Common::String(gd->gameId) == "darkside") {
+	} else if (Common::String(gd->desc.gameId) == "darkside") {
 		*engine = (Engine *)new Freescape::DarkEngine(syst, gd);
-	} else if (Common::String(gd->gameId) == "totaleclipse" || Common::String(gd->gameId) == "totaleclipse2") {
+	} else if (Common::String(gd->desc.gameId) == "totaleclipse" || Common::String(gd->desc.gameId) == "totaleclipse2") {
 		*engine = (Engine *)new Freescape::EclipseEngine(syst, gd);
-	} else if (Common::String(gd->gameId) == "castlemaster") {
+	} else if (Common::String(gd->desc.gameId) == "castlemaster") {
 		*engine = (Engine *)new Freescape::CastleEngine(syst, gd);
 	} else
 		*engine = new Freescape::FreescapeEngine(syst, gd);
@@ -177,7 +177,7 @@ void FreescapeMetaEngine::getSavegameThumbnail(Graphics::Surface &thumb) {
 namespace Freescape {
 
 bool FreescapeEngine::isDemo() const {
-	return (bool)(_gameDescription->flags & ADGF_DEMO);
+	return (bool)(_gameDescription->desc.flags & ADGF_DEMO);
 }
 
 } // namespace Freescape

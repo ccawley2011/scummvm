@@ -42,7 +42,7 @@ enum {
 	kDrillerRigNoGas = 3
 };
 
-DrillerEngine::DrillerEngine(OSystem *syst, const ADGameDescription *gd) : FreescapeEngine(syst, gd) {
+DrillerEngine::DrillerEngine(OSystem *syst, const FreescapeGameDescription *gd) : FreescapeEngine(syst, gd) {
 
 	if (!Common::parseBool(ConfMan.get("automatic_drilling"), _useAutomaticDrilling))
 		error("Failed to parse bool from automatic_drilling option");

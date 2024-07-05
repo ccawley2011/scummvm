@@ -45,7 +45,7 @@ enum DarkFontSize {
 
 class DarkEngine : public FreescapeEngine {
 public:
-	DarkEngine(OSystem *syst, const ADGameDescription *gd);
+	DarkEngine(OSystem *syst, const FreescapeGameDescription *gd);
 
 	uint32 _initialEnergy;
 	uint32 _initialShield;

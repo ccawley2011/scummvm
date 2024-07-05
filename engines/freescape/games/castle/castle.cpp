@@ -28,7 +28,7 @@
 
 namespace Freescape {
 
-CastleEngine::CastleEngine(OSystem *syst, const ADGameDescription *gd) : FreescapeEngine(syst, gd) {
+CastleEngine::CastleEngine(OSystem *syst, const FreescapeGameDescription *gd) : FreescapeEngine(syst, gd) {
 	if (isSpectrum())
 		initZX();
 

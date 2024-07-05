@@ -23,7 +23,7 @@ namespace Freescape {
 
 class CastleEngine : public FreescapeEngine {
 public:
-	CastleEngine(OSystem *syst, const ADGameDescription *gd);
+	CastleEngine(OSystem *syst, const FreescapeGameDescription *gd);
 	~CastleEngine();
 
 	Graphics::ManagedSurface *_option;

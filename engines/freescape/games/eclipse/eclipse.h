@@ -36,7 +36,7 @@ enum {
 
 class EclipseEngine : public FreescapeEngine {
 public:
-	EclipseEngine(OSystem *syst, const ADGameDescription *gd);
+	EclipseEngine(OSystem *syst, const FreescapeGameDescription *gd);
 
 	void gotoArea(uint16 areaID, int entranceID) override;
 

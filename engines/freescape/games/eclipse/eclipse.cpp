@@ -27,7 +27,7 @@
 
 namespace Freescape {
 
-EclipseEngine::EclipseEngine(OSystem *syst, const ADGameDescription *gd) : FreescapeEngine(syst, gd) {
+EclipseEngine::EclipseEngine(OSystem *syst, const FreescapeGameDescription *gd) : FreescapeEngine(syst, gd) {
 	if (isDOS())
 		initDOS();
 	else if (isCPC())
