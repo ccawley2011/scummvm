@@ -166,6 +166,7 @@ public:
 	Common::Error loadGameState(int slot) override;
 	bool canLoadGameStateCurrently(Common::U32String *msg = nullptr) override;
 
+	Common::Language _language;
 	uint32 _features;
 
 	MemoryManager *_memory;

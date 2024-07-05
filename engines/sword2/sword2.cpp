@@ -60,6 +60,7 @@ Sword2Engine::Sword2Engine(OSystem *syst, const ADGameDescription *gameDesc) : E
 	SearchMan.addSubDirectoryMatching(gameDataDir, "streams"); // PSX video
 
 	_features = gameDesc->flags;
+	_language = gameDesc->language;
 	Sword2Engine::_platform = gameDesc->platform;
 
 	_bootParam = ConfMan.getInt("boot_param");

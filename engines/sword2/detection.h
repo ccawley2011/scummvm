@@ -28,10 +28,6 @@
 
 namespace Sword2 {
 
-enum {
-	GF_SPANISHDEMO = 1 << 0
-};
-
 #define GAMEOPTION_OBJECT_LABELS GUIO_GAMEOPTIONS1
 
 } // End of namespace Sword2

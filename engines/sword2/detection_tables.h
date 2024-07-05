@@ -53,7 +53,7 @@ static const ADGameDescription gameDescriptions[] = {
 				   "docks.clu",   "c46d1150d826fff7f343edcc1cc430f7", 20375248),
 		Common::ES_ESP,
 		Common::kPlatformWindows,
-		ADGF_DEMO | GF_SPANISHDEMO,
+		ADGF_DEMO,
 		GUIO0()
 	},
 
