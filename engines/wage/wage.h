@@ -58,8 +58,6 @@
 
 #include "wage/debugger.h"
 
-struct ADGameDescription;
-
 namespace Common {
 struct Event;
 }
@@ -78,6 +76,7 @@ class Gui;
 class Obj;
 class Scene;
 class World;
+struct WageGameDescription;
 
 typedef Common::Array<Obj *> ObjArray;
 typedef Common::Array<Chr *> ChrArray;
@@ -126,7 +125,7 @@ bool isStorageScene(const Common::String &name);
 class WageEngine : public Engine {
 	friend class Dialog;
 public:
-	WageEngine(OSystem *syst, const ADGameDescription *gameDesc);
+	WageEngine(OSystem *syst, const WageGameDescription *gameDesc);
 	~WageEngine() override;
 
 	bool hasFeature(EngineFeature f) const override;
@@ -250,7 +249,7 @@ private:
 	void restart();
 
 private:
-	const ADGameDescription *_gameDescription;
+	const WageGameDescription *_gameDescription;
 
 	Common::MacResManager *_resManager;
 

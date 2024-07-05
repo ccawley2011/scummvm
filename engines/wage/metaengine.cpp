@@ -27,26 +27,27 @@
 #include "engines/advancedDetector.h"
 
 #include "wage/wage.h"
+#include "wage/detection.h"
 
 namespace Wage {
 
 uint32 WageEngine::getFeatures() {
-	return _gameDescription->flags;
+	return _gameDescription->features;
 }
 
 const char *WageEngine::getGameFile() const {
-	return _gameDescription->filesDescriptions[0].fileName;
+	return _gameDescription->desc.filesDescriptions[0].fileName;
 }
 
 } // End of namespace Wage
 
-class WageMetaEngine : public AdvancedMetaEngine<ADGameDescription> {
+class WageMetaEngine : public AdvancedMetaEngine<Wage::WageGameDescription> {
 public:
 	const char *getName() const override {
 		return "wage";
 	}
 
-	Common::Error createInstance(OSystem *syst, Engine **engine, const ADGameDescription *desc) const override;
+	Common::Error createInstance(OSystem *syst, Engine **engine, const Wage::WageGameDescription *desc) const override;
 
 	bool hasFeature(MetaEngineFeature f) const override;
 	int getMaximumSaveSlot() const override;
@@ -64,7 +65,7 @@ bool Wage::WageEngine::hasFeature(EngineFeature f) const {
 		(f == kSupportsSavingDuringRuntime);
 }
 
-Common::Error WageMetaEngine::createInstance(OSystem *syst, Engine **engine, const ADGameDescription *desc) const {
+Common::Error WageMetaEngine::createInstance(OSystem *syst, Engine **engine, const Wage::WageGameDescription *desc) const {
 	*engine = new Wage::WageEngine(syst, desc);
 	return Common::kNoError;
 }

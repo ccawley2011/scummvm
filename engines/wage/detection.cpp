@@ -24,6 +24,8 @@
 
 #include "engines/advancedDetector.h"
 
+#include "wage/detection.h"
+
 static const PlainGameDescriptor wageGames[] = {
 	{"afm", "Another Fine Mess"},
 	{"amot", "A Mess O' Trouble"},
@@ -39,7 +41,7 @@ static const PlainGameDescriptor wageGames[] = {
 
 #include "wage/detection_tables.h"
 
-class WageMetaEngineDetection : public AdvancedMetaEngineDetection<ADGameDescription> {
+class WageMetaEngineDetection : public AdvancedMetaEngineDetection<Wage::WageGameDescription> {
 public:
 	WageMetaEngineDetection() : AdvancedMetaEngineDetection(Wage::gameDescriptions, wageGames) {
 		_md5Bytes = 2 * 1024 * 1024;

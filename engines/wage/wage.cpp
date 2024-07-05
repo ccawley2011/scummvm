@@ -64,7 +64,7 @@
 
 namespace Wage {
 
-WageEngine::WageEngine(OSystem *syst, const ADGameDescription *desc) : Engine(syst), _gameDescription(desc) {
+WageEngine::WageEngine(OSystem *syst, const WageGameDescription *desc) : Engine(syst), _gameDescription(desc) {
 	_rnd = new Common::RandomSource("wage");
 
 	_aim = -1;
