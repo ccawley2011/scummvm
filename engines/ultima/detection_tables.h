@@ -336,11 +336,11 @@ static const UltimaGameDescription GAME_DESCRIPTIONS[] = {
 			AD_ENTRY1s("eusecode.flx", "0a0f64507adc4f280129c735ee9cad42", 556613),
 			Common::EN_ANY,
 			Common::kPlatformDOS,
-			ADGF_USECODE_DEFAULT,
+			ADGF_NO_FLAGS,
 			GUI_OPTIONS_REMORSE
 		},
 		GAME_CRUSADER_REM,
-		0
+		GF_USECODE_DEFAULT
 	},
 
 	// Crusader - No Remorse provided by andy155
@@ -366,11 +366,11 @@ static const UltimaGameDescription GAME_DESCRIPTIONS[] = {
 			AD_ENTRY1s("eusecode.flx", "8c74327e30088ce93f08a15a7f85b3ce", 418556),
 			Common::EN_ANY,
 			Common::kPlatformDOS,
-			ADGF_UNSTABLE | ADGF_USECODE_ORIG,
+			ADGF_UNSTABLE,
 			GUI_OPTIONS_REMORSE
 		},
 		GAME_CRUSADER_REM,
-		0
+		GF_USECODE_ORIG
 	},
 
 	// Crusader - No Remorse (French) provided by BeWorld2018
@@ -381,11 +381,11 @@ static const UltimaGameDescription GAME_DESCRIPTIONS[] = {
 			AD_ENTRY1s("eusecode.flx", "efbd33d6a5e8f14e9c57f963c3fbe939", 423051),
 			Common::FR_FRA,
 			Common::kPlatformDOS,
-			ADGF_UNSTABLE | ADGF_USECODE_FR,
+			ADGF_UNSTABLE,
 			GUI_OPTIONS_REMORSE
 		},
 		GAME_CRUSADER_REM,
-		0
+		GF_USECODE_FR
 	},
 
 	// Crusader - No Remorse (Spanish) provided by Wesker
@@ -396,11 +396,11 @@ static const UltimaGameDescription GAME_DESCRIPTIONS[] = {
 			AD_ENTRY1s("eusecode.flx", "36a16d70c97d0379f1133cc743c31313", 558493),
 			Common::ES_ESP,
 			Common::kPlatformDOS,
-			ADGF_USECODE_ES,
+			ADGF_NO_FLAGS,
 			GUI_OPTIONS_REMORSE
 		},
 		GAME_CRUSADER_REM,
-		0
+		GF_USECODE_ES
 	},
 
 	// Crusader - No Remorse (Spanish fan patch) provided by Wesker
@@ -411,11 +411,11 @@ static const UltimaGameDescription GAME_DESCRIPTIONS[] = {
 			AD_ENTRY1s("eusecode.flx", "a8b5c421c5d74be8c69fcd4fecadd1dd", 559015),
 			Common::ES_ESP,
 			Common::kPlatformDOS,
-			ADGF_USECODE_DEFAULT,
+			ADGF_NO_FLAGS,
 			GUI_OPTIONS_REMORSE
 		},
 		GAME_CRUSADER_REM,
-		0
+		GF_USECODE_DEFAULT
 	},
 
 	// Crusader - No Remorse (Japanese) provided by Dominus
@@ -426,11 +426,11 @@ static const UltimaGameDescription GAME_DESCRIPTIONS[] = {
 			AD_ENTRY1s("jusecode.flx", "088105959be4f2de1cb9e796e71c5f2d", 554522),
 			Common::JA_JPN,
 			Common::kPlatformWindows,
-			ADGF_UNSTABLE | ADGF_USECODE_JA,
+			ADGF_UNSTABLE,
 			GUI_OPTIONS_REMORSE
 		},
 		GAME_CRUSADER_REM,
-		0
+		GF_USECODE_JA
 	},
 
 	// Crusader - No Remorse - Demo V1.12D
@@ -456,11 +456,11 @@ static const UltimaGameDescription GAME_DESCRIPTIONS[] = {
 			AD_ENTRY1s("eusecode.flx", "1bb360156b7240a1f05eb9bda01c54db", 481652),
 			Common::EN_ANY,
 			Common::kPlatformDOS,
-			ADGF_UNSTABLE | ADGF_USECODE_DEFAULT,
+			ADGF_UNSTABLE,
 			GUI_OPTIONS_REGRET
 		},
 		GAME_CRUSADER_REG,
-		0
+		GF_USECODE_DEFAULT
 	},
 
 	// Crusader - No Regret - German V1.07NV
@@ -471,11 +471,11 @@ static const UltimaGameDescription GAME_DESCRIPTIONS[] = {
 			AD_ENTRY1s("eusecode.flx", "1824d9725de45a8b49f058c12c6cf5c3", 484445),
 			Common::DE_DEU,
 			Common::kPlatformDOS,
-			ADGF_UNSTABLE | ADGF_USECODE_DE,
+			ADGF_UNSTABLE,
 			GUI_OPTIONS_REGRET
 		},
 		GAME_CRUSADER_REG,
-		0
+		GF_USECODE_DE
 	},
 
 	// Crusader - No Regret - Demo V1.08
@@ -501,11 +501,11 @@ static const UltimaGameDescription GAME_DESCRIPTIONS[] = {
 			AD_ENTRY1s("eusecode.flx", "f5906654047ed1dab75760da6426ecfa", 478125),
 			Common::ES_ESP,
 			Common::kPlatformDOS,
-			ADGF_UNSTABLE | ADGF_USECODE_ES,
+			ADGF_UNSTABLE,
 			GUI_OPTIONS_REGRET
 		},
 		GAME_CRUSADER_REG,
-		0
+		GF_USECODE_ES
 	},
 #endif
 

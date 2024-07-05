@@ -26,7 +26,7 @@
 
 namespace Ultima {
 
-enum GameId {
+enum GameId : uint8 {
 	GAME_AKALABETH,
 	GAME_ULTIMA1,
 	GAME_ULTIMA2,
@@ -52,14 +52,14 @@ enum UltimaGameFeatures {
 // Custom game detector flags used by Ultima engines
 enum UltimaGameFlags {
 	// Usecode variants (used by Crusader games)
-	ADGF_USECODE_MASK = (0xF | ADGF_DEMO),	// Mask of flags data used for usecode variants
-	ADGF_USECODE_DEFAULT = 0,	// Default usecode tables (latest/gog editions of game)
-	ADGF_USECODE_DEMO = ADGF_DEMO, // Demo versions of each game (re-use demo flag)
-	ADGF_USECODE_ORIG = 1, 		// Original (eg, 1.01) CD version
-	ADGF_USECODE_ES = 2,		// Spanish version of game
-	ADGF_USECODE_DE = 3, 		// German version of game
-	ADGF_USECODE_FR = 4,		// French version of game
-	ADGF_USECODE_JA = 5			// Japanese version of game
+	GF_USECODE_MASK = (0x1F),	// Mask of flags data used for usecode variants
+	GF_USECODE_DEFAULT = 0,	// Default usecode tables (latest/gog editions of game)
+	GF_USECODE_ORIG = 1, 		// Original (eg, 1.01) CD version
+	GF_USECODE_ES = 2,		// Spanish version of game
+	GF_USECODE_DE = 3, 		// German version of game
+	GF_USECODE_FR = 4,		// French version of game
+	GF_USECODE_JA = 5,			// Japanese version of game
+	GF_USECODE_DEMO = 0x100 // Demo versions of each game
 };
 
 struct UltimaGameDescription {
@@ -67,7 +67,7 @@ struct UltimaGameDescription {
 
 	ADGameDescription desc;
 	GameId gameId;
-	uint32 features;
+	uint8 features;
 };
 
 #define GAMEOPTION_ORIGINAL_SAVELOAD GUIO_GAMEOPTIONS1

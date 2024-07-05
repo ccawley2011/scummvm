@@ -418,34 +418,34 @@ bool Ultima8Engine::setupGame() {
 		info->_type = GameInfo::GAME_REGRET;
 
 	if (info->_type == GameInfo::GAME_REMORSE) {
-		switch (_gameDescription->desc.flags & ADGF_USECODE_MASK) {
-		case ADGF_USECODE_DEMO:
+		switch (_gameDescription->features & GF_USECODE_MASK) {
+		case GF_USECODE_DEMO:
 			info->_ucOffVariant = GameInfo::GAME_UC_DEMO;
 			break;
-		case ADGF_USECODE_ORIG:
+		case GF_USECODE_ORIG:
 			info->_ucOffVariant = GameInfo::GAME_UC_ORIG;
 			break;
-		case ADGF_USECODE_ES:
+		case GF_USECODE_ES:
 			info->_ucOffVariant = GameInfo::GAME_UC_REM_ES;
 			break;
-		case ADGF_USECODE_FR:
+		case GF_USECODE_FR:
 			info->_ucOffVariant = GameInfo::GAME_UC_REM_FR;
 			break;
-		case ADGF_USECODE_JA:
+		case GF_USECODE_JA:
 			info->_ucOffVariant = GameInfo::GAME_UC_REM_JA;
 			break;
 		default:
 			break;
 		}
 	} else if (info->_type == GameInfo::GAME_REGRET) {
-		switch (_gameDescription->desc.flags & ADGF_USECODE_MASK) {
-		case ADGF_USECODE_DEMO:
+		switch (_gameDescription->features & GF_USECODE_MASK) {
+		case GF_USECODE_DEMO:
 			info->_ucOffVariant = GameInfo::GAME_UC_DEMO;
 			break;
-		case ADGF_USECODE_ORIG:
+		case GF_USECODE_ORIG:
 			info->_ucOffVariant = GameInfo::GAME_UC_ORIG;
 			break;
-		case ADGF_USECODE_DE:
+		case GF_USECODE_DE:
 			info->_ucOffVariant = GameInfo::GAME_UC_REG_DE;
 			break;
 		default:
