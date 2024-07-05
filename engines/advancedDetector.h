@@ -135,27 +135,32 @@ struct ADGameFileDescription {
  *
  * Note that the lowest 16 bits are currently reserved for use by the client code.
  */
-enum ADGameFlags : uint {
+enum ADGameFlags : uint16 {
 	ADGF_NO_FLAGS        =  0u,        ///< No flags.
-	ADGF_TAILMD5         = (1u << 16), ///< Calculate the MD5 for this entry from the end of the file.
-	ADGF_AUTOGENTARGET   = (1u << 17), ///< Automatically generate gameid from @ref ADGameDescription::extra.
-	ADGF_UNSTABLE        = (1u << 18), ///< Flag to designate not yet officially supported games that are not fit for public testing.
-	ADGF_TESTING         = (1u << 19), ///< Flag to designate not yet officially supported games that are fit for public testing.
-	ADGF_PIRATED         = (1u << 20), ///< Flag to designate well-known pirated versions with cracks.
-	ADGF_UNSUPPORTED     = (1u << 21), /*!< Flag to mark certain versions (like badly protected full games as demos) not to be run for various reasons.
+	ADGF_TAILMD5         = (1u << 0), ///< Calculate the MD5 for this entry from the end of the file.
+	ADGF_AUTOGENTARGET   = (1u << 1), ///< Automatically generate gameid from @ref ADGameDescription::extra.
+	ADGF_UNSTABLE        = (1u << 2), ///< Flag to designate not yet officially supported games that are not fit for public testing.
+	ADGF_TESTING         = (1u << 3), ///< Flag to designate not yet officially supported games that are fit for public testing.
+	ADGF_PIRATED         = (1u << 4), ///< Flag to designate well-known pirated versions with cracks.
+	ADGF_UNSUPPORTED     = (1u << 5), /*!< Flag to mark certain versions (like badly protected full games as demos) not to be run for various reasons.
 	                                        A custom message can be provided in the @ref ADGameDescription::extra field. */
-	ADGF_WARNING         = (1u << 22), /*!< Flag to mark certain versions to show confirmation warning before proceeding.
+	ADGF_WARNING         = (1u << 6), /*!< Flag to mark certain versions to show confirmation warning before proceeding.
 	                                        A custom message should be provided in the @ref ADGameDescription::extra field. */
-	ADGF_ADDENGLISH      = (1u << 23), ///< Always add English as a language option.
-	ADGF_MACRESFORK      = (1u << 24), ///< Calculate the MD5 for this entry from the resource fork.
-	ADGF_USEEXTRAASTITLE = (1u << 25), ///< Use @ref ADGameDescription::extra as the main game title, not gameid.
-	ADGF_DROPLANGUAGE    = (1u << 26), ///< Do not add language to gameid.
-	ADGF_DROPPLATFORM    = (1u << 27), ///< Do not add platform to gameid.
-	ADGF_CD              = (1u << 28), ///< Add "-cd" to gameid.
-	ADGF_DVD             = (1u << 29), ///< Add "-dvd" to gameid.
-	ADGF_DEMO            = (1u << 30), ///< Add "-demo" to gameid.
-	ADGF_REMASTERED      = (1u << 31)  ///< Add "-remastered' to gameid.
+	ADGF_ADDENGLISH      = (1u << 7), ///< Always add English as a language option.
+	ADGF_MACRESFORK      = (1u << 8), ///< Calculate the MD5 for this entry from the resource fork.
+	ADGF_USEEXTRAASTITLE = (1u << 9), ///< Use @ref ADGameDescription::extra as the main game title, not gameid.
+	ADGF_DROPLANGUAGE    = (1u << 10), ///< Do not add language to gameid.
+	ADGF_DROPPLATFORM    = (1u << 11), ///< Do not add platform to gameid.
+	ADGF_CD              = (1u << 12), ///< Add "-cd" to gameid.
+	ADGF_DVD             = (1u << 13), ///< Add "-dvd" to gameid.
+	ADGF_DEMO            = (1u << 14), ///< Add "-demo" to gameid.
+	ADGF_REMASTERED      = (1u << 15)  ///< Add "-remastered' to gameid.
 };
+
+inline ADGameFlags operator|(ADGameFlags a, ADGameFlags b)
+{
+    return static_cast<ADGameFlags>(static_cast<uint16>(a) | static_cast<uint16>(b));
+}
 
 /**
  * Data table describing a game variant.
@@ -200,10 +205,9 @@ struct ADGameDescription {
 	/**
 	 * A bitmask of extra flags.
 	 *
-	 * The top 16 bits are reserved for generic flags defined in @ref ADGameFlags.
-	 * This leaves 16 bits to be used by the client code.
+	 * This is reserved for generic flags defined in @ref ADGameFlags.
 	 */
-	uint32 flags;
+	ADGameFlags flags;
 
 	/**
 	 * Game features that are user-controllable.

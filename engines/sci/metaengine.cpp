@@ -515,7 +515,7 @@ void constructFallbackDetectionEntry(const Common::String &gameId, Common::Platf
 	s_fallbackDesc.gameId = s_fallbackGameIdBuf;
 
 	if (isDemo)
-		s_fallbackDesc.flags |= ADGF_DEMO;
+		s_fallbackDesc.flags = s_fallbackDesc.flags | ADGF_DEMO;
 
 	if (isCD) {
 		s_fallbackDesc.guiOptions = GUIO3(GAMEOPTION_PREFER_DIGITAL_SFX, GAMEOPTION_ORIGINAL_SAVELOAD, GAMEOPTION_MIDI_MODE);

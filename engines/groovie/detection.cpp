@@ -55,7 +55,7 @@ static const PlainGameDescriptor groovieGames[] = {
 
 	{nullptr, nullptr}};
 
-const int BASE_FLAGS = ADGF_NO_FLAGS;
+const ADGameFlags BASE_FLAGS = ADGF_NO_FLAGS;
 
 #define GROOVIEGAME(id, extra, f1, x1, s1, f2, x2, s2, language, platform, flags, guiOptions, version) \
 	{                                                                                                  \

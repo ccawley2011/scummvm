@@ -213,8 +213,8 @@ public:
 		if (!extra.empty()) {
 			Common::strlcpy(s_fallbackExtraBuf, extra.c_str(), sizeof(s_fallbackExtraBuf) - 1);
 			s_fallbackDesc.extra = s_fallbackExtraBuf;
-			s_fallbackDesc.flags |= ADGF_USEEXTRAASTITLE;
-			s_fallbackDesc.flags |= ADGF_AUTOGENTARGET;
+			s_fallbackDesc.flags = s_fallbackDesc.flags | ADGF_USEEXTRAASTITLE;
+			s_fallbackDesc.flags = s_fallbackDesc.flags | ADGF_AUTOGENTARGET;
 		}
 
 		ADDetectedGame game(&s_fallbackDesc);
