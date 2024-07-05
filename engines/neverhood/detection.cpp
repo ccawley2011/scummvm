@@ -33,95 +33,119 @@ static const PlainGameDescriptor neverhoodGames[] = {
 
 namespace Neverhood {
 
-static const ADGameDescription gameDescriptions[] = {
+static const NeverhoodGameDescription gameDescriptions[] = {
 
 	// Neverhood English version
 	{
-		"neverhood",
-		nullptr,
-		AD_ENTRY1s("hd.blb", "22958d968458c9ff221aee38577bb2b2", 4279716),
-		Common::EN_ANY,
-		Common::kPlatformWindows,
-		ADGF_DROPPLATFORM,
-		GUIO1(GUIO_NONE)
+		{
+			"neverhood",
+			nullptr,
+			AD_ENTRY1s("hd.blb", "22958d968458c9ff221aee38577bb2b2", 4279716),
+			Common::EN_ANY,
+			Common::kPlatformWindows,
+			ADGF_DROPPLATFORM,
+			GUIO1(GUIO_NONE)
+		},
+		0
 	},
 
 	// Neverhood English big demo version
 	{
-		"neverhood",
-		"Big Demo",
-		AD_ENTRY1s("nevdemo.blb", "e637221d296f9a25ff22eaed96b07519", 117274189),
-		Common::EN_ANY,
-		Common::kPlatformWindows,
-		GF_BIG_DEMO | ADGF_DEMO | ADGF_DROPPLATFORM,
-		GUIO1(GUIO_NONE)
+		{
+			"neverhood",
+			"Big Demo",
+			AD_ENTRY1s("nevdemo.blb", "e637221d296f9a25ff22eaed96b07519", 117274189),
+			Common::EN_ANY,
+			Common::kPlatformWindows,
+			ADGF_DEMO | ADGF_DROPPLATFORM,
+			GUIO1(GUIO_NONE)
+		},
+		GF_BIG_DEMO
 	},
 
 	// Neverhood English demo version
 	{
-		"neverhood",
-		"Demo",
-		AD_ENTRY1s("nevdemo.blb", "05b735cfb1086892bec79b54dca5545b", 22564568),
-		Common::EN_ANY,
-		Common::kPlatformWindows,
-		ADGF_DEMO | ADGF_DROPPLATFORM,
-		GUIO1(GUIO_NONE)
+		{
+			"neverhood",
+			"Demo",
+			AD_ENTRY1s("nevdemo.blb", "05b735cfb1086892bec79b54dca5545b", 22564568),
+			Common::EN_ANY,
+			Common::kPlatformWindows,
+			ADGF_DEMO | ADGF_DROPPLATFORM,
+			GUIO1(GUIO_NONE)
+		},
+		0
 	},
 
 	// Neverhood earlier English demo version
 	{
-		"neverhood",
-		"Demo",
-		AD_ENTRY1s("nevdemo.blb", "9cbc33bc8ebacacfc8071f3e26a9c85f", 22357020),
-		Common::EN_ANY,
-		Common::kPlatformWindows,
-		ADGF_DEMO | ADGF_DROPPLATFORM,
-		GUIO1(GUIO_NONE)
+		{
+			"neverhood",
+			"Demo",
+			AD_ENTRY1s("nevdemo.blb", "9cbc33bc8ebacacfc8071f3e26a9c85f", 22357020),
+			Common::EN_ANY,
+			Common::kPlatformWindows,
+			ADGF_DEMO | ADGF_DROPPLATFORM,
+			GUIO1(GUIO_NONE)
+		},
+		0
 	},
 
 	// Neverhood lite English demo version
 	{
-		"neverhood",
-		"Demo",
-		AD_ENTRY1s("nevdemo.blb", "816741610771f6434a673b6821e88899", 11986100),
-		Common::EN_ANY,
-		Common::kPlatformWindows,
-		ADGF_DEMO | ADGF_DROPPLATFORM,
-		GUIO1(GUIO_NONE)
+		{
+			"neverhood",
+			"Demo",
+			AD_ENTRY1s("nevdemo.blb", "816741610771f6434a673b6821e88899", 11986100),
+			Common::EN_ANY,
+			Common::kPlatformWindows,
+			ADGF_DEMO | ADGF_DROPPLATFORM,
+			GUIO1(GUIO_NONE)
+		},
+		0
 	},
 
 	// Neverhood Russian version. Dyadyushka Risech
 	{
-		"neverhood",
-		"DR",
-		AD_ENTRY1s("hd.blb", "787951bf094aad9962291e69a707bdde", 4248635),
-		Common::RU_RUS,
-		Common::kPlatformWindows,
-		ADGF_DROPPLATFORM,
-		GUIO1(GUIO_NONE)
+		{
+			"neverhood",
+			"DR",
+			AD_ENTRY1s("hd.blb", "787951bf094aad9962291e69a707bdde", 4248635),
+			Common::RU_RUS,
+			Common::kPlatformWindows,
+			ADGF_DROPPLATFORM,
+			GUIO1(GUIO_NONE)
+		},
+		0
 	},
 
 	// Neverhood Russian version. Fargus
 	{
-		"neverhood",
-		"Fargus",
-		AD_ENTRY1s("hd.blb", "c87c69db423f560d3708e9de78751a7f", 4425816),
-		Common::RU_RUS,
-		Common::kPlatformWindows,
-		ADGF_DROPPLATFORM,
-		GUIO1(GUIO_NONE)
+		{
+			"neverhood",
+			"Fargus",
+			AD_ENTRY1s("hd.blb", "c87c69db423f560d3708e9de78751a7f", 4425816),
+			Common::RU_RUS,
+			Common::kPlatformWindows,
+			ADGF_DROPPLATFORM,
+			GUIO1(GUIO_NONE)
+		},
+		0
 	},
 
 	// Neverhood Japanese version
 	// Bugreport #11074
 	{
-		"neverhood",
-		"",
-		AD_ENTRY1s("hd.blb", "c791725bbbc23c0f8bf78eece4555565", 4308928),
-		Common::JA_JPN,
-		Common::kPlatformWindows,
-		ADGF_DROPPLATFORM,
-		GUIO1(GUIO_NONE)
+		{
+			"neverhood",
+			"",
+			AD_ENTRY1s("hd.blb", "c791725bbbc23c0f8bf78eece4555565", 4308928),
+			Common::JA_JPN,
+			Common::kPlatformWindows,
+			ADGF_DROPPLATFORM,
+			GUIO1(GUIO_NONE)
+		},
+		0
 	},
 
 	AD_TABLE_END_MARKER
@@ -130,7 +154,7 @@ static const ADGameDescription gameDescriptions[] = {
 } // End of namespace Neverhood
 
 
-class NeverhoodMetaEngineDetection : public AdvancedMetaEngineDetection<ADGameDescription> {
+class NeverhoodMetaEngineDetection : public AdvancedMetaEngineDetection<Neverhood::NeverhoodGameDescription> {
 public:
 	NeverhoodMetaEngineDetection() : AdvancedMetaEngineDetection(Neverhood::gameDescriptions, neverhoodGames) {
 		_guiOptions = GUIO5(GUIO_NOMIDI, GAMEOPTION_ORIGINAL_SAVELOAD, GAMEOPTION_SKIP_HALL_OF_RECORDS,

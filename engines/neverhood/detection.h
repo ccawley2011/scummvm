@@ -22,10 +22,20 @@
 #ifndef NEVERHOOD_DETECTION_H
 #define NEVERHOOD_DETECTION_H
 
+#include "engines/advancedDetector.h"
+
 namespace Neverhood {
 
 enum NeverhoodGameFeatures {
 	GF_BIG_DEMO = (1 << 0)
+};
+
+struct NeverhoodGameDescription {
+	AD_GAME_DESCRIPTION_HELPERS(desc);
+
+	ADGameDescription desc;
+
+	uint8 features;
 };
 
 #define GAMEOPTION_ORIGINAL_SAVELOAD      GUIO_GAMEOPTIONS1

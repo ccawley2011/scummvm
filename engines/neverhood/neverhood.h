@@ -34,8 +34,6 @@
 #include "neverhood/console.h"
 #include "neverhood/messages.h"
 
-struct ADGameDescription;
-
 namespace Neverhood {
 
 class GameModule;
@@ -46,6 +44,7 @@ class SoundMan;
 class AudioResourceMan;
 class StaticData;
 struct NPoint;
+struct NeverhoodGameDescription;
 
 struct GameState {
 	int sceneNum;
@@ -64,11 +63,11 @@ protected:
 	void mainLoop();
 
 public:
-	NeverhoodEngine(OSystem *syst, const ADGameDescription *gameDesc);
+	NeverhoodEngine(OSystem *syst, const NeverhoodGameDescription *gameDesc);
 	~NeverhoodEngine() override;
 
 	// Detection related functions
-	const ADGameDescription *_gameDescription;
+	const NeverhoodGameDescription *_gameDescription;
 	const char *getGameId() const;
 	Common::Platform getPlatform() const;
 	Common::Language getLanguage() const;

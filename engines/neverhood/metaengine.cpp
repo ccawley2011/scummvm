@@ -31,23 +31,23 @@
 namespace Neverhood {
 
 const char *NeverhoodEngine::getGameId() const {
-	return _gameDescription->gameId;
+	return _gameDescription->desc.gameId;
 }
 
 Common::Platform NeverhoodEngine::getPlatform() const {
-	return _gameDescription->platform;
+	return _gameDescription->desc.platform;
 }
 
 Common::Language NeverhoodEngine::getLanguage() const {
-	return _gameDescription->language;
+	return _gameDescription->desc.language;
 }
 
 bool NeverhoodEngine::isDemo() const {
-	return _gameDescription->flags & ADGF_DEMO;
+	return _gameDescription->desc.flags & ADGF_DEMO;
 }
 
 bool NeverhoodEngine::isBigDemo() const {
-	return _gameDescription->flags & GF_BIG_DEMO;
+	return _gameDescription->features & GF_BIG_DEMO;
 }
 
 bool NeverhoodEngine::applyResourceFixes() const {
@@ -56,7 +56,7 @@ bool NeverhoodEngine::applyResourceFixes() const {
 
 } // End of namespace Neverhood
 
-class NeverhoodMetaEngine : public AdvancedMetaEngine<ADGameDescription> {
+class NeverhoodMetaEngine : public AdvancedMetaEngine<Neverhood::NeverhoodGameDescription> {
 public:
 	const char *getName() const override {
 		return "neverhood";
@@ -67,7 +67,7 @@ public:
 	}
 
 	bool hasFeature(MetaEngineFeature f) const override;
-	Common::Error createInstance(OSystem *syst, Engine **engine, const ADGameDescription *desc) const override;
+	Common::Error createInstance(OSystem *syst, Engine **engine, const Neverhood::NeverhoodGameDescription *desc) const override;
 
 	SaveStateList listSaves(const char *target) const override;
 	int getMaximumSaveSlot() const override;
@@ -94,7 +94,7 @@ bool Neverhood::NeverhoodEngine::hasFeature(EngineFeature f) const {
 		(f == kSupportsSavingDuringRuntime);
 }
 
-Common::Error NeverhoodMetaEngine::createInstance(OSystem *syst, Engine **engine, const ADGameDescription *desc) const {
+Common::Error NeverhoodMetaEngine::createInstance(OSystem *syst, Engine **engine, const Neverhood::NeverhoodGameDescription *desc) const {
 	*engine = new Neverhood::NeverhoodEngine(syst, desc);
 	return Common::kNoError;
 }

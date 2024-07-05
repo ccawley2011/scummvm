@@ -46,7 +46,7 @@
 
 namespace Neverhood {
 
-NeverhoodEngine::NeverhoodEngine(OSystem *syst, const ADGameDescription *gameDesc) :
+NeverhoodEngine::NeverhoodEngine(OSystem *syst, const NeverhoodGameDescription *gameDesc) :
 		Engine(syst), _gameDescription(gameDesc), _haveSubtitles(false), _nhcOffsetFont(false) {
 	// Setup mixer
 	if (!_mixer->isReady()) {
