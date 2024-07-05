@@ -88,13 +88,13 @@ Common::Error VCruiseEngine::run() {
 	Common::List<Graphics::PixelFormat> pixelFormats = _system->getSupportedFormats();
 
 #if !defined(USE_JPEG)
-	if (_gameDescription->desc.flags & VCRUISE_GF_NEED_JPEG) {
+	if (_gameDescription->features & VCRUISE_GF_NEED_JPEG) {
 		return Common::Error(Common::kUnknownError, _s("This game requires JPEG support, which was not compiled in."));
 	}
 #endif
 
 #if !defined(USE_OGG) || !defined(USE_VORBIS)
-	if (_gameDescription->desc.flags & VCRUISE_GF_WANT_OGG_VORBIS) {
+	if (_gameDescription->features & VCRUISE_GF_WANT_OGG_VORBIS) {
 		GUI::MessageDialog dialog(
 			_("Music for this game requires Ogg Vorbis support, which was not compiled in.\n"
 			  "The game will still play, but will not have any music."),
@@ -104,7 +104,7 @@ Common::Error VCruiseEngine::run() {
 #endif
 
 #if !defined(USE_MAD)
-	if (_gameDescription->desc.flags & VCRUISE_GF_WANT_MP3) {
+	if (_gameDescription->features & VCRUISE_GF_WANT_MP3) {
 		GUI::MessageDialog dialog(
 			_("Music for this game requires MP3 support, which was not compiled in.\n"
 			  "The game will still play, but will not have any music."),
@@ -124,7 +124,7 @@ Common::Error VCruiseEngine::run() {
 		}
 	}
 
-	if (_gameDescription->desc.flags & VCRUISE_GF_GENTEE_PACKAGE) {
+	if (_gameDescription->features & VCRUISE_GF_GENTEE_PACKAGE) {
 		Common::File *f = new Common::File();
 
 		if (!f->open(_gameDescription->desc.filesDescriptions[0].fileName))
@@ -221,7 +221,7 @@ Common::Error VCruiseEngine::run() {
 
 	const char *exeName = _gameDescription->desc.filesDescriptions[0].fileName;
 
-	if (_gameDescription->desc.flags & VCRUISE_GF_GENTEE_PACKAGE)
+	if (_gameDescription->features & VCRUISE_GF_GENTEE_PACKAGE)
 		exeName = "Schizm.exe";
 
 	_runtime->loadCursors(exeName);
@@ -273,7 +273,7 @@ Common::Error VCruiseEngine::run() {
 	if (midiDrv)
 		midiDrv->close();
 
-	if (_gameDescription->desc.flags & VCRUISE_GF_GENTEE_PACKAGE)
+	if (_gameDescription->features & VCRUISE_GF_GENTEE_PACKAGE)
 		SearchMan.remove("VCruiseInstallerPackage");
 
 	// Flush any settings changes made in-game
@@ -400,7 +400,7 @@ void VCruiseEngine::initializePath(const Common::FSNode &gamePath) {
 
 	const char *gameSubPath = nullptr;
 
-	if (_gameDescription->desc.flags & VCRUISE_GF_GENTEE_PACKAGE) {
+	if (_gameDescription->features & VCRUISE_GF_GENTEE_PACKAGE) {
 		if (_gameDescription->gameID == GID_SCHIZM)
 			gameSubPath = "Schizm";
 	}

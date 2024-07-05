@@ -37,10 +37,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 					   "00010001.wav", "d385bb2f1b10ea8c13bbb2948794c9f6", 74950),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_MP3 | ADGF_UNSTABLE,
+			ADGF_UNSTABLE,
 			GUIO0()
 		},
 		GID_AD2044,
+		VCRUISE_GF_WANT_MP3,
 		Common::EN_ANY,
 	},
 	{ // Reah: Face the Unknown, English DVD version
@@ -51,10 +52,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 					   "0170_b.wav", "5b705300b4fee3ceb821a1b55884a722", 129248),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_MP3,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_REAH,
+		VCRUISE_GF_WANT_MP3,
 		Common::EN_ANY,
 	},
 	{ // Reah: Face the Unknown, English digital (GOG) version
@@ -65,10 +67,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 					   "0170_b.wav", "5b705300b4fee3ceb821a1b55884a722", 129248),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_MP3,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_REAH,
+		VCRUISE_GF_WANT_MP3,
 		Common::EN_ANY,
 	},
 	{ // Reah: Face the Unknown, English 6 CD Version
@@ -83,6 +86,7 @@ static const VCruiseGameDescription gameDescriptions[] = {
 			GUIO0()
 		},
 		GID_REAH,
+		0,
 		Common::EN_ANY,
 	},
 	{ // Reah: Face the Unknown, English 6 CD Version (Project Two Interactive variation)
@@ -97,6 +101,7 @@ static const VCruiseGameDescription gameDescriptions[] = {
 			GUIO0()
 		},
 		GID_REAH,
+		0,
 		Common::EN_ANY,
 	},
 	{ // Reah: Face the Unknown, German 6 CD Version
@@ -111,6 +116,7 @@ static const VCruiseGameDescription gameDescriptions[] = {
 			GUIO0()
 		},
 		GID_REAH,
+		0,
 		Common::DE_DEU,
 	},
 	{ // Reah: Face the Unknown, Russian 6 CD Version
@@ -122,10 +128,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 					   "Speech01.txt", "734478c94944eab9c954c612c70efb9a", 72694),
 			Common::RU_RUS,
 			Common::kPlatformWindows,
-			VCRUISE_GF_FORCE_LANGUAGE,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_REAH,
+		VCRUISE_GF_FORCE_LANGUAGE,
 		Common::RU_RUS,
 	},
 	{ // Reah: Face the Unknown, English digital (GOG) version + German VO community patch
@@ -136,10 +143,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 					   "0170_b.wav", "5f84af02d1193ce9c47fe0dc821f0613", 121220),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_MP3,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_REAH,
+		VCRUISE_GF_WANT_MP3,
 		Common::EN_ANY,
 	},
 	{ // Reah: Face the Unknown, English digital (GOG) version + Russian VO/subtitles community patch
@@ -151,10 +159,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 					   "Speech01.txt", "a4eaace1299de1d70805532fc0643a77", 72689),
 			Common::RU_RUS,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_MP3 | VCRUISE_GF_FORCE_LANGUAGE,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_REAH,
+		VCRUISE_GF_WANT_MP3 | VCRUISE_GF_FORCE_LANGUAGE,
 		Common::RU_RUS,
 	},
 	{ // Reah: Face the Unknown, Polish demo
@@ -168,6 +177,7 @@ static const VCruiseGameDescription gameDescriptions[] = {
 			GUIO0()
 		},
 		GID_REAH,
+		0,
 		Common::PL_POL,
 	},
 
@@ -179,10 +189,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 					   "0001_a.wav", "374d93abc3422840623acc618ecb2b1e", 1553784),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			ADGF_CD | VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG,
+			ADGF_CD,
 			GUIO0()
 		},
 		GID_SCHIZM,
+		VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG,
 		Common::EN_GRB,
 	},
 	{ // Schizm: Mysterious Journey, German DVD Version (installed)
@@ -193,10 +204,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 					   "0001_a.wav", "f2b7eccfb1e9af0282b541c5eac66cc7", 1613240),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_SCHIZM,
+		VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG,
 		Common::DE_DEU,
 	},
 
@@ -208,10 +220,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 			AD_ENTRY1s("disk1.pak", "41bd7514a7d783c555f3783c9417bf9e", 272405273),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_GENTEE_PACKAGE,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_SCHIZM,
+		VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_GENTEE_PACKAGE,
 		Common::EN_GRB,
 	},
 	{ // Schizm: Mysterious Journey, English DVD Version
@@ -221,10 +234,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 			AD_ENTRY1s("setup.pak", "eaaed2f6655342b4c320bdeb6f5ccfb9", 272655597),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_GENTEE_PACKAGE,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_SCHIZM,
+		VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_GENTEE_PACKAGE,
 		Common::EN_GRB,
 	},
 	{ // Schizm: Mysterious Journey, English DVD Version, unknown variant
@@ -234,10 +248,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 			AD_ENTRY1s("setup.pak", "964e386b187752d53b69f9c55c4f6e6b", 274948185),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_GENTEE_PACKAGE,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_SCHIZM,
+		VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_GENTEE_PACKAGE,
 		Common::EN_GRB,
 	},
 	{ // Schizm: Mysterious Journey, Polish DVD Version
@@ -247,10 +262,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 			AD_ENTRY1s("disk1.pak", "a3453878ad86d012b483a82e04276667", 272507257),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_GENTEE_PACKAGE,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_SCHIZM,
+		VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_GENTEE_PACKAGE,
 		Common::PL_POL,
 	},
 	{ // Schizm: Mysterious Journey, German DVD Version (Project 3 Interactive variation)
@@ -260,10 +276,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 			AD_ENTRY1s("disk1.pak", "dcb27eb3d8a0029c551df5f779af36fc", 274285596),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_GENTEE_PACKAGE,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_SCHIZM,
+		VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_GENTEE_PACKAGE,
 		Common::DE_DEU,
 	},
 	{ // Schizm: Mysterious Journey, German DVD Version (Project 3 Interactive + Brightstar Interactive variation)
@@ -273,10 +290,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 			AD_ENTRY1s("disk1.pak", "2f964852baf18f90e884d6873b1bad23", 272798001),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_GENTEE_PACKAGE,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_SCHIZM,
+		VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_GENTEE_PACKAGE,
 		Common::DE_DEU,
 	},
 
@@ -288,10 +306,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 					   "0001_a.wav", "374d93abc3422840623acc618ecb2b1e", 1553784),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_SCHIZM,
+		VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG,
 		Common::EN_GRB,
 	},
 	{ // Schizm: Mysterious Journey, German digital 10-language (GOG) version
@@ -302,10 +321,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 					   "0001_a.wav", "f2b7eccfb1e9af0282b541c5eac66cc7", 1613240),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_SCHIZM,
+		VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG,
 		Common::DE_DEU,
 	},
 	{ // Schizm: Mysterious Journey, German digital 10-language (GOG) version
@@ -316,10 +336,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 					   "0001_a.wav", "7a398f17e847a46de629a09fa6178b00", 1409560),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_SCHIZM,
+		VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG,
 		Common::ES_ESP,
 	},
 	{ // Schizm: Mysterious Journey, French digital 10-language (GOG) version
@@ -330,10 +351,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 					   "0001_a.wav", "cd46a5df85a879bf293871b5911abcc3", 1305470),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_SCHIZM,
+		VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG,
 		Common::FR_FRA,
 	},
 	{ // Schizm: Mysterious Journey, Hungarian digital 10-language (GOG) version
@@ -344,10 +366,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 					   "0001_a.wav", "9838f59fce21ba3a1eecc3d84c5be8b1", 1502674),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_SCHIZM,
+		VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG,
 		Common::HU_HUN,
 	},
 	{ // Schizm: Mysterious Journey, Italian digital 10-language (GOG) version
@@ -358,10 +381,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 					   "0001_a.wav", "6d8e4b97710b858525d9965ef1e627ab", 1280506),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_SCHIZM,
+		VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG,
 		Common::IT_ITA,
 	},
 	{ // Schizm: Mysterious Journey, Polish digital 10-language (GOG) version
@@ -372,10 +396,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 					   "0001_a.wav", "4fc0053f66657e416b69419106d238a5", 1592106),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_SCHIZM,
+		VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG,
 		Common::PL_POL,
 	},
 	{ // Schizm: Mysterious Journey, Russian digital 10-language (GOG) version
@@ -386,10 +411,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 					   "0001_a.wav", "ba8fc041a92f1afceee35bdbb84eb2cd", 1427794),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_SCHIZM,
+		VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG,
 		Common::RU_RUS,
 	},
 
@@ -403,10 +429,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 					   "Speech10.txt", "88fdaab90be33bca88db423e1acda8c3", 63697),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_STEAM_LANGUAGES,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_SCHIZM,
+		VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_STEAM_LANGUAGES,
 		Common::EN_GRB,
 	},
 	{ // Schizm: Mysterious Journey, German digital 16-language (Steam) version
@@ -418,10 +445,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 					   "Speech10.txt", "88fdaab90be33bca88db423e1acda8c3", 63697),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_STEAM_LANGUAGES,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_SCHIZM,
+		VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_STEAM_LANGUAGES,
 		Common::DE_DEU,
 	},
 	{ // Schizm: Mysterious Journey, Spanish digital 16-language (Steam) version
@@ -433,10 +461,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 					   "Speech10.txt", "88fdaab90be33bca88db423e1acda8c3", 63697),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_STEAM_LANGUAGES,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_SCHIZM,
+		VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_STEAM_LANGUAGES,
 		Common::ES_ESP,
 	},
 	{ // Schizm: Mysterious Journey, French digital 16-language (Steam) version
@@ -448,10 +477,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 					   "Speech10.txt", "88fdaab90be33bca88db423e1acda8c3", 63697),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_STEAM_LANGUAGES,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_SCHIZM,
+		VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_STEAM_LANGUAGES,
 		Common::FR_FRA,
 	},
 	{ // Schizm: Mysterious Journey, Hungarian digital 16-language (Steam) version
@@ -463,10 +493,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 					   "Speech10.txt", "88fdaab90be33bca88db423e1acda8c3", 63697),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_STEAM_LANGUAGES,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_SCHIZM,
+		VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_STEAM_LANGUAGES,
 		Common::HU_HUN,
 	},
 	{ // Schizm: Mysterious Journey, Italian digital 16-language (Steam) version
@@ -478,10 +509,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 					   "Speech10.txt", "88fdaab90be33bca88db423e1acda8c3", 63697),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_STEAM_LANGUAGES,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_SCHIZM,
+		VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_STEAM_LANGUAGES,
 		Common::IT_ITA,
 	},
 	{ // Schizm: Mysterious Journey, Polish digital 16-language (Steam) version
@@ -493,10 +525,11 @@ static const VCruiseGameDescription gameDescriptions[] = {
 					   "Speech10.txt", "88fdaab90be33bca88db423e1acda8c3", 63697),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_STEAM_LANGUAGES,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_SCHIZM,
+		VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_STEAM_LANGUAGES,
 		Common::PL_POL,
 	},
 	{ // Schizm: Mysterious Journey, Russian digital 16-language (Steam) version
@@ -508,14 +541,15 @@ static const VCruiseGameDescription gameDescriptions[] = {
 					   "Speech10.txt", "88fdaab90be33bca88db423e1acda8c3", 63697),
 			Common::UNK_LANG,
 			Common::kPlatformWindows,
-			VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_STEAM_LANGUAGES,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
 		GID_SCHIZM,
+		VCRUISE_GF_WANT_OGG_VORBIS | VCRUISE_GF_NEED_JPEG | VCRUISE_GF_STEAM_LANGUAGES,
 		Common::RU_RUS,
 	},
 
-	{ AD_TABLE_END_MARKER, GID_UNKNOWN, Common::UNK_LANG }
+	{ AD_TABLE_END_MARKER, GID_UNKNOWN, 0, Common::UNK_LANG }
 };
 
 } // End of namespace VCruise

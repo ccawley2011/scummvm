@@ -26,7 +26,7 @@
 
 namespace VCruise {
 
-enum VCruiseGameID {
+enum VCruiseGameID : uint8 {
 	GID_UNKNOWN	= 0,
 
 	GID_REAH	= 1,
@@ -52,6 +52,7 @@ struct VCruiseGameDescription {
 	ADGameDescription desc;
 
 	VCruiseGameID gameID;
+	uint8 features;
 
 	// Specifying the language in the ADGameDescription causes AD to fail to detect the game as a match,
 	// so we have to specify it as UNK_LANG and specify the default language here.
