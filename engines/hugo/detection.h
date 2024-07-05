@@ -30,7 +30,7 @@ enum HugoGameFeatures {
 	GF_PACKED = (1 << 0) // Database
 };
 
-enum GameType {
+enum GameType : uint8 {
 	kGameTypeNone  = 0,
 	kGameTypeHugo1,
 	kGameTypeHugo2,
@@ -52,6 +52,7 @@ struct HugoGameDescription {
 
 	ADGameDescription desc;
 	GameType gameType;
+	uint8 features;
 };
 
 } // End of namespace Hugo

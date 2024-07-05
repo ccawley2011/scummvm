@@ -246,7 +246,6 @@ public:
 	Command _scoreLine;
 
 	const HugoGameDescription *_gameDescription;
-	uint32 getFeatures() const;
 	const char *getGameId() const;
 
 	GameType getGameType() const;

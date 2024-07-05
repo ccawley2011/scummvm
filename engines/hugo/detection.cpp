@@ -61,7 +61,8 @@ static const HugoGameDescription gameDescriptions[] = {
 			ADGF_NO_FLAGS,
 			GUIO0()
 		},
-		kGameTypeHugo1
+		kGameTypeHugo1,
+		0
 	},
 	// Hugo1 Windows
 	{
@@ -70,10 +71,11 @@ static const HugoGameDescription gameDescriptions[] = {
 			AD_ENTRY1s("objects.dat", "3ba0f108f7690a05a34c56a02fbe644a", 126488),
 			Common::EN_ANY,
 			Common::kPlatformWindows,
-			GF_PACKED,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
-		kGameTypeHugo1
+		kGameTypeHugo1,
+		GF_PACKED
 	},
 	// Hugo2 DOS
 	{
@@ -82,10 +84,11 @@ static const HugoGameDescription gameDescriptions[] = {
 			AD_ENTRY1s("objects.dat", "88a718cc0ff2b3b25d49aaaa69d6d52c", 155240),
 			Common::EN_ANY,
 			Common::kPlatformDOS,
-			GF_PACKED,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
-		kGameTypeHugo2
+		kGameTypeHugo2,
+		GF_PACKED
 	},
 	// Hugo2 Windows
 	{
@@ -94,10 +97,11 @@ static const HugoGameDescription gameDescriptions[] = {
 			AD_ENTRY1s("objects.dat", "5df4ffc851e66a544c0e95e4e084a806", 158480),
 			Common::EN_ANY,
 			Common::kPlatformWindows,
-			GF_PACKED,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
-		kGameTypeHugo2
+		kGameTypeHugo2,
+		GF_PACKED
 	},
 	// Hugo3 DOS
 	{
@@ -106,10 +110,11 @@ static const HugoGameDescription gameDescriptions[] = {
 			AD_ENTRY1s("objects.dat", "bb1b061538a445f2eb99b682c0f506cc", 136419),
 			Common::EN_ANY,
 			Common::kPlatformDOS,
-			GF_PACKED,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
-		kGameTypeHugo3
+		kGameTypeHugo3,
+		GF_PACKED
 	},
 	// Hugo3 Windows
 	{
@@ -118,13 +123,14 @@ static const HugoGameDescription gameDescriptions[] = {
 			AD_ENTRY1s("objects.dat", "c9a8af7aa14cc907434eecee3ddd06d3", 136638),
 			Common::EN_ANY,
 			Common::kPlatformWindows,
-			GF_PACKED,
+			ADGF_NO_FLAGS,
 			GUIO0()
 		},
-		kGameTypeHugo3
+		kGameTypeHugo3,
+		GF_PACKED
 	},
 
-	{AD_TABLE_END_MARKER, kGameTypeNone}
+	{AD_TABLE_END_MARKER, kGameTypeNone, 0}
 };
 
 class HugoMetaEngineDetection : public AdvancedMetaEngineDetection<HugoGameDescription> {

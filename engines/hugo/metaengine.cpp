@@ -36,10 +36,6 @@
 
 namespace Hugo {
 
-uint32 HugoEngine::getFeatures() const {
-	return _gameDescription->desc.flags;
-}
-
 const char *HugoEngine::getGameId() const {
 	return _gameDescription->desc.gameId;
 }
@@ -344,7 +340,7 @@ namespace Hugo {
 void HugoEngine::initGame(const HugoGameDescription *gd) {
 	_gameType = gd->gameType;
 	_platform = gd->desc.platform;
-	_packedFl = (getFeatures() & GF_PACKED);
+	_packedFl = gd->features & GF_PACKED;
 	_gameVariant = _gameType - 1 + ((_platform == Common::kPlatformWindows) ? 0 : 3);
 }
 
