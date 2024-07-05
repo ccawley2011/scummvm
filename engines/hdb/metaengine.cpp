@@ -53,19 +53,15 @@ static const ADExtraGuiOptionsMap optionsList[] = {
 		AD_EXTRA_GUI_OPTIONS_TERMINATOR
 };
 
-const char *HDBGame::getGameId() const { return _gameDescription->gameId; }
-Common::Platform HDBGame::getPlatform() const { return _gameDescription->platform; }
+const char *HDBGame::getGameId() const { return _gameDescription->desc.gameId; }
+Common::Platform HDBGame::getPlatform() const { return _gameDescription->desc.platform; }
 
 const char *HDBGame::getGameFile() const {
-	return _gameDescription->filesDescriptions[0].fileName;
-}
-
-uint32 HDBGame::getGameFlags() const {
-	return _gameDescription->flags;
+	return _gameDescription->desc.filesDescriptions[0].fileName;
 }
 
 bool HDBGame::isDemo() const {
-	return (getGameFlags() & ADGF_DEMO);
+	return (_gameDescription->desc.flags & ADGF_DEMO);
 }
 
 bool HDBGame::isPPC() const {
@@ -73,12 +69,12 @@ bool HDBGame::isPPC() const {
 }
 
 bool HDBGame::isHandango() const {
-	return (getGameFlags() & GF_HANDANGO);
+	return (_gameDescription->features & GF_HANDANGO);
 }
 
 } // End of namespace HDB
 
-class HDBMetaEngine : public AdvancedMetaEngine<ADGameDescription> {
+class HDBMetaEngine : public AdvancedMetaEngine<HDB::HDBGameDescription> {
 public:
 	const char *getName() const override {
 		return "hdb";
@@ -95,7 +91,7 @@ public:
 	SaveStateList listSaves(const char *target) const override;
 	SaveStateDescriptor querySaveMetaInfos(const char *target, int slot) const override;
 	Common::KeymapArray initKeymaps(const char *target) const override;
-	Common::Error createInstance(OSystem *syst, Engine **engine, const ADGameDescription *desc) const override;
+	Common::Error createInstance(OSystem *syst, Engine **engine, const HDB::HDBGameDescription *desc) const override;
 };
 
 bool HDBMetaEngine::hasFeature(MetaEngineFeature f) const {
@@ -280,7 +276,7 @@ Common::KeymapArray HDBMetaEngine::initKeymaps(const char *target) const {
 	return Keymap::arrayOf(engineKeyMap);
 }
 
-Common::Error HDBMetaEngine::createInstance(OSystem *syst, Engine **engine, const ADGameDescription *desc) const {
+Common::Error HDBMetaEngine::createInstance(OSystem *syst, Engine **engine, const HDB::HDBGameDescription *desc) const {
 	*engine = new HDB::HDBGame(syst, desc);
 	return Common::kNoError;
 }

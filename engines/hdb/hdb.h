@@ -75,13 +75,9 @@ enum {
 
 }
 
-struct ADGameDescription;
-
 namespace HDB {
 
-enum GameFeatures {
-	ADGF_TALKIE = 1 << 0
-};
+struct HDBGameDescription;
 
 enum HDBDebugChannels {
 	kDebugExample1 = 1 << 0,
@@ -148,7 +144,7 @@ struct Save {
 
 class HDBGame : public Engine {
 public:
-	HDBGame(OSystem *syst, const ADGameDescription *gameDesc);
+	HDBGame(OSystem *syst, const HDBGameDescription *gameDesc);
 	~HDBGame() override;
 
 	bool hasFeature(Engine::EngineFeature f) const override;
@@ -158,10 +154,9 @@ public:
 	void syncSoundSettings() override;
 
 	// Detection related members;
-	const ADGameDescription *_gameDescription;
+	const HDBGameDescription *_gameDescription;
 	const char *getGameId() const;
 	const char *getGameFile() const;
-	uint32 getGameFlags() const;
 	Common::Platform getPlatform() const;
 	bool isDemo() const;
 	bool isPPC() const;

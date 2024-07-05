@@ -28,6 +28,14 @@ enum HDBGameFeatures {
 	GF_HANDANGO = (1 << 0)
 };
 
+struct HDBGameDescription {
+	AD_GAME_DESCRIPTION_HELPERS(desc);
+
+	ADGameDescription desc;
+
+	uint8 features;
+};
+
 #define GAMEOPTION_CHEATMODE GUIO_GAMEOPTIONS1
 
 } // End of namespace HDB

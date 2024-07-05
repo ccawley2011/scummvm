@@ -31,89 +31,113 @@ static const PlainGameDescriptor hdbGames[] = {
 
 namespace HDB {
 
-static const ADGameDescription gameDescriptions[] = {
+static const HDBGameDescription gameDescriptions[] = {
 	{
-		"hdb",
-		"",
-		AD_ENTRY1s("hyperspace.mpc", "ff8e51d0872736bc6afe87cfcb846b70", 50339161),
-		Common::EN_ANY,
-		Common::kPlatformWindows,
-		ADGF_NO_FLAGS,
-		GUIO2(GUIO_NOMIDI,GAMEOPTION_CHEATMODE)
+		{
+			"hdb",
+			"",
+			AD_ENTRY1s("hyperspace.mpc", "ff8e51d0872736bc6afe87cfcb846b70", 50339161),
+			Common::EN_ANY,
+			Common::kPlatformWindows,
+			ADGF_NO_FLAGS,
+			GUIO2(GUIO_NOMIDI,GAMEOPTION_CHEATMODE)
+		},
+		0
 	},
 	{
-		"hdb",
-		"",
-		AD_ENTRY1s("hyperspace.mpc", "39d3c9dbc9614f370ad9430307c043f9", 45645305),
-		Common::EN_ANY,
-		Common::kPlatformLinux,
-		ADGF_NO_FLAGS,
-		GUIO2(GUIO_NOMIDI,GAMEOPTION_CHEATMODE)
+		{
+			"hdb",
+			"",
+			AD_ENTRY1s("hyperspace.mpc", "39d3c9dbc9614f370ad9430307c043f9", 45645305),
+			Common::EN_ANY,
+			Common::kPlatformLinux,
+			ADGF_NO_FLAGS,
+			GUIO2(GUIO_NOMIDI,GAMEOPTION_CHEATMODE)
+		},
+		0
 	},
 	// PocketPC Arm
 	{
-		"hdb",
-		"",
-		AD_ENTRY1s("hyperspace.msd", "a62468904beb3efe16d4d64f3955a32e", 6825555),
-		Common::EN_ANY,
-		Common::kPlatformPocketPC,
-		ADGF_NO_FLAGS,
-		GUIO2(GUIO_NOMIDI,GAMEOPTION_CHEATMODE)
+		{
+			"hdb",
+			"",
+			AD_ENTRY1s("hyperspace.msd", "a62468904beb3efe16d4d64f3955a32e", 6825555),
+			Common::EN_ANY,
+			Common::kPlatformPocketPC,
+			ADGF_NO_FLAGS,
+			GUIO2(GUIO_NOMIDI,GAMEOPTION_CHEATMODE)
+		},
+		0
 	},
 
 	// Demos
 	{
-		"hdb",
-		"Demo",
-		AD_ENTRY1s("hyperdemo.mpc", "d8743b3b8be56486bcfb1398b2f2aad4", 13816461),
-		Common::EN_ANY,
-		Common::kPlatformLinux,
-		ADGF_DEMO,
-		GUIO2(GUIO_NOMIDI,GAMEOPTION_CHEATMODE)
+		{
+			"hdb",
+			"Demo",
+			AD_ENTRY1s("hyperdemo.mpc", "d8743b3b8be56486bcfb1398b2f2aad4", 13816461),
+			Common::EN_ANY,
+			Common::kPlatformLinux,
+			ADGF_DEMO,
+			GUIO2(GUIO_NOMIDI,GAMEOPTION_CHEATMODE)
+		},
+		0
 	},
 	{
-		"hdb",
-		"Demo",
-		AD_ENTRY1s("hyperdemo.mpc", "f3bc878e179f00b8666a9846f3d9f9f5", 5236568),
-		Common::EN_ANY,
-		Common::kPlatformWindows,
-		ADGF_DEMO,
-		GUIO2(GUIO_NOMIDI,GAMEOPTION_CHEATMODE)
+		{
+			"hdb",
+			"Demo",
+			AD_ENTRY1s("hyperdemo.mpc", "f3bc878e179f00b8666a9846f3d9f9f5", 5236568),
+			Common::EN_ANY,
+			Common::kPlatformWindows,
+			ADGF_DEMO,
+			GUIO2(GUIO_NOMIDI,GAMEOPTION_CHEATMODE)
+		},
+		0
 	},
 	// provided by sev
 	{
-		"hdb",
-		"Demo",
-		AD_ENTRY1s("hyperdemo.mpc", "7bc533e8f1866931c884f1bc09353744", 13906865),
-		Common::EN_ANY,
-		Common::kPlatformWindows,
-		ADGF_DEMO,
-		GUIO2(GUIO_NOMIDI,GAMEOPTION_CHEATMODE)
+		{
+			"hdb",
+			"Demo",
+			AD_ENTRY1s("hyperdemo.mpc", "7bc533e8f1866931c884f1bc09353744", 13906865),
+			Common::EN_ANY,
+			Common::kPlatformWindows,
+			ADGF_DEMO,
+			GUIO2(GUIO_NOMIDI,GAMEOPTION_CHEATMODE)
+		},
+		0
 	},
 	{
-		"hdb",
-		"Demo",
-		AD_ENTRY1s("hyperdemo.msd", "312525298ca9f5ac904883d1ce19dc0f", 3088651),
-		Common::EN_ANY,
-		Common::kPlatformPocketPC,
-		ADGF_DEMO,
-		GUIO2(GUIO_NOMIDI,GAMEOPTION_CHEATMODE)
+		{
+			"hdb",
+			"Demo",
+			AD_ENTRY1s("hyperdemo.msd", "312525298ca9f5ac904883d1ce19dc0f", 3088651),
+			Common::EN_ANY,
+			Common::kPlatformPocketPC,
+			ADGF_DEMO,
+			GUIO2(GUIO_NOMIDI,GAMEOPTION_CHEATMODE)
+		},
+		0
 	},
 	{
-		"hdb",
-		"Handango Demo",
-		AD_ENTRY1s("hyperdemo.msd", "2d4457b284a940b7058b36e5706b9951", 3094241),
-		Common::EN_ANY,
-		Common::kPlatformPocketPC,
-		(ADGF_DEMO | GF_HANDANGO),
-		GUIO2(GUIO_NOMIDI,GAMEOPTION_CHEATMODE)
+		{
+			"hdb",
+			"Handango Demo",
+			AD_ENTRY1s("hyperdemo.msd", "2d4457b284a940b7058b36e5706b9951", 3094241),
+			Common::EN_ANY,
+			Common::kPlatformPocketPC,
+			ADGF_DEMO,
+			GUIO2(GUIO_NOMIDI,GAMEOPTION_CHEATMODE)
+		},
+		GF_HANDANGO
 	},
-	AD_TABLE_END_MARKER
+	{ AD_TABLE_END_MARKER, 0 }
 };
 
 } // End of namespace HDB
 
-class HDBMetaEngineDetection : public AdvancedMetaEngineDetection<ADGameDescription> {
+class HDBMetaEngineDetection : public AdvancedMetaEngineDetection<HDB::HDBGameDescription> {
 public:
 	HDBMetaEngineDetection() : AdvancedMetaEngineDetection(HDB::gameDescriptions, hdbGames) {
 	}

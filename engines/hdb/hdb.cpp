@@ -44,7 +44,7 @@ namespace HDB {
 
 HDBGame* g_hdb;
 
-HDBGame::HDBGame(OSystem *syst, const ADGameDescription *gameDesc) : Engine(syst), _gameDescription(gameDesc) {
+HDBGame::HDBGame(OSystem *syst, const HDBGameDescription *gameDesc) : Engine(syst), _gameDescription(gameDesc) {
 	g_hdb = this;
 	if (isPPC()) {
 		_screenWidth = 240;
