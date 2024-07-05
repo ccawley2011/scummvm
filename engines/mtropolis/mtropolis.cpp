@@ -106,7 +106,7 @@ void MTropolisEngine::handleEvents() {
 
 Common::Error MTropolisEngine::run() {
 #if !defined(USE_MPEG2)
-	if (_gameDescription->desc.flags & MTGF_WANT_MPEG_VIDEO) {
+	if (_gameDescription->features & MTGF_WANT_MPEG_VIDEO) {
 		GUI::MessageDialog dialog(
 			_("This game requires MPEG video support for some\n"
 			  "content but MPEG video support was not compiled in.\n"
@@ -116,7 +116,7 @@ Common::Error MTropolisEngine::run() {
 	}
 #endif
 #if !defined(USE_MAD)
-	if (_gameDescription->desc.flags & MTGF_WANT_MPEG_AUDIO) {
+	if (_gameDescription->features & MTGF_WANT_MPEG_AUDIO) {
 		GUI::MessageDialog dialog(
 			_("This game requires MPEG audio support for some\n"
 			  "content but MPEG audio support was not compiled in.\n"

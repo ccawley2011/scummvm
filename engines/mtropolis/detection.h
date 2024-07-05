@@ -29,7 +29,7 @@
 
 namespace MTropolis {
 
-enum MTropolisGameID {
+enum MTropolisGameID : uint8 {
 	GID_OBSIDIAN			= 0,
 	GID_LEARNING_MTROPOLIS	= 1,
 	GID_MTI    				= 2,
@@ -45,7 +45,7 @@ enum MTropolisGameID {
 
 // Boot IDs - These can be shared across different variants if the file list and other properties are identical.
 // Cross-reference with the game table in mTropolis engine's boot.cpp
-enum MTropolisGameBootID {
+enum MTropolisGameBootID : uint8 {
 	MTBOOT_INVALID = 0,
 
 	MTBOOT_USE_BOOT_SCRIPT,
@@ -103,8 +103,8 @@ struct MTropolisGameDescription {
 
 	ADGameDescription desc;
 
-	int gameID;
-	int gameType;
+	MTropolisGameID gameID;
+	uint8 features;
 	MTropolisGameBootID bootID;
 };
 

@@ -452,11 +452,11 @@ static const MTropolisGameDescription gameDescriptions[] = {
 			},
 			Common::EN_ANY,
 			Common::kPlatformWindows,
-			ADGF_DVD | MTGF_WANT_MPEG_VIDEO | MTGF_WANT_MPEG_AUDIO,
+			ADGF_DVD,
 			GUIO0()
 		},
 		GID_MTI,
-		0,
+		MTGF_WANT_MPEG_VIDEO | MTGF_WANT_MPEG_AUDIO,
 		MTBOOT_MTI_RETAIL_WIN,
 	},
 
@@ -1001,7 +1001,7 @@ static const MTropolisGameDescription gameDescriptions[] = {
 		MTBOOT_UNIT_REBOOTED_WIN,
 	},
 
-	{ AD_TABLE_END_MARKER, 0, 0, MTBOOT_INVALID }
+	{ AD_TABLE_END_MARKER, GID_GENERIC, 0, MTBOOT_INVALID }
 };
 
 } // End of namespace MTropolis
