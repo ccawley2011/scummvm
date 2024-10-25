@@ -47,7 +47,7 @@ using namespace pyrodactyl::image;
 bool Image::load(Graphics::Surface *surface) {
 	deleteImage();
 
-	_texture->create(surface->w, surface->h, surface->format);
+	_texture = new Graphics::ManagedSurface();
 	_texture->copyFrom(*surface);
 
 	_w = surface->w;
@@ -59,6 +59,7 @@ bool Image::load(Graphics::Surface *surface) {
 bool Image::load(Graphics::ManagedSurface *surface) {
 	deleteImage();
 
+	_texture = new Graphics::ManagedSurface();
 	_texture->copyFrom(*surface);
 
 	_w = surface->w;
