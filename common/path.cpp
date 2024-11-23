@@ -1177,17 +1177,24 @@ String Path::toConfig() const {
 			return toString(Path::kNativeSeparator);
 		}
 	}
-#elif defined(__3DS__) || defined(__amigaos4__) || defined(__DS__) || defined(__MORPHOS__) || defined(NINTENDO_SWITCH) || defined(__PSP__) || defined(PSP2) || defined(__WII__) || defined(WIN32)
+#elif defined(__3DS__) || defined(__amigaos4__) || defined(__DS__) || defined(__MORPHOS__) || defined(NINTENDO_SWITCH) || defined(__PSP__) || defined(PSP2) || defined(RISCOS) || defined(__WII__) || defined(WIN32)
 	// For all platforms making use of : as a drive separator, avoid useless punycoding
 	if (!isEscaped()) {
 		// If we are escaped, we have forbidden characters which must be encoded
 		// Try to replace all : by SEPARATOR and check if we need puny encoding: if we don't, we are safe
 		Path tmp(*this);
 		tmp._str.replace(':', SEPARATOR);
+#if defined(RISCOS)
+		// WIN32 can also make use of ? in Win32 devices namespace
+		tmp._str.replace('$', SEPARATOR);
+		tmp._str.replace('<', SEPARATOR);
+		tmp._str.replace('>', SEPARATOR);
+#endif
 #if defined(WIN32)
 		// WIN32 can also make use of ? in Win32 devices namespace
 		tmp._str.replace('?', SEPARATOR);
 #endif
+		warning("tmp._str = %s", tmp._str.c_str());
 		if (!tmp.punycodeNeedsEncode()) {
 			return toString(Path::kNativeSeparator);
 		}
