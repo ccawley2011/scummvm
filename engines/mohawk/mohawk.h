@@ -73,6 +73,7 @@ public:
 
 	CursorManager *_cursor;
 
+	Common::Array<uint16> getResourceIDList(uint32 tag) const;
 	virtual Common::SeekableReadStream *getResource(uint32 tag, uint16 id);
 	bool hasResource(uint32 tag, uint16 id);
 	bool hasResource(uint32 tag, const Common::String &resName);

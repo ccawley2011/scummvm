@@ -112,6 +112,8 @@ public:
 	bool isPlaying();
 	uint getNumSamplesPlayed(uint16 id);
 
+	Common::Array<uint16> getResourceIDList() const;
+	Common::String getResourceName(uint16 id) const;
 private:
 	MohawkEngine *_vm;
 
@@ -120,6 +122,8 @@ private:
 	Common::Array<SndHandle> _handles;
 	SndHandle *getHandle();
 	Audio::RewindableAudioStream *makeAudioStream(uint16 id, CueList *cueList = nullptr);
+
+	uint32 getSoundTag() const;
 };
 
 } // End of namespace Mohawk

@@ -192,27 +192,54 @@ Sound::~Sound() {
 	stopSound();
 }
 
+uint32 Sound::getSoundTag() const {
+	switch (_vm->getGameType()) {
+	case GType_ZOOMBINI:
+		return ID_SND;
+	case GType_LIVINGBOOKSV1:
+		return ID_WAV;
+	case GType_LIVINGBOOKSV2:
+		if (_vm->getPlatform() == Common::kPlatformMacintosh) {
+			return ID_WAV;
+		}
+		// fall through
+	default:
+		return ID_TWAV;
+	}
+}
+
 Audio::RewindableAudioStream *Sound::makeAudioStream(uint16 id, CueList *cueList) {
 	Audio::RewindableAudioStream *audStream = nullptr;
+	uint32 tag = getSoundTag();
 
 	switch (_vm->getGameType()) {
 	case GType_ZOOMBINI:
-		audStream = makeMohawkWaveStream(_vm->getResource(ID_SND, id));
+		audStream = makeMohawkWaveStream(_vm->getResource(tag, id));
 		break;
 	case GType_LIVINGBOOKSV1:
-		audStream = makeLivingBooksWaveStream_v1(_vm->getResource(ID_WAV, id));
+		audStream = makeLivingBooksWaveStream_v1(_vm->getResource(tag, id));
 		break;
 	case GType_LIVINGBOOKSV2:
 		if (_vm->getPlatform() == Common::kPlatformMacintosh) {
-			audStream = makeLivingBooksWaveStream_v1(_vm->getResource(ID_WAV, id));
+			audStream = makeLivingBooksWaveStream_v1(_vm->getResource(tag, id));
 			break;
 		}
 		// fall through
 	default:
-		audStream = makeMohawkWaveStream(_vm->getResource(ID_TWAV, id), cueList);
+		audStream = makeMohawkWaveStream(_vm->getResource(tag, id), cueList);
 	}
 
 	return audStream;
+}
+
+Common::Array<uint16> Sound::getResourceIDList() const {
+	uint32 tag = getSoundTag();
+	return _vm->getResourceIDList(tag);
+}
+
+Common::String Sound::getResourceName(uint16 id) const {
+	uint32 tag = getSoundTag();
+	return _vm->getResourceName(tag, id);
 }
 
 Audio::SoundHandle *Sound::playSound(uint16 id, byte volume, bool loop, CueList *cueList) {

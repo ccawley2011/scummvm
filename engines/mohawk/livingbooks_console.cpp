@@ -34,6 +34,7 @@ namespace Mohawk {
 LivingBooksConsole::LivingBooksConsole(MohawkEngine_LivingBooks *vm) : GUI::Debugger(), _vm(vm) {
 	registerCmd("playSound",			WRAP_METHOD(LivingBooksConsole, Cmd_PlaySound));
 	registerCmd("stopSound",			WRAP_METHOD(LivingBooksConsole, Cmd_StopSound));
+	registerCmd("listSounds",			WRAP_METHOD(LivingBooksConsole, Cmd_ListSounds));
 	registerCmd("drawImage",			WRAP_METHOD(LivingBooksConsole, Cmd_DrawImage));
 	registerCmd("changePage",			WRAP_METHOD(LivingBooksConsole, Cmd_ChangePage));
 	registerCmd("changeCursor",			WRAP_METHOD(LivingBooksConsole, Cmd_ChangeCursor));
@@ -50,13 +51,24 @@ bool LivingBooksConsole::Cmd_PlaySound(int argc, const char **argv) {
 
 	_vm->_sound->stopSound();
 	_vm->_sound->playSound((uint16)atoi(argv[1]));
-	return false;
+	return true;
 }
 
 bool LivingBooksConsole::Cmd_StopSound(int argc, const char **argv) {
 	debugPrintf("Stopping Sound\n");
 
 	_vm->_sound->stopSound();
+	return true;
+}
+
+bool LivingBooksConsole::Cmd_ListSounds(int argc, const char **argv) {
+	Common::Array<uint16> ids = _vm->_sound->getResourceIDList();
+
+	for (int i = 0; i < ids.size(); i++) {
+		Common::String name( _vm->_sound->getResourceName(ids[i]));
+		debugPrintf("- %d (%s)\n", ids[i], name.c_str());
+	}
+
 	return true;
 }
 

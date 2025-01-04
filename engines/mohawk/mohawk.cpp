@@ -57,6 +57,15 @@ void MohawkEngine::pauseGame() {
 	runDialog(*_pauseDialog);
 }
 
+Common::Array<uint16> MohawkEngine::getResourceIDList(uint32 tag) const {
+	Common::Array<uint16> ids;
+
+	for (uint32 i = 0; i < _mhk.size(); i++)
+		ids.push_back(_mhk[i]->getResourceIDList(tag));
+
+	return ids;
+}
+
 Common::SeekableReadStream *MohawkEngine::getResource(uint32 tag, uint16 id) {
 	for (uint32 i = 0; i < _mhk.size(); i++)
 		if (_mhk[i]->hasResource(tag, id))
