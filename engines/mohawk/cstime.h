@@ -23,7 +23,7 @@
 #define MOHAWK_CSTIME_H
 
 #include "mohawk/mohawk.h"
-#include "mohawk/console.h"
+#include "mohawk/cstime_console.h"
 #include "mohawk/cstime_graphics.h"
 
 #include "common/random.h"

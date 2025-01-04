@@ -22,7 +22,7 @@
 #ifndef MOHAWK_MYST_H
 #define MOHAWK_MYST_H
 
-#include "mohawk/console.h"
+#include "mohawk/myst_console.h"
 #include "mohawk/mohawk.h"
 #include "mohawk/myst_actions.h"
 #include "mohawk/resource_cache.h"

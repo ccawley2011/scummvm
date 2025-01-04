@@ -23,7 +23,7 @@
 #define MOHAWK_LIVINGBOOKS_H
 
 #include "mohawk/mohawk.h"
-#include "mohawk/console.h"
+#include "mohawk/livingbooks_console.h"
 #include "mohawk/livingbooks_graphics.h"
 #include "mohawk/sound.h"
 #include "mohawk/video.h"

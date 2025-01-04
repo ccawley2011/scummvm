@@ -53,7 +53,7 @@
 #include "mohawk/riven_stacks/tspit.h"
 #include "mohawk/riven_video.h"
 #include "mohawk/dialogs.h"
-#include "mohawk/console.h"
+#include "mohawk/riven_console.h"
 
 // Shared code between detection/engine.
 #include "mohawk/riven_metaengine.h"

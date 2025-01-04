@@ -2,13 +2,13 @@ MODULE := engines/mohawk
 
 MODULE_OBJS = \
 	bitmap.o \
-	console.o \
 	cursors.o \
 	dialogs.o \
 	graphics.o \
 	installer_archive.o \
 	livingbooks.o \
 	livingbooks_code.o \
+	livingbooks_console.o \
 	livingbooks_graphics.o \
 	livingbooks_lbx.o \
 	metaengine.o \
@@ -24,6 +24,7 @@ ifdef ENABLE_CSTIME
 MODULE_OBJS += \
 	cstime.o \
 	cstime_cases.o \
+	cstime_console.o \
 	cstime_game.o \
 	cstime_graphics.o \
 	cstime_ui.o \
@@ -35,6 +36,7 @@ MODULE_OBJS += \
 	myst.o \
 	myst_areas.o \
 	myst_card.o \
+	myst_console.o \
 	myst_graphics.o \
 	myst_scripts.o \
 	myst_sound.o \
@@ -59,6 +61,7 @@ ifdef ENABLE_RIVEN
 MODULE_OBJS += \
 	riven.o \
 	riven_card.o \
+	riven_console.o \
 	riven_graphics.o \
 	riven_inventory.o \
 	riven_saveload.o \
