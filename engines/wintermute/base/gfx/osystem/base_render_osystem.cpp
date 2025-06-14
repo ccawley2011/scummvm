@@ -54,7 +54,6 @@ BaseRenderOSystem::BaseRenderOSystem(BaseGame *inGame) : BaseRenderer(inGame) {
 	_needsFlip = true;
 	_skipThisFrame = false;
 
-	_borderLeft = _borderRight = _borderTop = _borderBottom = 0;
 	_ratioX = _ratioY = 1.0f;
 	_dirtyRect = nullptr;
 	_disableDirtyRects = false;
@@ -82,13 +81,21 @@ BaseRenderOSystem::~BaseRenderOSystem() {
 
 //////////////////////////////////////////////////////////////////////////
 bool BaseRenderOSystem::initRenderer(int width, int height, bool windowed) {
+	Graphics::PixelFormat format(4, 8, 8, 8, 8, 24, 16, 8, 0);
+	initGraphics(width, height, &format);
+
+	if (g_system->getScreenFormat() != format) {
+		warning("Couldn't setup GFX-backend for %dx%dx%d", _width, _height, format.bytesPerPixel * 8);
+		return STATUS_FAILED;
+	}
+
 	_width = width;
 	_height = height;
 	_renderRect.setWidth(_width);
 	_renderRect.setHeight(_height);
 
-	_realWidth = width;
-	_realHeight = height;
+	_realWidth = g_system->getWidth();
+	_realHeight = g_system->getHeight();
 
 	float origAspect = (float)_width / (float)_height;
 	float realAspect = (float)_realWidth / (float)_realHeight;
@@ -102,24 +109,18 @@ bool BaseRenderOSystem::initRenderer(int width, int height, bool windowed) {
 		ratio = (float)_realWidth / (float)_width;
 	}
 
-	_borderLeft = (int)((_realWidth - (_width * ratio)) / 2);
-	_borderRight = (int)(_realWidth - (_width * ratio) - _borderLeft);
+	int borderLeft = (int)((_realWidth - (_width * ratio)) / 2);
+	int borderRight = (int)(_realWidth - (_width * ratio) - borderLeft);
 
-	_borderTop = (int)((_realHeight - (_height * ratio)) / 2);
-	_borderBottom = (int)(_realHeight - (_height * ratio) - _borderTop);
+	int borderTop = (int)((_realHeight - (_height * ratio)) / 2);
+	int borderBottom = (int)(_realHeight - (_height * ratio) - borderTop);
 
-	_ratioX = (float)(_realWidth - _borderLeft - _borderRight) / (float)_width;
-	_ratioY = (float)(_realHeight - _borderTop - _borderBottom) / (float)_height;
+	_borderRect = Common::Rect(borderLeft, borderTop, _realWidth - borderRight, _realHeight - borderBottom);
+
+	_ratioX = (float)(_realWidth - borderLeft - borderRight) / (float)_width;
+	_ratioY = (float)(_realHeight - borderTop - borderBottom) / (float)_height;
 
 	_windowed = !ConfMan.getBool("fullscreen");
-
-	Graphics::PixelFormat format(4, 8, 8, 8, 8, 24, 16, 8, 0);
-	initGraphics(_width, _height, &format);
-
-	if (g_system->getScreenFormat() != format) {
-		warning("Couldn't setup GFX-backend for %dx%dx%d", _width, _height, format.bytesPerPixel * 8);
-		return STATUS_FAILED;
-	}
 
 	g_system->showMouse(false);
 
@@ -133,7 +134,11 @@ bool BaseRenderOSystem::initRenderer(int width, int height, bool windowed) {
 
 bool BaseRenderOSystem::indicatorFlip() {
 	if (_indicatorWidthDrawn > 0 && _indicatorHeight > 0) {
-		g_system->copyRectToScreen(_renderSurface->getBasePtr(_indicatorX, _indicatorY), _renderSurface->pitch, _indicatorX, _indicatorY, _indicatorWidthDrawn, _indicatorHeight);
+		Common::Rect rect(_indicatorX, _indicatorY, _indicatorX + _indicatorWidthDrawn, _indicatorY + _indicatorHeight);
+		modTargetRect(&rect);
+		rect.clip(_renderRect);
+
+		g_system->copyRectToScreen(_renderSurface->getBasePtr(rect.left, rect.top), _renderSurface->pitch, rect.left, rect.top, rect.width(), rect.height());
 		g_system->updateScreen();
 	}
 	return STATUS_OK;
@@ -246,9 +251,8 @@ void BaseRenderOSystem::fadeToColor(byte r, byte g, byte b, byte a) {
 
 	Graphics::Surface surf;
 	surf.create((uint16)fillRect.width(), (uint16)fillRect.height(), _renderSurface->format);
-	Common::Rect sizeRect(fillRect);
-	sizeRect.translate(-fillRect.top, -fillRect.left);
-	surf.fillRect(fillRect, col);
+	Common::Rect sizeRect(fillRect.width(), fillRect.height());
+	surf.fillRect(sizeRect, col);
 	Graphics::TransformStruct temp = Graphics::TransformStruct();
 	temp._alphaDisable = false;
 	drawSurface(nullptr, &surf, &sizeRect, &fillRect, temp);
@@ -478,8 +482,9 @@ bool BaseRenderOSystem::fillRect(int x, int y, int w, int h, uint32 color) {
 //////////////////////////////////////////////////////////////////////////
 BaseImage *BaseRenderOSystem::takeScreenshot(int newWidth, int newHeight) {
 	// TODO: Clip by viewport.
+	const Graphics::Surface area = _renderSurface->getSubArea(_borderRect);
 	BaseImage *screenshot = new BaseImage();
-	screenshot->copyFrom(_renderSurface->surfacePtr(), newWidth, newHeight);
+	screenshot->copyFrom(&area, newWidth, newHeight);
 	return screenshot;
 }
 
@@ -491,8 +496,8 @@ Common::String BaseRenderOSystem::getName() const {
 //////////////////////////////////////////////////////////////////////////
 bool BaseRenderOSystem::setViewport(int left, int top, int right, int bottom) {
 	Common::Rect rect;
-	rect.left = (int16)(left + _borderLeft);
-	rect.top = (int16)(top + _borderTop);
+	rect.left = (int16)(left + _borderRect.left);
+	rect.top = (int16)(top + _borderRect.top);
 	rect.setWidth((int16)((right - left) * _ratioX));
 	rect.setHeight((int16)((bottom - top) * _ratioY));
 
@@ -502,26 +507,25 @@ bool BaseRenderOSystem::setViewport(int left, int top, int right, int bottom) {
 
 //////////////////////////////////////////////////////////////////////////
 void BaseRenderOSystem::modTargetRect(Common::Rect *rect) {
-	return;
 	int newWidth = (int16)MathUtil::roundUp(rect->width() * _ratioX);
 	int newHeight = (int16)MathUtil::roundUp(rect->height() * _ratioY);
-	rect->left = (int16)MathUtil::round(rect->left * _ratioX + _borderLeft);
-	rect->top = (int16)MathUtil::round(rect->top * _ratioY + _borderTop);
+	rect->left = (int16)MathUtil::round(rect->left * _ratioX + _borderRect.left);
+	rect->top = (int16)MathUtil::round(rect->top * _ratioY + _borderRect.top);
 	rect->setWidth(newWidth);
 	rect->setHeight(newHeight);
 }
 
 //////////////////////////////////////////////////////////////////////////
 void BaseRenderOSystem::pointFromScreen(Point32 *point) {
-	point->x = (int16)(point->x / _ratioX - _borderLeft / _ratioX + _renderRect.left);
-	point->y = (int16)(point->y / _ratioY - _borderTop / _ratioY + _renderRect.top);
+	point->x = (int16)(point->x / _ratioX - _borderRect.left / _ratioX + _renderRect.left);
+	point->y = (int16)(point->y / _ratioY - _borderRect.top / _ratioY + _renderRect.top);
 }
 
 
 //////////////////////////////////////////////////////////////////////////
 void BaseRenderOSystem::pointToScreen(Point32 *point) {
-	point->x = (int16)MathUtil::roundUp(point->x * _ratioX) + _borderLeft - _renderRect.left;
-	point->y = (int16)MathUtil::roundUp(point->y * _ratioY) + _borderTop - _renderRect.top;
+	point->x = (int16)MathUtil::roundUp(point->x * _ratioX) + _borderRect.left - _renderRect.left;
+	point->y = (int16)MathUtil::roundUp(point->y * _ratioY) + _borderRect.top - _renderRect.top;
 }
 
 BaseSurface *BaseRenderOSystem::createSurface() {

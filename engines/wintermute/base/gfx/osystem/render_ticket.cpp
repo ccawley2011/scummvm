@@ -155,8 +155,6 @@ void RenderTicket::drawToSurface(Graphics::ManagedSurface *_targetSurface, Commo
 		int y = 0;
 		int w = getSurface()->w;
 		int h = getSurface()->h;
-		assert(w == _dstRect.width() / _transform._numTimesX);
-		assert(h == _dstRect.height() / _transform._numTimesY);
 
 		int basex = dstRect->left - clipRect->left;
 		int basey = dstRect->top - clipRect->top;

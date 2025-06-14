@@ -135,10 +135,7 @@ private:
 	Common::Rect _renderRect;
 	Graphics::ManagedSurface *_renderSurface;
 
-	int _borderLeft;
-	int _borderTop;
-	int _borderRight;
-	int _borderBottom;
+	Common::Rect _borderRect;
 
 	bool _disableDirtyRects;
 	float _ratioX;
