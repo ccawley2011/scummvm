@@ -82,13 +82,21 @@ BaseRenderOSystem::~BaseRenderOSystem() {
 
 //////////////////////////////////////////////////////////////////////////
 bool BaseRenderOSystem::initRenderer(int width, int height, bool windowed) {
+	Graphics::PixelFormat format(4, 8, 8, 8, 8, 24, 16, 8, 0);
+	initGraphics(width, height, &format);
+
+	if (g_system->getScreenFormat() != format) {
+		warning("Couldn't setup GFX-backend for %dx%dx%d", _width, _height, format.bytesPerPixel * 8);
+		return STATUS_FAILED;
+	}
+
 	_width = width;
 	_height = height;
 	_renderRect.setWidth(_width);
 	_renderRect.setHeight(_height);
 
-	_realWidth = width;
-	_realHeight = height;
+	_realWidth = g_system->getWidth();
+	_realHeight = g_system->getHeight();
 
 	float origAspect = (float)_width / (float)_height;
 	float realAspect = (float)_realWidth / (float)_realHeight;
@@ -112,14 +120,6 @@ bool BaseRenderOSystem::initRenderer(int width, int height, bool windowed) {
 	_ratioY = (float)(_realHeight - _borderTop - _borderBottom) / (float)_height;
 
 	_windowed = !ConfMan.getBool("fullscreen");
-
-	Graphics::PixelFormat format(4, 8, 8, 8, 8, 24, 16, 8, 0);
-	initGraphics(_width, _height, &format);
-
-	if (g_system->getScreenFormat() != format) {
-		warning("Couldn't setup GFX-backend for %dx%dx%d", _width, _height, format.bytesPerPixel * 8);
-		return STATUS_FAILED;
-	}
 
 	g_system->showMouse(false);
 
@@ -250,9 +250,8 @@ void BaseRenderOSystem::fadeToColor(byte r, byte g, byte b, byte a) {
 
 	Graphics::Surface surf;
 	surf.create((uint16)fillRect.width(), (uint16)fillRect.height(), _renderSurface->format);
-	Common::Rect sizeRect(fillRect);
-	sizeRect.translate(-fillRect.top, -fillRect.left);
-	surf.fillRect(fillRect, col);
+	Common::Rect sizeRect(fillRect.width(), fillRect.height());
+	surf.fillRect(sizeRect, col);
 	Graphics::TransformStruct temp = Graphics::TransformStruct();
 	temp._alphaDisable = false;
 	drawSurface(nullptr, &surf, &sizeRect, &fillRect, temp);
@@ -512,7 +511,6 @@ bool BaseRenderOSystem::setViewport(int left, int top, int right, int bottom) {
 
 //////////////////////////////////////////////////////////////////////////
 void BaseRenderOSystem::modTargetRect(Common::Rect *rect) {
-	return;
 	int newWidth = (int16)MathUtil::roundUp(rect->width() * _ratioX);
 	int newHeight = (int16)MathUtil::roundUp(rect->height() * _ratioY);
 	rect->left = (int16)MathUtil::round(rect->left * _ratioX + _borderLeft);
