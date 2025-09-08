@@ -874,11 +874,17 @@ uint16 SCR_D_DrawPortraitDotEffect(void) {
 	cur_image_end = width * height;
 	int16 count = 0;
 
-	if (g_vm->_videoMode == Common::RenderMode::kRenderHercG) {
+	switch (g_vm->_videoMode) {
+	case Common::RenderMode::kRenderHercW:
+	case Common::RenderMode::kRenderHercG:
+	case Common::RenderMode::kRenderHercA: {
 		const int START_X = (HGA_WIDTH / 8 - (2 * CGA_WIDTH) / 8) / 2;
 		const int START_Y = (HGA_HEIGHT - CGA_HEIGHT) / 2;
 		x += START_X;
 		y += START_Y;
+		} break;
+	default:
+		break;
 	}
 
 	for (offs = 0; offs != cur_image_end;) {

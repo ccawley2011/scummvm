@@ -119,6 +119,7 @@ static const uint8 PALETTE_CGA2[4 * 3] = {
   Switch to CGA 320x200x2bpp mode
 */
 void switchToGraphicsMode(void) {
+	// TODO: Hercules support
 	g_system->getPaletteManager()->setPalette(PALETTE_CGA, 0, 4);
 }
 
@@ -135,6 +136,7 @@ void waitVBlank(void) {
 }
 
 void cga_ColorSelect(byte csel) {
+	// TODO: Hercules support
 	const byte *pal;
 	if (csel & 0x10)
 		pal = PALETTE_CGA;
@@ -168,18 +170,25 @@ void cga_blitToScreen(int16 dx, int16 dy, int16 w, int16 h) {
 
 		for (int16 x = 0; x < w; x++) {
 			byte colors = *src++;
-			if (g_vm->_videoMode == Common::RenderMode::kRenderCGA) {
+			switch (g_vm->_videoMode) {
+			case Common::RenderMode::kRenderCGA:
 				for (int16 c = 0; c < 4; c++) {
 					byte color = (colors & 0xC0) >> 6;
 					colors <<= 2;
 					*dst++ = color;
 				}
-			} else if (g_vm->_videoMode == Common::RenderMode::kRenderHercG) {
+				break;
+			case Common::RenderMode::kRenderHercW:
+			case Common::RenderMode::kRenderHercG:
+			case Common::RenderMode::kRenderHercA:
 				for (int16 c = 0; c < 8; c++) {
 					byte color = (colors & 0x80) >> 7;
 					colors <<= 1;
 					*dst++ = color;
 				}
+				break;
+			default:
+				break;
 			}
 		}
 	}
@@ -197,10 +206,14 @@ void cga_blitToScreen(int16 ofs, int16 w, int16 h) {
 }
 
 void cga_BackBufferToRealFull(void) {
-	if (g_vm->_videoMode == Common::RenderMode::kRenderCGA) {
+	switch (g_vm->_videoMode) {
+	case Common::RenderMode::kRenderCGA:
 		memcpy(CGA_SCREENBUFFER, backbuffer, sizeof(backbuffer));
+		break;
 
-	} else if (g_vm->_videoMode == Common::RenderMode::kRenderHercG) {
+	case Common::RenderMode::kRenderHercW:
+	case Common::RenderMode::kRenderHercG:
+	case Common::RenderMode::kRenderHercA: {
 		byte tempBackbuffer[0x4000];
 		byte *even = tempBackbuffer;
 		byte *odd = tempBackbuffer + CGA_BYTES_PER_LINE;
@@ -227,6 +240,9 @@ void cga_BackBufferToRealFull(void) {
 			memmove(destPtr, srcPtr, CGA_BYTES_PER_LINE);
 			srcPtr += CGA_BYTES_PER_LINE;
 		}
+		} break;
+	default:
+		break;
 	}
 	cga_blitToScreen(0, 0, g_vm->_screenW, g_vm->_screenH);
 }
@@ -302,21 +318,29 @@ uint16 cga_CalcXY(uint16 x, uint16 y) {
 }
 
 uint16 CalcXY(uint16 x, uint16 y) {
-	if (g_vm->_videoMode == Common::RenderMode::kRenderCGA)
+	switch (g_vm->_videoMode) {
+	case Common::RenderMode::kRenderCGA:
 		return cga_CalcXY(x, y);
-	else if (g_vm->_videoMode == Common::RenderMode::kRenderHercG)
+	case Common::RenderMode::kRenderHercW:
+	case Common::RenderMode::kRenderHercG:
+	case Common::RenderMode::kRenderHercA:
 		return HGA_CalcXY(x, y);
-	else
+	default:
 		return 0;
+	}
 }
 
 uint16 CalcXY_p(uint16 x, uint16 y) {
-	if (g_vm->_videoMode == Common::RenderMode::kRenderCGA)
+	switch (g_vm->_videoMode) {
+	case Common::RenderMode::kRenderCGA:
 		return cga_CalcXY_p(x, y);
-	else if (g_vm->_videoMode == Common::RenderMode::kRenderHercG)
+	case Common::RenderMode::kRenderHercW:
+	case Common::RenderMode::kRenderHercG:
+	case Common::RenderMode::kRenderHercA:
 		return HGA_CalcXY_p(x, y);
-	else
+	default:
 		return 0;
+	}
 }
 
 /*
@@ -453,10 +477,17 @@ void cga_DrawVLine(uint16 x, uint16 y, uint16 l, byte color, byte *target) {
 	uint16 ofs;
 	uint16 mask = 0;
 	/*pixels are starting from top bits of byte*/
-	if (g_vm->_videoMode == Common::RenderMode::kRenderCGA){
+	switch (g_vm->_videoMode) {
+	case Common::RenderMode::kRenderCGA:
 		mask = static_cast<uint16>((~(3 << ((g_vm->_screenPPB - 1) * g_vm->_screenPPB))) & 0xffff);
-	} else if (g_vm->_videoMode == Common::RenderMode::kRenderHercG) {
+		break;
+	case Common::RenderMode::kRenderHercW:
+	case Common::RenderMode::kRenderHercG:
+	case Common::RenderMode::kRenderHercA:
 		mask = static_cast<uint16>((~(1 << ((g_vm->_screenPPB - 1) * g_vm->_screenPPB))) & 0xffff);
+		break;
+	default:
+		break;
 	}
 	byte pixel = color << ((g_vm->_screenPPB - 1) * g_vm->_screenPPB);
 
@@ -485,10 +516,17 @@ void cga_DrawHLine(uint16 x, uint16 y, uint16 l, byte color, byte *target) {
 	uint16 ofs;
 	uint16 mask = 0;
 	/*pixels are starting from top bits of byte*/
-	if (g_vm->_videoMode == Common::RenderMode::kRenderCGA){
+	switch (g_vm->_videoMode) {
+	case Common::RenderMode::kRenderCGA:
 		mask = static_cast<uint16>((~(3 << ((g_vm->_screenPPB - 1) * g_vm->_screenPPB))) & 0xffff);
-	} else if (g_vm->_videoMode == Common::RenderMode::kRenderHercG) {
+		break;
+	case Common::RenderMode::kRenderHercW:
+	case Common::RenderMode::kRenderHercG:
+	case Common::RenderMode::kRenderHercA:
 		mask = static_cast<uint16>((~(1 << ((g_vm->_screenPPB - 1) * g_vm->_screenPPB))) & 0xffff);
+		break;
+	default:
+		break;
 	}
 
 	byte pixel = color << ((g_vm->_screenPPB - 1) * g_vm->_screenPPB);
@@ -505,10 +543,17 @@ void cga_DrawHLine(uint16 x, uint16 y, uint16 l, byte color, byte *target) {
 		pixel >>= g_vm->_screenPPB;
 		if (mask == 0xFF) {
 			ofs++;
-			if (g_vm->_videoMode == Common::RenderMode::kRenderCGA){
+			switch (g_vm->_videoMode) {
+			case Common::RenderMode::kRenderCGA:
 				mask = static_cast<uint16>((~(3 << ((g_vm->_screenPPB - 1) * g_vm->_screenPPB))) & 0xffff);
-			} else if (g_vm->_videoMode == Common::RenderMode::kRenderHercG) {
+				break;
+			case Common::RenderMode::kRenderHercW:
+			case Common::RenderMode::kRenderHercG:
+			case Common::RenderMode::kRenderHercA:
 				mask = static_cast<uint16>((~(1 << ((g_vm->_screenPPB - 1) * g_vm->_screenPPB))) & 0xffff);
+				break;
+			default:
+				break;
 			}
 			pixel = color << ((g_vm->_screenPPB - 1) * g_vm->_screenPPB);
 		}
@@ -544,7 +589,8 @@ void cga_PrintChar(byte c, byte *target) {
 	uint16 i;
 	byte *font = carpc_data + c * g_vm->_fontHeight;
 
-	if (g_vm->_videoMode == Common::RenderMode::kRenderCGA) {
+	switch (g_vm->_videoMode) {
+	case Common::RenderMode::kRenderCGA: {
 		uint16 ofs = cga_CalcXY_p(char_draw_coords_x++, char_draw_coords_y);
 		for (i = 0; i < g_vm->_fontHeight; i++) {
 			c = *font++;
@@ -557,8 +603,10 @@ void cga_PrintChar(byte c, byte *target) {
 
 		if (target == CGA_SCREENBUFFER)
 			cga_blitToScreen((char_draw_coords_x - 1) * g_vm->_fontWidth, char_draw_coords_y,  g_vm->_fontWidth, g_vm->_fontHeight);
-
-	} else if (g_vm->_videoMode == Common::RenderMode::kRenderHercG) {
+		} break;
+	case Common::RenderMode::kRenderHercW:
+	case Common::RenderMode::kRenderHercG:
+	case Common::RenderMode::kRenderHercA: {
 		const int16 START_X = char_draw_coords_x++ + (HGA_WIDTH / 8 - (2 * CGA_WIDTH) / 8) / 2; // x + 5
 		const int16 START_Y = char_draw_coords_y + (HGA_HEIGHT - CGA_HEIGHT) / 2;               // y + 74
 		for (i = 0; i < g_vm->_fontHeight; i++) {
@@ -570,6 +618,9 @@ void cga_PrintChar(byte c, byte *target) {
 
 		if (target == CGA_SCREENBUFFER)
 			cga_blitToScreen(START_X, START_Y, g_vm->_fontWidth, g_vm->_fontHeight);
+		} break;
+	default:
+		break;
 	}
 }
 

@@ -57,6 +57,7 @@ static const ADGameDescription gameDescriptions[] = {
 class ChamberMetaEngineDetection : public AdvancedMetaEngineDetection<ADGameDescription> {
 public:
 	ChamberMetaEngineDetection() : AdvancedMetaEngineDetection(Chamber::gameDescriptions, Chamber::ChamberGames) {
+		_guiOptions = GUIO4(GUIO_RENDERCGA, GUIO_RENDERHERCWHITE, GUIO_RENDERHERCGREEN, GUIO_RENDERHERCAMBER);
 	}
 
 	const char *getName() const override {

@@ -202,7 +202,8 @@ Common::Error ChamberEngine::init() {
 	byte c;
 
 	// Initialize graphics using following:
-	if (_videoMode == Common::RenderMode::kRenderCGA) {
+	switch (_videoMode) {
+	case Common::RenderMode::kRenderCGA:
 		// 320x200x2
 		_screenW = 320;
 		_screenH = 200;
@@ -213,7 +214,10 @@ Common::Error ChamberEngine::init() {
 		_fontHeight = 6;
 		_fontWidth = 4;
 		initGraphics(_screenW, _screenH);
-	} else if (_videoMode == Common::RenderMode::kRenderHercG) {
+		break;
+	case Common::RenderMode::kRenderHercW:
+	case Common::RenderMode::kRenderHercG:
+	case Common::RenderMode::kRenderHercA:
 		// 720x348x1
 		_screenW = 720;
 		_screenH = 348;
@@ -225,6 +229,9 @@ Common::Error ChamberEngine::init() {
 		_fontHeight = 6;
 		_fontWidth = 4;
 		initGraphics(_screenW, _screenH);
+		break;
+	default:
+		break;
 	}
 	initSound();
 
@@ -251,14 +258,21 @@ Common::Error ChamberEngine::init() {
 			exitGame();
 	}
 
-	if (_videoMode == Common::RenderMode::kRenderCGA) {
+	switch (_videoMode) {
+	case Common::RenderMode::kRenderCGA:
 		/* Select intense cyan-mageta palette */
 		cga_ColorSelect(0x30);
 		cga_BackBufferToRealFull();
-	} else if (_videoMode == Common::RenderMode::kRenderHercG) {
+		break;
+	case Common::RenderMode::kRenderHercW:
+	case Common::RenderMode::kRenderHercG:
+	case Common::RenderMode::kRenderHercA:
 		/* Select intense cyan-mageta palette */
 		cga_ColorSelect(0x30);
 		cga_BackBufferToRealFull();
+		break;
+	default:
+		break;
 	}
 
 	/* Wait for a keypress */
