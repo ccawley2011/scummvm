@@ -153,12 +153,16 @@ void ScummEngine::resetPalette(bool isBootUp) {
 		{ 0x00, 0x00, 0x00, 0x55, 0xFF, 0xFF, 0xFF, 0x55, 0xFF, 0xFF, 0xFF, 0xFF }
 	};
 
-	static const byte tableHercAPalette[] = {
-		0x00, 0x00, 0x00,	0xAE, 0x69, 0x38
+	static const byte tableHercWPalette[] = {
+		0x00, 0x00, 0x00,	0xFF, 0xFF, 0xFF
 	};
 
 	static const byte tableHercGPalette[] = {
 		0x00, 0x00, 0x00,	0x00, 0xFF, 0x00
+	};
+
+	static const byte tableHercAPalette[] = {
+		0x00, 0x00, 0x00,	0xAE, 0x69, 0x38
 	};
 
 	// Palette based on Apple IIgs Technical Notes: IIgs 2523063 Master Color Values
@@ -194,10 +198,12 @@ void ScummEngine::resetPalette(bool isBootUp) {
 	int cgaPalIntensity = 1;
 	_enableEGADithering = false;
 
-	if (_renderMode == Common::kRenderHercA) {
-		setPaletteFromTable(tableHercAPalette, sizeof(tableHercAPalette) / 3);
+	if (_renderMode == Common::kRenderHercW) {
+		setPaletteFromTable(tableHercWPalette, sizeof(tableHercWPalette) / 3);
 	} else if (_renderMode == Common::kRenderHercG) {
 		setPaletteFromTable(tableHercGPalette, sizeof(tableHercGPalette) / 3);
+	} else if (_renderMode == Common::kRenderHercA) {
+		setPaletteFromTable(tableHercAPalette, sizeof(tableHercAPalette) / 3);
 	} else if (_renderMode == Common::kRenderCGA || _renderMode == Common::kRenderCGAComp) {
 		setPaletteFromTable(_cgaColors[cgaPalIndex * 2 + cgaPalIntensity], sizeof(_cgaColors[0]) / 3);
 		// Cursor palette
@@ -494,7 +500,7 @@ void ScummEngine::setV1ColorTable(int renderMode) {
 	};
 
 	int tbl = (_game.platform == Common::kPlatformC64 || _game.platform == Common::kPlatformApple2GS) ? 0 : (_game.id == GID_ZAK ? 1 : 3);
-	if (renderMode == Common::kRenderHercA || renderMode == Common::kRenderHercG || renderMode == Common::kRenderCGA || renderMode == Common::kRenderCGA_BW)
+	if (renderMode == Common::kRenderHercW || renderMode == Common::kRenderHercG || renderMode == Common::kRenderHercA || renderMode == Common::kRenderCGA || renderMode == Common::kRenderCGA_BW)
 		++tbl;
 
 	assert(_gdi);

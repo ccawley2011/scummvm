@@ -232,7 +232,7 @@ void ScummEngine::parseEvent(Common::Event event) {
 		_mouse.x = event.mouse.x;
 		_mouse.y = event.mouse.y;
 
-		if (_renderMode == Common::kRenderHercA || _renderMode == Common::kRenderHercG) {
+		if (_renderMode == Common::kRenderHercW || _renderMode == Common::kRenderHercG || _renderMode == Common::kRenderHercA) {
 			_mouse.x -= (kHercWidth - _screenWidth * 2) / 2;
 			_mouse.x >>= 1;
 			if (_game.version < 3) {

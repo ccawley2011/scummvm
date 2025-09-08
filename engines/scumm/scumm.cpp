@@ -317,8 +317,9 @@ ScummEngine::ScummEngine(OSystem *syst, const DetectorResult &dr)
 		}
 
 	switch (_renderMode) {
-	case Common::kRenderHercA:
+	case Common::kRenderHercW:
 	case Common::kRenderHercG:
+	case Common::kRenderHercA:
 		if ((_game.version > 2 && _game.id != GID_MONKEY_EGA) || _game.platform != Common::kPlatformDOS)
 			_renderMode = Common::kRenderDefault;
 		break;
@@ -432,7 +433,7 @@ ScummEngine::ScummEngine(OSystem *syst, const DetectorResult &dr)
 	else
 		_compositeBuf = nullptr;
 
-	if (_renderMode == Common::kRenderHercA || _renderMode == Common::kRenderHercG)
+	if (_renderMode == Common::kRenderHercW || _renderMode == Common::kRenderHercG || _renderMode == Common::kRenderHercA)
 		_hercCGAScaleBuf = (byte *)malloc(kHercWidth * kHercHeight);
 	else if (_renderMode == Common::kRenderCGA_BW || (_renderMode == Common::kRenderEGA && _supportsEGADithering))
 		_hercCGAScaleBuf = (byte *)malloc(_screenWidth * 2 * _screenHeight * 2);
@@ -568,7 +569,7 @@ ScummEngine_v4::ScummEngine_v4(OSystem *syst, const DetectorResult &dr)
 	// MI1 Amiga ignores the shadow palette (bug #4535 - Voodoo lady palette glitches).
 	// I haven't checked other Amiga targets, so I'm limiting it to MI1.
 	_shadowPalRemap = (!(_game.platform == Common::kPlatformAmiga && _game.id == GID_MONKEY_VGA) &&
-		_renderMode != Common::kRenderCGA && _renderMode != Common::kRenderHercA && _renderMode != Common::kRenderHercG);
+		_renderMode != Common::kRenderCGA && _renderMode != Common::kRenderHercW && _renderMode != Common::kRenderHercG && _renderMode != Common::kRenderHercA);
 }
 
 ScummEngine_v3::ScummEngine_v3(OSystem *syst, const DetectorResult &dr)
@@ -579,7 +580,7 @@ ScummEngine_v3::ScummEngine_v3(OSystem *syst, const DetectorResult &dr)
 	// In b/w Mac rendering mode, the shadow palette is handled by the renderer itself.
 	// See comment in mac_drawStripToScreen().
 	_shadowPalRemap = (_renderMode != Common::kRenderMacintoshBW &&
-		_renderMode != Common::kRenderCGA && _renderMode != Common::kRenderHercA && _renderMode != Common::kRenderHercG);
+		_renderMode != Common::kRenderCGA && _renderMode != Common::kRenderHercW && _renderMode != Common::kRenderHercG && _renderMode != Common::kRenderHercA);
 }
 
 ScummEngine_v3old::ScummEngine_v3old(OSystem *syst, const DetectorResult &dr)
@@ -1416,7 +1417,7 @@ Common::Error ScummEngine::init() {
 	}
 
 	// Initialize backend
-	if (_renderMode == Common::kRenderHercA || _renderMode == Common::kRenderHercG) {
+	if (_renderMode == Common::kRenderHercW || _renderMode == Common::kRenderHercG || _renderMode == Common::kRenderHercA) {
 		initGraphics(kHercWidth, kHercHeight);
 	} else if (_renderMode == Common::kRenderCGA_BW || (_renderMode == Common::kRenderEGA && _supportsEGADithering)) {
 		initGraphics(_screenWidth * 2, _screenHeight * 2);

@@ -845,7 +845,7 @@ void ScummEngine::setVideoModeVarToCurrentConfig() {
 		VAR(VAR_VIDEOMODE) = 4;
 	else if (_renderMode == Common::kRenderCGA_BW)
 		VAR(VAR_VIDEOMODE) = 6;
-	else if (_renderMode == Common::kRenderHercA || _renderMode == Common::kRenderHercG)
+	else if (_renderMode == Common::kRenderHercW || _renderMode == Common::kRenderHercG || _renderMode == Common::kRenderHercA)
 		VAR(VAR_VIDEOMODE) = 30;
 	else if (_renderMode == Common::kRenderEGA)
 		VAR(VAR_VIDEOMODE) = 13;

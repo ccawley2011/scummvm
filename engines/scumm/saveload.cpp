@@ -1652,7 +1652,7 @@ void ScummEngine::saveLoadWithSerializer(Common::Serializer &s) {
 		// Convert the mouse position, which uses game coordinates, to
 		// screen coordinates for the rendering modes that need it.
 
-		if (_renderMode == Common::kRenderHercA || _renderMode == Common::kRenderHercG) {
+		if (_renderMode == Common::kRenderHercW || _renderMode == Common::kRenderHercG || _renderMode == Common::kRenderHercA) {
 			x *= 2;
 			x += (kHercWidth - _screenWidth * 2) / 2;
 			y = y * 7 / 4;

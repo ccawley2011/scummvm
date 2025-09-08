@@ -1097,7 +1097,7 @@ void ClassicCostumeRenderer::setPalette(uint16 *palette) {
 			for (i = 0; i < 16; i++)
 				_palette[i] = palette[i];
 			if (_vm->_game.version == 2)
-				_palette[12] = (_vm->_renderMode == Common::kRenderCGA || _vm->_renderMode == Common::kRenderHercA || _vm->_renderMode == Common::kRenderHercG) ? 0x0F : 0x0C;
+				_palette[12] = (_vm->_renderMode == Common::kRenderCGA || _vm->_renderMode == Common::kRenderHercW || _vm->_renderMode == Common::kRenderHercG || _vm->_renderMode == Common::kRenderHercA) ? 0x0F : 0x0C;
 		} else {
 			for (i = 0; i < 16; i++)
 				_palette[i] = 8;

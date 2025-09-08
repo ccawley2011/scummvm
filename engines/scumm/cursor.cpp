@@ -804,7 +804,7 @@ void ScummEngine_v2::setBuiltinCursor(int idx) {
 		color = (_game.platform == Common::kPlatformApple2GS && !enhancementEnabled(kEnhVisualChanges)) ? 1 : default_v0_cursor_colors[idx];
 	else if (_renderMode == Common::kRenderCGA || _renderMode == Common::kRenderCGAComp)
 		color = (idx & 1) * 3;
-	else if (_renderMode == Common::kRenderHercA || _renderMode == Common::kRenderHercG || _renderMode == Common::kRenderCGA_BW)
+	else if (_renderMode == Common::kRenderHercW || _renderMode == Common::kRenderHercG || _renderMode == Common::kRenderHercA || _renderMode == Common::kRenderCGA_BW)
 		color = idx & 1;
 	else
 		color = default_cursor_colors[idx];
@@ -961,7 +961,7 @@ void ScummEngine_v2::setSnailCursor() {
 		color = default_v0_cursor_colors[1];
 	else if (_renderMode == Common::kRenderCGA || _renderMode == Common::kRenderCGAComp)
 		color = 3;
-	else if (_renderMode == Common::kRenderHercA || _renderMode == Common::kRenderHercG || _renderMode == Common::kRenderCGA_BW)
+	else if (_renderMode == Common::kRenderHercW || _renderMode == Common::kRenderHercG || _renderMode == Common::kRenderHercA || _renderMode == Common::kRenderCGA_BW)
 		color = 1;
 	else
 		color = default_cursor_colors[1];
@@ -1000,7 +1000,7 @@ void ScummEngine_v2::setSnailCursor() {
 }
 
 void ScummEngine_v2::adaptCursorToVideoMode() {
-	if (_renderMode != Common::kRenderHercA && _renderMode != Common::kRenderHercG && _renderMode != Common::kRenderCGA_BW)
+	if (_renderMode != Common::kRenderHercW && _renderMode != Common::kRenderHercG && _renderMode != Common::kRenderHercA && _renderMode != Common::kRenderCGA_BW)
 		return;
 
 	const byte *src = &_grabbedCursor[_cursor.width * _cursor.height - 1];
@@ -1117,7 +1117,7 @@ void ScummEngine_v5::setBuiltinCursor(int idx) {
 				252, 252, 253, 254
 			};
 			color = indy4AmigaColors[idx];
-		} else if (_renderMode == Common::kRenderHercA || _renderMode == Common::kRenderHercG) {
+		} else if (_renderMode == Common::kRenderHercW || _renderMode == Common::kRenderHercG || _renderMode == Common::kRenderHercA) {
 			color = idx & 1;
 		} else {
 			color = default_cursor_colors[idx];
@@ -1125,8 +1125,8 @@ void ScummEngine_v5::setBuiltinCursor(int idx) {
 		memset(_grabbedCursor, 0xFF, sizeof(_grabbedCursor));
 	}
 
-	int sclW = (_renderMode == Common::kRenderHercA || _renderMode == Common::kRenderHercG || _enableEGADithering) ? 2 : _textSurfaceMultiplier;
-	int sclH = (_renderMode == Common::kRenderHercA || _renderMode == Common::kRenderHercG) ? 1 : (_enableEGADithering ? 2 : _textSurfaceMultiplier);
+	int sclW = (_renderMode == Common::kRenderHercW || _renderMode == Common::kRenderHercG || _renderMode == Common::kRenderHercA || _enableEGADithering) ? 2 : _textSurfaceMultiplier;
+	int sclH = (_renderMode == Common::kRenderHercW || _renderMode == Common::kRenderHercG || _renderMode == Common::kRenderHercA) ? 1 : (_enableEGADithering ? 2 : _textSurfaceMultiplier);
 	int sclW2 = _outputPixelFormat.bytesPerPixel * sclW;
 
 	_cursor.hotspotX = _cursorHotspots[2 * _currentCursor] * sclW;

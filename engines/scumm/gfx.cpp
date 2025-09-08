@@ -639,7 +639,7 @@ void ScummEngine::drawStripToScreen(VirtScreen *vs, int x, int width, int top, i
 
 	// Some extra vertical alignment for certain render modes. It matters for MI1EGA. The dithering patterns require the alignment,
 	// otherwise there will be visible glitches. It can be found in the original interpreters.
-	int align = (_game.version > 2 && (_renderMode == Common::kRenderCGA || _renderMode == Common::kRenderHercG || _renderMode == Common::kRenderHercA)) ? 4 : (_enableEGADithering ? 2 : 1);
+	int align = (_game.version > 2 && (_renderMode == Common::kRenderCGA || _renderMode == Common::kRenderHercW || _renderMode == Common::kRenderHercG || _renderMode == Common::kRenderHercA)) ? 4 : (_enableEGADithering ? 2 : 1);
 	top &= ~(align - 1);
 	if (bottom & (align - 1))
 		bottom = (bottom + align) & ~(align - 1);
@@ -839,7 +839,7 @@ const byte *ScummEngine::postProcessDOSGraphics(VirtScreen *vs, int &pitch, int 
 	byte *res = _compositeBuf;
 	byte *dst = _compositeBuf;
 	const byte *src = res;
-	bool renderHerc = (_renderMode == Common::kRenderHercA || _renderMode == Common::kRenderHercG);
+	bool renderHerc = (_renderMode == Common::kRenderHercW || _renderMode == Common::kRenderHercG || _renderMode == Common::kRenderHercA);
 	bool renderV1 = (_game.version == 1);
 	bool renderV3 = _game.version > 2;
 
