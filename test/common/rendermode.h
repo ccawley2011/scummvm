@@ -13,6 +13,7 @@ class RenderModeTestSuite : public CxxTest::TestSuite {
 		 * fun with caps being had in here.
 		 */
 		TS_ASSERT_EQUALS(Common::parseRenderMode("fMTOwNs"), Common::kRenderFMTowns);
+		TS_ASSERT_EQUALS(Common::parseRenderMode("hercWhItE"), Common::kRenderHercW);
 		TS_ASSERT_EQUALS(Common::parseRenderMode("hercGrEen"), Common::kRenderHercG);
 		TS_ASSERT_EQUALS(Common::parseRenderMode("hercAmbeR"), Common::kRenderHercA);
 		TS_ASSERT_EQUALS(Common::parseRenderMode("CgA"), Common::kRenderCGA);
@@ -66,6 +67,7 @@ class RenderModeTestSuite : public CxxTest::TestSuite {
 		 * Verify that a rendermode is taken and the corresponding
 		 * GUIO_xxxxx is returned.
 		 */
+		TS_ASSERT_EQUALS(Common::renderMode2GUIO(Common::kRenderHercW), GUIO_RENDERHERCWHITE);
 		TS_ASSERT_EQUALS(Common::renderMode2GUIO(Common::kRenderHercG), GUIO_RENDERHERCGREEN);
 		TS_ASSERT_EQUALS(Common::renderMode2GUIO(Common::kRenderHercA), GUIO_RENDERHERCAMBER);
 		TS_ASSERT_EQUALS(Common::renderMode2GUIO(Common::kRenderCGA), GUIO_RENDERCGA);

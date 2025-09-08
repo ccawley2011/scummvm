@@ -62,6 +62,7 @@ const struct GameOpt {
 
 	{ GUIO_NOASPECT,     "noAspect" },
 
+	{ GUIO_RENDERHERCWHITE,		"hercWhite" },
 	{ GUIO_RENDERHERCGREEN,		"hercGreen" },
 	{ GUIO_RENDERHERCAMBER,		"hercAmber" },
 	{ GUIO_RENDERCGA,			"cga" },

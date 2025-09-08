@@ -30,6 +30,8 @@ namespace Common {
 
 
 const RenderModeDescription g_renderModes[] = {
+	// I18N: Hercules is a graphics card name, White is color
+	{ "hercWhite", _s("Hercules White"), kRenderHercW },
 	// I18N: Hercules is a graphics card name, Green is color
 	{ "hercGreen", _s("Hercules Green"), kRenderHercG },
 	// I18N: Hercules is a graphics card name, Amber is color
@@ -69,6 +71,7 @@ struct RenderGUIOMapping {
 // could be used to indicate "any" mode when passed to renderMode2GUIO (if
 // we wanted to merge allRenderModesGUIOs back into)
 static const RenderGUIOMapping s_renderGUIOMapping[] = {
+	{ kRenderHercW,			GUIO_RENDERHERCWHITE },
 	{ kRenderHercG,			GUIO_RENDERHERCGREEN },
 	{ kRenderHercA,			GUIO_RENDERHERCAMBER },
 	{ kRenderCGA,		    GUIO_RENDERCGA },
