@@ -365,22 +365,17 @@ void DrillerEngine::drawInfoMenu() {
 	uint32 black = _gfx->_texturePixelFormat.ARGBToColor(0xFF, 0x00, 0x00, 0x00);
 	surface->fillRect(_viewArea, black);
 
-	switch (_renderMode) {
-		case Common::kRenderCGA:
-		case Common::kRenderHercG:
-			color = 1;
-			break;
-		case Common::kRenderZX:
-			color = 6;
-			break;
-		case Common::kRenderCPC:
-			color = _gfx->_underFireBackgroundColor;
-			break;
-		default:
-			color = 14;
+	if (_renderMode == Common::kRenderCGA || isHercules()) {
+		color = 1;
+	} else if (_renderMode == Common::kRenderZX) {
+		color = 6;
+	} else if (_renderMode == Common::kRenderCPC) {
+		color = _gfx->_underFireBackgroundColor;
+	} else {
+		color = 14;
 	}
-	uint8 r, g, b;
 
+	uint8 r, g, b;
 	_gfx->readFromPalette(color, r, g, b);
 	if (isAmiga() || isAtariST()) {
 		r = 0xFF;

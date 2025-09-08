@@ -161,14 +161,14 @@ Common::Array<Graphics::ManagedSurface *> FreescapeEngine::getChars(Common::Seek
 		Graphics::ManagedSurface *surface = new Graphics::ManagedSurface();
 
 		int charWidth = sizeX;
-		if (_renderMode == Common::kRenderHercG || isC64())
+		if (isHercules() || isC64())
 			charWidth *= 2;
 
 		surface->create(charWidth, sizeY, Graphics::PixelFormat::createFormatCLUT8());
 		for (int j = 0; j < sizeY; j++) {
 			for (int i = 0; i < sizeX; i++) {
 				if (font.get(position + additional + j * 8 + i)) {
-					if (_renderMode == Common::kRenderHercG || isC64()) {
+					if (isHercules() || isC64()) {
 						surface->setPixel(2 * (7 - i), j, 1);
 						surface->setPixel(2 * (7 - i) + 1, j, 1);
 					} else {

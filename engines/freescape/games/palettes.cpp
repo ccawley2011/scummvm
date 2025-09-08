@@ -56,9 +56,19 @@ byte kCGAPaletteRedGreen[4][3] = {
 	{0xaa, 0x55, 0x00},
 };
 
+byte kHerculesPaletteWhite[2][3] = {
+	{0x00, 0x00, 0x00},
+	{0xff, 0xff, 0xff},
+};
+
 byte kHerculesPaletteGreen[2][3] = {
 	{0x00, 0x00, 0x00},
 	{0x00, 0xff, 0x00},
+};
+
+byte kHerculesPaletteAmber[2][3] = {
+	{0x00, 0x00, 0x00},
+	{0xae, 0x69, 0x38},
 };
 
 byte kC64Palette[16][3] = {
@@ -136,8 +146,12 @@ void FreescapeEngine::loadColorPalette() {
 		_gfx->_palette = (byte *)kDrillerZXPalette;
 	} else if (_renderMode == Common::kRenderCPC) {
 		_gfx->_palette = (byte *)kDrillerCPCPalette;
+	} else if (_renderMode == Common::kRenderHercW) {
+		_gfx->_palette = (byte *)&kHerculesPaletteWhite;
 	} else if (_renderMode == Common::kRenderHercG) {
 		_gfx->_palette = (byte *)&kHerculesPaletteGreen;
+	} else if (_renderMode == Common::kRenderHercA) {
+		_gfx->_palette = (byte *)&kHerculesPaletteAmber;
 	} else if (_renderMode == Common::kRenderCGA) {
 		// palette depends on the area
 	} else if (_renderMode == Common::kRenderAmiga || _renderMode == Common::kRenderAtariST) {

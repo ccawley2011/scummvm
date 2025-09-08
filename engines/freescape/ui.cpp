@@ -145,20 +145,15 @@ Graphics::Surface *FreescapeEngine::drawStringsInSurface(const Common::Array<Com
 	uint32 color = 0;
 	uint32 back = _gfx->_texturePixelFormat.ARGBToColor(0x00, 0x00, 0x00, 0x00);
 
-	switch (_renderMode) {
-	case Common::kRenderCGA:
-	case Common::kRenderHercG:
+	if (_renderMode == Common::kRenderCGA || isHercules()) {
 		color = 1;
-		break;
-	case Common::kRenderZX:
+	} else if (_renderMode == Common::kRenderZX) {
 		color = isCastle() ? 7 : 6;
-		break;
-	case Common::kRenderCPC:
+	} else if (_renderMode == Common::kRenderCPC) {
 		color = _gfx->_underFireBackgroundColor;
 		if (color == uint32(-1))
 			color = 14;
-		break;
-	default:
+	} else {
 		color = 14;
 	}
 	uint8 r, g, b;

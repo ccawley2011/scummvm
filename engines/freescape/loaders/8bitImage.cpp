@@ -77,7 +77,7 @@ void FreescapeEngine::load8bitBinImageRow(Common::SeekableReadStream *file, Grap
 		nBits = 2;
 	else if (_renderMode == Common::kRenderEGA)
 		nBits = 4;
-	else if (_renderMode == Common::kRenderHercG)
+	else if (isHercules())
 		nBits = 1;
 	else
 		error("Unimplemented render mode for reading images");

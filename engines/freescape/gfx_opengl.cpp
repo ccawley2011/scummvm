@@ -26,6 +26,7 @@
 #include "common/system.h"
 #include "math/glmath.h"
 
+#include "freescape/freescape.h"
 #include "freescape/objects/object.h"
 #include "freescape/gfx_opengl.h"
 #include "freescape/gfx_opengl_texture.h"
@@ -519,7 +520,7 @@ void OpenGLRenderer::useStipple(bool enabled) {
 		if (_renderMode == Common::kRenderZX    ||
 		        _renderMode == Common::kRenderCPC   ||
 		        _renderMode == Common::kRenderCGA   ||
-		        _renderMode == Common::kRenderHercG)
+		        g_freescape->isHercules())
 			glPolygonStipple(_variableStippleArray);
 		else
 			glPolygonStipple(_defaultStippleArray);

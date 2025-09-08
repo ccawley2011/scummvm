@@ -46,7 +46,8 @@ FreescapeEngine::FreescapeEngine(OSystem *syst, const ADGameDescription *gd)
 		_renderMode = Common::parseRenderMode(ConfMan.get("render_mode"));
 
 	_binaryBits = 0;
-	if (_renderMode == Common::kRenderHercG) {
+
+	if (isHercules()) {
 		_screenW = 720;
 		_screenH = 348;
 	} else {

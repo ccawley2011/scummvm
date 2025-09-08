@@ -29,6 +29,7 @@
 	#include "graphics/opengl/context.h"
 #endif
 
+#include "freescape/freescape.h"
 #include "freescape/gfx.h"
 #include "freescape/objects/object.h"
 
@@ -246,7 +247,7 @@ void Renderer::scaleStipplePattern(byte originalPattern[128], byte newPattern[12
 
 void Renderer::setColorMap(ColorMap *colorMap_) {
 	_colorMap = colorMap_;
-	if (_renderMode == Common::kRenderZX || _renderMode == Common::kRenderHercG) {
+	if (_renderMode == Common::kRenderZX || g_freescape->isHercules()) {
 		for (int i = 0; i < 15; i++) {
 			byte *entry = (*_colorMap)[i];
 			for (int j = 0; j < 128; j++)
@@ -563,7 +564,7 @@ bool Renderer::getRGBAt(uint8 index, uint8 ecolor, uint8 &r1, uint8 &g1, uint8 &
 		return getRGBAtCPC(index, r1, g1, b1, r2, g2, b2, stipple);
 	else if (_renderMode == Common::kRenderZX)
 		return getRGBAtZX(index, r1, g1, b1, r2, g2, b2, stipple);
-	else if (_renderMode == Common::kRenderHercG)
+	else if (g_freescape->isHercules())
 		return getRGBAtHercules(index, r1, g1, b1, r2, g2, b2, stipple);
 
 

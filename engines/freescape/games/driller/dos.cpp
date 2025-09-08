@@ -30,12 +30,14 @@ namespace Freescape {
 extern byte kEGADefaultPalette[16][3];
 extern byte kCGAPaletteRedGreen[4][3];
 extern byte kCGAPalettePinkBlue[4][3];
+extern byte kHerculesPaletteWhite[2][3];
 extern byte kHerculesPaletteGreen[2][3];
+extern byte kHerculesPaletteAmber[2][3];
 
 void DrillerEngine::initDOS() {
 	if (_renderMode == Common::kRenderEGA)
 		_viewArea = Common::Rect(40, 16, 280, 117);
-	else if (_renderMode == Common::kRenderHercG)
+	else if (isHercules())
 		_viewArea = Common::Rect(112, 64, 607, 224);
 	else if (_renderMode == Common::kRenderCGA)
 		_viewArea = Common::Rect(36, 16, 284, 117);
@@ -250,11 +252,17 @@ void DrillerEngine::loadAssetsDOSFullGame() {
 		_border = load8bitBinImage(&file, 0x210);
 		_border->setPalette((byte*)&kCGAPalettePinkBlueWhiteData, 0, 4);
 		swapPalette(1);
-	} else if (_renderMode == Common::kRenderHercG) {
+	} else if (isHercules()) {
 		file.open("SCN1H.DAT");
 		if (file.isOpen()) {
 			_title = load8bitBinImage(&file, 0x0);
-			_title->setPalette((byte*)&kHerculesPaletteGreen, 0, 2);
+			if (_renderMode == Common::kRenderHercW) {
+				_title->setPalette((byte*)&kHerculesPaletteWhite, 0, 2);
+			} else if (_renderMode == Common::kRenderHercG) {
+				_title->setPalette((byte*)&kHerculesPaletteGreen, 0, 2);
+			} else if (_renderMode == Common::kRenderHercA) {
+				_title->setPalette((byte*)&kHerculesPaletteAmber, 0, 2);
+			}
 		}
 		file.close();
 		file.open("DRILLH.EXE");
@@ -269,11 +277,17 @@ void DrillerEngine::loadAssetsDOSFullGame() {
 		load8bitBinary(&file, 0x89e0, 4);
 		loadGlobalObjects(&file, 0x2d02, 8);
 		_border = load8bitBinImage(&file, 0x210);
-		_border->setPalette((byte*)&kHerculesPaletteGreen, 0, 2);
+		if (_renderMode == Common::kRenderHercW) {
+			_border->setPalette((byte*)&kHerculesPaletteWhite, 0, 2);
+		} else if (_renderMode == Common::kRenderHercG) {
+			_border->setPalette((byte*)&kHerculesPaletteGreen, 0, 2);
+		} else if (_renderMode == Common::kRenderHercA) {
+			_border->setPalette((byte*)&kHerculesPaletteAmber, 0, 2);
+		}
 	} else
 		error("Unsupported video mode for DOS");
 
-	if (_renderMode != Common::kRenderHercG) {
+	if (!isHercules()) {
 		_indicators.push_back(loadBundledImage("driller_tank_indicator"));
 		_indicators.push_back(loadBundledImage("driller_ship_indicator"));
 
@@ -320,7 +334,7 @@ void DrillerEngine::loadAssetsDOSDemo() {
 }
 
 void DrillerEngine::drawDOSUI(Graphics::Surface *surface) {
-	uint32 color = _renderMode == Common::kRenderCGA || _renderMode == Common::kRenderHercG ? 1 : 14;
+	uint32 color = _renderMode == Common::kRenderCGA || isHercules() ? 1 : 14;
 	uint8 r, g, b;
 
 	_gfx->readFromPalette(color, r, g, b);
@@ -335,29 +349,29 @@ void DrillerEngine::drawDOSUI(Graphics::Surface *surface) {
 	uint32 back = _gfx->_texturePixelFormat.ARGBToColor(0xFF, r, g, b);
 
 	int score = _gameStateVars[k8bitVariableScore];
-	Common::Point currentAreaPos = _renderMode == Common::kRenderHercG ? Common::Point(437, 293) : Common::Point(197, 185);
+	Common::Point currentAreaPos = isHercules() ? Common::Point(437, 293) : Common::Point(197, 185);
 	drawStringInSurface(_currentArea->_name, currentAreaPos.x, currentAreaPos.y, front, back, surface);
 
-	Common::Point coordinateXPos = _renderMode == Common::kRenderHercG ? Common::Point(345, 253) : Common::Point(151, 145);
-	Common::Point coordinateYPos = _renderMode == Common::kRenderHercG ? Common::Point(345, 261) : Common::Point(151, 153);
-	Common::Point coordinateZPos = _renderMode == Common::kRenderHercG ? Common::Point(345, 269) : Common::Point(151, 161);
+	Common::Point coordinateXPos = isHercules() ? Common::Point(345, 253) : Common::Point(151, 145);
+	Common::Point coordinateYPos = isHercules() ? Common::Point(345, 261) : Common::Point(151, 153);
+	Common::Point coordinateZPos = isHercules() ? Common::Point(345, 269) : Common::Point(151, 161);
 
 	drawStringInSurface(Common::String::format("%04d", int(2 * _position.x())), coordinateXPos.x, coordinateXPos.y, front, back, surface);
 	drawStringInSurface(Common::String::format("%04d", int(2 * _position.z())), coordinateYPos.x, coordinateYPos.y, front, back, surface);
 	drawStringInSurface(Common::String::format("%04d", int(2 * _position.y())), coordinateZPos.x, coordinateZPos.y, front, back, surface);
 
-	Common::Point playerHeightPos = _renderMode == Common::kRenderHercG ? Common::Point(157, 269) : Common::Point(57, 161);
+	Common::Point playerHeightPos = isHercules() ? Common::Point(157, 269) : Common::Point(57, 161);
 	if (_playerHeightNumber >= 0)
 		drawStringInSurface(Common::String::format("%d", _playerHeightNumber), playerHeightPos.x, playerHeightPos.y, front, back, surface);
 	else
 		drawStringInSurface(Common::String::format("%s", "J"), playerHeightPos.x, playerHeightPos.y, front, back, surface);
 
-	Common::Point anglePos = _renderMode == Common::kRenderHercG ? Common::Point(141, 253) : Common::Point(47, 145);
+	Common::Point anglePos = isHercules() ? Common::Point(141, 253) : Common::Point(47, 145);
 	drawStringInSurface(Common::String::format("%02d", int(_angleRotations[_angleRotationIndex])), anglePos.x, anglePos.y, front, back, surface);
 
 	Common::Point playerStepsPos;
 
-	if (_renderMode == Common::kRenderHercG)
+	if (isHercules())
 		playerStepsPos = Common::Point(130, 261);
 	else if (_renderMode == Common::kRenderCGA)
 		playerStepsPos = Common::Point(44, 153);
@@ -366,25 +380,25 @@ void DrillerEngine::drawDOSUI(Graphics::Surface *surface) {
 
 	drawStringInSurface(Common::String::format("%3d", _playerSteps[_playerStepIndex]), playerStepsPos.x, playerStepsPos.y, front, back, surface);
 
-	Common::Point scorePos = _renderMode == Common::kRenderHercG ? Common::Point(522, 237) : Common::Point(239, 129);
+	Common::Point scorePos = isHercules() ? Common::Point(522, 237) : Common::Point(239, 129);
 	drawStringInSurface(Common::String::format("%07d", score), scorePos.x, scorePos.y, front, back, surface);
 
 	int seconds, minutes, hours;
 	getTimeFromCountdown(seconds, minutes, hours);
 
-	Common::Point hoursPos = _renderMode == Common::kRenderHercG ? Common::Point(462, 56) : Common::Point(208, 8);
+	Common::Point hoursPos = isHercules() ? Common::Point(462, 56) : Common::Point(208, 8);
 	drawStringInSurface(Common::String::format("%02d", hours), hoursPos.x, hoursPos.y, front, back, surface);
 
-	Common::Point minutesPos = _renderMode == Common::kRenderHercG ? Common::Point(506, 56) : Common::Point(231, 8);
+	Common::Point minutesPos = isHercules() ? Common::Point(506, 56) : Common::Point(231, 8);
 	drawStringInSurface(Common::String::format("%02d", minutes), minutesPos.x, minutesPos.y, front, back, surface);
 
-	Common::Point secondsPos = _renderMode == Common::kRenderHercG ? Common::Point(554, 56) : Common::Point(255, 8);
+	Common::Point secondsPos = isHercules() ? Common::Point(554, 56) : Common::Point(255, 8);
 	drawStringInSurface(Common::String::format("%02d", seconds), secondsPos.x, secondsPos.y, front, back, surface);
 
 	Common::String message;
 	int deadline;
 	getLatestMessages(message, deadline);
-	Common::Point messagePos = _renderMode == Common::kRenderHercG ? Common::Point(424, 285) : Common::Point(191, 177);
+	Common::Point messagePos = isHercules() ? Common::Point(424, 285) : Common::Point(191, 177);
 	if (deadline <= _countdown) {
 		drawStringInSurface(message, messagePos.x, messagePos.y, back, front, surface);
 		_temporaryMessages.push_back(message);
@@ -403,7 +417,7 @@ void DrillerEngine::drawDOSUI(Graphics::Surface *surface) {
 	int energy = _gameStateVars[k8bitVariableEnergy];
 	int shield = _gameStateVars[k8bitVariableShield];
 
-	if (_renderMode != Common::kRenderHercG) {
+	if (!isHercules()) {
 		if (energy >= 0) {
 			Common::Rect backBar(20, 185, 88 - energy, 191);
 			surface->fillRect(backBar, back);
@@ -427,13 +441,13 @@ void DrillerEngine::drawDOSUI(Graphics::Surface *surface) {
 			surface->copyRectToSurface(*_indicators[1], 132, 127, Common::Rect(_indicators[1]->w, _indicators[1]->h));
 	}
 
-	color = _renderMode == Common::kRenderHercG ? 1 : 2;
+	color = isHercules() ? 1 : 2;
 	_gfx->readFromPalette(color, r, g, b);
 	uint32 other = _gfx->_texturePixelFormat.ARGBToColor(0xFF, r, g, b);
 
-	Common::Point compassYawPos = _renderMode == Common::kRenderHercG ? Common::Point(214, 264) : Common::Point(87, 156);
+	Common::Point compassYawPos = isHercules() ? Common::Point(214, 264) : Common::Point(87, 156);
 	drawCompass(surface, compassYawPos.x, compassYawPos.y, _yaw - 30, 10, 75, other);
-	Common::Point compassPitchPos = _renderMode == Common::kRenderHercG ? Common::Point(502, 264) : Common::Point(230, 156);
+	Common::Point compassPitchPos = isHercules() ? Common::Point(502, 264) : Common::Point(230, 156);
 	drawCompass(surface, compassPitchPos.x, compassPitchPos.y, _pitch - 30, 10, 60, other);
 }
 

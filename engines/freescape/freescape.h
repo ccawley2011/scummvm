@@ -192,6 +192,7 @@ public:
 	bool isSpectrum() { return _gameDescription->platform == Common::kPlatformZX; }
 	bool isCPC() { return _gameDescription->platform == Common::kPlatformAmstradCPC; }
 	bool isC64() { return _gameDescription->platform == Common::kPlatformC64; }
+	bool isHercules() { return _renderMode == Common::kRenderHercW || _renderMode == Common::kRenderHercG || _renderMode == Common::kRenderHercA; }
 
 	Common::Error run() override;
 
