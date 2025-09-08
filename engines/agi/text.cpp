@@ -185,8 +185,9 @@ void TextMgr::charAttrib_Set(byte foreground, byte background) {
 				_textAttrib.combinedBackground = 0;
 			}
 			break;
-		case Common::kRenderHercA:
+		case Common::kRenderHercW:
 		case Common::kRenderHercG:
+		case Common::kRenderHercA:
 			if (background) {
 				_textAttrib.combinedForeground = 0;
 				_textAttrib.combinedBackground = 1;

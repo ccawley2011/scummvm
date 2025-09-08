@@ -59,6 +59,14 @@ static const uint8 PALETTE_CGA[4 * 3] = {
 };
 
 /**
+ * 2 color Hercules (white) palette. Using 8-bit RGB values.
+ */
+static const uint8 PALETTE_HERCULES_WHITE[2 * 3] = {
+	0x00, 0x00, 0x00, // black
+	0xff, 0xff, 0xff  // white
+};
+
+/**
  * 2 color Hercules (green) palette. Using 8-bit RGB values.
  */
 static const uint8 PALETTE_HERCULES_GREEN[2 * 3] = {

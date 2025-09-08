@@ -96,8 +96,9 @@ byte PreAgiEngine::getWhite() const {
 	switch (_renderMode) {
 	case Common::kRenderCGA:
 		return 3;
-	case Common::kRenderHercA:
+	case Common::kRenderHercW:
 	case Common::kRenderHercG:
+	case Common::kRenderHercA:
 		return 1;
 	default:
 		return 15;
@@ -128,8 +129,9 @@ void PreAgiEngine::drawStr(int row, int col, int attr, const char *buffer) {
 			background = 3;
 		}
 		break;
-	case Common::kRenderHercA:
+	case Common::kRenderHercW:
 	case Common::kRenderHercG:
+	case Common::kRenderHercA:
 		// Map non-black text to amber/green
 		if (foreground != 0) {
 			foreground = 1;

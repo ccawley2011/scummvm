@@ -57,8 +57,9 @@ void GfxFont::init() {
 		loadFontHercules();
 	} else {
 		switch (_vm->_renderMode) {
-		case Common::kRenderHercA:
+		case Common::kRenderHercW:
 		case Common::kRenderHercG:
+		case Common::kRenderHercA:
 			// Render mode is Hercules, we try to load Hercules hires font
 			loadFontHercules();
 			break;
@@ -91,8 +92,9 @@ void GfxFont::init() {
 				}
 			}
 			break;
-		case Common::kRenderHercA:
+		case Common::kRenderHercW:
 		case Common::kRenderHercG:
+		case Common::kRenderHercA:
 		case Common::kRenderCGA:
 		case Common::kRenderEGA:
 		case Common::kRenderVGA:

@@ -90,6 +90,10 @@ void GfxMgr::initVideo() {
 	case Common::kRenderVGA:
 		initPalette(_paletteGfxMode, PALETTE_VGA, 256, 8);
 		break;
+	case Common::kRenderHercW:
+		initPalette(_paletteGfxMode, PALETTE_HERCULES_WHITE, 2, 8);
+		forceHires = true;
+		break;
 	case Common::kRenderHercG:
 		initPalette(_paletteGfxMode, PALETTE_HERCULES_GREEN, 2, 8);
 		forceHires = true;
@@ -168,6 +172,7 @@ void GfxMgr::initVideo() {
 	case Common::kRenderEGA:
 	case Common::kRenderCGA:
 	case Common::kRenderVGA:
+	case Common::kRenderHercW:
 	case Common::kRenderHercG:
 	case Common::kRenderHercA:
 		initMouseCursor(&_mouseCursor, MOUSECURSOR_SCI, 11, 16, 0, 0);
@@ -558,6 +563,7 @@ void GfxMgr::render_Block(int16 x, int16 y, int16 width, int16 height, bool copy
 	}
 
 	switch (_vm->_renderMode) {
+	case Common::kRenderHercW:
 	case Common::kRenderHercG:
 	case Common::kRenderHercA:
 		render_BlockHercules(x, y, width, height);
@@ -1059,8 +1065,9 @@ void GfxMgr::drawBox(int16 x, int16 y, int16 width, int16 height, byte backgroun
 		drawDisplayRect(x, +1, y + height, -2, width, -2, 0, 1, 0);
 		drawDisplayRect(x, +1, y, +1, 0, 1, height, -2, 0);
 		break;
-	case Common::kRenderHercA:
+	case Common::kRenderHercW:
 	case Common::kRenderHercG:
+	case Common::kRenderHercA:
 		lineColor = 0; // change linecolor to black
 		// fall through
 	case Common::kRenderCGA:
@@ -1084,10 +1091,11 @@ void GfxMgr::drawDisplayRect(int16 x, int16 y, int16 width, int16 height, byte c
 	case Common::kRenderCGA:
 		drawDisplayRectCGA(x, y, width, height, color);
 		break;
+	case Common::kRenderHercW:
 	case Common::kRenderHercG:
 	case Common::kRenderHercA:
 		if (color)
-			color = 1; // change any color except black to green/amber
+			color = 1; // change any color except black to white/green/amber
 		// fall through
 	case Common::kRenderEGA:
 	default:

@@ -495,8 +495,9 @@ int AgiEngine::runGame() {
 		case Common::kRenderCGA:
 			setVar(VM_VAR_MONITOR, kAgiMonitorCga);
 			break;
-		case Common::kRenderHercA:
+		case Common::kRenderHercW:
 		case Common::kRenderHercG:
+		case Common::kRenderHercA:
 			// Set EGA for now. Some games place text differently, when this is set to kAgiMonitorHercules.
 			// Text placement was different for Hercules rendering (16x12 instead of 16x16). There also was
 			// not enough space left for the prompt at the bottom. This was caused by the Hercules resolution.

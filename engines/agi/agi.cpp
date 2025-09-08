@@ -389,6 +389,7 @@ void AgiBase::initRenderMode() {
 	case Common::kRenderCGA:
 	case Common::kRenderEGA:
 	case Common::kRenderVGA:
+	case Common::kRenderHercW:
 	case Common::kRenderHercG:
 	case Common::kRenderHercA:
 	case Common::kRenderAmiga:
