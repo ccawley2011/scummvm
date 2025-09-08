@@ -81,6 +81,7 @@ static const GfxDriverInfo _gfxDriverInfos[] = {
 	{ Common::kRenderCGA_BW, Common::kPlatformUnknown, SCI_VERSION_0_EARLY, SCI_VERSION_1_EGA_ONLY, GID_ALL, Common::UNK_LANG, kUnused, INITPROCS2(SCI0_CGABW), 2 },
 	{ Common::kRenderHercA, Common::kPlatformUnknown, SCI_VERSION_0_EARLY, SCI_VERSION_1_EGA_ONLY, GID_ALL, Common::UNK_LANG, kUnused, INITPROCS2(SCI0_Hercules), 0 },
 	{ Common::kRenderHercG, Common::kPlatformUnknown, SCI_VERSION_0_EARLY, SCI_VERSION_1_EGA_ONLY, GID_ALL, Common::UNK_LANG, kUnused, INITPROCS2(SCI0_Hercules), 1 },
+	{ Common::kRenderHercW, Common::kPlatformUnknown, SCI_VERSION_0_EARLY, SCI_VERSION_1_EGA_ONLY, GID_ALL, Common::UNK_LANG, kUnused, INITPROCS2(SCI0_Hercules), 2 },
 	{ Common::kRenderPC98_8c, Common::kPlatformUnknown, SCI_VERSION_0_LATE, SCI_VERSION_0_LATE, GID_PQ2, Common::UNK_LANG, kUnused, INITPROCS2(SCI0_PC98Gfx8Colors), 1 },
 	{ Common::kRenderPC98_8c, Common::kPlatformUnknown, SCI_VERSION_01, SCI_VERSION_01, GID_ALL, Common::UNK_LANG, kUnused, INITPROCS2(SCI0_PC98Gfx8Colors), 0 },
 	{ Common::kRenderPC98_8c, Common::kPlatformUnknown, SCI_VERSION_1_LATE, SCI_VERSION_1_LATE, GID_ALL, Common::UNK_LANG, kUnused, INITPROCS2(SCI1_PC98Gfx8Colors), 0 },
