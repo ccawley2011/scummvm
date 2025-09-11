@@ -50,8 +50,8 @@ private:
 	static const char *_driverFile;
 };
 
-SCI0_HerculesDriver::SCI0_HerculesDriver(uint32 monochromeColor, bool rgbRendering, bool cropImage) : SCI0_DOSPreVGADriver(2, cropImage ? 640 : 720, cropImage ? 300 : 350, rgbRendering),
-	_centerX(cropImage ? 0 : 40), _centerY(cropImage ? 0 : 25), _monochromePatterns(nullptr), _renderLine(nullptr) {
+SCI0_HerculesDriver::SCI0_HerculesDriver(uint32 monochromeColor, bool rgbRendering, bool cropImage) : SCI0_DOSPreVGADriver(2, cropImage ? 640 : 720, cropImage ? 300 : 348, rgbRendering),
+	_centerX(cropImage ? 0 : 40), _centerY(cropImage ? 0 : 24), _monochromePatterns(nullptr), _renderLine(nullptr) {
 	_monochromePalette[0] = _monochromePalette[1] = _monochromePalette[2] = 0;
 	_monochromePalette[3] = (monochromeColor >> 16) & 0xff;
 	_monochromePalette[4] = (monochromeColor >> 8) & 0xff;
