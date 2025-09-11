@@ -124,7 +124,7 @@ class ScummEngine;
 
 enum HerculesDimensions {
 	kHercWidth = 720,
-	kHercHeight = 350
+	kHercHeight = 348
 };
 
 /** Camera modes */
