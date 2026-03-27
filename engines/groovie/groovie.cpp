@@ -104,8 +104,9 @@ Common::Error GroovieEngine::run() {
 	case kGroovieCDY:
 	case kGroovieUHP:
 	case kGroovieTLC: {
-		// Request the mode with the highest precision available
-		Graphics::PixelFormat format(4, 8, 8, 8, 8, 24, 16, 8, 0);
+		// The ROQ decoder currently relies on the screen using this format.
+		// TODO: Support selecting the pixel format dynamically.
+		Graphics::PixelFormat format(4, 8, 8, 8, 8, 16, 8, 0, 24);
 		initGraphics(640, 480, &format);
 
 		if (_system->getScreenFormat() != format)

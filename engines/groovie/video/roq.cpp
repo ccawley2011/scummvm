@@ -52,18 +52,18 @@
 #include "image/bmp.h"
 #endif
 
-/* copied from graphics/blit.h */
+// TODO: Remove these hardcoded constants
 #ifdef SCUMM_LITTLE_ENDIAN
-static const int kAIndex = 0;
-static const int kBIndex = 1;
-static const int kGIndex = 2;
-static const int kRIndex = 3;
+static const int kAIndex = 3;
+static const int kBIndex = 0;
+static const int kGIndex = 1;
+static const int kRIndex = 2;
 
 #else
-static const int kAIndex = 3;
-static const int kBIndex = 2;
-static const int kGIndex = 1;
-static const int kRIndex = 0;
+static const int kAIndex = 0;
+static const int kBIndex = 3;
+static const int kGIndex = 2;
+static const int kRIndex = 1;
 #endif
 
 namespace Groovie {

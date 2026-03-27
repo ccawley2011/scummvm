@@ -256,7 +256,9 @@ private:
 Cursor_v2::Cursor_v2(Common::File &file) {
 	byte *pal = new byte[0x20 * 3];
 
-	_format = g_system->getScreenFormat();
+	// For now, we hardcode this and let the backend handle conversion.
+	// TODO: It would be faster to convert each frame ahead of time.
+	_format = Graphics::PixelFormat(4, 8, 8, 8, 8, 16, 8, 0, 24);
 
 	_numFrames = file.readUint16LE();
 	_width = file.readUint16LE();
@@ -299,9 +301,20 @@ Cursor_v2::~Cursor_v2() {
 }
 
 void Cursor_v2::decodeFrame(byte *pal, byte *data, byte *dest, uint32 size) {
-	// Scratch memory
-	byte *tmp = new byte[_width * _height * 4]();
-	byte *ptr = tmp;
+#ifdef SCUMM_LITTLE_ENDIAN
+	static const int kAIndex = 3;
+	static const int kBIndex = 0;
+	static const int kGIndex = 1;
+	static const int kRIndex = 2;
+
+#else
+	static const int kAIndex = 0;
+	static const int kBIndex = 3;
+	static const int kGIndex = 2;
+	static const int kRIndex = 1;
+#endif
+
+	byte *ptr = dest;
 
 	byte ctrA = 0, ctrB = 0;
 
@@ -355,10 +368,15 @@ void Cursor_v2::decodeFrame(byte *pal, byte *data, byte *dest, uint32 size) {
 
 			// Decode pixel
 			if (alpha) {
-				ptr[0] = alpha;
-				ptr[1] = r;
-				ptr[2] = g;
-				ptr[3] = b;
+				ptr[kAIndex] = alpha;
+				ptr[kRIndex] = r;
+				ptr[kGIndex] = g;
+				ptr[kBIndex] = b;
+			} else {
+				ptr[kAIndex] = 0;
+				ptr[kRIndex] = 0;
+				ptr[kGIndex] = 0;
+				ptr[kBIndex] = 0;
 			}
 			ptr += 4;
 		}
@@ -366,19 +384,6 @@ void Cursor_v2::decodeFrame(byte *pal, byte *data, byte *dest, uint32 size) {
 		if (!size)
 			break;
 	}
-
-	// Convert to screen format
-	// NOTE: Currently locked to 32bpp
-	ptr = tmp;
-	for (int y = 0; y < _height; y++) {
-		for (int x = 0; x < _width; x++) {
-			*(uint32 *)dest = _format.ARGBToColor(ptr[0], ptr[1], ptr[2], ptr[3]);
-			dest += 4;
-			ptr += 4;
-		}
-	}
-
-	delete[] tmp;
 }
 
 void Cursor_v2::enable() {
@@ -386,23 +391,23 @@ void Cursor_v2::enable() {
 
 void Cursor_v2::showFrame(uint16 frame) {
 	int offset = _width * _height * frame * 4;
-	// SDL uses keycolor even though we're using ABGR8888, so just set it to a pink color that isn't used
+	// SDL uses keycolor even though we're using an alpha channel, so just set it to a pink color that isn't used
 	uint32 keycolor = _format.ARGBToColor(0, 255, 128, 255);
 	CursorMan.replaceCursor((const byte *)(_img + offset), _width, _height, _hotspotX, _hotspotY, keycolor, false, &_format);
 }
 
 void blendCursorPixel(uint32 &d, uint32 &s) {
 #ifdef SCUMM_LITTLE_ENDIAN
-	static const int kAIndex = 0;
-	static const int kBIndex = 1;
-	static const int kGIndex = 2;
-	static const int kRIndex = 3;
+	static const int kAIndex = 3;
+	static const int kBIndex = 0;
+	static const int kGIndex = 1;
+	static const int kRIndex = 2;
 
 #else
-	static const int kAIndex = 3;
-	static const int kBIndex = 2;
-	static const int kGIndex = 1;
-	static const int kRIndex = 0;
+	static const int kAIndex = 0;
+	static const int kBIndex = 3;
+	static const int kGIndex = 2;
+	static const int kRIndex = 1;
 #endif
 
 	byte *dst = (byte *)&d;
@@ -438,11 +443,12 @@ void Cursor_v2::show2Cursors(Cursor_v2 *c1, uint16 frame1, Cursor_v2 *c2, uint16
 	int height = MAX(c1->_height, c2->_height);
 	uint32 *img = new uint32[width * height]();
 
+	// TODO: Use blending routines from common code.
 	c2->blendCursor(img, frame2, width, height);
 	c1->blendCursor(img, frame1, width, height);
 
-	// SDL uses keycolor even though we're using ABGR8888, so just set it to a pink color that isn't used
-	Graphics::PixelFormat format = g_system->getScreenFormat();
+	// SDL uses keycolor even though we're using an alpha channel, so just set it to a pink color that isn't used
+	Graphics::PixelFormat format = c1->_format;
 	uint32 keycolor = format.ARGBToColor(0, 255, 128, 255);
 
 	// replaceCursor copies the buffer, so we're ok to delete it
