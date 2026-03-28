@@ -3042,8 +3042,19 @@ void SurfaceSdlGraphicsManager::recreateScreenTexture() {
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, _videoMode.filtering ? "linear" : "nearest");
 #endif
 
+#if SDL_VERSION_ATLEAST(3, 0, 0)
+	SDL_PixelFormat format;
+#else
+	Uint32 format;
+#endif
+#ifdef PLAYSTATION3
+	format = SDL_PIXELFORMAT_ARGB8888;
+#else
+	format = SDL_PIXELFORMAT_RGB565;
+#endif
+
 	SDL_Texture *oldTexture = _screenTexture;
-	_screenTexture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_RGB565, SDL_TEXTUREACCESS_STREAMING, _videoMode.hardwareWidth, _videoMode.hardwareHeight);
+	_screenTexture = SDL_CreateTexture(_renderer, format, SDL_TEXTUREACCESS_STREAMING, _videoMode.hardwareWidth, _videoMode.hardwareHeight);
 	if (_screenTexture) {
 		SDL_DestroyTexture(oldTexture);
 #if SDL_VERSION_ATLEAST(3, 0, 0)
@@ -3130,9 +3141,14 @@ SDL_Surface *SurfaceSdlGraphicsManager::SDL_SetVideoMode(int width, int height, 
 #endif
 
 #if SDL_VERSION_ATLEAST(3, 0, 0)
-	SDL_PixelFormat format = SDL_PIXELFORMAT_RGB565;
+	SDL_PixelFormat format;
 #else
-	Uint32 format = SDL_PIXELFORMAT_RGB565;
+	Uint32 format;
+#endif
+#ifdef PLAYSTATION3
+	format = SDL_PIXELFORMAT_ARGB8888;
+#else
+	format = SDL_PIXELFORMAT_RGB565;
 #endif
 
 	_screenTexture = SDL_CreateTexture(_renderer, format, SDL_TEXTUREACCESS_STREAMING, width, height);
