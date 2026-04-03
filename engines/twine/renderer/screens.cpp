@@ -126,7 +126,7 @@ static bool loadImageDelayViaDecoder(TwinEEngine *engine, const Common::Path &fi
 	Common::Rect rect(src->w, src->h);
 	if (!decoder.hasPalette()) {
 		uint8 pal[Graphics::PALETTE_SIZE];
-		engine->_frontVideoBuffer.getPalette(pal, 0, 256);
+		engine->_frontVideoBuffer.grabPalette(pal, 0, 256);
 		Graphics::Surface *source = decoder.getSurface()->convertTo(target.format, nullptr, 0, pal, 256);
 		target.blitFrom(*source, rect, target.getBounds());
 		source->free();

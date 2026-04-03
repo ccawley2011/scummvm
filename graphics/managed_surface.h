@@ -577,7 +577,7 @@ public:
 	void rawBlitFrom(const ManagedSurface &src, const Common::Rect &srcRect,
 			const Common::Point &destPos) {
 		blitFromInner(src._innerSurface, srcRect, Common::Rect(destPos.x, destPos.y, destPos.x + srcRect.width(),
-			destPos.y + srcRect.height()), src._palette);
+			destPos.y + srcRect.height()), src.grabPalette());
 	}
 	
 	/**
@@ -1043,25 +1043,30 @@ public:
 	/**
 	 * Clear any existing palette.
 	 */
-	void clearPalette();
+	virtual void clearPalette();
 
 	/**
 	 * Return true if a palette has been set.
 	 */
-	bool hasPalette() const;
+	virtual bool hasPalette() const;
 
 	/**
 	 * Grab the palette using RGB tuples.
 	 */
-	void grabPalette(byte *colors, uint start, uint num) const;
-	const Graphics::Palette *grabPalette() const {
+	virtual void grabPalette(byte *colors, uint start, uint num) const;
+	virtual const Graphics::Palette *grabPalette() const {
 		return _palette;
 	}
 
 	/**
 	 * Set the palette using RGB tuples.
 	 */
-	void setPalette(const byte *colors, uint start, uint num);
+	virtual void setPalette(const byte *colors, uint start, uint num);
+
+	/**
+	 * Set a palette based on a passed palette object
+	 */
+	void setPalette(const Graphics::Palette &pal, uint start = 0);
 };
 /** @} */
 } // End of namespace Graphics

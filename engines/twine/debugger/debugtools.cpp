@@ -230,9 +230,9 @@ static void paletteWindow(TwinEEngine *engine) {
 		}
 
 		ImGui::SeparatorText("Front buffer palette");
-		const Graphics::Palette &frontBufferPalette = engine->_frontVideoBuffer.getPalette();
+		const Graphics::Palette *frontBufferPalette = engine->_frontVideoBuffer.grabPalette();
 		ImGui::PushID("frontBufferPalette");
-		ImGuiEx::Palette(frontBufferPalette);
+		ImGuiEx::Palette(*frontBufferPalette);
 		ImGui::PopID();
 
 		ImGui::SeparatorText("PalettePCX");

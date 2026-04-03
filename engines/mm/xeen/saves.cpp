@@ -99,7 +99,7 @@ void SavesManager::writeSavegameHeader(Common::OutSaveFile *out, XeenSavegameHea
 
 	// Write a thumbnail of the screen
 	uint8 thumbPalette[768];
-	screen.getPalette(thumbPalette);
+	screen.grabPalette(thumbPalette, 0, 256);
 	Graphics::Surface saveThumb;
 	::createThumbnail(&saveThumb, (const byte *)screen.getPixels(),
 		screen.w, screen.h, thumbPalette);

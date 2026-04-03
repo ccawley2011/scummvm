@@ -24,6 +24,7 @@
 
 #include "common/list.h"
 #include "common/rect.h"
+#include "graphics/palette.h"
 #include "sherlock/image_file.h"
 #include "sherlock/surface.h"
 #include "sherlock/resources.h"
@@ -74,6 +75,15 @@ public:
 	 * Makes second back buffer active.
 	 */
 	void activateBackBuffer2();
+
+	using Graphics::Screen::setPalette;
+	void setPalette(const byte palette[Graphics::PALETTE_SIZE]) {
+		setPalette(palette, 0, Graphics::PALETTE_COUNT);
+	}
+
+	void getPalette(byte palette[Graphics::PALETTE_SIZE]) {
+		grabPalette(palette, 0, Graphics::PALETTE_COUNT);
+	}
 
 	/**
 	 * Fades from the currently active palette to the passed palette

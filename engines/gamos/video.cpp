@@ -90,7 +90,7 @@ void GamosEngine::playVideo(const Common::String &video, const Common::Point &po
         bkg = &screenCopy;
 
         screenPalette.resize(3 * 256);
-        _screen->getPalette( screenPalette.data() );
+        _screen->grabPalette( screenPalette.data(), 0, 256 );
 
         bkgPalette = screenPalette.data();
         bkgPaletteCount = 256;
@@ -122,7 +122,7 @@ void GamosEngine::playVideo(const Common::String &video, const Common::Point &po
             _screen->markAllDirty();
         }
 
-        avi.setDitheringPalette(_screen->getPalette().data());
+        avi.setDitheringPalette(_screen->grabPalette()->data());
         dither = true;
     }
 
@@ -134,7 +134,7 @@ void GamosEngine::playVideo(const Common::String &video, const Common::Point &po
         if (avi.needsUpdate()) {
             const Graphics::Surface *frm = avi.decodeNextFrame();
             if (!dither && avi.hasDirtyPalette()) {
-                _screen->setPalette(avi.getPalette());
+                _screen->setPalette(avi.getPalette(), 0, 256);
                 surfacePaletteRemap(_screen->surfacePtr(), avi.getPalette(), bkg, bkgPalette, bkgPaletteCount);
                 _screen->markAllDirty();
             }

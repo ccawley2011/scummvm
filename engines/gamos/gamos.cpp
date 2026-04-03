@@ -1024,19 +1024,19 @@ bool GamosEngine::usePalette(const byte *pal, int num, int fade, bool winColors)
 
 	if (_width != 0 && _height != 0) {
 		if (fade == 0 || shouldQuit()) {
-			uint16 color = _screen->getPalette().findBestColor(0, 0, 0);
+			uint16 color = _screen->grabPalette()->findBestColor(0, 0, 0);
 			_screen->fillRect(_screen->getBounds(), color);
 			_screen->update();
 		} else {
 			uint16 color = 0;
 			if (fade == 2)
-				color = _screen->getPalette().findBestColor(0x80, 0x80, 0x80);
+				color = _screen->grabPalette()->findBestColor(0x80, 0x80, 0x80);
 			else if (fade == 3)
-				color = _screen->getPalette().findBestColor(0xc0, 0xc0, 0xc0);
+				color = _screen->grabPalette()->findBestColor(0xc0, 0xc0, 0xc0);
 			else if (fade == 4)
-				color = _screen->getPalette().findBestColor(0xff, 0xff, 0xff);
+				color = _screen->grabPalette()->findBestColor(0xff, 0xff, 0xff);
 			else
-				color = _screen->getPalette().findBestColor(0, 0, 0);
+				color = _screen->grabPalette()->findBestColor(0, 0, 0);
 
 			/* 0.4sec */
 			const int16 maxDelay = (400 / 8) - 1;
@@ -1056,7 +1056,7 @@ bool GamosEngine::usePalette(const byte *pal, int num, int fade, bool winColors)
 
 					if (eventsSkip()) {
 						j = 8;
-						color = _screen->getPalette().findBestColor(0, 0, 0);
+						color = _screen->grabPalette()->findBestColor(0, 0, 0);
 						_screen->fillRect(_screen->getBounds(), color);
 						_screen->update();
 						break;

@@ -23,7 +23,6 @@
 #define GRAPHICS_SCREEN_H
 
 #include "graphics/managed_surface.h"
-#include "graphics/palette.h"
 #include "graphics/pixelformat.h"
 #include "common/list.h"
 #include "common/rect.h"
@@ -98,46 +97,17 @@ public:
 	 */
 	virtual void updateScreen();
 
-	/**
-	 * Return the currently active palette
-	 */
-	void getPalette(byte palette[PALETTE_SIZE]);
-
-	/**
-	 * Return a portion of the currently active palette
-	 */
-	void getPalette(byte *palette, uint start, uint num);
-
-	/**
-	 * Return a portion of the currently active palette as a palette object
-	 */
-	Graphics::Palette getPalette(uint start = 0, uint num = PALETTE_COUNT) {
-		byte tmp[PALETTE_SIZE];
-		getPalette(tmp, start, num);
-		return Graphics::Palette(tmp, num);
-	}
-
-	/**
-	 * Set the palette
-	 */
-	void setPalette(const byte palette[PALETTE_SIZE]);
+	using Graphics::ManagedSurface::setPalette;
 
 	/**
 	 * Set a subsection of the palette
 	 */
-	void setPalette(const byte *palette, uint start, uint num);
-
-	/**
-	 * Set a palette based on a passed palette object
-	 */
-	void setPalette(const Graphics::Palette &pal, uint start = 0) {
-		setPalette(pal.data(), start, pal.size());
-	}
+	void setPalette(const byte *palette, uint start, uint num) override;
 
 	/**
 	 * Clears the current palette, setting all entries to black
 	 */
-	void clearPalette();
+	void clearPalette() override;
 };
  /** @} */
 } // End of namespace Graphics

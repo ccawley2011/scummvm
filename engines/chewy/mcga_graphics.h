@@ -22,6 +22,7 @@
 #ifndef CHEWY_MCGA_GRAPHICS_H
 #define CHEWY_MCGA_GRAPHICS_H
 
+#include "graphics/palette.h"
 #include "graphics/screen.h"
 
 namespace Chewy {

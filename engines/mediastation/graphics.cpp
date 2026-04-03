@@ -586,7 +586,8 @@ void VideoDisplayManager::_fadeToColor(byte r, byte g, byte b, double fadeTime, 
 }
 
 void VideoDisplayManager::_setToColor(byte r, byte g, byte b, uint startIndex, uint colorCount) {
-	Graphics::Palette tempPalette = _screen->getPalette();
+	// TODO: Cache the palette locally?
+	Graphics::Palette tempPalette = *_screen->grabPalette();
 	uint endIndex = _limitColorRange(startIndex, colorCount);
 	for (uint colorIndex = startIndex; colorIndex < endIndex; colorIndex++) {
 		tempPalette.set(colorIndex, r, g, b);
@@ -637,7 +638,8 @@ void VideoDisplayManager::_fadeToPalette(double fadeTime, Graphics::Palette &tar
 	// Gamma correction can be set via a script function, but I haven't seen
 	// that be set to anything other than 1 (the default), so it's not
 	// implemented for now.
-	Graphics::Palette currentPalette = _screen->getPalette();
+	// TODO: Cache the palette locally?
+	Graphics::Palette currentPalette = *_screen->grabPalette();
 	Graphics::Palette intermediatePalette(Graphics::PALETTE_COUNT);
 	uint endIndex = _limitColorRange(startIndex, colorCount);
 	uint fadeTimeMillis = static_cast<uint>(fadeTime * 1000);
@@ -679,7 +681,8 @@ void VideoDisplayManager::_setToRegisteredPalette(uint startIndex, uint colorCou
 
 void VideoDisplayManager::_colorShiftCurrentPalette(uint startIndex, uint shiftAmount, uint colorCount) {
 	uint endIndex = _limitColorRange(startIndex, colorCount);
-	Graphics::Palette currentPalette = _screen->getPalette();
+	// TODO: Cache the palette locally?
+	Graphics::Palette currentPalette = *_screen->grabPalette();
 	Graphics::Palette shiftedPalette = currentPalette;
 
 	for (uint i = startIndex; i < endIndex; i++) {

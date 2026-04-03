@@ -956,14 +956,14 @@ void Screen::restoreBack(Common::Array<Common::Rect> &rectList, int rectListCoun
 	_saveBack = saveBack;
 }
 
-void Screen::setPalette(const byte *palette, int start, int count) {
+void Screen::setPalette(const byte *palette, uint start, uint count) {
 	Graphics::Screen::setPalette(palette, start, count);
 	_vm->_eventsManager->_gameData._hasPalette = false;
 }
 
-void Screen::setPalette128(const byte *palette, int start, int count) {
+void Screen::setPalette128(const byte *palette, uint start, uint count) {
 	byte rgb[3];
-	getPalette(&rgb[0], 128, 1);
+	grabPalette(&rgb[0], 128, 1);
 	Graphics::Screen::setPalette(palette, start, count);
 	Graphics::Screen::setPalette(&rgb[0], 128, 1);
 }

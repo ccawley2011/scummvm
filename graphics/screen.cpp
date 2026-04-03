@@ -104,21 +104,6 @@ bool Screen::unionRectangle(Common::Rect &destRect, const Common::Rect &src1, co
 	return !destRect.isEmpty();
 }
 
-void Screen::getPalette(byte palette[PALETTE_SIZE]) {
-	assert(format.bytesPerPixel == 1);
-	g_system->getPaletteManager()->grabPalette(palette, 0, PALETTE_COUNT);
-}
-
-void Screen::getPalette(byte *palette, uint start, uint num) {
-	assert(format.bytesPerPixel == 1);
-	g_system->getPaletteManager()->grabPalette(palette, start, num);
-}
-
-void Screen::setPalette(const byte palette[PALETTE_SIZE]) {
-	assert(format.bytesPerPixel == 1);
-	g_system->getPaletteManager()->setPalette(palette, 0, PALETTE_COUNT);
-}
-
 void Screen::setPalette(const byte *palette, uint start, uint num) {
 	assert(format.bytesPerPixel == 1);
 	g_system->getPaletteManager()->setPalette(palette, start, num);
@@ -128,7 +113,9 @@ void Screen::setPalette(const byte *palette, uint start, uint num) {
 void Screen::clearPalette() {
 	byte palette[PALETTE_SIZE];
 	Common::fill(&palette[0], &palette[PALETTE_SIZE], 0);
-	setPalette(palette);
+	assert(format.bytesPerPixel == 1);
+	g_system->getPaletteManager()->setPalette(palette, 0, PALETTE_COUNT);
+	ManagedSurface::clearPalette();
 }
 
 } // End of namespace Graphics

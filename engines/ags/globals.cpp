@@ -102,6 +102,7 @@
 #include "ags/plugins/plugin_engine.h"
 #include "ags/plugins/core/core.h"
 #include "common/file.h"
+#include "graphics/palette.h"
 
 namespace AGS3 {
 

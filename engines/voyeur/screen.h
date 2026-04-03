@@ -26,6 +26,7 @@
 #include "common/array.h"
 #include "common/rect.h"
 #include "common/serializer.h"
+#include "graphics/palette.h"
 #include "graphics/screen.h"
 
 namespace Voyeur {
@@ -92,8 +93,8 @@ public:
 	void sDisplayPic(PictureResource *pic);
 	void drawANumber(DisplayResource *display, int num, const Common::Point &pt);
 	void flipPage();
-	void setPalette(const byte *palette, int start, int count);
-	void setPalette128(const byte *palette, int start, int count);
+	void setPalette(const byte *palette, uint start, uint count) override;
+	void setPalette128(const byte *palette, uint start, uint count);
 	void resetPalette();
 	void setColor(int idx, byte r, byte g, byte b);
 	void setOneColor(int idx, byte r, byte g, byte b);

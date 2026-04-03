@@ -25,6 +25,7 @@
 #include "common/scummsys.h"
 #include "common/rect.h"
 #include "common/stream.h"
+#include "graphics/palette.h"
 #include "graphics/screen.h"
 #include "access/asurface.h"
 
@@ -135,6 +136,7 @@ public:
 
 	void loadPalette(int fileNum, int subfile, int srcOffset = 0);
 
+	using Graphics::Screen::setPalette;
 	void setPalette();
 
 	void loadRawPalette(Common::SeekableReadStream *stream);

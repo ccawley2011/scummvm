@@ -22,6 +22,7 @@
 #ifndef NANCY_GRAPHICS_H
 #define NANCY_GRAPHICS_H
 
+#include "common/hashmap.h"
 #include "common/path.h"
 
 #include "graphics/screen.h"
