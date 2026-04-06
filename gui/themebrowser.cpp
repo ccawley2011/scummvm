@@ -103,7 +103,7 @@ void ThemeBrowser::updateListing() {
 
 	Common::U32StringArray list;
 	for (ThemeDescList::const_iterator i = _themes.begin(); i != _themes.end(); ++i, ++index) {
-		list.push_back(i->name);
+		list.push_back(i->name.decode());
 
 		if (i->id == currentThemeId)
 			currentThemeIndex = index;

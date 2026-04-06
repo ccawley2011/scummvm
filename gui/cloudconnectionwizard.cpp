@@ -691,7 +691,7 @@ void CloudConnectionWizard::handleCommand(CommandSender *sender, uint32 cmd, uin
 				break;
 			}
 			Common::String json = codeFile.readString();
-			_codeBox->setEditString(json);
+			_codeBox->setEditString(json.decode());
 		}
 		break;
 	}

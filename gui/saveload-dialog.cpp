@@ -60,7 +60,7 @@ SaveLoadCloudSyncProgressDialog::SaveLoadCloudSyncProgressDialog(bool canRunInBa
 	_progressBar->setMaxValue(100);
 	_progressBar->setValue(progress);
 	_progressBar->setEnabled(false);
-	_percentLabel = new StaticTextWidget(this, "SaveLoadCloudSyncProgress.PercentText", Common::String::format("%u %%", progress));
+	_percentLabel = new StaticTextWidget(this, "SaveLoadCloudSyncProgress.PercentText", Common::U32String::format("%u %%", progress));
 	new ButtonWidget(this, "SaveLoadCloudSyncProgress.Cancel", _("Cancel"), Common::U32String(), kCancelSyncCmd, Common::ASCII_ESCAPE);	// Cancel dialog
 	ButtonWidget *backgroundButton = new ButtonWidget(this, "SaveLoadCloudSyncProgress.Background", _("Run in background"), Common::U32String(), kBackgroundSyncCmd, Common::ASCII_RETURN);	// Confirm dialog
 	backgroundButton->setEnabled(canRunInBackground);
@@ -670,19 +670,19 @@ void SaveLoadChooserSimple::updateSelection(bool redraw) {
 		}
 
 		if (_saveDateSupport) {
-			const Common::U32String &saveDate = desc.getSaveDate();
+			const Common::String &saveDate = desc.getSaveDate();
 			if (!saveDate.empty())
-				_date->setLabel(_("Date: ") + saveDate);
+				_date->setLabel(_("Date: ") + saveDate.decode());
 
-			const Common::U32String &saveTime = desc.getSaveTime();
+			const Common::String &saveTime = desc.getSaveTime();
 			if (!saveTime.empty())
-				_time->setLabel(_("Time: ") + saveTime);
+				_time->setLabel(_("Time: ") + saveTime.decode());
 		}
 
 		if (_playTimeSupport) {
-			const Common::U32String &playTime = desc.getPlayTime();
+			const Common::String &playTime = desc.getPlayTime();
 			if (!playTime.empty())
-				_playtime->setLabel(_("Playtime: ") + playTime);
+				_playtime->setLabel(_("Playtime: ") + playTime.decode());
 		}
 	}
 
@@ -1071,7 +1071,7 @@ void SaveLoadChooserGrid::reflowLayout() {
 			PicButtonWidget *button = new PicButtonWidget(container, dstX, dstY, buttonWidth, buttonHeight, Common::U32String(), buttonCmd);
 			dstY += buttonHeight;
 
-			StaticTextWidget *description = new StaticTextWidget(container, dstX, dstY, buttonWidth, kLineHeight, Common::String(), Graphics::kTextAlignStart);
+			StaticTextWidget *description = new StaticTextWidget(container, dstX, dstY, buttonWidth, kLineHeight, Common::U32String(), Graphics::kTextAlignStart);
 
 			_buttons.push_back(SlotButton(container, button, description));
 		}
@@ -1186,24 +1186,24 @@ void SaveLoadChooserGrid::updateSaves() {
 		tooltip += _saveList[i].getDescription().decode();
 
 		if (_saveDateSupport) {
-			const Common::U32String &saveDate = desc.getSaveDate();
+			const Common::String &saveDate = desc.getSaveDate();
 			if (!saveDate.empty()) {
 				tooltip += Common::U32String("\n");
-				tooltip +=  _("Date: ") + saveDate;
+				tooltip +=  _("Date: ") + saveDate.decode();
 			}
 
-			const Common::U32String &saveTime = desc.getSaveTime();
+			const Common::String &saveTime = desc.getSaveTime();
 			if (!saveTime.empty()) {
 				tooltip += Common::U32String("\n");
-				tooltip += _("Time: ") + saveTime;
+				tooltip += _("Time: ") + saveTime.decode();
 			}
 		}
 
 		if (_playTimeSupport) {
-			const Common::U32String &playTime = desc.getPlayTime();
+			const Common::String &playTime = desc.getPlayTime();
 			if (!playTime.empty()) {
 				tooltip += Common::U32String("\n");
-				tooltip += _("Playtime: ") + playTime;
+				tooltip += _("Playtime: ") + playTime.decode();
 			}
 		}
 
@@ -1223,7 +1223,7 @@ void SaveLoadChooserGrid::updateSaves() {
 	}
 
 	const uint numPages = (_entriesPerPage != 0 && !_saveList.empty()) ? ((_saveList.size() + _entriesPerPage - 1) / _entriesPerPage) : 1;
-	_pageDisplay->setLabel(Common::String::format("%u/%u", _curPage + 1, numPages));
+	_pageDisplay->setLabel(Common::U32String::format("%u/%u", _curPage + 1, numPages));
 
 	if (_curPage > 0)
 		_prevButton->setEnabled(true);
@@ -1238,7 +1238,7 @@ void SaveLoadChooserGrid::updateSaves() {
 
 SavenameDialog::SavenameDialog()
 	: Dialog("SavenameDialog") {
-	_title = new StaticTextWidget(this, "SavenameDialog.DescriptionText", Common::String());
+	_title = new StaticTextWidget(this, "SavenameDialog.DescriptionText", Common::U32String());
 
 	new ButtonWidget(this, "SavenameDialog.Cancel", _("Cancel"), Common::U32String(), kCloseCmd);
 	new ButtonWidget(this, "SavenameDialog.Ok", _("OK"), Common::U32String(), kOKCmd);

@@ -38,7 +38,7 @@ namespace hpl {
 //-----------------------------------------------------------------------
 
 tWString cString::To16Char(const tString &asString) {
-	return asString;
+	return asString.decode();
 }
 
 //-----------------------------------------------------------------------

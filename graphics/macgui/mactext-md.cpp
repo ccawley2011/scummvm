@@ -376,7 +376,7 @@ void MacText::setMarkdownText(const Common::U32String &str) {
 	Common::SDMarkdown md(Common::MKDEXT_TABLES, 16, &cb, &mdState);
 	Common::String rendered = md.render((const byte *)input.c_str(), input.size());
 
-	setText(rendered);
+	setText(rendered.decode());
 }
 
 } // End of namespace Graphics

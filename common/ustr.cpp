@@ -283,7 +283,7 @@ U32String toPrintable(const U32String &in, bool keepNewLines) {
 
 			if (*p < 0x20) {
 				if (tr[*p] < 0x20)
-					res += Common::String::format("x%02x", *p);
+					res += Common::String::format("x%02x", *p).decode();
 				else
 					res += tr[*p];
 			} else {

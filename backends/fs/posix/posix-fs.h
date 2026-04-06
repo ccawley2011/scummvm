@@ -54,7 +54,7 @@ public:
 	POSIXFilesystemNode(const Common::String &path);
 
 	bool exists() const override;
-	Common::U32String getDisplayName() const override { return _displayName; }
+	Common::U32String getDisplayName() const override { return _displayName.decode(); }
 	Common::String getName() const override { return _displayName; }
 	Common::String getPath() const override { return _path; }
 	bool isDirectory() const override { return _isDirectory; }

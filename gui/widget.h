@@ -501,7 +501,7 @@ public:
 		if (path.empty()) {
 			StaticTextWidget::setLabel(_placeholder);
 		} else {
-			StaticTextWidget::setLabel(path.toString(Common::Path::kNativeSeparator));
+			StaticTextWidget::setLabel(path.toString(Common::Path::kNativeSeparator).decode());
 		}
 	}
 	const Common::Path &getLabel() const { return _path; }

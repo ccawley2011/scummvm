@@ -276,7 +276,7 @@ void Text::update() {
 		// split text by tokens and split tokens by lines
 		Common::Array<Line> lines;
 		Line line1;
-		TokenReader reader(_txt);
+		TokenReader reader(_txt.decode());
 		float x = 0;
 		Token tok;
 		while (reader.readToken(tok)) {

@@ -112,7 +112,7 @@ public:
 	void setList(const Common::U32StringArray &list);
 	const Common::U32StringArray &getList()	const			{ return _cleanedList; }
 
-	void append(const Common::String &s);
+	void append(const Common::U32String &s);
 
 	void setSelected(int item);
 	int getSelected() const						{ return (_filter.empty() || _selectedItem == -1) ? _selectedItem : _listIndex[_selectedItem]; }

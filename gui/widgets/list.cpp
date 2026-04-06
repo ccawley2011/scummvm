@@ -283,7 +283,7 @@ void ListWidget::setList(const Common::U32StringArray &list) {
 	scrollBarRecalc();
 }
 
-void ListWidget::append(const Common::String &s) {
+void ListWidget::append(const Common::U32String &s) {
 	Common::U32String stripped = stripGUIformatting(s);
 	_dataList.push_back(ListData(s, stripped));
 	_cleanedList.push_back(stripped);

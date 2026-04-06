@@ -1373,7 +1373,7 @@ void Lingo::setTheEntity(int entity, Datum &id, int field, Datum &d) {
 			int commandId = 100;
 			while (mainArchive->getScriptContext(kEventScript, commandId))
 				commandId++;
-			mainArchive->replaceCode(d.asString(), kEventScript, commandId);
+			mainArchive->replaceCode(d.asString().decode(), kEventScript, commandId);
 
 			g_director->_wm->setMenuItemAction(menuItem, commandId);
 		}

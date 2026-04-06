@@ -111,7 +111,7 @@ PredictiveDialog::PredictiveDialog() : Dialog("Predictive") {
 		_button[kDelAct] = new ButtonWidget(this, "Predictive.Delete" , _("<") , Common::U32String(), kDelCmd);
 	// I18N: Pre means 'Predictive', leave '*' as is
 	_button[kModeAct] = new ButtonWidget(this, "Predictive.Pre", _("*  Pre"), Common::U32String(), kModeCmd);
-	_editText = new EditTextWidget(this, "Predictive.Word", _search, Common::U32String(), 0, 0);
+	_editText = new EditTextWidget(this, "Predictive.Word", _search.decode(), Common::U32String(), 0, 0);
 
 	_userDictHasChanged = false;
 

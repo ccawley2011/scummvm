@@ -86,7 +86,7 @@ public:
 	U32String(const char *beginP, const char *endP, CodePage page = kUtf8);
 
 	/** Construct a copy of the given string. */
-	U32String(const String &str, CodePage page = kUtf8);
+	explicit U32String(const String &str, CodePage page = kUtf8);
 
 	/** Construct a string consisting of the given character. */
 	explicit constexpr U32String(value_type c) : BaseString<u32char_type_t>(c) {}

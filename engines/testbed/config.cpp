@@ -175,7 +175,7 @@ void TestbedInteractionDialog::addText(uint w, uint h, const Common::String &tex
 		xOffset = _xOffset;
 	}
 	_yOffset += yPadding;
-	new GUI::StaticTextWidget(this, xOffset, _yOffset, w, h, true, text, textAlign);
+	new GUI::StaticTextWidget(this, xOffset, _yOffset, w, h, true, text.decode(), textAlign);
 	_yOffset += h;
 }
 
@@ -184,7 +184,7 @@ void TestbedInteractionDialog::addButton(uint w, uint h, const Common::String &n
 		xOffset = _xOffset;
 	}
 	_yOffset += yPadding;
-	_buttonArray.push_back(new GUI::ButtonWidget(this, xOffset, _yOffset, w, h, true, name, Common::U32String(), cmd));
+	_buttonArray.push_back(new GUI::ButtonWidget(this, xOffset, _yOffset, w, h, true, name.decode(), Common::U32String(), cmd));
 	_yOffset += h;
 }
 
@@ -198,7 +198,7 @@ void TestbedInteractionDialog::addList(uint x, uint y, uint w, uint h, const Com
 }
 
 void TestbedInteractionDialog::addButtonXY(uint x, uint /*y*/, uint w, uint h, const Common::String &name, uint32 cmd) {
-	_buttonArray.push_back(new GUI::ButtonWidget(this, x, _yOffset, w, h, true, name, Common::U32String(), cmd));
+	_buttonArray.push_back(new GUI::ButtonWidget(this, x, _yOffset, w, h, true, name.decode(), Common::U32String(), cmd));
 }
 
 void TestbedInteractionDialog::handleCommand(GUI::CommandSender *sender, uint32 cmd, uint32 data) {

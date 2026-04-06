@@ -264,7 +264,7 @@ void MacDialog::mouseMove(int x, int y) {
 	if (_mouseOverButton != match) {
 		_mouseOverButton = match;
 		if (match != -1) {
-			_wm->sayText(_buttons->operator[](match)->text);
+			_wm->sayText(_buttons->operator[](match)->text.decode());
 		}
 	}
 }

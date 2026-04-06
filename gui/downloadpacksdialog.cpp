@@ -196,7 +196,7 @@ DownloadPacksDialog::DownloadPacksDialog(Common::U32String packname, const char 
 	_progressBar->setMaxValue(100);
 	_progressBar->setValue(progress);
 	_progressBar->setEnabled(false);
-	_percentLabel = new StaticTextWidget(this, "GlobalOptions_DownloadPacksDialog.PercentText", Common::String::format("%u %%", progress));
+	_percentLabel = new StaticTextWidget(this, "GlobalOptions_DownloadPacksDialog.PercentText", Common::U32String::format("%u %%", progress));
 	_downloadSizeLabel = new StaticTextWidget(this, "GlobalOptions_DownloadPacksDialog.DownloadSize", Common::U32String());
 	_downloadSpeedLabel = new StaticTextWidget(this, "GlobalOptions_DownloadPacksDialog.DownloadSpeed", Common::U32String());
 	_cancelButton = new ButtonWidget(this, "GlobalOptions_DownloadPacksDialog.MainButton", _("Cancel download"), Common::U32String(), kCleanupCmd);
@@ -377,7 +377,7 @@ Common::U32String DownloadPacksDialog::getSpeedLabelText() {
 
 void DownloadPacksDialog::refreshWidgets() {
 	uint32 progress = getDownloadingProgress();
-	_percentLabel->setLabel(Common::String::format("%u %%", progress));
+	_percentLabel->setLabel(Common::U32String::format("%u %%", progress));
 	_downloadSizeLabel->setLabel(getSizeLabelText());
 	_downloadSpeedLabel->setLabel(getSpeedLabelText());
 	_progressBar->setValue(progress);

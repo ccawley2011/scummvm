@@ -108,11 +108,11 @@ bool EditableWidget::tryInsertChar(Common::u32char_type_t c, int pos) {
 }
 
 int EditableWidget::caretVisualPos(int logicalPos) const {
-	return Common::convertBiDiU32String(_editString + " ").getVisualPosition(logicalPos);
+	return Common::convertBiDiU32String(_editString + U" ").getVisualPosition(logicalPos);
 }
 
 int EditableWidget::caretLogicalPos() const {
-	return Common::convertBiDiU32String(_editString + " ").getLogicalPosition(_caretPos);
+	return Common::convertBiDiU32String(_editString + U" ").getLogicalPosition(_caretPos);
 }
 
 void EditableWidget::handleTickle() {

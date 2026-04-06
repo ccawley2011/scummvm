@@ -115,7 +115,7 @@ void Movie::setPrimaryEventHandler(LEvent event, const Common::String &code) {
 	debugC(3, kDebugLingoExec, "setting primary event handler (%s)", _lingo->_eventHandlerTypes[event]);
 	LingoArchive *mainArchive = getMainLingoArch();
 	mainArchive->primaryEventHandlers[event] = code;
-	mainArchive->replaceCode(code, kEventScript, event);
+	mainArchive->replaceCode(code.decode(), kEventScript, event);
 }
 
 void Movie::resolveScriptEvent(LingoEvent &event) {

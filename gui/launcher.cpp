@@ -312,7 +312,7 @@ void LauncherDialog::build() {
 #endif
 		_searchDesc = new StaticTextWidget(this, _title + ".SearchDesc", _("Search:"));
 
-	_searchWidget = new EditTextWidget(this, _title + ".Search", _search, Common::U32String(), kSearchCmd);
+	_searchWidget = new EditTextWidget(this, _title + ".Search", _search.decode(), Common::U32String(), kSearchCmd);
 	_searchClearButton = addClearButton(this, _title + ".SearchClearButton", kSearchClearCmd);
 
 
@@ -734,7 +734,7 @@ bool LauncherDialog::doGameDetection(const Common::Path &path) {
 		// Display the candidates to the user and let her/him pick one
 		Common::U32StringArray list;
 		for (idx = 0; idx < (int)candidates.size(); idx++) {
-			Common::U32String description = candidates[idx].description;
+			Common::U32String description = candidates[idx].description.decode();
 
 			if (candidates[idx].hasUnknownFiles) {
 				description += Common::U32String(" - ");
@@ -1283,14 +1283,14 @@ void LauncherSimple::groupEntries(const Common::Array<LauncherEntry> &metadata) 
 	switch (_groupBy) {
 	case kGroupByFirstLetter: {
 		for (const auto &entry : metadata) {
-			attrs.push_back(entry.description.substr(0, 1));
+			attrs.push_back(entry.description.substr(0, 1).decode());
 		}
 		_list->setGroupHeaderFormat(Common::U32String(""), Common::U32String("..."));
 		break;
 	}
 	case kGroupByEngine: {
 		for (const auto &entry : metadata) {
-			attrs.push_back(entry.engineid);
+			attrs.push_back(entry.engineid.decode());
 		}
 		_list->setGroupHeaderFormat(Common::U32String(""), Common::U32String(""));
 		// I18N: List grouping when no engine is specified
@@ -1307,7 +1307,7 @@ void LauncherSimple::groupEntries(const Common::Array<LauncherEntry> &metadata) 
 	}
 	case kGroupByCompany: {
 		for (const auto &entry : metadata) {
-			attrs.push_back(_metadataParser._gameInfo[buildQualifiedGameName(entry.engineid, entry.gameid)].company_id);
+			attrs.push_back(_metadataParser._gameInfo[buildQualifiedGameName(entry.engineid, entry.gameid)].company_id.decode());
 		}
 		_list->setGroupHeaderFormat(Common::U32String(""), Common::U32String(""));
 		// I18N: List grouping when no publisher is specified
@@ -1324,7 +1324,7 @@ void LauncherSimple::groupEntries(const Common::Array<LauncherEntry> &metadata) 
 	}
 	case kGroupBySeries: {
 		for (const auto &entry : metadata) {
-			attrs.push_back(_metadataParser._gameInfo[buildQualifiedGameName(entry.engineid, entry.gameid)].series_id);
+			attrs.push_back(_metadataParser._gameInfo[buildQualifiedGameName(entry.engineid, entry.gameid)].series_id.decode());
 		}
 		_list->setGroupHeaderFormat(Common::U32String(""), Common::U32String(""));
 		// I18N: List group when no game series is specified
@@ -1337,8 +1337,8 @@ void LauncherSimple::groupEntries(const Common::Array<LauncherEntry> &metadata) 
 	}
 	case kGroupByLanguage: {
 		for (const auto &entry : metadata) {
-			Common::U32String language = entry.domain->getValOrDefault(Common::String("language"));
-			attrs.push_back(language);
+			Common::String language = entry.domain->getValOrDefault(Common::String("language"));
+			attrs.push_back(language.decode());
 		}
 		_list->setGroupHeaderFormat(Common::U32String(""), Common::U32String(""));
 		// I18N: List group when no language is specified
@@ -1351,8 +1351,8 @@ void LauncherSimple::groupEntries(const Common::Array<LauncherEntry> &metadata) 
 	}
 	case kGroupByPlatform: {
 		for (const auto &entry : metadata) {
-			Common::U32String platform = entry.domain->getValOrDefault(Common::String("Platform"));
-			attrs.push_back(platform);
+			Common::String platform = entry.domain->getValOrDefault(Common::String("Platform"));
+			attrs.push_back(platform.decode());
 		}
 		_list->setGroupHeaderFormat(Common::U32String(""), Common::U32String(""));
 		// I18N: List group when no platform is specified
@@ -1365,8 +1365,8 @@ void LauncherSimple::groupEntries(const Common::Array<LauncherEntry> &metadata) 
 	}
 	case kGroupByYear: {
 		for (const auto &entry : metadata) {
-			Common::U32String year = _metadataParser._gameInfo[buildQualifiedGameName(entry.engineid, entry.gameid)].year;
-			attrs.push_back(year);
+			Common::String year = _metadataParser._gameInfo[buildQualifiedGameName(entry.engineid, entry.gameid)].year;
+			attrs.push_back(year.decode());
 
 			if (!metadataNames.contains(year))
 				metadataNames[year] = year;
@@ -1528,14 +1528,14 @@ void LauncherGrid::groupEntries(const Common::Array<LauncherEntry> &metadata) {
 	switch (_groupBy) {
 	case kGroupByFirstLetter: {
 		for (const auto &entry : metadata) {
-			attrs.push_back(entry.description.substr(0, 1));
+			attrs.push_back(entry.description.substr(0, 1).decode());
 		}
 		_grid->setGroupHeaderFormat(Common::U32String(""), Common::U32String("..."));
 		break;
 	}
 	case kGroupByEngine: {
 		for (const auto &entry : metadata) {
-			attrs.push_back(entry.engineid);
+			attrs.push_back(entry.engineid.decode());
 		}
 		_grid->setGroupHeaderFormat(Common::U32String(""), Common::U32String(""));
 		// I18N: List grouping when no engine is specified
@@ -1552,7 +1552,7 @@ void LauncherGrid::groupEntries(const Common::Array<LauncherEntry> &metadata) {
 	}
 	case kGroupByCompany: {
 		for (const auto &entry : metadata) {
-			attrs.push_back(_metadataParser._gameInfo[buildQualifiedGameName(entry.engineid, entry.gameid)].company_id);
+			attrs.push_back(_metadataParser._gameInfo[buildQualifiedGameName(entry.engineid, entry.gameid)].company_id.decode());
 		}
 		_grid->setGroupHeaderFormat(Common::U32String(""), Common::U32String(""));
 		// I18N: List group when no publisher is specified
@@ -1569,7 +1569,7 @@ void LauncherGrid::groupEntries(const Common::Array<LauncherEntry> &metadata) {
 	}
 	case kGroupBySeries: {
 		for (const auto &entry : metadata) {
-			attrs.push_back(_metadataParser._gameInfo[buildQualifiedGameName(entry.engineid, entry.gameid)].series_id);
+			attrs.push_back(_metadataParser._gameInfo[buildQualifiedGameName(entry.engineid, entry.gameid)].series_id.decode());
 		}
 		_grid->setGroupHeaderFormat(Common::U32String(""), Common::U32String(""));
 		// I18N: List grouping when no game series is specified
@@ -1582,8 +1582,8 @@ void LauncherGrid::groupEntries(const Common::Array<LauncherEntry> &metadata) {
 	}
 	case kGroupByLanguage: {
 		for (const auto &entry : metadata) {
-			Common::U32String language = entry.domain->getValOrDefault(Common::String("language"));
-			attrs.push_back(language);
+			Common::String language = entry.domain->getValOrDefault(Common::String("language"));
+			attrs.push_back(language.decode());
 		}
 		_grid->setGroupHeaderFormat(Common::U32String(""), Common::U32String(""));
 		// I18N: List group when no language is specified
@@ -1596,8 +1596,8 @@ void LauncherGrid::groupEntries(const Common::Array<LauncherEntry> &metadata) {
 	}
 	case kGroupByPlatform: {
 		for (const auto &entry : metadata) {
-			Common::U32String platform = entry.domain->getValOrDefault(Common::String("Platform"));
-			attrs.push_back(platform);
+			Common::String platform = entry.domain->getValOrDefault(Common::String("Platform"));
+			attrs.push_back(platform.decode());
 		}
 		_grid->setGroupHeaderFormat(Common::U32String(""), Common::U32String(""));
 		// I18N: List group when no platform is specified
@@ -1610,8 +1610,8 @@ void LauncherGrid::groupEntries(const Common::Array<LauncherEntry> &metadata) {
 	}
 	case kGroupByYear: {
 		for (const auto &entry : metadata) {
-			Common::U32String year = _metadataParser._gameInfo[buildQualifiedGameName(entry.engineid, entry.gameid)].year;
-			attrs.push_back(year);
+			Common::String year = _metadataParser._gameInfo[buildQualifiedGameName(entry.engineid, entry.gameid)].year;
+			attrs.push_back(year.decode());
 
 			if (!metadataNames.contains(year))
 				metadataNames[year] = year;
@@ -1919,7 +1919,7 @@ RemovalConfirmationDialog::RemovalConfirmationDialog(const Common::U32String &me
 
 	// Create Game Widgets with bogus size (will be sized in reflowLayout)
 	for (uint i = 0; i < _gameTitles.size(); ++i) {
-		_gameNameWidgets.push_back(new StaticTextWidget(_scrollContainer, 0, 0, 0, 0, _gameTitles[i], Graphics::kTextAlignLeft));
+		_gameNameWidgets.push_back(new StaticTextWidget(_scrollContainer, 0, 0, 0, 0, _gameTitles[i].decode(), Graphics::kTextAlignLeft));
 	}
 
 	// Create Button Widgets with bogus size (will be sized in reflowLayout)

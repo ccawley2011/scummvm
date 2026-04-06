@@ -64,7 +64,7 @@ ShaderBrowserDialog::ShaderBrowserDialog(const Common::Path &initialSelection) :
 #endif
 		_searchDesc = new StaticTextWidget(this, "ShaderBrowser.SearchDesc", _("Search:"));
 
-	_searchWidget = new EditTextWidget(this, "ShaderBrowser.Search", _search, Common::U32String(), kSearchCmd);
+	_searchWidget = new EditTextWidget(this, "ShaderBrowser.Search", _search.decode(), Common::U32String(), kSearchCmd);
 	_searchClearButton = addClearButton(this, "ShaderBrowser.SearchClearButton", kSearchClearCmd);
 
 	new ButtonWidget(this, "ShaderBrowser.BrowseFile", _("Pick file instead..."), _("Pick shader from file system"), kChooseFileCmd);

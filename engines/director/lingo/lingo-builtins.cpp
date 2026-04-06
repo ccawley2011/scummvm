@@ -834,7 +834,7 @@ void LB::b_value(int nargs) {
 	}
 	Common::String code = "return " + expr;
 	// Compile the code to an anonymous function and call it
-	ScriptContext *sc = g_lingo->_compiler->compileAnonymous(code, kLPPTrimGarbage);
+	ScriptContext *sc = g_lingo->_compiler->compileAnonymous(code.decode(), kLPPTrimGarbage);
 	if (!sc) {
 		warning("b_value(): Failed to parse expression \"%s\", returning void", expr.c_str());
 		g_lingo->pushVoid();
@@ -1714,7 +1714,7 @@ void LB::b_open(int nargs) {
 
 	if (!debugChannelSet(-1, kDebugFewFramesOnly) &&
 		!(g_director->getGameGID() == GID_TEST || g_director->getGameGID() == GID_TESTALL)) {
-		Common::U32String message = Common::String::format("Unsupported command open encountered -> The movie tried to execute open %s %s!", ex.asString().c_str(), d.type != VOID ? d.asString().c_str() : "");
+		Common::U32String message = Common::U32String::format("Unsupported command open encountered -> The movie tried to execute open %s %s!", ex.asString().c_str(), d.type != VOID ? d.asString().c_str() : "");
 		GUI::MessageDialog dialog(message);
 		dialog.runModal();
 	}
@@ -1908,7 +1908,7 @@ void LB::b_do(int nargs) {
 	if (code.empty())
 		return;
 
-	ScriptContext *sc = g_lingo->_compiler->compileAnonymous(code);
+	ScriptContext *sc = g_lingo->_compiler->compileAnonymous(code.decode());
 	if (!sc) {
 		warning("b_do(): compilation failed, ignoring");
 		return;

@@ -235,7 +235,7 @@ Common::U32String generateUnknownGameReport(const DetectedGames &detectedGames, 
 		// Add the gameId to the list of matched games for the engine
 		// TODO: Use the gameId here instead of the preferred target.
 		// This is currently impossible due to the AD singleId feature losing the information.
-		report += game.preferredTarget;
+		report += game.preferredTarget.decode();
 
 		// Consolidate matched files across all engines and detection entries
 		for (const auto &file : game.matchedFiles) {
@@ -277,7 +277,7 @@ Common::U32String generateUnknownGameReport(const DetectedGames &detectedGames, 
 		Common::Path filepath(strchr(filenames[i].c_str(), ':') + 1);
 		report += Common::String::format("  {\"%s\", 0, \"%s%s\", %lld},\n",
 			filepath.toString().c_str(),
-			md5Prefix.c_str(), file.md5.c_str(), (long long)file.size);
+			md5Prefix.c_str(), file.md5.c_str(), (long long)file.size).decode();
 	}
 
 	report += Common::U32String("\n");

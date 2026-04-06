@@ -177,8 +177,8 @@ void MassAddDialog::updateGameList() {
 	_list->clearSelectedList();
 
 	for (const auto &game : _games) {
-		Common::U32String displayString = game.isSelected ? Common::String("[x] ") + game.description : Common::String("[\u2000] ") + game.description;
-		_list->append(displayString);
+		Common::String displayString = game.isSelected ? Common::String("[x] ") + game.description : Common::String("[\u2000] ") + game.description;
+		_list->append(displayString.decode());
 		_list->appendToSelectedList(game.isSelected);
 	}
 }
@@ -246,7 +246,7 @@ void MassAddDialog::handleTickle() {
 			}
 			_games.push_back(result);
 
-			_list->append(result.description);
+			_list->append(result.description.decode());
 		}
 
 		for (DetectedGame &game : _games) {

@@ -728,7 +728,7 @@ void AGOSEngine_PuzzlePack::printInfoText(const char *itemText) {
 	}
 
 	if (itemName != NULL) {
-		Common::String buf = Common::String::format("%s\n%s", itemName, itemText);
+		Common::U32String buf(Common::String(itemName) + '\n' + Common::String(itemText));
 		GUI::TimedMessageDialog dialog(buf, 1500);
 		dialog.runModal();
 	}

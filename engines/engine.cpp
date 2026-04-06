@@ -1219,7 +1219,7 @@ Common::ErrorCode Engine::updateAddOns(const MetaEngine *metaEngine) const {
 				// Display the candidates to the user and let her/him pick one
 				Common::U32StringArray list;
 				for (idx = 0; idx < (int)detectedAddOns.size(); idx++) {
-					Common::U32String description = detectedAddOns[idx].description;
+					Common::U32String description = detectedAddOns[idx].description.decode();
 
 					if (detectedAddOns[idx].hasUnknownFiles) {
 						description += Common::U32String(" - ");

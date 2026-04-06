@@ -2093,7 +2093,7 @@ void Cast::loadCastInfo(Common::SeekableReadStreamEndian &stream, uint16 id) {
 			if (ConfMan.getBool("dump_scripts"))
 				dumpScript(ci->script.c_str(), scriptType, id);
 
-			_lingoArchive->addCode(ci->script, scriptType, id, ci->name.c_str());
+			_lingoArchive->addCode(ci->script.decode(), scriptType, id, ci->name.c_str());
 		}
 	}
 

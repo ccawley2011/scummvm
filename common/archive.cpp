@@ -34,7 +34,7 @@ ArchiveMember::~ArchiveMember() {
 }
 
 U32String ArchiveMember::getDisplayName() const {
-	return getName();
+	return getName().decode();
 }
 
 bool ArchiveMember::isInMacArchive() const {

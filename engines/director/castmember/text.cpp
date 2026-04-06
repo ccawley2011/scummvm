@@ -416,8 +416,8 @@ void TextCastMember::setRawText(const Common::String &text) {
 	_ptext = Common::U32String(text);
 
 	// If text has changed, use the cached formatting from first STXT in this castmember.
-	Common::U32String formatting = Common::String::format("\001\016%04x%02x%04x%04x%04x%04x", _fontId, _textSlant, _fontSize, _fgpalinfo1, _fgpalinfo2, _fgpalinfo3);
-	_ftext = formatting + _ptext;
+	Common::String formatting = Common::String::format("\001\016%04x%02x%04x%04x%04x%04x", _fontId, _textSlant, _fontSize, _fgpalinfo1, _fgpalinfo2, _fgpalinfo3);
+	_ftext = formatting.decode() + _ptext;
 	_modified = true;
 }
 

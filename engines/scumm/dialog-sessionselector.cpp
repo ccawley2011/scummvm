@@ -58,7 +58,7 @@ SessionSelectorDialog::SessionSelectorDialog(Scumm::ScummEngine_v90he *vm)
 
 	// I18N: The user's name for online
 	new GUI::StaticTextWidget(this, "SessionSelector.PlayerNameLabel", _("Your Name:"));
-	_playerName = new GUI::EditTextWidget(this, "SessionSelector.PlayerName", ConfMan.get("network_player_name"));
+	_playerName = new GUI::EditTextWidget(this, "SessionSelector.PlayerName", ConfMan.get("network_player_name").decode());
 
 	// I18N: Join online multiplayer game
 	_joinButton = new GUI::ButtonWidget(this, "SessionSelector.Join", _("Join"), Common::U32String(), kOkCmd, Common::ASCII_RETURN);
@@ -109,7 +109,7 @@ void SessionSelectorDialog::handleTickle() {
 		for (int i = 0; i < numSessions; i++) {
 			char name[MAX_SESSION_NAME];
 			_vm->_net->getSessionName(i, name, MAX_SESSION_NAME);
-			_list->append(name);
+			_list->append(Common::String(name).decode());
 		}
 
 		_joinButton->setEnabled(false);

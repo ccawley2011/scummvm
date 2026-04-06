@@ -194,7 +194,7 @@ void BrowserDialog::handleCommand(CommandSender *sender, uint32 cmd, uint32 data
 
 void BrowserDialog::updateListing() {
 	// Update the path display
-	_currentPath->setEditString(_node.getPath().toString(Common::Path::kNativeSeparator));
+	_currentPath->setEditString(_node.getPath().toString(Common::Path::kNativeSeparator).decode());
 
 	// We memorize the last visited path.
 	// Don't memorize a path that is not a directory
@@ -220,7 +220,7 @@ void BrowserDialog::updateListing() {
 		}
 
 		if (node.isDirectory())
-			list.push_back(color + ListWidget::escapeString(Common::U32String(node.getName()) + "/"));
+			list.push_back(color + ListWidget::escapeString(Common::U32String(node.getName()) + U"/"));
 		else
 			list.push_back(color + ListWidget::escapeString(Common::U32String(node.getName())));
 	}

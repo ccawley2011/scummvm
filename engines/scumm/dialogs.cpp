@@ -539,7 +539,7 @@ const Common::U32String InfoDialog::queryResString(int stringno) {
 	const byte *result;
 
 	if (stringno == 0)
-		return String();
+		return U32String();
 
 	if (_vm->_game.heversion >= 80)
 		return _(string_map_table_v6[stringno - 1].string);
@@ -1028,7 +1028,7 @@ void DebugInputDialog::handleKeyDown(Common::KeyState state) {
 	if (state.keycode == Common::KEYCODE_BACKSPACE && buffer.size() > 0) {
 		buffer.deleteLastChar();
 		Common::String total = mainText + ' ' + buffer;
-		setInfoText(total);
+		setInfoText(total.decode());
 		g_gui.scheduleTopDialogRedraw();
 		reflowLayout();
 	} else if (state.keycode == Common::KEYCODE_RETURN) {
@@ -1040,7 +1040,7 @@ void DebugInputDialog::handleKeyDown(Common::KeyState state) {
 		Common::String total = mainText + ' ' + buffer;
 		g_gui.scheduleTopDialogRedraw();
 		reflowLayout();
-		setInfoText(total);
+		setInfoText(total.decode());
 	}
 }
 
@@ -1266,7 +1266,7 @@ void ScummOptionsContainerWidget::updateAdjustmentSlider(GUI::SliderWidget *slid
 	} else if (adjustment > 0)
 		sign = "+";
 
-	value->setLabel(Common::String::format("%s%d.%02d", sign, adjustment / 100, adjustment % 100));
+	value->setLabel(Common::String::format("%s%d.%02d", sign, adjustment / 100, adjustment % 100).decode());
 
 }
 
@@ -1460,7 +1460,7 @@ void LoomEgaGameOptionsWidget::handleCommand(GUI::CommandSender *sender, uint32 
 void LoomEgaGameOptionsWidget::updateOvertureTicksValue() {
 	int ticks = DEFAULT_LOOM_OVERTURE_TRANSITION + _overtureTicksSlider->getValue();
 
-	_overtureTicksValue->setLabel(Common::String::format("%d:%02d.%d", ticks / 600, (ticks % 600) / 10, ticks % 10));
+	_overtureTicksValue->setLabel(Common::String::format("%d:%02d.%d", ticks / 600, (ticks % 600) / 10, ticks % 10).decode());
 }
 
 // Options for various Mac games
@@ -1871,7 +1871,7 @@ HENetworkGameOptionsWidget::HENetworkGameOptionsWidget(GuiObject *boss, const Co
 		_enableCompetitiveMods = new GUI::CheckboxWidget(widgetsBoss(), "HENetworkGameOptionsDialog.EnableCompetitiveMods", _("Enable online competitive mods"), _("Enables custom-made modifications intended for online competitive play."));
 
 		// Display network version
-		_networkVersion = new GUI::StaticTextWidget(widgetsBoss(), "HENetworkGameOptionsDialog.NetworkVersion", Common::String::format("Multiplayer Version: %s", NETWORK_VERSION));
+		_networkVersion = new GUI::StaticTextWidget(widgetsBoss(), "HENetworkGameOptionsDialog.NetworkVersion", Common::U32String::format("Multiplayer Version: %s", NETWORK_VERSION));
 #endif
 	} else {
 		// Network configuration (Include LAN settings)
@@ -1891,7 +1891,7 @@ HENetworkGameOptionsWidget::HENetworkGameOptionsWidget(GuiObject *boss, const Co
 		_serverResetButton = addClearButton(widgetsBoss(), "HENetworkGameOptionsDialog.ServerReset", kResetServersCmd);
 
 		// Display network version
-		_networkVersion = new GUI::StaticTextWidget(widgetsBoss(), "HENetworkGameOptionsDialog.NetworkVersion", Common::String::format("Multiplayer Version: %s", NETWORK_VERSION));
+		_networkVersion = new GUI::StaticTextWidget(widgetsBoss(), "HENetworkGameOptionsDialog.NetworkVersion", Common::U32String::format("Multiplayer Version: %s", NETWORK_VERSION));
 	}
 }
 
@@ -1909,7 +1909,7 @@ void HENetworkGameOptionsWidget::load() {
 
 		if (ConfMan.hasKey("lobby_server", _domain))
 			lobbyServerAddr = ConfMan.get("lobby_server", _domain);
-		_lobbyServerAddr->setEditString(lobbyServerAddr);
+		_lobbyServerAddr->setEditString(lobbyServerAddr.decode());
 		if (ConfMan.hasKey("enable_competitive_mods", _domain))
 			enableCompetitiveMods = ConfMan.getBool("enable_competitive_mods", _domain);
 		_enableCompetitiveMods->setState(enableCompetitiveMods);
@@ -1930,7 +1930,7 @@ void HENetworkGameOptionsWidget::load() {
 
 		if (ConfMan.hasKey("session_server", _domain))
 			sessionServerAddr = ConfMan.get("session_server", _domain);
-		_sessionServerAddr->setEditString(sessionServerAddr);
+		_sessionServerAddr->setEditString(sessionServerAddr.decode());
 		_sessionServerAddr->setEnabled(enableSessionServer);
 
 		if (_gameid == "moonbase") {

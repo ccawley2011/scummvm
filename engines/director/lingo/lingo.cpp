@@ -1815,7 +1815,7 @@ void Lingo::varAssign(const Datum &var, const Datum &value) {
 					}
 					break;
 				}
-				res += value.asString();
+				res += value.asString().decode();
 			}
 			varAssign(var.u.cref->source, res.encode(Common::kUtf8));
 		}

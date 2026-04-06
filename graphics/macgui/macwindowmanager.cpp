@@ -657,7 +657,7 @@ Common::U32String stripFormat(const Common::U32String &str) {
 					s += len;
 
 					s = readHex(&len, s, 2);
-					Common::String alt = Common::U32String(s, len);
+					Common::U32String alt = Common::U32String(s, len);
 					s += len;
 
 					res += '[';

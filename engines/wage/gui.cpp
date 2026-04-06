@@ -513,7 +513,7 @@ void Gui::clearOutput() {
 }
 
 void Gui::actionCopy() {
-	g_system->setTextInClipboard(Common::convertUtf32ToUtf8(_consoleWindow->getSelection()));
+	g_system->setTextInClipboard(_consoleWindow->getSelection());
 
 	_menu->enableCommand(kMenuEdit, kMenuActionPaste, true);
 }
@@ -809,7 +809,7 @@ void Gui::gameOver() {
 
 	Graphics::MacFont font;
 
-	Graphics::MacText gameOverMessage(*_engine->_world->_gameOverMessage, _wm, &font, Graphics::kColorBlack,
+	Graphics::MacText gameOverMessage(_engine->_world->_gameOverMessage->decode(), _wm, &font, Graphics::kColorBlack,
 									  Graphics::kColorWhite, 199, Graphics::kTextAlignCenter);
 
 	_engine->sayText(*_engine->_world->_gameOverMessage, Common::TextToSpeechManager::QUEUE);
@@ -836,7 +836,7 @@ bool Gui::saveDialog() {
 
 	Graphics::MacFont font;
 
-	Graphics::MacText saveBeforeCloseMessage(*_engine->_world->_saveBeforeCloseMessage, _wm, &font, Graphics::kColorBlack,
+	Graphics::MacText saveBeforeCloseMessage(_engine->_world->_saveBeforeCloseMessage->decode(), _wm, &font, Graphics::kColorBlack,
 									  Graphics::kColorWhite, 250, Graphics::kTextAlignCenter);
 
 	_engine->sayText(*_engine->_world->_saveBeforeCloseMessage);

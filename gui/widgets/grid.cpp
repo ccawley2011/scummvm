@@ -83,7 +83,7 @@ void GridItemWidget::drawWidget() {
 	int thumbHeight = _grid->getThumbnailHeight();
 	int thumbWidth = _grid->getThumbnailWidth();
 	Common::Array<Common::U32String> titleLines;
-	g_gui.getFont().wordWrapText(_activeEntry->title, thumbWidth, titleLines);
+	g_gui.getFont().wordWrapText(_activeEntry->title.decode(), thumbWidth, titleLines);
 
 	// FIXME/HACK: We reserve 1/3 of the space between two items to draw the
 	//			selection border. This can break when the stroke width of
@@ -594,7 +594,7 @@ void GridWidget::groupEntries() {
 	_itemsInGroup.clear();
 
 	for (uint i = 0; i < _dataEntryList.size(); ++i) {
-		Common::U32String attrVal = _dataEntryList[i].attribute;
+		Common::U32String attrVal = _dataEntryList[i].attribute.decode();
 		if (!_groupValueIndex.contains(attrVal)) {
 			int newGroupID = _groupValueIndex.size();
 			_groupValueIndex.setVal(attrVal, newGroupID);
@@ -1113,7 +1113,7 @@ void GridWidget::calcEntrySizes() {
 			int titleRows;
 			if (_isTitlesVisible) {
 				Common::Array<Common::U32String> titleLines;
-				g_gui.getFont().wordWrapText(entry->title, _gridItemWidth, titleLines);
+				g_gui.getFont().wordWrapText(entry->title.decode(), _gridItemWidth, titleLines);
 				titleRows = MIN(2U, titleLines.size());
 			} else {
 				titleRows = 0;

@@ -139,7 +139,7 @@ void RemoteBrowserDialog::updateListing() {
 		path = "/"; //root
 	if (_navigationLocked)
 		path = "Loading... " + path;
-	_currentPath->setLabel(path);
+	_currentPath->setLabel(path.decode());
 
 	if (!_navigationLocked) {
 		// Populate the ListWidget

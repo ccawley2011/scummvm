@@ -527,7 +527,7 @@ Common::Path toSafePath(const Common::String &path) {
 	Common::Path result;
 	while (!pathList.empty()) {
 		Common::String token = pathList.nextToken();
-		token = Common::punycode_encodefilename(token);
+		token = Common::punycode_encodefilename(token.decode());
 		if (!result.empty())
 			result.appendInPlace(Common::String(g_director->_dirSeparator), g_director->_dirSeparator);
 		result.appendInPlace(token);

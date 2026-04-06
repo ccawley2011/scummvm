@@ -347,14 +347,14 @@ void EditGameDialog::addGameControls(GuiObject *boss, const Common::String &pref
 		new StaticTextWidget(boss, prefix + "Id", _("ID:"), _("Short game identifier used for referring to saved games and running the game from the command line"));
 	else
 		new StaticTextWidget(boss, prefix + "Id", _c("ID:", "lowres"), _("Short game identifier used for referring to saved games and running the game from the command line"));
-	_domainWidget = new DomainEditTextWidget(boss, prefix + "Domain", _domain, _("Short game identifier used for referring to saved games and running the game from the command line"));
+	_domainWidget = new DomainEditTextWidget(boss, prefix + "Domain", _domain.decode(), _("Short game identifier used for referring to saved games and running the game from the command line"));
 
 	// GUI:  Label & edit widget for the description
 	if (!g_gui.useLowResGUI())
 		new StaticTextWidget(boss, prefix + "Name", _("Name:"), _("Full title of the game"));
 	else
 		new StaticTextWidget(boss, prefix + "Name", _c("Name:", "lowres"), _("Full title of the game"));
-	_descriptionWidget = new EditTextWidget(boss, prefix + "Desc", description, _("Full title of the game"));
+	_descriptionWidget = new EditTextWidget(boss, prefix + "Desc", description.decode(), _("Full title of the game"));
 
 	// Language popup
 	_langPopUpDesc = nullptr;

@@ -442,7 +442,7 @@ void AdvancedMetaEngineDetectionBase::composeFileHashMap(FileMap &allFiles, cons
 		return;
 
 	for (const auto &file : fslist) {
-		Common::String efname = Common::punycode_encodefilename(file.getName());
+		Common::String efname = Common::punycode_encodefilename(file.getName().decode());
 		Common::Path tstr = (_flags & kADFlagMatchFullPaths) ? parentName.appendComponent(efname) : Common::Path(efname, Common::Path::kNoSeparator);
 
 		if (file.isDirectory()) {

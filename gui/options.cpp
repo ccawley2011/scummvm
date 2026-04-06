@@ -516,7 +516,7 @@ void OptionsDialog::build() {
 
 		// MIDI gain setting
 		_midiGainSlider->setValue(ConfMan.getInt("midi_gain", _domain));
-		_midiGainLabel->setLabel(Common::String::format("%.2f", (double)_midiGainSlider->getValue() / 100.0));
+		_midiGainLabel->setLabel(Common::String::format("%.2f", (double)_midiGainSlider->getValue() / 100.0).decode());
 		if (ConfMan.isKeyTemporary("midi_gain"))
 			_midiGainDesc->setFontColor(ThemeEngine::FontColor::kFontColorOverride);
 	}
@@ -1137,7 +1137,7 @@ void OptionsDialog::handleCommand(CommandSender *sender, uint32 cmd, uint32 data
 		_shaderClearButton->setEnabled(false);
 		break;
 	case kMidiGainChanged:
-		_midiGainLabel->setLabel(Common::String::format("%.2f", (double)_midiGainSlider->getValue() / 100.0));
+		_midiGainLabel->setLabel(Common::String::format("%.2f", (double)_midiGainSlider->getValue() / 100.0).decode());
 		break;
 	case kMusicVolumeChanged: {
 		const int newValue = _musicVolumeSlider->getValue();
@@ -2570,7 +2570,7 @@ void GlobalOptionsDialog::addPathsControls(GuiObject *boss, const Common::String
 #endif // DYNAMIC_MODULES
 #endif // !defined(__DC__)
 
-	Common::U32String confPath = ConfMan.getCustomConfigFileName().toString(Common::Path::kNativeSeparator);
+	Common::U32String confPath = ConfMan.getCustomConfigFileName().toString(Common::Path::kNativeSeparator).decode();
 	if (confPath.empty())
 		confPath = g_system->getDefaultConfigFileName().toString(Common::Path::kNativeSeparator).decode();
 	StaticTextWidget *configPathWidget = new StaticTextWidget(boss, prefix + "ConfigPath", _("ScummVM config path: ") + confPath, confPath);
@@ -2586,7 +2586,7 @@ void GlobalOptionsDialog::addPathsControls(GuiObject *boss, const Common::String
 		if (ConfMan.isKeyTemporary("logfile"))
 			colorOverride = true;
 	}
-	Common::U32String logPathS = logPath.toString(Common::Path::kNativeSeparator);
+	Common::U32String logPathS = logPath.toString(Common::Path::kNativeSeparator).decode();
 	_logPath = new StaticTextWidget(boss, prefix + "LogPath", _("ScummVM log path: ") + logPathS, logPathS);
 
 	if (colorOverride)
@@ -2608,7 +2608,7 @@ void GlobalOptionsDialog::addPathsControls(GuiObject *boss, const Common::String
 
 void GlobalOptionsDialog::addGUIControls(GuiObject *boss, const Common::String &prefix, bool lowres) {
 	new ButtonWidget(boss, prefix + "ThemeButton", _("Theme:"), Common::U32String(), kChooseThemeCmd);
-	_curTheme = new StaticTextWidget(boss, prefix + "CurTheme", g_gui.theme()->getThemeName());
+	_curTheme = new StaticTextWidget(boss, prefix + "CurTheme", g_gui.theme()->getThemeName().decode());
 	if (ConfMan.isKeyTemporary("gui_theme"))
 		_curTheme->setFontColor(ThemeEngine::FontColor::kFontColorOverride);
 
@@ -2730,9 +2730,9 @@ void GlobalOptionsDialog::addMiscControls(GuiObject *boss, const Common::String 
 		_autosavePeriodPopUp->appendEntry(_(savePeriodLabels[i]), savePeriodValues[i]);
 	}
 
-	Common::String seed;
+	Common::U32String seed;
 	if (ConfMan.hasKey("random_seed"))
-		seed = Common::String::format("%u", ConfMan.getInt("random_seed"));
+		seed = Common::U32String::format("%u", ConfMan.getInt("random_seed"));
 
 	_randomSeedDesc = new StaticTextWidget(boss, prefix + "RandomSeedDesc", _("Random seed:"), _("Seed for initializing all random number generators"));
 
@@ -3179,7 +3179,7 @@ void GlobalOptionsDialog::apply() {
 	if (!g_gui.loadNewTheme(_newTheme, gfxMode, true)) {
 		Common::U32String errorMessage;
 
-		_curTheme->setLabel(oldThemeName);
+		_curTheme->setLabel(oldThemeName.decode());
 		_newTheme = oldThemeId;
 		ConfMan.set("gui_theme", _newTheme);
 		gfxMode = GUI::ThemeEngine::findMode(oldGfxConfig);
@@ -3431,7 +3431,7 @@ void GlobalOptionsDialog::handleCommand(CommandSender *sender, uint32 cmd, uint3
 		if (browser.runModal() > 0) {
 			// User made his choice...
 			_newTheme = browser.getSelected();
-			_curTheme->setLabel(browser.getSelectedName());
+			_curTheme->setLabel(browser.getSelectedName().decode());
 			_curTheme->setFontColor(ThemeEngine::FontColor::kFontColorNormal);
 		}
 		break;
@@ -3668,7 +3668,7 @@ void GlobalOptionsDialog::setupCloudTab() {
 
 	if (_storageUsernameDesc) _storageUsernameDesc->setVisible(shownConnectedInfo);
 	if (_storageUsername) {
-		_storageUsername->setLabel(username);
+		_storageUsername->setLabel(username.decode());
 		_storageUsername->setVisible(shownConnectedInfo);
 	}
 	if (_storageUsedSpaceDesc) _storageUsedSpaceDesc->setVisible(shownConnectedInfo);
@@ -3685,7 +3685,7 @@ void GlobalOptionsDialog::setupCloudTab() {
 	}
 	if (_storageLastSyncDesc) _storageLastSyncDesc->setVisible(shownConnectedInfo);
 	if (_storageLastSync) {
-		Common::U32String sync = CloudMan.getStorageLastSync(_selectedStorageIndex);
+		Common::U32String sync = CloudMan.getStorageLastSync(_selectedStorageIndex).decode();
 		if (sync.empty()) {
 			if (_selectedStorageIndex == CloudMan.getStorageIndex() && CloudMan.isSyncing())
 				sync = _("<right now>");

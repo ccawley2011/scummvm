@@ -96,7 +96,7 @@ PauseDialog::PauseDialog() : GUI::Dialog(0, 0, 0, 0) {
 
 	_message = "Game paused. Press Ctrl+p again to continue.";
 	_text = new GUI::StaticTextWidget(this, 4, 0, 10, 10,
-			_message, Graphics::kTextAlignCenter);
+			_message.decode(), Graphics::kTextAlignCenter);
 }
 
 void PauseDialog::reflowLayout() {

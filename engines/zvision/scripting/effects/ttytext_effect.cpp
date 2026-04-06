@@ -101,7 +101,7 @@ bool ttyTextNode::process(uint32 deltaTimeInMillis) {
 					buf = Common::String::format("%d", _engine->getScriptManager()->getStateValue(_state._statebox));
 
 					if (_isRTL) {
-						int16 currDx = _dx + _fnt.getStringWidth(buf);
+						int16 currDx = _dx + _fnt.getStringWidth(buf.decode());
 						_dx = _r.width() - currDx;
 						_isRTL = false;
 						for (uint8 j = 0; j < buf.size(); j++)

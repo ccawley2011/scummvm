@@ -118,25 +118,25 @@ XOBJSTUBNR(JITDraw3XObj::m_dispose)
 XOBJSTUB(JITDraw3XObj::m_checkifcdrom, 0)
 
 void JITDraw3XObj::m_msgokcancel(int nargs) {
-	Common::U32String caption = g_lingo->pop().asString();  // Title of the message box
-	Common::U32String message = g_lingo->pop().asString();
-	GUI::MessageDialog dialog(message, _("OK"), _("Cancel"));
+	Common::String caption = g_lingo->pop().asString();  // Title of the message box
+	Common::String message = g_lingo->pop().asString();
+	GUI::MessageDialog dialog(message.decode(), _("OK"), _("Cancel"));
 	int result = dialog.runModal();
 	g_lingo->push(Datum(result == GUI::kMessageOK ? 1 : 0));
 }
 
 void JITDraw3XObj::m_msgok(int nargs) {
-	Common::U32String caption = g_lingo->pop().asString();  // Title of the message box
-	Common::U32String message = g_lingo->pop().asString();
-	GUI::MessageDialog dialog(message);
+	Common::String caption = g_lingo->pop().asString();  // Title of the message box
+	Common::String message = g_lingo->pop().asString();
+	GUI::MessageDialog dialog(message.decode());
 	dialog.runModal();
 	g_lingo->push(Datum());
 }
 
 void JITDraw3XObj::m_msgyesno(int nargs) {
-	Common::U32String caption = g_lingo->pop().asString();  // Title of the message box
-	Common::U32String message = g_lingo->pop().asString();
-	GUI::MessageDialog dialog(message, _("Yes"), _("No"));
+	Common::String caption = g_lingo->pop().asString();  // Title of the message box
+	Common::String message = g_lingo->pop().asString();
+	GUI::MessageDialog dialog(message.decode(), _("Yes"), _("No"));
 	int result = dialog.runModal();
 	g_lingo->push(Datum(result == GUI::kMessageOK ? 1 : 0));
 }

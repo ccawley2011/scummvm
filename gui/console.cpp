@@ -566,7 +566,7 @@ void ConsoleDialog::handleOtherEvent(const Common::Event &evt) {
 			if (_selBegin == -1 || _selEnd == -1) {
 				Common::String userInput = getUserInput();
 				if (!userInput.empty())
-					g_system->setTextInClipboard(userInput);
+					g_system->setTextInClipboard(userInput.decode());
 			} else {
 				Common::String str;
 				Common::String whitespaces; // for dealing with trailing whitespaces
@@ -584,7 +584,7 @@ void ConsoleDialog::handleOtherEvent(const Common::Event &evt) {
 						str += "\n";
 					}
 				}
-				g_system->setTextInClipboard(str);
+				g_system->setTextInClipboard(str.decode());
 			}
 		} break;
 		case kActionPaste:

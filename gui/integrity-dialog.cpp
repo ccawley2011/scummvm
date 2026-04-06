@@ -117,7 +117,7 @@ IntegrityDialog::IntegrityDialog(Common::String endpoint, Common::String domain)
 	_progressBar->setMaxValue(100);
 	_progressBar->setValue(progress);
 	_progressBar->setEnabled(false);
-	_percentLabel = new StaticTextWidget(this, "GameOptions_IntegrityDialog.PercentText", Common::String::format("%u %%", progress));
+	_percentLabel = new StaticTextWidget(this, "GameOptions_IntegrityDialog.PercentText", Common::U32String::format("%u %%", progress));
 	_calcSizeLabel = new StaticTextWidget(this, "GameOptions_IntegrityDialog.DownloadSize", Common::U32String());
 	_cancelButton = new ButtonWidget(this, "GameOptions_IntegrityDialog.MainButton", _("Cancel"), Common::U32String(), kCleanupCmd);
 
@@ -143,10 +143,10 @@ IntegrityDialog::IntegrityDialog(Common::String endpoint, Common::String domain)
 		if (!gameAddOns.empty()) {
 			// Ask the user to choose between the base game or one of its add-ons
 			Common::U32StringArray list;
-			list.push_back(ConfMan.get("description", domain));
+			list.push_back(ConfMan.get("description", domain).decode());
 
 			for (Common::String &gameAddOn : gameAddOns) {
-				list.push_back(ConfMan.get("description", gameAddOn));
+				list.push_back(ConfMan.get("description", gameAddOn).decode());
 			}
 
 			ChooserDialog dialog(_("This game includes add-ons, pick the part you want to be checked:"));
@@ -273,7 +273,7 @@ void IntegrityDialog::setState(ProcessState state) {
 		if (g_result->messageText.size() != 0) {
 			_resultsText->setList(g_result->messageText);
 		} else
-			_resultsText->setList(Common::U32StringArray({g_result->errorText}));
+			_resultsText->setList(Common::U32StringArray({g_result->errorText.decode()}));
 
 		if (g_result->error != 0) {
 			_copyEmailButton->setEnabled(true);
@@ -343,7 +343,7 @@ Common::U32String IntegrityDialog::getSizeLabelText() {
 
 void IntegrityDialog::refreshWidgets() {
 	uint32 progress = getCalculationProgress();
-	_percentLabel->setLabel(Common::String::format("%u %%", progress));
+	_percentLabel->setLabel(Common::U32String::format("%u %%", progress));
 	_calcSizeLabel->setLabel(getSizeLabelText());
 	_progressBar->setValue(progress);
 }
@@ -682,7 +682,7 @@ void IntegrityDialog::parseJSON(const Common::JSONValue *response) {
 
 		Common::StringTokenizer tok(emailText, "\n");
 		for (auto &line : tok.split())
-			messageText.push_back(line);
+			messageText.push_back(line.decode());
 
 		g_result->messageText = messageText;
 		g_result->emailLink = emailLink;
@@ -717,7 +717,7 @@ void IntegrityDialog::parseJSON(const Common::JSONValue *response) {
 		else if (status == "unknown_file")
 			results[UNKNOWN]++;
 
-		messageText.push_back(Common::String::format("%s %s\n", name.c_str(), status.c_str()));
+		messageText.push_back(Common::U32String::format("%s %s\n", name.c_str(), status.c_str()));
 	}
 
 	if (messageText.size() == 0)
@@ -725,7 +725,7 @@ void IntegrityDialog::parseJSON(const Common::JSONValue *response) {
 	else {
 		g_result->error = true;
 
-		Common::String resultSummary = "\n\nTotal: ";
+		Common::U32String resultSummary("\n\nTotal: ");
 		resultSummary += Common::U32String::format("%d OK, %d missing, %d mismatch, %d unknown files",
 												   results[OK], results[MISSING], results[SIZE_MISMATCH] + results[CHECKSUM_MISMATCH], results[UNKNOWN]);
 

@@ -231,7 +231,7 @@ bool punycode_needEncode(const String &src) {
 U32String punycode_decode(const String &src1, bool *error) {
 	if (error) *error = true;
 	if (!src1.hasPrefix("xn--")) {
-		return src1;
+		return src1.decode();
 	}
 
 	const char *src = src1.c_str() + 4; // Skip the prefix for simplification
@@ -240,7 +240,7 @@ U32String punycode_decode(const String &src1, bool *error) {
 	// Ensure that the input contains only ASCII characters.
 	for (uint si = 0; si < srclen; si++) {
 		if (src[si] & 0x80) {
-			return src1;
+			return src1.decode();
 		}
 	}
 
@@ -281,7 +281,7 @@ U32String punycode_decode(const String &src1, bool *error) {
 		// Look for another insertions start
 		if (startinsert == src) {
 			warning("punycode_decode: malformed string for string (%s)", src1.c_str());
-			return src1;
+			return src1.decode();
 		}
 
 		// Move back to the dash
@@ -310,20 +310,20 @@ U32String punycode_decode(const String &src1, bool *error) {
 		for (size_t w = 1, k = BASE; true; k += BASE) {
 			if (si >= tail) {
 				warning("punycode_decode: incorrect digit for string (%s)", src1.c_str());
-				return src1;
+				return src1.decode();
 			}
 
 			size_t digit = decode_digit(*si++);
 
 			if (digit == SMAX) {
 				warning("punycode_decode: incorrect digit2 for string (%s)", src1.c_str());
-				return src1;
+				return src1.decode();
 			}
 
 			if (digit > (SMAX - i) / w) {
 				// OVERFLOW
 				warning("punycode_decode: overflow1 for string (%s)", src1.c_str());
-				return src1;
+				return src1.decode();
 			}
 
 			i += digit * w;
@@ -344,7 +344,7 @@ U32String punycode_decode(const String &src1, bool *error) {
 			if (w > SMAX / (BASE - t)) {
 				// OVERFLOW
 				warning("punycode_decode: overflow2 for string (%s)", src1.c_str());
-				return src1;
+				return src1.decode();
 			}
 
 			w *= BASE - t;
@@ -355,7 +355,7 @@ U32String punycode_decode(const String &src1, bool *error) {
 		if (i / (di + 1) > SMAX - n) {
 			// OVERFLOW
 			warning("punycode_decode: overflow3 for string (%s)", src1.c_str());
-			return src1;
+			return src1.decode();
 		}
 
 		n += i / (di + 1);

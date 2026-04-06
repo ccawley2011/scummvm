@@ -660,7 +660,7 @@ void cSaveHandler::DeleteOldestIfMax(const tWString &asDir, const tWString &asMa
 
 tWString cSaveHandler::GetLatest(const tWString &asMask) {
 	Common::StringArray saves = Hpl1::g_engine->listInternalSaves(asMask);
-	return firstSave(saves, [](const cDate &a, const cDate &b) { return a > b; });
+	return cString::To16Char(firstSave(saves, [](const cDate &a, const cDate &b) { return a > b; }));
 }
 
 //-----------------------------------------------------------------------

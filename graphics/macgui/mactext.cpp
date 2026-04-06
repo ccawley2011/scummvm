@@ -1780,7 +1780,7 @@ Common::U32String MacText::getMouseLink(int x, int y) {
 		return _canvas._text[row].pictitle;
 
 	if (!_canvas._text[row].chunks[chunk].link.empty())
-		return _canvas._text[row].chunks[chunk].link;
+		return _canvas._text[row].chunks[chunk].link.decode();
 
 	return Common::U32String();
 }

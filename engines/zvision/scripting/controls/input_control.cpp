@@ -215,9 +215,9 @@ bool InputControl::process(uint32 deltaTimeInMillis) {
 		int32 oldTxtWidth = _txtWidth;
 
 		if (!_readOnly || !_focused)
-			_txtWidth = _engine->getTextRenderer()->drawText(_currentInputText, _stringInit, txt);
+			_txtWidth = _engine->getTextRenderer()->drawText(_currentInputText.decode(), _stringInit, txt);
 		else
-			_txtWidth = _engine->getTextRenderer()->drawText(_currentInputText, _stringChooserInit, txt);
+			_txtWidth = _engine->getTextRenderer()->drawText(_currentInputText.decode(), _stringChooserInit, txt);
 
 		if (_readOnly || _txtWidth <= _maxTxtWidth)
 			_engine->getRenderManager()->blitSurfaceToBkg(txt, _textRectangle.left, _textRectangle.top);

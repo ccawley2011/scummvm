@@ -79,7 +79,7 @@ void GroupedListWidget::groupByAttribute() {
 		_groupExpanded.push_back(true);
 		// I18N: Group for All items
 		_groupHeaders.push_back(_("All"));
-		_groupValueIndex.setVal(Common::String("All"), 0);
+		_groupValueIndex.setVal(Common::U32String("All"), 0);
 		for (uint i = 0; i < _dataList.size(); ++i) {
 			_itemsInGroup[0].push_back(i);
 		}

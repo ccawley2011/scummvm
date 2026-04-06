@@ -1207,7 +1207,7 @@ bool Debugger::lingoEval(const char *inputOrig) {
 		return true;
 
 	// Compile the code to an anonymous function and call it
-	ScriptContext *sc = g_lingo->_compiler->compileAnonymous(inputSan);
+	ScriptContext *sc = g_lingo->_compiler->compileAnonymous(inputSan.decode());
 	if (!sc) {
 		debugPrintf("Failed to parse expression!\n");
 		return true;

@@ -95,8 +95,8 @@ AboutDialog::AboutDialog(bool inGame)
 	for (i = 0; i < 1; i++)
 		_lines.push_back(Common::U32String());
 
-	Common::String version("C0""ScummVM ");
-	version += gScummVMVersion;
+	Common::U32String version("C0""ScummVM ");
+	version += Common::U32String(gScummVMVersion);
 	addLine(version);
 
 	// I18N: built on <build date> with <compiler>
@@ -109,8 +109,8 @@ AboutDialog::AboutDialog(bool inGame)
 	Common::U32String features("C1");
 	features += _("Features compiled in:");
 	addLine(features);
-	Common::String featureList("C0");
-	featureList += gScummVMFeatures;
+	Common::U32String featureList("C0");
+	featureList += Common::U32String(gScummVMFeatures);
 	addLine(featureList);
 
 	_lines.push_back(Common::U32String());
@@ -179,7 +179,7 @@ AboutDialog::AboutDialog(bool inGame)
 	if (!inGame) PluginMan.loadDetectionPlugin();
 
 	for (auto &engine : enginesDetected) {
-		Common::String str;
+		Common::U32String str;
 
 		const Plugin *p = EngineMan.findDetectionPlugin(engine);
 
@@ -188,11 +188,11 @@ AboutDialog::AboutDialog(bool inGame)
 			continue;
 		}
 
-		str = "C0";
-		str += p->get<MetaEngineDetection>().getEngineName();
+		str = U"C0";
+		str += Common::U32String(p->get<MetaEngineDetection>().getEngineName());
 		addLine(str);
-		str = "C2";
-		str += p->get<MetaEngineDetection>().getOriginalCopyright();
+		str = U"C2";
+		str += Common::U32String(p->get<MetaEngineDetection>().getOriginalCopyright());
 		addLine(str);
 
 		//addLine("");

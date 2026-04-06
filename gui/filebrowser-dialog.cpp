@@ -114,7 +114,7 @@ void FileBrowserDialog::normalieFileName() {
 	if (filename.matchString(_fileMask, true))
 		return;
 
-	_fileName->setEditString(filename + "." + _fileExt);
+	_fileName->setEditString(Common::U32String(filename + "." + _fileExt));
 }
 
 

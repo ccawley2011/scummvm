@@ -568,10 +568,10 @@ void Subtitles::mergeSubtitleQuotes(int actorId, int quoteFirst, int quoteSecond
 	const char *textSecond = _vqaSubsTextResourceEntries[0]->getText((uint32)idSecond);
 	if (_useUTF8) {
 		_subtitlesDataActive[kSubtitlesPrimary].currentText32 = Common::convertUtf8ToUtf32(textFirst);
-		_subtitlesDataActive[kSubtitlesPrimary].currentText32 += " " + Common::convertUtf8ToUtf32(textSecond);
+		_subtitlesDataActive[kSubtitlesPrimary].currentText32 += Common::U32String(' ') + Common::convertUtf8ToUtf32(textSecond);
 	} else {
 		_subtitlesDataActive[kSubtitlesPrimary].currentText = textFirst;
-		_subtitlesDataActive[kSubtitlesPrimary].currentText += " " + Common::String(textSecond);
+		_subtitlesDataActive[kSubtitlesPrimary].currentText += ' ' + Common::String(textSecond);
 	}
 }
 

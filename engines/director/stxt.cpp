@@ -97,8 +97,8 @@ Stxt::Stxt(Cast *cast, Common::SeekableReadStreamEndian &textStream) : _cast(cas
 		logText += Common::toPrintable(u32TextPart);
 
 		Common::String format = Common::String::format("\001\016%04x%02x%04x%04x%04x%04x", _style.fontId, _style.textSlant, _style.fontSize, _style.r, _style.g, _style.b);
-		_ftext += format;
-		logText += Common::toPrintable(format);
+		_ftext += format.decode();
+		logText += Common::toPrintable(format).decode();
 
 		formattingCount--;
 	}
