@@ -100,6 +100,11 @@ DBCSString &DBCSString::operator+=(const DBCSString &str) {
 	return *this;
 }
 
+DBCSString &DBCSString::operator+=(const value_type *str) {
+	append(str);
+	return *this;
+}
+
 DBCSString &DBCSString::operator+=(value_type c) {
 	push_back(c);
 	return *this;
@@ -111,7 +116,25 @@ DBCSString operator+(const DBCSString &x, const DBCSString &y) {
 	return temp;
 }
 
+DBCSString operator+(const DBCSString &x, const DBCSString::value_type *y) {
+	DBCSString temp(x);
+	temp += y;
+	return temp;
+}
+
+DBCSString operator+(const DBCSString::value_type *x, const DBCSString &y) {
+	DBCSString temp(x);
+	temp += y;
+	return temp;
+}
+
 DBCSString operator+(const DBCSString &x, const DBCSString::value_type y) {
+	DBCSString temp(x);
+	temp += y;
+	return temp;
+}
+
+DBCSString operator+(const DBCSString::value_type x, const DBCSString &y) {
 	DBCSString temp(x);
 	temp += y;
 	return temp;

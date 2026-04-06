@@ -117,11 +117,15 @@ private:
 	friend class String;
 };
 
-/** Concatenate strings @p x and @p y. */
+
+// Append two strings to form a new (temp) string
 DBCSString operator+(const DBCSString &x, const DBCSString &y);
 
-/** Append the given @p y character to the given @p x string. */
+DBCSString operator+(const DBCSString::value_type *x, const DBCSString &y);
+DBCSString operator+(const DBCSString &x, const DBCSString::value_type *y);
+
 DBCSString operator+(const DBCSString &x, DBCSString::value_type y);
+DBCSString operator+(DBCSString::value_type x, const DBCSString &y);
 
 /** @} */
 

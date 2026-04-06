@@ -202,11 +202,14 @@ inline U32String U32String::format(const U32String &fmt, TParam... param) {
 	return formatInternal(&fmt, Common::forward<TParam>(param)...);
 }
 
-/** Concatenate strings @p x and @p y. */
+// Append two strings to form a new (temp) string
 U32String operator+(const U32String &x, const U32String &y);
 
-/** Append the given @p y character to the given @p x string. */
+U32String operator+(const U32String::value_type *x, const U32String &y);
+U32String operator+(const U32String &x, const U32String::value_type *y);
+
 U32String operator+(const U32String &x, U32String::value_type y);
+U32String operator+(U32String::value_type x, const U32String &y);
 
 /**
  * Converts string with all non-printable characters properly escaped
