@@ -73,20 +73,8 @@ DBCSString &DBCSString::operator=(DBCSString &&str) {
 	return *this;
 }
 
-DBCSString &DBCSString::operator=(const String &str) {
-	clear();
-	decodeDBCS(str.c_str(), str.size());
-	return *this;
-}
-
 DBCSString &DBCSString::operator=(const value_type *str) {
 	assign(str);
-	return *this;
-}
-
-DBCSString &DBCSString::operator=(const char *str) {
-	clear();
-	decodeDBCS(str, strlen(str));
 	return *this;
 }
 

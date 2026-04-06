@@ -46,16 +46,16 @@ bool TosText::load() {
 void TosText::loadDemoTosEntries() {
 	_numEntries = 973;
 	_textArray.resize(_numEntries);
-	_textArray[10] = "My head is killing me.";
-	_textArray[11] = "My head feels like it is going to explode.";
-	_textArray[12] = "It seems like I've had this headache since I moved here.";
-	_textArray[13] = "I need an asprin or something.";
+	_textArray[10] = U"My head is killing me.";
+	_textArray[11] = U"My head feels like it is going to explode.";
+	_textArray[12] = U"It seems like I've had this headache since I moved here.";
+	_textArray[13] = U"I need an asprin or something.";
 
-	_textArray[798] = "You can't touch the horizon!";
+	_textArray[798] = U"You can't touch the horizon!";
 
-	_textArray[802] = "You see the unfortunate victims of the life leech.";
+	_textArray[802] = U"You see the unfortunate victims of the life leech.";
 
-	_textArray[972] = "Holding ";
+	_textArray[972] = U"Holding ";
 }
 
 const Common::U32String &TosText::getText(uint16 textIndex) {

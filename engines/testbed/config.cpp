@@ -41,13 +41,13 @@ TestbedOptionsDialog::TestbedOptionsDialog(Common::Array<Testsuite *> &tsList, T
 
 	// Construct a String Array
 	Common::Array<Testsuite *>::const_iterator iter;
-	Common::U32String description;
+	Common::String description;
 	uint selected = 0;
 	for (iter = tsList.begin(); iter != tsList.end(); iter++) {
 		_testSuiteArray.push_back(*iter);
 		description = (*iter)->getDescription();
 		GUI::CheckboxWidget *checkbox;
-		checkbox = new GUI::CheckboxWidget(_testContainerDisplay, 0, 0, 0, 0, description, Common::U32String());
+		checkbox = new GUI::CheckboxWidget(_testContainerDisplay, 0, 0, 0, 0, description.decode(), Common::U32String());
 		if ((*iter)->isEnabled()) {
 			checkbox->setState(true);
 			selected++;

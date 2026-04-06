@@ -624,7 +624,7 @@ private:
 		_selectedSave = -1;
 		_showPos = 0;
 
-		_typedSlotName = "";
+		_typedSlotName.clear();
 
 		room->selectFrame("saveas", kTitleZ, 0);
 		room->selectFrame(LayerId("thumbnails", 0, "save"), 5000,

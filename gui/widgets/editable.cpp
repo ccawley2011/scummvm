@@ -595,7 +595,7 @@ int EditableWidget::getSelectionCarretOffset() const {
 			// does not result in color glitches in case the edit rect is
 			// drawn with an inversion.
 			width = g_gui.getCharWidth(' ', _font);
-			character = " ";
+			character = ' ';
 		}
 
 		// TODO: Right now we manually prevent text from being drawn outside

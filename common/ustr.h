@@ -101,13 +101,7 @@ public:
 	U32String &operator=(U32String &&str);
 
 	/** @overload */
-	U32String &operator=(const String &str);
-
-	/** @overload */
 	U32String &operator=(const value_type *str);
-
-	/** @overload */
-	U32String &operator=(const char *str);
 
 	/** @overload */
 	U32String &operator=(value_type c);

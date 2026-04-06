@@ -604,7 +604,7 @@ bool EoBCoreEngine::importOriginalSaveFile(int destSlot, const Common::Path &sou
 					char descStr[20];
 					fs->read(descStr, 20);
 					dsc = Common::U32String(descStr, _flags.lang == Common::ZH_TWN ? Common::CodePage::kBig5 : Common::CodePage::kLatin1);
-					dsc = "(\"" + dsc + "\")";
+					dsc = U"(\"" + dsc + U"\")";
 				}
 
 				delete fs;

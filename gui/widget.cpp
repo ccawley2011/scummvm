@@ -322,7 +322,7 @@ StaticTextWidget::StaticTextWidget(GuiObject *boss, const Common::String &name, 
 }
 
 void StaticTextWidget::setValue(int value) {
-	_label = Common::String::format("%d", value);
+	_label = Common::U32String::format("%d", value);
 }
 
 void StaticTextWidget::setLabel(const Common::U32String &label) {

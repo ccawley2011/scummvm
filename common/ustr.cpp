@@ -58,20 +58,8 @@ U32String &U32String::operator=(U32String &&str) {
 	return *this;
 }
 
-U32String &U32String::operator=(const String &str) {
-	clear();
-	decodeInternal(str.c_str(), str.size(), Common::kUtf8);
-	return *this;
-}
-
 U32String &U32String::operator=(const value_type *str) {
 	assign(str);
-	return *this;
-}
-
-U32String &U32String::operator=(const char *str) {
-	clear();
-	decodeInternal(str, strlen(str), Common::kUtf8);
 	return *this;
 }
 

@@ -476,7 +476,7 @@ const Common::U32String::value_type *MacTextCanvas::splitString(const Common::U3
 					s += len;
 
 					s = readHex(&len, s, 2);
-					_text[curLine].picext = preprocessImageExt(Common::U32String(s, len).encode().c_str());
+					_text[curLine].picext = preprocessImageExt(Common::U32String(s, len).encode().c_str()).decode();
 					s += len;
 
 					D(9, "** splitString[i]: %d%% fname: '%s'  alt: '%s'  title: '%s'  ext: '%s'",

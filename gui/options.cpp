@@ -2572,7 +2572,7 @@ void GlobalOptionsDialog::addPathsControls(GuiObject *boss, const Common::String
 
 	Common::U32String confPath = ConfMan.getCustomConfigFileName().toString(Common::Path::kNativeSeparator);
 	if (confPath.empty())
-		confPath = g_system->getDefaultConfigFileName().toString(Common::Path::kNativeSeparator);
+		confPath = g_system->getDefaultConfigFileName().toString(Common::Path::kNativeSeparator).decode();
 	StaticTextWidget *configPathWidget = new StaticTextWidget(boss, prefix + "ConfigPath", _("ScummVM config path: ") + confPath, confPath);
 	if (ConfMan.isKeyTemporary("config"))
 		configPathWidget->setFontColor(ThemeEngine::FontColor::kFontColorOverride);
@@ -2599,7 +2599,7 @@ void GlobalOptionsDialog::addPathsControls(GuiObject *boss, const Common::String
 
 	Common::U32String browserPath = _("<default>");
 	if (ConfMan.hasKey("browser_lastpath"))
-		browserPath = ConfMan.getPath("browser_lastpath").toString(Common::Path::kNativeSeparator);
+		browserPath = ConfMan.getPath("browser_lastpath").toString(Common::Path::kNativeSeparator).decode();
 
 	// I18N: Referring to the last path memorized when adding a game
 	_browserPath = new StaticTextWidget(boss, prefix + "BrowserPath", _("Last browser path: ") + browserPath, browserPath);

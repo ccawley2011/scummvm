@@ -119,7 +119,7 @@ void GroupedListWidget::sortGroups() {
 		Common::U32String header = _groupHeaders[i];
 		Common::U32String displayedHeader;
 		if (_metadataNames.contains(header)) {
-			displayedHeader = _metadataNames[header];
+			displayedHeader = _metadataNames[header].decode();
 		} else {
 			displayedHeader = header;
 		}
@@ -386,7 +386,7 @@ void GroupedListWidget::drawWidget() {
 
 		// If in numbering mode & not in RTL based GUI, we first print a number prefix
 		if (_numberingMode != kListNumberingOff && g_gui.useRTL() == false) {
-			buffer = Common::String::format("%2d. ", (pos + _numberingMode));
+			buffer = Common::String::format("%2d. ", (pos + _numberingMode)).decode();
 			g_gui.theme()->drawText(Common::Rect(_x + _hlLeftPadding, y, _x + r.left + _leftPadding, y + lineHeight),
 									buffer, itemState, _drawAlign, inverted, _leftPadding, true);
 			pad = 0;
@@ -417,7 +417,7 @@ void GroupedListWidget::drawWidget() {
 		drawFormattedText(r1, buffer, itemState, _drawAlign, inverted, pad, true, color);
 
 		if (_numberingMode != kListNumberingOff && g_gui.useRTL()) {
-			buffer = Common::String::format(" .%2d", (pos + _numberingMode));
+			buffer = Common::String::format(" .%2d", (pos + _numberingMode)).decode();
 
 			Common::Rect r2 = r1;
 

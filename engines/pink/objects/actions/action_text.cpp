@@ -141,7 +141,7 @@ void ActionText::start() {
 	case Common::EN_ANY:
 		// fall through
 	default:
-		_text = Common::String(str);
+		_text = Common::String(str).decode(Common::kUtf8);
 		break;
 	}
 

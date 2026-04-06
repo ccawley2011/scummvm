@@ -625,7 +625,7 @@ void GridWidget::sortGroups() {
 			Common::U32String header = _groupHeaders[i];
 			Common::U32String displayedHeader;
 			if (_metadataNames.contains(header)) {
-				displayedHeader = _metadataNames[header];
+				displayedHeader = _metadataNames[header].decode();
 			} else {
 				displayedHeader = header;
 			}
@@ -653,7 +653,7 @@ void GridWidget::sortGroups() {
 		_sortedEntryList.clear();
 
 		for (GridItemInfo *i = _dataEntryList.begin(); i != _dataEntryList.end(); ++i, ++n) {
-			tmp = i->title;
+			tmp = i->title.decode();
 			tmp.toLowercase();
 			bool matches = true;
 			tok.reset();

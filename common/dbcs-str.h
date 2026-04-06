@@ -85,13 +85,7 @@ public:
 	DBCSString &operator=(DBCSString &&str);
 
 	/** @overload */
-	DBCSString &operator=(const String &str);
-
-	/** @overload */
 	DBCSString &operator=(const value_type *str);
-
-	/** @overload */
-	DBCSString &operator=(const char *str);
 
 	/** @overload */
 	DBCSString &operator=(value_type c);

@@ -173,11 +173,11 @@ Common::KeymapArray BladeRunnerMetaEngine::initKeymaps(const char *target) const
 	Keymap *kiaOnlyKeymap;
 
 	if (gameId == "bladerunner") {
-		gameDesc = "Blade Runner";
+		gameDesc = U"Blade Runner";
 	} else if (gameId == "bladerunner-final") {
-		gameDesc = "Blade Runner (Restored Content)";
+		gameDesc = U"Blade Runner (Restored Content)";
 	} else if (gameId == "bladerunner-ee") {
-		gameDesc = "Blade Runner: Enhanced Edition";
+		gameDesc = U"Blade Runner: Enhanced Edition";
 	}
 
 	if (gameDesc.empty()) {

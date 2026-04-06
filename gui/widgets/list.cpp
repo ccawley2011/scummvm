@@ -805,7 +805,7 @@ void ListWidget::drawWidget() {
 
 		// If in numbering mode & not in RTL based GUI, we first print a number prefix
 		if (_numberingMode != kListNumberingOff && g_gui.useRTL() == false) {
-			buffer = Common::String::format("%2d. ", (pos + _numberingMode));
+			buffer = Common::String::format("%2d. ", (pos + _numberingMode)).decode();
 			g_gui.theme()->drawText(Common::Rect(_x + _hlLeftPadding, y, _x + r.left + _leftPadding, y + lineHeight),
 									buffer, itemState, _drawAlign, inverted, _leftPadding, true);
 			pad = 0;
@@ -837,7 +837,7 @@ void ListWidget::drawWidget() {
 
 		// If in numbering mode & using RTL layout in GUI, we print a number suffix after drawing the text
 		if (_numberingMode != kListNumberingOff && g_gui.useRTL()) {
-			buffer = Common::String::format(" .%2d", (pos + _numberingMode));
+			buffer = Common::String::format(" .%2d", (pos + _numberingMode)).decode();
 
 			Common::Rect r2 = r1;
 

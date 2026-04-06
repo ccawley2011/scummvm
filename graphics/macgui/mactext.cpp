@@ -907,7 +907,7 @@ void MacText::clearChunkInput() {
 		int lastChunkIdx = _canvas._text[canvasTextSize].chunks.size() - 1;
 
 		if (lastChunkIdx >= 0)
-			_canvas._text[canvasTextSize].chunks[lastChunkIdx].text = "";
+			_canvas._text[canvasTextSize].chunks[lastChunkIdx].text.clear();
 	}
 }
 

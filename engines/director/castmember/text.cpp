@@ -402,7 +402,8 @@ void TextCastMember::importRTE(byte *text) {
 	//assert(rteList.size() == 3);
 	//child0 is probably font data.
 	//child1 is the raw text.
-	_rtext = _ptext = _ftext = Common::String((char*)text);
+	_rtext = Common::String((char*)text);
+	_ptext = _ftext = _rtext.decode();
 	//child2 is positional?
 }
 
@@ -581,13 +582,13 @@ void TextCastMember::setTextStyle(const Common::String &textStyle, int start, in
 
 void TextCastMember::updateFromWidget(Graphics::MacWidget *widget, bool spriteEditable) {
 	if (widget && (spriteEditable || _editable)) {
-		Common::String content = ((Graphics::MacText *)widget)->getEditedString();
+		Common::U32String content = ((Graphics::MacText *)widget)->getEditedString();
 		content.replace('\n', '\r');
 		_ptext = content;
 
 		// This string will be formatted with the default formatting
 		Common::String format = Common::String::format("\001\016%04x%02x%04x%04x%04x%04x", _fontId, _textSlant, _fontSize, _fgpalinfo1, _fgpalinfo2, _fgpalinfo2);
-		_ftext = format;
+		_ftext = format.decode();
 		_ftext += _ptext;
 	}
 }
