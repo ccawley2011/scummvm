@@ -29,6 +29,10 @@ namespace Image {
 
 BitmapRawDecoder::BitmapRawDecoder(int width, int height, int bitsPerPixel, bool ignoreAlpha, bool flip) : Codec(),
 		_width(width), _height(height), _bitsPerPixel(bitsPerPixel), _ignoreAlpha(ignoreAlpha), _flip(flip)  {
+	if (height < 0) {
+		_height = -height;
+		_flip = !flip;
+	}
 	_surface.create(_width, _height, getPixelFormat());
 }
 
@@ -50,13 +54,15 @@ const Graphics::Surface *BitmapRawDecoder::decodeFrame(Common::SeekableReadStrea
 		extraDataLength = (srcPitch % 4) ? 4 - (srcPitch % 4) : 0;
 	}
 
+	byte *dst = (byte *)_surface.getBasePtr(0, _flip ? 0 : _height - 1);
+	int dstStride = _flip ? _surface.pitch : -_surface.pitch;
+
 	if (_bitsPerPixel == 1) {
 		for (int i = 0; i < _height; i++) {
-			byte *dst = (byte *)_surface.getBasePtr(0, i);
 			for (int j = 0; j != _width;) {
 				byte color = stream.readByte();
 				for (int k = 0; k < 8; k++) {
-					*dst++ = (color & 0x80) >> 7;
+					dst[j] = (color & 0x80) >> 7;
 					color <<= 1;
 					j++;
 					if (j == _width) {
@@ -65,56 +71,45 @@ const Graphics::Surface *BitmapRawDecoder::decodeFrame(Common::SeekableReadStrea
 				}
 			}
 			stream.skip(extraDataLength);
+			dst += dstStride;
 		}
 	} else if (_bitsPerPixel == 4) {
 		for (int i = 0; i < _height; i++) {
-			byte *dst = (byte *)_surface.getBasePtr(0, _height - i - 1);
 			for (int j = 0; j < _width; j++) {
 				byte color = stream.readByte();
 
-				*dst++ = (color & 0xf0) >> 4;
+				dst[j] = (color & 0xf0) >> 4;
 				j++;
 
 				if (j ==_width)
 					break;
 
-				*dst++ = color & 0x0f;
+				dst[j] = color & 0x0f;
 			}
 
 			stream.skip(extraDataLength);
-		}
-	} else if (_bitsPerPixel == 8) {
-		// flip the 8bpp images when we are decoding QTvideo
-		byte *dst = (byte *)_surface.getPixels();
-
-		for (int i = 0; i < _height; i++) {
-			stream.read(dst + (_flip ? i : _height - i - 1) * _width, _width);
-			stream.skip(extraDataLength);
+			dst += dstStride;
 		}
 #ifndef SCUMM_LITTLE_ENDIAN
 	} else if (_bitsPerPixel == 16) {
-		byte *dst = (byte *)_surface.getBasePtr(0, _height - 1);
-
 		for (int i = 0; i < _height; i++) {
 			for (int j = 0; j < _width; j++) {
 				uint16 color = stream.readUint16LE();
 
-				*(uint16 *)dst = color;
-				dst += format.bytesPerPixel;
+				((uint16 *)dst)[j] = color;
 			}
 
 			stream.skip(extraDataLength);
-			dst -= _surface.pitch * 2;
+			dst += dstStride;
 		}
 #endif
 	} else {
-		byte *dst = (byte *)_surface.getBasePtr(0, _height - 1);
 		uint bpp = format.bytesPerPixel;
 
 		for (int i = 0; i < _height; i++) {
 			stream.read(dst, _width * bpp);
 			stream.skip(extraDataLength);
-			dst -= _surface.pitch;
+			dst += dstStride;
 		}
 	}
 
