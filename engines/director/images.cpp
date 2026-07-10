@@ -97,21 +97,20 @@ bool DIBDecoder::loadStream(Common::SeekableReadStream &stream) {
 
 	_surface = _codec->decodeFrame(subStream);
 
-	// The DIB decoder converts 1bpp images to the 16-color equivalent; we need them to be the palette extrema
-	// in order to work.
+	// For some reason, DIB cast members have the palette indices reversed
 	if (_bitsPerPixel == 1) {
+		// We need this to be the palette extrema in order to work.
 		for (int y = 0; y < _surface->h; y++) {
 			for (int x = 0; x < _surface->w; x++) {
-				*const_cast<byte *>((const byte *)_surface->getBasePtr(x, y)) = *(const byte *)_surface->getBasePtr(x, y) == 0xf ? 0x00 : 0xff;
+				// We're not supposed to modify the image that is coming from the decoder
+				// However, in this case, we know what we're doing.
+				*const_cast<byte *>((const byte *)_surface->getBasePtr(x, y)) = *(const byte *)_surface->getBasePtr(x, y) == 0x1 ? 0x00 : 0xff;
 			}
 		}
-	}
-
-	// For some reason, DIB cast members have the palette indices reversed
-	if (_bitsPerPixel == 2) {
+	} else if (_bitsPerPixel == 2) {
 		for (int y = 0; y < _surface->h; y++) {
 			for (int x = 0; x < _surface->w; x++) {
-				// We're not su[pposed to modify the image that is coming from the decoder
+				// We're not supposed to modify the image that is coming from the decoder
 				// However, in this case, we know what we're doing.
 				*const_cast<byte *>((const byte *)_surface->getBasePtr(x, y)) = 3 - *(const byte *)_surface->getBasePtr(x, y);
 			}
@@ -119,7 +118,7 @@ bool DIBDecoder::loadStream(Common::SeekableReadStream &stream) {
 	} else if (_bitsPerPixel == 4) {
 		for (int y = 0; y < _surface->h; y++) {
 			for (int x = 0; x < _surface->w; x++) {
-				// We're not su[pposed to modify the image that is coming from the decoder
+				// We're not supposed to modify the image that is coming from the decoder
 				// However, in this case, we know what we're doing.
 				*const_cast<byte *>((const byte *)_surface->getBasePtr(x, y)) = 15 - *(const byte *)_surface->getBasePtr(x, y);
 			}
@@ -127,7 +126,7 @@ bool DIBDecoder::loadStream(Common::SeekableReadStream &stream) {
 	} else if (_bitsPerPixel == 8) {
 		for (int y = 0; y < _surface->h; y++) {
 			for (int x = 0; x < _surface->w; x++) {
-				// We're not su[pposed to modify the image that is coming from the decoder
+				// We're not supposed to modify the image that is coming from the decoder
 				// However, in this case, we know what we're doing.
 				*const_cast<byte *>((const byte *)_surface->getBasePtr(x, y)) = 255 - *(const byte *)_surface->getBasePtr(x, y);
 			}
